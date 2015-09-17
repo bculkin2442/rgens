@@ -3,15 +3,34 @@ package bjc.RGens.text;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.function.BiConsumer;
 
 import bjc.utils.FunctionalStringTokenizer;
 import bjc.utils.data.FunctionalList;
 import bjc.utils.gen.WeightedGrammar;
 
 public class GrammarReader {
-	private void doCase(StringTokenizer stk, ReaderState rs) {
+	private static Map<String, BiConsumer<StringTokenizer, ReaderState>>	actMap;
+	private static Map<String, BiConsumer<StringTokenizer, ReaderState>>	pragmaMap;
+
+	static {
+		initPragmas();
+
+		actMap = new HashMap<>();
+		
+		actMap.put("#", (stk, rs) -> {
+			return;
+		});
+		
+		actMap.put("pragma", GrammarReader::doPragmas);
+		actMap.put("\t", GrammarReader::doCase);
+	}
+
+	private static void doCase(StringTokenizer stk, ReaderState rs) {
 		int prob = 1;
 
 		if (!rs.isUniform()) {
@@ -22,94 +41,69 @@ public class GrammarReader {
 				.fromString(new FunctionalStringTokenizer(stk), s -> s));
 	}
 
-	private void doPragmas(StringTokenizer stk, ReaderState rs) {
+	private static void doPragmas(StringTokenizer stk, ReaderState rs) {
 		String tk = stk.nextToken();
-		switch (tk) {
-			case "uniform": // set probability requirement for cases
-				rs.toggleUniformity();
-				break;
-			case "subordinate": // make this grammar subordinate to a new
-								// one
-				subordinateGrammar(stk, rs);
-				break;
-			case "promote": // Invert the positions of this grammar and one
-							// of its subgrammars
-				promoteGrammar(stk, rs);
-				break;
-			case "removeSubGrammar": // Delete a subgrammar
-				removeSubGrammar(stk, rs);
-				break;
-			case "removeRule": // Remove a rule and all of its associated
-								// cases
-				removeRule(stk, rs);
-				break;
-			case "loadSubGrammar": // Load a subgrammar from a file
-				loadSubGrammar(stk, rs);
-				break;
-			case "newSubGrammar":
-				rs.pushGrammar(new WeightedGrammar<>());
-				break;
-			case "editSubgrammar":
-				editSubGrammar(stk, rs);
-				break;
-			case "editParent":
-				rs.popGrammar();
-				break;
-			case "saveGrammar":
-				saveGrammar(stk, rs);
-				break;
-			default: // woops. unknown pragma
-				throw new UnknownPragmaException(
-						"Unknown pragma named: " + tk);
-		}
+
+		pragmaMap.getOrDefault(tk, (strk, ras) -> {
+			throw new UnknownPragmaException("Unknown pragma " + tk);
+		}).accept(stk, rs);
 	}
 
-	private void doRule(String tk, StringTokenizer stk, ReaderState rs) {
+	private static void doRule(String tk, StringTokenizer stk,
+			ReaderState rs) {
 		rs.getRules().addRule(tk);
-		
+
 		doCase(stk, rs);
 	}
 
-	private void editSubGrammar(StringTokenizer stk, ReaderState rs) {
+	private static void editSubGrammar(StringTokenizer stk,
+			ReaderState rs) {
 		String sgName = stk.nextToken();
 		rs.pushGrammar(rs.getRules().getSubGrammar(sgName));
 	}
 
-	public WeightedGrammar<String> fromStream(InputStream is) {
+	public static WeightedGrammar<String> fromStream(InputStream is) {
 		ReaderState rs = new ReaderState();
 
 		Scanner scn = new Scanner(is);
 
 		while (scn.hasNextLine()) {
 			String ln = scn.nextLine();
-			if (ln.equals("")) { // end this rules cases
+			
+			if (ln.equals("")) {
 				rs.setRule(null);
 				continue;
 			}
+			
 			StringTokenizer stk = new StringTokenizer(ln, " ");
 
-			String tk = stk.nextToken();
-
-			switch (tk) {
-				case "#": // comments
-					break;
-				case "pragma": // twiddle internal state
-					doPragmas(stk, rs);
-					break;
-				case "\t":
-					doCase(stk, rs);
-					break;
-				default:
-					doRule(tk, stk, rs);
-					break;
-			}
+			actMap.getOrDefault(stk.nextToken(), (stak, ras) -> doRule(stk.nextToken(), stak, ras))
+					.accept(stk, rs);
 		}
 
 		scn.close();
 		return rs.getRules();
 	}
 
-	private void loadSubGrammar(StringTokenizer stk, ReaderState rs) {
+	private static void initPragmas() {
+		pragmaMap = new HashMap<>();
+
+		pragmaMap.put("uniform", (stk, rs) -> rs.toggleUniformity());
+		pragmaMap.put("subordinate", GrammarReader::subordinateGrammar);
+		pragmaMap.put("promote", GrammarReader::promoteGrammar);
+		pragmaMap.put("remove-sub-grammar",
+				GrammarReader::removeSubGrammar);
+		pragmaMap.put("remove-rule", GrammarReader::removeRule);
+		pragmaMap.put("load-sub-grammar", GrammarReader::loadSubGrammar);
+		pragmaMap.put("new-sub-grammar",
+				(stk, rs) -> rs.pushGrammar(new WeightedGrammar<>()));
+		pragmaMap.put("edit-sub-grammar", GrammarReader::editSubGrammar);
+		pragmaMap.put("edit-parent", (stk, rs) -> rs.popGrammar());
+		pragmaMap.put("save-sub-grammar", GrammarReader::saveGrammar);
+	}
+
+	private static void loadSubGrammar(StringTokenizer stk,
+			ReaderState rs) {
 		String sgName = stk.nextToken();
 		String fName = stk.nextToken();
 
@@ -122,7 +116,8 @@ public class GrammarReader {
 		}
 	}
 
-	private void promoteGrammar(StringTokenizer stk, ReaderState rs) {
+	private static void promoteGrammar(StringTokenizer stk,
+			ReaderState rs) {
 		String gName = stk.nextToken();
 		String rName = stk.nextToken();
 
@@ -131,24 +126,26 @@ public class GrammarReader {
 		rs.setRules(nwg);
 	}
 
-	private void removeRule(StringTokenizer stk, ReaderState rs) {
+	private static void removeRule(StringTokenizer stk, ReaderState rs) {
 		String rName = stk.nextToken();
 
 		rs.getRules().removeRule(rName);
 	}
 
-	private void removeSubGrammar(StringTokenizer stk, ReaderState rs) {
+	private static void removeSubGrammar(StringTokenizer stk,
+			ReaderState rs) {
 		String sgName = stk.nextToken();
 		rs.getRules().removeSubgrammar(sgName);
 	}
 
-	private void saveGrammar(StringTokenizer stk, ReaderState rs) {
+	private static void saveGrammar(StringTokenizer stk, ReaderState rs) {
 		String sgName = stk.nextToken();
 		WeightedGrammar<String> sg = rs.popGrammar();
 		rs.getRules().addSubGrammar(sgName, sg);
 	}
 
-	private void subordinateGrammar(StringTokenizer stk, ReaderState rs) {
+	private static void subordinateGrammar(StringTokenizer stk,
+			ReaderState rs) {
 		String gName = stk.nextToken();
 		WeightedGrammar<String> nwg = new WeightedGrammar<>();
 
