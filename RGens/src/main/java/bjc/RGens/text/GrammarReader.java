@@ -9,8 +9,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.function.BiConsumer;
 
-import bjc.utils.FunctionalStringTokenizer;
-import bjc.utils.data.FunctionalList;
+import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.gen.WeightedGrammar;
 
 public class GrammarReader {
@@ -37,8 +36,7 @@ public class GrammarReader {
 			prob = Integer.parseInt(stk.nextToken());
 		}
 
-		rs.getRules().addCase(rs.getRule(), prob, FunctionalList
-				.fromString(new FunctionalStringTokenizer(stk), s -> s));
+		rs.getRules().addCase(rs.getRule(), prob, new FunctionalStringTokenizer(stk).toList(s -> s));
 	}
 
 	private static void doPragmas(StringTokenizer stk, ReaderState rs) {

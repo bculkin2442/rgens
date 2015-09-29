@@ -1,9 +1,7 @@
 package bjc.RGens;
 
-import java.util.StringTokenizer;
-
-import bjc.utils.FunctionalStringTokenizer;
-import bjc.utils.data.FunctionalList;
+import bjc.utils.funcdata.FunctionalStringTokenizer;
+import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.gen.RandomGrammar;
 
 public class ZadronsPouch {
@@ -155,12 +153,9 @@ public class ZadronsPouch {
 	private void addRule(String rule, String... cases) {
 		FunctionalList<FunctionalList<String>> cses = new FunctionalList<>();
 
-		for (String string : cases) {
-			cses.add(
-					FunctionalList.fromString(
-							new FunctionalStringTokenizer(
-									new StringTokenizer(string, " ")),
-							s -> s));
+		for (String strang : cases) {
+			cses.add(FunctionalStringTokenizer.fromString(strang)
+					.toList(s -> s));
 		}
 
 		wg.makeRule(rule, cses);
