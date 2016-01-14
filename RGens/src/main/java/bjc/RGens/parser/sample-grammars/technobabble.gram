@@ -1,0 +1,28 @@
+<main> <part-prefix> <part-suffix> <part-problem>
+
+<part-prefix> primary
+	compression
+	grav
+	hydraulic
+	reg
+	power
+
+<part-suffix> boot
+	coupling
+	housing
+	stabilizer
+	vent
+	lines
+	converter
+	feed
+
+<part-problem> cracked
+	wedged
+	collapsed
+	bent
+	fell off
+	shattered
+	seized
+	jammed
+	burnt
+	exploded

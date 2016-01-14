@@ -1,0 +1,44 @@
+<card> <title>
+	<noun>
+	<title> <adjective>
+	<noun> <adjective>
+	<title> <adjective> <noun>
+
+<title> <male-title>
+	<female-title>
+
+<male-title> emperor
+	king
+	knight
+	priest
+
+<female-title> empress
+	queen
+	princess
+	priestess
+
+<adjective> of <adjective-of>
+
+<adjective-of> shimmering
+	blazing
+	infinite
+	whispering
+	frozen
+	hidden
+	magical
+	quiet
+	dancing
+	lost
+
+<noun> darkness
+	light
+	waters
+	stars
+	hills
+	rainbows
+	forests
+	fire
+	moons
+	winds
+	hearts
+	spirits

@@ -1,0 +1,218 @@
+<suffix> of <suffix-act>
+
+<suffix-act> <damage-reduction>
+	<defense-effect>
+	<durability>
+	<hitpoints>
+	<ability-scores>
+	<cursed>
+	<recovery>
+	<memorization>
+	<combat-action>
+	<treasure-finder>
+	<light-source>
+	<hazard-reduction>
+	<damage-increase>
+	<min-damage>
+	<attack-speed>
+	<attack-effect>
+	<attack-restore>
+	<item-damage>
+	<weapon-proficency>
+	<weapon-use>
+	<spell-casting>
+
+<damage-reduction> health
+	protection
+	absorption
+	life
+	deflection
+
+<defense-effect> thorns
+	spikes
+	blocking
+
+<durability> sturdiness
+	structure
+	the ages
+	bonding
+	unity
+
+<hitpoints> the <hitpoints-act>
+
+<hitpoints-act> jackal
+	fox
+	jaguar
+	wolf
+	eagle
+	tiger
+	lion
+	mammoth
+	whale
+	colossus
+
+<ability-scores> vitality
+	dexterity
+	magic
+	strength
+	the lynx
+	zest
+	skill
+	the mind
+	might
+	the leopard
+	vim
+	accuracy
+	brilliance
+	power
+	the jaguar
+	vigor
+	precision
+	sorcery
+	the giant
+	the tiger
+	life
+	perfection
+	wizardry
+	the titan
+	the lion
+	the sky
+	the moon
+	the stars
+	the heavens
+	the zodiac
+
+<cursed> tears
+	pain
+	brittleness
+	decay
+	fragility
+	the vulture
+	disease
+	atrophy
+	dyslexia
+	weakness
+	the cat
+	the pit
+	illness
+	paralysis
+	draining
+	frailty
+	the rat
+	trouble
+	pox
+	corruption
+	infection
+	ruin
+	the exposed
+	discord
+	the night
+	the dark
+	the void
+	passivity
+	snail
+	fool
+
+<recovery> regeneration
+	regrowth
+
+<memorization> warding
+	the sentinel
+	guarding
+	negation
+	osmosis
+
+<combat-action> the apprentice
+	the magus
+	balance
+	stability
+	harmony
+
+<treasure-finder> greed
+	chance
+	wealth
+	fortune
+
+<light-source> light
+	radiance
+	the sun
+
+<hazard-reduction> the thief
+	warmth
+	remedy
+	amelioration
+	defiance
+	purging
+
+<damage-increase> craftsmanship
+	quality
+	maiming
+	slaying
+	gore
+	devestation
+	the jester
+	carnage
+	slaughter
+
+<min-damage> measure
+	worth
+	excellence
+	performance
+
+<attack-speed> readiness
+	alacrity
+	swiftness
+	quickness
+	speed
+	haste
+
+<attack-effect> frost
+	flame
+	shock
+	blight
+	ice
+	fire
+	lightning
+	venom
+	the glacier
+	burning
+	thunder
+	pestilence
+	vileness
+	the crusaders
+	destruction
+	peril
+	the bear
+	the grizzly
+
+<attack-restore> the leech
+	the claw
+	the bat
+	blood
+	the talon
+	the vampire
+	the lamprey
+
+<item-damage> piercing
+	breaking
+	puncturing
+	smashing
+	bashing
+
+<weapon-proficency> ease
+	simplicity
+
+<weapon-use> many
+	plenty
+
+<spell-casting> <spell-number> magic
+
+<spell-number> 1st
+	2nd
+	3rd
+	4th
+	5th
+	6th
+	7th
+	8th
+	9th
