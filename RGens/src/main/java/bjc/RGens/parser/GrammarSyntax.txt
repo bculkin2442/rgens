@@ -1,0 +1,18 @@
+Each line consists of either a comment, a pragma, a rule, or a case for a previously mentioned rule.
+	* Anything after a # on a line is considered a comment
+	* A pragma is indicated by the word 'pragma' followed by the pragma name and any parameters.
+		* List of pragmas
+			* uniform: toggle uniform weighting of grammar options. The default state of this is off.
+			* subordinate: create a new grammar and set the rules of the current grammar as a subgrammar
+				of the new grammar with the name given as a parameter to the pragma
+			* promote: Pick a subgrammar with the given name, and then subordinate this grammar to that one.
+			* remove-sub-grammar: remove a designated subgrammar
+			* remove-rule: remove a designated rule from this grammar
+			* load-sub-grammar: load a designated subgrammar from a file
+			* new-sub-grammar: create a new subgrammar and start editing it
+			* edit-sub-grammar: switch to editing the designated subgrammar
+			* edit-parent: switch to editing the parent of the current grammar
+			* save-sub-grammar: save the current subgrammar under a certain name
+	* A rule is defined by saying its name, then following it with a bunch of case definitions.
+	* A case definition is defined by an optional probability if uniformity is toggled off, then a series of tokens for the rules.
+		More case definitions are indicated by a leading tab.
