@@ -1,4 +1,4 @@
-package bjc.RGens.text;
+package bjc.RGens.parser;
 
 import java.util.InputMismatchException;
 

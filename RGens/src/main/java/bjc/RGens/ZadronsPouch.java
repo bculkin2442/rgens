@@ -17,6 +17,10 @@ public class ZadronsPouch {
 
 			System.out.println(sb.toString().replaceAll("\\s+", " "));
 		}
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	private RandomGrammar<String> wg;
@@ -51,18 +55,6 @@ public class ZadronsPouch {
 		addBoxRules();
 
 		addWandRules();
-	}
-
-	private void addWandRules() {
-		addRule("<wand>", "<wand-type> wand", "wand of <wand-type>",
-				"canceling <wand-type> wand");
-		addRule("<wand-type>", "magic missile", "<spell-1>", "<spell-2>",
-				"gusting", "life-detecting", "zadron");
-		addRule("<spell-1>", "frost", "fire", "lightning", "fear",
-				"illumination", "polymorphing", "conjuration",
-				"paralyzing");
-		addRule("<spell-2>", "<spell2-type> detecting");
-		addRule("<spell-2>", "magic", "enemy", "secret door/trap");
 	}
 
 	private void addBagRules() {
@@ -169,5 +161,17 @@ public class ZadronsPouch {
 		addRule("<bottle-type>", "ever-smoking", "wheezing",
 				"blank potion");
 		addRule("<flask-type>", "iron");
+	}
+
+	private void addWandRules() {
+		addRule("<wand>", "<wand-type> wand", "wand of <wand-type>",
+				"canceling <wand-type> wand");
+		addRule("<wand-type>", "magic missile", "<spell-1>", "<spell-2>",
+				"gusting", "life-detecting", "zadron");
+		addRule("<spell-1>", "frost", "fire", "lightning", "fear",
+				"illumination", "polymorphing", "conjuration",
+				"paralyzing");
+		addRule("<spell-2>", "<spell2-type> detecting");
+		addRule("<spell2-type>", "magic", "enemy", "secret door/trap");
 	}
 }

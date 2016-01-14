@@ -1,9 +1,9 @@
-package bjc.RGens.text;
+package bjc.RGens.parser;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -19,12 +19,12 @@ public class GrammarReader {
 	static {
 		initPragmas();
 
-		actMap = new HashMap<>();
-		
+		actMap = new Hashtable<>();
+
 		actMap.put("#", (stk, rs) -> {
 			return;
 		});
-		
+
 		actMap.put("pragma", GrammarReader::doPragmas);
 		actMap.put("\t", GrammarReader::doCase);
 	}
@@ -36,7 +36,8 @@ public class GrammarReader {
 			prob = Integer.parseInt(stk.nextToken());
 		}
 
-		rs.getRules().addCase(rs.getRule(), prob, new FunctionalStringTokenizer(stk).toList(s -> s));
+		rs.getRules().addCase(rs.getRule(), prob,
+				new FunctionalStringTokenizer(stk).toList(s -> s));
 	}
 
 	private static void doPragmas(StringTokenizer stk, ReaderState rs) {
@@ -50,6 +51,7 @@ public class GrammarReader {
 	private static void doRule(String tk, StringTokenizer stk,
 			ReaderState rs) {
 		rs.getRules().addRule(tk);
+		rs.setRule(tk);
 
 		doCase(stk, rs);
 	}
@@ -62,21 +64,26 @@ public class GrammarReader {
 
 	public static WeightedGrammar<String> fromStream(InputStream is) {
 		ReaderState rs = new ReaderState();
+		rs.toggleUniformity();
 
 		Scanner scn = new Scanner(is);
 
 		while (scn.hasNextLine()) {
 			String ln = scn.nextLine();
-			
+
 			if (ln.equals("")) {
 				rs.setRule(null);
 				continue;
-			}
-			
-			StringTokenizer stk = new StringTokenizer(ln, " ");
+			} else if (ln.startsWith("\t")) {
+				doCase(new StringTokenizer(ln.substring(1), " "), rs);
+			} else {
+				StringTokenizer stk = new StringTokenizer(ln, " ");
 
-			actMap.getOrDefault(stk.nextToken(), (stak, ras) -> doRule(stk.nextToken(), stak, ras))
-					.accept(stk, rs);
+				String nxtToken = stk.nextToken();
+				actMap.getOrDefault(nxtToken,
+						(stak, ras) -> doRule(nxtToken, stak, ras))
+						.accept(stk, rs);
+			}
 		}
 
 		scn.close();
@@ -84,7 +91,7 @@ public class GrammarReader {
 	}
 
 	private static void initPragmas() {
-		pragmaMap = new HashMap<>();
+		pragmaMap = new Hashtable<>();
 
 		pragmaMap.put("uniform", (stk, rs) -> rs.toggleUniformity());
 		pragmaMap.put("subordinate", GrammarReader::subordinateGrammar);
@@ -98,6 +105,46 @@ public class GrammarReader {
 		pragmaMap.put("edit-sub-grammar", GrammarReader::editSubGrammar);
 		pragmaMap.put("edit-parent", (stk, rs) -> rs.popGrammar());
 		pragmaMap.put("save-sub-grammar", GrammarReader::saveGrammar);
+		pragmaMap.put("debug", GrammarReader::debugGrammar);
+		pragmaMap.put("prefix-with", GrammarReader::prefixRule);
+		pragmaMap.put("suffix-with", GrammarReader::suffixRule);
+		pragmaMap.put("import-rule", GrammarReader::importRule);
+	}
+
+
+	private static void importRule(StringTokenizer stk, ReaderState rs) {
+		String ruleName = stk.nextToken();
+		String sgName = stk.nextToken();
+		
+		rs.getRules().addGrammarAlias(sgName, ruleName);
+	}
+	
+	private static void prefixRule(StringTokenizer stk, ReaderState rs) {
+		String rName = stk.nextToken();
+		String prefixToken = stk.nextToken();
+		int addProb = rs.isUniform() ? 0
+				: Integer.parseInt(stk.nextToken());
+
+		rs.getRules().prefixRule(rName, prefixToken, addProb);
+	}
+
+	private static void suffixRule(StringTokenizer stk, ReaderState rs) {
+		String rName = stk.nextToken();
+		String prefixToken = stk.nextToken();
+		int addProb = rs.isUniform() ? 0
+				: Integer.parseInt(stk.nextToken());
+
+		rs.getRules().suffixRule(rName, prefixToken, addProb);
+	}
+
+	private static void debugGrammar(StringTokenizer stk, ReaderState rs) {
+		System.out.println("Printing rule names: ");
+
+		for (String rul : rs.getRules().ruleNames()) {
+			System.out.println("\t" + rul);
+		}
+
+		System.out.println();
 	}
 
 	private static void loadSubGrammar(StringTokenizer stk,
@@ -120,6 +167,8 @@ public class GrammarReader {
 		String rName = stk.nextToken();
 
 		WeightedGrammar<String> nwg = rs.getRules().getSubGrammar(gName);
+		rs.getRules().removeSubgrammar(gName);
+
 		nwg.addSubGrammar(rName, rs.getRules());
 		rs.setRules(nwg);
 	}
