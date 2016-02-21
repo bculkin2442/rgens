@@ -3,6 +3,8 @@ package bjc.RGens.parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -36,14 +38,31 @@ public class GrammarReaderApp {
 			System.exit(1);
 		}
 
-		String initRule = SimpleDialogs.getChoice(null,
-				"Pick a initial rule",
-				"Pick a initial rule to generate choices from",
-				wg.ruleNames().stream().sorted().toArray(String[]::new));
+		String initRule = "";
+
+		if (!wg.hasInitRule()) {
+			initRule = SimpleDialogs.getChoice(null, "Pick a initial rule",
+					"Pick a initial rule to generate choices from",
+					wg.ruleNames().stream().sorted()
+							.toArray(String[]::new));
+		} else {
+			initRule = wg.getInitRule();
+		}
 
 		int count = SimpleDialogs.getWhole(null,
 				"Enter number of repititions",
 				"Enter the number of items to generate from the rule");
+
+		File outpFile = SimpleFileDialog.getSaveFile(null,
+				"Choose Grammar File");
+
+		PrintStream ps = null;
+
+		try {
+			ps = new PrintStream(outpFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		for (int i = 0; i < count; i++) {
 			String s = wg.genList(initRule, " ")
@@ -53,7 +72,7 @@ public class GrammarReaderApp {
 							t -> t.toString())
 					.replaceAll("\\s+", " ");
 
-			System.out.println(s);
+			ps.println(s);
 		}
 	}
 }

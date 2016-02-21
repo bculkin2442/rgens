@@ -93,32 +93,62 @@ public class GrammarReader {
 	private static void initPragmas() {
 		pragmaMap = new Hashtable<>();
 
+		addSubgrammarPragmas();
+
+		pragmaMap.put("debug", GrammarReader::debugGrammar);
+		pragmaMap.put("import-rule", GrammarReader::importRule);
+		pragmaMap.put("initial-rule", GrammarReader::initialRule);
 		pragmaMap.put("uniform", (stk, rs) -> rs.toggleUniformity());
-		pragmaMap.put("subordinate", GrammarReader::subordinateGrammar);
+
+		pragmaMap.put("multi-prefix-with", GrammarReader::multiPrefixRule);
+		pragmaMap.put("multi-suffix-with", GrammarReader::multiSuffixRule);
+
+		pragmaMap.put("prefix-with", GrammarReader::prefixRule);
+		pragmaMap.put("suffix-with", GrammarReader::suffixRule);
+	}
+
+	private static void multiPrefixRule(StringTokenizer stk,
+			ReaderState rs) {
+
+	}
+
+	private static void multiSuffixRule(StringTokenizer stk,
+			ReaderState rs) {
+
+	}
+
+	private static void addSubgrammarPragmas() {
+		pragmaMap.put("edit-sub-grammar", GrammarReader::editSubGrammar);
+		pragmaMap.put("edit-parent", (stk, rs) -> rs.popGrammar());
+
+		pragmaMap.put("load-sub-grammar", GrammarReader::loadSubGrammar);
+
+		pragmaMap.put("new-sub-grammar",
+				(stk, rs) -> rs.pushGrammar(new WeightedGrammar<>()));
+
 		pragmaMap.put("promote", GrammarReader::promoteGrammar);
+
 		pragmaMap.put("remove-sub-grammar",
 				GrammarReader::removeSubGrammar);
 		pragmaMap.put("remove-rule", GrammarReader::removeRule);
-		pragmaMap.put("load-sub-grammar", GrammarReader::loadSubGrammar);
-		pragmaMap.put("new-sub-grammar",
-				(stk, rs) -> rs.pushGrammar(new WeightedGrammar<>()));
-		pragmaMap.put("edit-sub-grammar", GrammarReader::editSubGrammar);
-		pragmaMap.put("edit-parent", (stk, rs) -> rs.popGrammar());
+
 		pragmaMap.put("save-sub-grammar", GrammarReader::saveGrammar);
-		pragmaMap.put("debug", GrammarReader::debugGrammar);
-		pragmaMap.put("prefix-with", GrammarReader::prefixRule);
-		pragmaMap.put("suffix-with", GrammarReader::suffixRule);
-		pragmaMap.put("import-rule", GrammarReader::importRule);
+		pragmaMap.put("subordinate", GrammarReader::subordinateGrammar);
 	}
 
+	private static void initialRule(StringTokenizer stk, ReaderState rs) {
+		String rName = stk.nextToken();
+
+		rs.setInitialRule(rName);
+	}
 
 	private static void importRule(StringTokenizer stk, ReaderState rs) {
 		String ruleName = stk.nextToken();
 		String sgName = stk.nextToken();
-		
+
 		rs.getRules().addGrammarAlias(sgName, ruleName);
 	}
-	
+
 	private static void prefixRule(StringTokenizer stk, ReaderState rs) {
 		String rName = stk.nextToken();
 		String prefixToken = stk.nextToken();
