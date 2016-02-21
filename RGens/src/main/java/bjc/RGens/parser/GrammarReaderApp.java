@@ -31,7 +31,7 @@ public class GrammarReaderApp {
 		WeightedGrammar<String> wg = null;
 
 		try {
-			wg = GrammarReader.fromStream(new FileInputStream(gramFile));
+			wg = RBGrammarReader.fromStream(new FileInputStream(gramFile));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

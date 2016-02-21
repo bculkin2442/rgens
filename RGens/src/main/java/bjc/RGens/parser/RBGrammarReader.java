@@ -5,48 +5,38 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.function.BiConsumer;
 
 import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.gen.WeightedGrammar;
-import bjc.utils.parserutils.UnknownPragmaException;
+import bjc.utils.parserutils.RuleBasedConfigReader;
 
-public class GrammarReader {
-	private static Map<String, BiConsumer<StringTokenizer, ReaderState>>	actMap;
-	private static Map<String, BiConsumer<StringTokenizer, ReaderState>>	pragmaMap;
+public class RBGrammarReader {
+	private static Map<String, BiConsumer<StringTokenizer, ReaderState>> pragmaMap;
 
 	static {
 		initPragmas();
 
-		actMap = new Hashtable<>();
-
-		actMap.put("#", (stk, rs) -> {
-			return;
-		});
-
-		actMap.put("pragma", GrammarReader::doPragmas);
-		actMap.put("\t", GrammarReader::doCase);
 	}
 
 	private static void addSubgrammarPragmas() {
-		pragmaMap.put("edit-sub-grammar", GrammarReader::editSubGrammar);
+		pragmaMap.put("edit-sub-grammar", RBGrammarReader::editSubGrammar);
 		pragmaMap.put("edit-parent", (stk, rs) -> rs.popGrammar());
 
-		pragmaMap.put("load-sub-grammar", GrammarReader::loadSubGrammar);
+		pragmaMap.put("load-sub-grammar", RBGrammarReader::loadSubGrammar);
 
 		pragmaMap.put("new-sub-grammar",
 				(stk, rs) -> rs.pushGrammar(new WeightedGrammar<>()));
 
-		pragmaMap.put("promote", GrammarReader::promoteGrammar);
+		pragmaMap.put("promote", RBGrammarReader::promoteGrammar);
 
 		pragmaMap.put("remove-sub-grammar",
-				GrammarReader::removeSubGrammar);
-		pragmaMap.put("remove-rule", GrammarReader::removeRule);
+				RBGrammarReader::removeSubGrammar);
+		pragmaMap.put("remove-rule", RBGrammarReader::removeRule);
 
-		pragmaMap.put("save-sub-grammar", GrammarReader::saveGrammar);
-		pragmaMap.put("subordinate", GrammarReader::subordinateGrammar);
+		pragmaMap.put("save-sub-grammar", RBGrammarReader::saveGrammar);
+		pragmaMap.put("subordinate", RBGrammarReader::subordinateGrammar);
 	}
 
 	private static void debugGrammar(StringTokenizer stk, ReaderState rs) {
@@ -70,22 +60,6 @@ public class GrammarReader {
 				new FunctionalStringTokenizer(stk).toList(s -> s));
 	}
 
-	private static void doPragmas(StringTokenizer stk, ReaderState rs) {
-		String tk = stk.nextToken();
-
-		pragmaMap.getOrDefault(tk, (strk, ras) -> {
-			throw new UnknownPragmaException("Unknown pragma " + tk);
-		}).accept(stk, rs);
-	}
-
-	private static void doRule(String tk, StringTokenizer stk,
-			ReaderState rs) {
-		rs.getRules().addRule(tk);
-		rs.setRule(tk);
-
-		doCase(stk, rs);
-	}
-
 	private static void editSubGrammar(StringTokenizer stk,
 			ReaderState rs) {
 		String sgName = stk.nextToken();
@@ -96,28 +70,31 @@ public class GrammarReader {
 		ReaderState rs = new ReaderState();
 		rs.toggleUniformity();
 
-		Scanner scn = new Scanner(is);
+		RuleBasedConfigReader<ReaderState> reader = new RuleBasedConfigReader<>(
+				null, null, null);
 
-		while (scn.hasNextLine()) {
-			String ln = scn.nextLine();
+		reader.setStartRule((stk, par) -> {
+			rs.getRules().addRule(par.l);
+			rs.setRule(par.l);
 
-			if (ln.equals("")) {
-				rs.setRule(null);
-				continue;
-			} else if (ln.startsWith("\t")) {
-				doCase(new StringTokenizer(ln.substring(1), " "), rs);
-			} else {
-				StringTokenizer stk = new StringTokenizer(ln, " ");
+			doCase(stk.getInternal(), par.r);
+		});
 
-				String nxtToken = stk.nextToken();
-				actMap.getOrDefault(nxtToken,
-						(stak, ras) -> doRule(nxtToken, stak, ras))
-						.accept(stk, rs);
-			}
-		}
+		reader.setContinueRule((stk, ras) -> {
+			doCase(stk.getInternal(), ras);
+		});
 
-		scn.close();
-		return rs.getRules();
+		reader.setEndRule((ras) -> {
+			ras.setRule(null);
+		});
+
+		pragmaMap.forEach((name, act) -> {
+			reader.addPragma(name, (tokn, stat) -> {
+				act.accept(tokn.getInternal(), stat);
+			});
+		});
+
+		return reader.fromStream(is, rs).getRules();
 	}
 
 	private static void importRule(StringTokenizer stk, ReaderState rs) {
@@ -138,16 +115,18 @@ public class GrammarReader {
 
 		addSubgrammarPragmas();
 
-		pragmaMap.put("debug", GrammarReader::debugGrammar);
-		pragmaMap.put("import-rule", GrammarReader::importRule);
-		pragmaMap.put("initial-rule", GrammarReader::initialRule);
+		pragmaMap.put("debug", RBGrammarReader::debugGrammar);
+		pragmaMap.put("import-rule", RBGrammarReader::importRule);
+		pragmaMap.put("initial-rule", RBGrammarReader::initialRule);
 		pragmaMap.put("uniform", (stk, rs) -> rs.toggleUniformity());
 
-		pragmaMap.put("multi-prefix-with", GrammarReader::multiPrefixRule);
-		pragmaMap.put("multi-suffix-with", GrammarReader::multiSuffixRule);
+		pragmaMap.put("multi-prefix-with",
+				RBGrammarReader::multiPrefixRule);
+		pragmaMap.put("multi-suffix-with",
+				RBGrammarReader::multiSuffixRule);
 
-		pragmaMap.put("prefix-with", GrammarReader::prefixRule);
-		pragmaMap.put("suffix-with", GrammarReader::suffixRule);
+		pragmaMap.put("prefix-with", RBGrammarReader::prefixRule);
+		pragmaMap.put("suffix-with", RBGrammarReader::suffixRule);
 	}
 
 	private static void loadSubGrammar(StringTokenizer stk,
@@ -166,12 +145,12 @@ public class GrammarReader {
 
 	private static void multiPrefixRule(StringTokenizer stk,
 			ReaderState rs) {
-
+		// TODO implement me :)
 	}
 
 	private static void multiSuffixRule(StringTokenizer stk,
 			ReaderState rs) {
-
+		// TODO implement me :)
 	}
 
 	private static void prefixRule(StringTokenizer stk, ReaderState rs) {
