@@ -73,12 +73,12 @@ public class RBGrammarReader {
 		RuleBasedConfigReader<ReaderState> reader = new RuleBasedConfigReader<>(
 				null, null, null);
 
-		reader.setStartRule((stk, par) -> {
-			rs.getRules().addRule(par.l);
-			rs.setRule(par.l);
+		reader.setStartRule((stk, par) -> par.doWith((left, right) -> {
+			rs.getRules().addRule(left);
+			rs.setRule(left);
 
-			doCase(stk.getInternal(), par.r);
-		});
+			doCase(stk.getInternal(), right);
+		}));
 
 		reader.setContinueRule((stk, ras) -> {
 			doCase(stk.getInternal(), ras);
