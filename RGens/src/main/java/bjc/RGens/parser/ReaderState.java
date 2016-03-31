@@ -55,6 +55,6 @@ public class ReaderState {
 	}
 	
 	public void setInitialRule(String rName) {
-		wg.peek().setInitRule(rName);
+		wg.peek().setInitialRule(rName);
 	}
 }

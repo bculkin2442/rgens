@@ -40,13 +40,13 @@ public class GrammarReaderApp {
 
 		String initRule = "";
 
-		if (!wg.hasInitRule()) {
+		if (!wg.hasInitialRule()) {
 			initRule = SimpleDialogs.getChoice(null, "Pick a initial rule",
 					"Pick a initial rule to generate choices from",
-					wg.ruleNames().stream().sorted()
+					wg.getRuleNames().stream().sorted()
 							.toArray(String[]::new));
 		} else {
-			initRule = wg.getInitRule();
+			initRule = wg.getInitialRule();
 		}
 
 		int count = SimpleDialogs.getWhole(null,
@@ -65,7 +65,7 @@ public class GrammarReaderApp {
 		}
 
 		for (int i = 0; i < count; i++) {
-			String s = wg.genList(initRule, " ")
+			String s = wg.generateListValues(initRule, " ")
 					.reduceAux(new StringBuilder(),
 							(strang, strangBuilder) -> strangBuilder
 									.append(strang),

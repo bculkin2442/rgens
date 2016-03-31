@@ -52,9 +52,10 @@ public class TextGenerator {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 			e.printStackTrace();
+			System.exit(1);
 		}
 
-		MyHashMap<String, Markov> hash = new MyHashMap<String, Markov>();
+		Map<String, Markov> hash = new HashMap<String, Markov>();
 
 		Character next = null;
 
@@ -63,11 +64,12 @@ public class TextGenerator {
 		} catch (IOException e1) {
 			System.out.println("IOException in stepping through the file");
 			e1.printStackTrace();
+			System.exit(1);
 		}
 
 		StringBuilder origFileBuffer = new StringBuilder();
 
-		while (Character.isDefined(next)) {
+		while (next != null && Character.isDefined(next)) {
 			Character.toString(next);
 			origFileBuffer.append(next);
 
@@ -121,7 +123,7 @@ public class TextGenerator {
 		}
 
 		if (hash.size() < 100) {
-			Iterator<String> keys = hash.keys();
+			Iterator<String> keys = hash.keySet().iterator();
 
 			while (keys.hasNext()) {
 				String hashKey = keys.next();

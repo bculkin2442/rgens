@@ -9,9 +9,9 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.function.BiConsumer;
 
+import bjc.utils.exceptions.UnknownPragmaException;
 import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.gen.WeightedGrammar;
-import bjc.utils.parserutils.UnknownPragmaException;
 
 public class GrammarReader {
 	private static Map<String, BiConsumer<StringTokenizer, ReaderState>>	actMap;
@@ -52,7 +52,7 @@ public class GrammarReader {
 	private static void debugGrammar(StringTokenizer stk, ReaderState rs) {
 		System.out.println("Printing rule names: ");
 
-		for (String rul : rs.getRules().ruleNames()) {
+		for (String rul : rs.getRules().getRuleNames()) {
 			System.out.println("\t" + rul);
 		}
 
@@ -89,7 +89,7 @@ public class GrammarReader {
 	private static void editSubGrammar(StringTokenizer stk,
 			ReaderState rs) {
 		String sgName = stk.nextToken();
-		rs.pushGrammar(rs.getRules().getSubGrammar(sgName));
+		rs.pushGrammar(rs.getRules().getSubgrammar(sgName));
 	}
 
 	public static WeightedGrammar<String> fromStream(InputStream is) {
@@ -156,7 +156,7 @@ public class GrammarReader {
 		String fName = stk.nextToken();
 
 		try {
-			rs.getRules().addSubGrammar(sgName,
+			rs.getRules().addSubgrammar(sgName,
 					fromStream(new FileInputStream(fName)));
 		} catch (FileNotFoundException e) {
 			throw new PragmaErrorException("Could not load subgrammar "
@@ -188,29 +188,29 @@ public class GrammarReader {
 		String gName = stk.nextToken();
 		String rName = stk.nextToken();
 
-		WeightedGrammar<String> nwg = rs.getRules().getSubGrammar(gName);
-		rs.getRules().removeSubgrammar(gName);
+		WeightedGrammar<String> nwg = rs.getRules().getSubgrammar(gName);
+		rs.getRules().deleteSubgrammar(gName);
 
-		nwg.addSubGrammar(rName, rs.getRules());
+		nwg.addSubgrammar(rName, rs.getRules());
 		rs.setRules(nwg);
 	}
 
 	private static void removeRule(StringTokenizer stk, ReaderState rs) {
 		String rName = stk.nextToken();
 
-		rs.getRules().removeRule(rName);
+		rs.getRules().deleteRule(rName);
 	}
 
 	private static void removeSubGrammar(StringTokenizer stk,
 			ReaderState rs) {
 		String sgName = stk.nextToken();
-		rs.getRules().removeSubgrammar(sgName);
+		rs.getRules().deleteSubgrammar(sgName);
 	}
 
 	private static void saveGrammar(StringTokenizer stk, ReaderState rs) {
 		String sgName = stk.nextToken();
 		WeightedGrammar<String> sg = rs.popGrammar();
-		rs.getRules().addSubGrammar(sgName, sg);
+		rs.getRules().addSubgrammar(sgName, sg);
 	}
 
 	private static void subordinateGrammar(StringTokenizer stk,
@@ -218,7 +218,7 @@ public class GrammarReader {
 		String gName = stk.nextToken();
 		WeightedGrammar<String> nwg = new WeightedGrammar<>();
 
-		nwg.addSubGrammar(gName, rs.getRules());
+		nwg.addSubgrammar(gName, rs.getRules());
 		rs.setRules(nwg);
 	}
 

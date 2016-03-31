@@ -24,7 +24,7 @@ public class FrequencyCounter {
 		Scanner s = new Scanner(System.in);
 		text = s.nextLine();
 
-		MyHashMap<String, Integer> hash = new MyHashMap<String, Integer>();
+		Map<String, Integer> hash = new HashMap<String, Integer>();
 		int distinct = 0;
 
 		for (int i = 0; i <= text.length() - k; i++) {
@@ -46,7 +46,7 @@ public class FrequencyCounter {
 
 		System.out.println(distinct + " distinct keys");
 
-		Iterator<String> keys = hash.keys();
+		Iterator<String> keys = hash.keySet().iterator();
 
 		while (keys.hasNext()) {
 			String key = keys.next();

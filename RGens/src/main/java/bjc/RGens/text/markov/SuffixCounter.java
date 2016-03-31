@@ -1,6 +1,8 @@
 package bjc.RGens.text.markov;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -25,7 +27,7 @@ public class SuffixCounter {
 		Scanner s = new Scanner(System.in);
 		text = s.nextLine();
 
-		MyHashMap<String, Markov> hash = new MyHashMap<String, Markov>();
+		Map<String, Markov> hash = new HashMap<String, Markov>();
 
 		int distinct = 0;
 
@@ -57,7 +59,7 @@ public class SuffixCounter {
 		}
 
 		System.out.println(distinct + " distinct keys");
-		Iterator<String> keys = hash.keys();
+		Iterator<String> keys = hash.keySet().iterator();
 
 		while (keys.hasNext()) {
 			String hashKey = keys.next();
@@ -74,7 +76,7 @@ public class SuffixCounter {
 
 			System.out.println();
 		}
-		
+
 		s.close();
 	}
 }

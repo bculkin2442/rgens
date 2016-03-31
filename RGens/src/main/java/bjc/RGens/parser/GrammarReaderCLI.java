@@ -29,7 +29,7 @@ public class GrammarReaderCLI {
 			}
 
 			if (rName.equalsIgnoreCase("--list-rules")) {
-				for (String rn : wg.ruleNames()) {
+				for (String rn : wg.getRuleNames()) {
 					System.out.println(rn);
 				}
 				System.exit(0);
@@ -38,7 +38,7 @@ public class GrammarReaderCLI {
 			int rCount = Integer.parseInt(args[2]);
 
 			for (int i = 0; i < rCount; i++) {
-				String s = wg.genList(rName, " ")
+				String s = wg.generateListValues(rName, " ")
 						.reduceAux(new StringBuilder(),
 								(strang, strangBuilder) -> strangBuilder
 										.append(strang),

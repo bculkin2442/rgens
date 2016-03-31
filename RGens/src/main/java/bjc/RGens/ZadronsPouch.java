@@ -4,12 +4,25 @@ import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.gen.RandomGrammar;
 
+/**
+ * Example showing code manipulate of random grammars
+ * 
+ * @author ben
+ *
+ */
 public class ZadronsPouch {
+	/**
+	 * Main method for running application
+	 * 
+	 * @param args
+	 *            Unused CLI args
+	 */
 	public static void main(String[] args) {
 		ZadronsPouch zp = new ZadronsPouch();
 
 		for (int i = 0; i < 100; i++) {
-			FunctionalList<String> ls = zp.wg.genList("<item>", " ");
+			FunctionalList<String> ls = zp.grammar
+					.generateListValues("<item>", " ");
 
 			StringBuilder sb = new StringBuilder();
 
@@ -17,16 +30,15 @@ public class ZadronsPouch {
 
 			System.out.println(sb.toString().replaceAll("\\s+", " "));
 		}
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
 	}
 
-	private RandomGrammar<String> wg;
+	private RandomGrammar<String> grammar;
 
+	/**
+	 * Create a new instance with a grammar
+	 */
 	public ZadronsPouch() {
-		wg = new RandomGrammar<>();
+		grammar = new RandomGrammar<>();
 
 		addRule("<item>", "<egg>", "<glove>", "<crys-sphere>", "<rock>",
 				"<figurine>", "<vial>", "<mini-weapon>", "<bag>", "<card>",
@@ -150,7 +162,7 @@ public class ZadronsPouch {
 					.toList(s -> s));
 		}
 
-		wg.makeRule(rule, cses);
+		grammar.makeRule(rule, cses);
 	}
 
 	private void addVialRules() {
