@@ -1,13 +1,25 @@
 package bjc.RGens.parser;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import bjc.utils.gen.WeightedGrammar;
 
+/**
+ * App that reads a grammar from a file and generates results
+ * 
+ * @author ben
+ *
+ */
 public class GrammarReaderCLI {
 	private static WeightedGrammar<String> wg = null;
 
+	/**
+	 * Main application method
+	 * 
+	 * @param args
+	 *            CLI args
+	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			GrammarReaderApp.main(args);
@@ -22,14 +34,14 @@ public class GrammarReaderCLI {
 
 			String rName = args[1];
 
-			try {
-				wg = GrammarReader.fromStream(new FileInputStream(fName));
-			} catch (FileNotFoundException e) {
+			try (FileInputStream fStream = new FileInputStream(fName)) {
+				wg = GrammarReader.fromStream(fStream);
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			if (rName.equalsIgnoreCase("--list-rules")) {
-				for (String rn : wg.getRuleNames()) {
+				for (String rn : wg.getRuleNames().toIterable()) {
 					System.out.println(rn);
 				}
 				System.exit(0);

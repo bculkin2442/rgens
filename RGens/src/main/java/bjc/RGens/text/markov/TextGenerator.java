@@ -4,6 +4,12 @@ import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 
+/**
+ * Generate text from a markov model of an input text
+ * 
+ * @author ben
+ *
+ */
 public class TextGenerator {
 
 	/**
@@ -18,6 +24,7 @@ public class TextGenerator {
 	 *            the file to be read. The generated text will be the same
 	 *            number of characters as the original file.
 	 */
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		int k = 0;
 		int M = 0;
@@ -45,17 +52,47 @@ public class TextGenerator {
 			System.exit(1);
 		}
 
-		FileReader reader = null;
+		Map<String, Markov> hash = null;
 
-		try {
-			reader = new FileReader(file);
+		try (FileReader reader = new FileReader(file)) {
+			hash = generateMarkovMap(k, M, text, reader);
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 			e.printStackTrace();
 			System.exit(1);
+		} catch (IOException ioex) {
+			System.out.println("IOException");
+			ioex.printStackTrace();
+			System.exit(1);
 		}
 
-		Map<String, Markov> hash = new HashMap<String, Markov>();
+		if (hash.size() < 100) {
+			Iterator<String> keys = hash.keySet().iterator();
+
+			while (keys.hasNext()) {
+				String hashKey = keys.next();
+				Markov hashValue = hash.get(hashKey);
+
+				System.out.print(hashValue.count() + " " + hashKey + ":");
+
+				for (Entry<Character, Integer> entry : hashValue.getMap()
+						.entrySet()) {
+					char suffix = entry.getKey();
+					int frequencyCount = entry.getValue();
+					System.out.print(" " + frequencyCount + " " + suffix);
+				}
+
+				System.out.println();
+			}
+		}
+
+		System.out.println(
+				text.toString().substring(0, Math.min(M, text.length())));
+	}
+
+	private static Map<String, Markov> generateMarkovMap(int k, int M,
+			StringBuilder text, Reader reader) {
+		Map<String, Markov> hash = new HashMap<>();
 
 		Character next = null;
 
@@ -100,9 +137,6 @@ public class TextGenerator {
 			}
 		}
 
-		if (M == 0) {
-			M = origFile.length();
-		}
 		for (int i = k; i < M; i++) {
 			if (i == k) {
 				text.append(firstSub);
@@ -122,27 +156,6 @@ public class TextGenerator {
 			}
 		}
 
-		if (hash.size() < 100) {
-			Iterator<String> keys = hash.keySet().iterator();
-
-			while (keys.hasNext()) {
-				String hashKey = keys.next();
-				Markov hashValue = hash.get(hashKey);
-
-				System.out.print(hashValue.count() + " " + hashKey + ":");
-
-				for (Entry<Character, Integer> entry : hashValue.getMap()
-						.entrySet()) {
-					char suffix = entry.getKey();
-					int frequencyCount = entry.getValue();
-					System.out.print(" " + frequencyCount + " " + suffix);
-				}
-
-				System.out.println();
-			}
-		}
-
-		System.out.println(
-				text.toString().substring(0, Math.min(M, text.length())));
+		return hash;
 	}
 }

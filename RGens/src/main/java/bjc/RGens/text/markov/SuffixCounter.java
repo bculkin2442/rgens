@@ -15,6 +15,12 @@ import java.util.Scanner;
  */
 
 public class SuffixCounter {
+	/**
+	 * Main method
+	 * 
+	 * @param args
+	 *            CLI args
+	 */
 	public static void main(String[] args) {
 		String text;
 		int k = 0;
@@ -27,7 +33,7 @@ public class SuffixCounter {
 		Scanner s = new Scanner(System.in);
 		text = s.nextLine();
 
-		Map<String, Markov> hash = new HashMap<String, Markov>();
+		Map<String, Markov> hash = new HashMap<>();
 
 		int distinct = 0;
 

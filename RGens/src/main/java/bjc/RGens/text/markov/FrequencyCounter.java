@@ -10,6 +10,12 @@ import java.util.*;
  */
 public class FrequencyCounter {
 
+	/**
+	 * Main method
+	 * 
+	 * @param args
+	 *            CLI args
+	 */
 	public static void main(String[] args) {
 		String text;
 
@@ -24,7 +30,7 @@ public class FrequencyCounter {
 		Scanner s = new Scanner(System.in);
 		text = s.nextLine();
 
-		Map<String, Integer> hash = new HashMap<String, Integer>();
+		Map<String, Integer> hash = new HashMap<>();
 		int distinct = 0;
 
 		for (int i = 0; i <= text.length() - k; i++) {
@@ -40,10 +46,9 @@ public class FrequencyCounter {
 				hash.put(sub, m.count);
 				distinct++;
 			}
-
-			s.close();
 		}
 
+		s.close();
 		System.out.println(distinct + " distinct keys");
 
 		Iterator<String> keys = hash.keySet().iterator();

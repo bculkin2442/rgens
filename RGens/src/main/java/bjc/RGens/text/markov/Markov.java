@@ -11,10 +11,10 @@ import java.util.*;
  *
  */
 public class Markov {
-	String substring;
-	int count = 0;
+	String						substring;
+	int							count	= 0;
 
-	TreeMap<Character, Integer> map;
+	TreeMap<Character, Integer>	map;
 
 	/**
 	 * Constructs a Markov object from a given substring.
@@ -25,7 +25,7 @@ public class Markov {
 	public Markov(String substring) {
 		this.substring = substring;
 
-		map = new TreeMap<Character, Integer>();
+		map = new TreeMap<>();
 
 		add();
 	}
@@ -42,7 +42,7 @@ public class Markov {
 	public Markov(String substring, Character suffix) {
 		this.substring = substring;
 
-		map = new TreeMap<Character, Integer>();
+		map = new TreeMap<>();
 
 		add(suffix);
 	}
@@ -82,23 +82,24 @@ public class Markov {
 	public int getFrequencyCount(char c) {
 		if (!map.containsKey(c)) {
 			return -1;
-		} else {
-			return map.get(c);
 		}
+
+		return map.get(c);
 	}
 
 	/**
 	 * Gives a percentage of frequency count / number of total suffixes.
 	 * 
 	 * @param c
-	 * @return
+	 * @return the ratio of frequency count of a single character to the
+	 *         total number of suffixes
 	 */
 	public double getCharFrequency(char c) {
 		if (getFrequencyCount(c) == -1) {
 			return -1;
-		} else {
-			return (double) getFrequencyCount(c) / (double) count;
 		}
+
+		return (double) getFrequencyCount(c) / (double) count;
 	}
 
 	/**
@@ -111,9 +112,9 @@ public class Markov {
 	public boolean containsChar(char c) {
 		if (!map.containsKey(c)) {
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 	}
 
 	/**
@@ -152,7 +153,7 @@ public class Markov {
 
 		Iterator<Entry<Character, Integer>> it = s.iterator();
 
-		ArrayList<Character> suffixes = new ArrayList<Character>();
+		ArrayList<Character> suffixes = new ArrayList<>();
 
 		while (it.hasNext()) {
 			Entry<Character, Integer> tmp = it.next();
@@ -173,6 +174,7 @@ public class Markov {
 	 * 
 	 * @return said String representation.
 	 */
+	@Override
 	public String toString() {
 		String ret = "Substring: " + substring + ", Count: " + count;
 		ret += "\n" + "Suffixes and frequency counts: ";

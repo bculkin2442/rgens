@@ -3,6 +3,7 @@ package bjc.RGens.parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import javax.swing.UIManager;
@@ -12,8 +13,21 @@ import bjc.utils.gen.WeightedGrammar;
 import bjc.utils.gui.SimpleDialogs;
 import bjc.utils.gui.awt.SimpleFileDialog;
 
+/**
+ * App that reads a grammar from a file and generates results
+ * 
+ * @author ben
+ *
+ */
 public class GrammarReaderApp {
 
+	/**
+	 * Main method of class
+	 * 
+	 * @param args
+	 *            CLI args
+	 */
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(
@@ -30,10 +44,9 @@ public class GrammarReaderApp {
 
 		WeightedGrammar<String> wg = null;
 
-		try {
-			wg = RBGrammarReader.fromStream(new FileInputStream(gramFile));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		try (FileInputStream fStream = new FileInputStream(gramFile)) {
+			wg = RBGrammarReader.fromStream(fStream);
+		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -41,10 +54,13 @@ public class GrammarReaderApp {
 		String initRule = "";
 
 		if (!wg.hasInitialRule()) {
+			wg.getRuleNames().sort((leftString, rightString) -> {
+				return leftString.compareTo(rightString);
+			});
+
 			initRule = SimpleDialogs.getChoice(null, "Pick a initial rule",
 					"Pick a initial rule to generate choices from",
-					wg.getRuleNames().stream().sorted()
-							.toArray(String[]::new));
+					wg.getRuleNames().toArray(new String[0]));
 		} else {
 			initRule = wg.getInitialRule();
 		}
@@ -74,5 +90,7 @@ public class GrammarReaderApp {
 
 			ps.println(s);
 		}
+		
+		ps.close();
 	}
 }
