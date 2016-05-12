@@ -2,11 +2,7 @@ package bjc.RGens.parser;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.function.BiConsumer;
+import java.nio.file.Path;
 
 import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.gen.WeightedGrammar;
@@ -19,218 +15,214 @@ import bjc.utils.parserutils.RuleBasedConfigReader;
  *
  */
 public class RBGrammarReader {
-	private static Map<String, BiConsumer<StringTokenizer, ReaderState>> pragmaMap;
+	private static RuleBasedConfigReader<ReaderState> reader;
 
 	static {
-		initPragmas();
+		setupReader();
 
+		initPragmas();
 	}
 
 	private static void addSubgrammarPragmas() {
-		pragmaMap.put("edit-sub-grammar", RBGrammarReader::editSubGrammar);
-		pragmaMap.put("edit-parent", (stk, rs) -> rs.popGrammar());
+		reader.addPragma("new-sub-grammar", (tokenizer, state) -> {
+			state.startNewSubgrammar();
+		});
 
-		pragmaMap.put("load-sub-grammar", RBGrammarReader::loadSubGrammar);
+		reader.addPragma("load-sub-grammar",
+				RBGrammarReader::loadSubGrammar);
+		reader.addPragma("save-sub-grammar", RBGrammarReader::saveGrammar);
 
-		pragmaMap.put("new-sub-grammar",
-				(stk, rs) -> rs.pushGrammar(new WeightedGrammar<>()));
+		reader.addPragma("edit-sub-grammar",
+				RBGrammarReader::editSubGrammar);
+		reader.addPragma("edit-parent", (tokenizer, state) -> {
+			state.editParent();
+		});
 
-		pragmaMap.put("promote", RBGrammarReader::promoteGrammar);
+		reader.addPragma("promote", RBGrammarReader::promoteGrammar);
+		reader.addPragma("subordinate",
+				RBGrammarReader::subordinateGrammar);
 
-		pragmaMap.put("remove-sub-grammar",
+		reader.addPragma("remove-sub-grammar",
 				RBGrammarReader::removeSubGrammar);
-		pragmaMap.put("remove-rule", RBGrammarReader::removeRule);
-
-		pragmaMap.put("save-sub-grammar", RBGrammarReader::saveGrammar);
-		pragmaMap.put("subordinate", RBGrammarReader::subordinateGrammar);
 	}
 
-	private static void debugGrammar(
-			@SuppressWarnings("unused") StringTokenizer stk,
-			ReaderState rs) {
+	private static void debugGrammar(ReaderState state) {
 		System.out.println("Printing rule names: ");
 
-		for (String rul : rs.currGrammar().getRuleNames().toIterable()) {
-			System.out.println("\t" + rul);
+		for (String currentRule : state.getRuleNames().toIterable()) {
+			System.out.println("\t" + currentRule);
 		}
 
 		System.out.println();
 	}
 
-	private static void doCase(StringTokenizer stk, ReaderState rs) {
-		int prob = 1;
+	private static void doCase(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		int ruleProbability = readOptionalProbability(tokenizer, state);
 
-		if (!rs.isUniform()) {
-			prob = Integer.parseInt(stk.nextToken());
-		}
-
-		rs.currGrammar().addCase(rs.getRule(), prob,
-				new FunctionalStringTokenizer(stk).toList(s -> s));
+		state.addCase(ruleProbability, tokenizer.toList());
 	}
 
-	private static void editSubGrammar(StringTokenizer stk,
-			ReaderState rs) {
-		String sgName = stk.nextToken();
-		rs.pushGrammar(rs.currGrammar().getSubgrammar(sgName));
+	private static void editSubGrammar(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String subgrammarName = tokenizer.nextToken();
+
+		state.editSubgrammar(subgrammarName);
 	}
 
 	/**
-	 * Read a grammar from a stream
+	 * Read a grammar from a path
 	 * 
-	 * @param is
-	 *            The stream to read from
+	 * @param inputPath
+	 *            The path to load the grammar from
+	 * 
 	 * @return A grammar read from the stream
 	 * 
-	 *         TODO redo the implementation for this
+	 * @throws IOException
+	 *             If something goes wrong during file reading
+	 * 
 	 */
-	public static WeightedGrammar<String> fromStream(InputStream is) {
-		ReaderState rs = new ReaderState();
-		rs.toggleUniformity();
+	public static WeightedGrammar<String> fromPath(Path inputPath)
+			throws IOException {
+		ReaderState initialState = new ReaderState(inputPath);
 
-		RuleBasedConfigReader<ReaderState> reader = new RuleBasedConfigReader<>(
-				null, null, null);
-
-		reader.setStartRule((stk, par) -> par.doWith((left, right) -> {
-			rs.currGrammar().addRule(left);
-			rs.setRule(left);
-
-			doCase(stk.getInternal(), right);
-		}));
-
-		reader.setContinueRule((stk, ras) -> {
-			doCase(stk.getInternal(), ras);
-		});
-
-		reader.setEndRule((ras) -> {
-			ras.setRule(null);
-		});
-
-		pragmaMap.forEach((name, act) -> {
-			reader.addPragma(name, (tokn, stat) -> {
-				act.accept(tokn.getInternal(), stat);
-			});
-		});
-
-		return reader.fromStream(is, rs).currGrammar();
-	}
-
-	private static void importRule(StringTokenizer stk, ReaderState rs) {
-		String ruleName = stk.nextToken();
-		String sgName = stk.nextToken();
-
-		rs.currGrammar().addGrammarAlias(sgName, ruleName);
-	}
-
-	private static void initialRule(StringTokenizer stk, ReaderState rs) {
-		String rName = stk.nextToken();
-
-		rs.setInitialRule(rName);
-	}
-
-	private static void initPragmas() {
-		pragmaMap = new Hashtable<>();
-
-		addSubgrammarPragmas();
-
-		pragmaMap.put("debug", RBGrammarReader::debugGrammar);
-		pragmaMap.put("import-rule", RBGrammarReader::importRule);
-		pragmaMap.put("initial-rule", RBGrammarReader::initialRule);
-		pragmaMap.put("uniform", (stk, rs) -> rs.toggleUniformity());
-
-		pragmaMap.put("multi-prefix-with",
-				RBGrammarReader::multiPrefixRule);
-		pragmaMap.put("multi-suffix-with",
-				RBGrammarReader::multiSuffixRule);
-
-		pragmaMap.put("prefix-with", RBGrammarReader::prefixRule);
-		pragmaMap.put("suffix-with", RBGrammarReader::suffixRule);
-	}
-
-	private static void loadSubGrammar(StringTokenizer stk,
-			ReaderState rs) {
-		String sgName = stk.nextToken();
-		String fName = stk.nextToken();
-
-		try (FileInputStream fStream = new FileInputStream(fName)) {
-			rs.currGrammar().addSubgrammar(sgName, fromStream(fStream));
-		} catch (IOException e) {
-			PragmaErrorException peex = new PragmaErrorException(
-					"Could not load subgrammar " + sgName + " from file "
-							+ fName);
-
-			peex.initCause(e);
-
-			throw peex;
+		try (FileInputStream inputStream = new FileInputStream(
+				inputPath.toFile())) {
+			return reader.fromStream(inputStream, initialState)
+					.getGrammar();
+		} catch (IOException ioex) {
+			throw ioex;
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private static void multiPrefixRule(StringTokenizer stk,
+	private static void importRule(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String ruleName = tokenizer.nextToken();
+		String subgrammarName = tokenizer.nextToken();
+
+		state.addGrammarAlias(subgrammarName, ruleName);
+	}
+
+	private static void initialRule(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String initialRuleName = tokenizer.nextToken();
+
+		state.setInitialRule(initialRuleName);
+	}
+
+	private static void initPragmas() {
+		addSubgrammarPragmas();
+
+		reader.addPragma("debug", (tokenizer, state) -> {
+			debugGrammar(state);
+		});
+
+		reader.addPragma("uniform", (tokenizer, state) -> {
+			state.toggleUniformity();
+		});
+
+		reader.addPragma("initial-rule", RBGrammarReader::initialRule);
+
+		reader.addPragma("import-rule", RBGrammarReader::importRule);
+
+		reader.addPragma("remove-rule", RBGrammarReader::removeRule);
+
+		reader.addPragma("prefix-with", RBGrammarReader::prefixRule);
+		reader.addPragma("suffix-with", RBGrammarReader::suffixRule);
+	}
+
+	private static void loadSubGrammar(FunctionalStringTokenizer stk,
 			ReaderState rs) {
-		// TODO implement me :)
+		String subgrammarName = stk.nextToken();
+		String subgrammarPath = stk.nextToken();
+
+		rs.loadSubgrammar(subgrammarName, subgrammarPath);
 	}
 
-	@SuppressWarnings("unused")
-	private static void multiSuffixRule(StringTokenizer stk,
-			ReaderState rs) {
-		// TODO implement me :)
+	private static void prefixRule(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String ruleName = tokenizer.nextToken();
+		String prefixToken = tokenizer.nextToken();
+
+		int additionalProbability = readOptionalProbability(tokenizer,
+				state);
+
+		state.prefixRule(ruleName, prefixToken, additionalProbability);
 	}
 
-	private static void prefixRule(StringTokenizer stk, ReaderState rs) {
-		String rName = stk.nextToken();
-		String prefixToken = stk.nextToken();
-		int addProb = rs.isUniform() ? 0
-				: Integer.parseInt(stk.nextToken());
+	private static void promoteGrammar(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String subgrammarName = tokenizer.nextToken();
+		String subordinateName = tokenizer.nextToken();
 
-		rs.currGrammar().prefixRule(rName, prefixToken, addProb);
+		state.promoteGrammar(subgrammarName, subordinateName);
 	}
 
-	private static void promoteGrammar(StringTokenizer stk,
-			ReaderState rs) {
-		String gName = stk.nextToken();
-		String rName = stk.nextToken();
+	private static int readOptionalProbability(
+			FunctionalStringTokenizer tokenizer, ReaderState state) {
+		if (state.isUniform()) {
+			return 0;
+		}
 
-		WeightedGrammar<String> nwg = rs.currGrammar()
-				.getSubgrammar(gName);
-		rs.currGrammar().deleteSubgrammar(gName);
-
-		nwg.addSubgrammar(rName, rs.currGrammar());
-		rs.setRules(nwg);
+		return Integer.parseInt(tokenizer.nextToken());
 	}
 
-	private static void removeRule(StringTokenizer stk, ReaderState rs) {
-		String rName = stk.nextToken();
+	private static void removeRule(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String ruleName = tokenizer.nextToken();
 
-		rs.currGrammar().deleteRule(rName);
+		state.deleteRule(ruleName);
 	}
 
-	private static void removeSubGrammar(StringTokenizer stk,
-			ReaderState rs) {
-		String sgName = stk.nextToken();
-		rs.currGrammar().deleteSubgrammar(sgName);
+	private static void removeSubGrammar(
+			FunctionalStringTokenizer tokenizer, ReaderState state) {
+		String subgrammarName = tokenizer.nextToken();
+
+		state.deleteSubgrammar(subgrammarName);
 	}
 
-	private static void saveGrammar(StringTokenizer stk, ReaderState rs) {
-		String sgName = stk.nextToken();
-		WeightedGrammar<String> sg = rs.popGrammar();
-		rs.currGrammar().addSubgrammar(sgName, sg);
+	private static void saveGrammar(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String subgrammarName = tokenizer.nextToken();
+
+		state.saveSubgrammar(subgrammarName);
 	}
 
-	private static void subordinateGrammar(StringTokenizer stk,
-			ReaderState rs) {
-		String gName = stk.nextToken();
-		WeightedGrammar<String> nwg = new WeightedGrammar<>();
+	private static void setupReader() {
+		reader = new RuleBasedConfigReader<>(null, null, null);
 
-		nwg.addSubgrammar(gName, rs.currGrammar());
-		rs.setRules(nwg);
+		reader.setStartRule((tokenizer, stateTokenPair) -> {
+			stateTokenPair.doWith((initToken, state) -> {
+				state.startNewRule(initToken);
+
+				doCase(tokenizer, state);
+			});
+		});
+
+		reader.setContinueRule((tokenizer, state) -> {
+			doCase(tokenizer, state);
+		});
+
+		reader.setEndRule((tokenizer) -> {
+			tokenizer.setCurrentRule(null);
+		});
 	}
 
-	private static void suffixRule(StringTokenizer stk, ReaderState rs) {
-		String rName = stk.nextToken();
-		String prefixToken = stk.nextToken();
-		int addProb = rs.isUniform() ? 0
-				: Integer.parseInt(stk.nextToken());
+	private static void subordinateGrammar(
+			FunctionalStringTokenizer tokenizer, ReaderState state) {
+		String grammarName = tokenizer.nextToken();
 
-		rs.currGrammar().suffixRule(rName, prefixToken, addProb);
+		state.subordinateGrammar(grammarName);
+	}
+
+	private static void suffixRule(FunctionalStringTokenizer tokenizer,
+			ReaderState state) {
+		String ruleName = tokenizer.nextToken();
+		String suffixToken = tokenizer.nextToken();
+
+		int additionalProbability = readOptionalProbability(tokenizer,
+				state);
+
+		state.suffixRule(ruleName, suffixToken, additionalProbability);
 	}
 }

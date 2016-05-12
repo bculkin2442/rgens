@@ -1,7 +1,6 @@
 package bjc.RGens.parser;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -9,6 +8,7 @@ import java.io.PrintStream;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import bjc.utils.funcutils.ListUtils;
 import bjc.utils.gen.WeightedGrammar;
 import bjc.utils.gui.SimpleDialogs;
 import bjc.utils.gui.awt.SimpleFileDialog;
@@ -42,55 +42,52 @@ public class GrammarReaderApp {
 		File gramFile = SimpleFileDialog.getOpenFile(null,
 				"Choose Grammar File", ".gram");
 
-		WeightedGrammar<String> wg = null;
+		WeightedGrammar<String> grammar = null;
 
-		try (FileInputStream fStream = new FileInputStream(gramFile)) {
-			wg = RBGrammarReader.fromStream(fStream);
-		} catch (IOException e) {
-			e.printStackTrace();
+		try {
+			grammar = RBGrammarReader.fromPath(gramFile.toPath());
+		} catch (IOException ioex) {
+			ioex.printStackTrace();
+
 			System.exit(1);
 		}
 
 		String initRule = "";
 
-		if (!wg.hasInitialRule()) {
-			wg.getRuleNames().sort((leftString, rightString) -> {
+		if (!grammar.hasInitialRule()) {
+			grammar.getRuleNames().sort((leftString, rightString) -> {
 				return leftString.compareTo(rightString);
 			});
 
 			initRule = SimpleDialogs.getChoice(null, "Pick a initial rule",
 					"Pick a initial rule to generate choices from",
-					wg.getRuleNames().toArray(new String[0]));
+					grammar.getRuleNames().toArray(new String[0]));
 		} else {
-			initRule = wg.getInitialRule();
+			initRule = grammar.getInitialRule();
 		}
 
 		int count = SimpleDialogs.getWhole(null,
 				"Enter number of repititions",
 				"Enter the number of items to generate from the rule");
 
-		File outpFile = SimpleFileDialog.getSaveFile(null,
+		File outputFile = SimpleFileDialog.getSaveFile(null,
 				"Choose Grammar File");
 
-		PrintStream ps = null;
+		PrintStream outputStream = null;
 
 		try {
-			ps = new PrintStream(outpFile);
+			outputStream = new PrintStream(outputFile);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < count; i++) {
-			String s = wg.generateListValues(initRule, " ")
-					.reduceAux(new StringBuilder(),
-							(strang, strangBuilder) -> strangBuilder
-									.append(strang),
-							t -> t.toString())
-					.replaceAll("\\s+", " ");
+			String ruleResult = ListUtils.collapseTokens(
+					grammar.generateListValues(initRule, " "));
 
-			ps.println(s);
+			outputStream.println(ruleResult.replaceAll("\\s+", " "));
 		}
-		
-		ps.close();
+
+		outputStream.close();
 	}
 }

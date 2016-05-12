@@ -2,7 +2,9 @@ package bjc.RGens.parser;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 
+import bjc.utils.funcutils.ListUtils;
 import bjc.utils.gen.WeightedGrammar;
 
 /**
@@ -12,7 +14,7 @@ import bjc.utils.gen.WeightedGrammar;
  *
  */
 public class GrammarReaderCLI {
-	private static WeightedGrammar<String> wg = null;
+	private static WeightedGrammar<String> grammar = null;
 
 	/**
 	 * Main application method
@@ -32,32 +34,27 @@ public class GrammarReaderCLI {
 				System.exit(0);
 			}
 
-			String rName = args[1];
+			String ruleName = args[1];
 
 			try (FileInputStream fStream = new FileInputStream(fName)) {
-				wg = GrammarReader.fromStream(fStream);
+				grammar = RBGrammarReader.fromPath(Paths.get(fName, ""));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			if (rName.equalsIgnoreCase("--list-rules")) {
-				for (String rn : wg.getRuleNames().toIterable()) {
-					System.out.println(rn);
-				}
+			if (ruleName.equalsIgnoreCase("--list-rules")) {
+				grammar.getRuleNames().forEach(System.out::println);
+
 				System.exit(0);
 			}
 
 			int rCount = Integer.parseInt(args[2]);
 
 			for (int i = 0; i < rCount; i++) {
-				String s = wg.generateListValues(rName, " ")
-						.reduceAux(new StringBuilder(),
-								(strang, strangBuilder) -> strangBuilder
-										.append(strang),
-								t -> t.toString())
-						.replaceAll("\\s+", " ");
+				String ruleResult = ListUtils.collapseTokens(
+						grammar.generateListValues(ruleName, " "));
 
-				System.out.println(s);
+				System.out.println(ruleResult.replaceAll("\\s+", " "));
 			}
 		}
 	}
