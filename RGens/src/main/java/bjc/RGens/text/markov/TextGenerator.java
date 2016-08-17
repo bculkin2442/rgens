@@ -48,8 +48,14 @@ public class TextGenerator {
 			System.exit(1);
 		}
 
+		StandaloneMarkov markov = null;
+
 		try (FileReader reader = new FileReader(file)) {
-			StandaloneTextGenerator.generateMarkovMap(k, M, text, reader);
+			markov = StandaloneTextGenerator.generateMarkovMap(k,
+					reader);
+
+			System.out.println(markov.generateTextFromMarkov(M)
+					.substring(0, Math.min(M, text.length())));
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 			e.printStackTrace();
@@ -59,8 +65,5 @@ public class TextGenerator {
 			ioex.printStackTrace();
 			System.exit(1);
 		}
-
-		System.out.println(
-				text.toString().substring(0, Math.min(M, text.length())));
 	}
 }

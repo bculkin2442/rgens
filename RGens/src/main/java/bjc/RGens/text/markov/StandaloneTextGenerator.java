@@ -11,13 +11,13 @@ public class StandaloneTextGenerator {
 	 * Build a markov generator from a provided source
 	 * 
 	 * @param k
-	 * @param M
-	 * @param text
+	 *            The markov order to use
 	 * @param reader
+	 *            The source to seed the generator from
 	 * @return The markov generator for the provided text
 	 */
-	public static StandaloneMarkov generateMarkovMap(int k, int M,
-			StringBuilder text, Reader reader) {
+	public static StandaloneMarkov generateMarkovMap(int k,
+			Reader reader) {
 		Map<String, Markov> hash = new HashMap<>();
 
 		Character next = null;
@@ -41,7 +41,7 @@ public class StandaloneTextGenerator {
 				next = (char) reader.read();
 			} catch (IOException e) {
 				System.out.println(
-						"IOException in stepping through the file");
+						"IOException in stepping through the reader");
 				e.printStackTrace();
 			}
 
@@ -64,11 +64,7 @@ public class StandaloneTextGenerator {
 			}
 		}
 
-		StandaloneMarkov markovGen = new StandaloneMarkov(k, hash, firstSub);
-		
-		text.append(markovGen.generateTextFromMarkov(M));
-
-		return markovGen;
+		return new StandaloneMarkov(k, hash, firstSub);
 	}
 
 }

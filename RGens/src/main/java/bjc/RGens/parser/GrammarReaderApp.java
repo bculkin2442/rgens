@@ -27,7 +27,6 @@ public class GrammarReaderApp {
 	 * @param args
 	 *            CLI args
 	 */
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(
@@ -39,6 +38,11 @@ public class GrammarReaderApp {
 			System.exit(1);
 		}
 
+		doSingleFile();
+	}
+
+	@SuppressWarnings("null")
+	private static void doSingleFile() {
 		File gramFile = SimpleFileDialog.getOpenFile(null,
 				"Choose Grammar File", ".gram");
 
@@ -67,7 +71,7 @@ public class GrammarReaderApp {
 		}
 
 		int count = SimpleDialogs.getWhole(null,
-				"Enter number of repititions",
+				"Enter number of repetitions",
 				"Enter the number of items to generate from the rule");
 
 		File outputFile = SimpleFileDialog.getSaveFile(null,
