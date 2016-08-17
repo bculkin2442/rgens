@@ -1,8 +1,6 @@
 package bjc.RGens.text.markov;
 
 import java.io.*;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Generate text from a markov model of an input text
@@ -11,7 +9,6 @@ import java.util.Map.Entry;
  *
  */
 public class TextGenerator {
-
 	/**
 	 * @param args
 	 *            when used with three arguments, the first represents the
@@ -24,7 +21,6 @@ public class TextGenerator {
 	 *            the file to be read. The generated text will be the same
 	 *            number of characters as the original file.
 	 */
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		int k = 0;
 		int M = 0;
@@ -52,10 +48,8 @@ public class TextGenerator {
 			System.exit(1);
 		}
 
-		Map<String, Markov> hash = null;
-
 		try (FileReader reader = new FileReader(file)) {
-			hash = generateMarkovMap(k, M, text, reader);
+			StandaloneTextGenerator.generateMarkovMap(k, M, text, reader);
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 			e.printStackTrace();
@@ -66,96 +60,7 @@ public class TextGenerator {
 			System.exit(1);
 		}
 
-		if (hash.size() < 100) {
-			Iterator<String> keys = hash.keySet().iterator();
-
-			while (keys.hasNext()) {
-				String hashKey = keys.next();
-				Markov hashValue = hash.get(hashKey);
-
-				System.out.print(hashValue.count() + " " + hashKey + ":");
-
-				for (Entry<Character, Integer> entry : hashValue.getMap()
-						.entrySet()) {
-					char suffix = entry.getKey();
-					int frequencyCount = entry.getValue();
-					System.out.print(" " + frequencyCount + " " + suffix);
-				}
-
-				System.out.println();
-			}
-		}
-
 		System.out.println(
 				text.toString().substring(0, Math.min(M, text.length())));
-	}
-
-	private static Map<String, Markov> generateMarkovMap(int k, int M,
-			StringBuilder text, Reader reader) {
-		Map<String, Markov> hash = new HashMap<>();
-
-		Character next = null;
-
-		try {
-			next = (char) reader.read();
-		} catch (IOException e1) {
-			System.out.println("IOException in stepping through the file");
-			e1.printStackTrace();
-			System.exit(1);
-		}
-
-		StringBuilder origFileBuffer = new StringBuilder();
-
-		while (next != null && Character.isDefined(next)) {
-			Character.toString(next);
-			origFileBuffer.append(next);
-
-			try {
-				next = (char) reader.read();
-			} catch (IOException e) {
-				System.out.println(
-						"IOException in stepping through the file");
-				e.printStackTrace();
-			}
-
-		}
-
-		String origFile = origFileBuffer.toString();
-		String firstSub = origFile.substring(0, k);
-
-		for (int i = 0; i < origFile.length() - k; i++) {
-			String sub = origFile.substring(i, i + k);
-			Character suffix = origFile.charAt(i + k);
-
-			if (hash.containsKey(sub)) {
-				Markov marvin = hash.get(sub);
-				marvin.add(suffix);
-				hash.put(sub, marvin);
-			} else {
-				Markov marvin = new Markov(sub, suffix);
-				hash.put(sub, marvin);
-			}
-		}
-
-		for (int i = k; i < M; i++) {
-			if (i == k) {
-				text.append(firstSub);
-
-				if (text.length() > k)
-					i = text.length();
-			}
-
-			String sub = text.substring((i - k), (i));
-			Markov tmp = hash.get(sub);
-
-			if (tmp != null) {
-				Character nextChar = tmp.random();
-				text.append(nextChar);
-			} else {
-				i = k - 1;
-			}
-		}
-
-		return hash;
 	}
 }
