@@ -1,25 +1,30 @@
-<card> <title>
-	<noun>
-	<title> <adjective>
-	<noun> <adjective>
-	<title> <adjective> <noun>
+[card] [adjective-of] [title]
+	[adjective-of] [noun] [title]
+	[noun]
+	[noun] [adjective]
+	[noun] [title]
+	[noun] [adjective] [noun]
+	[title] [adjective]
+	[title] [adjective] [noun]
 
-<title> <male-title>
-	<female-title>
+pragma initial-rule [card]
 
-<male-title> emperor
+[title] [male-title]
+	[female-title]
+
+[male-title] emperor
 	king
 	knight
 	priest
 
-<female-title> empress
+[female-title] empress
 	queen
 	princess
 	priestess
 
-<adjective> of <adjective-of>
+[adjective] of [adjective-of]
 
-<adjective-of> shimmering
+[adjective-of] shimmering
 	blazing
 	infinite
 	whispering
@@ -30,7 +35,7 @@
 	dancing
 	lost
 
-<noun> darkness
+[noun] darkness
 	light
 	waters
 	stars

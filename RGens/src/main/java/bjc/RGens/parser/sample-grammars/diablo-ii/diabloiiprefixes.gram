@@ -1,18 +1,18 @@
-<prefix> <armor-class>
-	<saving-throw>
-	<foe-reaction>
-	<skill-improve>
-	<cursed>
-	<visibility>
-	<castability>
-	<magical-effect>
-	<personal-stat>
-	<to-hit>
-	<extra-damage>
-	<to-hit+damage>
-	<item-charges>
+[prefix] [armor-class]
+	[saving-throw]
+	[foe-reaction]
+	[skill-improve]
+	[cursed]
+	[visibility]
+	[castability]
+	[magical-effect]
+	[personal-stat]
+	[to-hit]
+	[extra-damage]
+	[to-hit+damage]
+	[item-charges]
 
-<armor-class> sturdy
+[armor-class] sturdy
 	fine
 	strong
 	grand
@@ -24,7 +24,7 @@
 	holy
 	godly
 
-<saving-throw> tawny
+[saving-throw] tawny
 	azure
 	crimson
 	ocher
@@ -54,8 +54,9 @@
 	obsidian
 	topaz
 	prismatic
+	bond
 
-<foe-reaction> subduing
+[foe-reaction] subduing
 	wearying
 	phasing
 	depleting
@@ -66,7 +67,7 @@
 	exhausting
 	overwhelming
 
-<skill-improve> fletcher’s
+[skill-improve] fletcher’s
 	slayer’s
 	summoner’s
 	monk’s
@@ -77,7 +78,7 @@
 	priest’s
 	arch-angel’s
 
-<cursed> rusted
+[cursed] rusted
 	vulnerable
 	glass
 	hyena’s
@@ -92,14 +93,14 @@
 	dull
 	clumsy
 
-<visibility> glowing
+[visibility] glowing
 	oracular
 	unseen
 	hidden
 	veiled
 	stalking
 
-<castability> lizard’s
+[castability] lizard’s
 	spider’s
 	raven’s
 	snake’s
@@ -112,12 +113,12 @@
 	fortified
 	vulpine
 
-<magical-effect> extending
+[magical-effect] extending
 	chrono
 	augmenting
 	catalyzing
 
-<personal-stat> blue
+[personal-stat] blue
 	red
 	orange
 	white
@@ -133,7 +134,7 @@
 	muscular
 	healthy
 
-<to-hit> bronze
+[to-hit] bronze
 	iron
 	silver
 	steel
@@ -143,7 +144,7 @@
 	meteoric
 	weird
 
-<extra-damage> jagged
+[extra-damage] jagged
 	deadly
 	vicious
 	heavy
@@ -153,7 +154,7 @@
 	ruthless
 	merciless
 
-<to-hit+damage> sharp
+[to-hit+damage] sharp
 	fine
 	warrior’s
 	soldier’s
@@ -164,7 +165,7 @@
 	champion’s
 	king’s
 
-<item-charges> plentiful
+[item-charges] plentiful
 	jester’s
 	bountiful
 	

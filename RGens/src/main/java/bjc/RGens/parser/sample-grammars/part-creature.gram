@@ -1,0 +1,77 @@
+[full-creature] [creature-choice]
+
+[creature-choice] [creature]
+	[characteristic] [creature]
+	[ability] [creature]
+	[ability] [characteristic] [creature]
+
+pragma initial-rule [full-creature]
+
+[ability] flying
+	invisible
+	silent
+	ethereal
+	telepathic
+	eye beams
+	swallow whole
+	poisonous
+	regenerating
+	fire breathing
+	anti-magic
+	petrifying
+	soul-eating
+	frightful presence
+	confusing
+	flesh grinding
+	radioactive
+	rust
+	acidic
+	nauseating
+	[ability] and [ability]
+
+[characteristic] zombie
+	vampire
+	swarm
+	samurai
+	barbarian
+	wizard
+	ninja
+	were [characteristic]
+	robot
+	rabid
+	demonic
+	awakened
+	feral
+	pirate
+	half-dragon
+	gelatinous
+	dire
+	shadow
+	rich
+	[characteristic] and [characteristic]
+
+[creature] shark
+	bear
+	lion
+	badger
+	wolf
+	ape
+	squid
+	snake
+	weasel
+	tyrannosaurus
+	crocodile
+	bee
+	spider
+	[elemental]
+	mimic
+	dire penguin
+	giant mini space hamster
+	camel
+	little girl
+	classy kobold
+
+[elemental] fire
+	earth
+	water
+	air

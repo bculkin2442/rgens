@@ -1,0 +1,39 @@
+[name] [part]
+	[part] [part]
+
+pragma initial-rule [name]
+
+[part] battle
+	blade
+	blast
+	blood
+	claw
+	cold
+	cyber
+	dark
+	death
+	far
+	fire
+	force
+	hammer
+	hunt
+	ice
+	max
+	over
+	pain
+	shard
+	shot
+	siege
+	spike
+	star
+	storm
+	strike
+	stroke
+	sun
+	sword
+	ultra
+	war
+	wave
+	whip
+	wild
+	wolf

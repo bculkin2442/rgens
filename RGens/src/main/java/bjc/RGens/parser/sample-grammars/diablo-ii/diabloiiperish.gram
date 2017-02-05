@@ -1,8 +1,8 @@
-<perishables> <perishable-type> of <perishable-effect>
-	<perishable-effect> <perishable-type>
-	<bodypart> of <perishable-effect>
+[perishables] [perishable-type] of [perishable-effect]
+	[perishable-effect] [perishable-type]
+	[bodypart] of [perishable-effect]
 
-<bodypart> heart
+[bodypart] heart
 	brain
 	jawbone
 	eye
@@ -15,21 +15,21 @@
 	spleen
 	soul
 
-<perishable-type> potion
+[perishable-type] potion
 	oil
 	herb
 	elixir
 	resin
 
-<perishable-effect> <restore-effect>
-	light <restore-effect>
-	full <restore-effect>
+[perishable-effect] [restore-effect]
+	light [restore-effect]
+	full [restore-effect]
 	detox
 	restoration
 	flaming
 	explosive
 	fulminating
-	<gas-type> gas
+	[gas-type] gas
 	acidic
 	energizing
 	strengthening
@@ -98,11 +98,11 @@
 	permanence
 	enchantment
 
-<restore-effect> healing
+[restore-effect] healing
 	mana
 	rejuvenation
 	chi
 
-<gas-type> rancid
+[gas-type] rancid
 	choking
 	strangling

@@ -1,0 +1,70 @@
+[attack] [word-1] [word-1]
+	[word-2] [word-2]
+	[word-1] [word-2]
+	[word-2] [word-1]
+
+pragma initial-rule [attack]
+
+pragma prefix-with [attack] [word-1]
+# pragma prefix-with [attack] [word-2]
+
+# pragma suffix-with [attack] [word-1]
+pragma suffix-with [attack] [word-2]
+
+[word-1] acid
+	aerial
+	air
+	ancient
+	aqua
+	aura
+	aurora
+	baton
+	beat
+	belly
+	blast
+	blaze
+	body
+	bone
+	comet
+	confuse
+	cotton
+	cross
+	dark
+	destiny
+	diamond
+	dizzy
+	doom
+	dragon
+	dream
+	dynamic
+	earth
+	egg
+	electric
+	energy
+
+[word-2] terrain
+	ball
+	impulse
+	bomb
+	speed
+	lock
+	wind
+	stinger
+	dance
+	gambit
+	blast
+	fang
+	punch
+	spin
+	burst
+	charge
+	wheel
+	blitz
+	cannon
+	drink
+	eye
+	shot
+	sun
+	slap
+	wrath
+	blade

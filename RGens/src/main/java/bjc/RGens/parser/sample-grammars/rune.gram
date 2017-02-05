@@ -1,0 +1,109 @@
+[rune-string] [rune-2]
+	[rune-1] [rune-2]
+	[rune-1] [rune-2] [rune-3]
+	[rune-2] [rune-3]
+
+pragma initial-rule [rune-string]
+
+pragma prefix-with [rune-string] [rune-1]
+pragma suffix-with [rune-string] [rune-3]
+
+[rune-1] a dagger plunged into
+	vines growing out of
+	a crown perched atop
+	crossed swords over
+	a pair of hands surrounding
+	demonic eyes peering out of
+	blue lightning arcing out of
+	an axe thrust into
+	a hand bursting from
+	a tentacle reaching out of
+	a spear thrust through
+	a trumpet thrust through
+	tiny stars surrounding
+	a jewel within
+	a hand inside
+	a sword inside
+	a hand within
+	an arrow piercing
+	a hand clutching
+
+[rune-2] a skull
+	a treasure chest
+	a circle cut into three parts
+	a pyramid
+	a triangle
+	a mushroom
+	a grinning mask
+	a clenched fist
+	a giant human eye
+	a shield
+	a circle
+	a pentagram
+	a pentacle
+	a flagon
+	a circle cut in half
+	a semicircle
+	a heart
+	a large star
+	a wave
+	a diamond
+	an octagon
+	a scroll
+	a spiral
+	a tree
+	a rose
+	a helmet
+	a book
+	a staff
+	a hammer
+	a bone
+	a cat’s face
+	a wolf’s head
+	a large mouth
+	an upward-pointing arrow
+	a downward-pointing arrow
+	an arrow pointing two directions
+	a circle cut into four parts
+	a ship
+	a six-pointed star
+	a seven-pointed star
+	a pentagon
+
+[rune-3] girded by laurels
+	sheathed in flames
+	glowing like the sun
+	emblazoned with a demonic face
+	flanked by catlike wings
+	in the coils of a serpent
+	swaddled in tentacles
+	flanked by feathered wings
+	inscribed within a red circle
+	inscribed within a magic circle
+	inscribed within a long rectangle
+	covered with spikes and spines
+	haloed in light
+	half in shadow
+	with coins all around it
+	with curved knives all around it
+	wrapped in a pair of rings
+	atop a tower
+	next to a writhing snake
+	atop a mountain
+	next to a crescent moon
+	made of thin red lines
+	made of thin blue lines
+	made of thin green lines
+	made of thin black lines
+	all done as a silhouette
+	wrapped in a cloud
+	dripping with blood
+	flanked by swords
+	flanked by skulls
+	flanked by arrows
+	within a ring made by a whip
+	within a ring made by a snake, eating its own tail
+	atop crossed bones
+	above a trident
+	below two spears
+	covered in insects

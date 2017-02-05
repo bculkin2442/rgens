@@ -1,13 +1,17 @@
-<main> <part-prefix> <part-suffix> <part-problem>
+[main] [part-prefix] [part-suffix] [part-problem]
+	[part-prefix] [part-problem]
+	[part-suffix] [part-problem]
 
-<part-prefix> primary
+pragma initial-rule [main]
+
+[part-prefix] primary
 	compression
 	grav
 	hydraulic
 	reg
 	power
 
-<part-suffix> boot
+[part-suffix] boot
 	coupling
 	housing
 	stabilizer
@@ -16,7 +20,7 @@
 	converter
 	feed
 
-<part-problem> cracked
+[part-problem] cracked
 	wedged
 	collapsed
 	bent

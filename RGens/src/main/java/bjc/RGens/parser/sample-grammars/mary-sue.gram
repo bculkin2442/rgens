@@ -1,0 +1,494 @@
+[mary-sue] she appears to be a normal [normal-desc] . [mary-sue2]
+	she appears to be a normal [normal-desc] [opt-dress] [mary-sue2]
+
+pragma initial-rule [mary-sue]
+
+[normal-desc] schoolgirl
+	soldier
+	pirate
+	nun
+	nurse
+	teacher
+	teenager
+	martial artist
+	scientist
+	singer
+	artist
+	student
+	model
+	lawyer
+	journalist
+	mechanic
+	raver
+	woman
+	girl
+	cheerleader
+	sumo wrestler
+	cook
+	marine biologist
+	single mother
+
+[opt-dress] [except-dress]
+	[half-dress]
+	[except-dress] [half-dress]
+
+[except-dress] except she dress like a [exdress-1] [exdress-2]
+	except she dress like a [exdress-1]
+	except she dress like a [exdress-2]
+
+[exdress-1] gothic lolita
+	bloody nurse
+	vampire
+	raver
+	gangsta
+	ninja
+	princess
+	pirate
+	mad scientist
+	gestapo officer
+	elf
+	sorceress
+	witch
+	commando soldier
+	cat-girl
+	fox-girl
+	druidess
+	schoolgirl
+	j-pop star
+	skateboarder
+	skinhead
+	punk roc
+	pole dancing
+	biker
+	innuit
+
+[exdress-2] gangsta
+	raver
+	princess
+	gothic lolita
+	pirate
+	sorceress
+	witch
+	druidess
+	vampire
+	cat-girl
+	mad scientist
+	skateboarder
+	bloody nurse
+	fox-girl
+	j-pop star
+	schoolgirl
+	commando soldier
+	ninja
+	gestapo officer
+	elf
+	construction worker
+	shaman
+	monk
+	dominatrix
+	businesswoman
+
+[half-dress] but this is just to take away attention from the fact that she is a half [hdress]
+
+[hdress] Vampire.
+	Unicorn.
+	Dragon.
+	Elf.
+	Orc.
+	Xenomorph.
+	Batgirl.
+	Japanese.
+	Werewolf.
+	Android.
+	Ghost.
+	Fox-girl.
+	Slime-girl.
+	Pixie.
+	Angel.
+	Demon.
+	Fire-elemental.
+	Stone-elemental.
+	Dwarf.
+	Zergling.
+	Illithid.
+	Lizard-woman.
+	Giant.
+	Zombie.
+	Na’vi.
+
+[mary-sue2] She is [desc] and she will fight her enemies with her power to [power-desc] [mary-sue3]
+
+[desc] [desc-req]
+	[desc-req] [desc-opt]
+
+[desc-req] a megalomaniac
+	a secret super-soldier
+	an interdimensional traveler
+	a space traveler
+	a scientific experiment gone wrong
+	the last of her kind
+	chosen by destiny
+	a rumored demo-goddess
+	a misunderstood genius
+	created to be the next step in mankind’s evolution
+	unknowingly the queen of her kind
+	an amnesiac
+	a secret agent
+	the leader of a ninja clan
+	wanted in another galaxy
+	a fortune teller
+	the daughter of the president
+	a living time-bomb
+	a holographic projection
+	a chaos cultist
+	one of a hundred nearly identical clones
+	a mysterious orphan
+	the living key to open up hell
+	a goddess cast down to earth to become mortal
+
+[desc-opt] who is the last of her kind
+	born from a scientific experiment gone wrong
+	who reincarnates in a new body every 666 years
+	with a mysterious past
+	from another dimension
+	worshipped by a small cult
+	raised by wild animals
+	from another planet
+	working for the church
+	destined to save the world
+	falsely accused of murdering her father
+	created by nazi scientists by world war II
+	devoted to the gods of chaos
+	who is part of a secret organization
+	megalomaniac
+	with no memory of her childhood
+	created to be the next step in mankind’s evolution
+	foretold in ancient prophesies
+	who is also rumored to be a demo-goddess
+	who has lived for over 1000 years
+	in search of true love
+	and her blood is the cure for cancer
+	in search of her kidnapped sister
+	cursed by god
+	traveling through time
+
+[power-desc] [power-1]
+	[power-1] and [power-1]
+
+[power-1] [power-p1] [power-p2]
+
+[power-p1] summon
+	transform others into
+	incinerate
+	talk to
+	absorb the power of
+	shape-shift into
+	destroy
+	corrupt
+	seduce
+	befriend
+	heal
+	construct
+	banish
+	disintegrate
+	devour
+	control
+	frighten
+	ride
+	freeze
+	shrink
+	become invisible to
+	command
+	follow the scent of
+	magically imprison
+
+[power-p2] demons
+	gods
+	blood
+	angels
+	robots
+	dinosaurs
+	ghosts
+	wild animals
+	xenomorphs
+	mechas
+	vampires
+	werewolves
+	unicorns
+	adamantium
+	weapons
+	slime
+	elementals
+	retards
+	pedophiles
+	clones of herself
+	computers
+	centaurs
+	dragons
+	regular humans
+	plants
+
+[mary-sue3] . Her friends and enemies call her [name] [mary-sue4]
+
+[name] [name1]
+	[name1] [name2]
+
+[name1] star
+	angel
+	demon
+	sparkle
+	magic
+	mecha
+	power
+	peace
+	soul
+	blood
+	awesome
+	raven
+	unicorn
+	light
+	dark
+	summer
+	dragon
+	fire
+	night
+	day
+	shadow
+	thunder
+	mystery
+	love
+	cancer
+
+[name2] hair
+	eyes
+	face
+	claw
+	fur
+	fang
+	flower
+	lover
+	beast
+	girl
+	woman
+	princess
+	murderer
+	bringer
+	mistress
+	caller
+	singer
+	creator
+	lips
+	tits
+	thighs
+	hammer
+	dream
+	ender
+	stealer
+
+[mary-sue4] . Her constant companion is a [comp] .
+
+[comp] [comp-name]
+
+pragma suffix-with [comp] [comp-also]
+pragma suffix-with [comp] [comp-weapon]
+
+[comp-also] who is also [compal-desc]
+
+[comp-weapon] . His/her favored weapon is a(n) [comp-weapon1]
+
+[comp-name] [comp-name1]
+	[comp-prefix] [comp-name1]
+
+[comp-prefix] [comp-prefix1]
+	[comp-prefix2]
+	[comp-prefix1] [comp-prefix2]
+	[comp-prefix2] [comp-prefix1]
+
+[comp-name1] dragon
+	mecha
+	vampire
+	doll
+	white wolf
+	fox
+	zombie
+	space-marine
+	werewolf
+	robot
+	cat
+	dog
+	spaceship
+	faerie
+	vietnam veteran
+	unicorn
+	demon
+	angel
+	xenomorph
+	super saiyan
+	miniature elder god
+	fertility goddess
+	neck bearded man
+	wizard
+	giant
+
+[comp-prefix1] psychic
+	mexican
+	over-analytical
+	enslaved
+	mysterious
+	catatonic
+	angsty
+	depressed
+	spirit
+	friendly
+	young
+	ancient
+	flying
+	living
+	talking
+	intelligent
+	hyperactive
+	befriended
+	magical
+	sparkling
+	brain-washed
+	special needs
+	huge
+	murderous
+	amorous
+
+[comp-prefix2] young
+	talking
+	sparkling
+	living
+	intelligent
+	spirit
+	friendly
+	brain-washed
+	befriended
+	angsty
+	special needs
+	magical
+	psychic
+	enslaved
+	murderous
+	over-analytical
+	flying
+	catatonic
+	amorous
+	mysterious
+	ancient
+	invisible
+	mexican
+	huge
+	depressed
+
+[compal-desc] her lover
+	secretly her nemesis
+	her legal guardian
+	a projection of her evil self
+	secretly in love with her
+	her means of transport
+	her guardian angel
+	her best friend forever
+	destined to die by her hand
+	the reason she lives
+	herself from the future
+	her mentor
+	part of her soul
+	one of her failed experiments
+	a figment of her imagination
+	her father
+	her superior officer
+	her stalker
+	her mother
+	both her mother and father
+	soulmate
+	personal trainer
+	economic consultant
+	the phylactery of her soul
+	her bondage slave
+
+[comp-weapon1] [compweap-prefix] [compweap-type]
+
+[compweap-type] chainsaw
+	spear
+	katana
+	magnum
+	throwing star
+	dagger
+	mallet
+	machine gun
+	minion
+	axe
+	club
+	razor
+	whip
+	guitar-axe
+	knuckle iron
+	sword
+	staff
+	bow
+	javelin
+	charm
+	poleax
+	sniper rifle
+	flamethrower
+	rapier
+	scissors
+
+[compweap-prefix] [compweap-1]
+	[compweap-2]
+	[compweap-1] [compweap-2]
+	[compweap-2] [compweap-1]
+
+[compweap-1] poisoned
+	blessed
+	holy
+	legendary
+	burning
+	glowing
+	golden
+	silver
+	steam-powered
+	demonic
+	conscious
+	magical
+	huge
+	two-handed
+	dragonbone
+	adamantium
+	bio-mechanical
+	ancient
+	acidic
+	self-replicating
+	dark steel
+	freezing
+	spirit
+	shining
+	unbreakable
+
+[compweap-2] glowing
+	magical
+	legendary
+	acidic
+	silver
+	huge
+	demonic
+	blessed
+	bio-mechanical
+	poisoned
+	dragonbone
+	spirit
+	cursed
+	self-replicating
+	burning
+	darksteel
+	shining
+	conscious
+	unbreakable
+	freezing
+	steam-powered
+	ancient
+	holy
+	adamantium
+	two-handed

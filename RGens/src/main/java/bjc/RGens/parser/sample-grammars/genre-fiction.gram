@@ -1,0 +1,164 @@
+[genre-fict] in a [setting] a young [person] stumbles across a(n) [place] [genre-fict2]
+
+pragma initial-rule [genre-fict]
+
+[genre-fict2] which spurs him into conflict with [antagonist] [genre-fict3]
+
+[genre-fict3] with the help of a [female] and her [gear] culminating in [genre-fict4]
+
+[genre-fict4] culminating in [climax] . This is [title]
+
+[setting] [setting-adj] [setting-dest]
+
+[setting-adj] néo-noir
+	alternate-history
+	ancient
+	dystopian
+	metaphorical
+	anachronistic
+	leather-clad
+	coal-powered
+	dragon-filled
+	shrill
+
+[setting-dest] america
+	japan
+	soviet russia
+	victorian Britain
+	medieval Europe
+	aztec empire
+	atlantis
+	terraformed mars
+	antartica
+	one-way spaceflight
+	outer rim world
+	set from road warrior
+
+[person] flying message courier
+	student of metaphysics
+	milquetoast office drone
+	schlub with mild OCD
+	farm boy with dreams
+	techno-obsessed geek
+	brooding loner
+	wisecracking mercenary
+	idealistic revolutionary
+	journeyman inventor
+	collector of oddities
+	author self-insert
+
+[place] [place-pref] [place-suff]
+
+[place-pref] magic
+	arcane
+	dusty
+	crazy
+	alien
+	enchanted
+	otherworldly
+	dream-inducing
+	encrypted
+	time-traveling
+	exiled
+	talking
+
+[place-suff] diadem
+	prophecy
+	tome
+	old man
+	artifact
+	sword
+	portal
+	drug
+	data feed
+	soldier
+	angel
+	fish
+
+[antagonist] a megalomaniacal dictator
+	a government conspiracy
+	a profit-obsessed corporation
+	a sneering wizard
+	supernatural monsters
+	computer viruses made real
+	murderous robots
+	an army led by a sadist
+	forces that encourage conformity
+	a charismatic politician on the rise
+	humanity’s selfish nature
+	his own insecurity vis-a-vis girls
+
+[female] [female]
+	[female] [fem-suffix]
+	[fem-prefix] [female]
+	[fem-prefix] [female] [fem-suffix]
+
+[fem-prefix] sarcastic
+	tomboyish
+	shape-shifting
+	leather-clad
+	bookish
+	cherubic
+
+[female] female
+	girl
+
+[fem-suffix] techno-geek
+	mechanic
+	assassin
+	in shades
+	who’s always loved him
+	scholar with mousy brown hair
+	with pigtails and spunk
+	who inexplicably becomes attracted to the damaged protagonist for unstated reasons
+
+[gear] wacky pet
+	welding gear
+	closet full of assault rifles
+	reference book
+	cleavage
+	facility with magic
+	condescending tone
+	discomfort in formal wear
+	propensity for being captured
+
+[climax] a fistfight atop a tower
+	a daring rescue preceding a giant explosion
+	a heroic sacrifice that no one will ever remember
+	a philosophical argument punctuated by violence
+	a false victory with the promise of future danger
+	the invocation of a spell at the last possible moment
+	eternal love professed without irony
+	the land restored to health
+	authorial preaching through the mouths of the characters
+	convoluted nonsense that squanders the reader’s goodwill
+	wish-fulfillment solutions to real-world problems
+	a cliffhanger for the sake of prompting a series
+
+[title] [tit-1] [tit-2]
+
+[tit-1] chrono
+	neuro
+	aero
+	cosmo
+	reve
+	necro
+	cyber
+	astro
+	psycho
+	steam
+	meta
+	black
+
+[tit-2] punk
+	mech
+	noiac
+	(o)poli
+	naut
+	phage
+	droid
+	bot
+	blade
+	tron
+	cancer
+	War

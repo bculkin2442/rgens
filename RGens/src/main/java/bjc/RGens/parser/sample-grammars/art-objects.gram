@@ -1,0 +1,93 @@
+[treasure] [gemstones]
+	[art-object]
+	[art-object] as well as [gemstones]
+	[gemstones] as well as [art-object]
+
+pragma initial-rule [treasure]
+
+[art-object] [common-art]
+	[uncommon-art]
+	[rare-art]
+	[legendary-art]
+	[epic-art]
+	[mythic-art]
+
+[gemstones] [common-gem]
+	[rare-gem]
+	[legendary-gem]
+	[epic-gem]
+
+[common-gem] amber
+	amethyst
+	garnet
+	moonstone
+	jade
+	pearl
+	peridot
+	turquoise
+
+[rare-gem] alexandrite
+	aquamarine
+	black pearl
+	topaz
+
+[legendary-gem] emerald
+	fire opal
+	sapphire
+
+[epic-gem] diamond
+	jacinth
+	ruby
+
+[common-art] gold ring with [common-gem]
+	bone/ivory statuette
+	gold bracelet
+	silver necklace
+	bronze crown
+	silver-plated sword
+	silk robe
+
+[uncommon-art] gold ring with [legendary-gem]
+	gold/silver necklace
+	gold bracelet studded with [rare-gem]
+	gold necklace adorned with [common-gem]
+	silver tiara/crown decorated with [common-gem]
+	ivory comb with embedded [rare-gem]
+	gold vestments
+
+[rare-art] gold/platinum ring with [legendary-gem]
+	gold/silver statuette adorned with [rare-gem]
+	gold necklace adorned with [rare-gem]
+	gold crown with [rare-gem]
+	gold chalice dusted with [common-gem]
+	ceremonial gold chest-plate
+	enormous [common-gem]
+
+[legendary-art] platinum ring with [epic-gem]
+	gold statuette with [legendary-gem]
+	mithral necklace with [legendary-gem]
+	adamantine crown with many [legendary-gem]
+	adamantine box containing [art-element]
+	black tunic woven of pure [art-element]
+	enormous [rare-gem]
+
+[epic-art] mithral ring with an astral diamond
+	gold statuette with eyes of [epic-gem]
+	gold necklace adorned with [epic-gem]
+	mithral tiara studded with [epic-gem]
+	cup of celestial cold that glows with inner light
+	silvery cloak of astral thread
+	enormous [legendary-gem]
+
+[mythic-art] bracelet formed of cold elemental [art-element]
+	gown woven of elemental [art-element]
+	brass ring with bound elemental [art-element]
+	celestial gold statuette with astral diamonds
+	royal attire of astral thread loaded with [epic-gem]
+	enormous [epic-gem]
+
+[art-element] shadow
+	lightning
+	flame
+	fire
+	water

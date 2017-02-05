@@ -1,0 +1,96 @@
+[initial-name] [two-name]
+	[three-name]
+
+pragma initial-rule [name]
+
+[two-name] [first-name] [third-name]
+	[second-name] [third-name]
+
+[name] [first-name] [first-name]
+	[first-name] [second-name]
+	[second-name] [first-name]
+	[second-name] [second-name]
+
+pragma suffix-with [name] [third-name]
+
+[first-name] Vampire
+	Cat
+	Death
+	Mermaid
+	Infinite
+	Quantum
+	Endless
+	Bravo
+	Magical
+	Neon
+	Omega
+	Robo
+	Gothic
+	Peach
+	Ghost
+	Rhinestone
+	Mini
+	Blood
+	Bubblegum
+	Tokyo
+	Lucky
+	Soul
+	Cowboy
+	Awkward
+	Lucid
+	Space
+
+[second-name] Princess
+	Planet
+	Blade
+	Bride
+	Squad
+	Soldier
+	Waitress
+	Handkerchief
+	Goddess
+	Sushi
+	Star
+	Moon
+	Zombie
+	Banana
+	Dragon
+	Rocket
+	Fist
+	Chef
+	Robot
+	Psychic
+	Boogie
+	Power
+	Hamster
+	Tennis
+	Ballerina
+	Blackout
+	Phantom
+
+[third-name] Forever
+	Detectives
+	Memories
+	Outlaw
+	Chaos
+	Go!
+	Overture
+	9000
+	Super!
+	Zero
+	Genesis
+	Eternal
+	X
+	Revolution
+	Cowboy
+	Academy
+	Jellyfish
+	Club
+	Girl
+	Hunter
+	Arcade
+	Fantasy
+	Ultimate
+	Sudoku
+	Alchemy
+	Champion

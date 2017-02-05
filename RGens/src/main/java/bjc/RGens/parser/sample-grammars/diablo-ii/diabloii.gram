@@ -1,0 +1,46 @@
+# Load other files
+pragma load-sub-grammar [item-act] diabloiiitems.gram
+pragma load-sub-grammar [perishables] diabloiiperish.gram
+pragma load-sub-grammar [prefix] diabloiiprefixes.gram
+pragma load-sub-grammar [suffix] diabloiisuffixes.gram
+
+[base-treasures] [base-treasure]
+	[base-treasure] as well as [base-treasure]
+	[base-treasure] or [base-treasure]
+	[base-treasure] , and [base-treasure] as well as [base-treasure]
+	[base-treasure] , [base-treasure] or [base-treasure]
+
+pragma initial-rule [base-treasures]
+
+[base-treasure] a(n) [item]
+	[non-item]
+
+[non-item] [money]
+	[money]
+	nothing
+
+[money] [amount] [money-type]
+
+[amount] 1
+	5
+	10
+	20
+	50
+	100
+	200
+	500
+	1000
+
+[money-type] [metal-type] coin(s)
+
+[metal-type] copper
+	silver
+	gold
+	platinum
+
+[item] [item-act]
+	[item-act] of [suffix]
+	[item-act] of [suffix] and [suffix]
+
+pragma prefix-with [item] [prefix]
+pragma prefix-with [item] [prefix]

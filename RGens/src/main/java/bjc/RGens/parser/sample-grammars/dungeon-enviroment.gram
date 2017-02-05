@@ -1,0 +1,140 @@
+[enviroment] [man-made]
+	[cave]
+	[natural]
+	[aquatic]
+	[aerial]
+	[supernatural]
+
+pragma initial-rule [enviroment]
+
+[man-made] a stone room
+	a spiral staircase surrounding a giant pit
+	an old dusty library
+	an aging unadorned altar
+	a power plant full of gears and pistons
+	a giant stone staircase
+	a room made of large timbers
+	a factory with neglected machines
+	an ancient battlefield littered with skeletons and rusted weapons
+	a stone bathroom
+	a kitchen with a tall ceiling
+	a room whose walls are covered with drawings
+	an abandoned theatre
+	a garbage dump filled with trash
+	a colossal statue that was abandoned before it was completed
+	a great hall decorated with murals and tapestries
+	a metro khan railway
+	a gallery displaying paintings and busts
+	a tomb lined with stone sarcophagi
+	a gate whose door is covered in rust
+	an abandoned prison
+
+[cave] a cave with nothing but bare rock
+	a cave filled with bats and flying bugs
+	an abandoned mineshaft
+	somebodys campsite
+	a cave filled with so many boulders they obscure vision
+	a cave that belches smoke
+	a limestone grotto echoing with the sound of running water
+	a cavern filled with faint, eerie starlight
+	a cave full of quicksand
+	smooth tunnels dug out by some kind of animal
+	a cave filled with cold water
+	a crack between giant boulders
+	a cave whose walls are covered with paintings of animals and hunters
+	a natural bridge spanning a vast chasm
+	a cave that has been filled in almost to the ceiling
+	a precipice overlooking a bottomless pit
+	a cavern whose walls are obscured by swarms of crawling bugs
+	a cave with numerous fossils buried in it
+	a cave filled with hot, flowing lava
+	a cavern made of crystal
+	the lair of some creature, scattered with skeletons
+
+[natural] a room covered in moss
+	a secret forest reverberating with the calls of animals
+	a corridor made of vines
+	a field of flowers filled with hollows
+	a room with tree branches growing through the walls
+	farmland stretching across an entire cave
+	a forest overgrown with weeds
+	a tall cavern with a giant tree whose trunk twists and turns
+	a cave with a seal breeding ground spread through it
+	a room whose walls are covered in mold
+	a room dotted in cacti
+	a patch of giant mushrooms
+	a cave with a giant tree growing in the middle of it
+	corridors filled with roaming herds of horse lizards
+	a room with piles of fallen leaves
+	a hedge maze
+	an overgrown bamboo grove
+	a room with suddenly falling pine trees
+	a room filled with tall, overgrown grass
+	a withered forest
+	rooms and corridors that feel like the inside of a giant tree
+
+[aquatic] a bridge crossing a roaring river
+	the inside of a rainbow colored coral reef
+	a room filled with waist high water
+	a water fountain and watering hole
+	a boiling lake
+	a room whose floor has turned into a tidal flat
+	a cistern thats filling with water
+	a room obscured by hot steam
+	a swamp that spreads throughout a cave
+	a ship whose rigging and hull have been neglected
+	an aquarium filled with tanks
+	a foul smelling sewer
+	a submerged cavern with ruins at the bottom
+	a pier and harbor
+	a lake with rafts and barges
+	a gient pit and waterfall
+	an incomplete aqueduct
+	a frozen lake swarming with penguins
+	a steamy hot spring
+	an old well covered with strange engravings
+	a room whose walls are covered with shellfish and barnacles
+
+[aerial] a room where its raining
+	a cave made of cheese
+	gardens piled up towards the sky
+	clotheslines covered in pristine white clothing that stretch forever
+	a giant beanstalk stretching towards the ceiling
+	a giant pit with dangling rope ladders and chains
+	a room where a fierce wind blows
+	on top of a cloud
+	a cave obscured by thick mist
+	a room with zero gravity
+	a room where snowfall is quickly accumulating
+	a skyway where space-time is warped
+	a corridor where you can hear the sounds of a windmill for keeping monsters away
+	a cave with ruins on its ceiling
+	a massive, roaring ventilation shaft
+	a room with occasional lightning flashes
+	a room where bird feathers flutter to the ground
+	a cave whose walls are painted to look like the sky
+	a room where one wall is a mirror
+	a cave with a shimmering aurora
+	a room with variable gravity
+
+[supernatural] an old six tatami mat room
+	a cramped karaoke box
+	a town where time has stopped
+	a gymnasium with a single ball rolling around
+	a room covered in hair
+	some sort of waiting room
+	the inside of a living creature
+	a small park with swings and a slide
+	a cheap-looking prefabricated bathroom
+	a room with a noisy upstairs neighbor
+	a room made of human bones
+	a room that breathes
+	a room built on an angle
+	a room in a love hotel
+	a room where someone is spying on you
+	a room where you can hear voices talking loudly
+	a room growing tentacles
+	an interrogatin room with a table and chair
+	an empty classroom
+	a room whose ceiling is a giant human
+	aa room that is constantly swaying

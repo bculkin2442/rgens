@@ -1,0 +1,142 @@
+[superhero] [first-part] [second-part]
+	[second-part] [first-part]
+
+pragma initial-rule [superhero]
+
+pragma suffix-with [superhero] [third-part]
+pragma suffix-with [superhero] [fourth-part]
+
+[first-part] Captain
+	Yellow
+	Star
+	Incredible
+	Lightning
+	Silver
+	Phoenix
+	Wonder
+	Super
+	Green
+	Courageous
+	Iron
+	Black
+	Invisible
+	Professor
+	Night
+	Silent
+	Red
+	Thunder
+	General
+	Time
+	Scarlet
+	Grand
+	Arcane
+	White
+	[gender-title]
+
+[gender-title] Mr
+	Ms
+	Mister
+	Miss
+	Dr
+	Doctor
+	Professor
+	Lord
+	Lady
+	King
+	Queen
+	Prince
+	Princess
+
+[second-part] Hawk
+	Phantom
+	Fist
+	Hex
+	Soldier
+	Raven
+	Patriot
+	Hope
+	Stallion
+	Chimera
+	Archer
+	Raptor
+	Lord
+	Ninja
+	Eagle
+	Bolt
+	Boulder
+	Knight
+	Brain
+	Fusion
+	Crusader
+	Shepherd
+	Flame
+	Orchid
+	Rider
+	Torch
+
+[third-part] The [third-part-act]
+
+[third-part-act] Champion
+	Protector
+	Wielder
+	Marksman
+	Fated
+	Lover
+	Celebrated
+	Prodigy
+	Guardian
+	Inquisitor
+	Legend
+	Returned
+	Light
+	Warrior
+	Sacred
+	Victor
+	Triumphant
+	Mystic
+	Amazing
+	Incomparable
+	Lord
+	Mysterious
+	Face
+	Divine
+	Magnificent
+	Virtuous
+	Survivor
+	Courageous
+	Steward
+	Keeper
+	Squire
+
+[fourth-part] of [fourth-part-act]
+
+[fourth-part-act] the [fourth-part-the]
+	Destiny
+	Justice
+	Humanity
+	Men
+	Women
+	Freedom
+	Knowledge
+	Earth
+	Eternal Fire
+
+[fourth-part-the] Realm
+	Chalice
+	Law
+	Future
+	Tides
+	Poor
+	Trees
+	Universe
+	Seven
+	Past
+	Isles
+	Gauntlet
+	Dominion
+	Living
+	Galaxy
+	Ancients
+	Archive
+	
+	
