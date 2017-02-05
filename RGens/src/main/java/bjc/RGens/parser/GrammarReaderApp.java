@@ -20,7 +20,6 @@ import bjc.utils.gui.awt.SimpleFileDialog;
  *
  */
 public class GrammarReaderApp {
-
 	/**
 	 * Main method of class
 	 * 
@@ -29,9 +28,9 @@ public class GrammarReaderApp {
 	 */
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel(
-					UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException
+				| InstantiationException
 				| IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
@@ -43,8 +42,7 @@ public class GrammarReaderApp {
 
 	@SuppressWarnings("null")
 	private static void doSingleFile() {
-		File gramFile = SimpleFileDialog.getOpenFile(null,
-				"Choose Grammar File", ".gram");
+		File gramFile = SimpleFileDialog.getOpenFile(null, "Choose Grammar File", ".gram");
 
 		WeightedGrammar<String> grammar = null;
 
@@ -63,7 +61,8 @@ public class GrammarReaderApp {
 				return leftString.compareTo(rightString);
 			});
 
-			initRule = SimpleDialogs.getChoice(null, "Pick a initial rule",
+			initRule = SimpleDialogs.getChoice(null,
+					"Pick a initial rule",
 					"Pick a initial rule to generate choices from",
 					grammar.getRuleNames().toArray(new String[0]));
 		} else {
@@ -74,8 +73,7 @@ public class GrammarReaderApp {
 				"Enter number of repetitions",
 				"Enter the number of items to generate from the rule");
 
-		File outputFile = SimpleFileDialog.getSaveFile(null,
-				"Choose Grammar File");
+		File outputFile = SimpleFileDialog.getSaveFile(null, "Choose Grammar File");
 
 		PrintStream outputStream = null;
 
@@ -86,8 +84,7 @@ public class GrammarReaderApp {
 		}
 
 		for (int i = 0; i < count; i++) {
-			String ruleResult = ListUtils.collapseTokens(
-					grammar.generateListValues(initRule, " "));
+			String ruleResult = ListUtils.collapseTokens(grammar.generateListValues(initRule, " "));
 
 			outputStream.println(ruleResult.replaceAll("\\s+", " "));
 		}

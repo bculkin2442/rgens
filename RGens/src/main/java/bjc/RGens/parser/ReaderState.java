@@ -65,8 +65,7 @@ public class ReaderState {
 	 * @param newWorkingGrammar
 	 *            The new grammar to use
 	 */
-	public void setCurrentGrammar(
-			WeightedGrammar<String> newWorkingGrammar) {
+	public void setCurrentGrammar(WeightedGrammar<String> newWorkingGrammar) {
 		currentGrammar = newWorkingGrammar;
 	}
 
@@ -121,8 +120,7 @@ public class ReaderState {
 	 * @param ruleParts
 	 *            The parts that make up this case
 	 */
-	public void addCase(int ruleProbability,
-			IList<String> ruleParts) {
+	public void addCase(int ruleProbability, IList<String> ruleParts) {
 		currentGrammar.addCase(currentRule, ruleProbability, ruleParts);
 	}
 
@@ -133,8 +131,7 @@ public class ReaderState {
 	 *            The name of the subgrammar to edit
 	 */
 	public void editSubgrammar(String subgrammarName) {
-		WeightedGrammar<String> subgrammar = currentGrammar
-				.getSubgrammar(subgrammarName);
+		WeightedGrammar<String> subgrammar = currentGrammar.getSubgrammar(subgrammarName);
 
 		grammarStack.push(currentGrammar);
 
@@ -168,8 +165,7 @@ public class ReaderState {
 	 * @param subgrammarAlias
 	 *            The name of the alias for the subgrammar
 	 */
-	public void addGrammarAlias(String subgrammarName,
-			String subgrammarAlias) {
+	public void addGrammarAlias(String subgrammarName, String subgrammarAlias) {
 		currentGrammar.addGrammarAlias(subgrammarName, subgrammarAlias);
 	}
 
