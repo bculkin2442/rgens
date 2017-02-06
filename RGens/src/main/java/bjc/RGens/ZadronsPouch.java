@@ -22,7 +22,7 @@ public class ZadronsPouch {
 		ZadronsPouch zp = new ZadronsPouch();
 
 		for (int i = 0; i < 100; i++) {
-			IList[String] ls = zp.grammar.generateListValues("[item]", " ");
+			IList<String> ls = zp.grammar.generateListValues("[item]", " ");
 
 			StringBuilder sb = new StringBuilder();
 
@@ -32,7 +32,7 @@ public class ZadronsPouch {
 		}
 	}
 
-	private RandomGrammar[String] grammar;
+	private RandomGrammar<String> grammar;
 
 	/**
 	 * Create a new instance with a grammar
@@ -178,7 +178,7 @@ public class ZadronsPouch {
 	}
 
 	private void addRule(String rule, String... cases) {
-		IList[IList<String>] cses = new FunctionalList<>();
+		IList<IList<String>> cses = new FunctionalList<>();
 
 		for (String strang : cases) {
 			cses.add(FunctionalStringTokenizer.fromString(strang).toList(s -> s));
