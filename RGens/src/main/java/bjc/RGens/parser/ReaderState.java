@@ -3,6 +3,7 @@ package bjc.RGens.parser;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 import bjc.utils.funcdata.IList;
 import bjc.utils.gen.WeightedGrammar;
@@ -124,6 +125,9 @@ public class ReaderState {
 		currentGrammar.addCase(currentRule, ruleProbability, ruleParts);
 	}
 
+	public void addSpecialRule(String ruleName, Supplier<IList<String>> cse) {
+		currentGrammar.addSpecialRule(ruleName, cse);
+	}
 	/**
 	 * Edit a subgrammar of the current grammar
 	 * 
