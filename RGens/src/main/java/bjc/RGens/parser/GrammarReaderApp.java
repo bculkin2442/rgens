@@ -40,7 +40,6 @@ public class GrammarReaderApp {
 		doSingleFile();
 	}
 
-	@SuppressWarnings("null")
 	private static void doSingleFile() {
 		File gramFile = SimpleFileDialog.getOpenFile(null, "Choose Grammar File", ".gram");
 

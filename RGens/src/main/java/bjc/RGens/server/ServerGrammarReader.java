@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
