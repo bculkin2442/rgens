@@ -258,7 +258,7 @@ public class RBGrammarReader {
 
 	private static int readOptionalProbability(FunctionalStringTokenizer tokenizer, ReaderState state) {
 		if (state.isUniform()) {
-			return 0;
+			return 1;
 		}
 
 		return Integer.parseInt(tokenizer.nextToken());

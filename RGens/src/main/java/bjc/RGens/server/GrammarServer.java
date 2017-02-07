@@ -113,9 +113,9 @@ public class GrammarServer {
 									.generateListValues(ruleName, " "));
 
 							System.out.println("Generated Result: ");
-							System.out.println(ruleResult.replaceAll("\\s+", " "));
+							System.out.println("\t" + ruleResult.replaceAll("\\s+", " "));
 
-							System.out.println("Generate again from this rule? (yes/no)");
+							System.out.print("Generate again from this rule? (yes/no)");
 
 							String resp = scn.nextLine().trim();
 
