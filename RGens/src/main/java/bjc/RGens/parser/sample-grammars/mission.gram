@@ -1,0 +1,461 @@
+[mission-statement] [opening] [work-phrase] [verb-part] [noun-part]
+	[opening] [work-phrase2] [verb-part2] [noun-part]
+	[opening] [verb-part] [noun-part]
+	[opening] [work-phrase] [verb-part] [noun-part] and [verb-part] [noun-part]
+	[opening] [work-phrase2] [verb-part2] [noun-part] and [verb-part2] [noun-part]
+	[opening] [verb-part] [noun-part] and [noun-part]
+	[opening] [work-phrase] [verb-part] [noun-part] [connector] [goal]
+	[opening] [work-phrase2] [verb-part2] [noun-part] [connector] [goal]
+	[opening] [verb-part] [noun-part] [connector] [goal]
+	[opening] [work-phrase] [verb-part] [noun-part] [connector] [goal] and [goal]
+	[opening] [work-phrase2] [verb-part2] [noun-part] [connector] [goal] and [goal]
+	[opening] [verb-part] [noun-part] [connector] [goal] and [goal]
+	[opening] [work-phrase] [verb-part] [noun-part] and [verb-part] [noun-part] [connector] [goal]
+	[opening] [work-phrase2] [verb-part2] [noun-part] and [verb-part2] [noun-part] [connector] [goal]
+	[opening] [verb-part] [noun-part] and [noun-part] [connector] [goal]
+	[opening] [verb-part] [noun-part], [noun-part] and [noun-part] [connector] [goal]
+	[opening] [work-phrase] [verb-part] [noun-part] [connector] [verb-part] [noun-part] [connector] [goal]
+	[opening] [work-phrase2] [verb-part2] [noun-part] [connector] [verb-part] [noun-part] [connector] [goal]
+	[opening] [verb-part] [noun-part] [connector] [verb-part] [noun-part] [connector] [goal]
+
+pragma initial-rule [mission-statement]
+
+[verb-part] [verb-how] [verb]
+	[verb]
+
+[verb-part2] [verb-how] [verb-gerund]
+	[verb-gerund]
+
+[noun-part] our [adjective] [noun]
+	our [noun]
+	our [noun-prefix] [noun]
+	[adjective] [noun-prefix] [noun]
+	[adjective] [noun]
+	[noun]
+
+[opening] it's our [duty] to
+	it is our [duty] to
+	it is our [mission] to
+	it's our [mission] to
+	our [mission] is to
+	our [duty] is 
+	we are committed to
+	we have committed to
+	we
+	we resolve to
+
+[duty] duty
+	responsibility
+	obligation
+
+[mission] mission
+	task
+	goal
+	job
+	business
+	function
+
+[verb] aggregate
+	deliver
+	deploy
+	embrace
+	empower
+	enable
+	engage
+	engineer
+	enhance
+	envision
+	extend
+	facilitate
+	generate
+	harness
+	implement
+	innovate
+	integrate
+	leverage
+	maximize
+	optimize
+	reinvent
+	revolutionize
+	simplify
+	spearhead
+	strategize
+	streamline
+	syndicate
+	synergize
+	synthesize
+	transform
+	unleash
+	utilize
+	visualize
+
+[verb-gerund] aggregating 
+	delivering
+	deploying
+	embracing
+	empowering
+	enabling
+	engaging
+	engineering
+	enhancing
+	envisioning
+	extending
+	facilitating
+	generating
+	harnessing
+	implementing
+	innovating
+	integrating
+	leveraging
+	maximizing
+	optimizing
+	reinventing
+	revolutionizing
+	simplifying
+	spearheading
+	strategizing
+	streamlining
+	syndicating
+	synergizing
+	synthesizing
+	transforming
+	unleashing
+	utilizing
+	visualizing
+
+[verb-how] dramatically
+	practically
+	conveniently
+	efficiently
+	productively
+	rapidly
+	enthusiastically
+	completely
+	competently
+	assertively
+	quickly
+	intelligently
+	endlessly
+	tirelessly
+	effectively
+	skillfully
+	proficiently
+	professionally
+	swiftly
+	energetically
+	vigorously
+	zealously
+	briskly
+	speedily
+	shrewdly
+	cleverly
+	sharply
+	astutely
+	successfully
+	expertly
+
+[work-phrase] strive to
+	work to
+	endeavor to
+	continue to
+	execute a strategic plan to
+
+[work-phrase2] strive towards
+	work towards
+	endeavor towards
+	continue towards
+	make progress towards
+	make strides towards
+	take steps towards
+	achieve progress in
+	engage in
+	execute a strategic plan involving
+
+[noun] action items
+	architectures
+	assets
+	bandwidth
+	channels
+	communities
+	content
+	deliverables
+	eyeballs
+	face time
+	functionalities
+	infomediaries
+	infrastructures
+	initiatives
+	interfaces
+	key players
+	leadership skills
+	markets
+	metrics
+	middleware
+	mindshare
+	perspectives
+	networks
+	niches
+	paradigms
+	partnerships
+	platforms
+	portals
+	relationship corridors
+	relationships
+	synergies
+	schemas
+	skill sets
+	solutions
+	strategic alliances
+	supply-chains
+	synergies
+	technologies
+	total quality management
+	version control
+	vision
+	catalysts for [noun]
+
+[noun-prefix] sub-
+	meta-
+	mega-
+	e-
+	E-
+	cyber-
+	Net-
+
+[adjective] best-of-breed
+	bilateral
+	bleeding-edge
+	client-centered
+	cross-platform
+	cross-media
+	customer-centric
+	cutting-edge
+	distributed
+	dot-com
+	dynamic
+	effective
+	efficient
+	effort-intensive
+	enterprise
+	evolutionary
+	extensible
+	forward-thinking
+	frictionless
+	future-proof
+	global
+	granular
+	hyperlinked
+	idiot-proof
+	innovative
+	integrated
+	interactive
+	intuitive
+	killer
+	leading-edge
+	legacy
+	massively-parallel
+	mission-critical
+	multilevel
+	next-generation
+	object-oriented
+	open-source
+	proactive
+	progressive
+	real-time
+	revolutionary
+	robust
+	scalable
+	seamless
+	strategic
+	synergistic
+	transparent
+	turn-key
+	two-tier
+	ubiquitous
+	user-centric
+	value-added
+	vertical
+	viral
+	virtual
+	visionary
+	wireless
+	world-class
+
+[connector] so that we may
+	in order to
+	as part of our master plan to
+	as part of a larger strategy to
+	to
+	to
+	in order that we may
+	to allow us to
+	to enable us to
+	to permit us to
+	so that hopefully we may
+	as part of our five-year plan to
+	as part of our business plan to
+	as a component of our plan to
+	as the first step in our scheme to
+
+[goal] [make] a lot of [money]
+	produce [profit] for our [shareholders]
+	produce more [profit] for our [shareholders]
+	[increase] [profit] for our [shareholders]
+	better serve our customers
+	better serve our [shareholders]
+	better serve the [world]
+	[increase] our [bottom-line]
+	get out of debt
+	prevent bankruptcy
+	stay competitive for [todays] [world]
+	remain profitable in [todays] [world]
+	[set-us-apart] [competition]
+	[defeat] [competition]
+	[increase] customer satisfaction
+	create a [better] [product]
+	market a [lesser] [product]
+	produce a [better] [product] that kicks [competition] 's [butt]
+	market a [lesser] [product] that [make] s us a lot of [money]
+	exceed customer [demands]
+	meet the [demands] of our valued customers
+	meet the [demands] of the [world]
+	successfully market an overhyped [lesser] [product]
+	take over the [world]
+	dominate the [world]
+	waste a lot of time in meetings
+	make our founder enough [money] to exceed the net worth of the world's richest man
+
+[demands] demands
+	expectations
+	wants
+	needs
+	requirements
+
+[product] product
+	product line
+	line of products
+	line of services
+	brand
+
+[better] better
+	superior
+	finer
+	more affordable
+	quality
+	higher quality
+	popular
+	robust
+
+[lesser] lesser
+	highly inferior
+	subpar
+	worse
+	more expensive
+	weak
+	lower quality
+	poor
+
+[make] make
+	earn
+	produce
+	create
+	yield
+
+[defeat] defeat
+	counter
+	challenge
+	beat
+	strike back at
+	conquer
+	crush
+	shellac
+	rout
+	vanquish
+	reign victorious over
+	overwhelm
+	beat the snot out of
+
+[competition] the competition
+	our competitors
+	the rest of the industry
+	our evil competitors
+	the market
+	the industry
+	our enemies
+
+[set-us-apart] set us apart from
+	pull ahead from
+	distance us from
+	take us ahead of
+
+[todays] today's
+	tomorrow's
+	the future
+
+[shareholders] shareholders
+	employees
+	executive officers
+	head honchos
+	workers
+	serfs
+	investors
+	venture capitalists
+	sponsors
+
+[increase] increase
+	shore up
+	inflate
+	enlarge
+	enrich
+	add to
+	augment
+	advance
+	expand
+	burgeon
+	grow
+	multiply
+	make greater
+
+[profit] profit
+	dividends
+	cash
+	money
+	revenue
+	income
+	earnings
+	proceeds
+	rewards
+	benefits
+
+[money] money
+	cash
+	currency
+	moola
+	greenbacks
+	dough
+	bread
+	scratch
+	bucks
+	simoleons
+
+[world] world
+	industry
+	globe
+	universe
+	nation
+	country
+	market
+	economy
+
+[butt] butt
+	ass
+	rear end
+	posterior
+	behind
+
+[bottom-line] bottom line
+	stock price
+	net worth
+	earnings
+	revenue
+	sales

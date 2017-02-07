@@ -1,14 +1,15 @@
-package bjc.RGens.parser;
+package bjc.RGens.server;
 
 import com.mifmif.common.regex.Generex;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Path;
+import java.io.InputStream;
 import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
+import bjc.utils.data.IPair;
+import bjc.utils.data.Pair;
 import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.FunctionalMap;
@@ -24,34 +25,21 @@ import bjc.utils.parserutils.RuleBasedConfigReader;
  * @author ben
  *
  */
-public class RBGrammarReader {
+public class ServerGrammarReader {
 	private static RuleBasedConfigReader<ReaderState> reader;
 
 	private static Random numgen = new Random();
+
+	private static IMap<String, WeightedGrammar<String>> exportedRules;
+
+	public static void setExportedRules(IMap<String, WeightedGrammar<String>> rules) {
+		exportedRules = rules;
+	}
 
 	static {
 		setupReader();
 
 		initPragmas();
-	}
-
-	private static void addSubgrammarPragmas() {
-		reader.addPragma("new-sub-grammar", (tokenizer, state) -> {
-			state.startNewSubgrammar();
-		});
-
-		reader.addPragma("load-sub-grammar", RBGrammarReader::loadSubGrammar);
-		reader.addPragma("save-sub-grammar", RBGrammarReader::saveGrammar);
-		reader.addPragma("edit-sub-grammar", RBGrammarReader::editSubGrammar);
-		reader.addPragma("remove-sub-grammar", RBGrammarReader::removeSubGrammar);
-
-		reader.addPragma("edit-parent", (tokenizer, state) -> {
-			state.editParent();
-		});
-
-		reader.addPragma("promote", RBGrammarReader::promoteGrammar);
-		reader.addPragma("subordinate", RBGrammarReader::subordinateGrammar);
-
 	}
 
 	private static void debugGrammar(ReaderState state) {
@@ -70,28 +58,19 @@ public class RBGrammarReader {
 		state.addCase(ruleProbability, tokenizer.toList());
 	}
 
-	private static void editSubGrammar(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String subgrammarName = tokenizer.nextToken();
-
-		state.editSubgrammar(subgrammarName);
-	}
-
 	/**
-	 * Read a grammar from a path
+	 * Read a grammar from a stream
 	 * 
-	 * @param inputPath
-	 *            The path to load the grammar from
+	 * @param inputStream
+	 *            The stream to load the grammar from
 	 * 
 	 * @return A grammar read from the stream
 	 * 
-	 * @throws IOException
-	 *             If something goes wrong during file reading
-	 * 
 	 */
-	public static WeightedGrammar<String> fromPath(Path inputPath) throws IOException {
-		ReaderState initialState = new ReaderState(inputPath);
+	public static IPair<WeightedGrammar<String>, IList<String>>
+		fromStream(InputStream inputStream) {
+			ReaderState initialState = new ReaderState();
 
-		try (FileInputStream inputStream = new FileInputStream(inputPath.toFile())) {
 			WeightedGrammar<String> gram = reader.fromStream(inputStream, initialState).getGrammar();
 
 			IMap<String, IList<String>> vars = new FunctionalMap<>();
@@ -159,6 +138,9 @@ public class RBGrammarReader {
 							actualName.append("]");
 
 							retList = gramm.generateGenericValues(actualName.toString(), (s) -> s, " ");
+						} else if (exportedRules.containsKey(strang)) {
+							return exportedRules.get(strang)
+								.generateGenericValues(strang, (s) -> s, " ");
 						} else {
 							// @FIXME notify the user they did something wrong
 							retList.add(strang);
@@ -170,17 +152,7 @@ public class RBGrammarReader {
 
 			gram.configureSpecial(specialPredicate, specialAction);
 
-			return gram;
-		} catch (IOException ioex) {
-			throw ioex;
-		}
-	}
-
-	private static void importRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String ruleName = tokenizer.nextToken();
-		String subgrammarName = tokenizer.nextToken();
-
-		state.addGrammarAlias(subgrammarName, ruleName);
+			return new Pair<>(gram, initialState.getExports());
 	}
 
 	private static void initialRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
@@ -190,8 +162,6 @@ public class RBGrammarReader {
 	}
 
 	private static void initPragmas() {
-		addSubgrammarPragmas();
-
 		reader.addPragma("debug", (tokenizer, state) -> {
 			debugGrammar(state);
 		});
@@ -200,14 +170,12 @@ public class RBGrammarReader {
 			state.toggleUniformity();
 		});
 
-		reader.addPragma("initial-rule", RBGrammarReader::initialRule);
+		reader.addPragma("initial-rule", ServerGrammarReader::initialRule);
 
-		reader.addPragma("import-rule", RBGrammarReader::importRule);
+		reader.addPragma("remove-rule", ServerGrammarReader::removeRule);
 
-		reader.addPragma("remove-rule", RBGrammarReader::removeRule);
-
-		reader.addPragma("prefix-with", RBGrammarReader::prefixRule);
-		reader.addPragma("suffix-with", RBGrammarReader::suffixRule);
+		reader.addPragma("prefix-with", ServerGrammarReader::prefixRule);
+		reader.addPragma("suffix-with", ServerGrammarReader::suffixRule);
 
 		reader.addPragma("regex-rule", (tokenizer, state) -> {
 			String ruleName = tokenizer.nextToken();
@@ -225,19 +193,18 @@ public class RBGrammarReader {
 
 			int start = Integer.parseInt(tokenizer.nextToken());
 			int end = Integer.parseInt(tokenizer.nextToken());
-			
+
 			state.addSpecialRule(ruleName, () -> {
 				return new FunctionalList<>(Integer.toString(
 							numgen.nextInt((end - start) + 1) + start));
 			});
 		});
-	}
 
-	private static void loadSubGrammar(FunctionalStringTokenizer stk, ReaderState rs) {
-		String subgrammarName = stk.nextToken();
-		String subgrammarPath = stk.nextToken();
+		reader.addPragma("export-rule", (tokenizer, state) -> {
+			String ruleName = tokenizer.nextToken();
 
-		rs.loadSubgrammar(subgrammarName, subgrammarPath);
+			state.addExport(ruleName);
+		});
 	}
 
 	private static void prefixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
@@ -247,13 +214,6 @@ public class RBGrammarReader {
 		int additionalProbability = readOptionalProbability(tokenizer, state);
 
 		state.prefixRule(ruleName, prefixToken, additionalProbability);
-	}
-
-	private static void promoteGrammar(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String subgrammarName = tokenizer.nextToken();
-		String subordinateName = tokenizer.nextToken();
-
-		state.promoteGrammar(subgrammarName, subordinateName);
 	}
 
 	private static int readOptionalProbability(FunctionalStringTokenizer tokenizer, ReaderState state) {
@@ -268,18 +228,6 @@ public class RBGrammarReader {
 		String ruleName = tokenizer.nextToken();
 
 		state.deleteRule(ruleName);
-	}
-
-	private static void removeSubGrammar(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String subgrammarName = tokenizer.nextToken();
-
-		state.deleteSubgrammar(subgrammarName);
-	}
-
-	private static void saveGrammar(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String subgrammarName = tokenizer.nextToken();
-
-		state.saveSubgrammar(subgrammarName);
 	}
 
 	private static void setupReader() {
@@ -300,12 +248,6 @@ public class RBGrammarReader {
 		reader.setEndRule((tokenizer) -> {
 			tokenizer.setCurrentRule(null);
 		});
-	}
-
-	private static void subordinateGrammar(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String grammarName = tokenizer.nextToken();
-
-		state.subordinateGrammar(grammarName);
 	}
 
 	private static void suffixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {

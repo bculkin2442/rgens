@@ -1,0 +1,515 @@
+[college-announcement] next [course-time] , [university] will offer ' [college-course] '
+	the [university] class ' [college-course] ' has been cancelled due to lack of interest
+	starting next year, incoming freshmen at [university] will be required to take ' [college-course] '
+	' [college-course] ' will no longer be offered at [university] due to lack of interest
+	' [college-course] ' is the most popular [course-level] class at [university]
+	due to overwhelming popularity, an additional section of ' [college-course] ' will be offered at [university] next semester
+	not one single student signed up for [university] 's ' [college-course ' last semester
+	a [poll] of students at [university] revealed ' [college-course] ' is the [popular] popular [class-type] offered
+
+pragma initial-rule [college-announcement]
+
+[course-time] fall
+	year
+	semester
+
+[course-level] graduate
+	undergraduate
+	freshmen
+	liberal arts
+
+[poll] poll
+	survey
+
+[popular] least
+	most
+
+[class-type] class
+	course
+
+pragma range-rule [past-years] 1800 1970
+
+[college-course] [course-adj] [course-noun] [course-suffix]
+	[course-adj] [course-noun] : [course-ending]
+	[course-adj] [course-noun] and [course-adj] [course-noun] [course-suffix]
+	[course-noun] and [course-noun] [course-suffix]
+	[course-group1] [course-group2] [course-life] [course-suffix]
+	[course-group2] [course-noun] [course-life] [course-suffix]
+	[course-group1] [course-group2] [course-life] since [past-years]
+	[course-group2] [course-life] : [course-ending]
+	contemporary [course-group2] [course-life] and [course-life]
+	contemporary [course-group2] [course-life] : [course-ending]
+	transforming the [course-group1] [course-group2] experience
+	[course-prefix] [course-group1] [course-group2] [course-life]
+	[course-prefix] [course-group2] [course-life] [course-suffix]
+	[course-prefix] [course-adj] [course-noun] [course-suffix]
+	[course-prefix] the [course-group1] [course-group2] [course-movement] [course-suffix]
+	[course-adj] [course-life] : [course-ending]
+	[course-adj] [course-noun] in modern [course-medium]
+	[course-noun] [course-suffix] : [course-ending]
+	[course-prefix] [course-noun] and [course-noun] [course-suffix]
+	the [course-adj] dimension of [course-group1] [course-group2] [course-medium]
+	[course-prefix] [course-topic] in [course-group2] [course-medium] : [course-ending]
+	[course-topic] and [course-topic] [course-suffix]
+	[course-group2] [course-medium] interpretation: [course-ending]
+	[course-group2] [course-medium] as a [course-adj] genre
+	[course-prefix] [course-group1] [course-group2] [course-medium]
+	[course-life] of [course-group2] [course-noun] : [course-ending]
+	[course-prefix] [course-popculture] : [course-ending]
+	[course-popculture] [course-suffix] : [course-ending]
+	[course-prefix] [course-adj] [course-noun] and [theory]
+	[course-prefix] [course-action] : [course-ending]
+	[course-action] [course-suffix] : [course-ending]
+	[course-prefix] [course-nounprefix] [course-ancient] [course-medium] : [course-ending]
+	ethnicity [course-suffix] : the [course-group1] [course-group2] [condition]
+	masterpieces of [course-group1] [course-group2] [course-medium]
+	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] [course-suffix] : [course-ending]
+	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] in [course-group2] [course-medium] : [course-ending]
+	[course-prefix] [course-event] : [course-ending]
+	[course-event] as [course-explored] in [course-group1] [course-group2] [course-medium]
+	[university-subject] as [course-explored] in [course-group1] [course-group2] [course-medium]
+	[course-impactof] : [course-ending]
+	[course-static]
+	[course-static]
+
+[condition] condition
+	experience
+
+[course-static] [course-env1] : [course-prefix] [course-env2]
+	[course-prefix] [course-env3] : policy [course-suffix]
+	the meaning of life as [course-explored] in [course-group1] [course-group2] [course-medium]
+	the [course-impact] of [course-group2] [thinker-type] on [course-contemporary] [university-subject] : [course-ending]
+	the [rise] of [course-group2] [thinker-type] in [course-contemporary] [university-subject] : [course-ending]
+	[course-ancient] [course-medium] as the [roots] of [course-contemporary] [university-subject]]
+	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] as [course-explored] in [course-contemporary] [films] : [course-ending]
+	the history of [course-group2] [course-life] : [course-ending]
+	the [archetype] of the [quest] in [course-group1] [course-group2] [course-medium]
+	[cross-cultural] [studies] [course-group2] [course-life]
+
+[course-event] the african diaspora
+	the harlem renaissance
+	the civil rights movement
+	the italian renaissance
+	westward expansion
+	manifest destiny
+	women's suffrage
+	world war I
+	world war II
+	the war of 1812
+	the american revolution
+	the french revolution
+	the russian revolution
+	the american civil war
+	the franco-prussian war
+	the jfk assasination
+
+[thinker-type] researchers
+	thinkers
+	scientists
+
+[rise] rise
+	emergence
+	success
+	empowerment
+
+[roots] roots
+	foundations
+
+[films] film
+	fiction
+	television
+	cinema
+	theater
+
+[archetype] archetype
+	symbolism
+
+[quest] quest paradigm
+	journey
+	awakening
+	rite of passage
+
+[cross-cultural] cross-cultural
+	multi-ethnic
+
+[studies] studies in
+	perspectives on
+[course-env1] saving the world
+	the end of the word
+	the sky is falling
+	here come the mass extinctions
+
+[course-env2] modern enviromentalism
+	enviromental biology
+	enviromental activism
+
+[course-env3] the greenhouse effect
+	planetwide climatic change
+	global warning
+
+[course-action] basketweaving
+	aquatic ballet
+	synchronized swimming
+	professional sports
+	the [course-adj] pottery experience
+	home economics
+	cardplaying
+	[sportship]
+	the culinary [experience]
+
+[sportship] sportspersonship
+	sportsmanship
+
+[experience] arts
+	experience
+
+[course-noun] diversity
+	globalism
+	equality
+	feminism
+	sexuality
+	self-actualization
+	political correctness
+	enviromentalism
+	marxism
+	socialsm
+	communism
+	darwinism
+	activism
+	queer theory
+	[course-nounprefix] romanticism
+	[course-nounprefix] dadaism
+	[course-nounprefix] cubism
+	[course-nounprefix] realism
+	paganism
+	homosexuality
+	sexuality
+	evolution
+	poverty
+	fundamentalism
+	intellectualism
+	multiculturalism
+
+[course-nounprefix] post-
+	pre-
+	early
+	classical
+
+[course-adj] progressive
+	liberal
+	liberal
+	aesthetic
+	postmodern
+	feminist
+	radical
+	populist
+	humanist
+	reformist
+	liberated
+
+[course-prefix] ad-hoc investigation of
+	ad-hoc investigation of
+	the potential of
+	foundations of
+	literature of
+	the history of
+	principles of
+	exploration of
+	philosophy of
+	psychology of
+	meta-physics of
+	dynamic exploration of
+	symbolism of
+	topics in
+	advanced topics in
+	selected topics in
+	special topics in
+	survey of
+	the universe of
+	the meaning of
+	theories of
+	perspectives in
+	topics in
+	special studies in
+	introduction to
+	research capstone in
+	quantitative methods in
+	colloquium in
+	senior seminar in
+	critical perspectives in
+	brief survey of
+	concepts in
+	the highlights of
+
+[course-suffix] in the postmodern era
+	in the postmodern world
+	in the modern adge
+	in modern society
+	in modern america
+	in today's society
+	in the american landscape
+	in the united states
+	in the 21st century
+	in recent times
+	in the real world
+	in the [college-adj] world
+
+[course-ending] ideas in conflict
+	ideas in transition
+	critical issues facing the [course-contemporary] [course-person]
+	a process approach
+	[course-buzzword] , [course-buzzword] and [course-buzzword]
+	a [course-metaphor] of [course-noun] [course-suffix]
+	a [course-metaphor] of [course-ancient] [course-suffix]
+	a [course-metaphor] [course-explored] in american [course-medium]
+	a [course-metaphor] [course-explored] in [course-contemporary] [course-medium]
+	what is to be learned from it?
+	an interdisciplinary [study]
+	from [last-name] to [last-name]
+	[theory] at work
+	policy [course-suffix]
+	different points of view
+	[course-buzzword] and [course-buzzword]
+	the big picture
+	a paradigm shift
+	[modern] [theories]
+	myth and reality
+	the untold story
+	[journey] [discovery]
+
+[modern] modern
+	contemporary
+
+[theories] ideas
+	theories
+
+[journey] a journey of
+	a quest for
+	an odyssey of
+
+[discovery] discovery
+	exploration
+	thought
+	self-actualization
+
+[study] study
+	approach
+
+[course-group1] gay and lesbian
+	homosexual
+	bisexual
+	transgender
+	inner city
+	rural
+	suburban
+	urban
+	southern
+	western
+	eastern
+	liberated
+	upper class
+	middle class
+	[course-adj]
+
+[course-group2] african-american
+	hispanic
+	european
+	latino
+	native american
+	pacific islander
+	australian
+	latvian
+	elbonian
+	italian
+	african
+	american
+	asian
+	chinese
+	japanese
+	french
+	german
+	russian
+	middle eastern
+	scandinavian
+	mexican
+	female
+	female
+	female
+	neo-pagan
+	atheist
+	polytheistic
+	minority
+	multi-ethnic
+
+[course-ancient] roman
+	etruscan
+	greek
+	byzantine
+	mayan
+	incan
+	aztec
+	viking
+	bablyonian
+	egyptian
+	sumerian
+	hittite
+	renaissance
+	chinese
+	native american
+
+[course-life] life
+	literature
+	music
+	art
+	issues
+	perspectives
+	lifestyles
+	thought
+	ethics
+	values
+	landscapes
+	culture
+	society
+	images
+	ideas
+	endeavors
+	expression
+	affairs
+	morals
+	retrospectives
+	symbols
+	religion
+	traditions
+	civilization
+
+[course-metaphor] metaphor
+	study
+	presentation
+	collage
+	figure
+	symbol
+
+[course-explored] explored
+	expressed
+	analyzed
+	interpreted
+	seen
+
+[course-person] individual
+	american
+	person
+	citizen
+	student
+	well-rounded person
+	woman
+	minority
+	liberal
+
+[course-buzzword] understanding
+	understanding
+	analysis
+	synthesis
+	synergy
+	practice
+	the human condition
+	development
+	cross-cultural awareness
+	cross-cultural perspectives
+	evaluation
+	interpretation
+	abstraction
+	decision-making
+	perspectives
+	context
+	paradigms
+	critical thinking
+	relationships
+	discovery
+	empowerment
+
+[course-buzzword2] race
+	class
+	status
+	gender
+	age
+	sex
+	work
+	family
+	community
+	culture
+	politics
+	struggle
+	conflict
+
+[course-movement] movement
+	revolution
+	evolution
+	transformation
+	metamorphosis
+	campaign
+
+[course-medium] art
+	paintings
+	literature
+	folklore
+	mythology
+	poetry
+	sculptures
+	music
+	architecture
+	dance
+	drama
+
+[course-topic] sex
+	death
+	suicide
+	trauma
+	drama
+	life
+	mythology
+	crime
+	love
+	hate
+	anger
+	passion
+	infidelity
+	horror
+
+[course-popculture] 'star wars'
+	'star trek'
+	cyberpunk literature
+	harlequin romances
+	'the simpsons'
+	'the x-files'
+	daytime soap operas
+	radio talk shows
+	shakespeare's [comedy]
+	'the scarlet letter;
+	'seinfeld'
+	classic american literature
+	classic [course-ancient] [literature]
+	political cartoons
+	pornography
+	'the jerry springer show'
+
+[comedy] comedies
+	tragedies
+
+[literature] literature
+	art
+
+[course-contemporary] contemporary
+	modern
+	21st century
+	20th century
+
+[course-impactof] the [course-impact] of [course-ancient] [course-medium] on [course-group1] [course-group2] [course-medium] [course-suffix]
+	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [university-subject]
+	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [course-adj] [course-noun]
+	the [course-impact] of [course-group1] [course-group2] [course-medium] on [course-contemporary] [course-adj] [course-noun]
+	the [course-impact] of [course-group1] [course-group2] [course-medim] on [university-subject]
+
+[course-impact] impact
+	effect
+	consequences
+	influence

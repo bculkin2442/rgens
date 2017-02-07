@@ -1,6 +1,6 @@
-[rpg] [rpg-part] , [rpg-part] and <rpg-part>
-	[rpg-part] and <rpg-part>
-	[rpg-part] the <rpg-part>
+[rpg] [rpg-part] , [rpg-part] and [rpg-part]
+	[rpg-part] and [rpg-part]
+	[rpg-part] the [rpg-part]
 
 pragma initial-rule [rpg]
 
@@ -201,5 +201,4 @@ pragma initial-rule [rpg]
 	skies
 	madness
 	economy
-	the 60s
-	
+	the 60s	

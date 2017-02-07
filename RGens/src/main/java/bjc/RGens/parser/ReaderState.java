@@ -150,6 +150,8 @@ public class ReaderState {
 	 */
 	public void startNewRule(String ruleName) {
 		currentGrammar.addRule(ruleName);
+
+		currentRule = ruleName;
 	}
 
 	/**
