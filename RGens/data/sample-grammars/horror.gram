@@ -1,6 +1,6 @@
-[horror] [first] [second] [third]
+[horror-movie] [first] [second] [third]
 
-pragma initial-rule [horror]
+pragma initial-rule [horror-movie]
 
 [first] attack of the
 	invasion of the

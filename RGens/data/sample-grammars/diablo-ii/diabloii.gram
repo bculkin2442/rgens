@@ -1,9 +1,3 @@
-# Load other files
-pragma load-sub-grammar [item-act] diabloiiitems.gram
-pragma load-sub-grammar [perishables] diabloiiperish.gram
-pragma load-sub-grammar [prefix] diabloiiprefixes.gram
-pragma load-sub-grammar [suffix] diabloiisuffixes.gram
-
 [base-treasures] [base-treasure]
 	[base-treasure] as well as [base-treasure]
 	[base-treasure] or [base-treasure]

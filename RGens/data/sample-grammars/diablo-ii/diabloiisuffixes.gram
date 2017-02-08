@@ -20,6 +20,8 @@
 	[weapon-use]
 	[spell-casting]
 
+pragma export-rule [suffix]
+
 [damage-reduction] health
 	protection
 	absorption

@@ -1,4 +1,4 @@
-[card] [adjective-of] [title]
+[tarot-card] [adjective-of] [title]
 	[adjective-of] [noun] [title]
 	[noun]
 	[noun] [adjective]
@@ -7,7 +7,7 @@
 	[title] [adjective]
 	[title] [adjective] [noun]
 
-pragma initial-rule [card]
+pragma initial-rule [tarot-card]
 
 [title] [male-title]
 	[female-title]

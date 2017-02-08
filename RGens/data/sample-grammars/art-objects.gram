@@ -1,9 +1,9 @@
-[treasure] [gemstones]
+[art-treasure] [gemstones]
 	[art-object]
 	[art-object] as well as [gemstones]
 	[gemstones] as well as [art-object]
 
-pragma initial-rule [treasure]
+pragma initial-rule [art-treasure]
 
 [art-object] [common-art]
 	[uncommon-art]

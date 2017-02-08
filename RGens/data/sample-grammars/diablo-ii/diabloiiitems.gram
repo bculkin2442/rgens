@@ -17,6 +17,8 @@
 	[inscriptions]
 	[perishables]
 
+pragma export-rule [item-act]
+
 [armor] cape
 	rags
 	cloak

@@ -12,6 +12,8 @@
 	[to-hit+damage]
 	[item-charges]
 
+pragma export-rule [prefix]
+
 [armor-class] sturdy
 	fine
 	strong

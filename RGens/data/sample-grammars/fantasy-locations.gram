@@ -1,11 +1,11 @@
 pragma uniform
 
-[location-name] 4 [name1] [name2]
+[fantasy-location-name] 4 [name1] [name2]
 	2 [name1] [name1] [name2]
 
 pragma uniform
 
-pragma initial-rule [location-name]
+pragma initial-rule [fantasy-location-name]
 
 [name1] amber
 	angry

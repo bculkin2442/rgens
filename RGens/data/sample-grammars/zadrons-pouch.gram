@@ -1,12 +1,12 @@
-[items] [item]
-	[item] and a [item]
-	[item] and a  [item] as well as a [item]
-	[item] or [item]
-	[item] or [item] or maybe [item]
+[zadrons-pouch] [zadrons-item]
+	[zadrons-item] and a [zadrons-item]
+	[zadrons-item] and a  [zadrons-item] as well as a [zadrons-item]
+	[zadrons-item] or [zadrons-item]
+	[zadrons-item] or [zadrons-item] or maybe [zadrons-item]
 
-pragma initial-rule [items]
+pragma initial-rule [zadrons-pouch]
 
-[item] [egg]
+[zadrons-item] [egg]
 	[glove]
 	[crys-sphere]
 	[rock]
@@ -18,6 +18,8 @@ pragma initial-rule [items]
 	[rope]
 	[box]
 	[wand]
+
+pragma export-rule [zadrons-item]
 
 [bag] bag of [bag-type]
 	[sack-type] sack

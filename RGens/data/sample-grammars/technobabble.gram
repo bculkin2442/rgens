@@ -1,8 +1,8 @@
-[main] [part-prefix] [part-suffix] [part-problem]
+[technobabble] [part-prefix] [part-suffix] [part-problem]
 	[part-prefix] [part-problem]
 	[part-suffix] [part-problem]
 
-pragma initial-rule [main]
+pragma initial-rule [technobabble]
 
 [part-prefix] primary
 	compression

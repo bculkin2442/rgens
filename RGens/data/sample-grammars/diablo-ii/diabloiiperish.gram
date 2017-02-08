@@ -2,6 +2,8 @@
 	[perishable-effect] [perishable-type]
 	[bodypart] of [perishable-effect]
 
+pragma export-rule [perishables]
+
 [bodypart] heart
 	brain
 	jawbone

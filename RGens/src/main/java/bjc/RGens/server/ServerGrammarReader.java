@@ -25,6 +25,12 @@ import bjc.utils.parserutils.RuleBasedConfigReader;
  *
  */
 public class ServerGrammarReader {
+	static {
+		setupReader();
+	
+		initPragmas();
+	}
+
 	private static RuleBasedConfigReader<ReaderState> reader;
 
 	private static Random numgen = new Random();
@@ -35,10 +41,92 @@ public class ServerGrammarReader {
 		exportedRules = rules;
 	}
 
-	static {
-		setupReader();
+	/**
+	 * Read a grammar from a stream
+	 * 
+	 * @param inputStream
+	 *            The stream to load the grammar from
+	 * 
+	 * @return A grammar read from the stream
+	 * 
+	 */
+	public static IPair<WeightedGrammar<String>, IList<String>>
+		fromStream(InputStream inputStream) {
+			ReaderState initialState = new ReaderState();
+	
+			WeightedGrammar<String> gram = reader.fromStream(inputStream, initialState).getGrammar();
+	
+			IMap<String, IList<String>> vars = new FunctionalMap<>();
+	
+			Predicate<String> specialPredicate = (strang) -> {
+				if(strang.matches("\\[\\S+\\]")) {
+					return true;
+				}
+	
+				return false;
+			};
+	
+			BiFunction<String, WeightedGrammar<String>, IList<String>> 
+				specialAction = (strang, gramm) -> {
+					return handleSpecialRule(vars, strang, gramm);
+				};
+	
+			gram.configureSpecial(specialPredicate, specialAction);
+	
+			IList<String> exports = initialState.getExports();
+	
+			if(gram.getInitialRule() != null && !exports.contains(gram.getInitialRule())) {
+				exports.add(gram.getInitialRule());
+			}
+	
+			return new Pair<>(gram, exports);
+	}
 
-		initPragmas();
+	private static void initPragmas() {
+		reader.addPragma("debug", (tokenizer, state) -> {
+			debugGrammar(state);
+		});
+	
+		reader.addPragma("uniform", (tokenizer, state) -> {
+			state.toggleUniformity();
+		});
+	
+		reader.addPragma("initial-rule", ServerGrammarReader::initialRule);
+	
+		reader.addPragma("remove-rule", ServerGrammarReader::removeRule);
+	
+		reader.addPragma("prefix-with", ServerGrammarReader::prefixRule);
+		reader.addPragma("suffix-with", ServerGrammarReader::suffixRule);
+	
+		reader.addPragma("regex-rule", ServerGrammarReader::handleRegexRule);
+	
+		reader.addPragma("range-rule", ServerGrammarReader::handleRangeRule);
+	
+		reader.addPragma("export-rule", (tokenizer, state) -> {
+			String ruleName = tokenizer.nextToken();
+	
+			state.addExport(ruleName);
+		});
+	}
+
+	private static void setupReader() {
+		reader = new RuleBasedConfigReader<>(null, null, null);
+	
+		reader.setStartRule((tokenizer, stateTokenPair) -> {
+			stateTokenPair.doWith((initToken, state) -> {
+				state.startNewRule(initToken);
+	
+				doCase(tokenizer, state);
+			});
+		});
+	
+		reader.setContinueRule((tokenizer, state) -> {
+			doCase(tokenizer, state);
+		});
+	
+		reader.setEndRule((tokenizer) -> {
+			tokenizer.setCurrentRule(null);
+		});
 	}
 
 	private static void debugGrammar(ReaderState state) {
@@ -57,162 +145,114 @@ public class ServerGrammarReader {
 		state.addCase(ruleProbability, tokenizer.toList());
 	}
 
-	/**
-	 * Read a grammar from a stream
-	 * 
-	 * @param inputStream
-	 *            The stream to load the grammar from
-	 * 
-	 * @return A grammar read from the stream
-	 * 
-	 */
-	public static IPair<WeightedGrammar<String>, IList<String>>
-		fromStream(InputStream inputStream) {
-			ReaderState initialState = new ReaderState();
-
-			WeightedGrammar<String> gram = reader.fromStream(inputStream, initialState).getGrammar();
-
-			IMap<String, IList<String>> vars = new FunctionalMap<>();
-
-			Predicate<String> specialPredicate = (strang) -> {
-				if(strang.matches("\\{\\S+\\}") || strang.matches("\\[\\S+\\}")) {
-					return true;
-				}
-
-				return false;
-			};
-
-			BiFunction<String, WeightedGrammar<String>, IList<String>> 
-				specialAction = (strang, gramm) -> {
-					IList<String> retList = new FunctionalList<>();
-
-					if(strang.matches("\\{\\S+\\}")) {
-						if(strang.matches("\\{\\S+:=\\S+\\}")) {
-							String[] varParts = strang.split(":=");
-
-							String varName = varParts[0].substring(1);
-							String ruleName = varParts[1].substring(0, varParts[1].length());
-
-							IList<String> varValue = gramm.generateGenericValues(
-									ruleName, (s) -> s, " ");
-
-							vars.put(varName, varValue);
-						} else if(strang.matches("\\{\\S+=\\S+\\}")) {
-							String[] varParts = strang.split("=");
-
-							String varName = varParts[0].substring(1);
-							String varValue = varParts[1].substring(0, varParts[1].length());
-
-							vars.put(varName, new FunctionalList<>(varValue));
-						} else {
-							// @FIXME notify the user they did something wrong
-							retList.add(strang);
-						}
-					} else {
-						if(strang.matches("\\[\\$\\S+\\]")) {
-							String varName = strang.substring(2, strang.length());
-
-							retList = vars.get(varName);
-						} else if(strang.matches("\\[\\$\\S+\\-\\S+\\]")) {
-							String[] varParts = strang.substring(1, strang.length()).split("-");
-
-							StringBuilder actualName = new StringBuilder("[");
-
-							for(String varPart : varParts) {
-								if(varPart.startsWith("$")) {
-									IList<String> varName = vars.get(varPart.substring(1));
-
-									if(varName.getSize() != 1) {
-										// @FIXME notify the user they did something wrong
-									}
-
-									actualName.append(varName.first() + "-");
-								} else {
-									actualName.append(varPart + "-");
-								}
-							}
-
-							// Trim trailing -
-							actualName.deleteCharAt(actualName.length() - 1);
-							actualName.append("]");
-
-							retList = gramm.generateGenericValues(actualName.toString(), (s) -> s, " ");
-						} else if (exportedRules.containsKey(strang)) {
-							return exportedRules.get(strang)
-								.generateGenericValues(strang, (s) -> s, " ");
-						} else {
-							// @FIXME notify the user they did something wrong
-							retList.add(strang);
-						}
-					}
-
-					return retList;
-				};
-
-			gram.configureSpecial(specialPredicate, specialAction);
-
-			return new Pair<>(gram, initialState.getExports());
-	}
-
 	private static void initialRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
 		String initialRuleName = tokenizer.nextToken();
 
 		state.setInitialRule(initialRuleName);
 	}
 
-	private static void initPragmas() {
-		reader.addPragma("debug", (tokenizer, state) -> {
-			debugGrammar(state);
-		});
+	private static IList<String> handleSpecialRule(IMap<String, IList<String>> vars, String strang,
+			WeightedGrammar<String> gramm) {
+		IList<String> retList = new FunctionalList<>();
+	
+		if(strang.matches("\\[\\[\\S+\\]\\]")) {
+			if(strang.matches("\\[\\S+:=\\S+\\]")) {
+				String[] varParts = strang.split(":=");
+	
+				String varName = varParts[0].substring(1);
+				String ruleName = varParts[1].substring(0, varParts[1].length());
+	
+				IList<String> varValue = gramm.generateGenericValues(
+						ruleName, (s) -> s, " ");
+	
+				vars.put(varName, varValue);
+			} else if(strang.matches("\\[\\[\\S+=\\S+\\]\\]")) {
+				String[] varParts = strang.split("=");
+	
+				String varName = varParts[0].substring(1);
+				String varValue = varParts[1].substring(0, varParts[1].length());
+	
+				vars.put(varName, new FunctionalList<>(varValue));
+			} else if(strang.matches("\\[\\[\\S+\\]\\]")) {
+				String ruleName = strang.substring(1, strang.length() - 1);
 
-		reader.addPragma("uniform", (tokenizer, state) -> {
-			state.toggleUniformity();
-		});
+				IList<String> ruleValue = gramm.generateGenericValues(
+						ruleName, (s) -> s, "");
 
-		reader.addPragma("initial-rule", ServerGrammarReader::initialRule);
+				retList.add(ListUtils.collapseTokens(ruleValue));
+			} else {
+				// @FIXME notify the user they did something wrong
+				retList.add(strang);
+			}
+		} else {
+			if(strang.matches("\\[\\$\\S+\\]")) {
+				String varName = strang.substring(2, strang.length());
+	
+				retList = vars.get(varName);
+			} else if(strang.matches("\\[\\$\\S+\\-\\S+\\]")) {
+				String[] varParts = strang.substring(1, strang.length()).split("-");
+	
+				StringBuilder actualName = new StringBuilder("[");
+	
+				for(String varPart : varParts) {
+					if(varPart.startsWith("$")) {
+						IList<String> varName = vars.get(varPart.substring(1));
+	
+						if(varName.getSize() != 1) {
+							// @FIXME notify the user they did something wrong
+						}
+	
+						actualName.append(varName.first() + "-");
+					} else {
+						actualName.append(varPart + "-");
+					}
+				}
+	
+				// Trim trailing -
+				actualName.deleteCharAt(actualName.length() - 1);
+				actualName.append("]");
+	
+				retList = gramm.generateGenericValues(actualName.toString(), (s) -> s, " ");
+			} else if (exportedRules.containsKey(strang) && 
+					exportedRules.get(strang) != gramm &&
+					!gramm.hasRule(strang)) {
+				// Only pick external rules if they are both 
+				// a) in a different grammar
+				// b) not shadowed in the current grammar
+				WeightedGrammar<String> exportGram = exportedRules.get(strang);
+	
+				retList = exportGram.generateGenericValues(strang, (s) -> s, " ");
+			} else {
+				// @FIXME notify the user they did something wrong
+				retList.add(strang);
+			}
+		}
+	
+		return retList;
+	}
 
-		reader.addPragma("remove-rule", ServerGrammarReader::removeRule);
+	private static void handleRangeRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
+		String ruleName = tokenizer.nextToken();
 
-		reader.addPragma("prefix-with", ServerGrammarReader::prefixRule);
-		reader.addPragma("suffix-with", ServerGrammarReader::suffixRule);
+		int start = Integer.parseInt(tokenizer.nextToken());
+		int end = Integer.parseInt(tokenizer.nextToken());
 
-		reader.addPragma("regex-rule", (tokenizer, state) -> {
-			String ruleName = tokenizer.nextToken();
-
-			IList<String> regx = tokenizer.toList();
-			Generex regex = new Generex(ListUtils.collapseTokens(regx));
-
-			state.addSpecialRule(ruleName, () -> {
-				return new FunctionalList<>(regex.random().split(" "));
-			});
-		});
-
-		reader.addPragma("range-rule", (tokenizer, state) -> {
-			String ruleName = tokenizer.nextToken();
-
-			int start = Integer.parseInt(tokenizer.nextToken());
-			int end = Integer.parseInt(tokenizer.nextToken());
-
-			state.addSpecialRule(ruleName, () -> {
-				return new FunctionalList<>(Integer.toString(
-							numgen.nextInt((end - start) + 1) + start));
-			});
-		});
-
-		reader.addPragma("export-rule", (tokenizer, state) -> {
-			String ruleName = tokenizer.nextToken();
-
-			state.addExport(ruleName);
+		state.addSpecialRule(ruleName, () -> {
+			int genNum = numgen.nextInt((end - start) + 1) + start;
+			
+			return new FunctionalList<>(Integer.toString(genNum));
 		});
 	}
 
-	private static void prefixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
+	private static void handleRegexRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
 		String ruleName = tokenizer.nextToken();
-		String prefixToken = tokenizer.nextToken();
 
-		int additionalProbability = readOptionalProbability(tokenizer, state);
+		IList<String> regx = tokenizer.toList();
+		Generex regex = new Generex(ListUtils.collapseTokens(regx));
 
-		state.prefixRule(ruleName, prefixToken, additionalProbability);
+		state.addSpecialRule(ruleName, () -> {
+			return new FunctionalList<>(regex.random().split(" "));
+		});
 	}
 
 	private static int readOptionalProbability(FunctionalStringTokenizer tokenizer, ReaderState state) {
@@ -229,24 +269,13 @@ public class ServerGrammarReader {
 		state.deleteRule(ruleName);
 	}
 
-	private static void setupReader() {
-		reader = new RuleBasedConfigReader<>(null, null, null);
-
-		reader.setStartRule((tokenizer, stateTokenPair) -> {
-			stateTokenPair.doWith((initToken, state) -> {
-				state.startNewRule(initToken);
-
-				doCase(tokenizer, state);
-			});
-		});
-
-		reader.setContinueRule((tokenizer, state) -> {
-			doCase(tokenizer, state);
-		});
-
-		reader.setEndRule((tokenizer) -> {
-			tokenizer.setCurrentRule(null);
-		});
+	private static void prefixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
+		String ruleName = tokenizer.nextToken();
+		String prefixToken = tokenizer.nextToken();
+	
+		int additionalProbability = readOptionalProbability(tokenizer, state);
+	
+		state.prefixRule(ruleName, prefixToken, additionalProbability);
 	}
 
 	private static void suffixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {

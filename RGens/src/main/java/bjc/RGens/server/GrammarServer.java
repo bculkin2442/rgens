@@ -2,29 +2,28 @@ package bjc.RGens.server;
 
 import bjc.utils.funcdata.FunctionalMap;
 import bjc.utils.funcdata.IMap;
-import bjc.utils.funcdata.IList;
-import bjc.utils.funcutils.ListUtils;
 import bjc.utils.gen.WeightedGrammar;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.FileInputStream;
 
 import java.util.Scanner;
 
 public class GrammarServer {
 	private Scanner scn;
 
-	public final IMap<String, WeightedGrammar<String>> loadedGrammars;
-
-	public final IMap<String, WeightedGrammar<String>> exportedRules;
-
+	private IMap<String, WeightedGrammar<String>> loadedGrammars;
+	private IMap<String, WeightedGrammar<String>> exportedRules;
+	
+	private GrammarServerEngine eng;
+	
 	public GrammarServer(Scanner scn) {
 		this.scn = scn;
 
 		this.loadedGrammars = new FunctionalMap<>();
 		this.exportedRules  = new FunctionalMap<>();
 
+		eng = new GrammarServerEngine(loadedGrammars, exportedRules);
+		
 		ServerGrammarReader.setExportedRules(exportedRules);
 	}
 
@@ -34,6 +33,8 @@ public class GrammarServer {
 		Scanner scn = new Scanner(System.in);
 
 		GrammarServer serv = new GrammarServer(scn);
+
+		CLIArgsParser.parseArgs(args, serv.eng);
 
 		System.out.print("Enter a command (m for help): ");
 
@@ -50,7 +51,7 @@ public class GrammarServer {
 					System.out.println("\tg: Generate text");
 					break;
 				case 'g':
-					serv.generateText();
+					serv.generateMode();
 					break;
 				case 's':
 					serv.showMode();
@@ -70,10 +71,12 @@ public class GrammarServer {
 		System.out.println("GrammarServer exiting");
 	}
 
+	
+
 	private void loadMode() {
 		System.out.println("Entering Load Mode");
 
-		System.out.print("(Load Mode) Enter a command (m for help):");
+		System.out.print("(Load Mode) Enter a command (m for help): ");
 		char comm = scn.nextLine().charAt(0);
 
 		while(comm != 'e') {
@@ -81,8 +84,9 @@ public class GrammarServer {
 				case 'm':
 					System.out.println("GrammarServer Load Mode Commands");
 					System.out.println("\tm: Show command help");
-					System.out.println("\te: Exit Generate Mode");
+					System.out.println("\te: Exit Load Mode");
 					System.out.println("\tg: Load grammar from a file");
+					System.out.println("\tl: Load long rule from a file");
 					System.out.println("\tc: Load configuration from a file");
 					break;
 				case 'g':
@@ -91,15 +95,63 @@ public class GrammarServer {
 				case 'c':
 					loadConfig();
 					break;
+				case 'l':
+					loadLongRule();
+					break;
 				default:
 					System.out.println("? Unrecognized Command");
 			}
 
-			System.out.print("(Load Mode) Enter a command (m for help):");
+			System.out.print("(Load Mode) Enter a command (m for help): ");
 			comm = scn.nextLine().charAt(0);
 		}
 
 		System.out.println("Exiting Load Mode");
+	}
+
+	private void loadGrammar() {
+		System.out.print("Enter path to load grammar from: ");
+	
+		String grammarPath = scn.nextLine().trim();
+	
+		File grammarFile = new File(grammarPath);
+	
+		String grammarName = grammarFile.getName().trim();
+	
+		grammarName = grammarName.substring(0, grammarName.lastIndexOf("."));
+	
+		System.out.printf("Enter grammar name or press enter for"
+				+ " the default (%s): ", grammarName);
+	
+		String inputName = scn.nextLine();
+	
+		if(!inputName.equals("")) {
+			grammarName = inputName;
+		}
+	
+		eng.doLoadGrammar(grammarName, grammarPath);
+	
+		return;
+	}
+
+	private void loadLongRule() {
+		System.out.print("Enter the file to load a long rule from: ");
+
+		String fileName = scn.nextLine().trim();
+		File ruleFile = new File(fileName);
+
+		String tempName = ruleFile.getName();
+		tempName = tempName.substring(0, tempName.lastIndexOf('.'));
+
+		System.out.printf("Enter the name for the long rule (default %s): ", tempName);
+
+		String ruleName = scn.nextLine().trim();
+
+		if(ruleName.equals("")) {
+			ruleName = tempName;
+		}
+
+		eng.doLoadLongRule(ruleName, fileName);
 	}
 
 	private void loadConfig() {
@@ -107,23 +159,7 @@ public class GrammarServer {
 		
 		String fileName = scn.nextLine().trim();
 
-		File inputFile = new File(fileName);
-
-		try(FileInputStream inputStream = new FileInputStream(inputFile)) {
-			try(Scanner fle = new Scanner(inputStream)) {
-				while(fle.hasNextLine()) {
-					String line = fle.nextLine().trim();
-
-					String gramName = line.substring(0, line.indexOf(' '));
-					String gramPath = line.substring(line.indexOf(' ') + 1, line.length());
-
-					loadGrammar(gramName, gramPath);
-				}
-			}
-		} catch(IOException ioex) {
-			System.out.printf("? Error reading configuration from file"
-					+ " (reason: %s)", ioex.getMessage());
-		}
+		eng.doLoadConfig(fileName);
 	}
 
 	private void showMode() {
@@ -147,20 +183,10 @@ public class GrammarServer {
 					showGrammarRules();
 					break;
 				case 'x':
-					System.out.printf("Currently exported rules (%d total):\n",
-							exportedRules.getSize());
-
-					exportedRules.forEachKey(key -> {
-						System.out.println("\t" + key);
-					});
+					eng.doShowExportedRules();
 					break;
 				case 'l':
-					System.out.printf("Currently loaded grammars (%d total):\n",
-							loadedGrammars.getSize());
-
-					loadedGrammars.forEachKey(key -> {
-						System.out.println("\t" + key);
-					});
+					eng.doShowLoadedGrammars();
 					break;
 				default:
 					System.out.println("? Unrecognized command");
@@ -177,42 +203,7 @@ public class GrammarServer {
 		System.out.println("Exiting Show Mode");
 	}
 
-	private void showGrammarRules() {
-		System.out.print("Enter the name of the grammar (l to list): ");
-		String gramName = scn.nextLine().trim();
-
-		do {
-			if(gramName.equals("")) break;
-
-			if(gramName.equals("l")) {
-				System.out.printf("Currently loaded grammars (%d total):\n",
-						loadedGrammars.getSize());
-
-				loadedGrammars.forEachKey(key -> {
-					System.out.println("\t" + key);
-				});
-			} else if (loadedGrammars.containsKey(gramName)) {
-				WeightedGrammar<String> gram = loadedGrammars.get(gramName);
-
-				IList<String> ruleNames = gram.getRuleNames();
-
-				System.out.printf("Rules for grammar %s (%d total)\n",
-						gramName, ruleNames.getSize());
-
-				ruleNames.forEach(rule -> {
-					System.out.println("\t" + rule);
-				});
-				break;
-			} else {
-				System.out.println("? Unrecognized grammar name");
-			}
-
-			System.out.print("Enter the name of the grammar (l to list): ");
-			gramName = scn.nextLine().trim();
-		} while(true);
-	}
-
-	private void generateText() {
+	private void generateMode() {
 		System.out.println("Entering Generate Mode");
 
 		System.out.print("(Generate Mode) Enter a command (m for help): ");
@@ -225,10 +216,14 @@ public class GrammarServer {
 					System.out.println("GrammarServer Generate Mode Commands: ");
 					System.out.println("\tm: Show command help");
 					System.out.println("\tx: Generate from exported rules");
+					System.out.println("\tr: Generate from a grammar");
 					System.out.println("\te: Exit Generate Mode");
 					break;
 				case 'x':
 					generateExportedRule();
+					break;
+				case 'r':
+					generateGrammar();
 					break;
 				default:
 					System.out.println("? Unrecognized command");
@@ -252,17 +247,9 @@ public class GrammarServer {
 			if(ruleName.equals("")) break;
 
 			if(ruleName.equals("l")) {
-				System.out.println("Current exported rules: ");
-				exportedRules.forEachKey(key -> {
-					System.out.println("\t" + key);
-				});
+				eng.doShowExportedRules();
 			} else if (exportedRules.containsKey(ruleName)) {
-				String ruleResult = ListUtils.collapseTokens(
-						exportedRules.get(ruleName)
-						.generateListValues(ruleName, " "));
-
-				System.out.println("Generated Result: ");
-				System.out.println("\t" + ruleResult.replaceAll("\\s+", " "));
+				eng.doGenerateExportedRule(ruleName);
 
 				System.out.print("Generate again from this rule? (yes/no) (yes by default): ");
 
@@ -282,52 +269,78 @@ public class GrammarServer {
 		}
 	}
 
-	private void loadGrammar() {
-		System.out.print("Enter path to load grammar from: ");
+	private void generateGrammar() {
+		System.out.print("Enter the name of the grammar to generate from (l to list, enter to cancel): ");
 
-		String grammarPath = scn.nextLine().trim();
+		String grammarName = scn.nextLine().trim();
 
-		File grammarFile = new File(grammarPath);
+		while(true) {
+			if(grammarName.equals("")) break;
 
-		String grammarName = grammarFile.getName().trim();
+			if(grammarName.equals("l")) {
+				eng.doShowLoadedGrammars();
+			} else if(loadedGrammars.containsKey(grammarName)) {
+				WeightedGrammar<String> currentGram = loadedGrammars.get(grammarName);
 
-		grammarName = grammarName.substring(0, grammarName.lastIndexOf("."));
+				System.out.print("Enter the name of the rule to generate"
+						+ " (l to list, enter to cancel): ");
 
-		System.out.printf("Enter grammar name or press enter for"
-				+ " the default (%s): ", grammarName);
+				String ruleName = scn.nextLine().trim();
 
-		String inputName = scn.nextLine();
+				while(true) {
+					if(ruleName.equals("")) break;
 
-		if(!inputName.equals("")) {
-			grammarName = inputName;
-		}
+					if(ruleName.equals("l")) {
+						eng.doShowGrammarRules(grammarName);
+					} else if (currentGram.hasRule(ruleName)) {
+						eng.doGenerateGrammar(currentGram, ruleName);
 
-		doLoadGrammar(grammarName, grammarPath);
+						System.out.print("Generate again from this rule? (yes/no) (yes by default): ");
 
-		return;
-	}
+						String resp = scn.nextLine().trim();
 
-	private void doLoadGrammar(String grammarName, String grammarPath) {
-		System.out.printf("Loading grammar (named %s) from path %s\n",
-				grammarName, grammarPath);
-
-		try (FileInputStream inputStream = new FileInputStream(grammarPath)) {
-			WeightedGrammar<String> newGram = 
-				ServerGrammarReader.fromStream(inputStream).merge((gram, exports) -> {
-					for(String export : exports.toIterable()) {
-						exportedRules.put(export, gram);
+						if(resp.equalsIgnoreCase("yes") || resp.equals("")) {
+							continue;
+						}
+					} else {
+						System.out.println("? Unrecognized grammar rule");
 					}
 
-					return gram;
-				});
+					System.out.print("Enter the name of the rule to generate"
+							+ " (l to list, enter to cancel): ");
 
-			loadedGrammars.put(grammarName, newGram);
-		} catch (IOException ioex) {
-			System.out.printf("? Error reading grammar from file"
-					+ " (reason: %s)", ioex.getMessage());
+					ruleName = scn.nextLine().trim();
+				}
+
+			} else {
+				System.out.println("? Unrecognized grammar name");
+			}
+
+			System.out.print("Enter the name of the grammar to generate from "
+					+ "(l to list, enter to cancel): ");
+
+			grammarName = scn.nextLine().trim();
 		}
+	}
 
-		System.out.printf("Loaded grammar (named %s) from path %s\n",
-				grammarName, grammarPath);
+	private void showGrammarRules() {
+		System.out.print("Enter the name of the grammar (l to list): ");
+		String gramName = scn.nextLine().trim();
+	
+		do {
+			if(gramName.equals("")) break;
+	
+			if(gramName.equals("l")) {
+				eng.doShowLoadedGrammars();
+			} else if (loadedGrammars.containsKey(gramName)) {
+				eng.doShowGrammarRules(gramName);
+				break;
+			} else {
+				System.out.println("? Unrecognized grammar name");
+			}
+	
+			System.out.print("Enter the name of the grammar (l to list): ");
+			gramName = scn.nextLine().trim();
+		} while(true);
 	}
 }

@@ -17,6 +17,10 @@
                 <version>1.2.1</version>
                 <configuration>
                     <mainClass>bjc.RGens.server.GrammarServer</mainClass>
+					<arguments>
+						<argument>-c</argument>
+						<argument>data/server-config-sample.cfg</argument>
+					</arguments>
                 </configuration>	
 			</plugin>
 		</plugins>

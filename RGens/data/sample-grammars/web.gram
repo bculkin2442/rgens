@@ -1,0 +1,89 @@
+[email] [[actual-email]]
+
+[fake-email] [[actual-fake-email]]
+
+[username] [[actual-username]]
+
+[url] [[actual-url]]
+
+pragma initial-rule [email]
+pragma export-rule [fake-email]
+pragma export-rule [username]
+pragma export-rule [url]
+
+[actual-email] [username] @ [subdomain-name] . [domain]
+	[username] @mail. [domain]
+	[username] @ [domain]
+	[username] @ [domain]
+	[acronym] @ [domain]
+	[email-alias] @ [domain]
+	[email-alias] @ [subdomain-name] . [domain]
+	[username] @ [subdomain-name] . [town-name] .net
+	[first-name] @ [last-name] .com
+	[first-name] @ [first-last] . [big-tld]
+
+[first-last] [first-name]
+	[first-name] - [last-name]
+
+[actual-fake-email] [username] @ [subdomain-name] . [fake-domain]
+	[username] @mail. [fake-domain]
+	[acronym] @ [fake-domain]
+	[email-alias] @ [fake-domain]
+	[email-alias] @ [subdomain-name] . [fake-domain]
+
+[email-alias] webmaster
+	abuse
+	hostmaster
+	postman
+	webjockey
+	email
+	sales
+	support
+	marketingscum
+	mail
+	root
+
+
+[actual-username] [random-name]
+	[middle-initial] [random-name]
+	[middle-initial] [last-name]
+	[first-name] . [last-name]
+	[first-name]
+	[random-name] [num-range]
+
+pragma range-rule [num-range] 1 999
+
+[actual-url] http://www. [domain] /
+	http://www. [domain] /
+	http:// [subdomain-name] . [domain] /
+	http://www. [last-name] . [tld] /
+	http:// [username] . [domain] / 
+	[url-with-path]
+
+[url-with-path] http://www.geocities.com/ [neighborhood] / [digit-non0] [digit] [digit] [digit] /
+	http:// [url-begin] . [acronym] .net/ [url-username] /
+
+
+[neighborhood] siliconvalley
+	heartland
+	timessquare
+
+[url-begin] www
+	www2
+	users
+	members
+
+[url-username] [username]
+	~ [username]
+
+[url-state] s
+	n
+	e
+	w
+	se
+	nw
+	ne
+	sw
+	univ
+	u
+

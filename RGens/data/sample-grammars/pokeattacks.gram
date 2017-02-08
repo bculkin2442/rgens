@@ -1,15 +1,12 @@
-[attack] [word-1] [word-1]
+[pokeattack] [word-1] [word-1]
 	[word-2] [word-2]
 	[word-1] [word-2]
 	[word-2] [word-1]
 
-pragma initial-rule [attack]
+pragma initial-rule [pokeattack]
 
-pragma prefix-with [attack] [word-1]
-# pragma prefix-with [attack] [word-2]
-
-# pragma suffix-with [attack] [word-1]
-pragma suffix-with [attack] [word-2]
+pragma prefix-with [pokeattack] [word-1]
+pragma suffix-with [pokeattack] [word-2]
 
 [word-1] acid
 	aerial

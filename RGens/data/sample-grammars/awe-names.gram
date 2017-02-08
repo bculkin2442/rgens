@@ -1,7 +1,7 @@
-[name] [part]
+[awesome-name] [part]
 	[part] [part]
 
-pragma initial-rule [name]
+pragma initial-rule [awesome-name]
 
 [part] battle
 	blade

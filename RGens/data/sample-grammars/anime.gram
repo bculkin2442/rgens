@@ -1,20 +1,19 @@
-[anime-name] [anime-two-name]
-	[anime-three-name]
+[anime-name] [two-name]
+	[three-name]
 
 pragma initial-rule [anime-name]
-pragma export-rule [anime-name]
 
-[anime-two-name] [anime-first-name] [anime-third-name]
-	[anime-second-name] [anime-third-name]
+[two-name] [first-name] [third-name]
+	[second-name] [third-name]
 
-[anime-three-name] [anime-first-name] [anime-first-name]
-	[anime-first-name] [anime-second-name]
-	[anime-second-name] [anime-first-name]
-	[anime-second-name] [anime-second-name]
+[three-name] [first-name] [first-name]
+	[first-name] [second-name]
+	[second-name] [first-name]
+	[second-name] [second-name]
 
-pragma suffix-with [anime-name] [anime-third-name]
+pragma suffix-with [anime-name] [third-name]
 
-[anime-first-name] Vampire
+[first-name] Vampire
 	Cat
 	Death
 	Mermaid
@@ -41,7 +40,7 @@ pragma suffix-with [anime-name] [anime-third-name]
 	Lucid
 	Space
 
-[anime-second-name] Princess
+[second-name] Princess
 	Planet
 	Blade
 	Bride
@@ -69,7 +68,7 @@ pragma suffix-with [anime-name] [anime-third-name]
 	Blackout
 	Phantom
 
-[anime-third-name] Forever
+[third-name] Forever
 	Detectives
 	Memories
 	Outlaw

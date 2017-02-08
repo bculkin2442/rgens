@@ -1,11 +1,11 @@
-[enviroment] [man-made]
+[dungeon-enviroment] [man-made]
 	[cave]
 	[natural]
 	[aquatic]
 	[aerial]
 	[supernatural]
 
-pragma initial-rule [enviroment]
+pragma initial-rule [dungeon-enviroment]
 
 [man-made] a stone room
 	a spiral staircase surrounding a giant pit

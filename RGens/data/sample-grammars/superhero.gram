@@ -1,10 +1,10 @@
-[superhero] [first-part] [second-part]
+[superhero-name] [first-part] [second-part]
 	[second-part] [first-part]
 
-pragma initial-rule [superhero]
+pragma initial-rule [superhero-name]
 
-pragma suffix-with [superhero] [third-part]
-pragma suffix-with [superhero] [fourth-part]
+pragma suffix-with [superhero-name] [third-part]
+pragma suffix-with [superhero-name] [fourth-part]
 
 [first-part] Captain
 	Yellow

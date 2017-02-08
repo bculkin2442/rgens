@@ -1,9 +1,9 @@
-[art-name] [art-1] [art-2]
+[martial-arts-name] [art-1] [art-2]
 	[art-1] [art-3]
 	[art-2] [art-3]
 	[art-1] [art-2] [art-3]
 
-pragma initial-rule [art-name]
+pragma initial-rule [martial-arts-name]
 
 [art-1] running
 	hungry

@@ -28,10 +28,12 @@ pragma initial-rule [mission-statement]
 
 [noun-part] our [adjective] [noun]
 	our [noun]
-	our [noun-prefix] [noun]
-	[adjective] [noun-prefix] [noun]
+	our [[noun+noun-prefix]]
+	[adjective] [[noun+noun-prefix]]
 	[adjective] [noun]
 	[noun]
+
+[noun+noun-prefix] [noun-prefix] [noun]
 
 [opening] it's our [duty] to
 	it is our [duty] to
