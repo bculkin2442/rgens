@@ -1,0 +1,30 @@
+[full-name] [first-name] [last-name]
+	[first-name] [middle-initial] [last-name]
+	[consonant] [middle-initial] [last-name]
+	[random-name] [random-name]
+
+pragma initial-rule [full-name]
+pragma export-rule [person]
+pragma export-rule [first-name]
+pragma export-rule [full-name-and-title]
+pragma export-rule [random-name]
+
+[full-name-and-title] Mr. [first-name-male] [last-name]
+	Mr. [first-name-male] [middle-initial] [last-name]
+	Mrs. [first-name-female] [last-name]
+	Miss [first-name-female] [last-name]
+	Dr. [first-name] [last-name]
+
+[person] [first-name] [last-name]
+
+[first-name] [first-name-male]
+	[first-name-female]
+
+[random-name] [actual+random-name]
+
+[actual+random-name] [syllable] [syllable]
+	[syllable] [syllable] [last-syllable]
+	[syllable] [vowel] [consonant-group] [vowel]
+	[consonant-group] [vowel] [syllable]
+	[vowel] [syllable] [syllable]
+	[syllable] [vowel-group] [consonant]

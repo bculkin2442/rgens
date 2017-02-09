@@ -1,0 +1,4 @@
+[headline] [headline-prefix] [headline-news]
+	[headline-news] [headline-suffix]
+
+pragma initial-rule [headline]

@@ -1,0 +1,159 @@
+[media-company] [television-station]
+	[radio-station]
+	[newspaper]
+
+pragma initial-rule [media-company]
+pragma export-rule [television-station]
+pragma export-rule [radio-station]
+pragma export-rule [newspaper]
+
+[television-station] [chan+name] channel [med-chan-num]
+	[chan+name] channel [low-chan-num]
+
+pragma range-rule [med-chan-num] 2 45
+pragma range-rule [low-chan-num] 2 12
+
+[chan+name] k [chan-name2]
+	w [chan-name2]
+
+[chan-name2] [letter] [letter] [letter] -tv
+
+[radio-station] [radio+name] [radio+chan]
+
+[radio+name] k [radio+name2]
+	w [radio+name2]
+
+[radio+name2] [letter] [letter] [letter] [chan-type]
+
+[chan-type] -fm [[chantype=fm]]
+	-am [[chantype=am]]
+
+[radio+chan] 9 [radio-9chan]
+	[$chantype-1chan]
+
+[radio-9chan] [digit] . [digit]
+
+[fm-1chan] 1 [digit] [digit] . [digit]
+
+[am-1chan] 10 [digit] [digit]
+
+[newspaper] the [newspaper-pair1] - [newspaper-pair2]
+	the [newspaper-pair1] - [newspaper-pair2] - [newspaper-pair2]
+	the daily [newspaper-pair1] [newspaper-pair2]
+	the [newspaper-pair1] [newspaper-pair2]
+	[city] [newspaper-pair1] - [newspaper-pair2]
+	[city] [newspaper-pair1] [newspaper-pair2]
+	[city] [newspaper-pair2]
+	[city] [newspaper-pair1]
+	[real-city] [newspaper-pair1] - [newspaper-pair2]
+	[town-name] [newspaper-pair2]
+	the [cardinal] [us-stateadj]
+	[us-stateadj] [newspaper-pair1] - [newspaper-pair2]
+	[cardinal] [us-state] [newspaper-pair1] [newspaper-pair2]
+
+[newspaper-pair1] southern
+	northern
+	eastern
+	western
+	democratic
+	republic
+	liberty
+	freedom
+	sun
+	patriot
+	river
+	mountain
+	plains
+	american
+	news
+	post
+	morning
+	evening
+	star
+	daily
+	new
+	old
+	responsible
+	ethical
+	pulp
+	events
+	banner
+	standard
+	world
+	register
+
+[newspaper-pair2] daily
+	weekly
+	evening
+	republic
+	american
+	democrat
+	republican
+	leader
+	ledger
+	journal
+	bulletin
+	advertiser
+	dispatch
+	intelligencier
+	inquirer
+	post
+	times
+	review
+	star
+	justice
+	record
+	press
+	tribune
+	gazette
+	chronicle
+	herald
+	bugle
+	arrow
+	statesman
+	monitor
+	globe
+	planet
+	register
+
+pragma export-rule [newspaper-pair2]
+
+[cardinal] north
+	west
+	east
+	south
+	northeast
+	northwest
+	southeast
+	southwest
+
+pragma export-rule [cardinal]
+
+[real-newspaper] new york times
+	la times
+	chicago tribune
+	usa today
+	st. louis post-dispatch
+	washington post
+	houston chronicle
+	kansas city star
+	denver post
+	seattle times
+
+[tech-publication] wired news
+	infoworld
+	computerworld
+	pc week
+	windows magazine
+	salon.com
+	abcnews.com
+	the register
+
+[biz-publication] forbes
+	industry standard
+	business week
+	wall street journal
+	f@stcompany
+	motley fool
+	the economist
+	fortune

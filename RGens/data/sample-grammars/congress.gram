@@ -1,0 +1,35 @@
+[congress-critter] [critter-type] [critter-name]
+
+pragma initial-rule [congress-critter]
+
+[critter-type] senator
+	representative
+
+[critter-name] [last-name]
+	[critter-name2]
+
+[critter-name2] fattecat
+	becon
+	p. ork
+	g. raft
+	phil e. buster
+	phil t. rich
+	iva gottalot
+	erna bigcheque
+	billy o'naire
+	c. a. pitalist
+	noah morals
+	lucy morrals
+	buford fatbacke
+	c. r. pette-bagger
+	k. ickbach
+	lobb e. ist
+	p. orkbarrel
+	phil e. buster
+	p. urgery
+	l. ibel
+	s. lander
+	i. b. fersaile
+	pettie k. ash
+	c. l. inton
+	dee septive

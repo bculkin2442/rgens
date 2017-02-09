@@ -1,0 +1,186 @@
+[trademark] [actual+trademark]
+
+pragma initial-rule [trademark]
+
+[actual+trademark] [syllable] [trademark-suffix]
+	[random-name] [trademark-suffix]
+	[buzzword-stem] [buzzword-suffix]
+	[trademark-fragment] [trademark-suffix]
+
+[trademark-suffix] ent
+	izon
+	ium
+	ilium
+	ilon
+	ate
+	atium
+	ian
+
+[trademark-fragment] accel
+	ver
+	agil
+	pent
+	itan
+	celer
+	quali
+	free
+	syn
+	dyna [consonant]
+	cor
+	excel
+	valu [consonant]
+	top
+	fav
+	vant
+	cert
+	eq
+	cere
+	mor
+
+[trademark+drug] [trademark-drug-fragment] [trademark-drug-suffix]
+	[trademark-drug-fragment] [trademark-drug-suffix]
+	[trademark-drug-fragment] [trademark-drug-suffix]
+	[trademark-fragment] [trademark-drug-suffix]
+	[trademark-fragment] [trademark-drug-fragment] [trademark-drug-suffix]
+	[syllable] [trademark-drug-fragment] [trademark-drug-suffix]
+	[trademark-drug-fragment] [syllable] [trademark-drug-suffix]
+
+pragma export-rule [trademark+drug]
+
+[trademark-drug-fragment] can
+	cid
+	asper
+	fem
+	let
+	tam
+	tri [consonant]
+	zia
+	epi
+	retro
+	vu
+	zido
+	aba
+	nova
+	immu
+	kal
+	uni
+	lev [vowel]
+	thy
+	rox
+	gluco
+	gly
+	bur
+	met
+	form
+	dia
+	van
+	mala
+	sara
+	fem
+	pro
+	flu
+	ox
+	oxy
+	apli
+	opti
+	mylo
+	exe
+	tar
+	riva
+	sti [consonant]
+	zy [consonant]
+	mo
+	acti
+	estr
+	thin
+	via [vowel]
+	zone
+	huma
+	andro
+	prev
+	caf
+	proto
+	tri
+	duo
+	quadr [vowel]
+	lept
+	tequ
+	quino
+	[consonant-group] ox
+	ino
+	taxo
+	pen
+	cyclo
+	ciclo
+	zol
+	sert
+	meta
+	[consonant] epp
+	rem [vowel]
+	com
+	[vowel] sel
+	[consonant] apa
+	sirp
+	repro
+	aic
+	son
+	temo
+	neo
+	ant [vowel]
+	ky [consonant]
+	rel
+	rito
+	avan
+	gen
+
+[trademark-drug-suffix] [letter] as
+	[vowel] ra
+	[consonant] ole
+	[vowel] flue
+	[vowel] v [vowel] r
+	vir
+	g [vowel] n
+	dine
+	[consonant] ine
+	[consonant-group] one
+	nex
+	rex
+	[consonant] ex
+	etra
+	oid
+	[consonant-group] oid
+	vance
+	ide
+	iqa
+	iqua
+	zac
+	[consonant] ac
+	graf
+	var
+	[consonant] arg
+	lon
+	bic
+	[consonant] ella
+	[vowel] diol
+	ate
+	dyne
+	gran
+	[vowel] mide
+	log
+	[consonant] ar
+	cit
+	nix
+	t [vowel] l
+	max
+	[consonant] ere
+	oft
+	[vowel] line
+	[consonant] et [vowel] m
+	[consonant] ade
+	[consonant] imus
+	phex
+	ata
+	tr [vowel] l
+	[vowel] nza
+	[vowel] [consonant] [vowel] x
+

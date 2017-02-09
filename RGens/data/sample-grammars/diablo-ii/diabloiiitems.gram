@@ -135,7 +135,7 @@ pragma prefix-with [swords] [sword-kind]
 	battle
 	great
 
-[bows] arrow ( [amount] count)
+[bows] arrow ( [diablo-amount] count)
 	bow
 	[bow-size] bow
 	[bow-type] bow
@@ -149,7 +149,7 @@ pragma prefix-with [swords] [sword-kind]
 	battle
 	war
 
-[crossbows] bolt ( [amount] count)
+[crossbows] bolt ( [diablo-amount] count)
 	crossbow
 	[crossbow-type] crossbow
 

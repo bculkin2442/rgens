@@ -1,6 +1,7 @@
 [genre-fict] in a [setting] a young [person] stumbles across a(n) [place] [genre-fict2]
 
-pragma initial-rule [genre-fict]
+# Uncomment me when we're done testing
+# pragma initial-rule [genre-fict]
 
 [genre-fict2] which spurs him into conflict with [antagonist] [genre-fict3]
 

@@ -1,0 +1,17 @@
+[public-school-fullname] [public-school] [school-type]
+
+pragma initial-rule [public-school-fullname]
+pragma export-rule [public-school]
+
+[school-type] high school
+	middle school
+	grade school
+	elementary school
+
+[public-school] [us-president]
+	[us-president] memorial
+	[person]
+	[last-name]
+	[city] central
+	[city]
+	[cardinal] [city]

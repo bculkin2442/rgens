@@ -1,0 +1,9 @@
+[acronym] [actual+acronym]
+
+pragma initial-rule [acronym]
+
+[actual+acronym] [consonant] [vowel] [consonant]
+	[consonant-group] [consonant] [consonant]
+	[consonant] [consonant] [consonant] [consonant]
+	[consonant] [vowel] [consonant] [vowel]
+	[letter] [vowel-group] [letter] [consonant]

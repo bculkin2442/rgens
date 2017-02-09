@@ -1,0 +1,34 @@
+[computer-language] c
+	c
+	c++
+	c++
+	objective c
+	perl
+	python
+	java
+	javascript
+	basic
+	visual basic
+	awk/sed
+	bash
+	x86 assembly
+	pascal
+	cobol
+	forth
+	scheme
+	lisp
+	tcl/tk
+	ada
+	dos batch files
+
+pragma export-rule [computer-language]
+pragma export-rule [computer-skill]
+
+[computer-skill] html
+	xml
+	cgi scripting
+	photoshop
+	autocad
+	sql
+	asp
+	php

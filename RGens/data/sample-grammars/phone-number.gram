@@ -1,0 +1,22 @@
+[us-phone-number] [area+code] [full+num]
+	[intl+num]
+	[area+code] [full+num] ext. [ext+num]
+	[area+code] [letter+num]
+	[1800+num]
+	[1800+letter+num]
+
+pragma export-rule [us-phone-number]
+
+[area+code] ( [digit] [digit] [digit] )
+
+[full+num] [digit] [digit] [digit] - [digit] [digit] [digit] [digit]
+
+[intl+num] 1- [full+num]
+
+[ext+num] [digit-nozero] [digit] [digit]
+
+[letter+num] [digit] [digit] [digit] - [letter] [letter] [letter] [letter]
+
+[1800+num] 1-800- [digit] [digit] [digit] - [digit] [digit] [digit] [digit]
+
+[1800+letter+num] 1-800- [letter] [letter] [letter] [letter] [letter] [letter] [letter]

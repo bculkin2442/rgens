@@ -1,0 +1,186 @@
+[organization] [org-political]
+
+pragma initial-rule [organization]
+pragma export-rule [org-political]
+
+[org-political] [org-prefix] [org-body] [org-goal]
+
+pragma uniform
+
+[org-body] 7 of [org-members] [org-position]
+	1 for
+
+pragma uniform
+
+[org-position] for
+	for
+	supporting
+	in support of
+	committed to
+	against
+	opposed to
+
+[org-goal] "nuke first, ask questions later" policy
+	banning negative campaign ads
+	big brother policies
+	book burnings
+	campaign finance reform
+	cutting taxes for the [wealth] 
+	daylight saving time
+	draconian software license agreements
+	eliminating the national debt
+	eliminating violence on tv
+	gay marriages
+	genetically modified foods
+	god in the classroom
+	government handouts
+	gun control
+	hitting unfriendly nations with a nuclear bomb
+	increased military spending
+	increasing the minimum wage to [min+wage] 
+	internet censorship
+	internet pornography
+	legal reform
+	local control of schools
+	marijuana legalization
+	nuclear winter
+	political correctness
+	prescription drug subsidies
+	privacy rights
+	pro-choice policy
+	pro-life policy
+	protecting the [protect] 
+	raising taxes for [tax-class] 
+	random drug testing for elected officials
+	right on red traffic laws
+	splitting microsoft into [ms-pieces] pieces
+	subsidized day care for working parents
+	teaching [subject] in the classroom
+	the death penalty
+	the designated hitter rule
+	the flat tax
+	universal health care
+	using [bad-thing] in public
+	wealth redistribution
+	wearing baseball caps backwards
+	[org-goal-abolish] miranda rights
+	[org-goal-abolish] speed limits
+	[org-goal-abolish] the [protect]
+	[org-goal-abolish] women's suffrage
+
+[wealth] poor
+	working poor
+	middle class
+	lower class
+	upper class
+	wealth
+	filthy rich
+
+[min+wage] [min-wage-init] . [digit] [digit]
+
+pragma range-rule [min-wage-init] 6 8
+
+[protect] bill of rights
+	first amendment
+	second amendment
+
+[tax-class] the rich
+	the filthy rich
+	the wealthy
+	billionaire
+	lottery winners
+
+pragma range-rule [ms-pieces] 2 50
+
+[subject] evolution
+	evilution
+	creationism
+
+[bad-thing] swear words
+	cuss words
+	profanities
+	expletives
+
+[org-goal-abolish] abolishing
+	repealing
+	eliminating
+
+[org-prefix] council
+	[intl-name] association
+	organization
+	united organization
+	union
+	federation
+	league
+	association
+	campaign
+	society
+	alliance
+	fellowship
+
+[intl-name] american
+	national
+	international
+
+[org-members] [org-members-prefix] [org-members-body]
+
+# This should just create a blank token
+[org-members-prefix]  
+	radical
+	concerned
+	outraged
+	activist
+	caring
+	involved
+	civic-minded
+	conservative
+	liberal
+	reformist
+	socialist
+	communist
+	morally bankrupt
+
+[org-members-body] angst-ridden teenagers
+	baby boomers
+	bambi people
+	bible thumpers
+	church-goers
+	clergymen
+	democrats
+	[eco+members]
+	grandparents
+	hollywood movie stars
+	lawyers
+	lesbians
+	liberals
+	libertarians
+	lobbyists
+	minorities
+	parents
+	pointy haired bosses
+	republicans
+	soccer moms
+	socialists
+	state legislators
+	[tree+members]
+	[american+members]
+
+[eco+members] eco- [eco-suffix]
+
+[eco-suffix] watchdogs
+	freaks
+	terrorists
+	activists
+
+[tree+members] tree- [tree-suffix]
+
+[tree-suffix] huggers
+	worshippers
+
+[american+members] [american-prefix] -americans
+
+[american-prefix] african
+	asian
+	elbonian
+	native
+	mexican

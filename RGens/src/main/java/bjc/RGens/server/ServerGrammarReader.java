@@ -139,80 +139,40 @@ public class ServerGrammarReader {
 		System.out.println();
 	}
 
-	private static void doCase(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		int ruleProbability = readOptionalProbability(tokenizer, state);
-
-		state.addCase(ruleProbability, tokenizer.toList());
-	}
-
-	private static void initialRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String initialRuleName = tokenizer.nextToken();
-
-		state.setInitialRule(initialRuleName);
-	}
-
 	private static IList<String> handleSpecialRule(IMap<String, IList<String>> vars, String strang,
 			WeightedGrammar<String> gramm) {
 		IList<String> retList = new FunctionalList<>();
 	
 		if(strang.matches("\\[\\[\\S+\\]\\]")) {
-			if(strang.matches("\\[\\S+:=\\S+\\]")) {
-				String[] varParts = strang.split(":=");
-	
-				String varName = varParts[0].substring(1);
-				String ruleName = varParts[1].substring(0, varParts[1].length());
-	
-				IList<String> varValue = gramm.generateGenericValues(
-						ruleName, (s) -> s, " ");
-	
-				vars.put(varName, varValue);
+			if(strang.matches("\\[\\[\\S+:=\\S+\\]\\]")) {
+				doDefineExpandedVariable(vars, strang, gramm);
 			} else if(strang.matches("\\[\\[\\S+=\\S+\\]\\]")) {
-				String[] varParts = strang.split("=");
-	
-				String varName = varParts[0].substring(1);
-				String varValue = varParts[1].substring(0, varParts[1].length());
-	
-				vars.put(varName, new FunctionalList<>(varValue));
+				doDefineVariable(vars, strang);
 			} else if(strang.matches("\\[\\[\\S+\\]\\]")) {
-				String ruleName = strang.substring(1, strang.length() - 1);
+				if(GrammarServerEngine.debugMode) {
+					if(strang.contains("+")) 
+						System.out.println("Double-triggering no-space rule " + strang);
+					else 
+						System.out.println("Triggered alternate no-space rule " + strang);
+				}
+				
+				doNoSpaceRule(strang, gramm, retList);
+			} else if (strang.contains("+")) {
+				if(GrammarServerEngine.debugMode) 
+						System.out.println("Triggered alternate no-space rule " + strang);
 
-				IList<String> ruleValue = gramm.generateGenericValues(
-						ruleName, (s) -> s, "");
-
-				retList.add(ListUtils.collapseTokens(ruleValue));
+				doNoSpaceRule(strang, gramm, retList);
 			} else {
 				// @FIXME notify the user they did something wrong
 				retList.add(strang);
 			}
 		} else {
-			if(strang.matches("\\[\\$\\S+\\]")) {
+			if(strang.matches("\\[\\$\\S+\\-\\S+\\]")) {
+				retList = doExpandVariableReference(vars, strang, gramm);
+			} else if(strang.matches("\\[\\$\\S+\\]")) {
 				String varName = strang.substring(2, strang.length());
 	
 				retList = vars.get(varName);
-			} else if(strang.matches("\\[\\$\\S+\\-\\S+\\]")) {
-				String[] varParts = strang.substring(1, strang.length()).split("-");
-	
-				StringBuilder actualName = new StringBuilder("[");
-	
-				for(String varPart : varParts) {
-					if(varPart.startsWith("$")) {
-						IList<String> varName = vars.get(varPart.substring(1));
-	
-						if(varName.getSize() != 1) {
-							// @FIXME notify the user they did something wrong
-						}
-	
-						actualName.append(varName.first() + "-");
-					} else {
-						actualName.append(varPart + "-");
-					}
-				}
-	
-				// Trim trailing -
-				actualName.deleteCharAt(actualName.length() - 1);
-				actualName.append("]");
-	
-				retList = gramm.generateGenericValues(actualName.toString(), (s) -> s, " ");
 			} else if (exportedRules.containsKey(strang) && 
 					exportedRules.get(strang) != gramm &&
 					!gramm.hasRule(strang)) {
@@ -222,6 +182,8 @@ public class ServerGrammarReader {
 				WeightedGrammar<String> exportGram = exportedRules.get(strang);
 	
 				retList = exportGram.generateGenericValues(strang, (s) -> s, " ");
+			} else if (strang.contains("+")) {
+				doNoSpaceRule(strang, gramm, retList);
 			} else {
 				// @FIXME notify the user they did something wrong
 				retList.add(strang);
@@ -263,10 +225,10 @@ public class ServerGrammarReader {
 		return Integer.parseInt(tokenizer.nextToken());
 	}
 
-	private static void removeRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
-		String ruleName = tokenizer.nextToken();
-
-		state.deleteRule(ruleName);
+	private static void initialRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
+		String initialRuleName = tokenizer.nextToken();
+	
+		state.setInitialRule(initialRuleName);
 	}
 
 	private static void prefixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
@@ -278,6 +240,12 @@ public class ServerGrammarReader {
 		state.prefixRule(ruleName, prefixToken, additionalProbability);
 	}
 
+	private static void removeRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
+		String ruleName = tokenizer.nextToken();
+	
+		state.deleteRule(ruleName);
+	}
+
 	private static void suffixRule(FunctionalStringTokenizer tokenizer, ReaderState state) {
 		String ruleName = tokenizer.nextToken();
 		String suffixToken = tokenizer.nextToken();
@@ -285,5 +253,74 @@ public class ServerGrammarReader {
 		int additionalProbability = readOptionalProbability(tokenizer, state);
 
 		state.suffixRule(ruleName, suffixToken, additionalProbability);
+	}
+
+	private static void doCase(FunctionalStringTokenizer tokenizer, ReaderState state) {
+		int ruleProbability = readOptionalProbability(tokenizer, state);
+	
+		state.addCase(ruleProbability, tokenizer.toList());
+	}
+
+	private static void doDefineExpandedVariable(IMap<String, IList<String>> vars, String strang, WeightedGrammar<String> gramm) {
+		String[] varParts = strang.split(":=");
+	
+		String varName = varParts[0].substring(2);
+		String ruleName = varParts[1].substring(0, varParts[1].length() - 2);
+	
+		IList<String> varValue = gramm.generateGenericValues(
+				ruleName, (s) -> s, " ");
+	
+		vars.put(varName, varValue);
+	}
+
+	private static void doDefineVariable(IMap<String, IList<String>> vars, String strang) {
+		String[] varParts = strang.split("=");
+	
+		String varName = varParts[0].substring(2);
+		String varValue = varParts[1].substring(0, varParts[1].length() - 2);
+	
+		vars.put(varName, new FunctionalList<>(varValue));
+	}
+
+	private static IList<String> doExpandVariableReference(IMap<String, IList<String>> vars, String strang,
+			WeightedGrammar<String> gramm) {
+		IList<String> retList;
+		String[] varParts = strang.substring(1, strang.length()).split("-");
+	
+		StringBuilder actualName = new StringBuilder("[");
+	
+		for(String varPart : varParts) {
+			if(varPart.startsWith("$")) {
+				IList<String> varName = vars.get(varPart.substring(1));
+	
+				if(varName.getSize() != 1) {
+					// @FIXME notify the user they did something wrong
+				}
+	
+				actualName.append(varName.first() + "-");
+			} else {
+				actualName.append(varPart + "-");
+			}
+		}
+	
+		// Trim trailing -
+		actualName.deleteCharAt(actualName.length() - 1);
+	
+		retList = gramm.generateGenericValues(actualName.toString(), (s) -> s, " ");
+		return retList;
+	}
+
+	private static void doNoSpaceRule(String strang, WeightedGrammar<String> gramm, IList<String> retList) {
+		if(!GrammarServerEngine.debugMode) {
+			IList<String> ruleValue = gramm.generateGenericValues(
+					strang, (s) -> s.trim(), "");
+	
+			retList.add(ListUtils.collapseTokens(ruleValue));
+		} else {
+			// if(!gramm.hasRule(strang))
+			// 	System.out.println("Warning: Possible unexpanded rule " + strang);
+
+			retList.add(strang);
+		}
 	}
 }

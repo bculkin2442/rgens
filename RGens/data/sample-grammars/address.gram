@@ -1,0 +1,102 @@
+[us-postal-address] [full-name] , [street-address] , [city] , [us-postalstate] [zipcode]
+	[full-name-and-title] , [street-address] , [city] , [us-postalstate] [zipcode]
+	[person] , [street-address] , [city] , [us-postalstate] [zipcode]
+	[full-name] , [company] , [street-address] , [city] , [us-postalstate] [zipcode]
+	[company] , [street-address] , [city] , [us-postalstate] , [zipcode]
+	[company] , p.o box [medium-number] , [city] , [us-postalstate] [zipcode]
+
+[street-address] [medium-number] [street]
+	p.o. box [medium-number]
+	[medium-number] [street] , apartment [small-number] [letter]
+	route [digit] box [medium-number]
+	[small-number] street
+
+[street] [street-prefix] [tree] [street-suffix]
+	[tree] [street-suffix]
+	[color] [tree] [street-suffix]
+	[street-prefix] [last-name] [street-suffix]
+	[street-prefix] [first-name] [street-suffix]
+	[last-name] [street-suffix]
+	route [small-number]
+	[street-prefix] route [small-number]
+	county road [small-number]
+	[street-prefix] [ordinal] street]
+	[ordinal] ave.
+	[ordinal-number] st.
+	[ordinal-number] ave.
+	[letter] st.
+	[city] [street-suffix]
+	[us-state] [street-suffix]
+	[street-prefix] [us-state] [street-suffix]
+	[canada-province] [street-suffix]
+	[nation] [street-suffix]
+	[full-name] [street-suffix]
+	[street-prefix] [street-generic-standalone]
+	[street-prefix] [street-generic] [street-suffix]
+	[street-generic] [street-suffix]
+	[us-president] [street-suffix]
+	[us-president-common] [street-suffix]
+
+[street-prefix] n.
+	s.
+	e.
+	w.
+
+[street-suffix] street
+	st.
+	road
+	rd.
+	way
+	boulevard
+	blvd.
+	avenue
+	ave.
+	place
+	plaza
+	court
+	drive
+	highway
+	hwy.
+	parkway
+	pkwy.
+	pike
+	bypass
+
+pragma initial-rule [us-postal-address]
+
+[street-generic] main
+	main
+	high
+	independence
+	division
+	center
+	m. l. king
+	washington
+	lincoln
+	college
+	university
+	stadium
+	riverside
+	water
+	park
+	shore
+	airport
+	grand
+	sunset
+	telegraph
+	railroad
+	el paseo
+	market
+	church
+	mill
+	highland
+	woodland
+	hillcrest
+	lakeview
+	central
+	[geographic-thing]
+
+[street-generic-standalone] broadway
+	avenue of the americas
+	kingshighway
+	el camino real

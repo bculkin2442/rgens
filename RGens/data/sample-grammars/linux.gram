@@ -1,0 +1,942 @@
+[linux-domain] [actual+linux-domain]
+
+pragma initial-rule [linux-domain]
+
+[actual+linux-domain] [linux-domainname] . [big-tld]
+
+[linux-domainname] [linux-domain1] [linux-domain2]
+	[linux-domain1] [linux-domain2]
+	[linux-domain1] [linux-domain2]
+	[linux-domain1] [linux-domain1]
+	[linux-domain1] [linux-domain1]
+	[linux-domain1] [linux-domain1] [linux-domain2]
+	[linux-domain1] [linux-domain1] - [linux-domain2]
+	[linux-domain1] - [linux-domain2]
+	[linux-domain0] [linux-domain1]
+	[linux-domain0] [linux-domain1] [linux-domain2]
+	[linux-domain0] [linux-domain2]
+	[linux-domain1] . [domain-name]
+
+[linux-domain0] cmdr
+	captain
+	super
+	major
+	taco
+	cool
+	phat
+	burrito
+	coffee
+	mega
+	meta
+	slash
+	dot
+	colon
+	grok
+	about
+	1st
+	just
+	everything
+	project
+	os
+	techno
+	source
+	the
+	open
+	free
+	new
+	colonel
+	go
+	wow
+	hot
+	uber
+	[first-name]
+
+
+[linux-domain1] linux
+	geek
+	nerd
+	hack
+	unix
+	bsd
+	freebsd
+	solaris
+	apache
+	gnu
+	opensource
+	penguin
+	tux
+	daemon
+	linus
+	hacker
+	root
+	kernel
+	perl
+	python
+	programming
+	bitbucket
+	null
+
+[linux-domain2] news
+	week
+	today
+	tommorrow
+	day
+	newbie
+	ware
+	cheesymerchandise
+	headlines
+	stuff
+	portal
+	power
+	shell
+	hack
+	fest
+	web
+	site
+	forum
+	community
+	dotcom
+	dotorg
+	fun
+	help
+	advice
+	world
+	network
+	net
+	humor
+	rules
+	warez
+	rulez
+	kiddie
+	geek
+	nerd
+	hacker
+	moneymakingportal
+	here
+	planet
+	city
+	place
+	chat
+	grok
+	one
+	central
+	plaza
+	2000
+	search
+	find
+	finder
+	links
+	directory
+	apps
+	business
+	biz
+	archives
+	island
+	software
+	bandwagon
+	life
+	howto
+	mag
+	month
+	minute
+	chix
+	meat
+	women
+	docs
+	games
+	focus
+	[newspaper-pair2]
+	start
+	now
+	future
+	universe
+	galaxy
+	key
+	party
+	jobs
+	tech
+
+[linux-distro] red hat linux
+	debian gnu/linux
+	suse linux
+	turbolinux
+	stampede linux
+	caldera openlinux
+	slackware linux
+	linux mandrake
+	corel linux
+
+[linux-company] red hat
+	suse
+	caldera
+	corel
+	linuxcare
+	va linux
+	internet.com
+	cobalt networks
+	applix
+
+[linux-personality] linux torvalds
+	eric s. raymond
+	richard m. stallman
+	alan cox
+	bernharn rosenkraenzer
+	rik van riel
+	larry wall
+	bruce perens
+	miguel de icaza
+
+[microsoft-personality] bill gates
+	steve ballmer
+	ed muth
+	nathan myrrhvold
+
+[pundit-personality] jesse berst
+	fred moody
+	bob metcalfe
+
+[tech-columnist] [pundit-personality]
+	robert x. cringely
+	jon katz
+	nicholas petreley
+	john dvorak
+
+[linux-publication] linuxtoday
+	lwn
+	linuxworld
+	linux.com
+
+[linux-expo] [expo-body] [expo-suffix]
+
+pragma export-rule [linux-expo]
+
+[expo-body] [real-city] linux 
+	[us-state] linux 
+	linux 
+	linuxworld 
+	linuxexpo
+	linuxcon
+
+[expo-suffix] showcase
+	expo
+	conference
+	convention
+	show
+	money-making expo
+	phb get-together
+
+[tech-lawsuit-target] decss
+	napster
+	mp3.com
+	2600
+
+[techgeek-target] dmca
+	microsoft
+	echelon
+	carnivore
+	"know your customer"
+	geek profiling
+	software patents
+
+[techgeek-enemy] microsoft
+	riaa
+	mpaa
+	dvd cca
+	network solutions
+
+[geek-people] hackers
+	geeks
+	nerds
+	kids
+	teenagers
+	[teen-type] teens
+	anonymous cowards
+	lurkers
+	flamers
+
+[teen-type] angst-ridden
+	troubled
+
+[geek-enemy] bible-thumpers
+	congresscritters
+	[parent-type] parents
+	recording industry executives
+	media tycoons
+	bureacrats
+	soccer moms
+	prohibitionists
+	lawyers
+	attorneys
+	lobbyists
+	pointy haired bosses
+	school administrators
+	thought police
+
+[parent-type] paranoid
+	clueless
+	hysterical
+
+[geek-badguys] script kiddies
+	hackers
+	crackers
+	spammers
+
+[geek-political-problem] censorship
+	software patents
+	carnivore
+	echelon
+	geek profiling
+	"know your customer"
+	domain snatching
+
+[tech-problem] script kiddies
+	spammers
+	crackers
+	backhoes
+	network outtages
+	system crashes
+
+[linux-error] lp1 on fire
+	kernel panic
+	signal 11
+	security hole found between chair and monitor
+	user needs a cluestick
+	this ain't windows
+	bus error
+	black hole imminent
+	segmentation fault
+
+[tech-topic] bogus patents
+	artificial intelligence
+	embedded systems
+	dotcom meltdown
+	hackers/crackers
+	spam
+	windows [windows-version] security exploits
+
+[geek-entertainment] star wars
+	star wars
+	the matrix
+	star trek: [trek-type]
+	star tek
+	the simpsons
+	x-files
+	babylon 5
+	mst3k
+
+[trek-type] tos
+	tng
+	ds9
+	voyager
+
+[geek-scifi-book] the [geek-scifi-people] of the [geek-scifi-alien] [geek-scifi-place]
+	the [geek-scifi-people] of [geek-scifi-alien]
+	[geek-scifi-event] of the [geek-scifi-alien] [geek-scifi-place]
+	[geek-scifi-event] of the [geek-scifi-place] of the [geek-scifi-people]
+	the [geek-scifi-thing] of the [geek-scifi-alien] [geek-scifi-place]
+	[geek-scifi-people] of the [geek-scifi-thing]
+	[geek-scifi-place] [geek-scifi-thing]
+	the [geek-scifi-enemy] [awaits] 
+	[geek-scifi-thing] of the [geek-scifi-enemy]
+	[geek-scifi-event] of the [geek-scifi-enemy]
+	[geek-scifi-thing] [balance] 
+	[geek-scifi-event] of the [geek-scifi-thing] of [geek-scifi-alien]
+	[geek-scifi-adj] [geek-scifi-place]
+	[geek-scifi-adj] [geek-scifi-place] of [geek-scifi-alien]
+	[geek-scifi-adj] [geek-scifi-alien] [geek-scifi-thing]
+	[last-name] [effect] 
+
+pragma export-rule [geek-scifi-book]
+
+[awaits] awaits
+	comes
+	awakens
+	returns
+
+[balance] in the balance
+	on hold
+	in limbo
+	vanishes
+
+[effect] effect
+	equation
+
+[geek-scifi-place] planet
+	star
+	sun
+	universe
+	galaxy
+	solar system
+	world
+	realm
+	asteroid
+	comet
+	outpost
+	matrix
+	constellation
+	continuum
+	cluster
+	quasar
+	nebula
+
+[geek-scifi-thing] [techno+clysm]
+	federation
+	future
+	community
+	civilization
+	spaceship
+	union
+	alliance
+	foundation
+	conspiracy
+	amulet
+	black hole
+	anomaly
+	underground
+	empire
+
+[geek-scifi-enemy] menace
+	monster
+	machine
+	beast
+	devil
+
+[geek-scifi-people] explorer
+	pioneer
+	guardian
+	time traveler
+	astrophysicist
+	stonecutter
+	mystic
+	fortuneteller
+	philosopher
+	king
+	god
+	goddess
+	[dictator]
+	aristocrat
+	mathematician
+	scientist
+	wizard
+
+[geek-scifi-event] revenge
+	return
+	rise
+	fall
+	destruction
+	implosion
+	annihilation
+	victory
+	defeat
+	end
+
+[dictator] dictator
+	tyrant
+	despot
+	monarch
+
+[techno+clysm] [techno] clysm
+
+[techno] techno
+	cyber
+	lawyer
+	chrono
+
+[geek-scifi-adj] expanding
+	collapsing
+	imploding
+	derelict
+	abandoned
+	lost
+	triumphant
+	victorius
+	doomed
+	forbidden
+	unknown
+	null
+	infinite
+
+[geek-scifi-element] time travel
+	artificial intelligence
+	a sentient [animal]
+	galactic civilizations
+	faster-than-light travel
+	parallel universes
+	anti-gravity cars
+	mind-reading aliens
+	scientific techno-babble
+	teleportation
+
+[geek-scifi-alien] [random-name]
+	[geek-scifi-alien2]
+
+[geek-scifi-alien2] [planet]
+	orion
+	andromeda
+	gaia
+	alpha centauri
+	betelguese
+	alpha
+	beta
+	gamma
+	epsilon
+
+[geek-scifi-author] robert heinlein
+	neal stephenson
+	arthur c. clarke
+	isaac asimov
+	orson scott card
+
+[bogus-patent] server side includes
+	weblog-style sites
+	random poetry generators
+	[beige] computer cases
+	rectangular computer cases
+	dancing software assistants
+	command-line interfaces
+	floppy diskettes
+	hypertext documents
+	interpreted scripting languages
+	[num+click] shopping
+	rot13 encoding
+	xor encoding
+	the quadratic formula
+	cgi scripting
+	spell checking
+	pull-down menus
+	[dir] scroll bars
+
+[dir] horizontal
+	vertical
+
+[beige] beige
+	rectangular
+	translucent
+
+[num+click] [click-num] -click
+
+[click-num] double
+	zero
+	triple
+
+[pundit-flame] linux is communistic
+	linux will fail
+	linux is the worst operating system ever
+	could you get fired for choosing linux
+	unix is 1960s technology
+	the gpl is even more restrictive than a microsoft eula
+	the gnu project is holding back the open source movement
+	open source projects are uncreative and unoriginal
+	linux doesn't contain any innovations
+	microsoft is the most innovative company in the history of mankind
+	windows [windows-version] is much better than linux
+	iunix sucks
+	windows is the only gui with a consistent interface
+	why do end-users need source code anyways
+	linux users all behave like immature [linux-age] year olds
+	linux = linsux
+	linux is only free if your time is worthless
+	security through obscurity is the only way to go
+	attack of the snot-nosed linux zealots
+	linux advocacy: a dangerous brainwashing religious cult
+	microsoft will win
+
+pragma range-rule [linux-age] 7 16
+
+[peripheral] digital camera
+	[peripheral-interface] infrared video camera
+	[peripheral-interface] scanner
+	software modem
+	cable modem
+	video card
+	3d accelerator card
+	[peripheral-interface] time travel card
+	[peripheral-interface] coffee machine
+	[monitor-size] inch monitor
+	uninterruptible power supply
+	[peripheral-interface] cd-recorder
+	beowulf-cluster-in-a-box
+
+[peripheral-interface] scsi
+	ide
+	parallel port
+	[usb]
+	firewire
+	serial port
+	thunderbolt
+	
+[usb] usb
+	micro-usb
+	mini-usb
+	usb (type C)
+
+pragma export-rule [peripheral]
+
+[tech-hardware-company] ibm
+	dell
+	compaq
+	maxtor
+	seagate
+	western digital
+	transmeta
+	hewlett packard
+
+[opensource-project] linux
+	freebsd
+	netbsd
+	openbsd
+	apache
+	sendmail
+	gnome
+	kde
+	x11
+	mozilla
+
+[unix-tool] awk
+	sed
+	bison
+	gcc
+	vi
+	emacs
+
+[linux-event] linuxworld expo
+	atlanta linux showcase
+	linuxfest
+	linuxexpo
+
+[linux-usergroup] [linux+usergroup]
+
+[linux+usergroup] [letter] [letter] lug
+	[us-postal-state] lug
+	[letter] lug
+
+[freshmeat-url] [freshmeat+url]
+
+pragma export-rule [freshmeat-url]
+
+[freshmeat+url] http://freshmeat.net/news/ [digit] / [digit] / [digit] [digit] [digit] [digit] / [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit] /.html
+
+[freshmeat-desc] [app-type] [app-suffix]
+	[app-type] [app-suffix] for [freshmeat-for]
+	[app-type] [app-suffix] written in [computer-language]
+	[buzzword-adjective] [buzzword-noun] written in [computer-language]
+	[buzzword-adjective] [buzzword-noun] for the [career-tech]
+	[buzzword-adjective] [buzzword-noun] [buzzword-job]
+	[freshmeat-prefix] [app-type] [app-suffix]
+	[computer-language] [app-suffix]
+	[freshmeat-prefix] [buzzword-noun]
+	clone of [app-name-simple]
+	[freshmeat-prefix] implementation of microsoft [ms-product]
+
+pragma export-rule [freshmeat-desc]
+
+[freshmeat-prefix] open source
+	free
+	libre
+	updated
+	revamped
+	upgraded
+	shareware
+	freeware
+	public domain
+
+[freshmeat-for] linux
+	[linux-distro]
+	unix
+	freebsd
+	beos
+	bsd unix
+	perl/tk
+	tcl/tk
+	kde
+	gnome
+	qt
+	gtk
+	x11
+
+[freshmeat-app] [app-name] [app-version]
+
+[app-name] [app-name-simple]
+	[app-name-simple]
+	[app-name-simple]
+	[app-name-complex]
+
+pragma export-rule [app-name]
+
+[app-name-simple] [app-name+simple]
+
+[app-name+simple] [acronym]
+	[acronym]
+	[acronym]
+	[app-prefix] [acronym]
+	[app-prefix] [syllable] [letter]
+	[app-prefix] [syllable] 2 [syllable]
+	[acronym]
+	[letter] [acronym]
+	[random-name]
+	[last-name]
+	[syllable] [syllable]
+	[letter] [syllable]
+	[letter] [letter] [letter]
+	[letter] [letter] [letter] [letter]
+	[letter] [letter] [letter] [letter]
+	[letter] [letter] [letter] [letter]
+	[letter] [letter] [letter] [number-word]
+	[app-prefix] [acronym]
+	[app-prefix] [random-name]
+	[app-prefix] [letter] [letter] [letter] [letter]
+	[app-common]
+
+[app-name-complex] [plural+first] [app-type] [app-suffix]
+	[plural-first] [app-suffix]
+	[acronym] [app-type]
+	[acronym] [app-type] [app-suffix]
+	[app-type] [app-suffix]
+	[2+syllable] [app-type] [app-suffix]
+	[random-name] [app-suffix]
+	[app-prefix+letter] [app-suffix]
+	[app-prefix+syllable] [app-type] [app-suffix]
+	[app-common] [app-type] [app-suffix]
+	[tech-company] [peripheral] [device-type]
+	[buzzword-adjective] [app-suffix]
+	[plural+first] [buzzword-adjective] [buzzword-noun] [buzzword-job
+	[acronym] [buzzword-noun]
+	[app-prefix+name] [buzzword-adjective] [buzzword-job] [app-suffix]
+	[random-name] [buzzword-job]
+	[buzzword-adjective] [buzzword-noun] [app-suffix]
+	[linux-distro]
+
+[app-prefix+name] [app-prefix] [random-name]
+
+[app-prefix+letter] [app-prefix] [letter] [letter] [letter] [letter]
+
+[app-prefix+syllable] [app-prefix] [syllable] [syllable]
+
+[2+syllable] [syllable] [syllable]
+
+[plural+first] [first-name] 's
+
+[app-prefix] gnu/
+	gnu
+	gnu
+	gtk-
+	gtk
+	kde
+	x
+	k
+	x11
+	perl
+	java
+	php_
+	php
+	py
+	gpl
+	linux
+	linux
+	my
+	qt
+	qt_
+	lib
+	lib
+	mod
+	mod_
+	wx
+	cgi
+	web
+	net
+	html
+	phat
+	cool
+	wm
+	free
+	news
+	bsd
+
+[app-suffix] viewer
+	browser
+	client
+	server
+	proxy
+	agent
+	editor
+	database
+	object
+	programming language
+	shell
+	hack
+	window manager
+	user interface
+	front-end
+	back-end
+	interface
+	module
+	library
+	parser
+	generator
+	compiler
+	linker
+	plug-in
+	applet
+	project
+	office
+	enviroment
+	processor
+	parser
+	tools
+	toolkit
+	electron waster
+	simulator
+	clone
+	filesystem
+	device manager
+	thingamajig
+
+[app-type] web
+	internet
+	object-oriented
+	buzzword-enhanced
+	tcp/ip
+	html
+	http
+	xml
+	graphics
+	ascii
+	unicode
+	threaded
+	cool
+	cgi
+	scripting
+	online
+	c
+	perl
+	java
+	python
+	modern
+	postmodern
+	new and improved
+
+[app-common] [app+common]
+
+[app+common] [letter] spell
+	[letter] mail
+	[letter] edit
+	[last-name] fs
+	[random-name] lib
+	[letter] find
+	[random-name] x
+	[letter] grep
+	[letter] tools
+
+[app-version] [app+version]
+
+[app+version] 0.0. [1-20] [version-suffix]
+	0. [digit-nozero] . [0-30]
+	1.0. [0-30]
+	1. [digit-nozero] . [0-30] [version-suffix]
+	2. [digit] . [0-30]
+	2. [digit] . [0-30] [version-suffix]
+	[3-9] . [digit] . [0-30]
+	0.0 [digit] [version-suffix]
+	0. [digit]
+	0. [1-99]
+	1.0 [version-suffix]
+	1.00
+	1. [1-99]
+	1. [1-99] [version-suffix]
+	[2-20] . [1-99] [version-suffix]
+
+[version-suffix] pl [digit]
+	alpha
+	beta
+	- [1-30]
+	[letter]
+	-ac [digit]
+	-pre [digit]
+
+[linux-kernel-version] [linux-kernel+version]
+
+[linux-kernel+version] 2.2. [30-40]
+	2.3. [50-99]
+	2.4.0-pre [1-30]
+	2.4.0-ac [1-30]
+	2.4. [digit]
+	2.5. [0-99]
+
+pragma range-rule [50-99] 50 99
+pragma range-rule [30-40] 30 40
+pragma range-rule [1-30] 1 30
+pragma range-rule [2-20] 2 20
+pragma range-rule [1-99] 1 99
+pragma range-rule [3-9] 3 9
+pragma range-rule [1-20] 1 20
+pragma range-rule [0-99] 0 99
+pragma range-rule [0-30] 0 30
+
+[windows-version] 95
+	98
+	98 second edition
+	millenium edition
+	nt 4.0
+	2000
+	ce
+	xp
+	xp service pack 2
+	vista
+	7
+	8
+	10
+	10 anniversary edition
+
+[microsoft-product] office
+	word
+	excel
+	access
+	powerpoint
+	bob
+	visual basic
+	visual c++
+	iis
+	frontpage
+
+[software-product] coreldraw
+	wordperfect
+	microsoft office
+	microsoft word
+	borland delphi
+	oracle
+	interbase
+	autocad
+
+[microsoft-slogan] making it all make cents
+	over [5-20] years of innovation
+	wintel inside
+	your windows and gates to the world
+	fighting the department of injustice since day one
+	because anti-trust laws are obsolete
+	real people use our software, not nerds and geeks
+	crashes are normal
+	embracing and extending for over [20-30] years
+	this motto is not anti-competitive
+	got windows? you have to!
+	one microsoft way. it's much more than an address
+
+[opensource-license] gnu general public license
+	gnu lesser general public license
+	bsd licences
+	artistic license
+	mozilla public license
+	x11 license
+	apache license
+
+[rfc-document] [over+ip]
+	ip datagrams carried by [carrier]
+	PORN over real-time networks
+
+[over+ip] [ip-stuff] -over-ip
+
+[ip-stuff] electricity
+	water
+	pizza
+	beer
+
+pragma range-rule [5-20] 5 20

@@ -1,0 +1,25 @@
+[theory] [plural+last] [theory-suffix]
+	[plural+last] [theory-suffix]
+	the [2+last-name] [theory-suffix]
+	the [2+last-name] [theory-suffix]
+	the [2+last-name] [theory-suffix]
+	the [3+last-name] [theory-suffix]
+	[plural+last] [ordinal] [theory-suffix]
+	the [last-name] [theory-suffix]
+	the [last-name] [theory-suffix]
+
+pragma initial-rule [theory]
+
+[plural+last] [last-name] 's
+
+[2+last-name] [last-name] - [last-name]
+
+[3+last-name] [last-name] - [last-name] - [last-name]
+
+[theory-suffix] theory
+	law
+	theorem
+	postulate
+	conjecture
+	principle
+	hypothesis

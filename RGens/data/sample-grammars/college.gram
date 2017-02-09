@@ -82,7 +82,7 @@ pragma export-rule [college-course]
 	the meaning of life as [course-explored] in [course-group1] [course-group2] [course-medium]
 	the [course-impact] of [course-group2] [thinker-type] on [course-contemporary] [university-subject] : [course-ending]
 	the [rise] of [course-group2] [thinker-type] in [course-contemporary] [university-subject] : [course-ending]
-	[course-ancient] [course-medium] as the [roots] of [course-contemporary] [university-subject]]
+	[course-ancient] [course-medium] as the [roots] of [course-contemporary] [university-subject]
 	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] as [course-explored] in [course-contemporary] [films] : [course-ending]
 	the history of [course-group2] [course-life] : [course-ending]
 	the [archetype] of the [quest] in [course-group1] [course-group2] [course-medium]
@@ -255,7 +255,7 @@ pragma export-rule [college-course]
 	in the 21st century
 	in recent times
 	in the real world
-	in the [college-adj] world
+	in the [course-adj] world
 
 [course-ending] ideas in conflict
 	ideas in transition
@@ -510,9 +510,64 @@ pragma export-rule [college-course]
 	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [university-subject]
 	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [course-adj] [course-noun]
 	the [course-impact] of [course-group1] [course-group2] [course-medium] on [course-contemporary] [course-adj] [course-noun]
-	the [course-impact] of [course-group1] [course-group2] [course-medim] on [university-subject]
+	the [course-impact] of [course-group1] [course-group2] [course-medium] on [university-subject]
 
 [course-impact] impact
 	effect
 	consequences
 	influence
+
+[university] [university-body] [university-suffix]
+
+[university-body] [cardinal] [us-state]
+	central [us-state]
+	[us-president]
+	[city]
+	[real-city]
+	[last-name]
+	[person]
+
+pragma export-rule [university]
+
+[university-suffix] university
+	college
+	community college
+	state university
+	state college
+	ivy league college
+
+[university-subject] [hard-science]
+	[soft-science]
+
+[hard-science] quantum mechanics
+	planar geometry
+	vector calculus
+	theoretical physics
+	microbiology
+	abstract mathmatics
+	oceanography
+	extraterrestrial biology
+	fractal geometry
+	quantum string theory
+	linear algebra
+	computer science
+
+[soft-science] abnormal psychology
+	anthropology
+	legal theories
+	[soft-type] sociology
+	microeconomics
+	political science
+
+[soft-type] urban
+	suburban
+	rural
+
+[college-major-tech] computer science
+	information technology	
+	computer techology
+	mathematics
+	advanced mathematics nobody ever uses
+	applied physics
+	information systems
+	software engineering

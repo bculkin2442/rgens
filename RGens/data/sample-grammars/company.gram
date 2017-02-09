@@ -1,0 +1,170 @@
+[company] [last-name] [company-suffix]
+	[last-name] [company-name+suffix]
+	[plural+first] [company-name]
+	[last-name] , [last-name] and [last-name] [company-name+suffix]
+	[last-name] , [last-name] and [last-name] [company-suffix]
+	[2last+name] [company-name]
+	[2last+name] [company-suffix]
+	[2last+name] [company-name+suffix]
+	[last-name] & [last-name] [company-suffix]
+	[last-name] & [last-name] [company-name+suffix]
+	[first-name] [last-name] [company-name]
+	[first-name] [last-name] [company-suffix]
+	[first-name] [last-name] [company-name+suffix]
+	[acronym] [company-name+suffix]
+	[acronym] [company-name]
+	[acronym] [company-root-suffix] [company-suffix]
+	[full-name] [company-name+suffix]
+	[last-name] [company-root-suffix] [company-suffix]
+	[last-name] [company-root-suffix]
+	[2letter+letter] [company-name+suffix]
+	[letter+letter] [company-name]
+	[first-name] [company-root-suffix] [company-suffix]
+	[city] [company-name+suffix]
+	[city] [company-root-suffix]
+	[us-state] [company-name+suffix]
+	[buzzword-adjective] [buzzword-noun] [company-suffix]
+	[media-company]
+	[newspaper]
+	[real-company]
+
+pragma export-rule [company]
+
+[plural+first] [first-name] 's
+
+[company-name+suffix] [company-name] [company-suffix]
+
+[2last+name] [last-name] - [last-name]
+
+[2letter+letter] [letter] [letter] & [letter]
+
+[letter+letter] [letter] & [letter]
+
+# The extra space is supposed to be there
+[company-suffix]  [company-suffix1]
+	[company-suffix2]
+
+[company-suffix1] Inc.
+	Incorporated
+	Ltd.
+	Corp.
+	Corporation
+	Co.
+	Company
+	Cooperative
+	Amalgamated
+
+[company-suffix2] , Inc.
+	, Incorporated
+	, Ltd.
+	, LLC
+
+[company-name] associated
+	united
+	brothers
+	associates
+	gizmos
+	industries
+	products
+	widgets
+	farms
+	technology
+	electronics
+	communications
+	media
+	network
+	networking
+	software
+	computers
+	general store
+	stores
+	restaurants
+	design
+	construction
+	retail
+	manufacturing
+	ranch
+	ambulance chasers
+	attorneys at law
+	polluters
+	real estate
+	bank
+	railroad
+	consultants
+	publishing
+	holdings
+	services
+	utilities
+	and company [company-name]
+	and company
+	and co. [company-name]
+	and co.
+	of [city]
+
+[company-root-suffix] .com
+	.net
+	dot com
+	ware
+	soft
+	way
+	Co
+	co
+	tech
+
+[dotcom-company] [actual+dotcom-company]
+
+[actual+dotcom-company] [buzzword-adjective] .com
+	[acronym] .com
+	[dotcom-start] [newspaper-pair2] .com
+	[trademark] .com
+
+[tech-company] microsoft
+	america online
+	yahoo!
+	ebay
+	amazon.com
+	sun microsystems
+	va linux
+	red hat
+	oracle
+	corel
+	ibm
+	lucent technologies
+	earthlink
+	verio
+	lycos
+	altavista
+	cnet
+	citrix systems
+	intuit
+	exodus communications
+	verisign
+	inktomi
+	qualcomm
+	cisco systems
+	dell computers
+	gateway
+	jds uniphase
+	at&t
+	mci
+	apple
+	be, inc.
+	caldera
+	compaq
+	intel
+	amd
+	cyrix
+	motorola
+	sgi
+	transmeta
+	inprise
+	hewlett-packard
+
+[corp-job-title] president
+	vice president
+	chief executive officer
+	chief financial officer
+	public relations director
+	chief technology officer
+	board chairman
+	director

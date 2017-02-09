@@ -1,0 +1,52 @@
+[career-tech] [career-prefix] paper pusher
+	[career-prefix] computer programmer
+	[career-prefix] sheet spreader
+	data entry [career-suffix]
+	[career-prefix] webpage designer
+	[career-prefix] button pusher
+	[career-prefix] bug terminator
+	help desk [career-suffix]
+	[career-prefix] software reinstaller
+	software engineering [career-suffix]
+	[career-prefix] system administrator
+	[career-prefix] bastard operator from hell
+	[career-prefix] webmaster
+	[career-prefix] dead chicken waver
+	[career-prefix] information technology [career-suffix]
+	[career-prefix] four-color glossy publisher
+	[career-prefix] corporate spy [career-suffix]
+	[career-prefix] trade show booth bunny
+	evil human resources [career-suffix]
+	[career-prefix] internet [career-suffix]
+	[career-prefix] network administrator
+	[career-prefix] software design [career-suffix]
+
+pragma initial-rule [career-tech]
+
+[career-prefix] executive
+	assistant
+	junior
+	senior
+	associate
+	sub-adjunct
+	part-time
+	interrim
+	substitute
+
+[career-suffix] manager
+	assistant manager
+	supervisor
+	flunkie
+	intern
+	department manager
+	secretary
+	boss
+	department janitor
+	foreman
+	director
+	section chief
+	superintendant
+	department chairman
+	overseer
+	department head honcho
+	administrator

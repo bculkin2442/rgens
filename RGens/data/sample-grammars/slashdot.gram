@@ -1,0 +1,62 @@
+[slashdot-jonkatz] [jonkatz-prefix1] : [jonkatz-1]
+	[jonkatz-1]
+
+pragma initial-rule [slashdot-jonkatz]
+
+[jonkatz-1] [jonkatz-issues] , [jonkatz-issues] and the [jonkatz-issues2]
+	[jonkatz-verbs1] [jonkatz-actionsofthem] [jonkatz-issues]
+	[jonkazt-prefix2] [jonkatz-actionsofthem] [jonkatz-issues]
+
+[jonkatz-prefix1] analysis
+	unplugged
+	part [number-word]
+	feature
+	jon katz
+	the windbag speaks
+
+[jonkatz-prefix2] the rise of
+	brief history of
+	the road to
+	the myth of
+	voices from
+	descent into
+	at the crossroads of
+	showdown with
+	the era of
+	the power of
+	the death of
+	the nation of
+	some good news from
+	beyond
+
+[jonkatz-verbs1] dealing with
+	handling
+	facing
+	coping with
+	fighting
+	challenging
+
+[jonkatz-actionsofthem] war on
+	battle against
+	heavy-handed crusade against
+	draconian retaliation against
+	foolish crackdown on
+	crazy attempts to ban
+
+[jonkatz-issues] criminal libel
+	free speech
+	free music
+	fighting monopolies
+	repealing unjust laws
+	software patents
+	geek profiling
+	sexbots
+	free pornography
+
+[jonkatz-issues2] net
+	world
+	internet
+	worldwide community
+	web
+	geek population
+	future

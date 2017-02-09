@@ -1,0 +1,253 @@
+[buzzword] [buzzword-verb]
+	[buzzword-noun]
+	[buzzword-adjective]
+	[buzzword-job]
+
+pragma initial-rule [buzzword]
+pragma export-rule [buzzword-verb]
+pragma export-rule [buzzword-noun]
+pragma export-rule [buzzword-adjective]
+pragma export-rule [buzzword-job]
+
+[buzzword-verb] aggregate
+	benchmark
+	brand
+	capitalize
+	conceptualize
+	deliver
+	deploy
+	drive
+	embrace
+	empower
+	enable
+	engage
+	engineer
+	enhance
+	envision
+	evolve
+	expedite
+	exploit
+	extend
+	facilitate
+	generate
+	harness
+	implement
+	incentivize
+	incubate
+	innovate
+	integrate
+	leverage
+	maximize
+	mesh
+	monetize
+	morph
+	necessitate
+	optimize
+	orchestrate
+	productize
+	reformulate
+	reintermediate
+	reinvent
+	repurpose
+	revolutionize
+	scale
+	spearhead
+	strategize
+	streamline
+	syndicate
+	synergize
+	synthesize
+	take ownership
+	target
+	touch base
+	transform
+	trivialize
+	unleash
+	utilize
+	visualize
+
+[buzzword-noun] action items
+	architectures
+	asset management
+	bandwidth
+	channels
+	communities
+	content
+	content management
+	convergence
+	core competency
+	deliverables
+	dimension crossover
+	e-business
+	e-commerce
+	empowerment
+	end-users
+	eyeballs
+	face time
+	functionalities
+	infomediaries
+	infrastructures
+	initiatives
+	interfaces
+	intermediaries
+	key players
+	knowledge transfer
+	management by objective
+	markets
+	metrics
+	middleware
+	mindshare
+	multilevel perspective
+	networks
+	non-issues
+	niches
+	objectives
+	paradigms
+	paradigm shifts
+	partnerships
+	platforms
+	portals
+	quality-circles
+	reality checks
+	relationship corridors
+	relationships
+	resources
+	return on investment
+	synergies
+	schemas
+	skill sets
+	solutions
+	strategic alliances
+	supply-chains
+	synergical connectivity
+	tangents
+	technologies
+	total quality management
+	version control
+	vision
+
+[buzzword-adjective] asp
+	b2b
+	b2c
+	p2p
+	back-end
+	best-of-breed
+	bilateral
+	bleeding-edge
+	bricks-and-clicks
+	client-centered
+	cross-platform
+	cross-media
+	customer-centric
+	customized
+	cutting-edge
+	distributed
+	dot-com
+	dynamic
+	efficient
+	effort-intensive
+	end-to-end
+	enterprise
+	evolutionary
+	extensible
+	forward-thinking
+	frictionless
+	front-end
+	future-proof
+	global
+	granular
+	innovative
+	integrated
+	interactive
+	intuitive
+	just-in-time
+	killer
+	leading-edge
+	legacy
+	magnetic
+	marketable
+	massively-parallel
+	mission-critical
+	multilevel
+	next-generation
+	object-oriented
+	off-the-shelf
+	one-to-one
+	open-source
+	pragmatic
+	proactive
+	productized
+	real-time
+	revolutionary
+	robust
+	scalable
+	seamless
+	strategic
+	synergistic
+	transparent
+	turn-key
+	two-tier
+	ubiquitous
+	universal
+	user-centric
+	value-added
+	vertical
+	viral
+	virtual
+	visionary
+	wireless
+	world-class
+
+[buzzword-job] customizer
+	dothead
+	enabler
+	engineer
+	facilitator
+	forward-thinker
+	incubator
+	innovator
+	intergrator
+	liason
+	manager
+	marketer
+	strategist
+	synergizer
+	visionary
+
+[buzzword-stem] aggregat
+	benchmark
+	conceptual
+	empower
+	enhanc
+	exploit
+	generat
+	harness
+	implement
+	leverag
+	monet
+	morph
+	orchestr
+	product
+	reformul
+	reinvent
+	revolution
+	spearhead
+	synerg
+	synthes
+	trivial
+	util
+	visual
+
+[buzzword-suffix] age
+	ivize
+	ivize
+	ivate
+	ilate
+	[buzzword+consonant]
+	acity
+	ocity
+
+[buzzword+consonant] i [consonant] ate
+
+pragma export-rule [buzzword-suffix]
+pragma export-rule [buzzword-stem]

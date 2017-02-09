@@ -1,0 +1,95 @@
+[city] [real-city]
+	[real-city]
+	[town-name]
+	[town-name]
+	[town-prefix] [town-name]
+	[town-prefix] [town-name+suffix]
+	[natural-color] [geographic-thing]
+	[natural-color+suffix]
+	[natural-color] [tree]
+	[town-prefix+suffix]
+	[town-prefix] [geographic-thing]
+	[tree+suffix]
+	[random-name]
+	[town-prefix] [random-name]
+	[random-name+suffix]
+	[last-name]
+	[last-name]
+	[town-prefix] [last-name]
+	[2+last-name]
+	St. [last-name]
+	[last-name+suffix]
+	[first-name] [geographic-thing]
+	[first-name+suffix]
+
+pragma initial-rule [city]
+
+[town-name+suffix] [town-name] [town-suffix]
+
+[natural-color+suffix] [natural-color] [town-suffix]
+
+[town-prefix+suffix] [town-prefix] [town-suffix]
+
+[tree+suffix] [tree] [town-suffix]
+
+[random-name+suffix] [random-name] [town-suffix]
+
+[2+last-name] [last-name] - [last-name]
+
+[last-name+suffix] [last-name] [town-suffix]
+
+[first-name+suffix] [first-name] [town-suffix]
+
+[geographic-thing] mountain
+	hill
+	lake
+	plains
+	river
+	valley
+	hollow
+	beach
+	bay
+	harbor
+	grove
+	bridge
+	station
+	glade
+	forest
+	gulch
+	swamp
+	bend
+	springs
+	creek
+	falls
+	ridge
+	pass
+	meadow
+
+[town-prefix] north
+	south
+	east
+	west
+	north
+	south
+	east
+	west
+	new
+	new
+	old
+	little
+	fort
+	lower
+	upper
+	san
+	la
+	van
+
+[town-suffix] burg
+	ton
+	ville
+	opolis
+	field
+	boro
+	dale
+
+pragma export-rule [geographic-thing]

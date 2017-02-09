@@ -14,18 +14,23 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>bjc.RGens.server.GrammarServer</mainClass>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>bjc.RGens.server.GrammarServer</mainClass>
 					<arguments>
-						<argument>-c</argument>
+						<!-- Uncomment for debug mode -->
+						<argument>-d</argument>
+						<argument>-lc</argument>
 						<argument>data/server-config-sample.cfg</argument>
+						<argument>-st</argument>
+						<argument>*</argument>
+						<!-- <argument>-i</argument> -->
 					</arguments>
-                </configuration>	
+				</configuration>	
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<groupId>bjc</groupId>
 	<artifactId>RGens</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

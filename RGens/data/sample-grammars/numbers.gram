@@ -1,0 +1,19 @@
+[small-number] [actual+small-number]
+
+[medium-number] [actual+medium-number]
+
+[zipcode] [actual+zipcode]
+
+pragma export-rule [small-number]
+pragma export-rule [medium-number]
+pragma export-rule [zipcode]
+
+[actual+small-number] [digit-nozero]
+	[digit-nozero] [digit]
+	[digit-nozero] [digit] [digit]
+
+[actual+medium-number] [digit-nozero] [digit] [digit]
+	[digit-nozero] [digit] [digit] [digit]
+	[digit-nozero] [digit] [digit] [digit] [digit]
+
+[actual+zipcode] [digit] [digit] [digit] [digit] [digit]

@@ -9,7 +9,7 @@
 	[personal-stat]
 	[to-hit]
 	[extra-damage]
-	[to-hit+damage]
+	[to-hit-damage]
 	[item-charges]
 
 pragma export-rule [prefix]
@@ -156,7 +156,7 @@ pragma export-rule [prefix]
 	ruthless
 	merciless
 
-[to-hit+damage] sharp
+[to-hit-damage] sharp
 	fine
 	warrior’s
 	soldier’s

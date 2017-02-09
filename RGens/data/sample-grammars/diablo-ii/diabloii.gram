@@ -13,9 +13,9 @@ pragma initial-rule [base-treasures]
 	[money]
 	nothing
 
-[money] [amount] [money-type]
+[money] [diablo-amount] [money-type]
 
-[amount] 1
+[diablo-amount] 1
 	5
 	10
 	20
@@ -24,6 +24,8 @@ pragma initial-rule [base-treasures]
 	200
 	500
 	1000
+
+pragma export-rule [diablo-amount]
 
 [money-type] [metal-type] coin(s)
 

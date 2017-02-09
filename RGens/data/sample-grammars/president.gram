@@ -1,0 +1,64 @@
+[us-president] george washington 
+	john adams
+	thomas jefferson
+	james madison
+	james monroe
+	john quincy adams
+	andrew jackson
+	martin van buren
+	william henry harrison
+	john tyler
+	james polk
+	zachary taylor
+	millard fillmore
+	franklin pierce
+	james buchanan
+	abraham lincoln
+	andrew johnson
+	ulysses s grant
+	rutherford b. hayes
+	james garfield
+	chester a. arthur
+	grover cleveland
+	benjamin harrison
+	william mckinley
+	theodore roosevelt
+	william taft
+	woodrow wilson
+	warren g. harding
+	calvin coolidge
+	herbert hoover
+	franklin d. roosevelt
+	harry s truman
+	dwight eisenhower
+	john f. kennedy
+	lyndon b. johnson
+	richard nixon
+	gerald ford
+	jimmie carter
+	ronald reagan
+	george bush
+	bill clinton
+	george w. bush
+	barack obama
+	donald trump
+
+[us-president-common] washington 
+	adams
+	jefferson
+	madison
+	monroe
+	adams
+	jackson
+	van buren
+	harrison
+	taylor
+	lincoln
+	johnson
+	garfield
+	roosevelt
+	wilson
+	truman
+
+pragma export-rule [us-president]
+pragma export-rule [us-president-common]

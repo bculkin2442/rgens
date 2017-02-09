@@ -1,17 +1,19 @@
-[email] [[actual-email]]
+[email] [actual+email]
 
-[fake-email] [[actual-fake-email]]
+[fake-email] [actual+fake-email]
 
-[username] [[actual-username]]
+[username] [actual+username]
 
-[url] [[actual-url]]
+[url] [actual+url]
 
 pragma initial-rule [email]
 pragma export-rule [fake-email]
 pragma export-rule [username]
+pragma export-rule [domain-name]
 pragma export-rule [url]
+pragma export-rule [big-tld]
 
-[actual-email] [username] @ [subdomain-name] . [domain]
+[actual+email] [username] @ [subdomain-name] . [domain]
 	[username] @mail. [domain]
 	[username] @ [domain]
 	[username] @ [domain]
@@ -25,7 +27,7 @@ pragma export-rule [url]
 [first-last] [first-name]
 	[first-name] - [last-name]
 
-[actual-fake-email] [username] @ [subdomain-name] . [fake-domain]
+[actual+fake-email] [username] @ [subdomain-name] . [fake-domain]
 	[username] @mail. [fake-domain]
 	[acronym] @ [fake-domain]
 	[email-alias] @ [fake-domain]
@@ -43,8 +45,7 @@ pragma export-rule [url]
 	mail
 	root
 
-
-[actual-username] [random-name]
+[actual+username] [random-name]
 	[middle-initial] [random-name]
 	[middle-initial] [last-name]
 	[first-name] . [last-name]
@@ -53,16 +54,21 @@ pragma export-rule [url]
 
 pragma range-rule [num-range] 1 999
 
-[actual-url] http://www. [domain] /
+[actual+url] http://www. [domain] /
 	http://www. [domain] /
 	http:// [subdomain-name] . [domain] /
 	http://www. [last-name] . [tld] /
 	http:// [username] . [domain] / 
 	[url-with-path]
 
-[url-with-path] http://www.geocities.com/ [neighborhood] / [digit-non0] [digit] [digit] [digit] /
+[url-with-path] http://www.geocities.com/ [neighborhood] / [digit-nozero] [digit] [digit] [digit] /
 	http:// [url-begin] . [acronym] .net/ [url-username] /
-
+	http:// [url-begin] . [town-name] .net/ [url-username]
+	http:// [subdomain-name] . [acronym] .net/ [url-username]
+	http:// [subdomain-name] . [town-name] .net/ [url-username]
+	http:// [subdomain-name] . [last-name] . [big-tld] / [url-username]
+	http:// [username] . [acronym] .net/
+	http:// [username] . [url-state] [us-postalstate] .edu/
 
 [neighborhood] siliconvalley
 	heartland
@@ -87,3 +93,78 @@ pragma range-rule [num-range] 1 999
 	univ
 	u
 
+[domain] [domain-name] . [tld]
+	[domain-name] . [big-tld]
+
+[fake-domain] [domain-name] [fake-ending]
+
+[fake-ending] .con
+	.con
+	.not
+	.null
+	.usa
+	.com.uk
+	.con
+	.dot
+	.fake
+	.faux
+	.spam
+	.tld
+
+[domain-name] [domain+name]
+
+[domain+name] [acronym]
+	[random-name]
+	[last-name] - [last-name]
+	[first-name] - [last-name]
+	[letter] - [last-name]
+	[consonant] [vowel] [consonant]
+	[consonant-group] [vowel-group] [consonant]
+	[vowel-group] [consonant-group]
+	[letter] [vowel] [letter]
+	[town-name]
+	[last-name]
+	[syllable] [syllable]
+
+[tld] com
+	com
+	com
+	com
+	com
+	net
+	net
+	org
+	org
+	edu
+	de
+	ca
+	com.au
+	co.uk
+	fr
+	nu
+	to
+	se
+	no
+
+[big-tld] com
+	com
+	net
+	org
+
+[subdomain-name] venus
+	mars
+	jupiter
+	pluto
+	saturn
+	neptune
+	mail
+	www2
+	www [digit]
+	alpha
+	beta
+	gamma
+	omega
+	[random-name]
+	[first-name]
+	[last-name]
+	[acronym]
