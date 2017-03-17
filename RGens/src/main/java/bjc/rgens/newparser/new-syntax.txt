@@ -1,0 +1,10 @@
+[grammar] → ([block] (/\n\.\n?/ [block])*)?
+
+[block] → [pragma-block]
+	→ [rule-block]
+
+[pragma-block] → [pragma] (/\n(?!\t)/ [pragma])*
+
+[rule-block] → [rule-decl] [rule-case] (/\n\t/ [rule-case])*
+
+[pragma] → pragma [pragma-name] [pragma-body]

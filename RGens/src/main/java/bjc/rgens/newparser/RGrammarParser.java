@@ -63,6 +63,7 @@ public class RGrammarParser {
 	public RGrammar readGrammar(InputStream is) throws GrammarException {
 		LineNumberReader lnReader = new LineNumberReader(new InputStreamReader(is));
 
+		int blockNo = 0;
 		try (Scanner scn = new Scanner(lnReader)) {
 			scn.useDelimiter("\\n\\.?\\n");
 
@@ -70,6 +71,7 @@ public class RGrammarParser {
 
 			while (scn.hasNext()) {
 				String block = scn.next();
+				blockNo += 1;
 
 				if (block.startsWith("pragma")) {
 					handlePragmaBlock(block, build);
@@ -80,31 +82,50 @@ public class RGrammarParser {
 				}
 			}
 		} catch (GrammarException gex) {
-			throw new GrammarException(String.format("Error at line %d", lnReader.getLineNumber()), gex);
+			throw new GrammarException(String.format("Error in block %d at line %d of stream", blockNo, lnReader.getLineNumber()), gex);
 		}
 
 		return null;
 	}
 
+	/*
+	 * Handle reading a block of pragmas
+	 */
 	private void handlePragmaBlock(String block, RGrammarBuilder build) throws GrammarException {
 		LineNumberReader lnReader = new LineNumberReader(new StringReader(block));
 
+		int pragmaNo = 0;
 		try (Scanner deblocker = new Scanner(lnReader)) {
 			deblocker.useDelimiter("\\n(?!\\t)");
 
 			while (deblocker.hasNext()) {
 				String pragma = deblocker.next();
+				pragmaNo += 1;
 
 				if (!pragma.startsWith("pragma")) {
-					throw new GrammarException(String.format("Illegal line at line %d of pragma block: %s",
+					throw new GrammarException(String.format("Illegal line: %s",
 							lnReader.getLineNumber(), pragma));
+				} else {
+					handlePragma(pragma.substring(7), build);
 				}
 			}
+		} catch (GrammarException gex) {
+			throw new GrammarException(String.format("Error in pragma %d at line %d", pragmaNo, lnReader.getLineNumber()), gex);
 		}
 	}
 
-	private void handleRuleBlock(String block, RGrammarBuilder build) {
-		// TODO Auto-generated method stub
+	private void handlePragma(String pragma, RGrammarBuilder build) {
+		
+	}
 
+	/*
+	 * Handle a block of rules.
+	 */
+	private void handleRuleBlock(String block, RGrammarBuilder build) {
+		LineNumberReader lnReader = new LineNumberReader(new StringReader(block));
+
+		try(Scanner scn = new Scanner(lnReader)) {
+			
+		}
 	}
 }
