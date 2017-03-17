@@ -1,4 +1,4 @@
-package bjc.RGens.parser;
+package bjc.rgens.parser;
 
 import java.io.FileInputStream;
 import java.io.IOException;

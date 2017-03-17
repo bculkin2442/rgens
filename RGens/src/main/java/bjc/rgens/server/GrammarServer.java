@@ -1,4 +1,4 @@
-package bjc.RGens.server;
+package bjc.rgens.server;
 
 import bjc.utils.funcdata.FunctionalMap;
 import bjc.utils.funcdata.IMap;

@@ -1,4 +1,4 @@
-package bjc.RGens.text.markov;
+package bjc.rgens.text.markov;
 
 import java.io.IOException;
 import java.io.Reader;

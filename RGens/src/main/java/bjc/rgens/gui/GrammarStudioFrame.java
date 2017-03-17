@@ -1,4 +1,4 @@
-package bjc.RGens.gui;
+package bjc.rgens.gui;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;

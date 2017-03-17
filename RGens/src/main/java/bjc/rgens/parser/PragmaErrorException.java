@@ -1,4 +1,4 @@
-package bjc.RGens.parser;
+package bjc.rgens.parser;
 
 /**
  * Exception for error executing a pragma

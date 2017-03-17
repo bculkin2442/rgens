@@ -1,4 +1,4 @@
-package bjc.RGens.server;
+package bjc.rgens.server;
 
 import java.io.File;
 import java.io.FileInputStream;

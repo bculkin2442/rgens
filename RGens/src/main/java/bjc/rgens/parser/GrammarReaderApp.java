@@ -1,4 +1,4 @@
-package bjc.RGens.parser;
+package bjc.rgens.parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;

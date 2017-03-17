@@ -1,4 +1,4 @@
-package bjc.RGens;
+package bjc.rgens;
 
 import bjc.utils.funcdata.FunctionalStringTokenizer;
 import bjc.utils.funcdata.IList;

@@ -1,4 +1,4 @@
-package bjc.RGens.gui;
+package bjc.rgens.gui;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;

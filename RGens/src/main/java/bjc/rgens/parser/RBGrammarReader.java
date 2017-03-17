@@ -1,4 +1,4 @@
-package bjc.RGens.parser;
+package bjc.rgens.parser;
 
 import com.mifmif.common.regex.Generex;
 
