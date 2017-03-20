@@ -29,4 +29,23 @@ public class RGrammarBuilder {
 		 */
 		return null;
 	}
+
+	public void addCasePart(String csepart) {
+		// TODO Auto-generated method stub
+	}
+
+	public void endRule() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void finishCase() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void startWhereBlock(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
