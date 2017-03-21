@@ -49,6 +49,14 @@ public class RGrammarParser {
 
 			build.setInitialRule(body);
 		});
+
+		pragmas.put("export-rule", (body, build, level) -> {
+			String[] exports = body.split(" ");
+
+			for(String export : exports) {
+				build.addExport(export);
+			}
+		});
 	}
 
 	/**
@@ -99,6 +107,7 @@ public class RGrammarParser {
 		 */
 		if(block.equals("")) return;
 		if(block.equals("\n")) return;
+		if(block.equals("\r\n")) return;
 
 		int typeSep = block.indexOf(' ');
 
@@ -176,7 +185,11 @@ public class RGrammarParser {
 		String pragmaBody = pragma.substring(bodySep + 1);
 
 		if(pragmas.containsKey(pragmaName)) {
-			pragmas.get(pragmaName).accept(pragmaBody, build, level);
+			try {
+				pragmas.get(pragmaName).accept(pragmaBody, build, level);
+			} catch(GrammarException gex) {
+				throw new GrammarException(String.format("Error in '%s' pragma", pragmaName), gex);
+			}
 		} else {
 			throw new GrammarException(String.format("Unknown pragma named '%s'", pragmaName));
 		}
@@ -211,7 +224,7 @@ public class RGrammarParser {
 					 * single case.
 					 */
 					handleRuleDecl(build, ruleBlock);
-					
+
 					build.finishRule();
 				}
 			} catch(GrammarException gex) {
@@ -231,7 +244,8 @@ public class RGrammarParser {
 
 		if(declSep == -1) {
 			/*
-			 * The old syntax allowed it to work with just a space.
+			 * TODO remove support for the old syntax when all of
+			 * the files are converted.
 			 */
 			declSep = declContents.indexOf(' ');
 
@@ -240,9 +254,6 @@ public class RGrammarParser {
 						"A rule must be given at least one case in its declaration, and"
 								+ "seperated from that case by \u2192");
 			}
-
-			System.out.println(
-					"WARNING: Rule declarations must now be seperated from the initial case by \u2192.");
 		}
 
 		String ruleName = declContents.substring(0, declSep).trim();
@@ -264,7 +275,14 @@ public class RGrammarParser {
 		build.beginCase();
 
 		for(String csepart : cse.split(" ")) {
-			build.addCasePart(csepart);
+			String partToAdd = csepart.trim();
+			
+			/*
+			 * Ignore empty parts
+			 */
+			if(partToAdd.equals("")) continue;
+
+			build.addCasePart(partToAdd);
 		}
 
 		build.finishCase();

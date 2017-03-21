@@ -1,7 +1,8 @@
 package bjc.rgens.newparser;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents a randomized grammar.
@@ -20,7 +21,9 @@ public class RGrammar {
 
 	private Map<String, Rule> rules;
 
-	private Map<String, Rule> importRules;
+	private Map<String, RGrammar> importRules;
+
+	private Set<String> exportRules;
 
 	private String initialRule;
 
@@ -40,11 +43,11 @@ public class RGrammar {
 	 * Imported rules are checked for rule definitions after local
 	 * definitions are checked.
 	 * 
-	 * @param importedRules
+	 * @param exportedRules
 	 *                The set of imported rules to use.
 	 */
-	public void setImportedRules(Map<String, Rule> importedRules) {
-		importRules = importedRules;
+	public void setImportedRules(Map<String, RGrammar> exportedRules) {
+		importRules = exportedRules;
 	}
 
 	/**
@@ -116,9 +119,9 @@ public class RGrammar {
 
 					generateCase(cse, state);
 				} else if(importRules.containsKey(elm.getLiteral())) {
-					RuleCase cse = importRules.get(elm.getLiteral()).getCase();
+					RGrammar dst = importRules.get(elm.getLiteral());
 
-					generateCase(cse, state);
+					state.contents.append(dst.generate(elm.getLiteral()));
 				} else {
 					throw new GrammarException(
 							String.format("No rule by name '%s' found", elm.getLiteral()));
@@ -149,6 +152,14 @@ public class RGrammar {
 	 *                is no initial rule.
 	 */
 	public void setInitialRule(String initialRule) {
+		/*
+		 * Passing null nulls our initial rule.
+		 */
+		if(initialRule == null) {
+			this.initialRule = null;
+			return;
+		}
+
 		if(initialRule.equals("")) {
 			throw new GrammarException("The empty string is not a valid rule name");
 		} else if(!rules.containsKey(initialRule)) {
@@ -157,5 +168,41 @@ public class RGrammar {
 		}
 
 		this.initialRule = initialRule;
+	}
+
+	/**
+	 * Gets the rules exported by this grammar.
+	 * 
+	 * The initial rule is exported by default if specified.
+	 * 
+	 * @return The rules exported by this grammar.
+	 */
+	public Set<Rule> getExportedRules() {
+		Set<Rule> res = new HashSet<>();
+
+		for(String rname : exportRules) {
+			if(!rules.containsKey(rname)) {
+				throw new GrammarException(String
+						.format("No rule named '%s' local to this grammar found", initialRule));
+			}
+
+			res.add(rules.get(rname));
+		}
+
+		if(initialRule != null) {
+			res.add(rules.get(initialRule));
+		}
+
+		return res;
+	}
+
+	/**
+	 * Set the rules exported by this grammar.
+	 * 
+	 * @param exportRules
+	 *                The rules exported by this grammar.
+	 */
+	public void setExportedRules(Set<String> exportRules) {
+		this.exportRules = exportRules;
 	}
 }

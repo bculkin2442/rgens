@@ -16,12 +16,18 @@ public class RGrammarTest {
 	 *                Unused CLI args.
 	 */
 	public static void main(String[] args) {
-		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/insults.gram");
+		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/24hr-rpg.gram");
+
+		RGrammarSet grammarSet = new RGrammarSet();
 
 		RGrammarParser parse = new RGrammarParser();
 
 		RGrammar grammar = parse.readGrammar(stream);
 
-		System.out.println(grammar.generate(null));
+		grammarSet.addGrammar("rpg", grammar);
+
+		for(int i = 0; i < 10; i++) {
+			System.out.println(grammar.generate(null));
+		}
 	}
 }

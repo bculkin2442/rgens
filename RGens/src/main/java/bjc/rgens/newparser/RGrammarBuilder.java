@@ -4,7 +4,9 @@ import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static bjc.rgens.newparser.CaseElement.ElementType.*;
 import static bjc.rgens.newparser.RuleCase.CaseType.*;
@@ -16,11 +18,13 @@ import static bjc.rgens.newparser.RuleCase.CaseType.*;
  *
  */
 public class RGrammarBuilder {
-	private Map<String, Rule> rules;
+	private IList<CaseElement> currentCase;
 
 	private Rule currRule;
 
-	private IList<CaseElement> currentCase;
+	private Map<String, Rule> rules;
+
+	private Set<String> exportedRules;
 
 	private String initialRule;
 
@@ -29,6 +33,8 @@ public class RGrammarBuilder {
 	 */
 	public RGrammarBuilder() {
 		rules = new HashMap<>();
+
+		exportedRules = new HashSet<>();
 
 		currentCase = new FunctionalList<>();
 	}
@@ -64,6 +70,8 @@ public class RGrammarBuilder {
 		RGrammar grammar = new RGrammar(rules);
 
 		grammar.setInitialRule(initialRule);
+
+		grammar.setExportedRules(exportedRules);
 
 		return grammar;
 	}
@@ -139,6 +147,10 @@ public class RGrammarBuilder {
 	 * 
 	 * @param init
 	 *                The initial rule of the grammar.
+	 * 
+	 * @throws IllegalArgumentException
+	 *                 If the rule is either not valid or not defined in the
+	 *                 grammar.
 	 */
 	public void setInitialRule(String init) {
 		if(init == null) {
@@ -150,5 +162,27 @@ public class RGrammarBuilder {
 		}
 
 		initialRule = init;
+	}
+
+	/**
+	 * Add an exported rule to this grammar.
+	 * 
+	 * @param export
+	 *                The name of the rule to export.
+	 * 
+	 * @throws IllegalArgumentException
+	 *                 If the rule is either not valid or not defined in the
+	 *                 grammar.
+	 */
+	public void addExport(String export) {
+		if(export == null) {
+			throw new NullPointerException("Export name must not be null");
+		} else if(export.equals("")) {
+			throw new NullPointerException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(export)) {
+			throw new IllegalArgumentException(String.format("No rule named '%s' found", export));
+		}
+
+		exportedRules.add(export);
 	}
 }

@@ -18,7 +18,7 @@ public class RuleCase {
 		/**
 		 * A normal case, composed from a list of elementList.
 		 */
-		NORMAL;
+		NORMAL,
 	}
 
 	/**
