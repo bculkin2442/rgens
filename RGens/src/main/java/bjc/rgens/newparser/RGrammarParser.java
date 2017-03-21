@@ -6,11 +6,9 @@ import bjc.utils.parserutils.BlockReader.Block;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Reads {@link RGrammar} from a input stream.
@@ -40,6 +38,17 @@ public class RGrammarParser {
 	 */
 	static {
 		pragmas = new HashMap<>();
+
+		pragmas.put("initial-rule", (body, build, level) -> {
+			int sep = body.indexOf(' ');
+
+			if(sep != -1) {
+				throw new GrammarException(
+						"Initial-rule pragma takes only one argument, the name of the initial rule");
+			}
+
+			build.setInitialRule(body);
+		});
 	}
 
 	/**
@@ -85,6 +94,12 @@ public class RGrammarParser {
 	 * Handles an arbitrary block.
 	 */
 	private void handleBlock(RGrammarBuilder build, String block, int level) throws GrammarException {
+		/*
+		 * Discard empty blocks
+		 */
+		if(block.equals("")) return;
+		if(block.equals("\n")) return;
+
 		int typeSep = block.indexOf(' ');
 
 		if(typeSep == -1) {
@@ -100,6 +115,11 @@ public class RGrammarParser {
 			handleRuleBlock(block, build, level);
 		} else if(blockType.equalsIgnoreCase("where")) {
 			handleWhereBlock(block, build, level);
+		} else if(blockType.equalsIgnoreCase("#")) {
+			/*
+			 * Comment block.
+			 */
+			return;
 		} else {
 			throw new GrammarException(String.format("Unknown block type: '%s'", blockType));
 		}
@@ -124,7 +144,7 @@ public class RGrammarParser {
 					}
 
 					String pragmaLeader = pragmaContents.substring(0, pragmaSep);
-					String pragmaBody = pragmaContents.substring(pragmaSep);
+					String pragmaBody = pragmaContents.substring(pragmaSep + 1);
 
 					if(!pragmaLeader.equalsIgnoreCase("pragma")) {
 						throw new GrammarException(
@@ -153,7 +173,7 @@ public class RGrammarParser {
 		if(bodySep == -1) bodySep = pragma.length();
 
 		String pragmaName = pragma.substring(0, bodySep);
-		String pragmaBody = pragma.substring(bodySep);
+		String pragmaBody = pragma.substring(bodySep + 1);
 
 		if(pragmas.containsKey(pragmaName)) {
 			pragmas.get(pragmaName).accept(pragmaBody, build, level);
@@ -183,12 +203,16 @@ public class RGrammarParser {
 					ruleReader.forEachBlock((block) -> {
 						handleRuleCase(block.contents, build);
 					});
+
+					build.finishRule();
 				} else {
 					/*
 					 * Rule with a declaration followed by a
 					 * single case.
 					 */
 					handleRuleDecl(build, ruleBlock);
+					
+					build.finishRule();
 				}
 			} catch(GrammarException gex) {
 				throw new GrammarException(
@@ -206,18 +230,29 @@ public class RGrammarParser {
 		int declSep = declContents.indexOf("\u2192");
 
 		if(declSep == -1) {
-			throw new GrammarException("A rule must be given at least one case in its declaration, and"
-					+ "seperated from that case by \u2192");
+			/*
+			 * The old syntax allowed it to work with just a space.
+			 */
+			declSep = declContents.indexOf(' ');
+
+			if(declSep == -1) {
+				throw new GrammarException(
+						"A rule must be given at least one case in its declaration, and"
+								+ "seperated from that case by \u2192");
+			}
+
+			System.out.println(
+					"WARNING: Rule declarations must now be seperated from the initial case by \u2192.");
 		}
 
 		String ruleName = declContents.substring(0, declSep).trim();
-		String ruleBody = declContents.substring(declSep).trim();
+		String ruleBody = declContents.substring(declSep + 1).trim();
 
 		if(ruleName.equals("")) {
 			throw new GrammarException("The empty string is not a valid rule name");
 		}
 
-		build.setCurrentRule(ruleName);
+		build.startRule(ruleName);
 
 		handleRuleCase(ruleBody, build);
 	}
@@ -226,6 +261,8 @@ public class RGrammarParser {
 	 * Handle a single case of a rule.
 	 */
 	private void handleRuleCase(String cse, RGrammarBuilder build) {
+		build.beginCase();
+
 		for(String csepart : cse.split(" ")) {
 			build.addCasePart(csepart);
 		}
@@ -236,10 +273,13 @@ public class RGrammarParser {
 	/*
 	 * Handle a where block (a block with local rules).
 	 */
+	@SuppressWarnings("unused")
 	private void handleWhereBlock(String block, RGrammarBuilder build, int level) throws GrammarException {
 		try(BlockReader whereReader = new BlockReader("", new StringReader(block))) {
 			try {
-				
+				/*
+				 * TODO decide syntax for where blocks.
+				 */
 			} catch(GrammarException gex) {
 				throw new GrammarException(
 						String.format("Error in where block (%s)", whereReader.getBlock()),
