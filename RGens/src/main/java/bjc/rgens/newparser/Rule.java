@@ -3,6 +3,8 @@ package bjc.rgens.newparser;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 
+import java.util.Random;
+
 /**
  * A rule in a randomized grammar.
  * 
@@ -59,6 +61,18 @@ public class Rule {
 	 */
 	public RuleCase getCase() {
 		return ruleCases.randItem();
+	}
+
+	/**
+	 * Get a random case from this rule.
+	 * 
+	 * @param rnd
+	 *                The random number generator to use.
+	 * 
+	 * @return A random case from this rule.
+	 */
+	public RuleCase getCase(Random rnd) {
+		return ruleCases.randItem(rnd::nextInt);
 	}
 
 	/**

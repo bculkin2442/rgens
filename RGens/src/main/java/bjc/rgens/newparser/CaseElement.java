@@ -14,13 +14,17 @@ public class CaseElement {
 	 */
 	public static enum ElementType {
 		/**
-		 * A element that represents a literal string.
+		 * An element that represents a literal string.
 		 */
 		LITERAL,
 		/**
-		 * A element that represents a rule reference.
+		 * An element that represents a rule reference.
 		 */
-		RULEREF;
+		RULEREF,
+		/**
+		 * An element that represents a random range.
+		 */
+		RANGE;
 	}
 
 	/**
@@ -45,6 +49,28 @@ public class CaseElement {
 	private String literalVal;
 
 	/**
+	 * The starting integer value of this element.
+	 * 
+	 * <h2>Used For</h2>
+	 * <dl>
+	 * <dt>RANGE</dt>
+	 * <dd>The inclusive start of the range</dd>
+	 * </dl>
+	 */
+	private int start;
+
+	/**
+	 * The starting integer value of this element.
+	 * 
+	 * <h2>Used For</h2>
+	 * <dl>
+	 * <dt>RANGE</dt>
+	 * <dd>The inclusive end of the range</dd>
+	 * </dl>
+	 */
+	private int snd;
+
+	/**
 	 * Create a new case element.
 	 * 
 	 * @param typ
@@ -53,11 +79,13 @@ public class CaseElement {
 	 * @throws IllegalArgumentException
 	 *                 If the specified type needs parameters.
 	 */
-	public CaseElement(CaseElement.ElementType typ) {
+	public CaseElement(ElementType typ) {
 		switch(typ) {
 		case LITERAL:
 		case RULEREF:
 			throw new IllegalArgumentException("This type requires a string parameter.");
+		case RANGE:
+			throw new IllegalArgumentException("This type requires two int parameters.");
 		default:
 			break;
 		}
@@ -77,11 +105,13 @@ public class CaseElement {
 	 *                 If the specified type doesn't take a single string
 	 *                 parameter.
 	 */
-	public CaseElement(CaseElement.ElementType typ, String val) {
+	public CaseElement(ElementType typ, String val) {
 		switch(typ) {
 		case LITERAL:
 		case RULEREF:
 			break;
+		case RANGE:
+			throw new IllegalArgumentException("This type requires two int parameters.");
 		default:
 			throw new IllegalArgumentException("This type doesn't have a string parameter.");
 		}
@@ -92,6 +122,35 @@ public class CaseElement {
 	}
 
 	/**
+	 * Create a new case element that has two integer values.
+	 * 
+	 * @param typ
+	 *                The type of this element.
+	 * @param first
+	 *                The first integer value for this element.
+	 * @param second
+	 *                The second integer value for this element.
+	 * 
+	 * @throws IllegalArgumentException
+	 *                 If the specified type doesn't take two integer
+	 *                 parameters.
+	 */
+	public CaseElement(ElementType typ, int first, int second) {
+		switch(typ) {
+		case LITERAL:
+		case RULEREF:
+			throw new IllegalArgumentException("This type requires a string parameter.");
+		case RANGE:
+			break;
+		default:
+			throw new IllegalArgumentException("This type doesn't have two int parameters");
+		}
+
+		type = typ;
+
+		this.start = first;
+		this.snd = second;
+	}
 
 	/**
 	 * Get the literal string value for this element.
@@ -113,12 +172,55 @@ public class CaseElement {
 		return literalVal;
 	}
 
+	/**
+	 * Get the starting integer value for this element.
+	 * 
+	 * @return The starting integer value for this element.
+	 * 
+	 * @throws IllegalStateException
+	 *                 If this type doesn't have a starting integer value.
+	 */
+	public int getStart() {
+		switch(type) {
+		case RANGE:
+			break;
+		default:
+			throw new IllegalStateException(
+					String.format("Type '%s' doesn't have a starting integer value", type));
+
+		}
+		return start;
+	}
+
+	/**
+	 * Get the ending integer value for this element.
+	 * 
+	 * @return The ending integer value for this element.
+	 * 
+	 * @throws IllegalStateException
+	 *                 If this type doesn't have a ending integer value.
+	 */
+	public int getEnd() {
+		switch(type) {
+		case RANGE:
+			break;
+		default:
+			throw new IllegalStateException(
+					String.format("Type '%s' doesn't have a ending integer value", type));
+
+		}
+
+		return snd;
+	}
+
 	@Override
 	public String toString() {
 		switch(type) {
 		case LITERAL:
 		case RULEREF:
 			return literalVal;
+		case RANGE:
+			return String.format("[%d..%d]", start, snd);
 		default:
 			return String.format("Unknown type '%s'", type);
 		}

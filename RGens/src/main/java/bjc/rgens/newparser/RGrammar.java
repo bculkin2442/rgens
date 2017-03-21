@@ -2,6 +2,7 @@ package bjc.rgens.newparser;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -12,9 +13,10 @@ import java.util.Set;
  */
 public class RGrammar {
 	private static class GenerationState {
-		public StringBuilder contents;
+		public StringBuilder	contents;
+		public Random		rnd;
 
-		public GenerationState(StringBuilder contents) {
+		public GenerationState(StringBuilder contents, Random rnd) {
 			this.contents = contents;
 		}
 	}
@@ -61,6 +63,23 @@ public class RGrammar {
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule) {
+		return generate(startRule, new Random());
+	}
+
+	/**
+	 * Generate a string from this grammar, starting from the specified
+	 * rule.
+	 * 
+	 * @param startRule
+	 *                The rule to start generating at, or null to use the
+	 *                initial rule for this grammar.
+	 * 
+	 * @param rnd
+	 *                The random number generator to use.
+	 * 
+	 * @return A possible string from the grammar.
+	 */
+	public String generate(String startRule, Random rnd) {
 		String fromRule = startRule;
 
 		if(startRule == null) {
@@ -76,11 +95,11 @@ public class RGrammar {
 			}
 		}
 
-		RuleCase start = rules.get(fromRule).getCase();
+		RuleCase start = rules.get(fromRule).getCase(rnd);
 
 		StringBuilder contents = new StringBuilder();
 
-		generateCase(start, new GenerationState(contents));
+		generateCase(start, new GenerationState(contents, rnd));
 
 		return contents.toString();
 	}
@@ -111,10 +130,21 @@ public class RGrammar {
 		try {
 			switch(elm.type) {
 			case LITERAL:
-				state.contents.append(elm.getLiteral() + " ");
+				state.contents.append(elm.getLiteral());
+				state.contents.append(" ");
 				break;
 			case RULEREF:
 				generateRuleReference(elm, state);
+				break;
+			case RANGE:
+				int start = elm.getStart();
+				int end = elm.getEnd();
+
+				int val = state.rnd.nextInt(end - start);
+				val += start;
+
+				state.contents.append(val);
+				state.contents.append(" ");
 				break;
 			default:
 				throw new GrammarException(String.format("Unknown element type '%s'", elm.type));
@@ -130,16 +160,16 @@ public class RGrammar {
 	private void generateRuleReference(CaseElement elm, GenerationState state) {
 		String refersTo = elm.getLiteral();
 
-		GenerationState newState = new GenerationState(new StringBuilder());
+		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd);
 
 		if(rules.containsKey(refersTo)) {
-			RuleCase cse = rules.get(refersTo).getCase();
+			RuleCase cse = rules.get(refersTo).getCase(state.rnd);
 
 			generateCase(cse, newState);
 		} else if(importRules.containsKey(refersTo)) {
 			RGrammar dst = importRules.get(refersTo);
 
-			newState.contents.append(dst.generate(refersTo));
+			newState.contents.append(dst.generate(refersTo, state.rnd));
 		} else {
 			throw new GrammarException(String.format("No rule by name '%s' found", refersTo));
 		}

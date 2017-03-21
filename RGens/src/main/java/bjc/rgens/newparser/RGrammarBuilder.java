@@ -18,6 +18,8 @@ import static bjc.rgens.newparser.RuleCase.CaseType.*;
  *
  */
 public class RGrammarBuilder {
+	private static final String RANGE_CASELM = "\\[\\d+\\.\\.\\d+\\]";
+
 	private static final String REFER_CASELEM = "\\[[^\\]]+\\]";
 
 	private static final String SPECIAL_CASELEM = "{[^}]}";
@@ -100,7 +102,19 @@ public class RGrammarBuilder {
 			 * Handle other cases.
 			 */
 		} else if(csepart.matches(REFER_CASELEM)) {
+			if(csepart.matches(RANGE_CASELM)) {
+				/*
+				 * Handle ranges
+				 */
+				String rawRange = csepart.substring(1, csepart.length() - 1);
+
+				int firstNum = Integer.parseInt(rawRange.substring(0, rawRange.indexOf('.')));
+				int secondNum = Integer.parseInt(rawRange.substring(rawRange.lastIndexOf('.') + 1));
+
+				currentCase.add(new CaseElement(RANGE, firstNum, secondNum));
+			} else {
 				currentCase.add(new CaseElement(RULEREF, csepart));
+			}
 		} else {
 			currentCase.add(new CaseElement(LITERAL, csepart));
 		}

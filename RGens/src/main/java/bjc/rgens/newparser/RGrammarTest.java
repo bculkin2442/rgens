@@ -27,7 +27,7 @@ public class RGrammarTest {
 		grammarSet.addGrammar("rpg", grammar);
 
 		for(int i = 0; i < 10; i++) {
-			System.out.println(grammar.generate(null));
+			System.out.println(grammar.generate(null, null));
 		}
 
 		System.out.println();
