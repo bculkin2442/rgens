@@ -174,7 +174,14 @@ public class RGrammar {
 			throw new GrammarException(String.format("No rule by name '%s' found", refersTo));
 		}
 
+		if(refersTo.contains("+")) {
+			/*
+			 * Rule names with pluses in them get space-flattened
+			 */
+			state.contents.append(newState.contents.toString().replaceAll("\\s+", ""));
+		} else {
 			state.contents.append(newState.contents.toString());
+		}
 	}
 
 	/**
