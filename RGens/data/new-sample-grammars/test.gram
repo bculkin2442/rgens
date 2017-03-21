@@ -1,0 +1,6 @@
+# Test of new grammar syntax
+
+[test] → hello
+	there
+
+pragma initial-rule [test]
