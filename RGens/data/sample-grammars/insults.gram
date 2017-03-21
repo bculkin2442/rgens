@@ -1,4 +1,4 @@
-[shakesphere-insult] Thou [insult-1] [insult-2] [insult-3]!
+[shakesphere-insult] Thou [insult-1] [insult-2] [insult-3] !
 
 pragma initial-rule [shakesphere-insult]
 
@@ -104,7 +104,7 @@ pragma initial-rule [shakesphere-insult]
 	unchin-snouted
 	weather-bitten
 
-[insults-3] apple-john
+[insult-3] apple-john
 	baggage
 	barnacle
 	bladder
