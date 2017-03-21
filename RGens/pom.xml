@@ -26,9 +26,18 @@
 						<argument>*</argument>
 						<!-- <argument>-i</argument> -->
 					</arguments>
-				</configuration>	
+				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>data/</directory>
+				<includes>
+					<include>**/*.gram</include>
+					<include>**/*.help</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 	<groupId>bjc</groupId>
