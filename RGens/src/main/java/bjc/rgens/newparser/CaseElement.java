@@ -92,11 +92,35 @@ public class CaseElement {
 	}
 
 	/**
+
+	/**
 	 * Get the literal string value for this element.
 	 * 
 	 * @return The literal string value for this element.
+	 * 
+	 * @throws IllegalStateException
+	 *                 If this type doesn't have a literal string value.
 	 */
 	public String getLiteral() {
+		switch(type) {
+		case LITERAL:
+		case RULEREF:
+			break;
+		default:
+			throw new IllegalStateException(String.format("Type '%s' doesn't have a literal string value"));
+		}
+
 		return literalVal;
+	}
+
+	@Override
+	public String toString() {
+		switch(type) {
+		case LITERAL:
+		case RULEREF:
+			return literalVal;
+		default:
+			return String.format("Unknown type '%s'", type);
+		}
 	}
 }

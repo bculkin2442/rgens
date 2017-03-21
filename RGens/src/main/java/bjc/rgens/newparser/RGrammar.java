@@ -114,18 +114,7 @@ public class RGrammar {
 				state.contents.append(elm.getLiteral() + " ");
 				break;
 			case RULEREF:
-				if(rules.containsKey(elm.getLiteral())) {
-					RuleCase cse = rules.get(elm.getLiteral()).getCase();
-
-					generateCase(cse, state);
-				} else if(importRules.containsKey(elm.getLiteral())) {
-					RGrammar dst = importRules.get(elm.getLiteral());
-
-					state.contents.append(dst.generate(elm.getLiteral()));
-				} else {
-					throw new GrammarException(
-							String.format("No rule by name '%s' found", elm.getLiteral()));
-				}
+				generateRuleReference(elm, state);
 				break;
 			default:
 				throw new GrammarException(String.format("Unknown element type '%s'", elm.type));
@@ -133,6 +122,29 @@ public class RGrammar {
 		} catch(GrammarException gex) {
 			throw new GrammarException(String.format("Error in generating case element (%s)", elm), gex);
 		}
+	}
+
+	/*
+	 * Generate a rule reference.
+	 */
+	private void generateRuleReference(CaseElement elm, GenerationState state) {
+		String refersTo = elm.getLiteral();
+
+		GenerationState newState = new GenerationState(new StringBuilder());
+
+		if(rules.containsKey(refersTo)) {
+			RuleCase cse = rules.get(refersTo).getCase();
+
+			generateCase(cse, newState);
+		} else if(importRules.containsKey(refersTo)) {
+			RGrammar dst = importRules.get(refersTo);
+
+			newState.contents.append(dst.generate(refersTo));
+		} else {
+			throw new GrammarException(String.format("No rule by name '%s' found", refersTo));
+		}
+
+			state.contents.append(newState.contents.toString());
 	}
 
 	/**
@@ -204,5 +216,14 @@ public class RGrammar {
 	 */
 	public void setExportedRules(Set<String> exportRules) {
 		this.exportRules = exportRules;
+	}
+
+	/**
+	 * Get all the rules in this grammar.
+	 * 
+	 * @return All the rules in this grammar.
+	 */
+	public Map<String, Rule> getRules() {
+		return rules;
 	}
 }

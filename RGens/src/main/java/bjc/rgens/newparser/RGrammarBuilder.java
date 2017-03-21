@@ -18,6 +18,10 @@ import static bjc.rgens.newparser.RuleCase.CaseType.*;
  *
  */
 public class RGrammarBuilder {
+	private static final String REFER_CASELEM = "\\[[^\\]]+\\]";
+
+	private static final String SPECIAL_CASELEM = "{[^}]}";
+
 	private IList<CaseElement> currentCase;
 
 	private Rule currRule;
@@ -91,8 +95,12 @@ public class RGrammarBuilder {
 	 * @param csepart
 	 */
 	public void addCasePart(String csepart) {
-		if(csepart.matches("\\[[^\\]]+\\]")) {
-			currentCase.add(new CaseElement(RULEREF, csepart));
+		if(csepart.matches(SPECIAL_CASELEM)) {
+			/*
+			 * Handle other cases.
+			 */
+		} else if(csepart.matches(REFER_CASELEM)) {
+				currentCase.add(new CaseElement(RULEREF, csepart));
 		} else {
 			currentCase.add(new CaseElement(LITERAL, csepart));
 		}

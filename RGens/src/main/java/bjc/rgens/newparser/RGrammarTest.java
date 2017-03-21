@@ -16,7 +16,7 @@ public class RGrammarTest {
 	 *                Unused CLI args.
 	 */
 	public static void main(String[] args) {
-		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/24hr-rpg.gram");
+		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/web.gram");
 
 		RGrammarSet grammarSet = new RGrammarSet();
 
@@ -29,5 +29,14 @@ public class RGrammarTest {
 		for(int i = 0; i < 10; i++) {
 			System.out.println(grammar.generate(null));
 		}
+
+		System.out.println();
+		System.out.println();
+
+		System.out.println("Formatted grammar: ");
+
+		String formattedGrammar = RGrammarFormatter.formatGrammar(grammar);
+		
+		System.out.print(formattedGrammar);
 	}
 }

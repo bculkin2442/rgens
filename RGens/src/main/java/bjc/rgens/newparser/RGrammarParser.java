@@ -20,13 +20,13 @@ public class RGrammarParser {
 	/*
 	 * Templates for level-dependent delimiters.
 	 */
-	private static final String	TMPL_PRAGMA_BLOCK_DELIM		= "\\n\\t{%d}(?!\\t)";
-	private static final String	TMPL_RULEDECL_BLOCK_DELIM	= "\\n\\t\\t{%d}";
+	private static final String	TMPL_PRAGMA_BLOCK_DELIM		= "\\r?\\n\\t{%d}(?!\\t)";
+	private static final String	TMPL_RULEDECL_BLOCK_DELIM	= "\\r?\\n\\t\\t{%d}";
 
 	/*
 	 * Templates for non-level-dependent delimiters.
 	 */
-	private static final String TOPLEVEL_BLOCK_DELIM = "\\n\\.?\\n";
+	private static final String TOPLEVEL_BLOCK_DELIM = "\\r?\\n\\.?\\r?\\n";
 
 	/*
 	 * Pragma impls.
@@ -276,7 +276,7 @@ public class RGrammarParser {
 
 		for(String csepart : cse.split(" ")) {
 			String partToAdd = csepart.trim();
-			
+
 			/*
 			 * Ignore empty parts
 			 */
