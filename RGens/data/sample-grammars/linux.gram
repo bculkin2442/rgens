@@ -549,7 +549,7 @@ pragma export-rule [geek-scifi-book]
 	3d accelerator card
 	[peripheral-interface] time travel card
 	[peripheral-interface] coffee machine
-	[monitor-size] inch monitor
+	[40..99] inch monitor
 	uninterruptible power supply
 	[peripheral-interface] cd-recorder
 	beowulf-cluster-in-a-box
@@ -561,7 +561,7 @@ pragma export-rule [geek-scifi-book]
 	firewire
 	serial port
 	thunderbolt
-	
+
 [usb] usb
 	micro-usb
 	mini-usb

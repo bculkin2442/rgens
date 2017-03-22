@@ -124,8 +124,7 @@ pragma export-rule [org-political]
 [org-members] [org-members-prefix] [org-members-body]
 
 # This should just create a blank token
-[org-members-prefix]  
-	radical
+[org-members-prefix] radical
 	concerned
 	outraged
 	activist

@@ -8,12 +8,12 @@ pragma export-rule [small-number]
 pragma export-rule [medium-number]
 pragma export-rule [zipcode]
 
-[actual+small-number] [digit-nozero]
-	[digit-nozero] [digit]
-	[digit-nozero] [digit] [digit]
+[actual+small-number] [digit-nonzero]
+	[digit-nonzero] [digit]
+	[digit-nonzero] [digit] [digit]
 
-[actual+medium-number] [digit-nozero] [digit] [digit]
-	[digit-nozero] [digit] [digit] [digit]
-	[digit-nozero] [digit] [digit] [digit] [digit]
+[actual+medium-number] [digit-nonzero] [digit] [digit]
+	[digit-nonzero] [digit] [digit] [digit]
+	[digit-nonzero] [digit] [digit] [digit] [digit]
 
 [actual+zipcode] [digit] [digit] [digit] [digit] [digit]
