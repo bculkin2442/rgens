@@ -97,7 +97,7 @@ pragma initial-rule [fortune-cookie]
 
 [half-digit+percent] [1..5] %
 
-[large+bill] [digit-nozero] [digit] [digit] , [digit] [digit] [digit]
+[large+bill] [digit-nonzero] [digit] [digit] , [digit] [digit] [digit]
 
 [digit+digit] [digit] . [digit]
 

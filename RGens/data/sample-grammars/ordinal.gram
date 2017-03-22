@@ -6,7 +6,7 @@ pragma export-rule [ordinal-number]
 	1 [digit] th
 	[digit-noone] [ordinal-digit]
 	[digit-noone] [ordinal-digit]
-	[digit-nozero] [ordinal-number]
+	[digit-nonzero] [ordinal-number]
 
 [ordinal-digit] 1st
 	2nd
