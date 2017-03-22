@@ -400,6 +400,11 @@ public class CaseElement {
 				}
 
 				return new CaseElement(VARDEF, parts[0], parts[1]);
+			} else if(specialBody.matches("{empty}")) {
+				/*
+				 * Literal blank, for empty cases.
+				 */
+				return new CaseElement(LITERAL, "");
 			} else {
 				throw new IllegalArgumentException(
 						String.format("Unknown special case part '%s'", specialBody));
