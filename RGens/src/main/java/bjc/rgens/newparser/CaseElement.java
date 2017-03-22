@@ -38,7 +38,7 @@ public class CaseElement {
 		EXPVARDEF;
 	}
 
-	private static final String	SPECIAL_CASELEM	= "\\{[^}]\\}";
+	private static final String	SPECIAL_CASELEM	= "\\{[^}]+\\}";
 	private static final String	REFER_CASELEM	= "\\[[^\\]]+\\]";
 	private static final String	RANGE_CASELM	= "\\[\\d+\\.\\.\\d+\\]";
 

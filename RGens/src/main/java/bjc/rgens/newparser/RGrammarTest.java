@@ -24,10 +24,29 @@ public class RGrammarTest {
 		try {
 			RGrammarSet gramSet = RGrammarSet.fromConfigFile(Paths.get(rsc.toURI()));
 
+			for(String gramName : gramSet.getGrammars()) {
+				gramSet.getGrammar(gramName).generateSuggestions();
+			}
+
 			for(String exportName : gramSet.getExportedRules()) {
 				RGrammar grammar = gramSet.getExportSource(exportName);
 
-				grammar.generate(exportName);
+				for(int i = 0; i < 10; i++) {
+					try {
+						grammar.generate(exportName);
+					} catch(GrammarException gex) {
+						System.out.println("Error in exported rule " + exportName
+								+ " (loaded from "
+								+ gramSet.loadedFrom(gramSet.exportedFrom(exportName)));
+
+						System.out.println();
+
+						gex.printStackTrace();
+
+						System.out.println();
+						System.out.println();
+					}
+				}
 			}
 		} catch(IOException ioex) {
 			ioex.printStackTrace();

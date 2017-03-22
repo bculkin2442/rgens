@@ -112,7 +112,7 @@ public class RGrammar {
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule) {
-		return generate(startRule, new Random());
+		return generate(startRule, new Random(), new HashMap<>());
 	}
 
 	/**
@@ -126,9 +126,12 @@ public class RGrammar {
 	 * @param rnd
 	 *                The random number generator to use.
 	 * 
+	 * @param vars
+	 *                The set of variables to use.
+	 * 
 	 * @return A possible string from the grammar.
 	 */
-	public String generate(String startRule, Random rnd) {
+	public String generate(String startRule, Random rnd, Map<String, String> vars) {
 		String fromRule = startRule;
 
 		if(startRule == null) {
@@ -148,9 +151,7 @@ public class RGrammar {
 
 		StringBuilder contents = new StringBuilder();
 
-		HashMap<String, String> scope = new HashMap<>();
-
-		generateCase(start, new GenerationState(contents, rnd, scope));
+		generateCase(start, new GenerationState(contents, rnd, vars));
 
 		return contents.toString();
 	}
@@ -223,9 +224,9 @@ public class RGrammar {
 			generateCase(destCase, newState);
 		} else if(importRules.containsKey(defn)) {
 			RGrammar destGrammar = importRules.get(defn);
-			RuleCase destCase = destGrammar.rules.get(defn).getCase();
+			String res = destGrammar.generate(defn, state.rnd, state.vars);
 
-			destGrammar.generateCase(destCase, newState);
+			newState.contents.append(res);
 		} else {
 			throw new GrammarException(String.format("No rule '%s' defined", defn));
 		}
@@ -285,7 +286,7 @@ public class RGrammar {
 
 				nameMatcher.appendTail(nameBuffer);
 
-				refersTo = nameBuffer.toString();
+				refersTo = "[" + nameBuffer.toString() + "]";
 			} else {
 				/*
 				 * Handle string references.
@@ -301,9 +302,9 @@ public class RGrammar {
 				}
 
 				state.contents.append(state.vars.get(key));
-			}
 
-			refersTo = refBody;
+				return;
+			}
 		}
 
 		if(rules.containsKey(refersTo)) {
