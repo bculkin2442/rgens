@@ -874,7 +874,7 @@ pragma export-rule [app-name]
 	10
 	10 anniversary edition
 
-[microsoft-product] office
+[ms-product] office
 	word
 	excel
 	access

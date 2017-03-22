@@ -13,7 +13,7 @@ pragma export-rule [us-phone-number]
 
 [intl+num] 1- [full+num]
 
-[ext+num] [digit-nozero] [digit] [digit]
+[ext+num] [digit-nonzero] [digit] [digit]
 
 [letter+num] [digit] [digit] [digit] - [letter] [letter] [letter] [letter]
 
