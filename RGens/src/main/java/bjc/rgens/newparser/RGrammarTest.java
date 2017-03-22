@@ -1,6 +1,9 @@
 package bjc.rgens.newparser;
 
-import java.io.InputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 /**
  * Test for new grammar syntax.
@@ -16,27 +19,20 @@ public class RGrammarTest {
 	 *                Unused CLI args.
 	 */
 	public static void main(String[] args) {
-		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/college.gram");
+		URL rsc = RGrammarTest.class.getResource("/server-config-sample.cfg");
 
-		RGrammarSet grammarSet = new RGrammarSet();
+		try {
+			RGrammarSet gramSet = RGrammarSet.fromConfigFile(Paths.get(rsc.toURI()));
 
-		RGrammarParser parse = new RGrammarParser();
+			for(String exportName : gramSet.getExportedRules()) {
+				RGrammar grammar = gramSet.getExportSource(exportName);
 
-		RGrammar grammar = parse.readGrammar(stream);
-
-		grammarSet.addGrammar("rpg", grammar);
-
-		for(int i = 0; i < 10; i++) {
-			System.out.println(grammar.generate(null, null));
+				grammar.generate(exportName);
+			}
+		} catch(IOException ioex) {
+			ioex.printStackTrace();
+		} catch(URISyntaxException urisex) {
+			urisex.printStackTrace();
 		}
-
-		System.out.println();
-		System.out.println();
-
-		System.out.println("Formatted grammar: ");
-
-		String formattedGrammar = RGrammarFormatter.formatGrammar(grammar);
-		
-		System.out.print(formattedGrammar);
 	}
 }

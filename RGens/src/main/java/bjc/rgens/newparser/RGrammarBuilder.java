@@ -154,8 +154,6 @@ public class RGrammarBuilder {
 			throw new NullPointerException("init must not be null");
 		} else if(init.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		} else if(!rules.containsKey(init)) {
-			throw new IllegalArgumentException(String.format("No local rule named '%s' found", init));
 		}
 
 		initialRule = init;
@@ -176,8 +174,6 @@ public class RGrammarBuilder {
 			throw new NullPointerException("Export name must not be null");
 		} else if(export.equals("")) {
 			throw new NullPointerException("The empty string is not a valid rule name");
-		} else if(!rules.containsKey(export)) {
-			throw new IllegalArgumentException(String.format("No local rule named '%s' found", export));
 		}
 
 		exportedRules.add(export);
@@ -201,11 +197,36 @@ public class RGrammarBuilder {
 			throw new NullPointerException("Rule name must not be null");
 		} else if(ruleName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		} else if(!rules.containsKey(ruleName)) {
-			throw new IllegalArgumentException(String.format("No local rule named '%s' found", ruleName));
 		}
 
 		CaseElement element = CaseElement.createElement(suffix);
+
+		for(RuleCase ruleCase : rules.get(ruleName).getCases()) {
+			ruleCase.getElements().add(element);
+		}
+	}
+
+	/**
+	 * Prefix a given case element to every case of a specific rule.
+	 * 
+	 * @param ruleName
+	 *                The rule to prefix.
+	 * 
+	 * @param prefix
+	 *                The prefix to add.
+	 * 
+	 * @throws IllegalArgumentException
+	 *                 If the rule name is either invalid or not defined by
+	 *                 this grammar, or if the prefix is invalid.
+	 */
+	public void prefixWith(String ruleName, String prefix) {
+		if(ruleName == null) {
+			throw new NullPointerException("Rule name must not be null");
+		} else if(ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		}
+
+		CaseElement element = CaseElement.createElement(prefix);
 
 		for(RuleCase ruleCase : rules.get(ruleName).getCases()) {
 			ruleCase.getElements().add(element);

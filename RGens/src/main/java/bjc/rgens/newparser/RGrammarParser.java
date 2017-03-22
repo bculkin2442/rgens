@@ -57,6 +57,42 @@ public class RGrammarParser {
 				build.addExport(export);
 			}
 		});
+
+		pragmas.put("suffix-with", (body, build, level) -> {
+			String[] parts = body.trim().split(" ");
+
+			if(parts.length != 2) {
+				throw new GrammarException("Suffix-with pragma takes two arguments,"
+						+ " the name of the rule to suffix, then what to suffix it with");
+			} else {
+				String name = parts[0];
+				String suffix = parts[1];
+
+				if(name.equals("")) {
+					throw new GrammarException("The empty string is not a valid rule name");
+				}
+
+				build.suffixWith(name, suffix);
+			}
+		});
+		
+		pragmas.put("prefix-with", (body, build, level) -> {
+			String[] parts = body.trim().split(" ");
+
+			if(parts.length != 2) {
+				throw new GrammarException("Prefix-with pragma takes two arguments,"
+						+ " the name of the rule to prefix, then what to prefix it with");
+			} else {
+				String name = parts[0];
+				String prefix = parts[1];
+
+				if(name.equals("")) {
+					throw new GrammarException("The empty string is not a valid rule name");
+				}
+
+				build.prefixWith(name, prefix);
+			}
+		});
 	}
 
 	/**
@@ -294,6 +330,7 @@ public class RGrammarParser {
 	/*
 	 * Handle a where block (a block with local rules).
 	 */
+	@SuppressWarnings("unused")
 	private void handleWhereBlock(String block, RGrammarBuilder build, int level) throws GrammarException {
 		try(BlockReader whereReader = new BlockReader("", new StringReader(block))) {
 			try {

@@ -1,8 +1,6 @@
 package bjc.rgens.newparser;
 
-import static bjc.rgens.newparser.CaseElement.ElementType.LITERAL;
-import static bjc.rgens.newparser.CaseElement.ElementType.RANGE;
-import static bjc.rgens.newparser.CaseElement.ElementType.RULEREF;
+import static bjc.rgens.newparser.CaseElement.ElementType.*;
 
 /**
  * A element in a rule case.
@@ -34,15 +32,15 @@ public class CaseElement {
 		 */
 		VARDEF,
 		/**
-		 * An element that represents a variable that stores the result of
-		 * generating a rule.
+		 * An element that represents a variable that stores the result
+		 * of generating a rule.
 		 */
 		EXPVARDEF;
 	}
 
-	private static final String SPECIAL_CASELEM = "\\{[^}]\\}";
-	private static final String REFER_CASELEM = "\\[[^\\]]+\\]";
-	private static final String RANGE_CASELM = "\\[\\d+\\.\\.\\d+\\]";
+	private static final String	SPECIAL_CASELEM	= "\\{[^}]\\}";
+	private static final String	REFER_CASELEM	= "\\[[^\\]]+\\]";
+	private static final String	RANGE_CASELM	= "\\[\\d+\\.\\.\\d+\\]";
 
 	/**
 	 * The type of this element.
@@ -52,8 +50,8 @@ public class CaseElement {
 	/**
 	 * The literal string value of this element.
 	 * 
-	 * This means that it is a string whose value should always mean the same
-	 * thing.
+	 * This means that it is a string whose value should always mean the
+	 * same thing.
 	 * 
 	 * <h2>Used For</h2>
 	 * <dl>
@@ -117,13 +115,13 @@ public class CaseElement {
 	 * Create a new case element.
 	 * 
 	 * @param typ
-	 *            The type of this element.
+	 *                The type of this element.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             If the specified type needs parameters.
+	 *                 If the specified type needs parameters.
 	 */
 	public CaseElement(ElementType typ) {
-		switch (typ) {
+		switch(typ) {
 		case LITERAL:
 		case RULEREF:
 			throw new IllegalArgumentException("This type requires a string parameter");
@@ -143,16 +141,17 @@ public class CaseElement {
 	 * Create a new case element that has a single string value.
 	 * 
 	 * @param typ
-	 *            The type of this element.
+	 *                The type of this element.
 	 * 
 	 * @param val
-	 *            The string value of this element.
+	 *                The string value of this element.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             If the specified type doesn't take a single string parameter.
+	 *                 If the specified type doesn't take a single string
+	 *                 parameter.
 	 */
 	public CaseElement(ElementType typ, String val) {
-		switch (typ) {
+		switch(typ) {
 		case LITERAL:
 		case RULEREF:
 			break;
@@ -174,17 +173,18 @@ public class CaseElement {
 	 * Create a new case element that has two integer values.
 	 * 
 	 * @param typ
-	 *            The type of this element.
+	 *                The type of this element.
 	 * @param first
-	 *            The first integer value for this element.
+	 *                The first integer value for this element.
 	 * @param second
-	 *            The second integer value for this element.
+	 *                The second integer value for this element.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             If the specified type doesn't take two integer parameters.
+	 *                 If the specified type doesn't take two integer
+	 *                 parameters.
 	 */
 	public CaseElement(ElementType typ, int first, int second) {
-		switch (typ) {
+		switch(typ) {
 		case LITERAL:
 		case RULEREF:
 			throw new IllegalArgumentException("This type requires a string parameter");
@@ -207,17 +207,18 @@ public class CaseElement {
 	 * Create a new case element that has two string values.
 	 * 
 	 * @param typ
-	 *            The type of this element.
+	 *                The type of this element.
 	 * @param name
-	 *            The first string value for this element.
+	 *                The first string value for this element.
 	 * @param def
-	 *            The second string value for this element.
+	 *                The second string value for this element.
 	 * 
 	 * @throws IllegalArgumentException
-	 *             If the specified type doesn't take two string parameters.
+	 *                 If the specified type doesn't take two string
+	 *                 parameters.
 	 */
 	public CaseElement(ElementType typ, String name, String def) {
-		switch (typ) {
+		switch(typ) {
 		case LITERAL:
 		case RULEREF:
 			throw new IllegalArgumentException("This type requires a string parameter");
@@ -242,10 +243,10 @@ public class CaseElement {
 	 * @return The literal string value for this element.
 	 * 
 	 * @throws IllegalStateException
-	 *             If this type doesn't have a literal string value.
+	 *                 If this type doesn't have a literal string value.
 	 */
 	public String getLiteral() {
-		switch (type) {
+		switch(type) {
 		case LITERAL:
 		case RULEREF:
 			break;
@@ -262,14 +263,15 @@ public class CaseElement {
 	 * @return The starting integer value for this element.
 	 * 
 	 * @throws IllegalStateException
-	 *             If this type doesn't have a starting integer value.
+	 *                 If this type doesn't have a starting integer value.
 	 */
 	public int getStart() {
-		switch (type) {
+		switch(type) {
 		case RANGE:
 			break;
 		default:
-			throw new IllegalStateException(String.format("Type '%s' doesn't have a starting integer value", type));
+			throw new IllegalStateException(
+					String.format("Type '%s' doesn't have a starting integer value", type));
 
 		}
 		return start;
@@ -281,14 +283,15 @@ public class CaseElement {
 	 * @return The ending integer value for this element.
 	 * 
 	 * @throws IllegalStateException
-	 *             If this type doesn't have a ending integer value.
+	 *                 If this type doesn't have a ending integer value.
 	 */
 	public int getEnd() {
-		switch (type) {
+		switch(type) {
 		case RANGE:
 			break;
 		default:
-			throw new IllegalStateException(String.format("Type '%s' doesn't have a ending integer value", type));
+			throw new IllegalStateException(
+					String.format("Type '%s' doesn't have a ending integer value", type));
 		}
 
 		return end;
@@ -300,10 +303,10 @@ public class CaseElement {
 	 * @return The variable name of this element.
 	 * 
 	 * @throws IllegalStateException
-	 *             If the type doesn't have a variable name.
+	 *                 If the type doesn't have a variable name.
 	 */
 	public String getName() {
-		switch (type) {
+		switch(type) {
 		case VARDEF:
 		case EXPVARDEF:
 			break;
@@ -320,10 +323,10 @@ public class CaseElement {
 	 * @return The variable definition of this element.
 	 * 
 	 * @throws IllegalStateException
-	 *             If the type doesn't have a variable definition.
+	 *                 If the type doesn't have a variable definition.
 	 */
 	public String getDefn() {
-		switch (type) {
+		switch(type) {
 		case VARDEF:
 		case EXPVARDEF:
 			break;
@@ -336,7 +339,7 @@ public class CaseElement {
 
 	@Override
 	public String toString() {
-		switch (type) {
+		switch(type) {
 		case LITERAL:
 		case RULEREF:
 			return literalVal;
@@ -355,34 +358,54 @@ public class CaseElement {
 	 * Create a case element from a string.
 	 * 
 	 * @param csepart
-	 *            The string to convert.
+	 *                The string to convert.
 	 * 
 	 * @return A case element representing the string.
 	 */
 	public static CaseElement createElement(String csepart) {
-		if (csepart == null) {
+		if(csepart == null) {
 			throw new NullPointerException("Case part cannot be null");
 		}
 
-		if (csepart.matches(SPECIAL_CASELEM)) {
+		if(csepart.matches(SPECIAL_CASELEM)) {
 			/*
 			 * Handle special cases.
 			 */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
-			if (specialBody.matches("\\S+:=\\S+")) {
+			if(specialBody.matches("\\S+:=\\S+")) {
 				/*
 				 * Handle expanding variable definitions.
 				 */
-			} else if (specialBody.matches("\\S+=\\S+")) {
+				String[] parts = specialBody.split(":=");
+
+				if(parts.length != 2) {
+					throw new GrammarException("Expanded variables must be a name and a definition,"
+							+ " seperated by :=");
+				}
+
+				return new CaseElement(EXPVARDEF, parts[0], parts[1]);
+			} else if(specialBody.matches("\\S+=\\S+")) {
 				/*
 				 * Handle regular variable definitions.
 				 */
+				/*
+				 * Handle expanding variable definitions.
+				 */
+				String[] parts = specialBody.split("=");
+
+				if(parts.length != 2) {
+					throw new GrammarException("Variables must be a name and a definition,"
+							+ " seperated by =");
+				}
+
+				return new CaseElement(VARDEF, parts[0], parts[1]);
 			} else {
-				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
+				throw new IllegalArgumentException(
+						String.format("Unknown special case part '%s'", specialBody));
 			}
-		} else if (csepart.matches(REFER_CASELEM)) {
-			if (csepart.matches(RANGE_CASELM)) {
+		} else if(csepart.matches(REFER_CASELEM)) {
+			if(csepart.matches(RANGE_CASELM)) {
 				/*
 				 * Handle ranges
 				 */
@@ -398,7 +421,5 @@ public class CaseElement {
 		} else {
 			return new CaseElement(LITERAL, csepart);
 		}
-
-		throw new IllegalArgumentException(String.format("Unknown case part '%s'"));
 	}
 }

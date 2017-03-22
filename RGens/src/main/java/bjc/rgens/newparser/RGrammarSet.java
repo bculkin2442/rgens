@@ -1,7 +1,13 @@
 package bjc.rgens.newparser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -99,7 +105,7 @@ public class RGrammarSet {
 		} else if(!exportedRules.containsKey(exportName)) {
 			throw new IllegalArgumentException(String.format("No export with name '%s' found", exportName));
 		}
-		
+
 		return exportedRules.get(exportName);
 	}
 
@@ -119,5 +125,85 @@ public class RGrammarSet {
 	 */
 	public Set<String> getExportedRules() {
 		return exportedRules.keySet();
+	}
+
+	/**
+	 * Load a grammar set from a configuration file.
+	 * 
+	 * @param cfgFile
+	 *                The configuration file to load from.
+	 * 
+	 * @return The grammar set created by the configuration file.
+	 * 
+	 * @throws IOException
+	 *                 If something goes wrong during configuration loading.
+	 */
+	public static RGrammarSet fromConfigFile(Path cfgFile) throws IOException {
+		RGrammarSet set = new RGrammarSet();
+
+		RGrammarParser parser = new RGrammarParser();
+
+		Path cfgParent = cfgFile.getParent();
+
+		try(Scanner scn = new Scanner(cfgFile)) {
+			/*
+			 * Execute lines from the configuration file.
+			 */
+			while(scn.hasNextLine()) {
+				String ln = scn.nextLine().trim();
+
+				/*
+				 * Ignore blank/comment lines.
+				 */
+				if(ln.equals("")) continue;
+				if(ln.startsWith("#")) continue;
+
+				/*
+				 * Handle mixed whitespace
+				 */
+				ln = ln.replaceAll("\\s+", " ");
+
+				int nameIdx = ln.indexOf(" ");
+
+				if(nameIdx == -1) {
+					throw new GrammarException("Must specify a name for a loaded grammar");
+				}
+
+				/*
+				 * Name and path of grammar.
+				 */
+				String name = ln.substring(0, nameIdx);
+				Path path = Paths.get(ln.substring(nameIdx).trim());
+
+				/*
+				 * Convert from configuration relative path.
+				 */
+				Path convPath = cfgParent.resolve(path);
+
+				File fle = convPath.toFile();
+
+				if(fle.isDirectory()) {
+					/*
+					 * TODO implement subset grammars
+					 */
+					throw new GrammarException("Sub-grammar sets aren't implemented yet");
+				} else if(fle.getName().endsWith(".gram")) {
+					/*
+					 * Load grammar files.
+					 */
+					try {
+						RGrammar gram = parser.readGrammar(new FileInputStream(fle));
+						set.addGrammar(name, gram);
+					} catch(GrammarException gex) {
+						throw new GrammarException(
+								String.format("Error loading file '%s'", path), gex);
+					}
+				} else {
+					throw new GrammarException(String.format("Unrecognized file '%s'"));
+				}
+			}
+		}
+
+		return set;
 	}
 }
