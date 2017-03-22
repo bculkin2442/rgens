@@ -56,5 +56,15 @@
 			<artifactId>generex</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		<dependency>
+			<groupId>edu.gatech.gtri.bk-tree</groupId>
+			<artifactId>bk-tree</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

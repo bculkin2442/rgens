@@ -1,5 +1,7 @@
 package bjc.rgens.newparser;
 
+import bjc.utils.funcutils.StringUtils;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,6 +10,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.text.similarity.LevenshteinDistance;
+
+import edu.gatech.gtri.bktree.BkTreeSearcher;
+import edu.gatech.gtri.bktree.BkTreeSearcher.Match;
+import edu.gatech.gtri.bktree.Metric;
+import edu.gatech.gtri.bktree.MutableBkTree;
+
 /**
  * Represents a randomized grammar.
  * 
@@ -15,6 +24,21 @@ import java.util.regex.Pattern;
  *
  */
 public class RGrammar {
+	private static final int MAX_DISTANCE = 6;
+
+	private static final class LevenshteinMetric implements Metric<String> {
+		private static LevenshteinDistance DIST;
+
+		static {
+			DIST = LevenshteinDistance.getDefaultInstance();
+		}
+
+		@Override
+		public int distance(String x, String y) {
+			return DIST.apply(x, y);
+		}
+	}
+
 	private static class GenerationState {
 		public StringBuilder	contents;
 		public Random		rnd;
@@ -38,6 +62,8 @@ public class RGrammar {
 
 	private String initialRule;
 
+	private BkTreeSearcher<String> ruleSearcher;
+
 	/**
 	 * Create a new randomized grammar using the specified set of rules.
 	 * 
@@ -59,6 +85,20 @@ public class RGrammar {
 	 */
 	public void setImportedRules(Map<String, RGrammar> exportedRules) {
 		importRules = exportedRules;
+	}
+
+	/**
+	 * Generates the data structure backing rule suggestions for unknown
+	 * rules.
+	 */
+	public void generateSuggestions() {
+		MutableBkTree<String> ruleSuggester = new MutableBkTree<>(new LevenshteinMetric());
+
+		ruleSuggester.addAll(rules.keySet());
+
+		ruleSuggester.addAll(importRules.keySet());
+
+		ruleSearcher = new BkTreeSearcher<>(ruleSuggester);
 	}
 
 	/**
@@ -226,7 +266,8 @@ public class RGrammar {
 					String var = nameMatcher.group(1);
 
 					if(!state.vars.containsKey(var)) {
-						throw new GrammarException(String.format("No variable '%s' defined"));
+						throw new GrammarException(
+								String.format("No variable '%s' defined", var));
 					}
 
 					String name = state.vars.get(var);
@@ -272,9 +313,19 @@ public class RGrammar {
 		} else if(importRules.containsKey(refersTo)) {
 			RGrammar dst = importRules.get(refersTo);
 
-			newState.contents.append(dst.generate(refersTo, state.rnd));
+			newState.contents.append(dst.generate(refersTo, state.rnd, state.vars));
 		} else {
-			throw new GrammarException(String.format("No rule '%s' defined", refersTo));
+			if(ruleSearcher != null) {
+				Set<Match<? extends String>> results = ruleSearcher.search(refersTo, MAX_DISTANCE);
+
+				String[] resArray = results.stream().map((mat) -> mat.getMatch())
+						.toArray((i) -> new String[i]);
+
+				throw new GrammarException(String.format("No rule '%s' defined (perhaps you meant %s?)",
+						refersTo, StringUtils.toEnglishList(resArray, false)));
+			} else {
+				throw new GrammarException(String.format("No rule '%s' defined", refersTo));
+			}
 		}
 
 		if(refersTo.contains("+")) {
