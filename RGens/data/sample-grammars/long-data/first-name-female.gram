@@ -1,532 +1,534 @@
-abigail
-ada
-adrienne
-agnes
-alberta
-alexandra
-alexis
-alice
-alicia
-alison
-allison
-alma
-alyssa
-amanda
-amber
-amelia
-amy
-ana
-andre
-andrea
-angel
-angela
-angelica
-angelina
-angie
-anita
-ann
-anna
-anne
-annette
-annie
-antoinette
-antonia
-april
-ariane
-ariel
-arlene
-ashley
-audrey
-barbara
-beatrice
-becky
-belinda
-bernadette
-bernice
-bertha
-bessie
-beth
-bethany
-betsy
-betty
-beulah
-beverly
-billie
-blanca
-blanche
-bobbie
-bonnie
-brandi
-brandy
-brenda
-brianna
-bridget
-brittany
-brooke
-caitlin
-camille
-candace
-candice
-carla
-carmen
-carol
-carole
-caroline
-carolyn
-carrie
-casey
-cassandra
-catherine
-cathy
-cecelia
-cecilia
-celia
-charlene
-charlotte
-chelsea
-cheryl
-chloe
-christian
-christie
-christina
-christine
-christy
-cindy
-claire
-clara
-claudia
-colleen
-connie
-constance
-cora
-courtney
-cristina
-crystal
-cynthia
-daisy
-dana
-danielle
-darla
-darlene
-dawn
-deanna
-debbie
-deborah
-debra
-delia
-della
-delores
-denise
-desiree
-diana
-diane
-dianna
-dianne
-dion
-dixie
-dolores
-dominique
-donna
-dora
-doreen
-doris
-dorothy
-ebony
-edith
-edna
-eileen
-elaine
-eleanor
-elena
-elisa
-elizabeth
-ella
-ellen
-eloise
-elsa
-elsie
-elvira
-emily
-emma
-erica
-erika
-erin
-erma
-ernestine
-essie
-estelle
-esther
-ethel
-eula
-eunice
-eva
-evelyn
-faith
-fannie
-faye
-felicia
-felicity
-flora
-florence
-frances
-francis
-freda
-gabriel
-gabrielle
-gail
-gayle
-geneva
-genevieve
-georgia
-geraldine
-gertrude
-gina
-ginger
-gladys
-glenda
-gloria
-grace
-gretchen
-guadalupe
-gwen
-gwendolyn
-haley
-hannah
-harriet
-hattie
-hazel
-heather
-heidi
-helen
-henrietta
-hilda
-hillary
-holly
-hope
-ida
-inez
-irene
-iris
-irma
-isabel
-isabella
-jackie
-jacqueline
-jacquelyn
-jade
-jaime
-jamie
-jan
-jana
-jane
-janet
-janice
-janie
-janis
-jasmine
-jean
-jeanette
-jeanne
-jeannette
-jeannie
-jenna
-jennie
-jennifer
-jenny
-jessica
-jessie
-jill
-jo
-joan
-joann
-joanna
-joanne
-jodi
-jody
-johanna
-johnnie
-josefina
-josephine
-joy
-joyce
-juana
-juanita
-judith
-judy
-julia
-julie
-june
-kaitlyn
-kara
-karen
-kari
-karla
-kate
-katelyn
-katherine
-kathleen
-kathryn
-kathy
-katie
-katrina
-kay
-kayla
-kelley
-kelli
-kellie
-kelly
-kelsey
-kendra
-kerry
-kim
-kimberly
-krista
-kristen
-kristi
-kristie
-kristin
-kristina
-kristine
-kristy
-krystal
-lana
-latoya
-laura
-lauren
-laurie
-laverne
-leah
-lee
-leigh
-lela
-lena
-leona
-leslie
-leticia
-lila
-lillian
-lillie
-linda
-lindsay
-lindsey
-lisa
-lois
-lola
-lora
-lorena
-lorene
-loretta
-lori
-lorraine
-louise
-lucia
-lucille
-lucy
-lula
-luz
-lydia
-lynda
-lynette
-lynn
-lynne
-mabel
-mable
-mackenzie
-madeline
-madison
-mae
-magdalena
-maggie
-mamie
-mandy
-marcella
-marcia
-margaret
-margarita
-marge
-margie
-marguerite
-maria
-mariah
-marian
-marianne
-marie
-marilyn
-marion
-marjorie
-marlene
-marsha
-marta
-martha
-mary
-maryann
-mattie
-maureen
-maxine
-may
-megan
-meghan
-melanie
-melba
-melinda
-melissa
-melody
-mercedes
-meredith
-michele
-michelle
-mildred
-mindy
-minnie
-miranda
-miriam
-misty
-molly
-mona
-monica
-monique
-morgan
-muriel
-myra
-myrtle
-nadine
-nancy
-naomi
-natalie
-natasha
-nellie
-nettie
-nichole
-nicole
-nina
-nora
-norma
-olga
-olive
-olivia
-ollie
-opal
-ora
-paige
-pam
-pamela
-pat
-patricia
-patsy
-patti
-patty
-paula
-paulette
-pauline
-pearl
-peggy
-penny
-phyllis
-priscilla
-rachael
-rachel
-ramona
-raquel
-raven
-rebecca
-regina
-renee
-rhonda
-rita
-roberta
-robin
-robyn
-rochelle
-rosa
-rosalie
-rose
-rosemarie
-rosemary
-rosie
-roxanne
-ruby
-ruth
-sabrina
-sadie
-sally
-samantha
-sandra
-sandy
-sara
-sarah
-shannon
-shari
-sharon
-shawna
-sheila
-shelia
-shelley
-shelly
-sheri
-sherri
-sherry
-sheryl
-shirley
-silvia
-sonia
-sonja
-sonya
-sophia
-sophie
-stacey
-stacy
-stella
-stephanie
-sue
-susan
-susie
-suzanne
-sydney
-sylvia
-tabitha
-tamara
-tami
-tammy
-tanya
-tara
-tasha
-taylor
-teresa
-teri
-terri
-terry
-thelma
-theresa
-tiffany
-tina
-toni
-tonya
-tracey
-traci
-tracy
-tricia
-valerie
-vanessa
-velma
-vera
-verna
-veronica
-vicki
-vickie
-vicky
-victoria
-viola
-violet
-virginia
-vivian
-wanda
-wendy
-whitney
-willie
-wilma
-winifred
-yasmine
-yolanda
-yvette
-yvonne
-zoe
+[first-name-female] → abigail
+	ada
+	adrienne
+	agnes
+	alberta
+	alexandra
+	alexis
+	alice
+	alicia
+	alison
+	allison
+	alma
+	alyssa
+	amanda
+	amber
+	amelia
+	amy
+	ana
+	andre
+	andrea
+	angel
+	angela
+	angelica
+	angelina
+	angie
+	anita
+	ann
+	anna
+	anne
+	annette
+	annie
+	antoinette
+	antonia
+	april
+	ariane
+	ariel
+	arlene
+	ashley
+	audrey
+	barbara
+	beatrice
+	becky
+	belinda
+	bernadette
+	bernice
+	bertha
+	bessie
+	beth
+	bethany
+	betsy
+	betty
+	beulah
+	beverly
+	billie
+	blanca
+	blanche
+	bobbie
+	bonnie
+	brandi
+	brandy
+	brenda
+	brianna
+	bridget
+	brittany
+	brooke
+	caitlin
+	camille
+	candace
+	candice
+	carla
+	carmen
+	carol
+	carole
+	caroline
+	carolyn
+	carrie
+	casey
+	cassandra
+	catherine
+	cathy
+	cecelia
+	cecilia
+	celia
+	charlene
+	charlotte
+	chelsea
+	cheryl
+	chloe
+	christian
+	christie
+	christina
+	christine
+	christy
+	cindy
+	claire
+	clara
+	claudia
+	colleen
+	connie
+	constance
+	cora
+	courtney
+	cristina
+	crystal
+	cynthia
+	daisy
+	dana
+	danielle
+	darla
+	darlene
+	dawn
+	deanna
+	debbie
+	deborah
+	debra
+	delia
+	della
+	delores
+	denise
+	desiree
+	diana
+	diane
+	dianna
+	dianne
+	dion
+	dixie
+	dolores
+	dominique
+	donna
+	dora
+	doreen
+	doris
+	dorothy
+	ebony
+	edith
+	edna
+	eileen
+	elaine
+	eleanor
+	elena
+	elisa
+	elizabeth
+	ella
+	ellen
+	eloise
+	elsa
+	elsie
+	elvira
+	emily
+	emma
+	erica
+	erika
+	erin
+	erma
+	ernestine
+	essie
+	estelle
+	esther
+	ethel
+	eula
+	eunice
+	eva
+	evelyn
+	faith
+	fannie
+	faye
+	felicia
+	felicity
+	flora
+	florence
+	frances
+	francis
+	freda
+	gabriel
+	gabrielle
+	gail
+	gayle
+	geneva
+	genevieve
+	georgia
+	geraldine
+	gertrude
+	gina
+	ginger
+	gladys
+	glenda
+	gloria
+	grace
+	gretchen
+	guadalupe
+	gwen
+	gwendolyn
+	haley
+	hannah
+	harriet
+	hattie
+	hazel
+	heather
+	heidi
+	helen
+	henrietta
+	hilda
+	hillary
+	holly
+	hope
+	ida
+	inez
+	irene
+	iris
+	irma
+	isabel
+	isabella
+	jackie
+	jacqueline
+	jacquelyn
+	jade
+	jaime
+	jamie
+	jan
+	jana
+	jane
+	janet
+	janice
+	janie
+	janis
+	jasmine
+	jean
+	jeanette
+	jeanne
+	jeannette
+	jeannie
+	jenna
+	jennie
+	jennifer
+	jenny
+	jessica
+	jessie
+	jill
+	jo
+	joan
+	joann
+	joanna
+	joanne
+	jodi
+	jody
+	johanna
+	johnnie
+	josefina
+	josephine
+	joy
+	joyce
+	juana
+	juanita
+	judith
+	judy
+	julia
+	julie
+	june
+	kaitlyn
+	kara
+	karen
+	kari
+	karla
+	kate
+	katelyn
+	katherine
+	kathleen
+	kathryn
+	kathy
+	katie
+	katrina
+	kay
+	kayla
+	kelley
+	kelli
+	kellie
+	kelly
+	kelsey
+	kendra
+	kerry
+	kim
+	kimberly
+	krista
+	kristen
+	kristi
+	kristie
+	kristin
+	kristina
+	kristine
+	kristy
+	krystal
+	lana
+	latoya
+	laura
+	lauren
+	laurie
+	laverne
+	leah
+	lee
+	leigh
+	lela
+	lena
+	leona
+	leslie
+	leticia
+	lila
+	lillian
+	lillie
+	linda
+	lindsay
+	lindsey
+	lisa
+	lois
+	lola
+	lora
+	lorena
+	lorene
+	loretta
+	lori
+	lorraine
+	louise
+	lucia
+	lucille
+	lucy
+	lula
+	luz
+	lydia
+	lynda
+	lynette
+	lynn
+	lynne
+	mabel
+	mable
+	mackenzie
+	madeline
+	madison
+	mae
+	magdalena
+	maggie
+	mamie
+	mandy
+	marcella
+	marcia
+	margaret
+	margarita
+	marge
+	margie
+	marguerite
+	maria
+	mariah
+	marian
+	marianne
+	marie
+	marilyn
+	marion
+	marjorie
+	marlene
+	marsha
+	marta
+	martha
+	mary
+	maryann
+	mattie
+	maureen
+	maxine
+	may
+	megan
+	meghan
+	melanie
+	melba
+	melinda
+	melissa
+	melody
+	mercedes
+	meredith
+	michele
+	michelle
+	mildred
+	mindy
+	minnie
+	miranda
+	miriam
+	misty
+	molly
+	mona
+	monica
+	monique
+	morgan
+	muriel
+	myra
+	myrtle
+	nadine
+	nancy
+	naomi
+	natalie
+	natasha
+	nellie
+	nettie
+	nichole
+	nicole
+	nina
+	nora
+	norma
+	olga
+	olive
+	olivia
+	ollie
+	opal
+	ora
+	paige
+	pam
+	pamela
+	pat
+	patricia
+	patsy
+	patti
+	patty
+	paula
+	paulette
+	pauline
+	pearl
+	peggy
+	penny
+	phyllis
+	priscilla
+	rachael
+	rachel
+	ramona
+	raquel
+	raven
+	rebecca
+	regina
+	renee
+	rhonda
+	rita
+	roberta
+	robin
+	robyn
+	rochelle
+	rosa
+	rosalie
+	rose
+	rosemarie
+	rosemary
+	rosie
+	roxanne
+	ruby
+	ruth
+	sabrina
+	sadie
+	sally
+	samantha
+	sandra
+	sandy
+	sara
+	sarah
+	shannon
+	shari
+	sharon
+	shawna
+	sheila
+	shelia
+	shelley
+	shelly
+	sheri
+	sherri
+	sherry
+	sheryl
+	shirley
+	silvia
+	sonia
+	sonja
+	sonya
+	sophia
+	sophie
+	stacey
+	stacy
+	stella
+	stephanie
+	sue
+	susan
+	susie
+	suzanne
+	sydney
+	sylvia
+	tabitha
+	tamara
+	tami
+	tammy
+	tanya
+	tara
+	tasha
+	taylor
+	teresa
+	teri
+	terri
+	terry
+	thelma
+	theresa
+	tiffany
+	tina
+	toni
+	tonya
+	tracey
+	traci
+	tracy
+	tricia
+	valerie
+	vanessa
+	velma
+	vera
+	verna
+	veronica
+	vicki
+	vickie
+	vicky
+	victoria
+	viola
+	violet
+	virginia
+	vivian
+	wanda
+	wendy
+	whitney
+	willie
+	wilma
+	winifred
+	yasmine
+	yolanda
+	yvette
+	yvonne
+	zoe
+
+pragma initial-rule [first-name-female]

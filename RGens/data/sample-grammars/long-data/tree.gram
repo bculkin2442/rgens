@@ -1,17 +1,19 @@
-pine
-elm
-maple
-oak
-walnut
-ash
-sycamore
-gum
-hickory
-cedar
-willow
-cherry
-spruce
-chestnut
-birch
-dogwood
-poplar
+[tree] → pine
+	elm
+	maple
+	oak
+	walnut
+	ash
+	sycamore
+	gum
+	hickory
+	cedar
+	willow
+	cherry
+	spruce
+	chestnut
+	birch
+	dogwood
+	poplar
+
+pragma initial-rule [tree]

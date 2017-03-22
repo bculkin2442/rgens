@@ -1,10 +1,12 @@
-one
-two
-three
-four
-five
-six
-seven
-eight
-nine
-ten
+[number-word] → one
+	two
+	three
+	four
+	five
+	six
+	seven
+	eight
+	nine
+	ten
+
+pragma initial-rule [number-word]

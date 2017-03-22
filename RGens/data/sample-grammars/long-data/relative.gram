@@ -1,10 +1,12 @@
-father
-mother
-uncle
-aunt
-grandmother
-grandfather
-sister
-brother
-cousin
-mother-in-law
+[relative] → father
+	mother
+	uncle
+	aunt
+	grandmother
+	grandfather
+	sister
+	brother
+	cousin
+	mother-in-law
+
+pragma initial-rule [relative]

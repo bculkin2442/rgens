@@ -1,5 +1,7 @@
-a
-e
-i
-o
-u
+[vowel] → a
+	e
+	i
+	o
+	u
+
+pragma initial-rule [vowel]

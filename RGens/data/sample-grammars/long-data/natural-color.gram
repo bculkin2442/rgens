@@ -1,6 +1,8 @@
-red
-black
-blue
-green
-white
-yellow
+[natural-color] → red
+	black
+	blue
+	green
+	white
+	yellow
+
+pragma initial-rule [natural-color]

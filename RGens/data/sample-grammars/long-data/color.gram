@@ -1,10 +1,12 @@
-red
-orange
-yellow
-green
-blue
-purple
-white
-black
-brown
-grey
+[color] → red
+	orange
+	yellow
+	green
+	blue
+	purple
+	white
+	black
+	brown
+	grey
+
+pragma initial-rule [color]

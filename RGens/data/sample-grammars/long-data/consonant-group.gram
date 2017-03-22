@@ -1,42 +1,44 @@
-b
-br
-c
-cl
-ch
-cr
-d
-dr
-f
-fl
-fr
-g
-gl
-gr
-h
-l
-m
-n
-p
-pl
-ph
-pr
-s
-st
-sl
-str
-sm
-sw
-sp
-sh
-sc
-sch
-sn
-t
-th
-tr
-v
-w
-wr
-x
-y
-z
+[consonant-group] → b
+	br
+	c
+	cl
+	ch
+	cr
+	d
+	dr
+	f
+	fl
+	fr
+	g
+	gl
+	gr
+	h
+	l
+	m
+	n
+	p
+	pl
+	ph
+	pr
+	s
+	st
+	sl
+	str
+	sm
+	sw
+	sp
+	sh
+	sc
+	sch
+	sn
+	t
+	th
+	tr
+	v
+	w
+	wr
+	x
+	y
+	z
+
+pragma initial-rule [consonant-group]

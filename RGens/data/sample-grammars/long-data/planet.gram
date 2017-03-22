@@ -1,8 +1,10 @@
-mercury
-venus
-mars
-jupiter
-saturn
-uranus
-neptune
-pluto
+[planet] → mercury
+	venus
+	mars
+	jupiter
+	saturn
+	uranus
+	neptune
+	pluto
+
+pragma initial-rule [planet]

@@ -1,530 +1,532 @@
-ab
-ack
-ag
-ad
-al
-an
-ar
-at
-ash
-as
-augh
-ay
-au
-ba
-bab
-bat
-bal
-ban
-bar
-bau
-be
-bee
-bel
-ben
-ber
-bes
-bet
-bil
-bin
-big
-bir
-bis
-bla
-black
-blan
-blat
-bled
-blo
-bly
-bock
-bod
-bol
-bon
-boo
-bop
-bor
-bos
-bot
-bow
-boy
-bra
-brad
-bram
-bran
-bras
-brau
-bren
-brew
-bri
-bro
-brow
-bru
-brun
-bry
-buc
-bud
-bul
-bur
-burn
-bus
-bush
-by
-ca
-cal
-can
-cant
-car
-carl
-cap
-cat
-cer
-cha
-chan
-chap
-chas
-che
-chi
-chis
-chu
-cla
-clar
-clay
-cli
-cler
-coal
-coat
-cob
-cod
-col
-com
-con
-coo
-cop
-cor
-cow
-cra
-craw
-cro
-cub
-cum
-cun
-cur
-dab
-dag
-dal
-dan
-dar
-day
-dear
-der
-del
-dem
-den
-der
-des
-dick
-dir
-dix
-dil
-dim
-din
-dis
-dock
-dod
-dol
-dom
-don
-dor
-dos
-doy
-dow
-dra
-dre
-dru
-dry
-dub
-dud
-duck
-dul
-dum
-dun
-dur
-dwel
-dye
-eat
-eck
-ed
-el
-ell
-elm
-eng
-ep
-erk
-er
-esp
-esh
-fair
-fan
-far
-fal
-fam
-fen
-fel
-fer
-fid
-fir
-fin
-flack
-fla
-flet
-fly
-fol
-for
-foo
-fox
-fran
-free
-fred
-fre
-fri
-fry
-fro
-ful
-fun
-gal
-gan
-gar
-gain
-gat
-gee
-geer
-gib
-gil
-gill
-glas
-gol
-gold
-good
-gor
-gos
-gra
-gree
-green
-gri
-grif
-gris
-gro
-gun
-gush
-gut
-hack
-hag
-hal
-hall
-ham
-hamp
-han
-har
-hart
-hat
-haw
-hear
-heb
-hel
-hen
-her
-hes
-hig
-hick
-hil
-hip
-hod
-hol
-hoo
-hop
-hor
-how
-hub
-hud
-hun
-hur
-ice
-ick
-ight
-ill
-imp
-ir
-is
-it
-jack
-jam
-jeff
-jel
-jen
-jew
-jer
-jock
-jon
-jol
-jum
-kar
-kan
-kal
-kay
-keat
-kee
-kel
-ken
-ket
-key
-kil
-kick
-kin
-kir
-knight
-kol
-kor
-kun
-lab
-lam
-lan
-lar
-law
-lee
-len
-let
-lim
-lime
-lin
-line
-lip
-lit
-lock
-lor
-lom
-loo
-low
-luck
-lud
-lun
-mac
-mab
-mal
-man
-mar
-mat
-may
-mea
-med
-mee
-mel
-meg
-mer
-mes
-met
-mid
-mil
-mis
-mol
-mon
-mom
-moo
-mor
-mot
-mud
-mum
-mun
-mur
-mut
-myer
-nal
-nan
-nam
-nag
-nay
-new
-nel
-nes
-nick
-nor
-nov
-ob
-oct
-og
-ol
-or
-os
-ot
-ought
-ow
-pack
-pal
-par
-pas
-pat
-pam
-pan
-pay
-pea
-pear
-pel
-pen
-pep
-per
-pet
-phe
-phyl
-phi
-pick
-pin
-pit
-pla
-ple
-plo
-plor
-pli
-plu
-pol
-poo
-pot
-por
-pow
-pre
-pro
-pra
-pru
-put
-pul
-que
-qui
-quin
-ra
-rab
-rad
-ram
-rat
-ray
-red
-ree
-ren
-rick
-rice
-rid
-ril
-rin
-rit
-rob
-roe
-rom
-ron
-roo
-ro
-rot
-ros
-rud
-rul
-rut
-sack
-sal
-san
-sam
-sap
-sat
-scha
-schi
-scho
-schu
-scri
-sea
-seb
-sen
-sel
-sha
-she
-sher
-shi
-sho
-sil
-shu
-sim
-sla
-sle
-slo
-sli
-slu
-sno
-smee
-smit
-snow
-sol
-sout
-sor
-spa
-spe
-spi
-spoo
-spo
-sta
-stan
-star
-ster
-stee
-stin
-sto
-stre
-stur
-sun
-sup
-sul
-sut
-swa
-swe
-tan
-tap
-tar
-tee
-ter
-tem
-ten
-tes
-thor
-ton
-til
-tim
-too
-tre
-trip
-tro
-tut
-tur
-ul
-un
-ur
-van
-val
-var
-vee
-ver
-vin
-vel
-vir
-wad
-wal
-war
-wat
-web
-wel
-wes
-whit
-wil
-will
-win
-wit
-woo
-wood
-wool
-yan
-yar
-zar
-zin
+[syllable] → ab
+	ack
+	ag
+	ad
+	al
+	an
+	ar
+	at
+	ash
+	as
+	augh
+	ay
+	au
+	ba
+	bab
+	bat
+	bal
+	ban
+	bar
+	bau
+	be
+	bee
+	bel
+	ben
+	ber
+	bes
+	bet
+	bil
+	bin
+	big
+	bir
+	bis
+	bla
+	black
+	blan
+	blat
+	bled
+	blo
+	bly
+	bock
+	bod
+	bol
+	bon
+	boo
+	bop
+	bor
+	bos
+	bot
+	bow
+	boy
+	bra
+	brad
+	bram
+	bran
+	bras
+	brau
+	bren
+	brew
+	bri
+	bro
+	brow
+	bru
+	brun
+	bry
+	buc
+	bud
+	bul
+	bur
+	burn
+	bus
+	bush
+	by
+	ca
+	cal
+	can
+	cant
+	car
+	carl
+	cap
+	cat
+	cer
+	cha
+	chan
+	chap
+	chas
+	che
+	chi
+	chis
+	chu
+	cla
+	clar
+	clay
+	cli
+	cler
+	coal
+	coat
+	cob
+	cod
+	col
+	com
+	con
+	coo
+	cop
+	cor
+	cow
+	cra
+	craw
+	cro
+	cub
+	cum
+	cun
+	cur
+	dab
+	dag
+	dal
+	dan
+	dar
+	day
+	dear
+	der
+	del
+	dem
+	den
+	der
+	des
+	dick
+	dir
+	dix
+	dil
+	dim
+	din
+	dis
+	dock
+	dod
+	dol
+	dom
+	don
+	dor
+	dos
+	doy
+	dow
+	dra
+	dre
+	dru
+	dry
+	dub
+	dud
+	duck
+	dul
+	dum
+	dun
+	dur
+	dwel
+	dye
+	eat
+	eck
+	ed
+	el
+	ell
+	elm
+	eng
+	ep
+	erk
+	er
+	esp
+	esh
+	fair
+	fan
+	far
+	fal
+	fam
+	fen
+	fel
+	fer
+	fid
+	fir
+	fin
+	flack
+	fla
+	flet
+	fly
+	fol
+	for
+	foo
+	fox
+	fran
+	free
+	fred
+	fre
+	fri
+	fry
+	fro
+	ful
+	fun
+	gal
+	gan
+	gar
+	gain
+	gat
+	gee
+	geer
+	gib
+	gil
+	gill
+	glas
+	gol
+	gold
+	good
+	gor
+	gos
+	gra
+	gree
+	green
+	gri
+	grif
+	gris
+	gro
+	gun
+	gush
+	gut
+	hack
+	hag
+	hal
+	hall
+	ham
+	hamp
+	han
+	har
+	hart
+	hat
+	haw
+	hear
+	heb
+	hel
+	hen
+	her
+	hes
+	hig
+	hick
+	hil
+	hip
+	hod
+	hol
+	hoo
+	hop
+	hor
+	how
+	hub
+	hud
+	hun
+	hur
+	ice
+	ick
+	ight
+	ill
+	imp
+	ir
+	is
+	it
+	jack
+	jam
+	jeff
+	jel
+	jen
+	jew
+	jer
+	jock
+	jon
+	jol
+	jum
+	kar
+	kan
+	kal
+	kay
+	keat
+	kee
+	kel
+	ken
+	ket
+	key
+	kil
+	kick
+	kin
+	kir
+	knight
+	kol
+	kor
+	kun
+	lab
+	lam
+	lan
+	lar
+	law
+	lee
+	len
+	let
+	lim
+	lime
+	lin
+	line
+	lip
+	lit
+	lock
+	lor
+	lom
+	loo
+	low
+	luck
+	lud
+	lun
+	mac
+	mab
+	mal
+	man
+	mar
+	mat
+	may
+	mea
+	med
+	mee
+	mel
+	meg
+	mer
+	mes
+	met
+	mid
+	mil
+	mis
+	mol
+	mon
+	mom
+	moo
+	mor
+	mot
+	mud
+	mum
+	mun
+	mur
+	mut
+	myer
+	nal
+	nan
+	nam
+	nag
+	nay
+	new
+	nel
+	nes
+	nick
+	nor
+	nov
+	ob
+	oct
+	og
+	ol
+	or
+	os
+	ot
+	ought
+	ow
+	pack
+	pal
+	par
+	pas
+	pat
+	pam
+	pan
+	pay
+	pea
+	pear
+	pel
+	pen
+	pep
+	per
+	pet
+	phe
+	phyl
+	phi
+	pick
+	pin
+	pit
+	pla
+	ple
+	plo
+	plor
+	pli
+	plu
+	pol
+	poo
+	pot
+	por
+	pow
+	pre
+	pro
+	pra
+	pru
+	put
+	pul
+	que
+	qui
+	quin
+	ra
+	rab
+	rad
+	ram
+	rat
+	ray
+	red
+	ree
+	ren
+	rick
+	rice
+	rid
+	ril
+	rin
+	rit
+	rob
+	roe
+	rom
+	ron
+	roo
+	ro
+	rot
+	ros
+	rud
+	rul
+	rut
+	sack
+	sal
+	san
+	sam
+	sap
+	sat
+	scha
+	schi
+	scho
+	schu
+	scri
+	sea
+	seb
+	sen
+	sel
+	sha
+	she
+	sher
+	shi
+	sho
+	sil
+	shu
+	sim
+	sla
+	sle
+	slo
+	sli
+	slu
+	sno
+	smee
+	smit
+	snow
+	sol
+	sout
+	sor
+	spa
+	spe
+	spi
+	spoo
+	spo
+	sta
+	stan
+	star
+	ster
+	stee
+	stin
+	sto
+	stre
+	stur
+	sun
+	sup
+	sul
+	sut
+	swa
+	swe
+	tan
+	tap
+	tar
+	tee
+	ter
+	tem
+	ten
+	tes
+	thor
+	ton
+	til
+	tim
+	too
+	tre
+	trip
+	tro
+	tut
+	tur
+	ul
+	un
+	ur
+	van
+	val
+	var
+	vee
+	ver
+	vin
+	vel
+	vir
+	wad
+	wal
+	war
+	wat
+	web
+	wel
+	wes
+	whit
+	wil
+	will
+	win
+	wit
+	woo
+	wood
+	wool
+	yan
+	yar
+	zar
+	zin
+
+pragma initial-rule [syllable]

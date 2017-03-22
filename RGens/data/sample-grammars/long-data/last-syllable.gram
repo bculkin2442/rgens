@@ -1,9 +1,11 @@
-on
-ly
-er
-son
-row
-way
-s
-ton
-dale
+[last-syllable]  → on
+	ly
+	er
+	son
+	row
+	way
+	s
+	ton
+	dale
+
+pragma initial-rule [last-syllable]

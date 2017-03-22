@@ -1,10 +1,12 @@
-I
-II
-III
-IV
-V
-VI
-VII
-VIII
-IX
-X
+[roman-numeral] → I
+	II
+	III
+	IV
+	V
+	VI
+	VII
+	VIII
+	IX
+	X
+
+pragma initial-rule [roman-numeral]

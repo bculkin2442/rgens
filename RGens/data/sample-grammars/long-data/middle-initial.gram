@@ -1,18 +1,20 @@
-a
-b
-c
-d
-e
-f
-g
-h
-j
-k
-l
-m
-n
-o
-p
-r
-s
-t
+[middle-initial]  → a
+	b
+	c
+	d
+	e
+	f
+	g
+	h
+	j
+	k
+	l
+	m
+	n
+	o
+	p
+	r
+	s
+	t
+
+pragma initial-rule [middle-initial]
