@@ -2,9 +2,12 @@
 
 [block] → [pragma-block]
 	→ [rule-block]
+	→ [where-block]
 
 [pragma-block] → [pragma] (/\n(?!\t)/ [pragma])*
 
 [rule-block] → [rule-decl] [rule-case] (/\n\t/ [rule-case])*
+
+[where-block] -> where /\n\t/ ([rule-block] /\n\t/)+ in /\n\t/ [rule-block]
 
 [pragma] → pragma [pragma-name] [pragma-body]

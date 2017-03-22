@@ -16,15 +16,8 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<configuration>
-					<mainClass>bjc.RGens.server.GrammarServer</mainClass>
+					<mainClass>bjc.rgens.newparser.RGrammarTest</mainClass>
 					<arguments>
-						<!-- Uncomment for debug mode -->
-						<argument>-d</argument>
-						<argument>-lc</argument>
-						<argument>data/server-config-sample.cfg</argument>
-						<argument>-st</argument>
-						<argument>*</argument>
-						<!-- <argument>-i</argument> -->
 					</arguments>
 				</configuration>
 			</plugin>
