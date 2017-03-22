@@ -50,9 +50,7 @@ pragma export-rule [big-tld]
 	[middle-initial] [last-name]
 	[first-name] . [last-name]
 	[first-name]
-	[random-name] [num-range]
-
-pragma range-rule [num-range] 1 999
+	[random-name] [1..999]
 
 [actual+url] http://www. [domain] /
 	http://www. [domain] /

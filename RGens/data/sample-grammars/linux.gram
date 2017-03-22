@@ -51,7 +51,6 @@ pragma initial-rule [linux-domain]
 	uber
 	[first-name]
 
-
 [linux-domain1] linux
 	geek
 	nerd

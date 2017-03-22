@@ -5,12 +5,15 @@ pragma export-rule [org-political]
 
 [org-political] [org-prefix] [org-body] [org-goal]
 
-pragma uniform
-
-[org-body] 7 of [org-members] [org-position]
-	1 for
-
-pragma uniform
+[org-body] of [org-members] [org-position]
+	of [org-members] [org-position]
+	of [org-members] [org-position]
+	of [org-members] [org-position]
+	of [org-members] [org-position]
+	of [org-members] [org-position]
+	of [org-members] [org-position]
+	of [org-members] [org-position]
+	for
 
 [org-position] for
 	for
@@ -53,7 +56,7 @@ pragma uniform
 	raising taxes for [tax-class] 
 	random drug testing for elected officials
 	right on red traffic laws
-	splitting microsoft into [ms-pieces] pieces
+	splitting microsoft into [2..50] pieces
 	subsidized day care for working parents
 	teaching [subject] in the classroom
 	the death penalty
@@ -76,9 +79,7 @@ pragma uniform
 	wealth
 	filthy rich
 
-[min+wage] [min-wage-init] . [digit] [digit]
-
-pragma range-rule [min-wage-init] 6 8
+[min+wage] [6..8] . [digit] [digit]
 
 [protect] bill of rights
 	first amendment
@@ -89,8 +90,6 @@ pragma range-rule [min-wage-init] 6 8
 	the wealthy
 	billionaire
 	lottery winners
-
-pragma range-rule [ms-pieces] 2 50
 
 [subject] evolution
 	evilution
