@@ -27,15 +27,13 @@ pragma initial-rule [college-announcement]
 [class-type] class
 	course
 
-pragma range-rule [past-years] 1800 1970
-
 [college-course] [course-adj] [course-noun] [course-suffix]
 	[course-adj] [course-noun] : [course-ending]
 	[course-adj] [course-noun] and [course-adj] [course-noun] [course-suffix]
 	[course-noun] and [course-noun] [course-suffix]
 	[course-group1] [course-group2] [course-life] [course-suffix]
 	[course-group2] [course-noun] [course-life] [course-suffix]
-	[course-group1] [course-group2] [course-life] since [past-years]
+	[course-group1] [course-group2] [course-life] since [1800..1970]
 	[course-group2] [course-life] : [course-ending]
 	contemporary [course-group2] [course-life] and [course-life]
 	contemporary [course-group2] [course-life] : [course-ending]
@@ -564,7 +562,7 @@ pragma export-rule [university]
 	rural
 
 [college-major-tech] computer science
-	information technology	
+	information technology
 	computer techology
 	mathematics
 	advanced mathematics nobody ever uses

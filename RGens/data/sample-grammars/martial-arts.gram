@@ -1,39 +1,39 @@
-[martial-arts-name] [art-1] [art-2]
-	[art-1] [art-3]
-	[art-2] [art-3]
-	[art-1] [art-2] [art-3]
+[martial-arts-name] → [art-1] [art-2]
+	              [art-1] [art-3]
+	              [art-2] [art-3]
+	              [art-1] [art-2] [art-3]
 
 pragma initial-rule [martial-arts-name]
 
-[art-1] running
-	hungry
-	angry
-	naked
-	drunken
-	fortunate
-	lazy
-	swift
-	powerful
-	enlightened
+[art-1] → running
+	  hungry
+	  angry
+	  naked
+	  drunken
+	  fortunate
+	  lazy
+	  swift
+	  powerful
+	  enlightened
 
-[art-2] ox
-	tiger
-	dragon
-	crane
-	monkey
-	turtle
-	manticore
-	serpent
-	hummingbird
-	demon
+[art-2] → ox
+	  tiger
+	  dragon
+	  crane
+	  monkey
+	  turtle
+	  manticore
+	  serpent
+	  hummingbird
+	  demon
 
-[art-3] fist
-	stance
-	spinning kick
-	attack
-	technique
-	style
-	dance
-	movement
-	touch
-	fu
+[art-3] → fist
+	  stance
+	  spinning kick
+	  attack
+	  technique
+	  style
+	  dance
+	  movement
+	  touch
+	  fu

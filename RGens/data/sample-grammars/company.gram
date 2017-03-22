@@ -40,8 +40,7 @@ pragma export-rule [company]
 
 [letter+letter] [letter] & [letter]
 
-# The extra space is supposed to be there
-[company-suffix]  [company-suffix1]
+[company-suffix] [company-suffix1]
 	[company-suffix2]
 
 [company-suffix1] Inc.

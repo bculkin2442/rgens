@@ -7,11 +7,8 @@ pragma export-rule [television-station]
 pragma export-rule [radio-station]
 pragma export-rule [newspaper]
 
-[television-station] [chan+name] channel [med-chan-num]
-	[chan+name] channel [low-chan-num]
-
-pragma range-rule [med-chan-num] 2 45
-pragma range-rule [low-chan-num] 2 12
+[television-station] [chan+name] channel [2..45]
+	[chan+name] channel [2..12]
 
 [chan+name] k [chan-name2]
 	w [chan-name2]
@@ -25,8 +22,8 @@ pragma range-rule [low-chan-num] 2 12
 
 [radio+name2] [letter] [letter] [letter] [chan-type]
 
-[chan-type] -fm [[chantype=fm]]
-	-am [[chantype=am]]
+[chan-type] -fm {chantype=fm}
+	-am {chantype=am}
 
 [radio+chan] 9 [radio-9chan]
 	[$chantype-1chan]

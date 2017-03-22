@@ -533,15 +533,13 @@ pragma export-rule [geek-scifi-book]
 	iunix sucks
 	windows is the only gui with a consistent interface
 	why do end-users need source code anyways
-	linux users all behave like immature [linux-age] year olds
+	linux users all behave like immature [7..16] year olds
 	linux = linsux
 	linux is only free if your time is worthless
 	security through obscurity is the only way to go
 	attack of the snot-nosed linux zealots
 	linux advocacy: a dangerous brainwashing religious cult
 	microsoft will win
-
-pragma range-rule [linux-age] 7 16
 
 [peripheral] digital camera
 	[peripheral-interface] infrared video camera
@@ -829,48 +827,38 @@ pragma export-rule [app-name]
 
 [app-version] [app+version]
 
-[app+version] 0.0. [1-20] [version-suffix]
-	0. [digit-nozero] . [0-30]
-	1.0. [0-30]
-	1. [digit-nozero] . [0-30] [version-suffix]
-	2. [digit] . [0-30]
-	2. [digit] . [0-30] [version-suffix]
-	[3-9] . [digit] . [0-30]
+[app+version] 0.0. [1..20] [version-suffix]
+	0. [digit-nozero] . [0..30]
+	1.0. [0..30]
+	1. [digit-nozero] . [0..30] [version-suffix]
+	2. [digit] . [0..30]
+	2. [digit] . [0..30] [version-suffix]
+	[3..9] . [digit] . [0..30]
 	0.0 [digit] [version-suffix]
 	0. [digit]
-	0. [1-99]
+	0. [1..99]
 	1.0 [version-suffix]
 	1.00
-	1. [1-99]
-	1. [1-99] [version-suffix]
-	[2-20] . [1-99] [version-suffix]
+	1. [1..99]
+	1. [1..99] [version-suffix]
+	[2..20] . [1..99] [version-suffix]
 
 [version-suffix] pl [digit]
 	alpha
 	beta
-	- [1-30]
+	- [1..30]
 	[letter]
 	-ac [digit]
 	-pre [digit]
 
 [linux-kernel-version] [linux-kernel+version]
 
-[linux-kernel+version] 2.2. [30-40]
-	2.3. [50-99]
-	2.4.0-pre [1-30]
-	2.4.0-ac [1-30]
+[linux-kernel+version] 2.2. [30..40]
+	2.3. [50..99]
+	2.4.0-pre [1..30]
+	2.4.0-ac [1..30]
 	2.4. [digit]
-	2.5. [0-99]
-
-pragma range-rule [50-99] 50 99
-pragma range-rule [30-40] 30 40
-pragma range-rule [1-30] 1 30
-pragma range-rule [2-20] 2 20
-pragma range-rule [1-99] 1 99
-pragma range-rule [3-9] 3 9
-pragma range-rule [1-20] 1 20
-pragma range-rule [0-99] 0 99
-pragma range-rule [0-30] 0 30
+	2.5. [0..99]
 
 [windows-version] 95
 	98
@@ -908,14 +896,14 @@ pragma range-rule [0-30] 0 30
 	autocad
 
 [microsoft-slogan] making it all make cents
-	over [5-20] years of innovation
+	over [5..20] years of innovation
 	wintel inside
 	your windows and gates to the world
 	fighting the department of injustice since day one
 	because anti-trust laws are obsolete
 	real people use our software, not nerds and geeks
 	crashes are normal
-	embracing and extending for over [20-30] years
+	embracing and extending for over [20..30] years
 	this motto is not anti-competitive
 	got windows? you have to!
 	one microsoft way. it's much more than an address
@@ -938,5 +926,3 @@ pragma range-rule [0-30] 0 30
 	water
 	pizza
 	beer
-
-pragma range-rule [5-20] 5 20
