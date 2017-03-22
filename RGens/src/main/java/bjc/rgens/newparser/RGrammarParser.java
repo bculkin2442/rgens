@@ -294,7 +294,6 @@ public class RGrammarParser {
 	/*
 	 * Handle a where block (a block with local rules).
 	 */
-	@SuppressWarnings("unused")
 	private void handleWhereBlock(String block, RGrammarBuilder build, int level) throws GrammarException {
 		try(BlockReader whereReader = new BlockReader("", new StringReader(block))) {
 			try {
