@@ -27,7 +27,7 @@
 				<directory>data/</directory>
 				<includes>
 					<include>**/*.gram</include>
-					<include>**/*.help</include>
+					<include>**/*.cfg</include>
 				</includes>
 			</resource>
 		</resources>
