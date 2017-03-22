@@ -16,7 +16,7 @@ public class RGrammarTest {
 	 *                Unused CLI args.
 	 */
 	public static void main(String[] args) {
-		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/web.gram");
+		InputStream stream = RGrammarTest.class.getResourceAsStream("/sample-grammars/college.gram");
 
 		RGrammarSet grammarSet = new RGrammarSet();
 

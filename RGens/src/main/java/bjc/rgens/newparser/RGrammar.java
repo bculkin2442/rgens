@@ -18,6 +18,7 @@ public class RGrammar {
 
 		public GenerationState(StringBuilder contents, Random rnd) {
 			this.contents = contents;
+			this.rnd = rnd;
 		}
 	}
 

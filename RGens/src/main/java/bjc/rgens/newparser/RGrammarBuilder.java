@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static bjc.rgens.newparser.CaseElement.ElementType.*;
 import static bjc.rgens.newparser.RuleCase.CaseType.*;
 
 /**
@@ -18,12 +17,6 @@ import static bjc.rgens.newparser.RuleCase.CaseType.*;
  *
  */
 public class RGrammarBuilder {
-	private static final String RANGE_CASELM = "\\[\\d+\\.\\.\\d+\\]";
-
-	private static final String REFER_CASELEM = "\\[[^\\]]+\\]";
-
-	private static final String SPECIAL_CASELEM = "{[^}]}";
-
 	private IList<CaseElement> currentCase;
 
 	private Rule currRule;
@@ -97,27 +90,9 @@ public class RGrammarBuilder {
 	 * @param csepart
 	 */
 	public void addCasePart(String csepart) {
-		if(csepart.matches(SPECIAL_CASELEM)) {
-			/*
-			 * Handle other cases.
-			 */
-		} else if(csepart.matches(REFER_CASELEM)) {
-			if(csepart.matches(RANGE_CASELM)) {
-				/*
-				 * Handle ranges
-				 */
-				String rawRange = csepart.substring(1, csepart.length() - 1);
+		CaseElement element = CaseElement.createElement(csepart);
 
-				int firstNum = Integer.parseInt(rawRange.substring(0, rawRange.indexOf('.')));
-				int secondNum = Integer.parseInt(rawRange.substring(rawRange.lastIndexOf('.') + 1));
-
-				currentCase.add(new CaseElement(RANGE, firstNum, secondNum));
-			} else {
-				currentCase.add(new CaseElement(RULEREF, csepart));
-			}
-		} else {
-			currentCase.add(new CaseElement(LITERAL, csepart));
-		}
+		currentCase.add(element);
 	}
 
 	/**
@@ -180,7 +155,7 @@ public class RGrammarBuilder {
 		} else if(init.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if(!rules.containsKey(init)) {
-			throw new IllegalArgumentException(String.format("No rule named '%s' found", init));
+			throw new IllegalArgumentException(String.format("No local rule named '%s' found", init));
 		}
 
 		initialRule = init;
@@ -202,9 +177,38 @@ public class RGrammarBuilder {
 		} else if(export.equals("")) {
 			throw new NullPointerException("The empty string is not a valid rule name");
 		} else if(!rules.containsKey(export)) {
-			throw new IllegalArgumentException(String.format("No rule named '%s' found", export));
+			throw new IllegalArgumentException(String.format("No local rule named '%s' found", export));
 		}
 
 		exportedRules.add(export);
+	}
+
+	/**
+	 * Suffix a given case element to every case of a specific rule.
+	 * 
+	 * @param ruleName
+	 *                The rule to suffix.
+	 * 
+	 * @param suffix
+	 *                The suffix to add.
+	 * 
+	 * @throws IllegalArgumentException
+	 *                 If the rule name is either invalid or not defined by
+	 *                 this grammar, or if the suffix is invalid.
+	 */
+	public void suffixWith(String ruleName, String suffix) {
+		if(ruleName == null) {
+			throw new NullPointerException("Rule name must not be null");
+		} else if(ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(ruleName)) {
+			throw new IllegalArgumentException(String.format("No local rule named '%s' found", ruleName));
+		}
+
+		CaseElement element = CaseElement.createElement(suffix);
+
+		for(RuleCase ruleCase : rules.get(ruleName).getCases()) {
+			ruleCase.getElements().add(element);
+		}
 	}
 }

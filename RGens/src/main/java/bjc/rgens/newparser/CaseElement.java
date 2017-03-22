@@ -1,5 +1,9 @@
 package bjc.rgens.newparser;
 
+import static bjc.rgens.newparser.CaseElement.ElementType.LITERAL;
+import static bjc.rgens.newparser.CaseElement.ElementType.RANGE;
+import static bjc.rgens.newparser.CaseElement.ElementType.RULEREF;
+
 /**
  * A element in a rule case.
  * 
@@ -27,10 +31,14 @@ public class CaseElement {
 		RANGE;
 	}
 
+	private static final String	SPECIAL_CASELEM	= "\\{[^}]\\}";
+	private static final String	REFER_CASELEM	= "\\[[^\\]]+\\]";
+	private static final String	RANGE_CASELM	= "\\[\\d+\\.\\.\\d+\\]";
+
 	/**
 	 * The type of this element.
 	 */
-	public final CaseElement.ElementType type;
+	public final ElementType type;
 
 	/**
 	 * The literal string value of this element.
@@ -224,5 +232,43 @@ public class CaseElement {
 		default:
 			return String.format("Unknown type '%s'", type);
 		}
+	}
+
+	/**
+	 * Create a case element from a string.
+	 * 
+	 * @param csepart
+	 *                The string to convert.
+	 * 
+	 * @return A case element representing the string.
+	 */
+	public static CaseElement createElement(String csepart) {
+		if(csepart == null) {
+			throw new NullPointerException("Case part cannot be null");
+		}
+
+		if(csepart.matches(CaseElement.SPECIAL_CASELEM)) {
+			/*
+			 * Handle other cases.
+			 */
+		} else if(csepart.matches(CaseElement.REFER_CASELEM)) {
+			if(csepart.matches(CaseElement.RANGE_CASELM)) {
+				/*
+				 * Handle ranges
+				 */
+				String rawRange = csepart.substring(1, csepart.length() - 1);
+
+				int firstNum = Integer.parseInt(rawRange.substring(0, rawRange.indexOf('.')));
+				int secondNum = Integer.parseInt(rawRange.substring(rawRange.lastIndexOf('.') + 1));
+
+				return new CaseElement(RANGE, firstNum, secondNum);
+			} else {
+				return new CaseElement(RULEREF, csepart);
+			}
+		} else {
+			return new CaseElement(LITERAL, csepart);
+		}
+
+		throw new IllegalArgumentException(String.format("Unknown case part '%s'"));
 	}
 }
