@@ -3,9 +3,6 @@
 	[newspaper]
 
 pragma initial-rule [media-company]
-pragma export-rule [television-station]
-pragma export-rule [radio-station]
-pragma export-rule [newspaper]
 
 [television-station] [chan+name] channel [2..45]
 	[chan+name] channel [2..12]
@@ -154,3 +151,7 @@ pragma export-rule [cardinal]
 	motley fool
 	the economist
 	fortune
+
+pragma export-rule [television-station]
+pragma export-rule [radio-station]
+pragma export-rule [newspaper]
