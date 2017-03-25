@@ -219,8 +219,6 @@ public class RGrammarSet {
 	public static RGrammarSet fromConfigFile(Path cfgFile) throws IOException {
 		RGrammarSet set = new RGrammarSet();
 
-		RGrammarParser parser = new RGrammarParser();
-
 		Path cfgParent = cfgFile.getParent();
 
 		try(Scanner scn = new Scanner(cfgFile)) {
@@ -270,7 +268,10 @@ public class RGrammarSet {
 					 * Load grammar files.
 					 */
 					try {
-						RGrammar gram = parser.readGrammar(new FileInputStream(fle));
+						FileInputStream fis = new FileInputStream(fle);
+						RGrammar gram = RGrammarParser.readGrammar(fis);
+						fis.close();
+						
 						set.addGrammar(name, gram);
 
 						set.loadedFrom.put(name, path.toString());

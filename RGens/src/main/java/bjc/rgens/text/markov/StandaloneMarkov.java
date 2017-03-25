@@ -3,13 +3,12 @@ package bjc.rgens.text.markov;
 import java.util.Map;
 
 public class StandaloneMarkov {
-	private int					k;
+	private int k;
 
 	private Map<String, Markov>	markovHash;
-	private String				firstSub;
+	private String			firstSub;
 
-	public StandaloneMarkov(int k, Map<String, Markov> markovHash,
-			String firstSub) {
+	public StandaloneMarkov(int k, Map<String, Markov> markovHash, String firstSub) {
 		this.k = k;
 		this.markovHash = markovHash;
 		this.firstSub = firstSub;
@@ -21,8 +20,7 @@ public class StandaloneMarkov {
 			if (i == k) {
 				text.append(firstSub);
 
-				if (text.length() > k)
-					i = text.length();
+				if (text.length() > k) i = text.length();
 			}
 
 			String sub = text.substring((i - k), (i));

@@ -420,9 +420,9 @@ public class CaseElement {
 				int secondNum = Integer.parseInt(rawRange.substring(rawRange.lastIndexOf('.') + 1));
 
 				return new CaseElement(RANGE, firstNum, secondNum);
-			} else {
-				return new CaseElement(RULEREF, csepart);
 			}
+			
+			return new CaseElement(RULEREF, csepart);
 		} else {
 			return new CaseElement(LITERAL, csepart);
 		}
