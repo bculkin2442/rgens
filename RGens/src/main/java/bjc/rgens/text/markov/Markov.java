@@ -4,26 +4,26 @@ import java.util.Map.Entry;
 import java.util.*;
 
 /**
- * Represents a k-character substring. Can give a pseudo-random suffix
- * character based on probability.
+ * Represents a k-character substring. Can give a pseudo-random suffix character
+ * based on probability.
  * 
  * @author Daniel Friedman (Fall 2011)
  *
  */
 public class Markov {
-	String						substring;
-	int							count	= 0;
+	String	substring;
+	int	count	= 0;
 
-	TreeMap<Character, Integer>	map;
+	TreeMap<Character, Integer> map;
 
 	/**
 	 * Constructs a Markov object from a given substring.
 	 * 
-	 * @param substring
-	 *            the given substring.
+	 * @param substr
+	 *                the given substring.
 	 */
-	public Markov(String substring) {
-		this.substring = substring;
+	public Markov(String substr) {
+		this.substring = substr;
 
 		map = new TreeMap<>();
 
@@ -34,13 +34,13 @@ public class Markov {
 	 * Constructs a Markov object from a given substring and suffix
 	 * character. Suffix characters are stored in a TreeMap.
 	 * 
-	 * @param substring
-	 *            the specified substring.
+	 * @param substr
+	 *                the specified substring.
 	 * @param suffix
-	 *            the specified suffix.
+	 *                the specified suffix.
 	 */
-	public Markov(String substring, Character suffix) {
-		this.substring = substring;
+	public Markov(String substr, Character suffix) {
+		this.substring = substr;
 
 		map = new TreeMap<>();
 
@@ -59,7 +59,7 @@ public class Markov {
 	 * Adds a suffix character to the TreeMap.
 	 * 
 	 * @param c
-	 *            the suffix character to be added.
+	 *                the suffix character to be added.
 	 */
 	public void add(char c) {
 		add();
@@ -67,8 +67,7 @@ public class Markov {
 		if (map.containsKey(c)) {
 			int frequency = map.get(c);
 			map.put(c, frequency + 1);
-		} else
-			map.put(c, 1);
+		} else map.put(c, 1);
 	}
 
 	/**
@@ -76,7 +75,7 @@ public class Markov {
 	 * of times the specified suffix follows the substring in a text.
 	 * 
 	 * @param c
-	 *            the specified suffix.
+	 *                the specified suffix.
 	 * @return the frequency count.
 	 */
 	public int getFrequencyCount(char c) {
@@ -106,7 +105,7 @@ public class Markov {
 	 * Finds whether or not the given suffix is in the TreeMap.
 	 * 
 	 * @param c
-	 *            the given suffix.
+	 *                the given suffix.
 	 * @return True if the suffix exists in the TreeMap, false otherwise.
 	 */
 	public boolean containsChar(char c) {
@@ -138,8 +137,8 @@ public class Markov {
 	/**
 	 * Using probability, returns a pseudo-random character to follow the
 	 * substring. Character possibilities are added to an ArrayList
-	 * (duplicates allowed), and a random number from 0 to the last index
-	 * in the ArrayList is picked. Since more common suffixes occupy more
+	 * (duplicates allowed), and a random number from 0 to the last index in
+	 * the ArrayList is picked. Since more common suffixes occupy more
 	 * indices in the ArrayList, the probability of getting a more common
 	 * suffix is greater than the probability of getting a less common
 	 * suffix.

@@ -108,7 +108,7 @@ public class RGrammarBuilder {
 			throw new IllegalStateException("Must start a rule before finishing one");
 		}
 
-		rules.put(currRule.ruleName, currRule);
+		rules.put(currRule.name, currRule);
 	}
 
 	/**

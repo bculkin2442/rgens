@@ -2,39 +2,66 @@ package bjc.rgens.text.markov;
 
 import java.util.Map;
 
+/**
+ * A standalone Markov generator.
+ * 
+ * @author bjculkin
+ *
+ */
 public class StandaloneMarkov {
-	private int k;
+	private int ord;
 
-	private Map<String, Markov>	markovHash;
-	private String			firstSub;
+	private Map<String, Markov>	hash;
+	private String			first;
 
-	public StandaloneMarkov(int k, Map<String, Markov> markovHash, String firstSub) {
-		this.k = k;
-		this.markovHash = markovHash;
-		this.firstSub = firstSub;
+	/**
+	 * Create a new standalone Markov generator.
+	 * 
+	 * @param order
+	 *                The order of this generator.
+	 * 
+	 * @param markovHash
+	 *                The generators to use.
+	 * 
+	 * @param firstSub
+	 *                The string to start out with.
+	 */
+	public StandaloneMarkov(int order, Map<String, Markov> markovHash, String firstSub) {
+		ord = order;
+		hash = markovHash;
+		first = firstSub;
 	}
 
-	public String generateTextFromMarkov(int M) {
+	/**
+	 * Generate random text from the markov generator.
+	 * 
+	 * @param charsToGenerate
+	 *                The number of characters of text to generate.
+	 * 
+	 * @return The randomly generate text.
+	 */
+	public String generateTextFromMarkov(int charsToGenerate) {
 		StringBuilder text = new StringBuilder();
-		for (int i = k; i < M; i++) {
-			if (i == k) {
-				text.append(firstSub);
 
-				if (text.length() > k) i = text.length();
+		for (int i = ord; i < charsToGenerate; i++) {
+			if (i == ord) {
+				text.append(first);
+
+				if (text.length() > ord) i = text.length();
 			}
 
-			String sub = text.substring((i - k), (i));
-			Markov tmp = markovHash.get(sub);
+			String sub = text.substring(i - ord, i);
+			Markov tmp = hash.get(sub);
 
 			if (tmp != null) {
 				Character nextChar = tmp.random();
+
 				text.append(nextChar);
 			} else {
-				i = k - 1;
+				i = ord - 1;
 			}
 		}
 
 		return text.toString();
 	}
-
 }

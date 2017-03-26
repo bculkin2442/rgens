@@ -15,9 +15,9 @@ public class Rule {
 	/**
 	 * The name of this grammar rule.
 	 */
-	public final String ruleName;
+	public final String name;
 
-	private IList<RuleCase> ruleCases;
+	private IList<RuleCase> cases;
 
 	/**
 	 * Create a new grammar rule.
@@ -35,9 +35,9 @@ public class Rule {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		}
 
-		this.ruleName = ruleName;
+		name = ruleName;
 
-		ruleCases = new FunctionalList<>();
+		cases = new FunctionalList<>();
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class Rule {
 			throw new NullPointerException("Case must not be null");
 		}
 
-		ruleCases.add(cse);
+		cases.add(cse);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Rule {
 	 * @return A random case from this rule.
 	 */
 	public RuleCase getCase() {
-		return ruleCases.randItem();
+		return cases.randItem();
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Rule {
 	 * @return A random case from this rule.
 	 */
 	public RuleCase getCase(Random rnd) {
-		return ruleCases.randItem(rnd::nextInt);
+		return cases.randItem(rnd::nextInt);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class Rule {
 	 * @return All the cases in this rule.
 	 */
 	public IList<RuleCase> getCases() {
-		return ruleCases;
+		return cases;
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class Rule {
 		final int prime = 31;
 
 		int result = 1;
-		result = prime * result + ((ruleCases == null) ? 0 : ruleCases.hashCode());
-		result = prime * result + ((ruleName == null) ? 0 : ruleName.hashCode());
+		result = prime * result + ((cases == null) ? 0 : cases.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 
 		return result;
 	}
@@ -103,19 +103,19 @@ public class Rule {
 
 		Rule other = (Rule) obj;
 
-		if(ruleCases == null) {
-			if(other.ruleCases != null) return false;
-		} else if(!ruleCases.equals(other.ruleCases)) return false;
+		if(cases == null) {
+			if(other.cases != null) return false;
+		} else if(!cases.equals(other.cases)) return false;
 
-		if(ruleName == null) {
-			if(other.ruleName != null) return false;
-		} else if(!ruleName.equals(other.ruleName)) return false;
+		if(name == null) {
+			if(other.name != null) return false;
+		} else if(!name.equals(other.name)) return false;
 
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Rule [ruleName='%s', ruleCases=%s]", ruleName, ruleCases);
+		return String.format("Rule [ruleName='%s', ruleCases=%s]", name, cases);
 	}
 }

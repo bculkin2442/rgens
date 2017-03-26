@@ -73,8 +73,8 @@ public class RGrammarSet {
 		grammars.put(grammarName, gram);
 
 		for(Rule export : gram.getExportedRules()) {
-			exportedRules.put(export.ruleName, gram);
-			exportFrom.put(export.ruleName, grammarName);
+			exportedRules.put(export.name, gram);
+			exportFrom.put(export.name, grammarName);
 		}
 
 		gram.setImportedRules(exportedRules);

@@ -37,13 +37,13 @@ public class RGrammarFormatter {
 		}
 
 		for(Rule rule : rules.values()) {
-			if(!processedRules.contains(rule.ruleName)) {
+			if(!processedRules.contains(rule.name)) {
 				sb.append("\n\n");
 				
 				processRule(rule, sb);
 			}
 
-			processedRules.add(rule.ruleName);
+			processedRules.add(rule.name);
 		}
 
 		return sb.toString().trim();
@@ -54,7 +54,7 @@ public class RGrammarFormatter {
 
 		StringBuilder ruleBuilder = new StringBuilder();
 
-		ruleBuilder.append(rule.ruleName);
+		ruleBuilder.append(rule.name);
 		ruleBuilder.append(" \u2192 ");
 
 		int markerPos = ruleBuilder.length();

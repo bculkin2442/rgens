@@ -1,8 +1,8 @@
 package bjc.rgens.newparser;
 
 import bjc.utils.funcutils.TriConsumer;
-import bjc.utils.parserutils.BlockReader;
-import bjc.utils.parserutils.BlockReader.Block;
+import bjc.utils.ioutils.Block;
+import bjc.utils.ioutils.BlockReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

@@ -5,19 +5,25 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Create a Markov generate from a provided source.
+ * 
+ * @author bjculkin
+ *
+ */
 public class StandaloneTextGenerator {
-
 	/**
-	 * Build a markov generator from a provided source
+	 * Build a markov generator from a provided source.
 	 * 
-	 * @param k
-	 *            The markov order to use
+	 * @param order
+	 *                The markov order to use.
+	 * 
 	 * @param reader
-	 *            The source to seed the generator from
-	 * @return The markov generator for the provided text
+	 *                The source to seed the generator from.
+	 * 
+	 * @return The markov generator for the provided text.
 	 */
-	public static StandaloneMarkov generateMarkovMap(int k,
-			Reader reader) {
+	public static StandaloneMarkov generateMarkovMap(int order, Reader reader) {
 		Map<String, Markov> hash = new HashMap<>();
 
 		Character next = null;
@@ -25,9 +31,10 @@ public class StandaloneTextGenerator {
 		try {
 			next = (char) reader.read();
 		} catch (IOException e1) {
-			System.out
-					.println("IOException in stepping through the reader");
+			System.out.println("IOException in stepping through the reader");
+
 			e1.printStackTrace();
+
 			System.exit(1);
 		}
 
@@ -40,19 +47,19 @@ public class StandaloneTextGenerator {
 			try {
 				next = (char) reader.read();
 			} catch (IOException e) {
-				System.out.println(
-						"IOException in stepping through the reader");
+				System.out.println("IOException in stepping through the reader");
+
 				e.printStackTrace();
 			}
 
 		}
 
 		String origFile = origFileBuffer.toString();
-		String firstSub = origFile.substring(0, k);
+		String firstSub = origFile.substring(0, order);
 
-		for (int i = 0; i < origFile.length() - k; i++) {
-			String sub = origFile.substring(i, i + k);
-			Character suffix = origFile.charAt(i + k);
+		for (int i = 0; i < origFile.length() - order; i++) {
+			String sub = origFile.substring(i, i + order);
+			Character suffix = origFile.charAt(i + order);
 
 			if (hash.containsKey(sub)) {
 				Markov marvin = hash.get(sub);
@@ -64,7 +71,6 @@ public class StandaloneTextGenerator {
 			}
 		}
 
-		return new StandaloneMarkov(k, hash, firstSub);
+		return new StandaloneMarkov(order, hash, firstSub);
 	}
-
 }
