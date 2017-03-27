@@ -3,6 +3,7 @@ package bjc.rgens.newparser;
 import bjc.utils.funcutils.TriConsumer;
 import bjc.utils.ioutils.Block;
 import bjc.utils.ioutils.BlockReader;
+import bjc.utils.ioutils.SimpleBlockReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -107,7 +108,7 @@ public class RGrammarParser {
 	 *                 Thrown if the grammar has a syntax error.
 	 */
 	public static RGrammar readGrammar(InputStream is) throws GrammarException {
-		try (BlockReader reader = new BlockReader(TOPLEVEL_BLOCK_DELIM, new InputStreamReader(is))) {
+		try (BlockReader reader = new SimpleBlockReader(TOPLEVEL_BLOCK_DELIM, new InputStreamReader(is))) {
 			if (!reader.hasNextBlock()) {
 				throw new GrammarException("At least one top-level block must be present");
 			}
@@ -174,7 +175,7 @@ public class RGrammarParser {
 	 * Handle reading a block of pragmas.
 	 */
 	private static void handlePragmaBlock(String block, RGrammarBuilder build, int level) throws GrammarException {
-		try (BlockReader pragmaReader = new BlockReader(String.format(TMPL_PRAGMA_BLOCK_DELIM, level),
+		try (BlockReader pragmaReader = new SimpleBlockReader(String.format(TMPL_PRAGMA_BLOCK_DELIM, level),
 				new StringReader(block))) {
 			try {
 				pragmaReader.forEachBlock((pragma) -> {
@@ -236,7 +237,7 @@ public class RGrammarParser {
 	 */
 	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build, int level)
 			throws GrammarException {
-		try (BlockReader ruleReader = new BlockReader(String.format(TMPL_RULEDECL_BLOCK_DELIM, level),
+		try (BlockReader ruleReader = new SimpleBlockReader(String.format(TMPL_RULEDECL_BLOCK_DELIM, level),
 				new StringReader(ruleBlock))) {
 			try {
 				if (ruleReader.hasNextBlock()) {
@@ -332,7 +333,7 @@ public class RGrammarParser {
 	 * Handle a where block (a block with local rules).
 	 */
 	private static void handleWhereBlock(String block, RGrammarBuilder build, int level) throws GrammarException {
-		try (BlockReader whereReader = new BlockReader("", new StringReader(block))) {
+		try (BlockReader whereReader = new SimpleBlockReader("", new StringReader(block))) {
 			try {
 				/*
 				 * TODO decide syntax for where blocks.
