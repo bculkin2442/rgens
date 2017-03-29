@@ -1,7 +1,7 @@
 package bjc.rgens.newparser;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -268,7 +268,7 @@ public class RGrammarSet {
 					 * Load grammar files.
 					 */
 					try {
-						FileInputStream fis = new FileInputStream(fle);
+						FileReader fis = new FileReader(fle);
 						RGrammar gram = RGrammarParser.readGrammar(fis);
 						fis.close();
 						

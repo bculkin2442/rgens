@@ -5,8 +5,7 @@ import bjc.utils.ioutils.Block;
 import bjc.utils.ioutils.BlockReader;
 import bjc.utils.ioutils.SimpleBlockReader;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,13 +20,10 @@ public class RGrammarParser {
 	/*
 	 * Templates for level-dependent delimiters.
 	 */
-	private static final String	TMPL_PRAGMA_BLOCK_DELIM		= "\\r?\\n\\t{%d}(?!\\t)";
-	private static final String	TMPL_RULEDECL_BLOCK_DELIM	= "\\r?\\n\\t\\t{%d}";
-
-	/*
-	 * Templates for non-level-dependent delimiters.
-	 */
-	private static final String TOPLEVEL_BLOCK_DELIM = "\\r?\\n\\.?\\r?\\n";
+	private static final String TMPL_PRAGMA_BLOCK_DELIM = "\\R\\t{%d}(?!\\t)";
+	private static final String TMPL_RULEDECL_BLOCK_DELIM = "\\R\\t\\t{%d}";
+	private static final String TMPL_WHERE_BLOCK_DELIM = "\\R\\t{%d}(?:in|end)\\R";
+	private static final String TMPL_TOPLEVEL_BLOCK_DELIM = "\\R\\t{%d}\\.?\\R";
 
 	/*
 	 * Pragma impls.
@@ -44,8 +40,7 @@ public class RGrammarParser {
 			int sep = body.indexOf(' ');
 
 			if (sep != -1) {
-				throw new GrammarException(
-						"Initial-rule pragma takes only one argument, the name of the initial rule");
+				throw new GrammarException("Initial-rule pragma takes only one argument, the name of the initial rule");
 			}
 
 			build.setInitialRule(body);
@@ -100,15 +95,15 @@ public class RGrammarParser {
 	 * Read a {@link RGrammar} from an input stream.
 	 * 
 	 * @param is
-	 *                The input stream to read from.
+	 *            The input stream to read from.
 	 * 
 	 * @return The grammar represented by the stream.
 	 * 
 	 * @throws GrammarException
-	 *                 Thrown if the grammar has a syntax error.
+	 *             Thrown if the grammar has a syntax error.
 	 */
-	public static RGrammar readGrammar(InputStream is) throws GrammarException {
-		try (BlockReader reader = new SimpleBlockReader(TOPLEVEL_BLOCK_DELIM, new InputStreamReader(is))) {
+	public static RGrammar readGrammar(Reader is) throws GrammarException {
+		try (BlockReader reader = new SimpleBlockReader(String.format(TMPL_TOPLEVEL_BLOCK_DELIM, 0), is)) {
 			if (!reader.hasNextBlock()) {
 				throw new GrammarException("At least one top-level block must be present");
 			}
@@ -122,8 +117,7 @@ public class RGrammarParser {
 
 				return build.toRGrammar();
 			} catch (GrammarException gex) {
-				throw new GrammarException(String.format("Error in block (%s)", reader.getBlock()),
-						gex);
+				throw new GrammarException(String.format("Error in block (%s)", reader.getBlock()), gex);
 			}
 		} catch (Exception ex) {
 			throw new GrammarException(String.format("Unknown error handling block"), ex);
@@ -131,8 +125,7 @@ public class RGrammarParser {
 	}
 
 	/*
-	 * Throughout these, level indicates the nesting level of that
-	 * construct.
+	 * Throughout these, level indicates the nesting level of that construct.
 	 */
 
 	/*
@@ -142,9 +135,12 @@ public class RGrammarParser {
 		/*
 		 * Discard empty blocks
 		 */
-		if (block.equals("")) return;
-		if (block.equals("\n")) return;
-		if (block.equals("\r\n")) return;
+		if (block.equals(""))
+			return;
+		if (block.equals("\n"))
+			return;
+		if (block.equals("\r\n"))
+			return;
 
 		int typeSep = block.indexOf(' ');
 
@@ -184,18 +180,16 @@ public class RGrammarParser {
 					int pragmaSep = pragmaContents.indexOf(' ');
 
 					if (pragmaSep == -1) {
-						throw new GrammarException(
-								"A pragma invocation must consist of the word pragma,"
-										+ " followed by a space, then the body of the pragma");
+						throw new GrammarException("A pragma invocation must consist of the word pragma,"
+								+ " followed by a space, then the body of the pragma");
 					}
 
 					String pragmaLeader = pragmaContents.substring(0, pragmaSep);
 					String pragmaBody = pragmaContents.substring(pragmaSep + 1);
 
 					if (!pragmaLeader.equalsIgnoreCase("pragma")) {
-						throw new GrammarException(String.format(
-								"Illegal line leader in pragma block: '%s'",
-								pragmaLeader));
+						throw new GrammarException(
+								String.format("Illegal line leader in pragma block: '%s'", pragmaLeader));
 					}
 
 					handlePragma(pragmaBody, build, level);
@@ -210,13 +204,14 @@ public class RGrammarParser {
 		}
 	}
 
-	/*
+	/*msg
 	 * Handle an individual pragma in a block.
 	 */
 	private static void handlePragma(String pragma, RGrammarBuilder build, int level) throws GrammarException {
 		int bodySep = pragma.indexOf(' ');
 
-		if (bodySep == -1) bodySep = pragma.length();
+		if (bodySep == -1)
+			bodySep = pragma.length();
 
 		String pragmaName = pragma.substring(0, bodySep);
 		String pragmaBody = pragma.substring(bodySep + 1);
@@ -235,15 +230,13 @@ public class RGrammarParser {
 	/*
 	 * Handle a block of a rule declaration and one or more cases.
 	 */
-	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build, int level)
-			throws GrammarException {
+	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build, int level) throws GrammarException {
 		try (BlockReader ruleReader = new SimpleBlockReader(String.format(TMPL_RULEDECL_BLOCK_DELIM, level),
 				new StringReader(ruleBlock))) {
 			try {
 				if (ruleReader.hasNextBlock()) {
 					/*
-					 * Rule with a declaration followed by
-					 * multiple cases.
+					 * Rule with a declaration followed by multiple cases.
 					 */
 					ruleReader.nextBlock();
 					Block declBlock = ruleReader.getBlock();
@@ -258,16 +251,14 @@ public class RGrammarParser {
 					build.finishRule();
 				} else {
 					/*
-					 * Rule with a declaration followed by a
-					 * single case.
+					 * Rule with a declaration followed by a single case.
 					 */
 					handleRuleDecl(build, ruleBlock);
 
 					build.finishRule();
 				}
 			} catch (GrammarException gex) {
-				throw new GrammarException(
-						String.format("Error in rule case (%s)", ruleReader.getBlock()), gex);
+				throw new GrammarException(String.format("Error in rule case (%s)", ruleReader.getBlock()), gex);
 			}
 		} catch (Exception ex) {
 			throw new GrammarException("Unknown error handling rule block", ex);
@@ -282,15 +273,14 @@ public class RGrammarParser {
 
 		if (declSep == -1) {
 			/*
-			 * TODO remove support for the old syntax when all of
-			 * the files are converted.
+			 * TODO remove support for the old syntax when all of the files are
+			 * converted.
 			 */
 			declSep = declContents.indexOf(' ');
 
 			if (declSep == -1) {
-				throw new GrammarException(
-						"A rule must be given at least one case in its declaration, and"
-								+ "seperated from that case by \u2192");
+				throw new GrammarException("A rule must be given at least one case in its declaration, and"
+						+ "seperated from that case by \u2192");
 			}
 
 			System.out.println(
@@ -321,7 +311,8 @@ public class RGrammarParser {
 			/*
 			 * Ignore empty parts
 			 */
-			if (partToAdd.equals("")) continue;
+			if (partToAdd.equals(""))
+				continue;
 
 			build.addCasePart(partToAdd);
 		}
@@ -333,15 +324,34 @@ public class RGrammarParser {
 	 * Handle a where block (a block with local rules).
 	 */
 	private static void handleWhereBlock(String block, RGrammarBuilder build, int level) throws GrammarException {
-		try (BlockReader whereReader = new SimpleBlockReader("", new StringReader(block))) {
+		int nlIndex = block.indexOf("\\n");
+		if(nlIndex == -1) {
+			throw new GrammarException("Where block must be a context followed by a body");
+		}
+		
+		String trimBlock = block.substring(nlIndex).trim();
+		
+		String whereDelim = String.format(TMPL_WHERE_BLOCK_DELIM, level);
+		try (BlockReader whereReader = new SimpleBlockReader(whereDelim, new StringReader(trimBlock))) {
 			try {
-				/*
-				 * TODO decide syntax for where blocks.
+				Block whereCtx = whereReader.next();
+
+				StringReader ctxReader = new StringReader(whereCtx.contents.trim());
+				String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
+				try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
+
+				}
+
+				Block whereBody = whereReader.next();
+
+				/**
+				 * TODO implement where blocks.
+				 * 
+				 * A where block has the context evaluated in a new context, and
+				 * the body executed in that context.
 				 */
 			} catch (GrammarException gex) {
-				throw new GrammarException(
-						String.format("Error in where block (%s)", whereReader.getBlock()),
-						gex);
+				throw new GrammarException(String.format("Error in where block (%s)", whereReader.getBlock()), gex);
 			}
 		} catch (Exception ex) {
 			throw new GrammarException("Unknown error in where block", ex);
