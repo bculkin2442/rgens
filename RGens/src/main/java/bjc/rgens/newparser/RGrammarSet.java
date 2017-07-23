@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * Represents a set of grammars that can share rules via exports.
- * 
+ *
  * @author EVE
  *
  */
@@ -51,28 +51,28 @@ public class RGrammarSet {
 
 	/**
 	 * Add a grammar to this grammar set.
-	 * 
+	 *
 	 * @param grammarName
 	 *                The name of the grammar to add.
-	 * 
+	 *
 	 * @param gram
 	 *                The grammar to add.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *                 If the grammar name is invalid.
 	 */
 	public void addGrammar(String grammarName, RGrammar gram) {
-		if(grammarName == null) {
+		if (grammarName == null) {
 			throw new NullPointerException("Grammar name must not be null");
-		} else if(gram == null) {
+		} else if (gram == null) {
 			throw new NullPointerException("Grammar must not be null");
-		} else if(grammarName.equals("")) {
+		} else if (grammarName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid grammar name");
 		}
 
 		grammars.put(grammarName, gram);
 
-		for(Rule export : gram.getExportedRules()) {
+		for (Rule export : gram.getExportedRules()) {
 			exportedRules.put(export.name, gram);
 			exportFrom.put(export.name, grammarName);
 		}
@@ -82,24 +82,24 @@ public class RGrammarSet {
 
 	/**
 	 * Get a grammar from this grammar set.
-	 * 
+	 *
 	 * @param grammarName
 	 *                The name of the grammar to get.
-	 * 
+	 *
 	 * @return The grammar with that name.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *                 If the grammar name is invalid or not present in this
 	 *                 set.
 	 */
 	public RGrammar getGrammar(String grammarName) {
-		if(grammarName == null) {
+		if (grammarName == null) {
 			throw new NullPointerException("Grammar name must not be null");
-		} else if(grammarName.equals("")) {
+		} else if (grammarName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid grammar name");
-		} else if(!grammars.containsKey(grammarName)) {
+		} else if (!grammars.containsKey(grammarName)) {
 			throw new IllegalArgumentException(
-					String.format("No grammar with name '%s' found", grammarName));
+			        String.format("No grammar with name '%s' found", grammarName));
 		}
 
 		return grammars.get(grammarName);
@@ -107,24 +107,24 @@ public class RGrammarSet {
 
 	/**
 	 * Get the grammar a rule was exported from.
-	 * 
+	 *
 	 * @param exportName
 	 *                The name of the exported rule.
-	 * 
+	 *
 	 * @return The grammar the exported rule came from.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *                 If the export name is invalid or not present in this
 	 *                 set.
 	 */
 	public RGrammar getExportSource(String exportName) {
-		if(exportName == null) {
+		if (exportName == null) {
 			throw new NullPointerException("Export name must not be null");
-		} else if(exportName.equals("")) {
+		} else if (exportName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		} else if(!exportedRules.containsKey(exportName)) {
+		} else if (!exportedRules.containsKey(exportName)) {
 			throw new IllegalArgumentException(
-					String.format("No export with name '%s' defined", exportName));
+			        String.format("No export with name '%s' defined", exportName));
 		}
 
 		return exportedRules.get(exportName);
@@ -132,26 +132,26 @@ public class RGrammarSet {
 
 	/**
 	 * Get the source of an exported rule.
-	 * 
+	 *
 	 * This will often be a grammar name, but is not required to be one.
-	 * 
+	 *
 	 * @param exportName
 	 *                The name of the exported rule.
-	 * 
+	 *
 	 * @return The source of an exported rule.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *                 If the exported rule is invalid or not present in
 	 *                 this set.
 	 */
 	public String exportedFrom(String exportName) {
-		if(exportName == null) {
+		if (exportName == null) {
 			throw new NullPointerException("Export name must not be null");
-		} else if(exportName.equals("")) {
+		} else if (exportName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		} else if(!exportedRules.containsKey(exportName)) {
+		} else if (!exportedRules.containsKey(exportName)) {
 			throw new IllegalArgumentException(
-					String.format("No export with name '%s' defined", exportName));
+			        String.format("No export with name '%s' defined", exportName));
 		}
 
 		return exportFrom.getOrDefault(exportName, "unknown");
@@ -159,29 +159,29 @@ public class RGrammarSet {
 
 	/**
 	 * Get the source of an grammar
-	 * 
+	 *
 	 * This will often be a file name, but is not required to be one.
-	 * 
+	 *
 	 * @param grammarName
 	 *                The name of the exported grammar.
-	 * 
+	 *
 	 * @return The source of an exported grammar.
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *                 If the exported grammar is invalid or not present in
 	 *                 this set.
 	 */
 	public String loadedFrom(String grammarName) {
-		if(grammarName == null) {
+		if (grammarName == null) {
 			throw new NullPointerException("Grammar name must not be null");
-		} else if(grammarName.equals("")) {
+		} else if (grammarName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid grammar name");
-		} else if(grammarName.equals("unknown")) {
+		} else if (grammarName.equals("unknown")) {
 			return grammarName;
-		} else if(!grammars.containsKey(grammarName)) {
+		} else if (!grammars.containsKey(grammarName)) {
 
 			throw new IllegalArgumentException(
-					String.format("No grammar with name '%s' defined", grammarName));
+			        String.format("No grammar with name '%s' defined", grammarName));
 		}
 
 		return loadedFrom.getOrDefault(grammarName, "unknown");
@@ -189,7 +189,7 @@ public class RGrammarSet {
 
 	/**
 	 * Get the names of all the grammars in this set.
-	 * 
+	 *
 	 * @return The names of all the grammars in this set.
 	 */
 	public Set<String> getGrammars() {
@@ -198,7 +198,7 @@ public class RGrammarSet {
 
 	/**
 	 * Get the names of all the exported rules in this set.
-	 * 
+	 *
 	 * @return The names of all the exported rules in this set.
 	 */
 	public Set<String> getExportedRules() {
@@ -207,12 +207,12 @@ public class RGrammarSet {
 
 	/**
 	 * Load a grammar set from a configuration file.
-	 * 
+	 *
 	 * @param cfgFile
 	 *                The configuration file to load from.
-	 * 
+	 *
 	 * @return The grammar set created by the configuration file.
-	 * 
+	 *
 	 * @throws IOException
 	 *                 If something goes wrong during configuration loading.
 	 */
@@ -225,14 +225,15 @@ public class RGrammarSet {
 			/*
 			 * Execute lines from the configuration file.
 			 */
-			while(scn.hasNextLine()) {
+			while (scn.hasNextLine()) {
 				String ln = scn.nextLine().trim();
 
 				/*
 				 * Ignore blank/comment lines.
 				 */
-				if(ln.equals("")) continue;
-				if(ln.startsWith("#")) continue;
+				if (ln.equals("")) continue;
+
+				if (ln.startsWith("#")) continue;
 
 				/*
 				 * Handle mixed whitespace
@@ -241,7 +242,7 @@ public class RGrammarSet {
 
 				int nameIdx = ln.indexOf(" ");
 
-				if(nameIdx == -1) {
+				if (nameIdx == -1) {
 					throw new GrammarException("Must specify a name for a loaded grammar");
 				}
 
@@ -258,12 +259,12 @@ public class RGrammarSet {
 
 				File fle = convPath.toFile();
 
-				if(fle.isDirectory()) {
+				if (fle.isDirectory()) {
 					/*
 					 * TODO implement subset grammars
 					 */
 					throw new GrammarException("Sub-grammar sets aren't implemented yet");
-				} else if(fle.getName().endsWith(".gram")) {
+				} else if (fle.getName().endsWith(".gram")) {
 					/*
 					 * Load grammar files.
 					 */
@@ -271,13 +272,13 @@ public class RGrammarSet {
 						FileReader fis = new FileReader(fle);
 						RGrammar gram = RGrammarParser.readGrammar(fis);
 						fis.close();
-						
+
 						set.addGrammar(name, gram);
 
 						set.loadedFrom.put(name, path.toString());
-					} catch(GrammarException gex) {
+					} catch (GrammarException gex) {
 						throw new GrammarException(
-								String.format("Error loading file '%s'", path), gex);
+						        String.format("Error loading file '%s'", path), gex);
 					}
 				} else {
 					throw new GrammarException(String.format("Unrecognized file '%s'"));

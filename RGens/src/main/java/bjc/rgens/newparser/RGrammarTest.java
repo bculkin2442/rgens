@@ -7,14 +7,14 @@ import java.nio.file.Paths;
 
 /**
  * Test for new grammar syntax.
- * 
+ *
  * @author EVE
  *
  */
 public class RGrammarTest {
 	/**
 	 * Main method.
-	 * 
+	 *
 	 * @param args
 	 *                Unused CLI args.
 	 */
@@ -24,20 +24,20 @@ public class RGrammarTest {
 		try {
 			RGrammarSet gramSet = RGrammarSet.fromConfigFile(Paths.get(rsc.toURI()));
 
-			for(String gramName : gramSet.getGrammars()) {
+			for (String gramName : gramSet.getGrammars()) {
 				gramSet.getGrammar(gramName).generateSuggestions();
 			}
 
-			for(String exportName : gramSet.getExportedRules()) {
+			for (String exportName : gramSet.getExportedRules()) {
 				RGrammar grammar = gramSet.getExportSource(exportName);
 
-				for(int i = 0; i < 10; i++) {
+				for (int i = 0; i < 10; i++) {
 					try {
 						grammar.generate(exportName);
-					} catch(GrammarException gex) {
+					} catch (GrammarException gex) {
 						System.out.println("Error in exported rule " + exportName
-								+ " (loaded from "
-								+ gramSet.loadedFrom(gramSet.exportedFrom(exportName)));
+						                   + " (loaded from "
+						                   + gramSet.loadedFrom(gramSet.exportedFrom(exportName)));
 
 						System.out.println();
 
@@ -48,9 +48,9 @@ public class RGrammarTest {
 					}
 				}
 			}
-		} catch(IOException ioex) {
+		} catch (IOException ioex) {
 			ioex.printStackTrace();
-		} catch(URISyntaxException urisex) {
+		} catch (URISyntaxException urisex) {
 			urisex.printStackTrace();
 		}
 	}

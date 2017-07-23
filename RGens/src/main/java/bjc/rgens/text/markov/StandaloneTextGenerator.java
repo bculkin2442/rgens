@@ -7,20 +7,20 @@ import java.util.Map;
 
 /**
  * Create a Markov generate from a provided source.
- * 
+ *
  * @author bjculkin
  *
  */
 public class StandaloneTextGenerator {
 	/**
 	 * Build a markov generator from a provided source.
-	 * 
+	 *
 	 * @param order
 	 *                The markov order to use.
-	 * 
+	 *
 	 * @param reader
 	 *                The source to seed the generator from.
-	 * 
+	 *
 	 * @return The markov generator for the provided text.
 	 */
 	public static StandaloneMarkov generateMarkovMap(int order, Reader reader) {

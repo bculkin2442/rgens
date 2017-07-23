@@ -3,7 +3,7 @@ package bjc.rgens.newparser;
 /**
  * The exception thrown when something goes wrong while parsing a
  * grammar.
- * 
+ *
  * @author student
  *
  */
@@ -15,7 +15,7 @@ public class GrammarException extends RuntimeException {
 
 	/**
 	 * Create a new grammar exception with the specified message.
-	 * 
+	 *
 	 * @param msg
 	 *                The message for this exception.
 	 */
@@ -26,10 +26,10 @@ public class GrammarException extends RuntimeException {
 	/**
 	 * Create a new grammar exception with the specified message and
 	 * cause.
-	 * 
+	 *
 	 * @param msg
 	 *                The message for this exception.
-	 * 
+	 *
 	 * @param cause
 	 *                The cause of this exception.
 	 */

@@ -1,13 +1,13 @@
-[grammar] → ([block] (/\n\.\n?/ [block])*)?
+[grammar] → ([block] ( / \n\.\n ? / [block])*) ?
 
-[block] → [pragma-block]
-	→ [rule-block]
-	→ [where-block]
+[block] → [pragma - block]
+→ [rule - block]
+→ [where - block]
 
-[pragma-block] → [pragma] (/\n(?!\t)/ [pragma])*
+[pragma - block] → [pragma] ( / \n( ? !\t) / [pragma])*
 
-[rule-block] → [rule-decl] [rule-case] (/\n\t/ [rule-case])*
+[rule - block] → [rule - decl] [rule - case] ( / \n\t / [rule - case])*
 
-[where-block] -> where /\n\t/ ([rule-block] /\n\t/)+ in /\n\t/ [rule-block]
+[where - block] → where / \n\t / ([rule - block] / \n\t / ) + in / \n\t / [rule - block]
 
-[pragma] → pragma [pragma-name] [pragma-body]
+[pragma] → pragma [pragma - name] [pragma - body]

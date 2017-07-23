@@ -6,19 +6,19 @@ import java.util.*;
 /**
  * Represents a k-character substring. Can give a pseudo-random suffix character
  * based on probability.
- * 
+ *
  * @author Daniel Friedman (Fall 2011)
  *
  */
 public class Markov {
-	String	substring;
-	int	count	= 0;
+	String  substring;
+	int     count   = 0;
 
 	TreeMap<Character, Integer> map;
 
 	/**
 	 * Constructs a Markov object from a given substring.
-	 * 
+	 *
 	 * @param substr
 	 *                the given substring.
 	 */
@@ -33,7 +33,7 @@ public class Markov {
 	/**
 	 * Constructs a Markov object from a given substring and suffix
 	 * character. Suffix characters are stored in a TreeMap.
-	 * 
+	 *
 	 * @param substr
 	 *                the specified substring.
 	 * @param suffix
@@ -57,7 +57,7 @@ public class Markov {
 
 	/**
 	 * Adds a suffix character to the TreeMap.
-	 * 
+	 *
 	 * @param c
 	 *                the suffix character to be added.
 	 */
@@ -73,7 +73,7 @@ public class Markov {
 	/**
 	 * Gives the frequency count of a suffix character; that is, the number
 	 * of times the specified suffix follows the substring in a text.
-	 * 
+	 *
 	 * @param c
 	 *                the specified suffix.
 	 * @return the frequency count.
@@ -88,7 +88,7 @@ public class Markov {
 
 	/**
 	 * Gives a percentage of frequency count / number of total suffixes.
-	 * 
+	 *
 	 * @param c
 	 * @return the ratio of frequency count of a single character to the
 	 *         total number of suffixes
@@ -103,7 +103,7 @@ public class Markov {
 
 	/**
 	 * Finds whether or not the given suffix is in the TreeMap.
-	 * 
+	 *
 	 * @param c
 	 *                the given suffix.
 	 * @return True if the suffix exists in the TreeMap, false otherwise.
@@ -118,7 +118,7 @@ public class Markov {
 
 	/**
 	 * Gives the number of times this substring occurs in a text.
-	 * 
+	 *
 	 * @return said number of times.
 	 */
 	public int count() {
@@ -127,7 +127,7 @@ public class Markov {
 
 	/**
 	 * Gives the TreeMap.
-	 * 
+	 *
 	 * @return the TreeMap.
 	 */
 	public TreeMap<Character, Integer> getMap() {
@@ -142,7 +142,7 @@ public class Markov {
 	 * indices in the ArrayList, the probability of getting a more common
 	 * suffix is greater than the probability of getting a less common
 	 * suffix.
-	 * 
+	 *
 	 * @return the pseudo-random suffix.
 	 */
 	public char random() {
@@ -170,7 +170,7 @@ public class Markov {
 
 	/**
 	 * Gives a String representation of the Markov object.
-	 * 
+	 *
 	 * @return said String representation.
 	 */
 	@Override
@@ -183,6 +183,7 @@ public class Markov {
 			int value = entry.getValue();
 			ret += "\n" + "Suffix: " + key + ", frequency count: " + value;
 		}
+
 		return ret;
 	}
 }

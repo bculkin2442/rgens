@@ -8,17 +8,17 @@ import java.util.Set;
 
 /**
  * Format randomized grammars to strings properly.
- * 
+ *
  * @author EVE
  *
  */
 public class RGrammarFormatter {
 	/**
 	 * Format a grammar into a file that represents that grammar.
-	 * 
+	 *
 	 * @param gram
 	 *                The grammar to format.
-	 * 
+	 *
 	 * @return The formatted grammar.
 	 */
 	public static String formatGrammar(RGrammar gram) {
@@ -30,16 +30,16 @@ public class RGrammarFormatter {
 
 		Set<String> processedRules = new HashSet<>();
 
-		if(initRuleName != null) {
+		if (initRuleName != null) {
 			processRule(rules.get(initRuleName), sb);
 
 			processedRules.add(initRuleName);
 		}
 
-		for(Rule rule : rules.values()) {
-			if(!processedRules.contains(rule.name)) {
+		for (Rule rule : rules.values()) {
+			if (!processedRules.contains(rule.name)) {
 				sb.append("\n\n");
-				
+
 				processRule(rule, sb);
 			}
 
@@ -65,10 +65,10 @@ public class RGrammarFormatter {
 
 		ruleBuilder = new StringBuilder();
 
-		for(RuleCase cse : cases.tail()) {
+		for (RuleCase cse : cases.tail()) {
 			sb.append("\n\t");
 
-			for(int i = 8; i < markerPos; i++) {
+			for (int i = 8; i < markerPos; i++) {
 				ruleBuilder.append(" ");
 			}
 
@@ -85,7 +85,7 @@ public class RGrammarFormatter {
 		/*
 		 * Process each element, adding a space.
 		 */
-		for(CaseElement element : cse.getElements()) {
+		for (CaseElement element : cse.getElements()) {
 			sb.append(element.toString());
 			sb.append(" ");
 		}

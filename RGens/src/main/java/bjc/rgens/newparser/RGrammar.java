@@ -19,7 +19,7 @@ import edu.gatech.gtri.bktree.MutableBkTree;
 
 /**
  * Represents a randomized grammar.
- * 
+ *
  * @author EVE
  *
  */
@@ -43,8 +43,8 @@ public class RGrammar {
 	}
 
 	private static class GenerationState {
-		public StringBuilder	contents;
-		public Random		rnd;
+		public StringBuilder    contents;
+		public Random           rnd;
 
 		public Map<String, String> vars;
 
@@ -57,16 +57,16 @@ public class RGrammar {
 
 	private static Pattern NAMEVAR_PATTERN = Pattern.compile("\\$(\\w+)");
 
-	private Map<String, Rule>	rules;
-	private Map<String, RGrammar>	importRules;
-	private Set<String>		exportRules;
-	private String			initialRule;
+	private Map<String, Rule>       rules;
+	private Map<String, RGrammar>   importRules;
+	private Set<String>             exportRules;
+	private String                  initialRule;
 
 	private BkTreeSearcher<String> ruleSearcher;
 
 	/**
 	 * Create a new randomized grammar using the specified set of rules.
-	 * 
+	 *
 	 * @param ruls
 	 *                The rules to use.
 	 */
@@ -76,10 +76,10 @@ public class RGrammar {
 
 	/**
 	 * Sets the imported rules to use.
-	 * 
+	 *
 	 * Imported rules are checked for rule definitions after local
 	 * definitions are checked.
-	 * 
+	 *
 	 * @param exportedRules
 	 *                The set of imported rules to use.
 	 */
@@ -104,11 +104,11 @@ public class RGrammar {
 	/**
 	 * Generate a string from this grammar, starting from the specified
 	 * rule.
-	 * 
+	 *
 	 * @param startRule
 	 *                The rule to start generating at, or null to use the
 	 *                initial rule for this grammar.
-	 * 
+	 *
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule) {
@@ -118,17 +118,17 @@ public class RGrammar {
 	/**
 	 * Generate a string from this grammar, starting from the specified
 	 * rule.
-	 * 
+	 *
 	 * @param startRule
 	 *                The rule to start generating at, or null to use the
 	 *                initial rule for this grammar.
-	 * 
+	 *
 	 * @param rnd
 	 *                The random number generator to use.
-	 * 
+	 *
 	 * @param vars
 	 *                The set of variables to use.
-	 * 
+	 *
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule, Random rnd, Map<String, String> vars) {
@@ -137,7 +137,7 @@ public class RGrammar {
 		if (startRule == null) {
 			if (initialRule == null) {
 				throw new GrammarException(
-						"Must specify a start rule for grammars with no initial rule");
+				        "Must specify a start rule for grammars with no initial rule");
 			}
 
 			fromRule = initialRule;
@@ -166,7 +166,9 @@ public class RGrammar {
 				for (CaseElement elm : start.getElements()) {
 					generateElement(elm, state);
 				}
+
 				break;
+
 			default:
 				throw new GrammarException(String.format("Unknown case type '%s'", start.type));
 			}
@@ -185,9 +187,11 @@ public class RGrammar {
 				state.contents.append(elm.getLiteral());
 				state.contents.append(" ");
 				break;
+
 			case RULEREF:
 				generateRuleReference(elm, state);
 				break;
+
 			case RANGE:
 				int start = elm.getStart();
 				int end = elm.getEnd();
@@ -198,17 +202,21 @@ public class RGrammar {
 				state.contents.append(val);
 				state.contents.append(" ");
 				break;
+
 			case VARDEF:
 				generateVarDef(elm.getName(), elm.getDefn(), state);
 				break;
+
 			case EXPVARDEF:
 				generateExpVarDef(elm.getName(), elm.getDefn(), state);
 				break;
+
 			default:
 				throw new GrammarException(String.format("Unknown element type '%s'", elm.type));
 			}
 		} catch (GrammarException gex) {
-			throw new GrammarException(String.format("Error in generating case element (%s)", elm), gex);
+			throw new GrammarException(String.format("Error in generating case element (%s)", elm),
+			                           gex);
 		}
 	}
 
@@ -216,7 +224,8 @@ public class RGrammar {
 	 * Generate a expanding variable definition.
 	 */
 	private void generateExpVarDef(String name, String defn, GenerationState state) {
-		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd, state.vars);
+		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd,
+		                state.vars);
 
 		if (rules.containsKey(defn)) {
 			RuleCase destCase = rules.get(defn).getCase();
@@ -247,7 +256,8 @@ public class RGrammar {
 	private void generateRuleReference(CaseElement elm, GenerationState state) {
 		String refersTo = elm.getLiteral();
 
-		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd, state.vars);
+		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd,
+		                state.vars);
 
 		if (refersTo.contains("$")) {
 			/*
@@ -268,17 +278,17 @@ public class RGrammar {
 
 					if (!state.vars.containsKey(var)) {
 						throw new GrammarException(
-								String.format("No variable '%s' defined", var));
+						        String.format("No variable '%s' defined", var));
 					}
 
 					String name = state.vars.get(var);
 
 					if (name.contains(" ")) {
 						throw new GrammarException(
-								"Variables substituted into names cannot contain spaces");
+						        "Variables substituted into names cannot contain spaces");
 					} else if (name.equals("")) {
 						throw new GrammarException(
-								"Variables substituted into names cannot be empty");
+						        "Variables substituted into names cannot be empty");
 					}
 
 					nameMatcher.appendReplacement(nameBuffer, name);
@@ -320,10 +330,10 @@ public class RGrammar {
 				Set<Match<? extends String>> results = ruleSearcher.search(refersTo, MAX_DISTANCE);
 
 				String[] resArray = results.stream().map((mat) -> mat.getMatch())
-						.toArray((i) -> new String[i]);
+				                    .toArray((i) -> new String[i]);
 
 				throw new GrammarException(String.format("No rule '%s' defined (perhaps you meant %s?)",
-						refersTo, StringUtils.toEnglishList(resArray, false)));
+				                           refersTo, StringUtils.toEnglishList(resArray, false)));
 			}
 
 			throw new GrammarException(String.format("No rule '%s' defined", refersTo));
@@ -341,7 +351,7 @@ public class RGrammar {
 
 	/**
 	 * Get the initial rule of this grammar.
-	 * 
+	 *
 	 * @return The initial rule of this grammar.
 	 */
 	public String getInitialRule() {
@@ -350,7 +360,7 @@ public class RGrammar {
 
 	/**
 	 * Set the initial rule of this grammar.
-	 * 
+	 *
 	 * @param initRule
 	 *                The initial rule of this grammar, or null to say there
 	 *                is no initial rule.
@@ -368,7 +378,7 @@ public class RGrammar {
 			throw new GrammarException("The empty string is not a valid rule name");
 		} else if (!rules.containsKey(initRule)) {
 			throw new GrammarException(
-					String.format("No rule '%s' local to this grammar defined.", initRule));
+			        String.format("No rule '%s' local to this grammar defined.", initRule));
 		}
 
 		initialRule = initRule;
@@ -376,9 +386,9 @@ public class RGrammar {
 
 	/**
 	 * Gets the rules exported by this grammar.
-	 * 
+	 *
 	 * The initial rule is exported by default if specified.
-	 * 
+	 *
 	 * @return The rules exported by this grammar.
 	 */
 	public Set<Rule> getExportedRules() {
@@ -387,7 +397,7 @@ public class RGrammar {
 		for (String rname : exportRules) {
 			if (!rules.containsKey(rname)) {
 				throw new GrammarException(String.format("No rule '%s' local to this grammar defined",
-						initialRule));
+				                           initialRule));
 			}
 
 			res.add(rules.get(rname));
@@ -402,7 +412,7 @@ public class RGrammar {
 
 	/**
 	 * Set the rules exported by this grammar.
-	 * 
+	 *
 	 * @param exportedRules
 	 *                The rules exported by this grammar.
 	 */
@@ -412,7 +422,7 @@ public class RGrammar {
 
 	/**
 	 * Get all the rules in this grammar.
-	 * 
+	 *
 	 * @return All the rules in this grammar.
 	 */
 	public Map<String, Rule> getRules() {

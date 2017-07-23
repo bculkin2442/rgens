@@ -4,20 +4,20 @@ import java.io.*;
 
 /**
  * Generate text from a markov model of an input text
- * 
+ *
  * @author ben
  *
  */
 public class TextGenerator {
 	/**
 	 * Main method.
-	 * 
+	 *
 	 * @param args
 	 *                when used with three arguments, the first represents
 	 *                the k-order of the Markov objects. The second
 	 *                represents the number of characters to print out. The
 	 *                third represents the file to be read.
-	 * 
+	 *
 	 *                When used with two arguments, the first represents the
 	 *                k-order of the Markov objects, and the second
 	 *                represents the file to be read. The generated text
