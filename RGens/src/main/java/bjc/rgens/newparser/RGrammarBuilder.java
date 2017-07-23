@@ -17,10 +17,6 @@ import static bjc.rgens.newparser.RuleCase.CaseType.*;
  *
  */
 public class RGrammarBuilder {
-	private IList<CaseElement> currentCase;
-
-	private Rule currRule;
-
 	private Map<String, Rule> rules;
 
 	private Set<String> exportedRules;
@@ -34,30 +30,23 @@ public class RGrammarBuilder {
 		rules = new HashMap<>();
 
 		exportedRules = new HashSet<>();
-
-		currentCase = new FunctionalList<>();
 	}
 
-	/**
-	 * Starts a rule with the provided name.
-	 *
-	 * If the rule already exists, it will be opened for adding additional
-	 * cases instead.
-	 *
-	 * @param rName
-	 *                The name of the rule currently being built.
-	 *
-	 * @throws IllegalArgumentException
-	 *                 If the rule name is the empty string.
-	 */
-	public void startRule(String rName) {
-		if (rName == null) {
+	public Rule getOrCreateRule(String rName) {
+		if(rName == null)
 			throw new NullPointerException("Rule name must not be null");
-		} else if (rName.equals("")) {
+		else if(rName.equals(""))
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		}
 
-		currRule = new Rule(rName);
+		if(rules.containsKey(rName))
+			return rules.get(rName);
+		else {
+			Rule ret = new Rule(rName);
+
+			rules.put(rName, ret);
+
+			return ret;
+		}
 	}
 
 	/**
@@ -73,70 +62,6 @@ public class RGrammarBuilder {
 		grammar.setExportedRules(exportedRules);
 
 		return grammar;
-	}
-
-	/**
-	 * Adds a case part to this rule.
-	 *
-	 * <h2>Case part formatting</h2>
-	 * <dl>
-	 * <dt>Rule Reference</dt>
-	 * <dd>Rule references are marked by being surrounded with square
-	 * brackets (the square brackets are part of the rule's name)</dd>
-	 * <dt>Literal Strings</dt>
-	 * <dd>Literal strings are the default case part type.</dd>
-	 * </dl>
-	 *
-	 * @param csepart
-	 */
-	public void addCasePart(String csepart) {
-		CaseElement element = CaseElement.createElement(csepart);
-
-		currentCase.add(element);
-	}
-
-	/**
-	 * Finalizes editing a rule.
-	 *
-	 * Saves the rule to the rule map.
-	 *
-	 * @throws IllegalStateException
-	 *                 Must be invoked while a rule is being edited.
-	 */
-	public void finishRule() {
-		if (currRule == null) {
-			throw new IllegalStateException("Must start a rule before finishing one");
-		}
-
-		rules.put(currRule.name, currRule);
-	}
-
-	/**
-	 * Finishes the current case being edited.
-	 *
-	 * @throws IllegalStateException
-	 *                 Must be invoked while a rule is being edited.
-	 */
-	public void finishCase() {
-		if (currRule == null) {
-			throw new IllegalStateException("Must start a rule before finishing a case");
-		}
-
-		currRule.addCase(new RuleCase(NORMAL, currentCase));
-
-		currentCase = new FunctionalList<>();
-	}
-
-	/**
-	 * Begins a case for the current rule.
-	 *
-	 * @throws IllegalStateException
-	 *                 Must be invoked while a rule is being edited.
-	 */
-	public void beginCase() {
-		if (currRule == null) {
-			throw new IllegalStateException("Must start a rule before adding cases");
-		}
 	}
 
 	/**

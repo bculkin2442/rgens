@@ -281,7 +281,7 @@ public class RGrammar {
 
 					if (!state.vars.containsKey(var)) {
 						String msg = String.format("No variable '%s' defined", var);
-						throw new GrammarException();
+						throw new GrammarException(msg);
 					}
 
 					String name = state.vars.get(var);
@@ -312,7 +312,7 @@ public class RGrammar {
 
 				if (!state.vars.containsKey(key)) {
 					String msg = String.format("No variable '%s' defined", key);
-					throw new GrammarException();
+					throw new GrammarException(msg);
 				}
 
 				state.contents.append(state.vars.get(key));
@@ -339,11 +339,11 @@ public class RGrammar {
 				String msg = String.format("No rule '%s' defined (perhaps you meant %s?)",
 				                           refersTo, StringUtils.toEnglishList(resArray, false));
 
-				throw new GrammarException();
+				throw new GrammarException(msg);
 			}
 
 			String msg = String.format("No rule '%s' defined", refersTo);
-			throw new GrammarException();
+			throw new GrammarException(msg);
 		}
 
 		if (refersTo.contains("+")) {
@@ -385,7 +385,7 @@ public class RGrammar {
 			throw new GrammarException("The empty string is not a valid rule name");
 		} else if (!rules.containsKey(initRule)) {
 			String msg = String.format("No rule '%s' local to this grammar defined.", initRule);
-			throw new GrammarException();
+			throw new GrammarException(msg);
 		}
 
 		initialRule = initRule;
@@ -405,7 +405,7 @@ public class RGrammar {
 			if (!rules.containsKey(rname)) {
 				String msg = String.format("No rule '%s' local to this grammar defined",
 				                           initialRule);
-				throw new GrammarException();
+				throw new GrammarException(msg);
 			}
 
 			res.add(rules.get(rname));

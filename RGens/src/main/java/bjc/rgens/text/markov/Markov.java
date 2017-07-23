@@ -1,4 +1,4 @@
-p*ackage bjc.rgens.text.markov;
+package bjc.rgens.text.markov;
 
 import java.util.Map.Entry;
 import java.util.*;

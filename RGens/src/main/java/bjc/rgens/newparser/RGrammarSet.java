@@ -124,7 +124,7 @@ public class RGrammarSet {
 		} else if (exportName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if (!exportedRules.containsKey(exportName)) {
-			String msg = String.format("No export with name '%s' defined", exportName)
+			String msg = String.format("No export with name '%s' defined", exportName);
 			throw new IllegalArgumentException(msg);
 		}
 
@@ -151,7 +151,7 @@ public class RGrammarSet {
 		} else if (exportName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if (!exportedRules.containsKey(exportName)) {
-			String msg = String.format("No export with name '%s' defined", exportName)
+			String msg = String.format("No export with name '%s' defined", exportName);
 			throw new IllegalArgumentException(msg);
 		}
 

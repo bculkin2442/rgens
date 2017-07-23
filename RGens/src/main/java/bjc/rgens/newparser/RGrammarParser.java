@@ -1,5 +1,7 @@
 package bjc.rgens.newparser;
 
+import bjc.utils.funcdata.FunctionalList;
+import bjc.utils.funcdata.IList;
 import bjc.utils.funcutils.TriConsumer;
 import bjc.utils.ioutils.blocks.Block;
 import bjc.utils.ioutils.blocks.BlockReader;
@@ -17,6 +19,8 @@ import java.util.Map;
  *
  */
 public class RGrammarParser {
+	public static final boolean DEBUG = false;
+
 	/*
 	 * Templates for level-dependent delimiters.
 	 */
@@ -101,6 +105,9 @@ public class RGrammarParser {
 				RGrammarBuilder build = new RGrammarBuilder();
 
 				reader.forEachBlock((block) -> {
+					if(DEBUG)
+						System.err.printf("Handling top-level block (%s)\n", block);
+
 					handleBlock(build, block.contents, 0);
 				});
 
@@ -145,6 +152,8 @@ public class RGrammarParser {
 		} else if (blockType.equalsIgnoreCase("where")) {
 			handleWhereBlock(block, build, level);
 		} else if (blockType.equalsIgnoreCase("#")) {
+			if(DEBUG)
+				System.err.printf("Handled comment block (%s)\n", block);
 			/*
 			 * Comment block.
 			 *
@@ -167,6 +176,9 @@ public class RGrammarParser {
 		try (BlockReader pragmaReader = new SimpleBlockReader(dlm, new StringReader(block))) {
 			try {
 				pragmaReader.forEachBlock((pragma) -> {
+					if(DEBUG)
+						System.err.printf("Handled pragma block (%s)\n", pragma);
+
 					String pragmaContents = pragma.contents;
 
 					int pragmaSep = pragmaContents.indexOf(' ');
@@ -212,13 +224,16 @@ public class RGrammarParser {
 
 		if (pragmas.containsKey(pragmaName)) {
 			try {
+				if(DEBUG)
+					System.err.printf("Handled pragma '%s'\n", pragmaName);
+
 				pragmas.get(pragmaName).accept(pragmaBody, build, level);
 			} catch (GrammarException gex) {
 				String msg = String.format("Error in pragma '%s'", pragmaName);
 				throw new GrammarException(msg, gex);
 			}
 		} else {
-			String msg = String.format("Unknown pragma '%s'", pragmaName)
+			String msg = String.format("Unknown pragma '%s'", pragmaName);
 			throw new GrammarException(msg);
 		}
 	}
@@ -228,8 +243,8 @@ public class RGrammarParser {
 	 */
 	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build,
 	                                    int level) throws GrammarException {
-		String msg = String.format(TMPL_RULEDECL_BLOCK_DELIM, level);
-		try (BlockReader ruleReader = new SimpleBlockReaderformat(msg, new StringReader(ruleBlock)) {
+		String dlm = String.format(TMPL_RULEDECL_BLOCK_DELIM, level);
+		try (BlockReader ruleReader = new SimpleBlockReader(dlm, new StringReader(ruleBlock))) {
 			try {
 				if (ruleReader.hasNextBlock()) {
 					/*
@@ -239,20 +254,16 @@ public class RGrammarParser {
 					Block declBlock = ruleReader.getBlock();
 
 					String declContents = declBlock.contents;
-					handleRuleDecl(build, declContents);
+					Rule rl = handleRuleDecl(build, declContents);
 
 					ruleReader.forEachBlock((block) -> {
-						handleRuleCase(block.contents, build);
+						handleRuleCase(block.contents, build, rl);
 					});
-
-					build.finishRule();
 				} else {
 					/*
 					 * Rule with a declaration followed by a single case.
 					 */
 					handleRuleDecl(build, ruleBlock);
-
-					build.finishRule();
 				}
 			} catch (GrammarException gex) {
 				String msg = String.format("Error in rule case (%s)", ruleReader.getBlock());
@@ -266,7 +277,7 @@ public class RGrammarParser {
 	/*
 	 * Handle a rule declaration and its initial case.
 	 */
-	private static void handleRuleDecl(RGrammarBuilder build, String declContents) {
+	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents) {
 		int declSep = declContents.indexOf("\u2192");
 
 		if (declSep == -1) {
@@ -292,16 +303,18 @@ public class RGrammarParser {
 			throw new GrammarException("The empty string is not a valid rule name");
 		}
 
-		build.startRule(ruleName);
+		Rule rul = build.getOrCreateRule(ruleName);
 
-		handleRuleCase(ruleBody, build);
+		handleRuleCase(ruleBody, build, rul);
+
+		return rul;
 	}
 
 	/*
 	 * Handle a single case of a rule.
 	 */
-	private static void handleRuleCase(String cse, RGrammarBuilder build) {
-		build.beginCase();
+	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul) {
+		IList<CaseElement> caseParts = new FunctionalList<>();
 
 		for (String csepart : cse.split(" ")) {
 			String partToAdd = csepart.trim();
@@ -312,10 +325,10 @@ public class RGrammarParser {
 			if (partToAdd.equals(""))
 				continue;
 
-			build.addCasePart(partToAdd);
+			caseParts.add(CaseElement.createElement(partToAdd));
 		}
 
-		build.finishCase();
+		rul.addCase(new RuleCase(RuleCase.CaseType.NORMAL, caseParts));
 	}
 
 	/*
