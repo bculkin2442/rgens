@@ -80,11 +80,11 @@ public class RGrammar {
 	 * Imported rules are checked for rule definitions after local
 	 * definitions are checked.
 	 *
-	 * @param exportedRules
+	 * @param importedRules
 	 *                The set of imported rules to use.
 	 */
-	public void setImportedRules(Map<String, RGrammar> exportedRules) {
-		importRules = exportedRules;
+	public void setImportedRules(Map<String, RGrammar> importedRules) {
+		importRules = importedRules;
 	}
 
 	/**
@@ -95,7 +95,6 @@ public class RGrammar {
 		MutableBkTree<String> ruleSuggester = new MutableBkTree<>(new LevenshteinMetric());
 
 		ruleSuggester.addAll(rules.keySet());
-
 		ruleSuggester.addAll(importRules.keySet());
 
 		ruleSearcher = new BkTreeSearcher<>(ruleSuggester);
@@ -170,10 +169,12 @@ public class RGrammar {
 				break;
 
 			default:
-				throw new GrammarException(String.format("Unknown case type '%s'", start.type));
+				String msg = String.format("Unknown case type '%s'", start.type);
+				throw new GrammarException(msg);
 			}
 		} catch (GrammarException gex) {
-			throw new GrammarException(String.format("Error in generating case (%s)", start), gex);
+			String msg = String.format("Error in generating case (%s)", start);
+			throw new GrammarException(msg, gex);
 		}
 	}
 
@@ -212,11 +213,12 @@ public class RGrammar {
 				break;
 
 			default:
-				throw new GrammarException(String.format("Unknown element type '%s'", elm.type));
+				String msg = String.format("Unknown element type '%s'", elm.type);
+				throw new GrammarException(msg);
 			}
 		} catch (GrammarException gex) {
-			throw new GrammarException(String.format("Error in generating case element (%s)", elm),
-			                           gex);
+			String msg = String.format("Error in generating case element (%s)", elm);
+			throw new GrammarException(msg, gex);
 		}
 	}
 
@@ -237,7 +239,8 @@ public class RGrammar {
 
 			newState.contents.append(res);
 		} else {
-			throw new GrammarException(String.format("No rule '%s' defined", defn));
+			String msg = String.format("No rule '%s' defined", defn);
+			throw new GrammarException(msg);
 		}
 
 		state.vars.put(name, newState.contents.toString());
@@ -277,8 +280,8 @@ public class RGrammar {
 					String var = nameMatcher.group(1);
 
 					if (!state.vars.containsKey(var)) {
-						throw new GrammarException(
-						        String.format("No variable '%s' defined", var));
+						String msg = String.format("No variable '%s' defined", var);
+						throw new GrammarException();
 					}
 
 					String name = state.vars.get(var);
@@ -308,7 +311,8 @@ public class RGrammar {
 				String key = refBody.substring(1);
 
 				if (!state.vars.containsKey(key)) {
-					throw new GrammarException(String.format("No variable '%s' defined", key));
+					String msg = String.format("No variable '%s' defined", key);
+					throw new GrammarException();
 				}
 
 				state.contents.append(state.vars.get(key));
@@ -332,11 +336,14 @@ public class RGrammar {
 				String[] resArray = results.stream().map((mat) -> mat.getMatch())
 				                    .toArray((i) -> new String[i]);
 
-				throw new GrammarException(String.format("No rule '%s' defined (perhaps you meant %s?)",
-				                           refersTo, StringUtils.toEnglishList(resArray, false)));
+				String msg = String.format("No rule '%s' defined (perhaps you meant %s?)",
+				                           refersTo, StringUtils.toEnglishList(resArray, false));
+
+				throw new GrammarException();
 			}
 
-			throw new GrammarException(String.format("No rule '%s' defined", refersTo));
+			String msg = String.format("No rule '%s' defined", refersTo);
+			throw new GrammarException();
 		}
 
 		if (refersTo.contains("+")) {
@@ -377,8 +384,8 @@ public class RGrammar {
 		if (initRule.equals("")) {
 			throw new GrammarException("The empty string is not a valid rule name");
 		} else if (!rules.containsKey(initRule)) {
-			throw new GrammarException(
-			        String.format("No rule '%s' local to this grammar defined.", initRule));
+			String msg = String.format("No rule '%s' local to this grammar defined.", initRule);
+			throw new GrammarException();
 		}
 
 		initialRule = initRule;
@@ -396,8 +403,9 @@ public class RGrammar {
 
 		for (String rname : exportRules) {
 			if (!rules.containsKey(rname)) {
-				throw new GrammarException(String.format("No rule '%s' local to this grammar defined",
-				                           initialRule));
+				String msg = String.format("No rule '%s' local to this grammar defined",
+				                           initialRule);
+				throw new GrammarException();
 			}
 
 			res.add(rules.get(rname));

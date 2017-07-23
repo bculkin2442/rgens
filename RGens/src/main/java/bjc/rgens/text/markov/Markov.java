@@ -1,11 +1,12 @@
-package bjc.rgens.text.markov;
+p*ackage bjc.rgens.text.markov;
 
 import java.util.Map.Entry;
 import java.util.*;
 
 /**
- * Represents a k-character substring. Can give a pseudo-random suffix character
- * based on probability.
+ * Represents a k-character substring.
+ *
+ * Can give a pseudo-random suffix character based on probability.
  *
  * @author Daniel Friedman (Fall 2011)
  *
@@ -32,7 +33,9 @@ public class Markov {
 
 	/**
 	 * Constructs a Markov object from a given substring and suffix
-	 * character. Suffix characters are stored in a TreeMap.
+	 * character. 
+	 *
+	 * Suffix characters are stored in a TreeMap.
 	 *
 	 * @param substr
 	 *                the specified substring.
@@ -136,7 +139,9 @@ public class Markov {
 
 	/**
 	 * Using probability, returns a pseudo-random character to follow the
-	 * substring. Character possibilities are added to an ArrayList
+	 * substring.
+	 *
+	 * Character possibilities are added to an ArrayList
 	 * (duplicates allowed), and a random number from 0 to the last index in
 	 * the ArrayList is picked. Since more common suffixes occupy more
 	 * indices in the ArrayList, the probability of getting a more common
@@ -163,8 +168,10 @@ public class Markov {
 		}
 
 		Random rand = new Random();
+
 		int retIndex = rand.nextInt(suffixes.size());
 		ret = suffixes.get(retIndex);
+
 		return ret;
 	}
 

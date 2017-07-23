@@ -98,8 +98,9 @@ public class RGrammarSet {
 		} else if (grammarName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid grammar name");
 		} else if (!grammars.containsKey(grammarName)) {
-			throw new IllegalArgumentException(
-			        String.format("No grammar with name '%s' found", grammarName));
+			String msg = String.format("No grammar with name '%s' found", grammarName);
+
+			throw new IllegalArgumentException(msg);
 		}
 
 		return grammars.get(grammarName);
@@ -123,8 +124,8 @@ public class RGrammarSet {
 		} else if (exportName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if (!exportedRules.containsKey(exportName)) {
-			throw new IllegalArgumentException(
-			        String.format("No export with name '%s' defined", exportName));
+			String msg = String.format("No export with name '%s' defined", exportName)
+			throw new IllegalArgumentException(msg);
 		}
 
 		return exportedRules.get(exportName);
@@ -150,11 +151,11 @@ public class RGrammarSet {
 		} else if (exportName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if (!exportedRules.containsKey(exportName)) {
-			throw new IllegalArgumentException(
-			        String.format("No export with name '%s' defined", exportName));
+			String msg = String.format("No export with name '%s' defined", exportName)
+			throw new IllegalArgumentException(msg);
 		}
 
-		return exportFrom.getOrDefault(exportName, "unknown");
+		return exportFrom.getOrDefault(exportName, "Unknown");
 	}
 
 	/**
@@ -179,12 +180,11 @@ public class RGrammarSet {
 		} else if (grammarName.equals("unknown")) {
 			return grammarName;
 		} else if (!grammars.containsKey(grammarName)) {
-
-			throw new IllegalArgumentException(
-			        String.format("No grammar with name '%s' defined", grammarName));
+			String msg = String.format("No grammar with name '%s' defined", grammarName);
+			throw new IllegalArgumentException();
 		}
 
-		return loadedFrom.getOrDefault(grammarName, "unknown");
+		return loadedFrom.getOrDefault(grammarName, "Unknown");
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class RGrammarSet {
 				if (ln.startsWith("#")) continue;
 
 				/*
-				 * Handle mixed whitespace
+				 * Handle mixed whitespace.
 				 */
 				ln = ln.replaceAll("\\s+", " ");
 
@@ -277,11 +277,12 @@ public class RGrammarSet {
 
 						set.loadedFrom.put(name, path.toString());
 					} catch (GrammarException gex) {
-						throw new GrammarException(
-						        String.format("Error loading file '%s'", path), gex);
+						String msg = String.format("Error loading file '%s'", path);
+						throw new GrammarException(msg, gex);
 					}
 				} else {
-					throw new GrammarException(String.format("Unrecognized file '%s'"));
+					String msg = String.format("Unrecognized file '%s'");
+					throw new GrammarException(msg);
 				}
 			}
 		}

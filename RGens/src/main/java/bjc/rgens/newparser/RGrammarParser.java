@@ -20,9 +20,9 @@ public class RGrammarParser {
 	/*
 	 * Templates for level-dependent delimiters.
 	 */
-	private static final String TMPL_PRAGMA_BLOCK_DELIM = "\\R\\t{%d}(?!\\t)";
+	private static final String TMPL_PRAGMA_BLOCK_DELIM   = "\\R\\t{%d}(?!\\t)";
 	private static final String TMPL_RULEDECL_BLOCK_DELIM = "\\R\\t\\t{%d}";
-	private static final String TMPL_WHERE_BLOCK_DELIM = "\\R\\t{%d}(?:in|end)\\R";
+	private static final String TMPL_WHERE_BLOCK_DELIM    = "\\R\\t{%d}(?:in|end)\\R";
 	private static final String TMPL_TOPLEVEL_BLOCK_DELIM = "\\R\\t{%d}\\.?\\R";
 
 	/*
@@ -40,7 +40,8 @@ public class RGrammarParser {
 			int sep = body.indexOf(' ');
 
 			if (sep != -1) {
-				throw new GrammarException("Initial-rule pragma takes only one argument, the name of the initial rule");
+				String msg = "Initial-rule pragma takes only one argument, the name of the initial rule";
+				throw new GrammarException(msg);
 			}
 
 			build.setInitialRule(body);
@@ -58,36 +59,22 @@ public class RGrammarParser {
 			String[] parts = body.trim().split(" ");
 
 			if (parts.length != 2) {
-				throw new GrammarException("Suffix-with pragma takes two arguments,"
-				+ " the name of the rule to suffix, then what to suffix it with");
+				String msg = "Suffix-with pragma takes two arguments, the name of the rule to suffix, then what to suffix it with";
+				throw new GrammarException(msg);
 			}
 
-			String name = parts[0];
-			String suffix = parts[1];
-
-			if (name.equals("")) {
-				throw new GrammarException("The empty string is not a valid rule name");
-			}
-
-			build.suffixWith(name, suffix);
+			build.suffixWith(parts[0], parts[1]);
 		});
 
 		pragmas.put("prefix-with", (body, build, level) -> {
 			String[] parts = body.trim().split(" ");
 
 			if (parts.length != 2) {
-				throw new GrammarException("Prefix-with pragma takes two arguments,"
-				+ " the name of the rule to prefix, then what to prefix it with");
+				String msg = "Prefix-with pragma takes two arguments, the name of the rule to prefix, then what to prefix it with";
+				throw new GrammarException(msg);
 			}
 
-			String name = parts[0];
-			String prefix = parts[1];
-
-			if (name.equals("")) {
-				throw new GrammarException("The empty string is not a valid rule name");
-			}
-
-			build.prefixWith(name, prefix);
+			build.prefixWith(parts[0], parts[1]);
 		});
 	}
 
@@ -103,8 +90,9 @@ public class RGrammarParser {
 	 *             Thrown if the grammar has a syntax error.
 	 */
 	public static RGrammar readGrammar(Reader is) throws GrammarException {
-		try (BlockReader reader = new SimpleBlockReader(String.format(TMPL_TOPLEVEL_BLOCK_DELIM,
-			                0), is)) {
+		String dlm = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, 0);
+
+		try (BlockReader reader = new SimpleBlockReader(dlm, is)) {
 			if (!reader.hasNextBlock()) {
 				throw new GrammarException("At least one top-level block must be present");
 			}
@@ -118,10 +106,11 @@ public class RGrammarParser {
 
 				return build.toRGrammar();
 			} catch (GrammarException gex) {
-				throw new GrammarException(String.format("Error in block (%s)", reader.getBlock()), gex);
+				String msg = String.format("Error in block (%s)", reader.getBlock());
+				throw new GrammarException(msg, gex);
 			}
 		} catch (Exception ex) {
-			throw new GrammarException(String.format("Unknown error handling block"), ex);
+			throw new GrammarException("Unknown error handling block", ex);
 		}
 	}
 
@@ -135,22 +124,16 @@ public class RGrammarParser {
 	private static void handleBlock(RGrammarBuilder build, String block,
 	                                int level) throws GrammarException {
 		/*
-		 * Discard empty blocks
+		 * Discard empty blocks.
 		 */
-		if (block.equals(""))
-			return;
-
-		if (block.equals("\n"))
-			return;
-
-		if (block.equals("\r\n"))
+		if (block.equals("") || block.matches("\\R"))
 			return;
 
 		int typeSep = block.indexOf(' ');
 
 		if (typeSep == -1) {
 			throw new GrammarException(
-			        "A block must start with a type, followed by a space, then the rest of the block");
+			        "A block must start with a introducer, followed by a space, then the rest of the block");
 		}
 
 		String blockType = block.substring(0, typeSep);
@@ -164,10 +147,14 @@ public class RGrammarParser {
 		} else if (blockType.equalsIgnoreCase("#")) {
 			/*
 			 * Comment block.
+			 *
+			 * @Incomplete Attach these to the grammar builder so
+			 * that they can be re-output during formatting.
 			 */
 			return;
 		} else {
-			throw new GrammarException(String.format("Unknown block type: '%s'", blockType));
+			String msg = String.format("Unknown block type: '%s'", blockType);
+			throw new GrammarException(msg);
 		}
 	}
 
@@ -176,9 +163,8 @@ public class RGrammarParser {
 	 */
 	private static void handlePragmaBlock(String block, RGrammarBuilder build,
 	                                      int level) throws GrammarException {
-		try (BlockReader pragmaReader = new SimpleBlockReader(String.format(
-			                        TMPL_PRAGMA_BLOCK_DELIM, level),
-			                new StringReader(block))) {
+		String dlm = String.format(TMPL_PRAGMA_BLOCK_DELIM, level);
+		try (BlockReader pragmaReader = new SimpleBlockReader(dlm, new StringReader(block))) {
 			try {
 				pragmaReader.forEachBlock((pragma) -> {
 					String pragmaContents = pragma.contents;
@@ -186,16 +172,16 @@ public class RGrammarParser {
 					int pragmaSep = pragmaContents.indexOf(' ');
 
 					if (pragmaSep == -1) {
-						throw new GrammarException("A pragma invocation must consist of the word pragma,"
-						+ " followed by a space, then the body of the pragma");
+						String msg = "A pragma invocation must consist of the word pragma, followed by a space, then the body of the pragma";
+						throw new GrammarException(msg);
 					}
 
 					String pragmaLeader = pragmaContents.substring(0, pragmaSep);
 					String pragmaBody = pragmaContents.substring(pragmaSep + 1);
 
 					if (!pragmaLeader.equalsIgnoreCase("pragma")) {
-						throw new GrammarException(
-						        String.format("Illegal line leader in pragma block: '%s'", pragmaLeader));
+						String msg = String.format("Illegal line leader in pragma block: '%s'", pragmaLeader);
+						throw new GrammarException(msg);
 					}
 
 					handlePragma(pragmaBody, build, level);
@@ -203,14 +189,15 @@ public class RGrammarParser {
 			} catch (GrammarException gex) {
 				Block pragma = pragmaReader.getBlock();
 
-				throw new GrammarException(String.format("Error in pragma: (%s)", pragma), gex);
+				String msg = String.format("Error in pragma: (%s)", pragma);
+				throw new GrammarException(msg, gex);
 			}
 		} catch (Exception ex) {
 			throw new GrammarException("Unknown error handling pragma block", ex);
 		}
 	}
 
-	/*msg
+	/*
 	 * Handle an individual pragma in a block.
 	 */
 	private static void handlePragma(String pragma, RGrammarBuilder build,
@@ -227,10 +214,12 @@ public class RGrammarParser {
 			try {
 				pragmas.get(pragmaName).accept(pragmaBody, build, level);
 			} catch (GrammarException gex) {
-				throw new GrammarException(String.format("Error in '%s' pragma", pragmaName), gex);
+				String msg = String.format("Error in pragma '%s'", pragmaName);
+				throw new GrammarException(msg, gex);
 			}
 		} else {
-			throw new GrammarException(String.format("Unknown pragma named '%s'", pragmaName));
+			String msg = String.format("Unknown pragma '%s'", pragmaName)
+			throw new GrammarException(msg);
 		}
 	}
 
@@ -239,9 +228,8 @@ public class RGrammarParser {
 	 */
 	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build,
 	                                    int level) throws GrammarException {
-		try (BlockReader ruleReader = new SimpleBlockReader(String.format(
-			                        TMPL_RULEDECL_BLOCK_DELIM, level),
-			                new StringReader(ruleBlock))) {
+		String msg = String.format(TMPL_RULEDECL_BLOCK_DELIM, level);
+		try (BlockReader ruleReader = new SimpleBlockReaderformat(msg, new StringReader(ruleBlock)) {
 			try {
 				if (ruleReader.hasNextBlock()) {
 					/*
@@ -267,8 +255,8 @@ public class RGrammarParser {
 					build.finishRule();
 				}
 			} catch (GrammarException gex) {
-				throw new GrammarException(String.format("Error in rule case (%s)",
-				                           ruleReader.getBlock()), gex);
+				String msg = String.format("Error in rule case (%s)", ruleReader.getBlock());
+				throw new GrammarException(msg, gex);
 			}
 		} catch (Exception ex) {
 			throw new GrammarException("Unknown error handling rule block", ex);

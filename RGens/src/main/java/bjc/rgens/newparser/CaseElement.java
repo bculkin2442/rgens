@@ -38,6 +38,9 @@ public class CaseElement {
 		EXPVARDEF;
 	}
 
+	/*
+	 * Regexps for marking rule types.
+	 */
 	private static final String     SPECIAL_CASELEM = "\\{[^}]+\\}";
 	private static final String     REFER_CASELEM   = "\\[[^\\]]+\\]";
 	private static final String     RANGE_CASELM    = "\\[\\d+\\.\\.\\d+\\]";
