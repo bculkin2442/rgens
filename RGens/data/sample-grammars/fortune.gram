@@ -42,7 +42,7 @@
 	you will discover the meaning of life at the bottom of a beer bottle, but you won't remember what it is after you sober up in the morning
 	you will recieve a blank fortune cookie at a chinese restaurant, an event regarded by most superstition experts as a "bad omen"
 	you will be falsely accused of jaywalking
-	you will suffer a nosebleed during a speech in front of [speech-num]
+	you will suffer a nosebleed during a speech in front of [speech+num]
 	you will recieve [50..100] credit card offers in the mail during the next week
 	you will recieve [speech+num] pieces of spam email during the next year
 	your favorite tv show will be cancelled and replaced with an infomercial

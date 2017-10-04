@@ -59,7 +59,7 @@ pragma export-rule [big-tld]
 	http:// [username] . [domain] / 
 	[url-with-path]
 
-[url-with-path] http://www.geocities.com/ [neighborhood] / [digit-nozero] [digit] [digit] [digit] /
+[url-with-path] http://www.geocities.com/ [neighborhood] / [digit-nonzero] [digit] [digit] [digit] /
 	http:// [url-begin] . [acronym] .net/ [url-username] /
 	http:// [url-begin] . [town-name] .net/ [url-username]
 	http:// [subdomain-name] . [acronym] .net/ [url-username]
