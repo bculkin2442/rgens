@@ -291,9 +291,14 @@ public class RGrammarParser {
 				throw new GrammarException("A rule must be given at least one case in its declaration, and"
 				                           + "seperated from that case by \u2192");
 			}
-
-			System.out.println(
-			        "WARNING: Empty space separating a declaration and its case is deprecated. Use \u2192 instead");
+			
+			/*
+			 * @NOTE
+			 * 
+			 * This is true, but I don't care that much anyways.
+			 * System.out.println(
+			 *       "WARNING: Empty space separating a declaration and its case is deprecated. Use \u2192 instead");
+			 */
 		}
 
 		String ruleName = declContents.substring(0, declSep).trim();

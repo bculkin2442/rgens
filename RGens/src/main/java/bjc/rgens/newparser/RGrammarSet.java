@@ -17,24 +17,16 @@ import java.util.Set;
  *
  */
 public class RGrammarSet {
-	/*
-	 * Contains all the grammars in this set.
-	 */
+	/* Contains all the grammars in this set. */
 	private Map<String, RGrammar> grammars;
 
-	/*
-	 * Contains all the exported rules from grammars.
-	 */
+	/* Contains all the exported rules from grammars. */
 	private Map<String, RGrammar> exportedRules;
 
-	/*
-	 * Contains which export came from which grammar.
-	 */
+	/* Contains which export came from which grammar. */
 	private Map<String, String> exportFrom;
 
-	/*
-	 * Contains which file a grammar was loaded from.
-	 */
+	/* Contains which file a grammar was loaded from. */
 	private Map<String, String> loadedFrom;
 
 	/**
@@ -62,6 +54,7 @@ public class RGrammarSet {
 	 *                 If the grammar name is invalid.
 	 */
 	public void addGrammar(String grammarName, RGrammar gram) {
+		/* Make sure a grammar is valid. */
 		if (grammarName == null) {
 			throw new NullPointerException("Grammar name must not be null");
 		} else if (gram == null) {
@@ -72,11 +65,13 @@ public class RGrammarSet {
 
 		grammars.put(grammarName, gram);
 
+		/* Process exports from the grammar. */
 		for (Rule export : gram.getExportedRules()) {
 			exportedRules.put(export.name, gram);
 			exportFrom.put(export.name, grammarName);
 		}
 
+		/* Add exports to grammar. */
 		gram.setImportedRules(exportedRules);
 	}
 
@@ -93,6 +88,7 @@ public class RGrammarSet {
 	 *                 set.
 	 */
 	public RGrammar getGrammar(String grammarName) {
+		/* Check arguments. */
 		if (grammarName == null) {
 			throw new NullPointerException("Grammar name must not be null");
 		} else if (grammarName.equals("")) {
@@ -119,6 +115,7 @@ public class RGrammarSet {
 	 *                 set.
 	 */
 	public RGrammar getExportSource(String exportName) {
+		/* Check arguments. */
 		if (exportName == null) {
 			throw new NullPointerException("Export name must not be null");
 		} else if (exportName.equals("")) {
@@ -146,6 +143,7 @@ public class RGrammarSet {
 	 *                 this set.
 	 */
 	public String exportedFrom(String exportName) {
+		/* Check arguments. */
 		if (exportName == null) {
 			throw new NullPointerException("Export name must not be null");
 		} else if (exportName.equals("")) {
@@ -173,6 +171,7 @@ public class RGrammarSet {
 	 *                 this set.
 	 */
 	public String loadedFrom(String grammarName) {
+		/* Check arguments. */
 		if (grammarName == null) {
 			throw new NullPointerException("Grammar name must not be null");
 		} else if (grammarName.equals("")) {
@@ -217,71 +216,69 @@ public class RGrammarSet {
 	 *                 If something goes wrong during configuration loading.
 	 */
 	public static RGrammarSet fromConfigFile(Path cfgFile) throws IOException {
+		/* The grammar set to hand back. */
 		RGrammarSet set = new RGrammarSet();
 
+		/* Get the directory that contains the config file. */
 		Path cfgParent = cfgFile.getParent();
 
 		try(Scanner scn = new Scanner(cfgFile)) {
-			/*
-			 * Execute lines from the configuration file.
-			 */
+			/* Execute lines from the configuration file. */
 			while (scn.hasNextLine()) {
 				String ln = scn.nextLine().trim();
 
-				/*
-				 * Ignore blank/comment lines.
-				 */
+				/* Ignore blank/comment lines. */
 				if (ln.equals("")) continue;
 
 				if (ln.startsWith("#")) continue;
 
-				/*
-				 * Handle mixed whitespace.
-				 */
+				/* Handle mixed whitespace. */
 				ln = ln.replaceAll("\\s+", " ");
 
+				/* 
+				 * Get the place where the name of the grammar
+				 * ends. 
+				 */
 				int nameIdx = ln.indexOf(" ");
-
 				if (nameIdx == -1) {
 					throw new GrammarException("Must specify a name for a loaded grammar");
 				}
 
-				/*
-				 * Name and path of grammar.
-				 */
+				/* Name and path of grammar. */
 				String name = ln.substring(0, nameIdx);
 				Path path = Paths.get(ln.substring(nameIdx).trim());
 
 				/*
-				 * Convert from configuration relative path.
+				 * Convert from configuration relative path to
+				 * absolute path.
 				 */
 				Path convPath = cfgParent.resolve(path);
-
 				File fle = convPath.toFile();
 
 				if (fle.isDirectory()) {
-					/*
-					 * TODO implement subset grammars
-					 */
+					/* @TODO implement subset grammars */
 					throw new GrammarException("Sub-grammar sets aren't implemented yet");
 				} else if (fle.getName().endsWith(".gram")) {
-					/*
-					 * Load grammar files.
-					 */
+					/* Load grammar file. */
 					try {
 						FileReader fis = new FileReader(fle);
 						RGrammar gram = RGrammarParser.readGrammar(fis);
 						fis.close();
 
+						/* Add grammar to the set. */
 						set.addGrammar(name, gram);
 
+						/*
+						 * Mark where the grammar came
+						 * from. 
+						 */
 						set.loadedFrom.put(name, path.toString());
 					} catch (GrammarException gex) {
 						String msg = String.format("Error loading file '%s'", path);
 						throw new GrammarException(msg, gex);
 					}
 				} else {
-					String msg = String.format("Unrecognized file '%s'");
+					String msg = String.format("Unrecognized file type '%s'");
 					throw new GrammarException(msg);
 				}
 			}
