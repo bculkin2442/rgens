@@ -1,0 +1,376 @@
+[color] [standard]
+	[red-purple]
+	[yellow-orange]
+	[green-blue]
+	[brown-neutral]
+	[jewel]
+	[metallic]
+	[heraldic]
+	[archaic-purple]
+	[archaic-green]
+	[archaic-brown]
+	[anachronistic]
+
+pragma initial-rule [color]
+pragma export-rule [color]
+
+[standard] red
+	orange
+	ochre
+	yellow
+	green
+	olive
+	blue
+	navy
+	indigo
+	violet
+	purple
+	beige
+	brown
+	cream
+	khaki
+	tan
+	ivory
+	white
+	blue-gray
+	gray
+	black
+	ebony
+	copper
+	gold
+	silver
+	[iridescent]
+	[opalescent]
+	[ombre]
+	[rainbow]
+	transparent
+
+[iridescent] iridescent [color]
+	iridescent between [color] and [color]
+
+[opalescent] opalescent [color]
+
+[ombre] [color] (tinted [color] )
+
+[rainbow] rainbow of red, orange, yellow, green, blue, indigo and violet
+	rainbow of [color] , [color] and [color]
+	rainbow of [color] , [color] , [color] and [color]
+	rainbow of [color] , [color] , [color] , [color] and [color]
+	rainbow of [color] , [color] , [color] , [color] , [color] and [color]
+	rainbow of [color] , [color] , [color] , [color] , [color] , [color] and [color]
+
+[red-purple] auburn
+	blood
+	brick
+	burgundy
+	cardinal
+	carmine
+	cherry
+	cinnabar
+	crimson
+	incarnadine
+	maroon
+	oxblood
+	pink
+	puce
+	raspberry
+	rose
+	scarlet
+	amaranth
+	aubergine
+	heliotrope
+	iris
+	lavender
+	lilac
+	mulberry
+	orchid
+	plum
+	porphyry
+	violet
+	wine
+	wisteria
+
+[yellow-orange] butter
+	canary
+	citrine
+	ecru
+	flax
+	gold
+	goldenrod
+	honey
+	jasmine
+	jaundiced
+	lemon
+	maize
+	mustard
+	primrose
+	saffron
+	straw
+	turmeric
+	annatto
+	apricot
+	carrot
+	marigold
+	ochre
+	peach
+	persimmon
+	poppy
+	pumpkin
+	salmon
+	tangerine
+	tomato
+	vermilion
+
+[green-blue] baby blue
+	cerulean
+	cobalt
+	cornflower
+	denim
+	iris
+	midnight
+	navy
+	periwinkle
+	robin's egg blue
+	royal blue
+	sky blue
+	ultramarine
+	artichoke
+	avocado
+	chartreuse
+	forest green
+	grass green
+	harlequin
+	honeydew
+	hunter green
+	jungle green
+	lime
+	mint
+	moss
+	myrtle
+	olive
+	pistachio
+	sea-green
+	teal
+
+[brown-neutral] beaver
+	bistre
+	buff
+	camel
+	chestnut
+	chocolate
+	coffee
+	fawn
+	khaki
+	mahogany
+	russet
+	sand
+	sienna
+	sepia
+	taupe
+	tawny
+	terra cotta
+	umber
+	cornsilk
+	eggshell
+	snow
+	vanilla
+	whey
+	ash
+	charcoal
+	cool gray
+	slate
+	warm gray
+	ebony
+	licorice
+
+[jewel] amber
+	amethyst
+	aquamarine
+	aventurine
+	bone
+	carnelian
+	chrysophrase
+	citrine
+	copal
+	coral
+	diamond
+	emerald
+	garnet
+	ivory
+	jacinth
+	jade
+	jet
+	lapis lazuli
+	malachite
+	obsidian
+	onyx
+	[opalescent]
+	pearlescent
+	peridot
+	ruby
+	sapphire
+	sardonyx
+	topaz
+	tourmaline
+	turquoise
+
+[metallic] brass
+	bronze
+	chrome
+	copper
+	gold
+	gunmetal
+	iron
+	pewter
+	platinum
+	rust
+	silver
+	steel
+	titanium
+	verdigris
+	white gold
+
+[heraldic] argent
+	azure
+	carnation
+	celeste
+	cendree
+	gules
+	or
+	murrey
+	purpure
+	sable
+	rose
+	sanguine
+	tenne
+	vert
+	white
+
+[archaic-purple] arcipluvian [arcipluvian]
+	ianthine (violet)
+	rhodopsin (purple)
+	solferino (purple)
+	coccineous (bright red)
+	cramoisy (crimson)
+	erythraen (reddish)
+	lateritious (brick red)
+	miniaceous (red)
+	piceous (reddish-black)
+	puccoon (blood red)
+	stammel (red)
+	vinious (deep red)
+	nacarat (orange-red)
+	coquelicot (poppy)
+	croceate (saffron)
+	ibis (apricot)
+	minium (vermilion)
+	vermeil (vermilion)
+	citreous (lemon)
+	flavescent (yellowish)
+	icterine (jaundice-yellow)
+	jessamy (jasmine)
+	jonquil (yellow)
+	luteous (golden yellow)
+	meline (canary)
+	ochroleucous (yellow-white)
+	orpiment (yellow)
+	sulphureous (bright yellow)
+	urobilin (urine-colored)
+
+[arcipluvian] (varies between [color] and [color])
+	(varies between [color] , [color] and [color])
+	(varies between [color] , [color] , [color] and [color])
+	(varies between [color] , [color] and [color])
+
+[archaic-green] bilious (yellow-green)
+	chrysochlorous (green-gold)
+	tilleul (yellow-green)
+	celadon (pale green)
+	chlorochorous (green)
+	corbeau (green-black)
+	porraceous (leek green)
+	virescent (green or greenish)
+	viridian (green)
+	zinnober (green)
+	bice (green or blue)
+	caesious (blue- or gray-green)
+	glaucous (bluish-gray or green)
+	lovat (gray- or blue-green)
+	azuline (blue)
+	mazarine (blue or reddish-blue)
+	pavonated (peacock blue)
+	smalt (deep blue)
+	watchet (pale blue)
+	woad (blue)
+	atrous (jet black)
+	eburnean (ivory)
+	griseous (pearl-gray)
+	nacreous (pearlescent)
+	smaragdine (emerald)
+	aeneous (bronze)
+	ferruginous (rusty)
+	hoary (pale silver-gray)
+	plumbeous (lead white)
+	rubiginous (rusty)
+
+[archaic-brown] badious (chestnut)
+	bole (reddish-brown)
+	burnet (dark brown)
+	castaneous (chestnut)
+	castory (beaver)
+	filemot (dead leaf brown)
+	fulvous (dull reddish- or brownish-yellow)
+	fuscous (brown, tawny, dingy)
+	infuscate (cloudy brown)
+	melichrous (honey)
+	nankeen (buff)
+	pyrrhous (ruddy)
+	rufous (reddish-brown)
+	sarcoline (caucasian flesh)
+	spadiceous (chestnut)
+	stramineous (straw-colored)
+	albicant (turning white)
+	canescent (hoary, grayish-white)
+	cretaceous (chalky)
+	leucochroic (white, pale)
+	niveious (snowy)
+	cinereous (ashen)
+	columbine (dove-colored)
+	fuliginous (sooty, dusky)
+	greige (gray-beige)
+	gridelin (violet-gray)
+	isabelline (yellow-gray)
+	liard (dapple-gray)
+	welmish (pale, sickly)
+	morel (black)
+
+[anachronistic] cyan
+	fuchsia
+	hot pink
+	magenta
+	mauve
+	safety orange
+	dolm
+	fuligin
+	garrow
+	vantablack
+	jale
+	octarine
+	pallow
+	rawn
+	smaudre
+	ulfire
+	infrared
+	ultraviolet
+	reflective
+	fluorescent [color]
+	freezy freakies ( [color] normally, [color] when cold)
+	hypercolor ( [color] normally, [color] when hot)
+	[iridescent]
+	metameric (appears as [color] , but is really [color] )
+	[ombre]
+	[opalescent]
+	phosphorescent [color]
+	[rainbow]
+	translucent [color]
+	transparent

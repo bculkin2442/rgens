@@ -36,7 +36,7 @@ pragma export-rule [item-act]
 	plate mail
 	field plate
 	ancient armor
-	gothic plate
+	Gothic plate
 	full plate mail
 
 [headgear] cap
@@ -78,7 +78,7 @@ pragma prefix-with [accoutrements] [acc-kind]
 	      spiked
 	      bone
 	      tower
-	      gothic
+	      Gothic
 
 [knives] dagger
 	 throwing knife
@@ -106,7 +106,6 @@ pragma prefix-with [swords] [sword-kind]
 	flail
 	war hammer
 	maul
-	malus
 
 [spears] javelin
 	 spear
@@ -118,7 +117,7 @@ pragma prefix-with [swords] [sword-kind]
 
 [polearms] bardiche
 	   scythe
-	   poleax
+	   poleaxe
 	   halberd
 
 [axes]  axe

@@ -32,7 +32,7 @@ pragma initial-rule [dungeon-enviroment]
 [cave] a cave with nothing but bare rock
 	a cave filled with bats and flying bugs
 	an abandoned mineshaft
-	somebodys campsite
+	somebody's campsite
 	a cave filled with so many boulders they obscure vision
 	a cave that belches smoke
 	a limestone grotto echoing with the sound of running water
@@ -88,7 +88,7 @@ pragma initial-rule [dungeon-enviroment]
 	a submerged cavern with ruins at the bottom
 	a pier and harbor
 	a lake with rafts and barges
-	a gient pit and waterfall
+	a giant pit and waterfall
 	an incomplete aqueduct
 	a frozen lake swarming with penguins
 	a steamy hot spring
@@ -134,7 +134,7 @@ pragma initial-rule [dungeon-enviroment]
 	a room where someone is spying on you
 	a room where you can hear voices talking loudly
 	a room growing tentacles
-	an interrogatin room with a table and chair
+	an interrogation room with a table and chair
 	an empty classroom
 	a room whose ceiling is a giant human
 	a room that is constantly swaying

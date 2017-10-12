@@ -1,0 +1,11 @@
+@TODO 10/11/17 Ben Culkin :GrammarReorg
+	Better organize the provided sample grammars.
+
+@TODO 10/11/17 Ben Culkin :Determinism
+	Add a way to get the grammar to pick rules in a deterministic fashion,
+	so as to be able to iterate all of the rules.
+
+@TODO 10/11/17 Ben Culkin :ExportSanity
+	Figure out a way to organize exports instead of just sticking them all
+	into the global namespace. Maybe use the @ symbol for 'foreign rule
+	references' (FRRs)

@@ -1,0 +1,25 @@
+[favorite-food] My favorite foods are [fruit], [vegetable] and [meat]
+
+pragma initial-rule [favorite-food]
+pragma export-rule [favorite-food]
+
+[fruit] apple
+	banana
+	cherry
+
+[vegetable] potato
+	okra
+	brussel sprouts
+	broccoli
+	peas
+	cauliflower
+	radish
+	green beans
+
+[meat] hamburgers
+	hot dogs
+	salmon
+	beef
+	chicken
+	pork
+	fish

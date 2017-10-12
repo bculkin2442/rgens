@@ -43,15 +43,15 @@ pragma export-rule [company]
 [company-suffix] [company-suffix1]
 	[company-suffix2]
 
-[company-suffix1] Inc.
-	Incorporated
-	Ltd.
-	Corp.
-	Corporation
-	Co.
-	Company
-	Cooperative
-	Amalgamated
+[company-suffix1] {{empty}} Inc.
+	{{empty}} Incorporated
+	{{empty}} Ltd.
+	{{empty}} Corp.
+	{{empty}} Corporation
+	{{empty}} Co.
+	{{empty}} Company
+	{{empty}} Cooperative
+	{{empty}} Amalgamated
 
 [company-suffix2] , Inc.
 	, Incorporated
@@ -158,6 +158,8 @@ pragma export-rule [company]
 	transmeta
 	inprise
 	hewlett-packard
+
+pragma export-rule [tech-company]
 
 [corp-job-title] president
 	vice president

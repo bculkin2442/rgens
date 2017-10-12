@@ -1,0 +1,25 @@
+[kitchen] You enter the [kitchen-desc] kitchen. There is a [kitchen-book] cookbook nearby. Over the hearth, a [kitchen-food] gently simmers in a saucepan.
+
+pragma initial-rule [kitchen]
+pragma export-rule [kitchen]
+
+[kitchen-desc] poorly lit
+	dirty and insect infested
+	blood-soaked
+	built for a studio audience
+	well-stocked
+	papier-mache
+
+[kitchen-book] troll
+	orcish
+	demonic
+	braille
+	animated, speaking
+	floating
+
+[kitchen-food] chicken with herb butter
+	charred human heart
+	glittering pixie carcass
+	pound of thick-cut bacon
+	dragon-egg omelette
+	dozen tiny hands

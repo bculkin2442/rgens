@@ -4,15 +4,15 @@
 
 pragma initial-rule [media-company]
 
-[television-station] [chan+name] channel [2..45]
-	[chan+name] channel [2..12]
+[television-station] [chan+name] on channel [2..45]
+	[chan+name] on channel [2..12]
 
 [chan+name] k [chan-name2]
 	w [chan-name2]
 
 [chan-name2] [letter] [letter] [letter] -tv
 
-[radio-station] [radio+name] [radio+chan]
+[radio-station] [radio+name] on frequency [radio+chan]
 
 [radio+name] k [radio+name2]
 	w [radio+name2]

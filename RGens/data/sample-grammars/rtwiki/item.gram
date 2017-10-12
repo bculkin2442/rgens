@@ -1,0 +1,70 @@
+[item] [body]
+	[music]
+	[symbol]
+	[thing]
+	[weapon]
+
+pragma initial-rule [item]
+pragma export-rule [item]
+
+[body] arm
+	open eye
+	closed eye
+	foot
+	gauntlet
+	clenched hand
+	open hand
+	head
+	helm
+	heart
+	mouth
+	skull
+	tail
+
+[music] bagpipe
+	bell
+	drum
+	dulcimer
+	flute
+	harp
+	harpsichord
+	lute
+	recorder
+	tambourine
+
+[symbol] arcane symbol
+	divine symbol
+	full moon
+	crescent moon
+	star
+	sunburst
+	waves
+
+[thing] anchor
+	candle
+	castle
+	chalice
+	coin
+	flag
+	goblet
+	shield
+	tankard
+	temple
+	tree
+	wagon
+	wheel
+	wreath
+
+[weapon] arrow
+	axe
+	blade
+	bow
+	club
+	dagger
+	flail
+	mace
+	polearm
+	quarterstaff
+	spear
+	sword
+	whip

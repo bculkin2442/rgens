@@ -1,0 +1,116 @@
+[wand] a wand
+	a [material] wand
+	a [wand+tip] wand
+	a [material] [wand+tip] wand
+
+pragma suffix-with [wand] [tipped]
+pragma suffix-with [wand] [ornament]
+pragma suffix-with [wand] [inscription]
+
+pragma initial-rule [wand]
+
+[material] [material-wood]
+	[material-metal]
+	ivory
+	glass
+	ash
+	bone
+
+[tipped] tipped with a [tip]
+
+[wand+tip] [tip] -tipped
+
+[ornament] decorated with [ornaments]
+
+[inscription] inscribed with [inscriptions]
+	with a [inscriptions] inscribed on it
+
+[material-wood] teak
+	ironwood
+	bamboo
+	willow
+	bronze
+	cedar
+	darkwood
+	ebony
+	birch
+	oak
+	ash
+	pine
+	reed
+
+[material-metal] bronze
+	copper
+	mithril
+	steel
+	silver
+
+[tip] [tip-jewel]
+	[tip-metal]
+	tuning {empty} fork
+	crystal {empty} lens
+	dragon {empty} tooth
+	dessicated {empty} eye
+	pentagram
+	crescent {moon}
+
+[tip-jewel] diamond
+	amethyst
+	amber
+	emerald
+	onyx {empty} disc
+	ruby
+	uncut {empty} quartz
+	sapphire
+
+[tip-metal] golden {empty} orb
+	iron {empty} spike
+	copper {empty} sun
+	silver {empty} star
+	tin {empty} thimble
+
+[ornaments] [ornaments-elements]
+	[ornaments-creatures]
+	[ornaments-sigils]
+	ribbons
+	chains
+	feathers
+	glitter
+	leather braids
+
+[ornaments-sigils] lucky charms
+	hieroglyphs
+	alchemy signs
+	holy symbols
+	unholy symbols
+	arcane sigils
+
+[ornaments-elements] waves
+	lightning
+	flames
+	whirlwinds
+
+[ornaments-creatures] serpents
+	dragons
+	spiders and insects
+
+[inscriptions] unreadable
+	gnomish
+	aboleth
+	abyssal
+	aquan
+	dwarven
+	draconic
+	lost tongue
+	sphinx
+	ignan
+	orcish
+	elven
+	dreemspeech
+	celestial
+	runes
+	auran
+	sylvan
+	terran
+	druidic
+	infernal

@@ -71,8 +71,8 @@ pragma initial-rule [us-postal-address]
 	division
 	center
 	m. l. king
-	washington
-	lincoln
+	Washington
+	Lincoln
 	college
 	university
 	stadium
@@ -85,18 +85,18 @@ pragma initial-rule [us-postal-address]
 	sunset
 	telegraph
 	railroad
-	el paseo
+	El Paseo
 	market
 	church
 	mill
 	highland
 	woodland
-	hillcrest
-	lakeview
+	Hillcrest
+	Lakeview
 	central
 	[geographic-thing]
 
-[street-generic-standalone] broadway
-	avenue of the americas
-	kingshighway
-	el camino real
+[street-generic-standalone] Broadway
+	avenue of the Americas
+	Kingshighway
+	El Camino real

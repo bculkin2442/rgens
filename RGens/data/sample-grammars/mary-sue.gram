@@ -1,6 +1,12 @@
 [mary-sue] she appears to be a normal [normal-desc] . [mary-sue2]
 	she appears to be a normal [normal-desc] [opt-dress] [mary-sue2]
 
+[mary-sue2] She is [desc] and she will fight her enemies with her power to [power-desc] [mary-sue3]
+
+[mary-sue3] . Her friends and enemies call her [name] [mary-sue4]
+
+[mary-sue4] . Her constant companion is a [comp] .
+
 pragma initial-rule [mary-sue]
 
 [normal-desc] schoolgirl
@@ -28,13 +34,13 @@ pragma initial-rule [mary-sue]
 	marine biologist
 	single mother
 
-[opt-dress] [except-dress]
+[opt-dress] [except-dress] 
 	[half-dress]
 	[except-dress] [half-dress]
 
-[except-dress] except she dress like a [exdress-1] [exdress-2]
-	except she dress like a [exdress-1]
-	except she dress like a [exdress-2]
+[except-dress] except she dresses like a [exdress-1] [exdress-2]
+	except she dresses like a [exdress-1]
+	except she dresses like a [exdress-2]
 
 [exdress-1] gothic lolita
 	bloody nurse
@@ -57,7 +63,7 @@ pragma initial-rule [mary-sue]
 	j-pop star
 	skateboarder
 	skinhead
-	punk roc
+	punk rock
 	pole dancing
 	biker
 	innuit
@@ -116,8 +122,6 @@ pragma initial-rule [mary-sue]
 	Zombie.
 	Na’vi.
 
-[mary-sue2] She is [desc] and she will fight her enemies with her power to [power-desc] [mary-sue3]
-
 [desc] [desc-req]
 	[desc-req] [desc-opt]
 
@@ -128,7 +132,8 @@ pragma initial-rule [mary-sue]
 	a scientific experiment gone wrong
 	the last of her kind
 	chosen by destiny
-	a rumored demo-goddess
+	a rumored demon-goddess
+	a rumored demi-goddess
 	a misunderstood genius
 	created to be the next step in mankind’s evolution
 	unknowingly the queen of her kind
@@ -157,7 +162,7 @@ pragma initial-rule [mary-sue]
 	working for the church
 	destined to save the world
 	falsely accused of murdering her father
-	created by nazi scientists by world war II
+	created by Nazi scientists by world war II
 	devoted to the gods of chaos
 	who is part of a secret organization
 	megalomaniac
@@ -228,8 +233,6 @@ pragma initial-rule [mary-sue]
 	regular humans
 	plants
 
-[mary-sue3] . Her friends and enemies call her [name] [mary-sue4]
-
 [name] [name1]
 	[name1] [name2]
 
@@ -285,8 +288,6 @@ pragma initial-rule [mary-sue]
 	ender
 	stealer
 
-[mary-sue4] . Her constant companion is a [comp] .
-
 [comp] [comp-name]
 
 pragma suffix-with [comp] [comp-also]
@@ -294,7 +295,7 @@ pragma suffix-with [comp] [comp-weapon]
 
 [comp-also] who is also [compal-desc]
 
-[comp-weapon] . His/her favored weapon is a(n) [comp-weapon1]
+[comp-weapon] . Her favored weapon is a(n) [comp-weapon1]
 
 [comp-name] [comp-name1]
 	[comp-prefix] [comp-name1]
@@ -430,7 +431,7 @@ pragma suffix-with [comp] [comp-weapon]
 	bow
 	javelin
 	charm
-	poleax
+	poleaxe
 	sniper rifle
 	flamethrower
 	rapier

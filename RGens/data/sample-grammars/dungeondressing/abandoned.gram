@@ -1,0 +1,25 @@
+[abandoned] while exploring the abandoned [abandon-place] , a [abandon-person] sneaks up on you [abandon-motion] .
+
+pragma initial-rule [abandoned]
+pragma export-rule [abandoned]
+
+[abandon-place] shopping mall
+	amusement park
+	military complex
+	junkyard
+	hospital
+	insane asylum
+
+[abandon-person] pedophile
+	investment banker
+	cyborg prostitute
+	vampire
+	3 dogs in a trench coat
+	undead wizard
+
+[abandon-motion] on a jetpack
+	in a spooky van
+	on roller skates
+	on horseback
+	in a rickshaw
+	in a palanquin

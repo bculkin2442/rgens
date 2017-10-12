@@ -189,6 +189,7 @@ pragma initial-rule [linux-domain]
 	steve ballmer
 	ed muth
 	nathan myrrhvold
+	raymond chen
 
 [pundit-personality] jesse berst
 	fred moody
@@ -261,7 +262,7 @@ pragma export-rule [linux-expo]
 	[parent-type] parents
 	recording industry executives
 	media tycoons
-	bureacrats
+	bureaucrats
 	soccer moms
 	prohibitionists
 	lawyers
@@ -292,7 +293,7 @@ pragma export-rule [linux-expo]
 	spammers
 	crackers
 	backhoes
-	network outtages
+	network outages
 	system crashes
 
 [linux-error] lp1 on fire
@@ -448,7 +449,7 @@ pragma export-rule [geek-scifi-book]
 	abandoned
 	lost
 	triumphant
-	victorius
+	victorious
 	doomed
 	forbidden
 	unknown
@@ -685,7 +686,7 @@ pragma export-rule [app-name]
 	[app-common]
 
 [app-name-complex] [plural+first] [app-type] [app-suffix]
-	[plural-first] [app-suffix]
+	[plural+first] [app-suffix]
 	[acronym] [app-type]
 	[acronym] [app-type] [app-suffix]
 	[app-type] [app-suffix]
@@ -694,9 +695,10 @@ pragma export-rule [app-name]
 	[app-prefix+letter] [app-suffix]
 	[app-prefix+syllable] [app-type] [app-suffix]
 	[app-common] [app-type] [app-suffix]
-	[tech-company] [peripheral] [device-type]
+# TODO write [device-type] or find what its supposed to be.
+#	[tech-company] [peripheral] [device-type]
 	[buzzword-adjective] [app-suffix]
-	[plural+first] [buzzword-adjective] [buzzword-noun] [buzzword-job
+	[plural+first] [buzzword-adjective] [buzzword-noun] [buzzword-job]
 	[acronym] [buzzword-noun]
 	[app-prefix+name] [buzzword-adjective] [buzzword-job] [app-suffix]
 	[random-name] [buzzword-job]
@@ -827,9 +829,9 @@ pragma export-rule [app-name]
 [app-version] [app+version]
 
 [app+version] 0.0. [1..20] [version-suffix]
-	0. [digit-nozero] . [0..30]
+	0. [digit-nonzero] . [0..30]
 	1.0. [0..30]
-	1. [digit-nozero] . [0..30] [version-suffix]
+	1. [digit-nonzero] . [0..30] [version-suffix]
 	2. [digit] . [0..30]
 	2. [digit] . [0..30] [version-suffix]
 	[3..9] . [digit] . [0..30]

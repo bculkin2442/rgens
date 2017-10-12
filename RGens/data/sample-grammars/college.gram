@@ -4,7 +4,7 @@
 	' [college-course] ' will no longer be offered at [university] due to lack of interest
 	' [college-course] ' is the most popular [course-level] class at [university]
 	due to overwhelming popularity, an additional section of ' [college-course] ' will be offered at [university] next semester
-	not one single student signed up for [university] 's ' [college-course ' last semester
+	not one single student signed up for [university] 's ' [college-course] ' last semester
 	a [poll] of students at [university] revealed ' [college-course] ' is the [popular] popular [class-type] offered
 
 pragma initial-rule [college-announcement]
@@ -86,22 +86,22 @@ pragma export-rule [college-course]
 	the [archetype] of the [quest] in [course-group1] [course-group2] [course-medium]
 	[cross-cultural] [studies] [course-group2] [course-life]
 
-[course-event] the african diaspora
-	the harlem renaissance
+[course-event] the African diaspora
+	the Harlem renaissance
 	the civil rights movement
-	the italian renaissance
+	the Italian renaissance
 	westward expansion
 	manifest destiny
 	women's suffrage
 	world war I
 	world war II
 	the war of 1812
-	the american revolution
+	the American revolution
 	the french revolution
-	the russian revolution
-	the american civil war
-	the franco-prussian war
-	the jfk assasination
+	the Russian revolution
+	the American civil war
+	the Franco-Prussian war
+	the JFK Assassination
 
 [thinker-type] researchers
 	thinkers
@@ -140,9 +140,9 @@ pragma export-rule [college-course]
 	the sky is falling
 	here come the mass extinctions
 
-[course-env2] modern enviromentalism
-	enviromental biology
-	enviromental activism
+[course-env2] modern environmentalism
+	environmental biology
+	environmental activism
 
 [course-env3] the greenhouse effect
 	planetwide climatic change
@@ -171,11 +171,11 @@ pragma export-rule [college-course]
 	sexuality
 	self-actualization
 	political correctness
-	enviromentalism
-	marxism
-	socialsm
+	environmentalism
+	Marxism
+	socialism
 	communism
-	darwinism
+	Darwinism
 	activism
 	queer theory
 	[course-nounprefix] romanticism
@@ -244,11 +244,11 @@ pragma export-rule [college-course]
 
 [course-suffix] in the postmodern era
 	in the postmodern world
-	in the modern adge
+	in the modern age
 	in modern society
-	in modern america
+	in modern America
 	in today's society
-	in the american landscape
+	in the American landscape
 	in the united states
 	in the 21st century
 	in recent times
@@ -262,7 +262,7 @@ pragma export-rule [college-course]
 	[course-buzzword] , [course-buzzword] and [course-buzzword]
 	a [course-metaphor] of [course-noun] [course-suffix]
 	a [course-metaphor] of [course-ancient] [course-suffix]
-	a [course-metaphor] [course-explored] in american [course-medium]
+	a [course-metaphor] [course-explored] in American [course-medium]
 	a [course-metaphor] [course-explored] in [course-contemporary] [course-medium]
 	what is to be learned from it?
 	an interdisciplinary [study]
@@ -312,27 +312,27 @@ pragma export-rule [college-course]
 	middle class
 	[course-adj]
 
-[course-group2] african-american
-	hispanic
-	european
-	latino
-	native american
+[course-group2] African-American
+	Hispanic
+	European
+	Latino
+	native American
 	pacific islander
-	australian
-	latvian
-	elbonian
-	italian
-	african
-	american
-	asian
-	chinese
-	japanese
+	Australian
+	Latvian
+	Elbonian
+	Italian
+	African
+	American
+	Asian
+	Chinese
+	Japanese
 	french
-	german
-	russian
+	German
+	Russian
 	middle eastern
-	scandinavian
-	mexican
+	Scandinavian
+	Mexican
 	female
 	female
 	female
@@ -343,20 +343,20 @@ pragma export-rule [college-course]
 	multi-ethnic
 
 [course-ancient] roman
-	etruscan
-	greek
+	Etruscan
+	Greek
 	byzantine
-	mayan
-	incan
-	aztec
+	Mayan
+	Incan
+	Aztec
 	viking
-	bablyonian
-	egyptian
-	sumerian
-	hittite
+	Babylonian
+	Egyptian
+	Sumerian
+	Hittite
 	renaissance
-	chinese
-	native american
+	Chinese
+	native American
 
 [course-life] life
 	literature
@@ -397,7 +397,7 @@ pragma export-rule [college-course]
 	seen
 
 [course-person] individual
-	american
+	American
 	person
 	citizen
 	student
@@ -480,14 +480,14 @@ pragma export-rule [college-course]
 	'star trek'
 	cyberpunk literature
 	harlequin romances
-	'the simpsons'
+	'the Simpsons'
 	'the x-files'
 	daytime soap operas
 	radio talk shows
-	shakespeare's [comedy]
+	Shakespeare's [comedy]
 	'the scarlet letter;
-	'seinfeld'
-	classic american literature
+	'Seinfeld'
+	classic American literature
 	classic [course-ancient] [literature]
 	political cartoons
 	pornography
@@ -542,7 +542,7 @@ pragma export-rule [university]
 	vector calculus
 	theoretical physics
 	microbiology
-	abstract mathmatics
+	abstract mathematics
 	oceanography
 	extraterrestrial biology
 	fractal geometry
@@ -563,7 +563,7 @@ pragma export-rule [university]
 
 [college-major-tech] computer science
 	information technology
-	computer techology
+	computer technology
 	mathematics
 	advanced mathematics nobody ever uses
 	applied physics

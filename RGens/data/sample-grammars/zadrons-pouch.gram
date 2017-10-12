@@ -1,23 +1,23 @@
-[zadrons-pouch] → [zadrons-item]
-                  [zadrons-item] and a [zadrons-item]
-                  [zadrons-item] and a [zadrons-item] as well as a [zadrons-item]
-                  [zadrons-item] or [zadrons-item]
-                  [zadrons-item] or [zadrons-item] or maybe [zadrons-item]
+[zadrons-pouch] → a [zadrons-item]
+	a [zadrons-item] and a [zadrons-item]
+	a [zadrons-item] and a [zadrons-item] as well as a [zadrons-item]
+	a [zadrons-item] or a [zadrons-item]
+	a [zadrons-item] or a [zadrons-item] or maybe a [zadrons-item]
 
 pragma initial-rule [zadrons-pouch]
 
 [zadrons-item] → [egg]
-	         [glove]
-	         [crys-sphere]
-	         [rock]
-	         [figurine]
-	         [vial]
-	         [mini-weapon]
-	         [bag]
-	         [card]
-	         [rope]
-	         [box]
-	         [wand]
+	[glove]
+	[crys-sphere]
+	[rock]
+	[figurine]
+	[vial]
+	[mini-weapon]
+	[bag]
+	[card]
+	[rope]
+	[box]
+	[wand]
 
 pragma export-rule [zadrons-item]
 
@@ -26,15 +26,15 @@ pragma export-rule [zadrons-item]
 	[purse-type] purse
 
 [bag-type] → holding
-	     tricks
-	     useful items
-	     devouring
-	     dwarf-kind
-	     invisible cloth
-	     monster summoning
+	tricks
+	useful items
+	devouring
+	dwarf-kind
+	invisible cloth
+	monster summoning
 
 [sack-type] → lunch
-	      recursive
+	recursive
 
 [purse-type] → everfull
 
@@ -42,129 +42,133 @@ pragma export-rule [zadrons-item]
 	cube of [box-type]
 
 [box-type] → limited-force
-	     frost-resisting
-	     morphing
-	     self-destructing
-	     pandora
-	     panicking
+	frost-resisting
+	morphing
+	self-destructing
+	pandora
+	panicking
 
 [card] → card of [card-type]
-	 [card-type] card
+	[card-type] card
 
 [card-type] → fate
-	      teleporting
-	      elusive treasure
-	      spell-storing
-	      many-thing
-	      imprisoning
-	      messaging
-	      bounty
+	teleporting
+	elusive treasure
+	spell-storing
+	many-things
+	imprisoning
+	messaging
+	bounty
+	minor arcana
+	major arcana
+	inverse minor arcana
+	inverse major arcana
 
 [crys-sphere] → [sphere-type] spheres
-	        [sphere-type] sphere
-	        lens of [lens-type]
-	        [crystal-type] sphere
-	        crystal of [crystal-type]
-	        crystal ball
-	        crystal ball of [crys-suffix]
+	[sphere-type] sphere
+	lens of [lens-type]
+	[crystal-type] sphere
+	crystal of [crystal-type]
+	crystal ball
+	crystal ball of [crys-suffix]
 
 [sphere-type] → microphonic
-	        seeing-eye
+	seeing-eye
 
 [lens-type] → detection
 
 [crystal-type] → prison
-	         radar
+	radar
 
 [crys-suffix] → jumping
 
 [egg] → [egg-type] egg
 
 [egg-type] → copper
-	     stone
-	     golden
-	     white
-	     white/pink
-	     glass
+	stone
+	golden
+	white
+	white/pink
+	glass
 
 [figurine] → [fig-material] [fig-animal]
 
 [fig-material] → golden
-	         onyx
-	         serpentine
-	         ivory
-	         marble
-	         bronze
-	         jade
-	         limestone
+	onyx
+	serpentine
+	ivory
+	marble
+	bronze
+	jade
+	limestone
 
 [fig-animal] → lion
-	       dog
-	       owl
-	       goat
-	       elephant
-	       warrior
-	       palace
-	       leprechaun
+	dog
+	owl
+	goat
+	elephant
+	warrior
+	palace
+	leprechaun
 
 [glove] → gauntlets of [gauntlet-type]
-	  gloves of [glove-type]
-	  [glove-type] gloves
+	gloves of [glove-type]
+	[glove-type] gloves
 
 [gauntlet-type] → dexterity
-	          power
+	power
 
 [glove-type] → pushing
-	       choking
-	       bigby
-	       stunning
+	choking
+	bigby
+	stunning
 
 [mini-weapon] → minature [weapon-type]
-	        small [weapon-type]
-	        tiny [weapon-type]
-	        [sling-type] sling
-	        [weapon-type]
+	small [weapon-type]
+	tiny [weapon-type]
+	[sling-type] sling
+	[weapon-type]
 
 [weapon-type] → boomerang
-	        arrow
-	        net
-	        catapult
-	        hammer
-	        sword
-	        club
+	arrow
+	net
+	catapult
+	hammer
+	sword
+	club
 
 [sling-type] → seeking
 
 [rock] → [pebble-type] pebble
-	 stone of [stone-type]
-	 [stone-type] stone
-	 brick of [brick-type]
-	 [geode-type] geode
+	stone of [stone-type]
+	[stone-type] stone
+	brick of [brick-type]
+	[geode-type] geode
 
 [pebble-type] → inscribed
-	        elemental control
+	elemental control
 
 [stone-type] → good-luck
-	       weight
-	       blind-defense
-	       metal-clinging
+	weight
+	blind-defense
+	metal-clinging
 
 [brick-type] → flying
 
 [geode-type] → ioun
 
 [rope] → [rope-type] rope
-	 rope of [rope-type]
-	 ball of [string-type] [string-kind]
+	rope of [rope-type]
+	ball of [string-type] [string-kind]
 
 [rope-type] → trick
-	      entangling
-	      climbing
-	      dancing
-	      tripping
-	      snaring
-	      levitating
-	      self-entangling
+	entangling
+	climbing
+	dancing
+	tripping
+	snaring
+	levitating
+	self-entangling
 
 [string-type] → endless
 
@@ -172,43 +176,43 @@ pragma export-rule [zadrons-item]
 	yarn
 
 [vial] → vial of [vial-type]
-	 [vial-type] vial
-	 [bottle-type] bottle
-	 [flask-type] flask
+	[vial-type] vial
+	[bottle-type] bottle
+	[flask-type] flask
 
 [vial-type] → holding
-	      trapping
-	      experience
-	      unnatural regeneration
+	trapping
+	experience
+	unnatural regeneration
 
 [bottle-type] → ever-smoking
-	        wheezing
-	        blank potion
+	wheezing
+	blank potion
 
 [flask-type] → iron
 
 [wand] → [wand-type] wand
-	 wand of [wand-type]
-	 canceling [wand-type] wand
+	wand of [wand-type]
+	canceling [wand-type] wand
 
 [wand-type] → magic missile
-	      [spell-1]
-	      [spell-2]
-	      gusting
-	      life-detecting
-	      zadron
+	[spell-1]
+	[spell-2]
+	gusting
+	life-detecting
+	zadron
 
 [spell-1] → frost
-	    fire
-	    lightining
-	    fear
-	    illumination
-	    polymorphing
-	    conjuration
-	    paralyzing
+	fire
+	lightining
+	fear
+	illumination
+	polymorphing
+	conjuration
+	paralyzing
 
 [spell-2] → [spell2-type] detecting
 
 [spell2-type] → magic
-	        enemy
-	        secret door/trap
+	enemy
+	secret door/trap

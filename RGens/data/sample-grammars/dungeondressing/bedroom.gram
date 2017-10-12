@@ -1,0 +1,25 @@
+[bedroom] you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] lying on it.
+
+pragma initial-rule [bedroom]
+pragma export-rule [bedroom]
+
+[bedroom-type] cheap hotel room
+	penthouse suite
+	secret passage
+	bear's den
+	captain's cabin
+	hospital ward
+
+[bedroom-bed] king bed with luxury sheets
+	messy pile of wet hay
+	flea-infested sleeping bag
+	pentagram with candles
+	freshly unearthed coffin
+	tropical rope hammock
+
+[bedroom-person] half-orc prostitute
+	pile of moldy bones
+	mountain lion
+	jug of moonshine
+	kidnapped aristocrat
+	realistic sex doll

@@ -74,7 +74,8 @@ pragma suffix-with [superhero-name] [fourth-part]
 	Rider
 	Torch
 
-[third-part] The [third-part-act]
+[third-part] ,The [third-part-act]
+	,The [third-part-act] [second-part]
 
 [third-part-act] Champion
 	Protector
@@ -138,5 +139,3 @@ pragma suffix-with [superhero-name] [fourth-part]
 	Galaxy
 	Ancients
 	Archive
-	
-	

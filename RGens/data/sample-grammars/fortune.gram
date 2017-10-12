@@ -2,25 +2,25 @@
 	you will be hit over the head with a piano falling from a [ordinal] floor window
 	you will be audited by the irs
 	you will be audited by the irs because of your activity in the [org-political]
-	you will be help hostage by the radical [org-political]
+	you will be held hostage by the radical [org-political]
 	you will be run over by a [bus]
-	you will find yourself as the victim of a bizzare practical joke
+	you will find yourself as the victim of a bizarre practical joke
 	you will contract a rare form of [plural+last-name] disease
 	you will grow fat and bald
 	you will lose your present job and have to become a [job]
-	you will run for public office and only recieve [half-digit+percent] of the vote
+	you will run for public office and only receive [half-digit+percent] of the vote
 	your spouse will eventually find out about you-know what
 	you will accidentally run over your neighbor's pet [animal] and be sued for [1..5] million dollars.
 	you will arrive late at work only to realize that it's a federal holiday
 	you will write a perl script to spit out random text
 	your family will grow suspicious of your newly acquired tattoo
-	you will recieve a promotion, only to be terminated a month later by failing a random drug test
+	you will receive a promotion, only to be terminated a month later by failing a random drug test
 	you will spend the next [2..7] days fighting a flaw in a microsoft product
 	you will become the leader of the [org-political]
 	you will lose your job because of your involvement in the [org-political]
 	you will find the perfect joke to play on your [relative] on april fool's day, only to discover that it's actually april 2nd
 	your television will explode while the [big-game] is on
-	you will recieve a [large+bill] [bill-type] bill by mistake
+	you will receive a [large+bill] [bill-type] bill by mistake
 	you will find a counterfeit [counter-bill] bill on the ground
 	you will discover that everybody really is out to get you
 	you will become successful in business -- unfortunately, that business will violate the laws of [30..49]
@@ -40,11 +40,11 @@
 	you will soon realize that your life is completely indistinguishable from "Dilbert" cartoons
 	you will hurt your hand while thumping a Bible
 	you will discover the meaning of life at the bottom of a beer bottle, but you won't remember what it is after you sober up in the morning
-	you will recieve a blank fortune cookie at a chinese restaurant, an event regarded by most superstition experts as a "bad omen"
+	you will receive a blank fortune cookie at a chinese restaurant, an event regarded by most superstition experts as a "bad omen"
 	you will be falsely accused of jaywalking
 	you will suffer a nosebleed during a speech in front of [speech+num]
-	you will recieve [50..100] credit card offers in the mail during the next week
-	you will recieve [speech+num] pieces of spam email during the next year
+	you will receive [50..100] credit card offers in the mail during the next week
+	you will receive [speech+num] pieces of spam email during the next year
 	your favorite tv show will be cancelled and replaced with an infomercial
 	you will lose your life savings in las vegas
 	you will sign a contract requiring you to hand over your first born son to a large multinational corporation
@@ -57,11 +57,11 @@
 	you will appear on "who wants to be a millionaire?" and fail to answer the first $100 question
 	you will be sued by major league baseball for taping the world series on your vcr without prior written consent
 	you will be at the losing end of a [300..500] lawsuit
-	you will recieve a [100..500] dollar parking ticket from [real-city] even though you have never been there
+	you will receive a [100..500] dollar parking ticket from [real-city] even though you have never been there
 	every single time you visit the doctor's office, the doctor will be out playing golf
 	until the day you die, you will never understand what the saying "Life is like a bowl of cherries" actually means
 	your hometown baseball team will never win the world series
-	your brand-new [comp+amount] dollar computer will be struct by lightning [3..6] hours after you first plug it in
+	your brand-new [comp+amount] dollar computer will be struck by lightning [3..6] hours after you first plug it in
 	you will send the author of this fortune [hundred+amount] in plain, unmarked bills with the next week
 	you will be excommunicated from your church after you accidentally fall asleep and start snoring during services
 	your personal information will be in the hands of [100..500] large, evil multinational corporations by the time you finish reading this fortune
@@ -118,4 +118,6 @@ pragma initial-rule [fortune-cookie]
 
 [comp+amount] [2..4] , [digit] [digit] [digit]
 
-[hundred+amount] $ [digit-nozero] 00
+[hundred+amount] $ [digit-nonzero] 00
+
+[job] 'WRITE ME'

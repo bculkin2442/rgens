@@ -1,0 +1,47 @@
+[monster] [monster-kind]
+	[monster-prefix] [monster-kind]
+
+[monster-prefix] were
+	vampire
+	giant
+	diseased
+	magic
+	clockwork
+	cybernetic
+	rabid
+	ancient
+	eldritch
+	ghostly
+	alien
+
+[monster-kind] orc
+	goblin
+	dragon
+	zombie
+	wizard
+	ogre
+	pegasus
+	witch
+	spider
+	harpy
+	minotaur
+	chupacabra
+	chimera
+	mermaid
+	kraken
+	sasquatch
+	jackalope
+	hydra
+	wyvern
+	gorgon
+	cyclops
+	medusa
+	genie
+	dwarf
+	elf
+	banshee
+	gremlin
+	angel
+	demon
+	troll
+	centaur

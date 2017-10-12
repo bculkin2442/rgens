@@ -30,7 +30,7 @@ pragma initial-rule [career-tech]
 	associate
 	sub-adjunct
 	part-time
-	interrim
+	interim
 	substitute
 
 [career-suffix] manager
@@ -45,7 +45,7 @@ pragma initial-rule [career-tech]
 	foreman
 	director
 	section chief
-	superintendant
+	superintendent
 	department chairman
 	overseer
 	department head honcho

@@ -1,16 +1,16 @@
-[canada-province] → alberta
-	british columbia
-	manitoba
-	new brunswick
-	newfoundland
-	labrador
-	northwest territories
-	nova scotia
-	nunavut
-	ontario
-	prince edward island
-	quebec
-	saskatchewan
-	yukon
+[canada-province] → Alberta
+	British Columbia
+	Manitoba
+	New Brunswick
+	Newfoundland
+	Labrador
+	Northwest Territories
+	Nova Scotia
+	Nunavut
+	Ontario
+	Prince Edward island
+	Quebec
+	Saskatchewan
+	Yukon
 
 pragma initial-rule [canada-province]

@@ -1,0 +1,25 @@
+[dragon-encounter] The [dragon-desc] dragon has a lair in [dragon-lair] where it guards a massive hoard of [dragon-hoard]
+
+pragma initial-rule [dragon-encounter]
+pragma export-rule [dragon-encounter]
+
+[dragon-desc] obese
+	syphilitic
+	convict
+	terrorist
+	college-educated
+	moronic
+
+[dragon-lair] an inner-city slum
+	a lunar base
+	a penthouse apartment
+	a floating ghost ship
+	an open-air sewer
+	an abandoned church
+
+[dragon-hoard] drugs and alcohol
+	11 herbs and spices
+	erotic sculpture
+	stock market advice
+	graffiti stencils
+	canned food
