@@ -9,14 +9,13 @@ import bjc.utils.gen.RandomGrammar;
  * Example showing code manipulate of random grammars
  *
  * @author ben
- *
  */
 public class ZadronsPouch {
 	/**
 	 * Main method for running application
 	 *
 	 * @param args
-	 *            Unused CLI args
+	 * 	Unused CLI args
 	 */
 	public static void main(String[] args) {
 		ZadronsPouch zp = new ZadronsPouch();
@@ -34,16 +33,18 @@ public class ZadronsPouch {
 
 	private RandomGrammar<String> grammar;
 
-	/**
-	 * Create a new instance with a grammar
-	 */
+	/** Create a new instance with a grammar */
 	public ZadronsPouch() {
 		grammar = new RandomGrammar<>();
 
+		/*
+		 * @NOTE
+		 * 	Should there be some sort of builder sort of interface?
+		 */
 		addRule("[item]",
-		        "[egg]", "[glove]", "[crys-sphere]", "[rock]",
-		        "[figurine]", "[vial]", "[mini-weapon]", "[bag]",
-		        "[card]", "[rope]", "[box]", "[wand]");
+		        "[egg]",      "[glove]", "[crys-sphere]", "[rock]",
+		        "[figurine]", "[vial]",  "[mini-weapon]", "[bag]",
+		        "[card]",     "[rope]",  "[box]",         "[wand]");
 
 		addEggRules();
 		addGloveRules();
@@ -65,7 +66,7 @@ public class ZadronsPouch {
 		addRule("[bag]",
 		        "bag of [bag-type]", "[sack-type] sack", "[purse-type] purse");
 		addRule("[bag-type]",
-		        "holding", "tricks", "useful items",
+		        "holding",   "tricks",     "useful items",
 		        "devouring", "dwarf-kind", "invisible cloth",
 		        "monster summoning");
 		addRule("[sack-type]",
@@ -78,22 +79,22 @@ public class ZadronsPouch {
 		addRule("[box]",
 		        "[box-type] box", "cube of [box-type]");
 		addRule("[box-type]",
-		        "limited-force", "frost-resisting", "morphing",
-		        "self-destructing", "pandora", "panicking");
+		        "limited-force",    "frost-resisting", "morphing",
+		        "self-destructing", "pandora",         "panicking");
 	}
 
 	private void addCardRules() {
 		addRule("[card]",
 		        "card of [card-type]", "[card-type] card");
 		addRule("[card-type]",
-		        "fate", "teleporting", "elusive treasure", "spell-storing",
-		        "many-things", "imprisoning", "messaging", "bounty");
+		        "fate",        "teleporting", "elusive treasure", "spell-storing",
+		        "many-things", "imprisoning", "messaging",        "bounty");
 	}
 
 	private void addCrysSphereRules() {
 		addRule("[crys-sphere]",
-		        "[sphere-type] spheres", "[sphere-type] sphere",
-		        "lens of [lens-type]", "[crystal-type] crystal",
+		        "[sphere-type] spheres",     "[sphere-type] sphere",
+		        "lens of [lens-type]",       "[crystal-type] crystal",
 		        "crystal of [crystal-type]", "crystal ball",
 		        "crystal ball of [crys-suffix]");
 		addRule("[sphere-type]",
@@ -110,18 +111,18 @@ public class ZadronsPouch {
 		addRule("[egg]",
 		        "[egg-type] egg");
 		addRule("[egg-type]",
-		        "copper", "stone", "golden",
-		        "white", "white/pink", "glass");
+		        "copper", "stone",      "golden",
+		        "white",  "white/pink", "glass");
 	}
 
 	private void addFigurineRules() {
 		addRule("[figurine]",
 		        "[fig-material] [fig-animal]");
 		addRule("[fig-material]",
-		        "golden", "onyx", "serpentine", "ivory",
-		        "marble", "bronze", "jade", "limestone");
+		        "golden", "onyx",   "serpentine", "ivory",
+		        "marble", "bronze", "jade",       "limestone");
 		addRule("[fig-animal]",
-		        "lion", "dog", "owl", "goat",
+		        "lion",     "dog",     "owl",    "goat",
 		        "elephant", "warrior", "palace", "leprechaun");
 	}
 
@@ -139,11 +140,11 @@ public class ZadronsPouch {
 	private void addMiniWeaponRules() {
 		addRule("[mini-weapon]",
 		        "minature [weapon-type]", "small [weapon-type]",
-		        "tiny [weapon-type]", "[sling-type] sling",
+		        "tiny [weapon-type]",     "[sling-type] sling",
 		        "[weapon-type]");
 		addRule("[weapon-type]",
-		        "boomerang", "arrow", "net",
-		        "catapult", "hammer", "sword", "club");
+		        "boomerang", "arrow",  "net",
+		        "catapult",  "hammer", "sword", "club");
 		addRule("[sling-type]",
 		        "seeking");
 	}
@@ -151,12 +152,12 @@ public class ZadronsPouch {
 	private void addRockRules() {
 		addRule("[rock]",
 		        "[pebble-type] pebble", "stone of [stone-type]",
-		        "[stone-type] stone", "brick of [brick-type]",
+		        "[stone-type] stone",   "brick of [brick-type]",
 		        "[geode-type] geode");
 		addRule("[pebble-type]",
 		        "inscribed", "elemental control");
 		addRule("[stone-type]",
-		        "good-luck", "weight",
+		        "good-luck",     "weight",
 		        "blind-defense", "metal-clinging");
 		addRule("[brick-type]",
 		        "flying");
@@ -169,8 +170,8 @@ public class ZadronsPouch {
 		        "[rope-type] rope", "rope of [rope-type]",
 		        "ball of [string-type] [string-kind]");
 		addRule("[rope-type]",
-		        "trick", "entangling", "climbing", "dancing",
-		        "tripping", "snaring", "levitating", "self-entangling");
+		        "trick",    "entangling", "climbing",   "dancing",
+		        "tripping", "snaring",    "levitating", "self-entangling");
 		addRule("[string-type]",
 		        "endless");
 		addRule("[string-kind]",
@@ -189,10 +190,10 @@ public class ZadronsPouch {
 
 	private void addVialRules() {
 		addRule("[vial]",
-		        "vial of [vial-type]", "[vial-type] vial",
+		        "vial of [vial-type]",  "[vial-type] vial",
 		        "[bottle-type] bottle", "[flask-type] flask");
 		addRule("[vial-type]",
-		        "holding", "trapping",
+		        "holding",    "trapping",
 		        "experience", "unnatural regeneration");
 		addRule("[bottle-type]",
 		        "ever-smoking", "wheezing",
@@ -206,10 +207,10 @@ public class ZadronsPouch {
 		        "[wand-type] wand", "wand of [wand-type]",
 		        "canceling [wand-type] wand");
 		addRule("[wand-type]",
-		        "magic missile", "[spell-1]", "[spell-2]",
-		        "gusting", "life-detecting", "zadron");
+		        "magic missile", "[spell-1]",      "[spell-2]",
+		        "gusting",       "life-detecting", "zadron");
 		addRule("[spell-1]",
-		        "frost", "fire", "lightning", "fear",
+		        "frost",        "fire",         "lightning",   "fear",
 		        "illumination", "polymorphing", "conjuration", "paralyzing");
 		addRule("[spell-2]",
 		        "[spell2-type] detecting");

@@ -13,16 +13,15 @@ public class TextGenerator {
 	 * Main method.
 	 *
 	 * @param args
-	 *                when used with three arguments, the first represents
-	 *                the k-order of the Markov objects. The second
-	 *                represents the number of characters to print out. The
-	 *                third represents the file to be read.
+	 * 	When used with three arguments, the first represents the k-order
+	 * 	of the Markov objects. The second represents the number of
+	 * 	characters to print out. The third represents the file to be
+	 * 	read. 
 	 *
-	 *                When used with two arguments, the first represents the
-	 *                k-order of the Markov objects, and the second
-	 *                represents the file to be read. The generated text
-	 *                will be the same number of characters as the original
-	 *                file.
+	 * 	When used with two arguments, the first represents the k-order
+	 * 	of the Markov objects, and the second represents the file to be
+	 * 	read. The generated text will be the same number of characters
+	 * 	as the original file.
 	 */
 	public static void main(String[] args) {
 		int k = 0;

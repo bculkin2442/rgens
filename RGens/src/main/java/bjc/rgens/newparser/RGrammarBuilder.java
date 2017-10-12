@@ -14,24 +14,31 @@ import static bjc.rgens.newparser.RuleCase.CaseType.*;
  * Construct randomized grammars piece by piece.
  *
  * @author EVE
- *
  */
 public class RGrammarBuilder {
+	/* The rules being built. */
 	private Map<String, Rule> rules;
-
+	/* The current set of exported rules. */
 	private Set<String> exportedRules;
-
+	/* The current initial rule. */
 	private String initialRule;
 
-	/**
-	 * Create a new randomized grammar builder.
-	 */
+	/** Create a new randomized grammar builder. */
 	public RGrammarBuilder() {
 		rules = new HashMap<>();
 
 		exportedRules = new HashSet<>();
 	}
 
+	/**
+	 * Get or create a rule by the given name.
+	 *
+	 * @param rName
+	 * 	The name of the rule.
+	 *
+	 * @return
+	 * 	The rule by that name, or a new one if none existed.
+	 */
 	public Rule getOrCreateRule(String rName) {
 		if(rName == null)
 			throw new NullPointerException("Rule name must not be null");
@@ -52,7 +59,8 @@ public class RGrammarBuilder {
 	/**
 	 * Convert this builder into a grammar.
 	 *
-	 * @return The grammar built by this builder
+	 * @return 
+	 * 	The grammar built by this builder
 	 */
 	public RGrammar toRGrammar() {
 		RGrammar grammar = new RGrammar(rules);
@@ -68,11 +76,10 @@ public class RGrammarBuilder {
 	 * Set the initial rule of the grammar.
 	 *
 	 * @param init
-	 *                The initial rule of the grammar.
+	 * 	The initial rule of the grammar.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the rule is either not valid or not defined in the
-	 *                 grammar.
+	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
 	public void setInitialRule(String init) {
 		if (init == null) {
@@ -88,11 +95,10 @@ public class RGrammarBuilder {
 	 * Add an exported rule to this grammar.
 	 *
 	 * @param export
-	 *                The name of the rule to export.
+	 * 	The name of the rule to export.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the rule is either not valid or not defined in the
-	 *                 grammar.
+	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
 	public void addExport(String export) {
 		if (export == null) {
@@ -108,14 +114,14 @@ public class RGrammarBuilder {
 	 * Suffix a given case element to every case of a specific rule.
 	 *
 	 * @param ruleName
-	 *                The rule to suffix.
+	 * 	The rule to suffix.
 	 *
 	 * @param suffix
-	 *                The suffix to add.
+	 * 	The suffix to add.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the rule name is either invalid or not defined by
-	 *                 this grammar, or if the suffix is invalid.
+	 * 	If the rule name is either invalid or not defined by this
+	 * 	grammar, or if the suffix is invalid.
 	 */
 	public void suffixWith(String ruleName, String suffix) {
 		if (ruleName == null) {
@@ -135,14 +141,14 @@ public class RGrammarBuilder {
 	 * Prefix a given case element to every case of a specific rule.
 	 *
 	 * @param ruleName
-	 *                The rule to prefix.
+	 * 	The rule to prefix.
 	 *
 	 * @param prefix
-	 *                The prefix to add.
+	 * 	The prefix to add.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the rule name is either invalid or not defined by
-	 *                 this grammar, or if the prefix is invalid.
+	 * 	If the rule name is either invalid or not defined by this
+	 * 	grammar, or if the prefix is invalid.
 	 */
 	public void prefixWith(String ruleName, String prefix) {
 		if (ruleName == null) {

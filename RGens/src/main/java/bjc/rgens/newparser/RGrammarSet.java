@@ -14,7 +14,6 @@ import java.util.Set;
  * Represents a set of grammars that can share rules via exports.
  *
  * @author EVE
- *
  */
 public class RGrammarSet {
 	/* Contains all the grammars in this set. */
@@ -29,9 +28,7 @@ public class RGrammarSet {
 	/* Contains which file a grammar was loaded from. */
 	private Map<String, String> loadedFrom;
 
-	/**
-	 * Create a new set of randomized grammars.
-	 */
+	/** Create a new set of randomized grammars. */
 	public RGrammarSet() {
 		grammars = new HashMap<>();
 
@@ -45,13 +42,13 @@ public class RGrammarSet {
 	 * Add a grammar to this grammar set.
 	 *
 	 * @param grammarName
-	 *                The name of the grammar to add.
+	 * 	The name of the grammar to add.
 	 *
 	 * @param gram
-	 *                The grammar to add.
+	 * 	The grammar to add.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the grammar name is invalid.
+	 * 	If the grammar name is invalid.
 	 */
 	public void addGrammar(String grammarName, RGrammar gram) {
 		/* Make sure a grammar is valid. */
@@ -68,6 +65,7 @@ public class RGrammarSet {
 		/* Process exports from the grammar. */
 		for (Rule export : gram.getExportedRules()) {
 			exportedRules.put(export.name, gram);
+
 			exportFrom.put(export.name, grammarName);
 		}
 
@@ -79,13 +77,13 @@ public class RGrammarSet {
 	 * Get a grammar from this grammar set.
 	 *
 	 * @param grammarName
-	 *                The name of the grammar to get.
+	 * 	The name of the grammar to get.
 	 *
-	 * @return The grammar with that name.
+	 * @return
+	 * 	The grammar with that name.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the grammar name is invalid or not present in this
-	 *                 set.
+	 * 	If the grammar name is invalid or not present in this set.
 	 */
 	public RGrammar getGrammar(String grammarName) {
 		/* Check arguments. */
@@ -106,13 +104,13 @@ public class RGrammarSet {
 	 * Get the grammar a rule was exported from.
 	 *
 	 * @param exportName
-	 *                The name of the exported rule.
+	 * 	The name of the exported rule.
 	 *
-	 * @return The grammar the exported rule came from.
+	 * @return
+	 * 	The grammar the exported rule came from.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the export name is invalid or not present in this
-	 *                 set.
+	 * 	If the export name is invalid or not present in this set.
 	 */
 	public RGrammar getExportSource(String exportName) {
 		/* Check arguments. */
@@ -134,13 +132,13 @@ public class RGrammarSet {
 	 * This will often be a grammar name, but is not required to be one.
 	 *
 	 * @param exportName
-	 *                The name of the exported rule.
+	 * 	The name of the exported rule.
 	 *
-	 * @return The source of an exported rule.
+	 * @return 
+	 * 	The source of an exported rule.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the exported rule is invalid or not present in
-	 *                 this set.
+	 * 	If the exported rule is invalid or not present in this set.
 	 */
 	public String exportedFrom(String exportName) {
 		/* Check arguments. */
@@ -150,6 +148,7 @@ public class RGrammarSet {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if (!exportedRules.containsKey(exportName)) {
 			String msg = String.format("No export with name '%s' defined", exportName);
+
 			throw new IllegalArgumentException(msg);
 		}
 
@@ -162,13 +161,13 @@ public class RGrammarSet {
 	 * This will often be a file name, but is not required to be one.
 	 *
 	 * @param grammarName
-	 *                The name of the exported grammar.
+	 * 	The name of the exported grammar.
 	 *
-	 * @return The source of an exported grammar.
+	 * @return
+	 * 	The source of an exported grammar.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the exported grammar is invalid or not present in
-	 *                 this set.
+	 * 	If the exported grammar is invalid or not present in this set.
 	 */
 	public String loadedFrom(String grammarName) {
 		/* Check arguments. */
@@ -189,7 +188,8 @@ public class RGrammarSet {
 	/**
 	 * Get the names of all the grammars in this set.
 	 *
-	 * @return The names of all the grammars in this set.
+	 * @return
+	 * 	The names of all the grammars in this set.
 	 */
 	public Set<String> getGrammars() {
 		return grammars.keySet();
@@ -198,7 +198,8 @@ public class RGrammarSet {
 	/**
 	 * Get the names of all the exported rules in this set.
 	 *
-	 * @return The names of all the exported rules in this set.
+	 * @return
+	 * 	The names of all the exported rules in this set.
 	 */
 	public Set<String> getExportedRules() {
 		return exportedRules.keySet();
@@ -208,12 +209,13 @@ public class RGrammarSet {
 	 * Load a grammar set from a configuration file.
 	 *
 	 * @param cfgFile
-	 *                The configuration file to load from.
+	 * 	The configuration file to load from.
 	 *
-	 * @return The grammar set created by the configuration file.
+	 * @return
+	 * 	The grammar set created by the configuration file.
 	 *
 	 * @throws IOException
-	 *                 If something goes wrong during configuration loading.
+	 * 	If something goes wrong during configuration loading.
 	 */
 	public static RGrammarSet fromConfigFile(Path cfgFile) throws IOException {
 		/* The grammar set to hand back. */
@@ -246,14 +248,14 @@ public class RGrammarSet {
 
 				/* Name and path of grammar. */
 				String name = ln.substring(0, nameIdx);
-				Path path = Paths.get(ln.substring(nameIdx).trim());
+				Path path   = Paths.get(ln.substring(nameIdx).trim());
 
 				/*
 				 * Convert from configuration relative path to
 				 * absolute path.
 				 */
 				Path convPath = cfgParent.resolve(path);
-				File fle = convPath.toFile();
+				File fle      = convPath.toFile();
 
 				if (fle.isDirectory()) {
 					/* @TODO implement subset grammars */

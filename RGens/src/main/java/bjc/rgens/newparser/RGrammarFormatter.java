@@ -10,16 +10,16 @@ import java.util.Set;
  * Format randomized grammars to strings properly.
  *
  * @author EVE
- *
  */
 public class RGrammarFormatter {
 	/**
 	 * Format a grammar into a file that represents that grammar.
 	 *
 	 * @param gram
-	 *                The grammar to format.
+	 * 	The grammar to format.
 	 *
-	 * @return The formatted grammar.
+	 * @return
+	 * 	The formatted grammar.
 	 */
 	public static String formatGrammar(RGrammar gram) {
 		StringBuilder sb = new StringBuilder();
@@ -49,6 +49,7 @@ public class RGrammarFormatter {
 		return sb.toString().trim();
 	}
 
+	/* Format a rule. */
 	private static void processRule(Rule rule, StringBuilder sb) {
 		IList<RuleCase> cases = rule.getCases();
 
@@ -81,18 +82,15 @@ public class RGrammarFormatter {
 
 	}
 
+	/* Format a case. */
 	private static void processCase(RuleCase cse, StringBuilder sb) {
-		/*
-		 * Process each element, adding a space.
-		 */
+		/* Process each element, adding a space. */
 		for (CaseElement element : cse.getElements()) {
 			sb.append(element.toString());
 			sb.append(" ");
 		}
 
-		/*
-		 * Remove the trailing space.
-		 */
+		/* Remove the trailing space. */
 		sb.deleteCharAt(sb.length() - 1);
 	}
 }

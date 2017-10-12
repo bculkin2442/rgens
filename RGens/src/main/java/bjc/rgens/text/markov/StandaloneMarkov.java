@@ -6,25 +6,27 @@ import java.util.Map;
  * A standalone Markov generator.
  *
  * @author bjculkin
- *
  */
 public class StandaloneMarkov {
+	/* The order of the generator. */
 	private int ord;
 
+	/* The generators to use. */
 	private Map<String, Markov>     hash;
+	/* The initial string.    */
 	private String                  first;
 
 	/**
 	 * Create a new standalone Markov generator.
 	 *
 	 * @param order
-	 *                The order of this generator.
+	 * 	The order of this generator.
 	 *
 	 * @param markovHash
-	 *                The generators to use.
+	 * 	The generators to use.
 	 *
 	 * @param firstSub
-	 *                The string to start out with.
+	 * 	The string to start out with.
 	 */
 	public StandaloneMarkov(int order, Map<String, Markov> markovHash, String firstSub) {
 		ord = order;
@@ -36,9 +38,10 @@ public class StandaloneMarkov {
 	 * Generate random text from the markov generator.
 	 *
 	 * @param charsToGenerate
-	 *                The number of characters of text to generate.
+	 * 	The number of characters of text to generate.
 	 *
-	 * @return The randomly generate text.
+	 * @return
+	 * 	The randomly generate text.
 	 */
 	public String generateTextFromMarkov(int charsToGenerate) {
 		StringBuilder text = new StringBuilder();

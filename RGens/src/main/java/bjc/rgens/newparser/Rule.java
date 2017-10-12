@@ -9,24 +9,22 @@ import java.util.Random;
  * A rule in a randomized grammar.
  *
  * @author EVE
- *
  */
 public class Rule {
-	/**
-	 * The name of this grammar rule.
-	 */
+	/** The name of this grammar rule. */
 	public final String name;
 
+	/* The cases for this rule. */
 	private IList<RuleCase> cases;
 
 	/**
 	 * Create a new grammar rule.
 	 *
 	 * @param ruleName
-	 *                The name of the grammar rule.
+	 * 	The name of the grammar rule.
 	 *
 	 * @throws IllegalArgumentException
-	 *                 If the rule name is invalid.
+	 * 	If the rule name is invalid.
 	 */
 	public Rule(String ruleName) {
 		if (ruleName == null) {
@@ -44,7 +42,7 @@ public class Rule {
 	 * Adds a case to the rule.
 	 *
 	 * @param cse
-	 *                The case to add.
+	 * 	The case to add.
 	 */
 	public void addCase(RuleCase cse) {
 		if (cse == null) {
@@ -57,7 +55,8 @@ public class Rule {
 	/**
 	 * Get a random case from this rule.
 	 *
-	 * @return A random case from this rule.
+	 * @return
+	 * 	A random case from this rule.
 	 */
 	public RuleCase getCase() {
 		return cases.randItem();
@@ -67,9 +66,10 @@ public class Rule {
 	 * Get a random case from this rule.
 	 *
 	 * @param rnd
-	 *                The random number generator to use.
+	 * 	The random number generator to use.
 	 *
-	 * @return A random case from this rule.
+	 * @return
+	 * 	A random case from this rule.
 	 */
 	public RuleCase getCase(Random rnd) {
 		return cases.randItem(rnd::nextInt);
@@ -78,7 +78,8 @@ public class Rule {
 	/**
 	 * Get all the cases of this rule.
 	 *
-	 * @return All the cases in this rule.
+	 * @return
+	 * 	All the cases in this rule.
 	 */
 	public IList<RuleCase> getCases() {
 		return cases;

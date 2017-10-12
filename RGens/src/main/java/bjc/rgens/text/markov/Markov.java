@@ -9,7 +9,6 @@ import java.util.*;
  * Can give a pseudo-random suffix character based on probability.
  *
  * @author Daniel Friedman (Fall 2011)
- *
  */
 public class Markov {
 	String  substring;
@@ -21,7 +20,7 @@ public class Markov {
 	 * Constructs a Markov object from a given substring.
 	 *
 	 * @param substr
-	 *                the given substring.
+	 * 	The given substring.
 	 */
 	public Markov(String substr) {
 		this.substring = substr;
@@ -38,9 +37,10 @@ public class Markov {
 	 * Suffix characters are stored in a TreeMap.
 	 *
 	 * @param substr
-	 *                the specified substring.
+	 * 	The specified substring.
+	 *
 	 * @param suffix
-	 *                the specified suffix.
+	 * 	The specified suffix.
 	 */
 	public Markov(String substr, Character suffix) {
 		this.substring = substr;
@@ -62,7 +62,7 @@ public class Markov {
 	 * Adds a suffix character to the TreeMap.
 	 *
 	 * @param c
-	 *                the suffix character to be added.
+	 * 	The suffix character to be added.
 	 */
 	public void add(char c) {
 		add();
@@ -70,7 +70,9 @@ public class Markov {
 		if (map.containsKey(c)) {
 			int frequency = map.get(c);
 			map.put(c, frequency + 1);
-		} else map.put(c, 1);
+		} else {
+			map.put(c, 1);
+		}
 	}
 
 	/**
@@ -78,8 +80,10 @@ public class Markov {
 	 * of times the specified suffix follows the substring in a text.
 	 *
 	 * @param c
-	 *                the specified suffix.
-	 * @return the frequency count.
+	 * 	The specified suffix.
+	 *
+	 * @return 
+	 * 	The frequency count.
 	 */
 	public int getFrequencyCount(char c) {
 		if (!map.containsKey(c)) {
@@ -93,8 +97,11 @@ public class Markov {
 	 * Gives a percentage of frequency count / number of total suffixes.
 	 *
 	 * @param c
-	 * @return the ratio of frequency count of a single character to the
-	 *         total number of suffixes
+	 * 	The character to look for the frequency for.
+	 *
+	 * @return
+	 * 	The ratio of frequency count of a single character to the total
+	 * 	number of suffixes.
 	 */
 	public double getCharFrequency(char c) {
 		if (getFrequencyCount(c) == -1) {
@@ -108,8 +115,10 @@ public class Markov {
 	 * Finds whether or not the given suffix is in the TreeMap.
 	 *
 	 * @param c
-	 *                the given suffix.
-	 * @return True if the suffix exists in the TreeMap, false otherwise.
+	 * 	The given suffix.
+	 *
+	 * @return
+	 * 	True if the suffix exists in the TreeMap, false otherwise.
 	 */
 	public boolean containsChar(char c) {
 		if (!map.containsKey(c)) {
@@ -122,7 +131,8 @@ public class Markov {
 	/**
 	 * Gives the number of times this substring occurs in a text.
 	 *
-	 * @return said number of times.
+	 * @return
+	 * 	Said number of times.
 	 */
 	public int count() {
 		return count;
@@ -131,7 +141,8 @@ public class Markov {
 	/**
 	 * Gives the TreeMap.
 	 *
-	 * @return the TreeMap.
+	 * @return 
+	 * 	The TreeMap.
 	 */
 	public TreeMap<Character, Integer> getMap() {
 		return map;
@@ -141,14 +152,14 @@ public class Markov {
 	 * Using probability, returns a pseudo-random character to follow the
 	 * substring.
 	 *
-	 * Character possibilities are added to an ArrayList
-	 * (duplicates allowed), and a random number from 0 to the last index in
-	 * the ArrayList is picked. Since more common suffixes occupy more
-	 * indices in the ArrayList, the probability of getting a more common
-	 * suffix is greater than the probability of getting a less common
-	 * suffix.
+	 * Character possibilities are added to an ArrayList (duplicates
+	 * allowed), and a random number from 0 to the last index in the
+	 * ArrayList is picked. Since more common suffixes occupy more indices
+	 * in the ArrayList, the probability of getting a more common suffix is
+	 * greater than the probability of getting a less common suffix.
 	 *
-	 * @return the pseudo-random suffix.
+	 * @return 
+	 * 	The pseudo-random suffix.
 	 */
 	public char random() {
 		Character ret = null;
@@ -178,7 +189,8 @@ public class Markov {
 	/**
 	 * Gives a String representation of the Markov object.
 	 *
-	 * @return said String representation.
+	 * @return 
+	 * 	Said String representation.
 	 */
 	@Override
 	public String toString() {

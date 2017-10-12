@@ -5,19 +5,16 @@ package bjc.rgens.newparser;
  * grammar.
  *
  * @author student
- *
  */
 public class GrammarException extends RuntimeException {
-	/*
-	 * Serialization ID.
-	 */
+	/* Serialization ID. */
 	private static final long serialVersionUID = -7287427479316953668L;
 
 	/**
 	 * Create a new grammar exception with the specified message.
 	 *
 	 * @param msg
-	 *                The message for this exception.
+	 * 	The message for this exception.
 	 */
 	public GrammarException(String msg) {
 		super(msg);
@@ -28,10 +25,10 @@ public class GrammarException extends RuntimeException {
 	 * cause.
 	 *
 	 * @param msg
-	 *                The message for this exception.
+	 * 	The message for this exception.
 	 *
 	 * @param cause
-	 *                The cause of this exception.
+	 * 	The cause of this exception.
 	 */
 	public GrammarException(String msg, Exception cause) {
 		super(msg, cause);
