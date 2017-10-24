@@ -998,3 +998,5 @@
 	Youthful 
 	Zany 
 	Zealot 
+
+pragma export-rule [personality-trait]

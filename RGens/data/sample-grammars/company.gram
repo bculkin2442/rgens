@@ -13,15 +13,14 @@
 	[first-name] [last-name] [company-name+suffix]
 	[acronym] [company-name+suffix]
 	[acronym] [company-name]
-	[acronym] [company-root-suffix] [company-suffix]
+	[company-root+acronym] [company-suffix]
 	[full-name] [company-name+suffix]
-	[last-name] [company-root-suffix] [company-suffix]
-	[last-name] [company-root-suffix]
+	[company-root+name]
 	[2letter+letter] [company-name+suffix]
 	[letter+letter] [company-name]
-	[first-name] [company-root-suffix] [company-suffix]
+	[company-root+name] [company-suffix]
 	[city] [company-name+suffix]
-	[city] [company-root-suffix]
+	[company-root+city]
 	[us-state] [company-name+suffix]
 	[buzzword-adjective] [buzzword-noun] [company-suffix]
 	[media-company]
@@ -29,6 +28,13 @@
 	[real-company]
 
 pragma export-rule [company]
+
+[company-root+acronym] [acronym] [company-root-suffix]
+
+[company-root+city] [city] [company-root-suffix]
+
+[company-root+name] [first-name] [company-root-suffix]
+	[last-name] [company-root-suffix]
 
 [plural+first] [first-name] 's
 
@@ -53,10 +59,10 @@ pragma export-rule [company]
 	{{empty}} Cooperative
 	{{empty}} Amalgamated
 
-[company-suffix2] , Inc.
-	, Incorporated
-	, Ltd.
-	, LLC
+[company-suffix2] , {{empty}} Inc.
+	, {{empty}} Incorporated
+	, {{empty}} Ltd.
+	, {{empty}} LLC
 
 [company-name] associated
 	united

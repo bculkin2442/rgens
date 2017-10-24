@@ -1,7 +1,7 @@
 [bedroom] you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] lying on it.
+	you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] lying in it.
 
 pragma initial-rule [bedroom]
-pragma export-rule [bedroom]
 
 [bedroom-type] cheap hotel room
 	penthouse suite
@@ -9,6 +9,9 @@ pragma export-rule [bedroom]
 	bear's den
 	captain's cabin
 	hospital ward
+	damp cave
+	mountain glen
+	deserted clearing
 
 [bedroom-bed] king bed with luxury sheets
 	messy pile of wet hay

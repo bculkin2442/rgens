@@ -1,21 +1,408 @@
-[full-name] [first-name] [last-name]
-	[first-name] [middle-initial] [last-name]
-	[consonant] [middle-initial] [last-name]
+[full-name] [first-name]
+	[last-name]
+	[first-name] [last-name]
+	[first-name] [middle-initial] . [last-name]
+	[consonant] . [middle-initial] . [last-name]
+	[middle-initial] . [middle-initial] . [last-name]
+	[random-name]
 	[random-name] [random-name]
+	[random-name] [middle-initial] . [random-name]
 
-pragma initial-rule [full-name]
+pragma initial-rule [full-name-and-title]
+
 pragma export-rule [person]
 pragma export-rule [first-name]
-pragma export-rule [full-name-and-title]
+pragma export-rule [generic-title]
+pragma export-rule [full-name]
 pragma export-rule [random-name]
 
-[full-name-and-title] Mr. [first-name-male] [last-name]
-	Mr. [first-name-male] [middle-initial] [last-name]
-	Mrs. [first-name-female] [last-name]
-	Miss [first-name-female] [last-name]
-	Dr. [first-name] [last-name]
+[full-name-and-title] [generic-title] [last-name]
+	[generic-title] [middle-initial] . [middle-initial] . [last-name]
+	[male-title] [first-name-male]
+	[male-title] [first-name-male] [last-name]
+	[male-title] [first-name-male] [middle-initial] . [last-name]
+	[female-title] [first-name-female]
+	[female-title] [first-name-female] [last-name]
+	[female-title] [first-name-female] [middle-initial] . [last-name]
+	[gender-neutral-title] [full-name]
+	[full-name]
 
-[person] [first-name] [last-name]
+[generic-title] [male-title]
+	[female-title]
+	[gender-neutral-title]
+
+# @TODO 10/23/17 Ben Culkin :TitleExpansion
+#	Expand titles to
+#	- Include place names where appropriate (e.g empereror of ...)
+#	- Include ordinals where necessary (first emperor of ...)
+#
+
+[male-title] Mr.
+	Master
+	Uncle
+	Lord Mayor
+	Prince
+	archduke
+	grand duke
+	duke
+	marquis
+	marquess
+	count
+	earl
+	jarl
+	viscount
+	baron
+	lord
+	emperor
+	king
+	tsar
+	imperator
+	viceroy
+	pope
+	abbot
+	brother
+	friar
+	bishop
+	archbishob
+	priest
+	high priest
+	father
+	patriarch
+	vicar
+	chaplain
+	pastor
+	cardinal
+	monsieur
+	herr
+	senor
+	signor
+	emir
+	sultan
+	maharajah
+	lord protector
+	king-emperor
+	rex
+	lord of the manor
+	high king
+	crown prince
+	grand prince
+	praetor
+	headmaster
+
+[female-title] Ms.
+	Mrs.
+	Miss
+	Mistress
+	Aunt
+	Lady Mayoress
+	princess
+	arch duchess
+	grand duchess
+	duchess
+	marquise
+	marchioness
+	countess
+	viscountess
+	baroness
+	lady
+	empress
+	queen
+	tsarina
+	imperatrix
+	rex
+	vicerine
+	popess
+	dame
+	abbess
+	sister
+	mother superior
+	mother
+	reverend mother
+	priestess
+	high priestess
+	matriarch
+	madame
+	mademoiselle
+	frau
+	fraulein
+	senora
+	senorita
+	signora
+	signorina
+	emira
+	sultana
+	maharani
+	lady protectoress
+	queen-empress
+	regina
+	lady of the manor
+	high queen
+	crown princess
+	grand princess
+	headmistress
+
+[gender-neutral-title] Dr.
+	Professor
+	Right Honorable
+	Rt. Hon.
+	Honorable
+	Hon.
+	Representative
+	Senator
+	Speaker
+	[president]
+	Councillor
+	Delegate
+	Mayor
+	Governor
+	Lieutenant Governor
+	Premier
+	[ambassador]
+	[envoy]
+	[secretary]
+	attache
+	attache ( to [full-name-and-title] )
+	provost
+	chevalier
+	[judicial-title]
+	[religious-title]
+	[military-title]
+	coach
+	wizard
+	grand wizard
+	imperial wizard
+	principal
+	comrade
+	docent
+	lama
+	druid
+	archdruid
+	rabbi
+	ayatollah
+	bodhisattva
+	saoshyant
+	sheikh
+	archon
+	legate
+	satrap
+	consul
+	doge
+	pharaoh
+	caliph
+	khagan
+	khan
+	shah
+	shogun
+	despot
+	kaiser
+	don
+	comissioner
+	comptroller
+	courtier
+	curator
+	intendant
+	superindentent
+	sheriff
+	treasurer
+	warden
+	lord warden
+	apprentice
+	apprentice (to a [generic-title] )
+	apprentice (to a [full-name-and-title] )
+	journeyman
+	adept
+	centurion
+	daimyo
+	elector
+	inquisitor
+	grand inquisitor
+	pontiff
+	knight
+	squire
+
+[military-title] admiral
+	grand admiral
+	lord high admiral
+	rear admiral
+	vice admiral
+	brigadier
+	captain
+	group captain
+	colonel
+	lieutenant colonel
+	commander
+	commander-in-chief
+	lieutenant commander
+	wing commander
+	commodore
+	air commodore
+	corporal
+	lance corporal
+	staff corporal
+	general
+	first lieutenant
+	flight lieutenant
+	major
+	marshal
+	air marshal
+	field marshal
+	mate
+	chief mate
+	first mate
+	[officer]
+	private
+	sergeant
+	sergeant at arms
+	brigadier general
+	cadet
+	ensign
+
+[officer] officer
+	chief academic officer
+	chief executive officer
+	chief information officer
+	chief operating officer
+	field officer
+	first officer
+	flag officer
+	warrant officer
+	petty officer
+	police officer
+	political officer
+	senior officer
+	staff officer
+	police officer
+	constable
+	agent
+
+[religious-title] venerable
+	blessed
+	Saint
+	St.
+	decon
+	archdeacon
+	acolyte
+	dean
+	elder
+	minister
+	monsignor
+	reader
+	almoner
+
+[judicial-title] advocate
+	attorney
+	attorney general
+	bailiff
+	chancellor
+	judge
+	justice
+	lord chief justice
+	justice of the peace
+	magistrate
+	solicitor
+
+[president] president
+	deputy president
+	vice president
+	executive vice president
+	lord president of the council
+
+[ambassador] ambassador
+	ambassador (to [nation] )
+
+[envoy] envoy
+	envoy (to [nation] )
+	envoy (to the [generic-title] )
+	envoy (to [full-name-and-title] )
+	special envoy
+	special envoy (to [nation] )
+	special envoy (to the [generic-title] )
+	special envoy (to [full-name-and-title] )
+
+[secretary] secretary
+	secretary (to [full-name-and-title] )
+	secretary (to the [generic-title] )
+	under-secretary
+	under-secretary (to [full-name-and-title] )
+	under-secretary (to the [generic-title] )
+	foreign secretary
+	general secretary
+	secretary of state
+
+pragma suffix-with [full-name-and-title] [title-generation]
+pragma suffix-with [full-name-and-title] [title-suffix]
+pragma suffix-with [full-name-and-title] [title-suffix]
+pragma suffix-with [full-name-and-title] [title-suffix]
+
+[title-generation] Sr.
+	Jr.
+	[roman-numeral]
+	the [roman-numeral]
+	the [ordinal]
+	the [ordinal-number]
+
+[title-trailer] CPA
+	Ph.D
+	MP
+	M.D
+	DBA
+	RNA
+	TLA
+	A.B
+	B.A
+	B.S
+	M.A
+	M.S
+	Ed.D
+	D.Phil
+	Eng.D
+	K.B.E
+	D.D
+	Esq.
+	Esquire
+	CFA
+	P.E
+	PMP
+	CIA
+	CEH
+	CISA
+	CISM
+	CISSP
+	CNP
+	[cisco-title]
+	[ms-title]
+	OCP
+	[acronym]
+	J.D
+	J.P
+	N.P
+	CPL
+	DVM
+	D.D.S
+	D.M.D
+	OD
+	EMT
+	LPN
+	CMT
+	CRNA
+	OTP
+	KHS
+	GCHS
+	KCHS
+	MBA
+
+[cisco-title] CCNA
+	CCNP
+	CCIE
+
+[ms-title] MCDBA
+	MCSA
+	MCSE
+	MCP
+
+[title-suffix] , [title-trailer]
+
+[person] [full-name]
 
 [first-name] [first-name-male]
 	[first-name-female]

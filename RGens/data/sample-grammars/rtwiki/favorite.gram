@@ -1,7 +1,6 @@
-[favorite-food] My favorite foods are [fruit], [vegetable] and [meat]
+[favorite-food] My favorite foods are [fruit] , [vegetable] and [meat]
 
 pragma initial-rule [favorite-food]
-pragma export-rule [favorite-food]
 
 [fruit] apple
 	banana

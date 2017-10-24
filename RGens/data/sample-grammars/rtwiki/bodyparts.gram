@@ -70,3 +70,5 @@
 	shin
 	arm
 	forearm
+
+pragma export-rule [bodypart]

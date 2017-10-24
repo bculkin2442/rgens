@@ -1,7 +1,18 @@
 [art-treasure] [gemstones]
+	[gemstones]
 	[art-object]
-	[art-object] as well as a [gemstones]
+	[art-object]
+	[art-object] as well as a large [gemstones]
 	[gemstones] as well as a [art-object]
+	a small [gemstones]
+	a flawless piece of [gemstones]
+	[art-object] ; [art-object] as well as a [art-object]
+	a pile of [gemstones]
+	a pile of [gemstones]
+	a [art-object] atop a pile of [gemstones]
+	a [art-object] hidden under a [art-object]
+	a [gemstones] hidden under a pile of [gemstones]
+	a [art-object] hidden under a pile of [gemstones]
 
 pragma initial-rule [art-treasure]
 
@@ -30,16 +41,22 @@ pragma initial-rule [art-treasure]
 	aquamarine
 	black pearl
 	topaz
+	[common-gem] and [common-gem]
+	[common-gem] and [common-gem] fused together
 
 [legendary-gem] emerald
 	fire opal
 	sapphire
+	[rare-gem] and [rare-gem]
+	[rare-gem] and [rare-gem] fused together
 
 [epic-gem] diamond
 	jacinth
 	ruby
+	[legendary-gem] and [legendary-gem]
+	[legendary-gem] and [legendary-gem] fused together
 
-[common-art] gold ring with [common-gem]
+[common-art] [common-goldring]
 	bone/ivory statuette
 	gold bracelet
 	silver necklace
@@ -47,7 +64,12 @@ pragma initial-rule [art-treasure]
 	silver-plated sword
 	silk robe
 
-[uncommon-art] gold ring with [legendary-gem]
+[common-goldring] gold ring
+	gold ring with a [common-gem]
+	gold ring with [common-gem] inlay
+	gold ring with [common-gem] setting
+
+[uncommon-art] [uncommon-goldring]
 	gold/silver necklace
 	gold bracelet studded with [rare-gem]
 	gold necklace adorned with [common-gem]
@@ -55,7 +77,12 @@ pragma initial-rule [art-treasure]
 	ivory comb with embedded [rare-gem]
 	gold vestments
 
-[rare-art] gold/platinum ring with [legendary-gem]
+[uncommon-goldring] gold ring with [legendary-gem] inlay
+	gold ring with a [legendary-gem]
+	gold ring with [legendary-gem] setting
+	gold ring with [rare-gem] and [rare-gem] decorations
+
+[rare-art] gold/platinum ring with a [legendary-gem]
 	gold/silver statuette adorned with [rare-gem]
 	gold necklace adorned with [rare-gem]
 	gold crown with [rare-gem]
@@ -75,7 +102,7 @@ pragma initial-rule [art-treasure]
 	gold statuette with eyes of [epic-gem]
 	gold necklace adorned with [epic-gem]
 	mithril tiara studded with [epic-gem]
-	cup of celestial cold that glows with inner light
+	cup of celestial gold that glows with inner light
 	silvery cloak of astral thread
 	enormous [legendary-gem]
 

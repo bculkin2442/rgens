@@ -1,0 +1,99 @@
+[item-name] [noun]
+
+pragma initial-rule [item-name]
+
+pragma prefix-with [item-name] [post]
+pragma prefix-with [item-name] [adj]
+pragma prefix-with [item-name] [adj]
+pragma prefix-with [item-name] [pre]
+
+pragma suffix-with [item-name] [end]
+
+[end] of Secrets
+	of Flies
+	da Whoop
+	of Shadows
+	of Meat
+	Baby
+	of Pills
+	of Cards
+	Fetus
+	Worm
+	2.0
+	is Power
+	in a jar
+
+[adj] Gross
+	Smelly
+	Holy
+	Dead
+	Small
+	Rotten
+	Tiny
+	Magic
+	Mysterious
+	Lost
+	Little
+	Sacred
+	Cursed
+	Evil
+	Demonic
+	Sad
+	Turdy
+	Sticky
+	Ultra
+	Super
+	Satanic
+	Sulfuric
+	Epic
+	Explosive
+	Powerful
+	Charged
+	Electric
+	Bloody
+	Charmed
+	Burning
+	Charred
+	Poison
+	Rainbow
+	Soy
+
+[noun] Boy
+	Kid
+	Tears
+	Head
+	Bag
+	Brain
+	Box
+	Eye
+	Sack
+	Meat
+	Paw
+	Ring
+	Poop
+	Acid
+	Liquid
+	Shield
+	Money
+	Friend
+	Aura
+	Battery
+	Milk
+
+[post] Bomb
+	Coin
+	Spider
+	Fly
+	Cube of
+	Book of
+	Halo of
+	Trinity
+	Bum
+	Revenge
+
+[pre] Bob's
+	Guppy's
+	Mr.
+	My
+	Mom's
+	Mama

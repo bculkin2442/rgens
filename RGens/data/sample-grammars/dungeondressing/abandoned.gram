@@ -1,7 +1,6 @@
 [abandoned] while exploring the abandoned [abandon-place] , a [abandon-person] sneaks up on you [abandon-motion] .
 
 pragma initial-rule [abandoned]
-pragma export-rule [abandoned]
 
 [abandon-place] shopping mall
 	amusement park
@@ -14,7 +13,7 @@ pragma export-rule [abandoned]
 	investment banker
 	cyborg prostitute
 	vampire
-	3 dogs in a trench coat
+	trio of dogs in a trench coat
 	undead wizard
 
 [abandon-motion] on a jetpack

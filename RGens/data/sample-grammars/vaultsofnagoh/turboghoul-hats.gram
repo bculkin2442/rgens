@@ -1,0 +1,56 @@
+[turboghoul-hat] sack with eyeholes
+	bucket with eyeholes
+	coalscuttle with eyeholes
+	[mask]
+	[headscarf]
+	[hood]
+	[turban]
+	]hat]
+	[helmet]
+	birdcage
+	goldfish bowl
+
+[mask] [mask-type] mask
+
+[mask-type] clown
+	fanged iron
+	gimp
+	guy fawkes
+	gas
+	welding
+	hockey
+	tights
+
+[headscarf] [headscarf-type] headscarf
+
+[headscarf-type] flowery
+	bedouin
+
+[hood] [hood-type] hood
+
+[hood-type] liripided
+	monastic
+
+[turban] [turban-type] turban
+
+[turban-type] elaborate
+	simple
+
+[hat] [hat-type] hat
+	[hat-type] hat with bandana
+
+[hat-type] stetson
+	fancy feathered
+	wizard's pointy
+
+[helmet] [helmet-type] helmet
+	[helmet-type] helm
+
+[helmet-type] monstrous skull
+	common
+	knightly
+	winged
+	pickelhaub
+	futuristic
+	football
+	extra-spiky chaotic

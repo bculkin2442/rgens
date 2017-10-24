@@ -12,7 +12,6 @@
 	[anachronistic]
 
 pragma initial-rule [color]
-pragma export-rule [color]
 
 [standard] red
 	orange
@@ -277,10 +276,10 @@ pragma export-rule [color]
 	sulphureous (bright yellow)
 	urobilin (urine-colored)
 
-[arcipluvian] (varies between [color] and [color])
-	(varies between [color] , [color] and [color])
-	(varies between [color] , [color] , [color] and [color])
-	(varies between [color] , [color] and [color])
+[arcipluvian] (varies between [color] and [color] )
+	(varies between [color] , [color] and [color] )
+	(varies between [color] , [color] , [color] and [color] )
+	(varies between [color] , [color] and [color] )
 
 [archaic-green] bilious (yellow-green)
 	chrysochlorous (green-gold)

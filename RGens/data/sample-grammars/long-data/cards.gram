@@ -1,0 +1,248 @@
+[card] [playing-card]
+	[tarot-card]
+	[complete-many-things]
+	[harrowed-many-things]
+
+pragma initial-rule [card]
+
+[playing-card] [playing-rank] of [playing-suit]
+
+[playing-rank] 2
+	deuce
+	two
+	3
+	three
+	4
+	four
+	5
+	five
+	6
+	six
+	7
+	seven
+	8
+	eight
+	9
+	nine
+	10
+	ten
+	jack
+	king
+	queen
+	ace
+
+[playing-suit] hearts
+	clubs
+	spades
+	diamonds
+
+pragma export-rule [playing-card]
+
+[tarot-card] [minor-arcana]
+	[major-arcana]
+
+pragma export-rule [tarot-card]
+
+pragma prefix-with [tarot-card] inverse
+
+[minor-arcana] [minor-rank] of [playing-suit]
+	[minor-rank] of [arcana-suit]
+	[minor-rank] of [alt-arcana-suit]
+
+[major-arcana] [major-arcana1]
+	[major-arcana2]
+
+[minor-rank] ace
+	2
+	deuce
+	3
+	three
+	4
+	four
+	5
+	five
+	6
+	six
+	7
+	seven
+	8
+	eight
+	9
+	nine
+	10
+	ten
+	knave
+	page
+	jack
+	knight
+	king
+	queen
+
+[arcana-suit] swords
+	staves
+	cups
+	coins
+	pentacles
+
+[alt-arcana-suit] stones
+	books
+	bells
+	candles
+
+[major-arcana1] the magician
+	the high priestess
+	the empress
+	the emperor
+	the hierophant
+	the lovers
+	the chariot
+	justice
+	the hermit
+	the wheel of fortune
+	the strength
+	the hanged man
+	death
+	temperance
+	the devil
+	the tower
+	the star
+	the moon
+	the sun
+	judgment
+	the world
+	the fool
+	the excuse
+
+[major-arcana2] the witch
+	the sorceror
+	the temple
+	balance
+	the dragon
+	the die
+	diligence
+	life
+	courage
+	the angel
+	day
+	dusk
+	night
+	the rainbow
+	void
+	the demon
+
+pragma export-rule [major-arcana]
+pragma export-rule [major-arcana1]
+pragma export-rule [major-arcana2]
+
+[complete-many-things] fates
+	donjon
+	balance
+	patient zero
+	metamorphosis
+	frog
+	dwarf
+	crone
+	tongue
+	coin
+	rogue
+	euryale
+	ruin
+	talons
+	idiot
+	burdned man
+	bleeding man
+	cripple
+	nymph
+	leper
+	acid
+	blind man
+	hermaphrodite
+	skull
+	flames
+	void
+	god-king
+	wizard
+	titan
+	chicken soup
+	ballerina
+	sage
+	demagogue
+	armor
+	guide
+	heart
+	knight
+	moon
+	throne
+	vizier
+	gem
+	envy
+	sea
+	shoes
+	nose
+	giant
+	maiden
+	gift
+	comet
+	star
+	key
+	sun
+	jester
+	fool
+
+pragma export-rule [complete-many-things]
+
+[harrowed-many-things] the avalanche
+	the bear
+	the beating
+	the betrayal
+	the big sky
+	the brass dwarf
+	the carnival
+	the courtesan
+	the cricket
+	the crows
+	the cyclone
+	the dance
+	the demon's lantern
+	the desert
+	the fiend
+	the foreign trader
+	the forge
+	the eclipse
+	the empty throne
+	the hidden truth
+	the idiot
+	the inquisitor
+	the joke
+	the juggler
+	the keep
+	the liar
+	the locksmith
+	the lost
+	the marriage
+	the mountain man
+	the mute hag
+	the owl
+	the paladin
+	the peacock
+	the publican
+	the queen mother
+	the rabbit prince
+	the rakshasa
+	the sickness
+	the snakebite
+	the survivor
+	the tangled briar
+	the teamster
+	the theater
+	the trumpet
+	the twin joker
+	the tyrant
+	the unicorn
+	the uprsing
+	the vision
+	the wanderer
+	the waxworks
+	the winged serpent
+
+pragma export-rule [harrowed-many-things]

@@ -98,3 +98,5 @@
 	by a hilltop gazebo
 	by crucifixion
 	by act of god
+
+pragma export-rule [death-cause]

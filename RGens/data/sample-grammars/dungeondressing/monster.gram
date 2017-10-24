@@ -1,6 +1,8 @@
 [monster] [monster-kind]
 	[monster-prefix] [monster-kind]
 
+pragma initial-rule [monster]
+
 [monster-prefix] were
 	vampire
 	giant

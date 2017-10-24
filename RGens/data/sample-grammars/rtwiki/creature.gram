@@ -73,3 +73,7 @@
 	orc
 	tiefling
 	troglodyte
+
+pragma export-rule [creature]
+pragma export-rule [creature-epic]
+pragma export-rule [humanoid]

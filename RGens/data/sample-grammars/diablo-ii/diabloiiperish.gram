@@ -32,14 +32,14 @@ pragma export-rule [perishables]
 	            explosive
 	            fulminating
 	            [gas-type] gas
-	            acidic
+	            acidity
 	            energizing
 	            strengthening
 	            empowering
 	            artful
 	            skillful
 	            adroit
-	            sturdy
+	            sturdiness
 	            hardy
 	            robust
 	            sage
@@ -63,7 +63,7 @@ pragma export-rule [perishables]
 	            fascinating
 	            bright
 	            solar
-	            omniscient
+	            omniscience
 	            mystical
 	            arcane
 	            strength
@@ -71,7 +71,7 @@ pragma export-rule [perishables]
 	            vitality
 	            intelligence
 	            chi
-	            spectral
+	            spectralness
 	            fire
 	            ice
 	            lightning

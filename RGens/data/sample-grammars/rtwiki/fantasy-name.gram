@@ -1,7 +1,6 @@
 [fantasy-name] [fantasy+name]
 
 pragma initial-rule [fantasy-name]
-pragma export-rule [fantasy-name]
 
 [fantasy+name] [name-root1] [name-root2]
 	[name-root1] [name-root3]

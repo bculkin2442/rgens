@@ -4,8 +4,8 @@ pragma export-rule [ordinal-number]
 
 [actual+ordinal-number] [ordinal-digit]
 	1 [digit] th
-	[digit-noone] [ordinal-digit]
-	[digit-noone] [ordinal-digit]
+	[digit-twoup] [ordinal-digit]
+	[digit-twoup] [ordinal-digit]
 	[digit-nonzero] [ordinal-number]
 
 [ordinal-digit] 1st

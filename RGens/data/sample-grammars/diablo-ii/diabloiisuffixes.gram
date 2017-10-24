@@ -205,7 +205,7 @@ pragma export-rule [suffix]
 [weapon-use] many
 	     plenty
 
-[spell-casting] [spell-number] magic
+[spell-casting] [spell-number] level magic
 
 [spell-number] 1st
 	       2nd

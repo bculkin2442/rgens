@@ -112,7 +112,12 @@ pragma initial-rule [media-company]
 
 pragma export-rule [newspaper-pair2]
 
-[cardinal] north
+[cardinal] [act-cardinal]
+	[act-cardinal]
+	[act-cardinal] by [act-cardinal]
+	[2+cardinal]
+
+[act-cardinal] north
 	west
 	east
 	south
@@ -120,6 +125,8 @@ pragma export-rule [newspaper-pair2]
 	northwest
 	southeast
 	southwest
+
+[2+cardinal] [act-cardinal] - [act-cardinal]
 
 pragma export-rule [cardinal]
 

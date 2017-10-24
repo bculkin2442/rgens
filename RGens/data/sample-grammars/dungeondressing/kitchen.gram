@@ -1,7 +1,6 @@
 [kitchen] You enter the [kitchen-desc] kitchen. There is a [kitchen-book] cookbook nearby. Over the hearth, a [kitchen-food] gently simmers in a saucepan.
 
 pragma initial-rule [kitchen]
-pragma export-rule [kitchen]
 
 [kitchen-desc] poorly lit
 	dirty and insect infested

@@ -147,3 +147,6 @@
 	Biter
 	Final Remedy
 	Taskmaster
+
+pragma export-rule [guncorp]
+pragma export-rule [gun-name]

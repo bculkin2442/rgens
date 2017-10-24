@@ -7,6 +7,7 @@
 [url] [actual+url]
 
 pragma initial-rule [email]
+
 pragma export-rule [fake-email]
 pragma export-rule [username]
 pragma export-rule [domain-name]

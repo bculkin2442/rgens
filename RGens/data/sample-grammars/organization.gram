@@ -79,7 +79,7 @@ pragma export-rule [org-political]
 	wealth
 	filthy rich
 
-[min+wage] [6..8] . [digit] [digit]
+[min+wage] [9..20] . [digit] [digit]
 
 [protect] bill of rights
 	first amendment

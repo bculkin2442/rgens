@@ -1,10 +1,28 @@
+[superhero-desc] [superhero-name]
+
+pragma initial-rule [superhero-desc]
+
+pragma suffix-with [superhero-desc] [superhero-ally]
+pragma suffix-with [superhero-desc] [superhero-enemy]
+
+[superhero-ally] (ally of [superhero-name] )
+
+[superhero-enemy] (enemy of [superhero-name] )
+
 [superhero-name] [first-part] [second-part]
 	[second-part] [first-part]
 
-pragma initial-rule [superhero-name]
+pragma export-rule [superhero-name]
 
 pragma suffix-with [superhero-name] [third-part]
 pragma suffix-with [superhero-name] [fourth-part]
+pragma suffix-with [superhero-name] [fifth-part]
+pragma prefix-with [superhero-name] [third-part2]
+
+[fifth-part] and the [third-part2]
+	and [third-part2]
+
+pragma suffix-with [fifth-part] [fourth-part]
 
 [first-part] Captain
 	Yellow
@@ -30,7 +48,10 @@ pragma suffix-with [superhero-name] [fourth-part]
 	Scarlet
 	Grand
 	Arcane
+	Arcana
 	White
+	Muscle
+	[second-class]
 	[gender-title]
 
 [gender-title] Mr
@@ -71,47 +92,124 @@ pragma suffix-with [superhero-name] [fourth-part]
 	Shepherd
 	Flame
 	Orchid
-	Rider
 	Torch
+	Magus
+	Wizard
+	[second-class]
+	[second-class]
 
-[third-part] ,The [third-part-act]
-	,The [third-part-act] [second-part]
+[second-class] Rider
+	Caster
+	Assasin
+	Berserker
+	Saber
+	Archer
+	Lancer
+	Saver
+	Ruler
+	Shielder
+	Avenger
+
+[third-part] ,The [third-part2]
+
+[third-part2] [third-part-act]
+	[third-part-act] [second-part]
 
 [third-part-act] Champion
 	Protector
 	Wielder
+	Wielding
 	Marksman
 	Fated
+	Fate
 	Lover
+	Lovely
+	Loving
 	Celebrated
 	Prodigy
 	Guardian
 	Inquisitor
+	Inquisitorial
 	Legend
+	Legendary
 	Returned
 	Light
+	Dark
 	Warrior
 	Sacred
+	Cursed
 	Victor
+	Victorious
 	Triumphant
 	Mystic
+	Mystical
 	Amazing
 	Incomparable
 	Lord
+	Lady
 	Mysterious
 	Face
 	Divine
 	Magnificent
+	Magnificence
 	Virtuous
 	Survivor
+	Surviving
 	Courageous
 	Steward
 	Keeper
 	Squire
+	Exalted
+	Dammed
+	Infernal
+	Demonic
+	Demon
+	Angelic
+	Angel
+	Devilish
+	Devil
+	Dragonic
+	Dragon
+	Crusading
+	Crusader
+	Knightly
+	Knight
+	Lordly
+	Lord
+	Ravenous
+	Saintly
+	Saint
+	Blessed
+	Ghost
+	Ghostly
+	Magical
+	Magical Girl
+	Magical Knight
+	Dead
+	Deadly
+	Flaming
+	Thunderer
+	[major-arcana]
+	[major-arcana]
+	Cardinal
+	Bishop
+	Archbishop
+	Pope
+	Father
+	Mother
+	Fatherly
+	Motherly
+	Sinister
+	Embodiment
+	[generic-title]
+	[generic-title]
 
 [fourth-part] of [fourth-part-act]
 
 [fourth-part-act] the [fourth-part-the]
+	[harrowed-many-things]
+	[harrowed-many-things]
+	Hope
 	Destiny
 	Justice
 	Humanity
@@ -121,6 +219,20 @@ pragma suffix-with [superhero-name] [fourth-part]
 	Knowledge
 	Earth
 	Eternal Fire
+	[planet]
+	[planet]
+	[second-part]
+	[second-part]
+
+[planet] Earth
+	Mars
+	Jupiter
+	Saturn
+	Pluto
+	Uranus
+	Mercury
+	Venus
+	Neptune
 
 [fourth-part-the] Realm
 	Chalice
@@ -139,3 +251,24 @@ pragma suffix-with [superhero-name] [fourth-part]
 	Galaxy
 	Ancients
 	Archive
+	Moon
+	[generic-title]
+	[generic-title]
+	[exalt-type]
+	[exalt-type]
+	[arcana]
+	[arcana]
+
+[exalt-type] Dawn
+	Zenith
+	Twilight
+	Night
+	Eclipse
+
+[arcana] [tarot-card]
+	Arcana
+	Minor Arcana
+	Major Arcana
+	[ordinal-roman] Arcana
+	[ordinal-number] Arcana
+	[ordinal] Arcana

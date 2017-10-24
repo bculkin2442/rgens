@@ -1,3 +1,17 @@
+[roman-numeral-string] [roman-numeral-string+1]
+
+[roman-numeral-string+1] [roman-numeral]
+	[roman-numeral]
+	[roman-numeral] [roman-numeral-string]
+
+pragma initial-rule [roman-numeral-string]
+
+[ordinal-roman] [act+ordroman]
+
+pragma export-rule [ordinal-roman]
+
+[act+ordroman] [roman-numeral-string] th
+
 [roman-numeral] → I
 	II
 	III
@@ -8,5 +22,8 @@
 	VIII
 	IX
 	X
+	D
+	C
+	M
 
-pragma initial-rule [roman-numeral]
+pragma export-rule [roman-numeral]

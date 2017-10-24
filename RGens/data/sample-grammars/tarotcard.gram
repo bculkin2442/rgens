@@ -1,5 +1,9 @@
 [tarot-card] [adjective-of] [title]
+	[adjective-of] [title] [adjective]
+	[adjective-of] [title] [adjective] [noun]
 	[adjective-of] [noun] [title]
+	[adjective-of] [noun]
+	[adjective-of] [noun] [adjective] [noun]
 	[noun]
 	[noun] [adjective]
 	[noun] [title]
@@ -10,7 +14,10 @@
 pragma initial-rule [tarot-card]
 
 [title] [male-title]
+	[male-title]
 	[female-title]
+	[female-title]
+	[misc-title]
 
 [male-title] emperor
 	king
@@ -21,6 +28,8 @@ pragma initial-rule [tarot-card]
 	queen
 	princess
 	priestess
+
+[misc-title] fool
 
 [adjective] of [adjective-of]
 

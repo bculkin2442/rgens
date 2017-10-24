@@ -20,13 +20,29 @@
 	tcl/tk
 	ada
 	dos batch files
+	jcl
+	rexx
+	scheme
+	clojure
+	ruby
+	python
+	apl
+	k
+	opencomal
+	[esoteric-language]
+	[esoteric-language]
+
+[esoteric-language] magenta
 
 pragma export-rule [computer-language]
+pragma export-rule [esoteric-language]
 pragma export-rule [computer-skill]
 
 [computer-skill] html
 	xml
+	css
 	cgi scripting
+	cgi scripting with [computer-language]
 	photoshop
 	autocad
 	sql

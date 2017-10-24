@@ -13,7 +13,7 @@
 	[opening] [work-phrase] [verb-part] [noun-part] and [verb-part] [noun-part] [connector] [goal]
 	[opening] [work-phrase2] [verb-part2] [noun-part] and [verb-part2] [noun-part] [connector] [goal]
 	[opening] [verb-part] [noun-part] and [noun-part] [connector] [goal]
-	[opening] [verb-part] [noun-part], [noun-part] and [noun-part] [connector] [goal]
+	[opening] [verb-part] [noun-part] , [noun-part] and [noun-part] [connector] [goal]
 	[opening] [work-phrase] [verb-part] [noun-part] [connector] [verb-part] [noun-part] [connector] [goal]
 	[opening] [work-phrase2] [verb-part2] [noun-part] [connector] [verb-part] [noun-part] [connector] [goal]
 	[opening] [verb-part] [noun-part] [connector] [verb-part] [noun-part] [connector] [goal]

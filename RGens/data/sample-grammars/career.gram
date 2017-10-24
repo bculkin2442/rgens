@@ -1,27 +1,30 @@
-[career-tech] [career-prefix] paper pusher
-	[career-prefix] computer programmer
-	[career-prefix] sheet spreader
+[career-tech] paper pusher
+	computer programmer
+	sheet spreader
 	data entry [career-suffix]
-	[career-prefix] webpage designer
-	[career-prefix] button pusher
-	[career-prefix] bug terminator
+	webpage designer
+	button pusher
+	bug terminator
 	help desk [career-suffix]
-	[career-prefix] software reinstaller
+	software reinstaller
 	software engineering [career-suffix]
-	[career-prefix] system administrator
-	[career-prefix] bastard operator from hell
-	[career-prefix] webmaster
-	[career-prefix] dead chicken waver
-	[career-prefix] information technology [career-suffix]
-	[career-prefix] four-color glossy publisher
-	[career-prefix] corporate spy [career-suffix]
-	[career-prefix] trade show booth bunny
+	system administrator
+	bastard operator from hell
+	webmaster
+	dead chicken waver
+	information technology [career-suffix]
+	four-color glossy publisher
+	corporate spy [career-suffix]
+	trade show booth bunny
 	evil human resources [career-suffix]
-	[career-prefix] internet [career-suffix]
-	[career-prefix] network administrator
-	[career-prefix] software design [career-suffix]
+	internet [career-suffix]
+	network administrator
+	software design [career-suffix]
+	to the [career-tech]
 
 pragma initial-rule [career-tech]
+
+pragma prefix-with [career-tech] [career-prefix]
 
 [career-prefix] executive
 	assistant

@@ -547,23 +547,74 @@ pragma export-rule [geek-scifi-book]
 	software modem
 	cable modem
 	video card
+	[monitor-type] capture card
+	[peripheral-interface] [wireless+type] adapter
 	3d accelerator card
 	[peripheral-interface] time travel card
 	[peripheral-interface] coffee machine
-	[40..99] inch monitor
+	[15..99] inch [monitor]
+	[15..99] inch widescreen [monitor]
 	uninterruptible power supply
 	[peripheral-interface] cd-recorder
 	beowulf-cluster-in-a-box
+	[cable-type] extender
+	[cable-type] to [cable-type] converter
+	[cable-type] hub
+	[cable-type] splitter
+
+[wireless+type] 802.11 [wireless-postfix]
+
+[wireless-postfix] a
+	b
+	g
+	n
+	ac
+	ad
+	af
+	ah
+	ai
+	aj
+	aq
+	ax
+	ay
+
+[cable-type] [monitor-type]
+	[peripheral-interface]
+
+[monitor] monitor
+
+pragma prefix-with [monitor] [monitor-resolution]
+pragma prefix-with [monitor] [monitor-type]
+
+[monitor-resolution] 4k
+	1080p
+	720p
+	480p
+	360p
+	240p
+	144p
+
+[monitor-type] vga
+	dvi-d
+	hdmi
+	display-port
+	mini display-port
+	micro display-port
 
 [peripheral-interface] scsi
 	ide
-	parallel port
+	parallel
 	[usb]
-	firewire
-	serial port
+	firewire 400
+	firewire 800
+	serial
 	thunderbolt
 
 [usb] usb
+	usb type A
+	usb type B
+	usb 3.0
+	usb 2.0
 	micro-usb
 	mini-usb
 	usb (type C)
@@ -612,7 +663,11 @@ pragma export-rule [peripheral]
 
 pragma export-rule [freshmeat-url]
 
-[freshmeat+url] http://freshmeat.net/news/ [digit] / [digit] / [digit] [digit] [digit] [digit] / [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit] /.html
+[freshmeat+url] http://freshmeat.net/news/ [digit] / [digit] / [freshmeat-group1] / [freshmeat-group2] .html
+
+[freshmeat-group1] [digit] [digit] [digit] [digit]
+
+[freshmeat-group2] [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit]
 
 [freshmeat-desc] [app-type] [app-suffix]
 	[app-type] [app-suffix] for [freshmeat-for]
@@ -695,8 +750,7 @@ pragma export-rule [app-name]
 	[app-prefix+letter] [app-suffix]
 	[app-prefix+syllable] [app-type] [app-suffix]
 	[app-common] [app-type] [app-suffix]
-# TODO write [device-type] or find what its supposed to be.
-#	[tech-company] [peripheral] [device-type]
+	[tech-company] [peripheral] [device-type]
 	[buzzword-adjective] [app-suffix]
 	[plural+first] [buzzword-adjective] [buzzword-noun] [buzzword-job]
 	[acronym] [buzzword-noun]
@@ -704,6 +758,8 @@ pragma export-rule [app-name]
 	[random-name] [buzzword-job]
 	[buzzword-adjective] [buzzword-noun] [app-suffix]
 	[linux-distro]
+
+[device-type] 'WRITE ME'
 
 [app-prefix+name] [app-prefix] [random-name]
 
@@ -860,8 +916,10 @@ pragma export-rule [app-name]
 	2.4.0-ac [1..30]
 	2.4. [digit]
 	2.5. [0..99]
+	[2..4] . [6..9] . [0..99]
 
-[windows-version] 95
+[windows-version] 3.1
+	95
 	98
 	98 second edition
 	millenium edition
@@ -875,6 +933,7 @@ pragma export-rule [app-name]
 	8
 	10
 	10 anniversary edition
+	10 creators update
 
 [ms-product] office
 	word

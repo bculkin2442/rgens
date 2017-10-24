@@ -1,10 +1,22 @@
 [technobabble] [part-prefix] [part-suffix] [part-problem]
+	[part-suffix] [part-prefix] [part-problem]
 	[part-prefix] [part-problem]
-	[part-suffix] [part-problem]
 
 pragma initial-rule [technobabble]
 
+pragma suffix-with [technobabble] [part-cause]
+
+[part-cause] the [part-prefix]
+	the [part-suffix]
+	the [part-prefix] [part-suffix]
+
+pragma suffix-with [part-cause] [add-cause]
+
+[add-cause] and [part-cause]
+	and [part-problem] [part-cause]
+
 [part-prefix] primary
+	secondary
 	compression
 	grav
 	hydraulic
@@ -30,3 +42,8 @@ pragma initial-rule [technobabble]
 	jammed
 	burnt
 	exploded
+	imploded
+	incinerated
+	froze
+	destabilized
+	clogged
