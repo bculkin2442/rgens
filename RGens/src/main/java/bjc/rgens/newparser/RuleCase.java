@@ -21,6 +21,8 @@ public class RuleCase {
 	public static enum CaseType {
 		/** A normal case, composed from a list of elementList. */
 		NORMAL,
+		/** A case that doesn't insert spaces. */
+		SPACEFLATTEN
 	}
 
 	/** The type of this case. */
@@ -31,7 +33,7 @@ public class RuleCase {
 	 *
 	 * <h2>Used For</h2>
 	 * <dl>
-	 * <dt>NORMAL</dt>
+	 * <dt>NORMAL, SPACEFLATTEN</dt>
 	 * <dd>Used as the list of elementList the rule is composed of.</dd>
 	 * </dl>
 	 */
@@ -49,6 +51,7 @@ public class RuleCase {
 	public RuleCase(CaseType typ) {
 		switch (typ) {
 		case NORMAL:
+		case SPACEFLATTEN:
 			throw new IllegalArgumentException("This type requires an element list parameter");
 		default:
 			break;
@@ -73,6 +76,7 @@ public class RuleCase {
 	public RuleCase(CaseType typ, IList<CaseElement> elements) {
 		switch (typ) {
 		case NORMAL:
+		case SPACEFLATTEN:
 			break;
 		default:
 			throw new IllegalArgumentException("This type doesn't have a element list parameter");

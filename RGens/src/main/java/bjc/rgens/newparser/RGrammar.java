@@ -187,6 +187,12 @@ public class RGrammar {
 			case NORMAL:
 				for (CaseElement elm : start.getElements()) {
 					generateElement(elm, state);
+					state.contents.append(" ");
+				}
+				break;
+			case SPACEFLATTEN:
+				for (CaseElement elm : start.getElements()) {
+					generateElement(elm, state);
 				}
 				break;
 			default:
@@ -205,7 +211,6 @@ public class RGrammar {
 			switch (elm.type) {
 			case LITERAL:
 				state.contents.append(elm.getLiteral());
-				state.contents.append(" ");
 				break;
 			case RULEREF:
 				generateRuleReference(elm, state);
@@ -218,7 +223,6 @@ public class RGrammar {
 				val += start;
 
 				state.contents.append(val);
-				state.contents.append(" ");
 				break;
 			case VARDEF:
 				generateVarDef(elm.getName(), elm.getDefn(), state);
@@ -351,7 +355,6 @@ public class RGrammar {
 		if (refersTo.contains("+")) {
 			/* Rule names with pluses in them get space-flattened */
 			state.contents.append(newState.contents.toString().replaceAll("\\s+", ""));
-			state.contents.append(" ");
 		} else {
 			state.contents.append(newState.contents.toString());
 		}

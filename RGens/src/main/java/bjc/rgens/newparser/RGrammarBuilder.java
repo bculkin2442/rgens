@@ -128,12 +128,32 @@ public class RGrammarBuilder {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(ruleName)) {
+			String msg = String.format("Rule '%s' is not a valid rule name.");
+
+			throw new IllegalArgumentException(msg);
 		}
 
 		CaseElement element = CaseElement.createElement(suffix);
 
-		for (RuleCase ruleCase : rules.get(ruleName).getCases()) {
-			ruleCase.getElements().add(element);
+		FunctionalList<RuleCase> newCases = new FunctionalList<>();
+
+		IList<RuleCase> caseList = rules.get(ruleName).getCases();
+		for (RuleCase ruleCase : caseList) {
+			FunctionalList<CaseElement> newCase = new FunctionalList<>();
+
+			for(CaseElement elm : ruleCase.getElements()) {
+				newCase.add(elm);
+			}
+
+			newCase.add(element);
+
+			newCases.add(new RuleCase(NORMAL, newCase));
+		}
+
+
+		for (RuleCase newCase : newCases) {
+			caseList.add(newCase);
 		}
 	}
 
@@ -155,12 +175,50 @@ public class RGrammarBuilder {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(ruleName)) {
+			String msg = String.format("Rule '%s' is not a valid rule name.");
+
+			throw new IllegalArgumentException(msg);
 		}
 
 		CaseElement element = CaseElement.createElement(prefix);
 
-		for (RuleCase ruleCase : rules.get(ruleName).getCases()) {
-			ruleCase.getElements().add(element);
+		FunctionalList<RuleCase> newCases = new FunctionalList<>();
+
+		IList<RuleCase> caseList = rules.get(ruleName).getCases();
+		for (RuleCase ruleCase : caseList) {
+			FunctionalList<CaseElement> newCase = new FunctionalList<>();
+
+			newCase.add(element);
+
+			for(CaseElement elm : ruleCase.getElements()) {
+				newCase.add(elm);
+			}
+
+			newCases.add(new RuleCase(NORMAL, newCase));
 		}
+
+
+		for (RuleCase newCase : newCases) {
+			caseList.add(newCase);
+		}
+	}
+
+	public void despaceRule(String ruleName) {
+		if (ruleName == null) {
+			throw new NullPointerException("ruleName must not be null");
+		} else if (ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		}
+
+		IList<RuleCase> caseList = rules.get(ruleName).getCases();
+
+		IList<RuleCase> newCaseList = new FunctionalList<>();
+
+		for(RuleCase cse : caseList) {
+			newCaseList.add(new RuleCase(SPACEFLATTEN, cse.getElements()));
+		}
+
+		rules.get(ruleName).replaceCases(newCaseList);
 	}
 }

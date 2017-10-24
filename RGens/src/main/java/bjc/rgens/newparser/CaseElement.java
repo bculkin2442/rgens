@@ -373,6 +373,8 @@ public class CaseElement {
 			/* Handle special cases. */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
+			System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
+
 			if (specialBody.matches("\\S+:=\\S+")) {
 				/* Handle expanding variable definitions. */
 				String[] parts = specialBody.split(":=");

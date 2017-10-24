@@ -51,6 +51,17 @@ public class RGrammarParser {
 			build.setInitialRule(body);
 		});
 
+		pragmas.put("despace-rule", (body, build, level) -> {
+			int sep = body.indexOf(' ');
+
+			if (sep != -1) {
+				String msg = "despace-rule pragma takes only one argument, the name of the rule to despace";
+				throw new GrammarException(msg);
+			}
+
+			build.despaceRule(body);
+		});
+
 		pragmas.put("export-rule", (body, build, level) -> {
 			String[] exports = body.split(" ");
 

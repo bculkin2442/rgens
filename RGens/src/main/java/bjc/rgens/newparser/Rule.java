@@ -85,6 +85,16 @@ public class Rule {
 		return cases;
 	}
 
+	/**
+	 * Replace the current list of cases with a new one.
+	 *
+	 * @param cases
+	 * 	The new list of cases.
+	 */
+	public void replaceCases(IList<RuleCase> cases) {
+		this.cases = cases;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
