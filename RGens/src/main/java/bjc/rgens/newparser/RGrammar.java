@@ -177,7 +177,7 @@ public class RGrammar {
 
 		generateCase(start, new GenerationState(contents, rnd, vars));
 
-		return contents.toString();
+		return contents.toString().replaceAll("\\s+", " ");
 	}
 
 	/* Generate a rule case. */

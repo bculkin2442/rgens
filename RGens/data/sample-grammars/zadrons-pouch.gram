@@ -14,7 +14,7 @@ pragma initial-rule [zadrons-pouch]
 	[vial]
 	[mini-weapon]
 	[bag]
-	[card]
+	[zadron-card]
 	[rope]
 	[box]
 	[wand]
@@ -48,10 +48,10 @@ pragma export-rule [zadrons-item]
 	pandora
 	panicking
 
-[card] → card of [card-type]
-	[card-type] card
+[zadron-card] → card of [zad-card-type]
+	[zad-card-type] card
 
-[card-type] → fate
+[zad-card-type] → fate
 	teleporting
 	elusive treasure
 	spell-storing
@@ -59,10 +59,9 @@ pragma export-rule [zadrons-item]
 	imprisoning
 	messaging
 	bounty
-	minor arcana
-	major arcana
-	inverse minor arcana
-	inverse major arcana
+	[card]
+	[card]
+	[card]
 
 [crys-sphere] → [sphere-type] spheres
 	[sphere-type] sphere
