@@ -1,43 +1,11 @@
-[guncorp] Ace-Eight Industrial 
-	Akinyemi Firearms 
-	Anasi Manufacturing 
-	Atmaghata Group 
-	Brainfuck Limited 
-	Choral Hardtech Ventures 
-	Double Six Security 
-	Death's Head Enterprises 
-	Exomorph Technica 
-	Fury Sports 
-	Pactkeeper Copperhead
-	Bereitschaft GmbH 
-	Godfist Corporation 
-	Golovanov Amerika 
-	Ishtar Macrotech 
-	Jiandao Fangyu 
-	Hachiman Omnitech 
-	Hivewerks 
-	Honeybadger Sporting Arms 
-	Kaamat-Bandi 
-	Nadel Hauserkampf 
-	Neo-Ordinance 
-	Nekrasova Armaments 
-	Onwudiwe Group 
-	Pallas Athena Industries 
-	Pryhn Interstellar Arms 
-	Quliang 
-	Raventech 
-	Riverboat Weaponsmiths 
-	Sekhmet Industrial Warfare 
-	Skullkorp 
-	Southern Dwarfhold 
-	Takein Personal Weaponry 
-	Thorhammer Urban 
-	Ultraviolet Thunderbolt 
-	Waspmill Coounterstrike 
-	Xuguan-Fuchang 
-	Yttrium Galactic 
-	Zoahou Unlimited 
-	Zurgug Tribal Alliance 
+[guncorp] [guncorp-1]
+	[guncorp-1] [guncorp-2]
+	[guncorp-1] [guncorp-2]
+	[guncorp-1] [guncorp-2]
+	[guncorp-1] [guncorp-1] [guncorp-2]
+	[guncorp-1] - [guncorp-1] [guncorp-2]
+	[guncorp-1] and [guncorp-1] [guncorp-2]
+	[guncorp-1] / [guncorp-1] [guncorp-2]
 
 [gun-name] Chimera
 	Warrior
@@ -150,3 +118,79 @@
 
 pragma export-rule [guncorp]
 pragma export-rule [gun-name]
+
+[guncorp-1] Ace-Eight 
+	Akinyemi       
+	Anasi
+	Atmaghata
+	Brainfuck
+	Choral Hardtech
+	Double Six
+	Death's Head
+	Exomorph
+	Fury
+	Pactkeeper
+	Bereitschaft
+	Godfist
+	Golovanov
+	Ishtar
+	Jiandao
+	Hachiman
+	Hivewerks
+	Honeybadger
+	Kaamat-Bandi
+	Nadel
+	Neo-Ordinance
+	Nekrasova
+	Onwudiwe
+	Pallas Athena
+	Pryhn
+	Quliang
+	Raventech
+	Riverboat
+	Sekhmet
+	Skullkorp
+	Southern
+	Takein
+	Thorhammer
+	Ultraviolet
+	Waspmill
+	Xuguan-Fuchang
+	Yttrium
+	Zoahou
+	Zurgug
+
+[guncorp-2] Industrial
+	Firearms
+	Manufacturing
+	Group
+	Limited
+	Ventures
+	Security
+	Enterprises
+	Technica
+	Sports
+	Copperhead
+	GmbH
+	Corporation
+	Amerika
+	Macrotech
+	Fangyu
+	Omnitech
+	Sporting Arms
+	Hauserkampf
+	Armaments
+	Group
+	Industries
+	Interstellar Arms
+	Weaponsmiths
+	Industrial Warfare
+	Dwarfhold
+	Personal Weaponry
+	Urban
+	Thunderbolt
+	Coounterstrike
+	Galactic
+	Unlimited
+	Tribal Alliance
+

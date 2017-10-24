@@ -199,6 +199,7 @@ pragma export-rule [random-name]
 	comissioner
 	comptroller
 	courtier
+	courtier (to [full-name-and-title] )
 	curator
 	intendant
 	superindentent
@@ -208,7 +209,7 @@ pragma export-rule [random-name]
 	lord warden
 	apprentice
 	apprentice (to a [generic-title] )
-	apprentice (to a [full-name-and-title] )
+	apprentice (to [full-name-and-title] )
 	journeyman
 	adept
 	centurion
@@ -219,6 +220,7 @@ pragma export-rule [random-name]
 	pontiff
 	knight
 	squire
+	squire (to [full-name-and-title] )
 
 [military-title] admiral
 	grand admiral
