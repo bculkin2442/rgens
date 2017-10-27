@@ -1,0 +1,27 @@
+[user-role] student
+	student
+	student
+	student
+	student
+	tutor
+	tutor
+	tutor
+	tutor
+	staff
+	staff
+	staff
+	admin
+	admin
+	sysadmin
+
+[user+idno] 800 [idno-chain]
+	700 [idno-chain]
+
+[idno-chain] [digit] [digit] [digit] [digit] [digit]
+
+[sd-user] User (role: ' [user-role] ' ; id: ' [user+idno] ' ; realname : ' [full-name-and-title] ' ; email: ' [email] ' )
+
+[sd-pmsg] recipient: [full-name-and-title] ; nquestions: [small-number] ; questions: [mission-statement]
+
+pragma export-rule [sd-user]
+pragma export-rule [sd-pmsg]

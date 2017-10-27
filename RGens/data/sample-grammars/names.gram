@@ -1,3 +1,7 @@
+# @TODO 10/26/17 Ben Culkin :NameTypes
+#	Add rules for producing names in the common 'last, first' style format,
+#	as well as producing actual middle names/nick names for people
+
 [full-name] [first-name]
 	[last-name]
 	[first-name] [last-name]
@@ -25,6 +29,7 @@ pragma export-rule [random-name]
 	[female-title] [first-name-female] [last-name]
 	[female-title] [first-name-female] [middle-initial] . [last-name]
 	[gender-neutral-title] [full-name]
+	[generic-title] [full-name]
 	[full-name]
 
 [generic-title] [male-title]

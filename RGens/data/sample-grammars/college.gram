@@ -1,71 +1,121 @@
-[college-announcement] next [course-time] , [university] will offer ' [college-course] '
-	the [university] class ' [college-course] ' has been cancelled due to lack of interest
-	starting next year, incoming freshmen at [university] will be required to take ' [college-course] '
-	' [college-course] ' will no longer be offered at [university] due to lack of interest
-	' [college-course] ' is the most popular [course-level] class at [university]
-	due to overwhelming popularity, an additional section of ' [college-course] ' will be offered at [university] next semester
-	not one single student signed up for [university] 's ' [college-course] ' last semester
-	a [poll] of students at [university] revealed ' [college-course] ' is the [popular] popular [class-type] offered
+[college-announcement] next [course-time] , [university] will offer [quote-course]
+	the [university] class [quote-course] has been cancelled due to lack of interest
+	starting next [course-time] , incoming freshmen at [university] will be [required] to take [quote-course]
+	starting next [course-time] , incoming freshmen at [university] will no longer be [required] to take [quote-course]
+	students are [required] to take [quote-course]
+	students are no longer [required] to take [quote-course]
+	[quote-course] will no longer be offered at [university] due to [lack-reason]
+	[quote-course] is the most popular [course-level] class at [university]
+	due to overwhelming popularity, [add-sec] of [quote-course] will be offered at [university] next [course-time]
+	not one single student signed up for [plural-univ] [quote-course] last semester
+	a [poll] of students at [university] revealed [quote-course] is the [popular] popular [class-type] offered
+
+[plural-univ] [university] 's
+
+pragma despace-rule [plural-univ]
+
+[lack-reason] lack of interest
+	lack of teachers
+	lack of space
+
+[quote-course] ' [college-course] '
+
+pragma despace-rule [quote-course]
+pragma export-rule [quote-course]
+
+[required] required
+	strongly encouraged
+	strongly discouraged
+	forbidden
+
+[add-sec] an additional section
+	[2..6] additional sections
 
 pragma initial-rule [college-announcement]
 
 [course-time] fall
+	spring
+	winter
+	summer
 	year
 	semester
 
 [course-level] graduate
 	undergraduate
-	freshmen
+	[class-year]
 	liberal arts
+
+[class-year] freshmen
+	sophmore
+	junior
+	senior
+	super-senior
 
 [poll] poll
 	survey
 
 [popular] least
+	second-least
 	most
+	second-most
 
 [class-type] class
 	course
+	lecture
+	lab
 
-[college-course] [course-adj] [course-noun] [course-suffix]
-	[course-adj] [course-noun] : [course-ending]
-	[course-adj] [course-noun] and [course-adj] [course-noun] [course-suffix]
-	[course-noun] and [course-noun] [course-suffix]
-	[course-group1] [course-group2] [course-life] [course-suffix]
-	[course-group2] [course-noun] [course-life] [course-suffix]
-	[course-group1] [course-group2] [course-life] since [1800..1970]
+[course-adjnoun1] [course-prefixednoun]
+
+pragma prefix-with [course-adjnoun1] [course-adj]
+pragma prefix-with [course-adjnoun1] [course-adj]
+
+[course-adjnoun] [course-adjnoun1]
+	[course-adjnoun1]
+	[course-adjnoun1]
+	[course-adjnoun1]
+	[course-adjnoun1] and [course-adjnoun1]
+	[course-adjnoun1] , [course-adjnoun1] and [course-adjnoun1]
+	[course-adjnoun1] or [course-adjnoun1]
+	[course-adjnoun1] , [course-adjnoun1] or [course-adjnoun1]
+
+[college-course] [course-adjnoun] [course-suffix]
+	[course-adjnoun] : [course-ending]
+	[course-adjnoun] [course-suffix]
+	[course-group] [course-life] [course-suffix]
+	[course-group2] [course-adjnoun] [course-life] [course-suffix]
+	[course-group] [course-life] since [1500..2010]
 	[course-group2] [course-life] : [course-ending]
 	contemporary [course-group2] [course-life] and [course-life]
 	contemporary [course-group2] [course-life] : [course-ending]
-	transforming the [course-group1] [course-group2] experience
-	[course-prefix] [course-group1] [course-group2] [course-life]
+	transforming the [course-group] experience
+	[course-prefix] [course-group] [course-life]
 	[course-prefix] [course-group2] [course-life] [course-suffix]
-	[course-prefix] [course-adj] [course-noun] [course-suffix]
-	[course-prefix] the [course-group1] [course-group2] [course-movement] [course-suffix]
+	[course-prefix] [course-adjnoun] [course-suffix]
+	[course-prefix] the [course-group] [course-movement] [course-suffix]
 	[course-adj] [course-life] : [course-ending]
-	[course-adj] [course-noun] in modern [course-medium]
-	[course-noun] [course-suffix] : [course-ending]
-	[course-prefix] [course-noun] and [course-noun] [course-suffix]
-	the [course-adj] dimension of [course-group1] [course-group2] [course-medium]
+	[course-adjnoun] in modern [course-medium]
+	[course-adjnoun] [course-suffix] : [course-ending]
+	[course-prefix] [course-adjnoun] [course-suffix]
+	the [course-adj] dimension of [course-group] [course-medium]
 	[course-prefix] [course-topic] in [course-group2] [course-medium] : [course-ending]
 	[course-topic] and [course-topic] [course-suffix]
 	[course-group2] [course-medium] interpretation: [course-ending]
 	[course-group2] [course-medium] as a [course-adj] genre
-	[course-prefix] [course-group1] [course-group2] [course-medium]
-	[course-life] of [course-group2] [course-noun] : [course-ending]
+	[course-prefix] [course-group] [course-medium]
+	[course-life] of [course-group2] [course-adjnoun] : [course-ending]
 	[course-prefix] [course-popculture] : [course-ending]
 	[course-popculture] [course-suffix] : [course-ending]
-	[course-prefix] [course-adj] [course-noun] and [theory]
+	[course-prefix] [course-adjnoun] and [theory]
 	[course-prefix] [course-action] : [course-ending]
 	[course-action] [course-suffix] : [course-ending]
 	[course-prefix] [course-nounprefix] [course-ancient] [course-medium] : [course-ending]
-	ethnicity [course-suffix] : the [course-group1] [course-group2] [condition]
-	masterpieces of [course-group1] [course-group2] [course-medium]
+	ethnicity [course-suffix] : the [course-group] [condition]
+	masterpieces of [course-group] [course-medium]
 	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] [course-suffix] : [course-ending]
 	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] in [course-group2] [course-medium] : [course-ending]
 	[course-prefix] [course-event] : [course-ending]
-	[course-event] as [course-explored] in [course-group1] [course-group2] [course-medium]
-	[university-subject] as [course-explored] in [course-group1] [course-group2] [course-medium]
+	[course-event] as [course-explored] in [course-group] [course-medium]
+	[university-subject] as [course-explored] in [course-group] [course-medium]
 	[course-impactof] : [course-ending]
 	[course-static]
 	[course-static]
@@ -77,13 +127,13 @@ pragma export-rule [college-course]
 
 [course-static] [course-env1] : [course-prefix] [course-env2]
 	[course-prefix] [course-env3] : policy [course-suffix]
-	the meaning of life as [course-explored] in [course-group1] [course-group2] [course-medium]
+	the meaning of life as [course-explored] in [course-group] [course-medium]
 	the [course-impact] of [course-group2] [thinker-type] on [course-contemporary] [university-subject] : [course-ending]
 	the [rise] of [course-group2] [thinker-type] in [course-contemporary] [university-subject] : [course-ending]
 	[course-ancient] [course-medium] as the [roots] of [course-contemporary] [university-subject]
 	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] as [course-explored] in [course-contemporary] [films] : [course-ending]
 	the history of [course-group2] [course-life] : [course-ending]
-	the [archetype] of the [quest] in [course-group1] [course-group2] [course-medium]
+	the [archetype] of the [quest] in [course-group] [course-medium]
 	[cross-cultural] [studies] [course-group2] [course-life]
 
 [course-event] the African diaspora
@@ -178,10 +228,10 @@ pragma export-rule [college-course]
 	Darwinism
 	activism
 	queer theory
-	[course-nounprefix] romanticism
-	[course-nounprefix] dadaism
-	[course-nounprefix] cubism
-	[course-nounprefix] realism
+	romanticism
+	dadaism
+	cubism
+	realism
 	paganism
 	homosexuality
 	sexuality
@@ -191,10 +241,20 @@ pragma export-rule [college-course]
 	intellectualism
 	multiculturalism
 
-[course-nounprefix] post-
-	pre-
-	early
+pragma prefix-with [course-noun] [course-nounprefix]
+
+[course-prefixednoun] [course-noun]
+	post- [course-noun]
+	pre- [course-noun]
+
+pragma despace-rule [course-prefixednoun]
+
+[course-nounprefix] early
+	middle
+	late
 	classical
+	historical
+	modern
 
 [course-adj] progressive
 	liberal
@@ -260,7 +320,7 @@ pragma export-rule [college-course]
 	critical issues facing the [course-contemporary] [course-person]
 	a process approach
 	[course-buzzword] , [course-buzzword] and [course-buzzword]
-	a [course-metaphor] of [course-noun] [course-suffix]
+	a [course-metaphor] of [course-adjnoun] [course-suffix]
 	a [course-metaphor] of [course-ancient] [course-suffix]
 	a [course-metaphor] [course-explored] in American [course-medium]
 	a [course-metaphor] [course-explored] in [course-contemporary] [course-medium]
@@ -295,6 +355,16 @@ pragma export-rule [college-course]
 
 [study] study
 	approach
+
+[course-group] [course-group1] [course-group2]
+	[course-group1] [course-group2]
+	[course-group1] [course-group2]
+	[course-group1] [course-group2]
+	[quote-political]
+
+[quote-political] " [org-political] "
+
+pragma despace-rule [quote-political]
 
 [course-group1] gay and lesbian
 	homosexual
@@ -504,11 +574,11 @@ pragma export-rule [college-course]
 	21st century
 	20th century
 
-[course-impactof] the [course-impact] of [course-ancient] [course-medium] on [course-group1] [course-group2] [course-medium] [course-suffix]
+[course-impactof] the [course-impact] of [course-ancient] [course-medium] on [course-group] [course-medium] [course-suffix]
 	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [university-subject]
-	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [course-adj] [course-noun]
-	the [course-impact] of [course-group1] [course-group2] [course-medium] on [course-contemporary] [course-adj] [course-noun]
-	the [course-impact] of [course-group1] [course-group2] [course-medium] on [university-subject]
+	the [course-impact] of [course-ancient] [course-medium] on [course-contemporary] [course-adjnoun]
+	the [course-impact] of [course-group] [course-medium] on [course-contemporary] [course-adjnoun]
+	the [course-impact] of [course-group] [course-medium] on [university-subject]
 
 [course-impact] impact
 	effect
@@ -536,6 +606,7 @@ pragma export-rule [university]
 
 [university-subject] [hard-science]
 	[soft-science]
+	[college-major-tech]
 
 [hard-science] quantum mechanics
 	planar geometry

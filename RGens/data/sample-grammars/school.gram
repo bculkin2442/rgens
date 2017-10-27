@@ -1,7 +1,6 @@
 [public-school-fullname] [public-school] [school-type]
 
 pragma initial-rule [public-school-fullname]
-pragma export-rule [public-school]
 
 [school-type] high school
 	middle school

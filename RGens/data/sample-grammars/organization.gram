@@ -1,19 +1,39 @@
+[organization-desc] [org-political]
+
+[org-postfix] (allies of [org-political] )
+	(enemies of [org-political] )
+	(secretly opposed to [org-political] )
+	(secretly in cohorts with [org-political] )
+	(based in [city] )
+	(based in [town-name] )
+
+pragma suffix-with [organization-desc] [org-postfix]
+pragma suffix-with [organization-desc] [org-postfix]
+pragma suffix-with [organization-desc] [org-postfix]
+
 [organization] [org-political]
 
 pragma initial-rule [organization]
 pragma export-rule [org-political]
 
-[org-political] [org-prefix] [org-body] [org-goal]
+[org-political] [org-prefix] [org-body]
 
-[org-body] of [org-members] [org-position]
-	of [org-members] [org-position]
-	of [org-members] [org-position]
-	of [org-members] [org-position]
-	of [org-members] [org-position]
-	of [org-members] [org-position]
-	of [org-members] [org-position]
-	of [org-members] [org-position]
-	for
+pragma suffix-with [org-political] [org-goalbody]
+
+[org-body] of [org-members]
+
+[org-goalbody] [org-position] [org-goal]
+	for [org-goal]
+
+pragma suffix-with [org-goalbody] [org-wayof]
+
+[org-wayof] by way of [org-goal]
+	by [org-positioning] [org-goal]
+
+[org-positioning] supporting
+	abolishing
+	repealing
+	eliminating
 
 [org-position] for
 	for
@@ -66,10 +86,23 @@ pragma export-rule [org-political]
 	using [bad-thing] in public
 	wealth redistribution
 	wearing baseball caps backwards
-	[org-goal-abolish] miranda rights
-	[org-goal-abolish] speed limits
-	[org-goal-abolish] the [protect]
-	[org-goal-abolish] women's suffrage
+	miranda rights
+	speed limits
+	the [protect]
+	women's suffrage
+	[trademark+drug]
+	[organization]
+	offering [quote-course] in college
+	making [quote-course] a mandatory course
+	teaching [quote-course] in high school
+
+[org-goal-person] supporting [full-name-and-title]
+	opposing [full-name-and-title]
+	exiling [full-name-and-title]
+	indicting [full-name-and-title]
+	pardoning [full-name-and-title]
+
+pragma prefix-with [org-goal] [org-goal-abolish]
 
 [wealth] poor
 	working poor
@@ -105,7 +138,7 @@ pragma export-rule [org-political]
 	eliminating
 
 [org-prefix] council
-	[intl-name] association
+	association
 	organization
 	united organization
 	union
@@ -120,8 +153,22 @@ pragma export-rule [org-political]
 [intl-name] american
 	national
 	international
+	[intl-possesive]
+	[us-stateadj]
 
-[org-members] [org-members-prefix] [org-members-body]
+[intl-possesive] [full-name-and-title] 's
+
+pragma despace-rule [intl-possesive]
+
+pragma prefix-with [org-prefix] [org-members-prefix]
+pragma prefix-with [org-prefix] [intl-name]
+pragma prefix-with [org-prefix] [org-members-prefix]
+
+[org-members] [org-members-body]
+
+pragma prefix-with [org-members] [org-members-prefix]
+pragma prefix-with [org-members] [intl-name]
+pragma prefix-with [org-members] [org-members-prefix]
 
 [org-members-prefix] radical
 	concerned

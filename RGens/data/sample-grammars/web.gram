@@ -1,3 +1,6 @@
+[generic-email] [email]
+	[fake-email]
+
 [email] [actual+email]
 
 [fake-email] [actual+fake-email]
@@ -6,52 +9,87 @@
 
 [url] [actual+url]
 
-pragma initial-rule [email]
+pragma initial-rule [generic-email]
 
+pragma export-rule [email]
 pragma export-rule [fake-email]
 pragma export-rule [username]
 pragma export-rule [domain-name]
 pragma export-rule [url]
 pragma export-rule [big-tld]
 
-[actual+email] [username] @ [subdomain-name] . [domain]
-	[username] @mail. [domain]
-	[username] @ [domain]
-	[username] @ [domain]
-	[acronym] @ [domain]
-	[email-alias] @ [domain]
-	[email-alias] @ [subdomain-name] . [domain]
-	[username] @ [subdomain-name] . [town-name] .net
-	[first-name] @ [last-name] .com
-	[first-name] @ [first-last] . [big-tld]
+[actual+email] [email-initial] @ [email-trailing]
 
-[first-last] [first-name]
-	[first-name] - [last-name]
+[email-initial] [username]
+	[acronym]
+	[email-alias]
+	[full-name]
+	[username]
+	[acronym]
+	[email-alias]
+	[full-name]
+	[subdomain-name]
+	[email-misc]
+	[email-initial] + [email-initial]
 
-[actual+fake-email] [username] @ [subdomain-name] . [fake-domain]
-	[username] @mail. [fake-domain]
-	[acronym] @ [fake-domain]
-	[email-alias] @ [fake-domain]
-	[email-alias] @ [subdomain-name] . [fake-domain]
+[email-trailing] [subdomain-name] . [domain]
+	mail. [domain]
+	[domain]
+	[subdomain-name] - [town-name] . [tld]
+	[last-name] . [tld]
+	[first-name] . [tld]
+	[last-name] - [first-name] . [tld]
+	[first-name] - [last-name] . [tld]
 
-[email-alias] webmaster
-	abuse
-	hostmaster
-	postman
-	webjockey
+[actual+fake-email] [email-initial] @ [fake-trailing]
+
+[fake-trailing] [subdomain-name] . [fake-domain]
+	[fake-domain]
+
+[email-alias] abuse
+	admin
+	administrator
+	billing
+	blog
+	ceo
+	cfo
+	contact
+	coo
+	cto
+	customer
+	customerservice
+	dnsadmin
+	dnsmaster
 	email
-	sales
-	support
-	marketingscum
+	ftp
+	help
+	helpdesk
+	hostmaster
+	info
+	ipadmin
 	mail
+	mailer-daemon
+	marketing
+	marketingscum
+	news
+	nobody
+	noc
+	no-reply
+	postman
+	postmaster
 	root
+	sales
+	security
+	ssladmin
+	support
+	usenet
+	webjockey
+	webmaster
+	www
 
-[actual+username] [random-name]
-	[middle-initial] [random-name]
-	[middle-initial] [last-name]
+[actual+username] [full-name]
 	[first-name] . [last-name]
-	[first-name]
-	[random-name] [1..999]
+	[full-name] [1..999]
 
 [actual+url] http://www. [domain] /
 	http://www. [domain] /
@@ -59,15 +97,27 @@ pragma export-rule [big-tld]
 	http://www. [last-name] . [tld] /
 	http:// [username] . [domain] / 
 	[url-with-path]
+	[url-with-path]
 
-[url-with-path] http://www.geocities.com/ [neighborhood] / [digit-nonzero] [digit] [digit] [digit] /
-	http:// [url-begin] . [acronym] .net/ [url-username] /
-	http:// [url-begin] . [town-name] .net/ [url-username]
-	http:// [subdomain-name] . [acronym] .net/ [url-username]
-	http:// [subdomain-name] . [town-name] .net/ [url-username]
-	http:// [subdomain-name] . [last-name] . [big-tld] / [url-username]
-	http:// [username] . [acronym] .net/
-	http:// [username] . [url-state] [us-postalstate] .edu/
+[url-with-path] [url-protocol] :// www.geocities.com/ [neighborhood] / [digit-nonzero] [digit] [digit] [digit] /
+	[url-protocol] :// [url-begin] . [acronym] .net/ [url-username] /
+	[url-protocol] :// [url-begin] . [town-name] .net/ [url-username]
+	[url-protocol] :// [subdomain-name] . [acronym] .net/ [url-username]
+	[url-protocol] :// [subdomain-name] . [town-name] .net/ [url-username]
+	[url-protocol] :// [subdomain-name] . [last-name] . [big-tld] / [url-username]
+	[url-protocol] :// [username] . [acronym] .net/
+	[url-protocol] :// [username] . [url-state] [us-postalstate] .edu/
+	[freshmeat-url]
+
+[url-protocol] http
+	http
+	https
+	https
+	ftp
+	ssh
+	rsync
+	gopher
+	git
 
 [neighborhood] siliconvalley
 	heartland
@@ -150,12 +200,8 @@ pragma export-rule [big-tld]
 	net
 	org
 
-[subdomain-name] venus
-	mars
-	jupiter
-	pluto
-	saturn
-	neptune
+[subdomain-name] [planet]
+	[planet]
 	mail
 	www2
 	www [digit]
@@ -167,3 +213,15 @@ pragma export-rule [big-tld]
 	[first-name]
 	[last-name]
 	[acronym]
+	[email-misc]
+	[email-initial]
+	[subdomain-name] - [subdomain-name]
+
+[email-misc] 
+	[us-stateadj]
+	[town-name]
+	[complete-many-things]
+	[major-arcana]
+	[trademark+drug]
+	[trademark]
+	[city]

@@ -10,6 +10,10 @@
 	into the global namespace. Maybe use the @ symbol for 'foreign rule
 	references' (FRRs)
 
+	ADDENDA: 10/26/17
+	We now have the '^<rule>' syntax to avoid shadowing issues, but this
+	doesn't avoid the issue with duplicate exports.
+
 @TODO 10/23/17 Ben Culkin :Casing
 	Provide some way to convert rules into different cases.
 

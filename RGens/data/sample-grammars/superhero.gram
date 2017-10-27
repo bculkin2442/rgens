@@ -2,12 +2,40 @@
 
 pragma initial-rule [superhero-desc]
 
-pragma suffix-with [superhero-desc] [superhero-ally]
-pragma suffix-with [superhero-desc] [superhero-enemy]
+[superhero-postfix] [superhero-ally]
+	[superhero-enemy]
+
+pragma suffix-with [superhero-desc] [superhero-postfix]
+pragma suffix-with [superhero-desc] [superhero-postfix]
+pragma suffix-with [superhero-desc] [superhero-postfix]
+
+pragma suffix-with [superhero-desc] [superhero-secret]
+
+pragma suffix-with [superhero-desc] [superhero-org]
+pragma suffix-with [superhero-desc] [superhero-org]
 
 [superhero-ally] (ally of [superhero-name] )
+	(secret ally of [superhero-name] )
+	(lover of [superhero-name] )
 
 [superhero-enemy] (enemy of [superhero-name] )
+	(secret enemy of [superhero-name] )
+
+[superhero-misc] (betrayer of [superhero-name] )
+	(killer of [superhero-name] )
+	(defeater of [superhero-name] )
+	(mentor of [superhero-name] )
+	(subordinate of [superhero-name] )
+	( [generic-title] )
+
+[superhero-secret] (secret identity of [full-name-and-title] )
+
+[superhero-org] (member of the [organization] )
+	(double agent for the [organization] )
+	(sworn enemy of the [organization] )
+	(leader of the [organization] )
+	(second in command of the [organization] )
+	( [generic-title] of the [organization] )
 
 [superhero-name] [first-part] [second-part]
 	[second-part] [first-part]
@@ -111,6 +139,8 @@ pragma suffix-with [fifth-part] [fourth-part]
 	Avenger
 
 [third-part] ,The [third-part2]
+
+pragma suffix-with [third-part] [fifth-part]
 
 [third-part2] [third-part-act]
 	[third-part-act] [second-part]

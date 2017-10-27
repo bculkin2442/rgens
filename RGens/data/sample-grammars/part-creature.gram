@@ -1,9 +1,13 @@
-[full-creature] [creature-choice]
+[full-creature] a(n) [creature-choice]
+	a(n) [creature-choice] fused with a(n) [creature-choice]
+	chimera of a(n) [creature-choice] , a(n) [creature-choice] and a [creature-choice]
 
 [creature-choice] [creature]
-	[characteristic] [creature]
-	[ability] [creature]
-	[ability] [characteristic] [creature]
+
+pragma prefix-with [creature-choice] [characteristic]
+pragma prefix-with [creature-choice] [ability]
+pragma prefix-with [creature-choice] [characteristic]
+pragma prefix-with [creature-choice] [ability]
 
 pragma initial-rule [full-creature]
 
@@ -16,10 +20,11 @@ pragma initial-rule [full-creature]
 	swallow whole
 	poisonous
 	regenerating
-	fire breathing
+	fire-breathing
 	anti-magic
 	petrifying
 	soul-eating
+	[eating]
 	frightful presence
 	confusing
 	flesh grinding
@@ -29,6 +34,14 @@ pragma initial-rule [full-creature]
 	nauseating
 	[ability] and [ability]
 
+[eating] [characteristic] -eating
+	[creature] -eating
+
+pragma despace-rule [eating]
+
+# @TODO 10/26/17 Ben Culkin :CharacteristicAdditions
+# 	Add more templates and classes to the list
+
 [characteristic] zombie
 	vampire
 	swarm
@@ -36,19 +49,29 @@ pragma initial-rule [full-creature]
 	barbarian
 	wizard
 	ninja
-	were [characteristic]
+	[were]
 	robot
 	rabid
 	demonic
 	awakened
 	feral
 	pirate
-	half-dragon
+	[partial-breed]
 	gelatinous
 	dire
 	shadow
 	rich
 	[characteristic] and [characteristic]
+
+[were] were- [characteristic]
+	were- [creature]
+
+pragma despace-rule [were]
+
+[partial-breed] half- [creature]
+	quarter- [creature]
+
+pragma despace-rule [partial-breed]
 
 [creature] shark
 	bear
@@ -63,15 +86,33 @@ pragma initial-rule [full-creature]
 	crocodile
 	bee
 	spider
+	dragon
 	[elemental]
-	mimic
+	[dungeon-mimic]
 	dire penguin
 	giant mini space hamster
 	camel
 	little girl
 	classy kobold
+	disenchanter
+	[^creature]
+	[humanoid]
+	[creature-epic]
 
-[elemental] fire
+[dungeon-mimic] trapper
+	mimic
+	lurker
+	cloaker
+
+[elemental] [elemental-type] elemental
+
+[elemental-type] fire
 	earth
 	water
 	air
+	[paraquasi-elemental]
+
+[paraquasi-elemental] [elemental-type]
+
+# @TODO 10/26/17 Ben Culkin :ParaQuasiElementals
+# 	Add para/quasi elementals

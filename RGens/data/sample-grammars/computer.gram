@@ -33,9 +33,12 @@
 	[esoteric-language]
 
 [esoteric-language] magenta
+	brainfuck
+	whitespace
+	befunge
+	malbolge
 
 pragma export-rule [computer-language]
-pragma export-rule [esoteric-language]
 pragma export-rule [computer-skill]
 
 [computer-skill] html

@@ -1,4 +1,16 @@
-[career-tech] paper pusher
+[career-tech] [act-career-tech]
+	[act-career-tech]
+	[career-prefix] [act-career-tech]
+	[career-prefix] [act-career-tech]
+	[career-tech2]
+	[career-tech2]
+
+[career-tech2] [career-prefix] [act-career-tech] (to the [career-tech] )
+	[career-prefix] [act-career-tech] (to the [career-tech] )
+	[career-prefix] [act-career-tech] (to the [career-tech] , [full-name-and-title] )
+	[career-prefix] [act-career-tech] (to [full-name-and-title] )
+
+[act-career-tech] paper pusher
 	computer programmer
 	sheet spreader
 	data entry [career-suffix]
@@ -20,11 +32,8 @@
 	internet [career-suffix]
 	network administrator
 	software design [career-suffix]
-	to the [career-tech]
 
 pragma initial-rule [career-tech]
-
-pragma prefix-with [career-tech] [career-prefix]
 
 [career-prefix] executive
 	assistant
