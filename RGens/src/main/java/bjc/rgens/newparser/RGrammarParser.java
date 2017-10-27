@@ -151,7 +151,7 @@ public class RGrammarParser {
 			        "A block must start with a introducer, followed by a space, then the rest of the block");
 		}
 
-		String blockType = block.substring(0, typeSep);
+		String blockType = block.substring(0, typeSep).trim();
 
 		if (blockType.equalsIgnoreCase("pragma")) {
 			handlePragmaBlock(block, build, level);
