@@ -191,6 +191,7 @@ public class RGrammar {
 		 * do so.
 		 */
 		body = body.replaceAll(" ([,:().'\"\\[\\]/]) ", "$1 ");
+		body = body.replaceAll("\\s+-\\s+", "-");
 
 		return body;
 	}
