@@ -342,7 +342,13 @@ public class RGrammar {
 			}
 		}
 
-		if (rules.containsKey(refersTo)) {
+		if(refersTo.startsWith("[^")) {
+			refersTo = "[" + refersTo.substring(2);
+
+			RGrammar dst = importRules.get(refersTo);
+
+			newState.contents.append(dst.generate(refersTo, state.rnd, state.vars));
+		} else if (rules.containsKey(refersTo)) {
 			RuleCase cse = rules.get(refersTo).getCase(state.rnd);
 
 			generateCase(cse, newState);
