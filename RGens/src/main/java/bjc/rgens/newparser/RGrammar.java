@@ -177,7 +177,22 @@ public class RGrammar {
 
 		generateCase(start, new GenerationState(contents, rnd, vars));
 
-		return contents.toString().replaceAll("\\s+", " ");
+		String body = contents.toString();
+
+		/*
+		 * Collapse duplicate spaces.
+		 */
+		body = body.replaceAll("\\s+", " ");
+
+		/*
+		 * Remove extraneous spaces around punctutation marks.
+		 *
+		 * This can be done in the grammars, but it is very tedious to
+		 * do so.
+		 */
+		body = body.replaceAll(" ([,:().'\"\\[\\]/]) ", "$1 ");
+
+		return body;
 	}
 
 	/* Generate a rule case. */
