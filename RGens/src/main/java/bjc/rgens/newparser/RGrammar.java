@@ -190,8 +190,9 @@ public class RGrammar {
 		 * This can be done in the grammars, but it is very tedious to
 		 * do so.
 		 */
-		body = body.replaceAll(" ([,:().'\"\\[\\]/]) ", "$1 ");
-		body = body.replaceAll("\\s+-\\s+", "-");
+		body = body.replaceAll(" ([,:.]) ", "$1 ");
+		body = body.replaceAll(" (['\"]) ", " $1");
+		body = body.replaceAll("\\s+([-/()\\[\\]])\\s+", "$1");
 
 		return body;
 	}
