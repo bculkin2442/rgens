@@ -1,9 +1,62 @@
-[pokeattack] [word-1] [word-1]
+[pokeattack] [pokeattack-name]
+
+[attack-type] ( [poke-type] type)
+	( [poke-type] / [poke-type] type)
+
+[attack-pp] [5..40] type
+
+pragma suffix-with [pokeattack] [move-kind]
+pragma suffix-with [pokeattack] [attack-type]
+
+[pokeattack-name] [word-1] [word-1]
 	[word-2] [word-2]
 	[word-1] [word-2]
 	[word-2] [word-1]
+	[word-1] [seperator] [word-1]
+	[word-2] [seperator] [word-2]
+	[word-1] [seperator] [word-2]
+	[word-2] [seperator] [word-1]
+	[word-1] [seperator] [word-1]
+	[word-2] [seperator] [word-2]
+	[word-1] [seperator] [word-2]
+	[word-2] [seperator] [word-1]
+
+[seperator] -
+	/
+	and
+
+[move-kind] (special move)
+	(physical move)
+
+[poke-type] normal
+	fire
+	fighting
+	water
+	flying
+	grass
+	poison
+	electric
+	ground
+	psychic
+	rock
+	ice
+	bug
+	dragon
+	ghost
+	dark
+	steel
+	fairy
 
 pragma initial-rule [pokeattack]
+pragma export-rule [pokeattack-name]
+
+[word-11] [word-1]
+
+pragma suffix-with [word-11] [seperator]
+
+[word-21] [word-2]
+
+pragma prefix-with [word-21] [seperator]
 
 pragma prefix-with [pokeattack] [word-1]
 pragma suffix-with [pokeattack] [word-2]

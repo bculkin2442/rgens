@@ -1,39 +1,87 @@
+[career-tech-desc] [career-tech]
+
+[career-tech-descpref] (to the [career-techname] )
+	(boss of [career-techname] )
+	(subordinate of [career-techname] )
+	(co-worker of [career-techname] )
+	(office rival of [career-techname] )
+	(secretly [career-techname] )
+
+[career-techname] [career-tech]
+	[career-tech] , [full-name-and-title]
+	[full-name-and-title]
+
 [career-tech] [act-career-tech]
 	[act-career-tech]
-	[career-prefix] [act-career-tech]
-	[career-prefix] [act-career-tech]
-	[career-tech2]
-	[career-tech2]
+	[act-career-tech]
+	[act-career-tech]
+	[act-career-tech]
+	[act-career-tech]
+	[act-career-tech] and [act-career-tech]
+	[act-career-tech] , [act-career-tech] and [act-career-tech]
 
-[career-tech2] [career-prefix] [act-career-tech] (to the [career-tech] )
-	[career-prefix] [act-career-tech] (to the [career-tech] )
-	[career-prefix] [act-career-tech] (to the [career-tech] , [full-name-and-title] )
-	[career-prefix] [act-career-tech] (to [full-name-and-title] )
+pragma suffix-with [career-tech-desc] [career-tech-descpref]
+pragma suffix-with [career-tech-desc] [career-tech-descpref]
+pragma suffix-with [career-tech-desc] [career-tech-descpref]
+
+pragma initial-rule [career-tech-desc]
+pragma export-rule [career-tech]
+pragma export-rule [career-techname]
+
+[career-tech2] [act-career-tech] (to the [career-tech] )
+	[act-career-tech] (to the [career-tech] )
+	[act-career-tech] (to the [career-tech] , [full-name-and-title] )
+	[act-career-tech] (to [full-name-and-title] )
+
+pragma prefix-with [career-tech] [career-prefsuf]
+pragma prefix-with [career-tech-desc] [career-prefsuf]
 
 [act-career-tech] paper pusher
-	computer programmer
+	computer [software-career-type]
 	sheet spreader
 	data entry [career-suffix]
-	webpage designer
+	webpage [software-career-type]
 	button pusher
-	bug terminator
-	help desk [career-suffix]
-	software reinstaller
-	software engineering [career-suffix]
-	system administrator
+	bug [bug-term]
+	problem [bug-term]
+	help desk
+	software [software-career-type]
+	system [software-career-type]
 	bastard operator from hell
 	webmaster
 	dead chicken waver
-	information technology [career-suffix]
+	information technology
 	four-color glossy publisher
-	corporate spy [career-suffix]
+	corporate spy
 	trade show booth bunny
-	evil human resources [career-suffix]
-	internet [career-suffix]
-	network administrator
-	software design [career-suffix]
+	evil human resources
+	internet
+	network [software-career-type]
 
-pragma initial-rule [career-tech]
+[bug-term] terminator
+	exterminator
+	hunter
+	killer
+	eradicator
+	incinerator
+
+[software-career-type] reinstaller
+	engineering
+	engineer
+	design
+	designer
+	administrator
+	programmer
+	programming
+	publisher
+	publishing
+
+[career-prefsuf] [career-suffix]
+	[career-prefix] [career-suffix]
+
+[career-sufsuf] , [career-prefsuf]
+
+pragma suffix-with [act-career-tech] [career-sufsuf]
 
 [career-prefix] executive
 	assistant
@@ -44,21 +92,24 @@ pragma initial-rule [career-tech]
 	part-time
 	interim
 	substitute
+	department
+	head
+	section
 
 [career-suffix] manager
-	assistant manager
 	supervisor
 	flunkie
 	intern
-	department manager
 	secretary
 	boss
-	department janitor
+	janitor
 	foreman
 	director
+	chief
 	section chief
 	superintendent
-	department chairman
+	chairman
 	overseer
-	department head honcho
+	honcho
 	administrator
+	[generic-title]
