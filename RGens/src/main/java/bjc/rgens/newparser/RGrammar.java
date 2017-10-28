@@ -192,7 +192,7 @@ public class RGrammar {
 		 */
 		body = body.replaceAll(" ([,:.)\\]]) ", "$1 ");
 		body = body.replaceAll(" (['\"(\\[]) ", " $1");
-		body = body.replaceAll(" ([-/]) ", "$1");
+		body = body.replaceAll("\\s?([-/])\\s?", "$1");
 
 		return body;
 	}

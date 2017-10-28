@@ -10,6 +10,7 @@ pragma prefix-with [creature-choice] [characteristic]
 pragma prefix-with [creature-choice] [ability]
 
 pragma initial-rule [full-creature]
+pragma export-rule [creature-choice]
 
 [ability] flying
 	invisible
@@ -20,10 +21,10 @@ pragma initial-rule [full-creature]
 	swallow whole
 	poisonous
 	regenerating
-	fire-breathing
+	[elemental-type] -breathing
 	anti-magic
 	petrifying
-	soul-eating
+	[elemental-type] -eating
 	[eating]
 	frightful presence
 	confusing
@@ -88,6 +89,8 @@ pragma despace-rule [partial-breed]
 	spider
 	dragon
 	[elemental]
+	[elemental-type]
+	living [elemental-type]
 	[dungeon-mimic]
 	dire penguin
 	giant mini space hamster
@@ -104,15 +107,192 @@ pragma despace-rule [partial-breed]
 	lurker
 	cloaker
 
-[elemental] [elemental-type] elemental
+[other-elementalcreatures] archonmental
+	grue
+	weird
+	elementite swarm
+	genasi
+	half-elemental
+	elemental [creature]
+	[creature]
+	unraveler
+	necromental
+	archon
+	phantom
+	facet
+	wyrm
+	fiend
+	spirit
+	crystalle
+	spawn
+	minion
+	horror
+	horde
+	reactionals
+	elemental dragon
+	elemental knight
+
+[elemental] elemental
+	elemental
+	elemental
+	[other-elementalcreatures]
+	[rs-elementype]
+
+[great-less] lesser
+	greater
+	advanced
+
+[sgreat-less] , [great-less]
+
+pragma prefix-with [elemental] [elemental-type]
+pragma prefix-with [elemental] [elemental-age]
+pragma prefix-with [elemental] [great-less]
+pragma suffix-with [elemental] [sgreat-less]
+
+[rs-elementype] essling
+	esshound
+	esswraith
+
+[elemental-age] small
+	medium
+	large
+	huge
+	titanic
+	elder
+	monolithic
+	great
+	primal
 
 [elemental-type] fire
 	earth
 	water
 	air
+	[runescape-elemental]
+	[runescape-elemental]
+	[paraquasi-elemental]
+	[paraquasi-elemental]
+	[other-elemental]
+	[elemental-type] / [elemental-type]
+	[elemental-adv] [elemental-type]
+
+[elemental-adv] shadowy
+	clockwork
+	spacious
+	ethereal
+	blessed
+	cursed
+	ruined
+	stormy
+	tainted
+	chaotic
+	natural
+	deathly
+	astral
+	cosmic
+	bloody
+	soul-
+	icy
+	oozing
+	smoking
+	ashy
+	dusty
+	salty
+	steaming
+	forceful
+	radiant
+	empty
+	crystallized
+	frosted
+	silty
+	volcanic
+	sparking
+	fuming
+	blazing
+	grave
+	primal
+	rainy
+	sunny
+	angelic
+	demonic
+	devilish
+	sandy
+	dreaming
+	demonically-fused
+	wooden
+	sonic
+	decaying
+	growing
+	diseased
+	metallic
+	null
+	divine
+	oily
+
+[other-elemental] shadow
+	time
+	space
+	ether
+	light
+	storm
+	taint
+	ruin
+	darkness
+	grave
+	mist
+	pyre
+	rain
+	sun
+	sand
+	dream
+	wood
+	sonic
+	titanium
+	decay
+	growth
+	disease
+	crystal
+	metal
+	null
+	oil
+
+[runescape-elemental] mind
+	body
+	cosmic
+	chaos
+	nature
+	law
+	death
+	astral
+	blood
+	soul
+
+[paraquasi-elemental] [para-elemental]
+	[para-elemental]
+	[quasi-elemental]
+	[quasi-elemental]
+	[quasi-elemental]
+	[quasi-elemental]
 	[paraquasi-elemental]
 
-[paraquasi-elemental] [elemental-type]
+[para-elemental] ice
+	magma
+	ooze
+	smoke
 
-# @TODO 10/26/17 Ben Culkin :ParaQuasiElementals
-# 	Add para/quasi elementals
+[quasi-elemental] ash
+	dust
+	salt
+	vacuum
+	mineral
+	radiance
+	steam
+	force
+
+[paraquasi-elemental] crystal
+	frost
+	clay
+	silt
+	obsidian
+	pumice
+	spark
+	fumes

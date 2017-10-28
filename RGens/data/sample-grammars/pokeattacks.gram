@@ -3,10 +3,11 @@
 [attack-type] ( [poke-type] type)
 	( [poke-type] / [poke-type] type)
 
-[attack-pp] [5..40] type
+[attack-pp] ( [5..40] pp )
 
 pragma suffix-with [pokeattack] [move-kind]
 pragma suffix-with [pokeattack] [attack-type]
+pragma suffix-with [pokeattack] [attack-pp]
 
 [pokeattack-name] [word-1] [word-1]
 	[word-2] [word-2]
@@ -58,8 +59,8 @@ pragma suffix-with [word-11] [seperator]
 
 pragma prefix-with [word-21] [seperator]
 
-pragma prefix-with [pokeattack] [word-1]
-pragma suffix-with [pokeattack] [word-2]
+pragma prefix-with [pokeattack-name] [word-1]
+pragma suffix-with [pokeattack-name] [word-2]
 
 [word-1] acid
 	aerial
