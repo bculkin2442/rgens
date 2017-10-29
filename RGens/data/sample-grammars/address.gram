@@ -1,41 +1,56 @@
-[us-postal-address] [full-name] , [street-address] , [city] , [us-postalstate] [zipcode]
-	[full-name-and-title] , [street-address] , [city] , [us-postalstate] [zipcode]
-	[person] , [street-address] , [city] , [us-postalstate] [zipcode]
-	[full-name] , [company] , [street-address] , [city] , [us-postalstate] [zipcode]
-	[company] , [street-address] , [city] , [us-postalstate] , [zipcode]
-	[company] , p.o box [medium-number] , [city] , [us-postalstate] [zipcode]
+[us-postal-address] [us-postal-address1]
+	[us-postal-address1]
+	[us-postal-address1]
+	[us-postal-address1]
+	[company]
+
+pragma initial-rule [us-postal-address]
+
+[com-street-address] , [street-address]
+
+[city-post-zip] , [city] , [us-postalstate] [zipcode]
+
+pragma suffix-with [us-postal-address] [com-street-address]
+pragma suffix-with [us-postal-address] [city-post-zip]
+
+[us-postal-address1] [full-name]
+	[full-name-and-title]
+	[person]
+
+[com-company] , [company]
+
+pragma suffix-with [us-postal-address1] [com-company]
 
 [street-address] [medium-number] [street]
 	p.o. box [medium-number]
 	[medium-number] [street] , apartment [small-number] [letter]
 	route [digit] box [medium-number]
-	[small-number] street
+	[small-number] [street]
 
-[street] [street-prefix] [tree] [street-suffix]
-	[tree] [street-suffix]
-	[color] [tree] [street-suffix]
-	[street-prefix] [last-name] [street-suffix]
-	[street-prefix] [first-name] [street-suffix]
-	[last-name] [street-suffix]
+[street] [tree]
+	[color] [tree]
+ 	[last-name]
+ 	[first-name]
 	route [small-number]
-	[street-prefix] route [small-number]
+ 	route [small-number]
 	county road [small-number]
-	[street-prefix] [ordinal] street]
+ 	[ordinal] street
 	[ordinal] ave.
 	[ordinal-number] st.
 	[ordinal-number] ave.
 	[letter] st.
-	[city] [street-suffix]
-	[us-state] [street-suffix]
-	[street-prefix] [us-state] [street-suffix]
-	[canada-province] [street-suffix]
-	[nation] [street-suffix]
-	[full-name] [street-suffix]
-	[street-prefix] [street-generic-standalone]
-	[street-prefix] [street-generic] [street-suffix]
-	[street-generic] [street-suffix]
-	[us-president] [street-suffix]
-	[us-president-common] [street-suffix]
+	[city]
+	[us-state]
+	[canada-province]
+	[nation]
+	[full-name]
+ 	[street-generic-standalone]
+	[street-generic]
+	[us-president]
+	[us-president-common]
+
+pragma prefix-with [street] [street-prefix]
+pragma suffix-with [street] [street-suffix]
 
 [street-prefix] n.
 	s.
@@ -61,8 +76,6 @@
 	pkwy.
 	pike
 	bypass
-
-pragma initial-rule [us-postal-address]
 
 [street-generic] main
 	main

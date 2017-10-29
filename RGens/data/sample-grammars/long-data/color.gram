@@ -1,12 +1,16 @@
-[color] → red
-	orange
-	yellow
-	green
-	blue
+[color] orange
 	purple
-	white
-	black
 	brown
 	grey
+	[natural-color]
 
-pragma initial-rule [color]
+pragma export-rule [color]
+
+[natural-color] → red
+	black
+	blue
+	green
+	white
+	yellow
+
+pragma export-rule [natural-color]

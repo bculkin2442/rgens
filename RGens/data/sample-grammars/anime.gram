@@ -1,17 +1,16 @@
-[anime-name] [two-name]
-	[three-name]
+[anime-name] [first-name]
+	[second-name]
+	[third-name]
 
 pragma initial-rule [anime-name]
 
-[two-name] [first-name] [third-name]
-	[second-name] [third-name]
-
-[three-name] [first-name] [first-name]
-	[first-name] [second-name]
-	[second-name] [first-name]
-	[second-name] [second-name]
-
+pragma suffix-with [anime-name] [first-name]
+pragma suffix-with [anime-name] [second-name]
 pragma suffix-with [anime-name] [third-name]
+
+pragma prefix-with [anime-name] [third-name]
+pragma prefix-with [anime-name] [second-name]
+pragma prefix-with [anime-name] [first-name]
 
 [first-name] Vampire
 	Cat
@@ -51,6 +50,7 @@ pragma suffix-with [anime-name] [third-name]
 	Goddess
 	Sushi
 	Star
+	[planet]
 	Moon
 	Zombie
 	Banana

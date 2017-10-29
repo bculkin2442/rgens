@@ -1,4 +1,39 @@
-[color] [standard]
+[color-phrases] [color-phrase]
+	[color-phrase] blended with [color-phrase]
+	a blend between [color-phrase] , [color-phrase] and [color-phrase]
+	between [color-phrase] and [color-phrase]
+	between [color-phrase] , [color-phrase] and [color-phrase]
+
+pragma initial-rule [color-phrases]
+
+[color-phrase] [complete-color]
+	[sw-complete-color]
+	[sw-complete-color] [complete-color]
+	[sw-complete-color] - [complete-color]
+	[sw-complete-color] [sw-complete-color]
+	[sw-complete-color] - [sw-complete-color]
+
+pragma export-rule [color-phrase]
+
+[sw-color-phrase] [sw-complete-color]
+	[sw-complete-color] [sw-complete-color]
+	[sw-complete-color] - [sw-complete-color]
+
+pragma export-rule [sw-color-phrase]
+
+[complete-color] {wtype=mw} [act-complete-color]
+
+pragma export-rule [complete-color]
+
+[sw-complete-color] [act-sw-complete-color]
+	[act-sw-complete-color] ish
+
+pragma despace-rule [sw-complete-color]
+pragma export-rule [sw-complete-color]
+
+[act-sw-complete-color] {wtype=sw} [act-complete-color]
+
+[act-complete-color] [standard]
 	[red-purple]
 	[yellow-orange]
 	[green-blue]
@@ -6,12 +41,11 @@
 	[jewel]
 	[metallic]
 	[heraldic]
-	[archaic-purple]
+
+[other-color] [archaic-purple]
 	[archaic-green]
 	[archaic-brown]
 	[anachronistic]
-
-pragma initial-rule [color]
 
 [standard] red
 	orange
@@ -32,17 +66,29 @@ pragma initial-rule [color]
 	ivory
 	white
 	blue-gray
-	gray
+	[gray]
 	black
 	ebony
 	copper
 	gold
 	silver
-	[iridescent]
+	[$wtype-standard]
+	[$wtype-standard]
+	[$wtype-standard]
+	[$wtype-standard]
+	transparent
+
+[gray] gray
+	grey
+
+[sw-standard] iridescent
+	opalescent
+	rainbow
+
+[mw-standard] [iridescent]
 	[opalescent]
 	[ombre]
 	[rainbow]
-	transparent
 
 [iridescent] iridescent [color]
 	iridescent between [color] and [color]
@@ -52,11 +98,20 @@ pragma initial-rule [color]
 [ombre] [color] (tinted [color] )
 
 [rainbow] rainbow of red, orange, yellow, green, blue, indigo and violet
-	rainbow of [color] , [color] and [color]
-	rainbow of [color] , [color] , [color] and [color]
-	rainbow of [color] , [color] , [color] , [color] and [color]
-	rainbow of [color] , [color] , [color] , [color] , [color] and [color]
-	rainbow of [color] , [color] , [color] , [color] , [color] , [color] and [color]
+	[custom-rainbow]
+
+[custom-rainbow] rainbow of [color]
+
+pragma suffix-with [custom-rainbow] [com-color]
+pragma suffix-with [custom-rainbow] [com-color]
+pragma suffix-with [custom-rainbow] [com-color]
+pragma suffix-with [custom-rainbow] [com-color]
+pragma suffix-with [custom-rainbow] [com-color]
+pragma suffix-with [custom-rainbow] [and-color]
+
+[com-color] , [color]
+
+[and-color] and [color]
 
 [red-purple] auburn
 	blood
@@ -203,7 +258,7 @@ pragma initial-rule [color]
 	malachite
 	obsidian
 	onyx
-	[opalescent]
+	[$wtype-jewel]
 	pearlescent
 	peridot
 	ruby
@@ -212,6 +267,10 @@ pragma initial-rule [color]
 	topaz
 	tourmaline
 	turquoise
+
+[sw-jewel] opalescent
+
+[mw-jewel] [opalescent]
 
 [metallic] brass
 	bronze
@@ -245,7 +304,40 @@ pragma initial-rule [color]
 	vert
 	white
 
-[archaic-purple] arcipluvian [arcipluvian]
+[archaic-purple] [$wtype-archaic-purple]
+
+[sw-archaic-purple] arcipluvian
+	ianthine
+	rhodopsin
+	solferino
+	coccineous
+	cramoisy
+	erythraen
+	lateritious
+	miniaceous
+	piceous
+	puccoon
+	stammel
+	vinious
+	nacarat
+	coquelicot
+	croceate
+	ibis
+	minium
+	vermeil
+	citreous
+	flavescent
+	icterine
+	jessamy
+	jonquil
+	luteous
+	meline
+	ochroleucous
+	orpiment
+	sulphureous
+	urobilin
+
+[mw-archaic-purple] arcipluvian [arcipluvian]
 	ianthine (violet)
 	rhodopsin (purple)
 	solferino (purple)
@@ -281,7 +373,40 @@ pragma initial-rule [color]
 	(varies between [color] , [color] , [color] and [color] )
 	(varies between [color] , [color] and [color] )
 
-[archaic-green] bilious (yellow-green)
+[archaic-green] [$wtype-archaic-green]
+
+[sw-archaic-green] bilious
+	chrysochlorous
+	tilleul
+	celadon
+	chlorochorous
+	corbeau
+	porraceous
+	virescent
+	viridian
+	zinnober
+	bice
+	caesious
+	glaucous
+	lovat
+	azuline
+	mazarine
+	pavonated
+	smalt
+	watchet
+	woad
+	atrous
+	eburnean
+	griseous
+	nacreous
+	smaragdine
+	aeneous
+	ferruginous
+	hoary
+	plumbeous
+	rubiginous
+
+[mw-archaic-green] bilious (yellow-green)
 	chrysochlorous (green-gold)
 	tilleul (yellow-green)
 	celadon (pale green)
@@ -312,7 +437,40 @@ pragma initial-rule [color]
 	plumbeous (lead white)
 	rubiginous (rusty)
 
-[archaic-brown] badious (chestnut)
+[archaic-brown] [$wtype-archaic-brown]
+
+[sw-archaic-brown] badious (chestnut)
+	bole
+	burnet
+	castaneous
+	castory
+	filemot
+	fulvous
+	fuscous
+	infuscate
+	melichrous
+	nankeen
+	pyrrhous
+	rufous
+	sarcoline
+	spadiceous
+	stramineous
+	albicant
+	canescent
+	cretaceous
+	leucochroic
+	niveious
+	cinereous
+	columbine
+	fuliginous
+	greige
+	gridelin
+	isabelline
+	liard
+	welmish
+	morel
+
+[mw-archaic-brown] badious (chestnut)
 	bole (reddish-brown)
 	burnet (dark brown)
 	castaneous (chestnut)
@@ -343,7 +501,38 @@ pragma initial-rule [color]
 	welmish (pale, sickly)
 	morel (black)
 
-[anachronistic] cyan
+[anachronistic] [$wtype-anachronistic]
+
+[sw-anachronistic] cyan
+	fuchsia
+	hot pink
+	magenta
+	mauve
+	safety orange
+	dolm
+	fuligin
+	garrow
+	vantablack
+	jale
+	octarine
+	pallow
+	rawn
+	smaudre
+	ulfire
+	infrared
+	ultraviolet
+	reflective
+	fluorescent [color]
+	hypercolor
+	iridescent
+	metameric
+	opalescent
+	phosphorescent [color]
+	rainbow
+	translucent [color]
+	transparent
+
+[mw-anachronistic] cyan
 	fuchsia
 	hot pink
 	magenta

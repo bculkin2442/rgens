@@ -1,78 +1,31 @@
 [city] [real-city]
-	[real-city]
 	[town-name]
-	[town-name]
-	[town-prefix] [town-name]
-	[town-prefix] [town-name+suffix]
-	[natural-color] [geographic-thing]
-	[natural-color+suffix]
-	[natural-color] [tree]
-	[town-prefix+suffix]
-	[town-prefix] [geographic-thing]
-	[tree+suffix]
-	[random-name]
-	[town-prefix] [random-name]
-	[random-name+suffix]
-	[last-name]
-	[last-name]
-	[town-prefix] [last-name]
-	[2+last-name]
-	St. [last-name]
-	[last-name+suffix]
-	[first-name] [geographic-thing]
-	[first-name+suffix]
+	[other-city]
 
 pragma initial-rule [city]
 
-[town-name+suffix] [town-name] [town-suffix]
+[other-city] [act-other-city]
+	[act-other-city] [town-suffix]
+	[town-suffix]
 
-[natural-color+suffix] [natural-color] [town-suffix]
+pragma prefix-with [other-city] [town-prefix]
+pragma despace-rule [other-city]
 
-[town-prefix+suffix] [town-prefix] [town-suffix]
+[act-other-city] [town-name]
+	[sw-color-phrase]
+	[sw-color-phrase] [geographic-thing]
+	[sw-color-phrase] [tree]
+	[tree]
+	[geographic-thing]
+	[gen-name]
+	[gen-name] - [gen-name]
+	[gen-name] [geographic-thing]
 
-[tree+suffix] [tree] [town-suffix]
+[gen-name] [last-name]
+	[first-name]
+	[random-name]
 
-[random-name+suffix] [random-name] [town-suffix]
-
-[2+last-name] [last-name] - [last-name]
-
-[last-name+suffix] [last-name] [town-suffix]
-
-[first-name+suffix] [first-name] [town-suffix]
-
-[geographic-thing] mountain
-	hill
-	lake
-	plains
-	river
-	valley
-	hollow
-	beach
-	bay
-	harbor
-	grove
-	bridge
-	station
-	glade
-	forest
-	gulch
-	swamp
-	bend
-	springs
-	creek
-	falls
-	ridge
-	pass
-	meadow
-
-[town-prefix] north
-	south
-	east
-	west
-	north
-	south
-	east
-	west
+[town-prefix] [cardinal]
 	new
 	new
 	old
@@ -91,5 +44,3 @@ pragma initial-rule [city]
 	field
 	boro
 	dale
-
-pragma export-rule [geographic-thing]

@@ -1,0 +1,26 @@
+[geographic-thing] mountain
+	hill
+	lake
+	plains
+	river
+	valley
+	hollow
+	beach
+	bay
+	harbor
+	grove
+	bridge
+	station
+	glade
+	forest
+	gulch
+	swamp
+	bend
+	springs
+	creek
+	falls
+	ridge
+	pass
+	meadow
+
+pragma initial-rule [geographic-thing]

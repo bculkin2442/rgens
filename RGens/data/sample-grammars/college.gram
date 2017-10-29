@@ -10,6 +10,8 @@
 	not one single student signed up for [plural-univ] [quote-course] last semester
 	a [poll] of students at [university] revealed [quote-course] is the [popular] popular [class-type] offered
 
+pragma initial-rule [college-announcement]
+
 [plural-univ] [university] 's
 
 pragma despace-rule [plural-univ]
@@ -30,8 +32,6 @@ pragma export-rule [quote-course]
 
 [add-sec] an additional section
 	[2..6] additional sections
-
-pragma initial-rule [college-announcement]
 
 [course-time] fall
 	spring
@@ -78,47 +78,50 @@ pragma prefix-with [course-adjnoun1] [course-adj]
 	[course-adjnoun1] or [course-adjnoun1]
 	[course-adjnoun1] , [course-adjnoun1] or [course-adjnoun1]
 
-[college-course] [course-adjnoun] [course-suffix]
+[college-course] [course-adjnoun]
 	[course-adjnoun] : [course-ending]
-	[course-adjnoun] [course-suffix]
-	[course-group] [course-life] [course-suffix]
-	[course-group2] [course-adjnoun] [course-life] [course-suffix]
+	[course-adjnoun]
+	[course-group] [course-life]
+	[course-group2] [course-adjnoun] [course-life]
 	[course-group] [course-life] since [1500..2010]
 	[course-group2] [course-life] : [course-ending]
 	contemporary [course-group2] [course-life] and [course-life]
 	contemporary [course-group2] [course-life] : [course-ending]
 	transforming the [course-group] experience
-	[course-prefix] [course-group] [course-life]
-	[course-prefix] [course-group2] [course-life] [course-suffix]
-	[course-prefix] [course-adjnoun] [course-suffix]
-	[course-prefix] the [course-group] [course-movement] [course-suffix]
+	[course-group] [course-life]
+	[course-group2] [course-life]
+	[course-adjnoun]
+	the [course-group] [course-movement]
 	[course-adj] [course-life] : [course-ending]
 	[course-adjnoun] in modern [course-medium]
 	[course-adjnoun] [course-suffix] : [course-ending]
-	[course-prefix] [course-adjnoun] [course-suffix]
+	[course-adjnoun]
 	the [course-adj] dimension of [course-group] [course-medium]
-	[course-prefix] [course-topic] in [course-group2] [course-medium] : [course-ending]
-	[course-topic] and [course-topic] [course-suffix]
+	[course-topic] in [course-group2] [course-medium] : [course-ending]
+	[course-topic] and [course-topic]
 	[course-group2] [course-medium] interpretation: [course-ending]
 	[course-group2] [course-medium] as a [course-adj] genre
-	[course-prefix] [course-group] [course-medium]
+	[course-group] [course-medium]
 	[course-life] of [course-group2] [course-adjnoun] : [course-ending]
-	[course-prefix] [course-popculture] : [course-ending]
+	[course-popculture] : [course-ending]
 	[course-popculture] [course-suffix] : [course-ending]
-	[course-prefix] [course-adjnoun] and [theory]
-	[course-prefix] [course-action] : [course-ending]
+	[course-adjnoun] and [theory]
+	[course-action] : [course-ending]
 	[course-action] [course-suffix] : [course-ending]
-	[course-prefix] [course-nounprefix] [course-ancient] [course-medium] : [course-ending]
+	[course-nounprefix] [course-ancient] [course-medium] : [course-ending]
 	ethnicity [course-suffix] : the [course-group] [condition]
 	masterpieces of [course-group] [course-medium]
 	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] [course-suffix] : [course-ending]
 	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] in [course-group2] [course-medium] : [course-ending]
-	[course-prefix] [course-event] : [course-ending]
+	[course-event] : [course-ending]
 	[course-event] as [course-explored] in [course-group] [course-medium]
 	[university-subject] as [course-explored] in [course-group] [course-medium]
 	[course-impactof] : [course-ending]
 	[course-static]
 	[course-static]
+
+pragma prefix-with [college-course] [course-prefix]
+pragma suffix-with [college-course] [course-suffix]
 
 pragma export-rule [college-course]
 
@@ -126,7 +129,7 @@ pragma export-rule [college-course]
 	experience
 
 [course-static] [course-env1] : [course-prefix] [course-env2]
-	[course-prefix] [course-env3] : policy [course-suffix]
+	[course-env3] : policy [course-suffix]
 	the meaning of life as [course-explored] in [course-group] [course-medium]
 	the [course-impact] of [course-group2] [thinker-type] on [course-contemporary] [university-subject] : [course-ending]
 	the [rise] of [course-group2] [thinker-type] in [course-contemporary] [university-subject] : [course-ending]

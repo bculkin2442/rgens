@@ -1,68 +1,78 @@
-[company] [last-name] [company-suffix]
-	[last-name] [company-name+suffix]
-	[plural+first] [company-name]
-	[last-name] , [last-name] and [last-name] [company-name+suffix]
-	[last-name] , [last-name] and [last-name] [company-suffix]
-	[2last+name] [company-name]
-	[2last+name] [company-suffix]
-	[2last+name] [company-name+suffix]
-	[last-name] & [last-name] [company-suffix]
-	[last-name] & [last-name] [company-name+suffix]
-	[first-name] [last-name] [company-name]
-	[first-name] [last-name] [company-suffix]
-	[first-name] [last-name] [company-name+suffix]
-	[acronym] [company-name+suffix]
+[company] [gen-name]
+	[gen-name] [company-name]
+	[plural-name] [company-name]
+	[gen-name] , [gen-name] and [gen-name] [company-name]
+	[gen-name] - [gen-name] [company-name]
+	[gen-name] - [gen-name]
+	[gen-name] & [gen-name]
+	[gen-name] & [gen-name] [company-name]
+	[gen-name] [gen-name]
+	[gen-name] [gen-name] [company-name]
 	[acronym] [company-name]
-	[company-root+acronym] [company-suffix]
-	[full-name] [company-name+suffix]
-	[company-root+name]
-	[2letter+letter] [company-name+suffix]
-	[letter+letter] [company-name]
-	[company-root+name] [company-suffix]
-	[city] [company-name+suffix]
-	[company-root+city]
-	[us-state] [company-name+suffix]
-	[buzzword-adjective] [buzzword-noun] [company-suffix]
+	[company-root-acronym]
+	[full-name] [company-name]
+	[company-root-name]
+	[letter+group] [company-name]
+	[city] [company-name]
+	[company-root-city]
+	[us-state] [company-name]
+	[buzzword-adjective] [buzzword-noun]
 	[media-company]
 	[newspaper]
 	[real-company]
 
+pragma suffix-with [company] [company-suffix]
 pragma export-rule [company]
 
-[company-root+acronym] [acronym] [company-root-suffix]
+[plural-name] [gen-name] 's
 
-[company-root+city] [city] [company-root-suffix]
+pragma despace-rule [plural-name]
 
-[company-root+name] [first-name] [company-root-suffix]
-	[last-name] [company-root-suffix]
+[gen-name] [last-name]
+	[first-name]
 
-[plural+first] [first-name] 's
+[company-root-acronym] [acronym] [company-root-suffix]
 
-[company-name+suffix] [company-name] [company-suffix]
+pragma despace-rule [company-root-acronym]
 
-[2last+name] [last-name] - [last-name]
+[company-root-city] [city] [company-root-suffix]
 
-[2letter+letter] [letter] [letter] & [letter]
+pragma despace-rule [company-root-city]
 
-[letter+letter] [letter] & [letter]
+[company-root-name] [gen-name] [company-root-suffix]
+
+pragma despace-rule [company-root-name]
+
+[letter+group] [letters]
+	[letters] & [letters]
+	[letters] & [letters] & [letters]
+
+[letters] [letter]
+	[letter]
+	[letter]
+	[letter] [letter]
+	[letter] [letter]
+	[letter] [letter] [letter]
+
+pragma despace-rule [letters]
 
 [company-suffix] [company-suffix1]
 	[company-suffix2]
 
-[company-suffix1] {{empty}} Inc.
-	{{empty}} Incorporated
-	{{empty}} Ltd.
-	{{empty}} Corp.
-	{{empty}} Corporation
-	{{empty}} Co.
-	{{empty}} Company
-	{{empty}} Cooperative
-	{{empty}} Amalgamated
+[company-suffix1] Inc.
+	Incorporated
+	Ltd.
+	Corp.
+	Corporation
+	Co.
+	Company
+	Cooperative
+	Amalgamated
 
-[company-suffix2] , {{empty}} Inc.
-	, {{empty}} Incorporated
-	, {{empty}} Ltd.
-	, {{empty}} LLC
+[company-suffix2] , Inc.
+	, Incorporated
+	, Ltd.
+	, LLC
 
 [company-name] associated
 	united

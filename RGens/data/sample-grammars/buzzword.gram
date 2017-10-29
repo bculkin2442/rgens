@@ -1,13 +1,25 @@
+[buzzword-phrase] [buzzwords]
+	[buzzwords] to [buzzwords]
+	[buzzwords] while [buzzwords]
+	[buzzwords] in order to [buzzwords]
+	[buzzwords] in the process of [buzzwords]
+
+pragma initial-rule [buzzword-phrase]
+
+[buzzwords] [buzzword]
+	[buzzword] [buzzword]
+	[buzzword] and [buzzword]
+	[buzzword] , [buzzword] and [buzzword]
+
+pragma export-rule [buzzwords]
+
 [buzzword] [buzzword-verb]
 	[buzzword-noun]
 	[buzzword-adjective]
 	[buzzword-job]
+	[buzzword-fused]
 
-pragma initial-rule [buzzword]
-pragma export-rule [buzzword-verb]
-pragma export-rule [buzzword-noun]
-pragma export-rule [buzzword-adjective]
-pragma export-rule [buzzword-job]
+pragma export-rule [buzzword]
 
 [buzzword-verb] aggregate
 	benchmark
@@ -65,6 +77,8 @@ pragma export-rule [buzzword-job]
 	unleash
 	utilize
 	visualize
+
+pragma export-rule [buzzword-verb]
 
 [buzzword-noun] action items
 	architectures
@@ -125,6 +139,8 @@ pragma export-rule [buzzword-job]
 	total quality management
 	version control
 	vision
+
+pragma export-rule [buzzword-noun]
 
 [buzzword-adjective] asp
 	b2b
@@ -198,6 +214,8 @@ pragma export-rule [buzzword-job]
 	wireless
 	world-class
 
+pragma export-rule [buzzword-adjective]
+
 [buzzword-job] customizer
 	dothead
 	enabler
@@ -213,6 +231,13 @@ pragma export-rule [buzzword-job]
 	strategist
 	synergizer
 	visionary
+
+pragma export-rule [buzzword-job]
+
+[buzzword-fused] [buzzword-stem] [buzzword-suffix]
+
+pragma despace-rule [buzzword-fused]
+pragma export-rule [buzzword-fused]
 
 [buzzword-stem] aggregat
 	benchmark
@@ -238,6 +263,8 @@ pragma export-rule [buzzword-job]
 	util
 	visual
 
+pragma export-rule [buzzword-stem]
+
 [buzzword-suffix] age
 	ivize
 	ivize
@@ -250,4 +277,3 @@ pragma export-rule [buzzword-job]
 [buzzword+consonant] i [consonant] ate
 
 pragma export-rule [buzzword-suffix]
-pragma export-rule [buzzword-stem]

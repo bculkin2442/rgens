@@ -1,20 +1,39 @@
-[art-treasure] [gemstones]
-	[gemstones]
-	[art-object]
-	[art-object]
-	[art-object] as well as a large [gemstones]
-	[gemstones] as well as a [art-object]
-	a small [gemstones]
-	a flawless piece of [gemstones]
-	[art-object] ; [art-object] as well as a [art-object]
-	a pile of [gemstones]
-	a pile of [gemstones]
-	a [art-object] atop a pile of [gemstones]
-	a [art-object] hidden under a [art-object]
-	a [gemstones] hidden under a pile of [gemstones]
-	a [art-object] hidden under a pile of [gemstones]
+[art-treasure-group] [art-treasure]
+	a choice between [art-treasure] and [art-treasure]
+	a choice between [art-treasure] , [art-treasure] and [art-treasure]
+	[art-treasure] as well as [art-treasure]
+	[art-treasure] ; [art-treasure] as well as [art-treasure]
+	[art-treasure] atop [art-treasure]
+	[art-treasure] hidden under [art-treasure]
+	[art-treasure] lying next to [art-treasure]
+	[art-treasure] hiding in [art-treasure]
+	[art-treasure] hidden among [art-treasure] and [art-treasure]
 
-pragma initial-rule [art-treasure]
+pragma initial-rule [art-treasure-group]
+
+[art-treasure] [gemstones]
+	[art-object]
+
+pragma export-rule [art-treasure]
+
+pragma prefix-with [art-treasure] [possesive-title]
+pragma prefix-with [art-treasure-group] a(n)
+
+[possesive-title] [full-name-and-title] 's
+
+[art-objects] [art-object]
+
+pragma export-rule [art-objects]
+pragma prefix-with [art-objects] [art-object-pref]
+
+[art-object-pref] counterfeit
+	ancient
+	legendary
+	lost
+	holy
+	blessed
+	cursed
+	demonic
 
 [art-object] [common-art]
 	[uncommon-art]
@@ -23,10 +42,45 @@ pragma initial-rule [art-treasure]
 	[epic-art]
 	[mythic-art]
 
-[gemstones] [common-gem]
+pragma export-rule [art-object]
+pragma prefix-with [art-object] [size]
+
+[gemstones] [gemstone]
+	pair of [gemstone]
+	[gemstone-sizedesc] pile of [gemstone]
+	[gemstone-sizedesc] hoard of [gemstone]
+
+pragma export-rule [gemstones]
+
+[gemstone] [common-gem]
 	[rare-gem]
 	[legendary-gem]
 	[epic-gem]
+
+pragma export-rule [gemstone]
+
+[gemstone-sizedesc] [size]
+	[gemstone-desc]
+	[size] [gemstone-desc]
+	[gemstone-desc] [size]
+
+pragma prefix-with [gemstone] [gemstone-sizedesc]
+
+[size] tiny
+	miniscule
+	small
+	medium
+	large
+	huge
+	titanic
+
+[gemstone-desc] flawless
+	flawed
+	cracked
+	faceted
+	cut
+	uncut
+	fake
 
 [common-gem] amber
 	amethyst

@@ -1,5 +1,9 @@
 [awesome-name] [part]
-	[part] [part]
+
+pragma prefix-with [awesome-name] [part]
+pragma prefix-with [awesome-name] [part]
+pragma suffix-with [awesome-name] [part]
+pragma suffix-with [awesome-name] [part]
 
 pragma initial-rule [awesome-name]
 
