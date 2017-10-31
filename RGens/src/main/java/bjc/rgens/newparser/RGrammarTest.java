@@ -45,7 +45,11 @@ public class RGrammarTest {
 						String res = grammar.generate(exportName);
 						if(exportName.contains("+")) res = res.replaceAll("\\s+", "");
 
-						System.out.printf("\tContents: %s\n", res);
+						if(res.length() > 120) {
+							System.out.printf("\t\n\tContents: %s\n\t\n", res);
+						} else {
+							System.out.printf("\tContents: %s\n", res);
+						}
 					} catch (GrammarException gex) {
 						/* Print out errors with generation. */
 						String fmt     = "Error in exported rule '%s' (loaded from '%s')\n";

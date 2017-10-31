@@ -19,7 +19,7 @@ public class RuleCase {
 	 * @author EVE
 	 */
 	public static enum CaseType {
-		/** A normal case, composed from a list of elementList. */
+		/** A normal case, composed from a list of elements. */
 		NORMAL,
 		/** A case that doesn't insert spaces. */
 		SPACEFLATTEN
