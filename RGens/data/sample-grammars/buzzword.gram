@@ -234,9 +234,10 @@ pragma export-rule [buzzword-adjective]
 
 pragma export-rule [buzzword-job]
 
-[buzzword-fused] [buzzword-stem] [buzzword-suffix]
+[buzzword-fused] [act+buzzword-fused]
 
-pragma despace-rule [buzzword-fused]
+[act+buzzword-fused] [buzzword-stem] [buzzword-suffix]
+
 pragma export-rule [buzzword-fused]
 
 [buzzword-stem] aggregat

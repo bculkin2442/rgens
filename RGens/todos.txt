@@ -32,3 +32,7 @@
 @TODO 10/23/17 Ben Culkin :Extensions
 	Add some soft of pragmas to allow the loading of extensions that provide
 	custom rules/case types/pragmas and things like that
+
+@TODO 10/30/17 Ben Culkin :RegexPragma
+	Add a pragma that applies a regex substitution to the generated version
+	of a rule.

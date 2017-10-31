@@ -1,9 +1,7 @@
-[fantasy-location-name] [name1] [name2]
-	[name1] [name2]
-	[name1] [name2]
-	[name1] [name2]
-	[name1] [name1] [name2]
-	[name1] [name1] [name2]
+[fantasy-location-name] [name2]
+
+pragma prefix-with [fantasy-location-name] [name1]
+pragma prefix-with [fantasy-location-name] [name1]
 
 pragma initial-rule [fantasy-location-name]
 
@@ -107,6 +105,7 @@ pragma initial-rule [fantasy-location-name]
 	wind
 	winter
 	xanthous
+	[complete-color]
 
 [name2] beach
 	bear

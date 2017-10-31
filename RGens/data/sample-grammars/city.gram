@@ -8,8 +8,8 @@ pragma initial-rule [city]
 	[act-other-city] [town-suffix]
 	[town-suffix]
 
-pragma prefix-with [other-city] [town-prefix]
 pragma despace-rule [other-city]
+pragma prefix-with [other-city] [town-prefix]
 
 [act-other-city] [town-name]
 	[sw-color-phrase]

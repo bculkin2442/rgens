@@ -1,5 +1,4 @@
-[bedroom] you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] lying on it.
-	you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] lying in it.
+[bedroom] you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] [bedroom-lying]
 
 pragma initial-rule [bedroom]
 
@@ -12,17 +11,162 @@ pragma initial-rule [bedroom]
 	damp cave
 	mountain glen
 	deserted clearing
+	desert island
+	abandoned crypt
+	[fantasy-location-name]
+	[fantasy-location-name]
+	[fantasy-location-name]
 
 [bedroom-bed] king bed with luxury sheets
 	messy pile of wet hay
 	flea-infested sleeping bag
+	luxurious sleeping bag
 	pentagram with candles
 	freshly unearthed coffin
 	tropical rope hammock
+	altar
 
-[bedroom-person] half-orc prostitute
-	pile of moldy bones
-	mountain lion
+pragma prefix-with [bedroom-bed] [unholy]
+pragma prefix-with [bedroom-bed] [bed-prefix]
+
+[bed-prefix] ruined
+	ancient
+	legendary
+
+[unholy] unholy
+	holy
+	blessed
+	dammed
+	cursed
+	demonic
+	hallowed
+	unhallowed
+	sacred
+
+[bedroom-person] pile of [bone-status] bones
 	jug of moonshine
-	kidnapped aristocrat
-	realistic sex doll
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+	[bed-aliveperson]
+
+[bedroom-lying] lying [onin] it
+	draped atop it
+	prostrated before it
+	[tied] to it
+	trapped in it
+
+[bed-aliveperson] [bed-arist]
+	[bed-doll]
+	[bed-prost]
+	[bed-slave]
+	[humanoid]
+	[creature]
+
+pragma prefix-with [bed-aliveperson] [bed-status]
+
+[bed-status] [bed-status1]
+	[bed-status2]
+	[bed-status1] [bed-status2]
+	[bed-status2] [bed-status1]
+
+[bed-status1] dead
+	decapitated
+	[status-alive]
+	[status-alive]
+	[status-alive]
+	[status-alive]
+
+[status-alive] unconcious
+	sleeping
+	normal
+
+[bed-status2] bleeding
+	badly wounded
+	uninjured
+	pale
+	burnt
+
+[tied] chained
+	tied
+	bound
+
+[onin] on
+	in
+
+[bed-bones] pile of [bone-status] [bones]
+	pile of [bone-status] [part-human] [bones]
+
+[bones] bones
+	flesh
+	viscera
+	skulls
+
+[bone-status] clean
+	old
+	fresh
+	moldy
+	dusty
+	bloody
+
+[bed-arist] kidnapped [aristocrat]
+	kidnapped [part-human] [aristocrat]
+	kidnapped [part-human]
+
+[aristocrat] aristocrat
+	prince
+	princess
+	king
+	queen
+	mercenary
+	merchant
+
+[bed-doll] sex doll
+	sex doll of a [part-human]
+
+pragma prefix-with [bed-doll] [realism]
+
+[realism] realistic
+	unrealistic
+	[beauty]
+
+[beauty] beautiful
+	pretty
+	cute
+	ugly
+
+pragma prefix-with [realism] creepily
+
+[bed-prost] prostitute
+
+pragma prefix-with [bed-prost] [part-human]
+
+[bed-slave] slave
+	escaped slave
+
+pragma prefix-with [bed-slave] [part-human]
+
+[bed-gender] male
+	female
+
+[part-human] [part-human1]
+
+pragma prefix-with [part-human] [bed-gender]
+
+[part-human1] [humanoid]
+	[half-human]
+	[half-human] , [half-human]
+	[quarter-human]
+
+[half-human] half- [humanoid]
+
+[quarter-human] quarter- [humanoid]
+
+pragma despace-rule [half-human]
+pragma despace-rule [quarter-human]

@@ -5,6 +5,9 @@
 
 [attack-pp] ( [5..40] pp )
 
+pragma despace-rule [attack-type]
+pragma despace-rule [attack-pp]
+
 pragma suffix-with [pokeattack] [move-kind]
 pragma suffix-with [pokeattack] [attack-type]
 pragma suffix-with [pokeattack] [attack-pp]

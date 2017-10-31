@@ -66,9 +66,9 @@ pragma prefix-with [accoutrements] [acc-kind]
 
 [shields] buckler
 	  shield
-	  [shield-size] shield
-	  [shield-type] shield
-	  [shield-size] [shield-type] shield
+
+pragma prefix-with [shields] [shield-type]
+pragma prefix-with [shields] [shield-size]
 
 [shield-size] small
 	      large
@@ -91,13 +91,13 @@ pragma prefix-with [accoutrements] [acc-kind]
 	 falchion
 	 claymore
 
+pragma prefix-with [swords] [sword-kind]
+
 [sword-kind] long
 	     broad
 	     short
 	     bastard
 	     two-handed
-
-pragma prefix-with [swords] [sword-kind]
 
 [clubs] club
 	spiked club
@@ -121,24 +121,28 @@ pragma prefix-with [swords] [sword-kind]
 	   halberd
 
 [axes]  axe
-	[axe-size] axe
-	[axe-type] axe
-	[axe-size] [axe-type] axe
+
+pragma prefix-with [axes] [axe-type]
+pragma prefix-with [axes] [axe-size]
 
 [axe-size] small
 	   large
 	   giant
 
 [axe-type] throwing
-           broad
-           battle
-           great
+	broad
+	battle
+	great
+	hand
 
-[bows]  arrow ( [diablo-amount] count)
+[bows]  arrow [quote-count]
 	bow
 	[bow-size] bow
 	[bow-type] bow
 	[bow-size] [bow-type] bow
+
+pragma prefix-with [bows] [bow-type]
+pragma prefix-with [bows] [bow-size]
 
 [bow-size] short
 	   long
@@ -148,7 +152,7 @@ pragma prefix-with [swords] [sword-kind]
 	   battle
 	   war
 
-[crossbows] bolt ( [diablo-amount] count)
+[crossbows] bolt [quote-count]
 	    crossbow
 	    [crossbow-type] crossbow
 
@@ -157,15 +161,17 @@ pragma prefix-with [swords] [sword-kind]
 	        heavy
 
 [wands] wand
-	[wand-type] wand
 	torch
 	scepter
-	[wand-type] scepter
+
+pragma prefix-with [wands] [wand-type]
 
 [wand-type] bone
 	    yew
 
 [staves] staff
+
+pragma prefix-with [staves] [staff-type]
 
 [staff-type] short
 	     long
@@ -174,8 +180,6 @@ pragma prefix-with [swords] [sword-kind]
 	     battle
 	     war
 
-pragma prefix-with [staves] [staff-type]
-
 [accessories] charm
 	      ring
 	      flag
@@ -183,6 +187,8 @@ pragma prefix-with [staves] [staff-type]
 	      amulet
 
 [gems] [gem-type]
+
+pragma prefix-with [gems] [gem-quality]
 
 [gem-quality] chipped
 	      flawed
@@ -196,8 +202,10 @@ pragma prefix-with [staves] [staff-type]
 	   sapphire
 	   topaz
 
-pragma prefix-with [gems] [gem-quality]
-
 [inscriptions] scroll
 	       rune
 	       book
+
+[quote-count] ( [diablo-amount] count )
+
+pragma despace-rule [quote-count]

@@ -1,16 +1,32 @@
 [full-creature] a(n) [creature-choice]
-	a(n) [creature-choice] fused with a(n) [creature-choice]
-	chimera of a(n) [creature-choice] , a(n) [creature-choice] and a [creature-choice]
+	a(n) [quote-creature] fused with a(n) [quote-creature]
+	chimera of a(n) [quote-creature] , a(n) [quote-creature] and a(n) [quote-creature] 
+
+[quote-creature] ( [creature-choice] )
+
+pragma despace-rule [quote-creature]
 
 [creature-choice] [creature]
 
-pragma prefix-with [creature-choice] [characteristic]
-pragma prefix-with [creature-choice] [ability]
-pragma prefix-with [creature-choice] [characteristic]
-pragma prefix-with [creature-choice] [ability]
+pragma prefix-with [creature-choice] [characteristics]
+pragma prefix-with [creature-choice] [abilities]
+pragma prefix-with [creature-choice] [characteristics]
+pragma prefix-with [creature-choice] [abilities]
 
 pragma initial-rule [full-creature]
 pragma export-rule [creature-choice]
+
+[abilities] [ability]
+	[ability]
+	[ability]
+	[ability]
+	[quote-ability] and [quote-ability]
+	[quote-ability] and [quote-ability]
+	[quote-ability] , [quote-ability] and [quote-ability]
+
+[quote-ability] ( [ability] )
+
+pragma despace-rule [quote-ability]
 
 [ability] flying
 	invisible
@@ -21,11 +37,8 @@ pragma export-rule [creature-choice]
 	swallow whole
 	poisonous
 	regenerating
-	[elemental-type] -breathing
 	anti-magic
 	petrifying
-	[elemental-type] -eating
-	[eating]
 	frightful presence
 	confusing
 	flesh grinding
@@ -33,7 +46,11 @@ pragma export-rule [creature-choice]
 	rust
 	acidic
 	nauseating
-	[ability] and [ability]
+	[eating]
+	[elemental-type] -breathing
+	[elemental-type] -eating
+	[elemental-type] -immune
+	[elemental-type] -resistant
 
 [eating] [characteristic] -eating
 	[creature] -eating
@@ -43,6 +60,18 @@ pragma despace-rule [eating]
 # @TODO 10/26/17 Ben Culkin :CharacteristicAdditions
 # 	Add more templates and classes to the list
 
+[characteristics] [characteristic]
+	[characteristic]
+	[characteristic]
+	[characteristic]
+	[quote-characteristic] and [quote-characteristic]
+	[quote-characteristic] and [quote-characteristic]
+	[quote-characteristic] , [quote-characteristic] and [quote-characteristic]
+
+[quote-characteristic] ( [characteristic] )
+
+pragma despace-rule [quote-characteristic]
+
 [characteristic] zombie
 	vampire
 	swarm
@@ -50,19 +79,19 @@ pragma despace-rule [eating]
 	barbarian
 	wizard
 	ninja
-	[were]
 	robot
 	rabid
 	demonic
 	awakened
 	feral
 	pirate
-	[partial-breed]
 	gelatinous
 	dire
 	shadow
 	rich
-	[characteristic] and [characteristic]
+	[partial-breed]
+	[were]
+	[elemental-adv] [characteristic]
 
 [were] were- [characteristic]
 	were- [creature]
@@ -88,16 +117,16 @@ pragma despace-rule [partial-breed]
 	bee
 	spider
 	dragon
-	[elemental]
-	[elemental-type]
-	living [elemental-type]
-	[dungeon-mimic]
 	dire penguin
 	giant mini space hamster
 	camel
 	little girl
 	classy kobold
 	disenchanter
+	[elemental]
+	[elemental-type]
+	living [elemental-type]
+	[dungeon-mimic]
 	[^creature]
 	[humanoid]
 	[creature-epic]
@@ -106,193 +135,3 @@ pragma despace-rule [partial-breed]
 	mimic
 	lurker
 	cloaker
-
-[other-elementalcreatures] archonmental
-	grue
-	weird
-	elementite swarm
-	genasi
-	half-elemental
-	elemental [creature]
-	[creature]
-	unraveler
-	necromental
-	archon
-	phantom
-	facet
-	wyrm
-	fiend
-	spirit
-	crystalle
-	spawn
-	minion
-	horror
-	horde
-	reactionals
-	elemental dragon
-	elemental knight
-
-[elemental] elemental
-	elemental
-	elemental
-	[other-elementalcreatures]
-	[rs-elementype]
-
-[great-less] lesser
-	greater
-	advanced
-
-[sgreat-less] , [great-less]
-
-pragma prefix-with [elemental] [elemental-type]
-pragma prefix-with [elemental] [elemental-age]
-pragma prefix-with [elemental] [great-less]
-pragma suffix-with [elemental] [sgreat-less]
-
-[rs-elementype] essling
-	esshound
-	esswraith
-
-[elemental-age] small
-	medium
-	large
-	huge
-	titanic
-	elder
-	monolithic
-	great
-	primal
-
-[elemental-type] fire
-	earth
-	water
-	air
-	[runescape-elemental]
-	[runescape-elemental]
-	[paraquasi-elemental]
-	[paraquasi-elemental]
-	[other-elemental]
-	[elemental-type] / [elemental-type]
-	[elemental-adv] [elemental-type]
-
-[elemental-adv] shadowy
-	clockwork
-	spacious
-	ethereal
-	blessed
-	cursed
-	ruined
-	stormy
-	tainted
-	chaotic
-	natural
-	deathly
-	astral
-	cosmic
-	bloody
-	soul-
-	icy
-	oozing
-	smoking
-	ashy
-	dusty
-	salty
-	steaming
-	forceful
-	radiant
-	empty
-	crystallized
-	frosted
-	silty
-	volcanic
-	sparking
-	fuming
-	blazing
-	grave
-	primal
-	rainy
-	sunny
-	angelic
-	demonic
-	devilish
-	sandy
-	dreaming
-	demonically-fused
-	wooden
-	sonic
-	decaying
-	growing
-	diseased
-	metallic
-	null
-	divine
-	oily
-
-[other-elemental] shadow
-	time
-	space
-	ether
-	light
-	storm
-	taint
-	ruin
-	darkness
-	grave
-	mist
-	pyre
-	rain
-	sun
-	sand
-	dream
-	wood
-	sonic
-	titanium
-	decay
-	growth
-	disease
-	crystal
-	metal
-	null
-	oil
-
-[runescape-elemental] mind
-	body
-	cosmic
-	chaos
-	nature
-	law
-	death
-	astral
-	blood
-	soul
-
-[paraquasi-elemental] [para-elemental]
-	[para-elemental]
-	[quasi-elemental]
-	[quasi-elemental]
-	[quasi-elemental]
-	[quasi-elemental]
-	[paraquasi-elemental]
-
-[para-elemental] ice
-	magma
-	ooze
-	smoke
-
-[quasi-elemental] ash
-	dust
-	salt
-	vacuum
-	mineral
-	radiance
-	steam
-	force
-
-[paraquasi-elemental] crystal
-	frost
-	clay
-	silt
-	obsidian
-	pumice
-	spark
-	fumes

@@ -23,6 +23,7 @@ pragma export-rule [sw-color-phrase]
 
 [complete-color] {wtype=mw} [act-complete-color]
 
+pragma despace-rule [complete-color]
 pragma export-rule [complete-color]
 
 [sw-complete-color] [act-sw-complete-color]
@@ -32,6 +33,8 @@ pragma despace-rule [sw-complete-color]
 pragma export-rule [sw-complete-color]
 
 [act-sw-complete-color] {wtype=sw} [act-complete-color]
+
+pragma despace-rule [act-sw-complete-color]
 
 [act-complete-color] [standard]
 	[red-purple]

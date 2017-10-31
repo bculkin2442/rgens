@@ -1,13 +1,17 @@
 [base-treasures] [base-treasure]
-	         [base-treasure] as well as [base-treasure]
-	         [base-treasure] or [base-treasure]
-	         [base-treasure] , and [base-treasure] as well as [base-treasure]
-	         [base-treasure] , [base-treasure] or [base-treasure]
+	         [quote-treasure] as well as [quote-treasure]
+	         [quote-treasure] or [quote-treasure]
+	         [quote-treasure] , and [quote-treasure] as well as [quote-treasure]
+	         [quote-treasure] , [quote-treasure] or [quote-treasure]
 
 pragma initial-rule [base-treasures]
 
+[quote-treasure] ( [base-treasure] )
+
+pragma despace-rule [quote-treasure]
+
 [base-treasure] a(n) [item]
-	        [non-item]
+	[non-item]
 
 [non-item] [money]
 	   [money]

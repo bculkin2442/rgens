@@ -1,0 +1,237 @@
+[elemental] elemental
+	elemental
+	elemental
+	[other-elementalcreatures]
+	[rs-elementype]
+
+pragma prefix-with [elemental] [elemental-types]
+pragma prefix-with [elemental] [elemental-age]
+pragma prefix-with [elemental] [great-less]
+pragma suffix-with [elemental] [sgreat-less]
+
+pragma initial-rule [elemental]
+
+[other-elementalcreatures] archonmental
+	grue
+	weird
+	elementite swarm
+	genasi
+	half-elemental
+	elemental [creature]
+	[creature]
+	unraveler
+	necromental
+	archon
+	phantom
+	facet
+	wyrm
+	fiend
+	spirit
+	crystalle
+	spawn
+	minion
+	horror
+	horde
+	reactionals
+	elemental dragon
+	elemental knight
+
+[great-less] lesser
+	greater
+	advanced
+
+[sgreat-less] , [great-less]
+
+[rs-elementype] essling
+	esshound
+	esswraith
+
+[elemental-age] small
+	medium
+	large
+	huge
+	titanic
+	elder
+	monolithic
+	great
+	primal
+	eldritch
+
+[elemental-types] [nhelemental-types]
+	[nhelemental-types]
+	[nhelemental-types]
+	[nhelemental-types]
+	[nhelemental-types]
+	[nhelemental-types]
+	[hybrid-type]
+
+[nhelemental-types] [quote-type]
+	[quote-type]
+	[quote-type] / [quote-type]
+	[quote-type] / [quote-type] / [nhelemental-types]
+
+pragma export-rule [elemental-types]
+
+[hybrid-type] hybrid [hybrid-open] and [hybrid-close]
+	hybrid [hybrid-open] , [nhelemental-types] and [hybrid-close]
+
+[hybrid-open] ( [nhelemental-types]
+
+pragma despace-rule [hybrid-open]
+
+[hybrid-close] [nhelemental-types] )
+
+pragma despace-rule [hybrid-close]
+
+[quote-type] ( [elemental-type] )
+
+pragma despace-rule [quote-type]
+
+[elemental-type] [bare-elemental-type]
+	[bare-elemental-type]
+	[bare-elemental-type]
+	[bare-elemental-type]
+	[elemental-adv] [bare-elemental-type]
+	[elemental-adv] [bare-elemental-type]
+	[elemental-adv] [elemental-adv] [bare-elemental-type]
+
+[bare-elemental-type] [common-element]
+	[common-element]
+	[runescape-elemental]
+	[runescape-elemental]
+	[paraquasi-elemental]
+	[paraquasi-elemental]
+	[other-elemental]
+
+pragma export-rule [elemental-type]
+pragma export-rule [bare-elemental-type]
+
+[common-element] fire
+	earth
+	water
+	air
+
+[elemental-adv] shadowy
+	clockwork
+	spacious
+	ethereal
+	blessed
+	cursed
+	ruined
+	stormy
+	tainted
+	chaotic
+	natural
+	deathly
+	astral
+	cosmic
+	bloody
+	soul-
+	icy
+	oozing
+	smoking
+	ashy
+	dusty
+	salty
+	steaming
+	forceful
+	radiant
+	empty
+	crystallized
+	frosted
+	silty
+	volcanic
+	sparking
+	fuming
+	blazing
+	grave
+	primal
+	rainy
+	sunny
+	angelic
+	demonic
+	devilish
+	sandy
+	dreaming
+	demonically-fused
+	wooden
+	sonic
+	decaying
+	growing
+	diseased
+	metallic
+	null
+	divine
+	oily
+	eldritch
+
+pragma export-rule [elemental-adv]
+
+[other-elemental] shadow
+	time
+	space
+	ether
+	light
+	storm
+	taint
+	ruin
+	darkness
+	grave
+	mist
+	pyre
+	rain
+	sun
+	sand
+	dream
+	wood
+	sonic
+	titanium
+	decay
+	growth
+	disease
+	crystal
+	metal
+	null
+	oil
+
+[runescape-elemental] mind
+	body
+	cosmic
+	chaos
+	nature
+	law
+	death
+	astral
+	blood
+	soul
+
+[paraquasi-elemental] [para-elemental]
+	[para-elemental]
+	[quasi-elemental]
+	[quasi-elemental]
+	[quasi-elemental]
+	[quasi-elemental]
+	[paraquasi-elemental]
+
+[para-elemental] ice
+	magma
+	ooze
+	smoke
+
+[quasi-elemental] ash
+	dust
+	salt
+	vacuum
+	mineral
+	radiance
+	steam
+	force
+
+[paraquasi-elemental] crystal
+	frost
+	clay
+	silt
+	obsidian
+	pumice
+	spark
+	fumes

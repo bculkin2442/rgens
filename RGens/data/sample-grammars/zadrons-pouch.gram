@@ -1,10 +1,14 @@
-[zadrons-pouch] → a [zadrons-item]
-	a [zadrons-item] and a [zadrons-item]
-	a [zadrons-item] and a [zadrons-item] as well as a [zadrons-item]
-	a [zadrons-item] or a [zadrons-item]
-	a [zadrons-item] or a [zadrons-item] or maybe a [zadrons-item]
+[zadrons-pouch] → a(n) [zadrons-item]
+	a(n) [quote-item] and a(n) [quote-item]
+	a(n) [quote-item] and a(n) [quote-item] as well as a(n) [quote-item]
+	a(n) [quote-item] or a(n) [quote-item]
+	a(n) [quote-item] or a(n) [quote-item] or maybe a(n) [quote-item]
 
 pragma initial-rule [zadrons-pouch]
+
+[quote-item] ( [zadrons-item] )
+
+pragma despace-rule [quote-item]
 
 [zadrons-item] → [egg]
 	[glove]
@@ -32,6 +36,7 @@ pragma export-rule [zadrons-item]
 	dwarf-kind
 	invisible cloth
 	monster summoning
+	monster summoning (summons [creature-choice] )
 
 [sack-type] → lunch
 	recursive
@@ -73,13 +78,16 @@ pragma export-rule [zadrons-item]
 
 [sphere-type] → microphonic
 	seeing-eye
+	immurement
 
 [lens-type] → detection
 
 [crystal-type] → prison
 	radar
+	seeing
 
 [crys-suffix] → jumping
+	scrying
 
 [egg] → [egg-type] egg
 
@@ -146,6 +154,7 @@ pragma export-rule [zadrons-item]
 
 [pebble-type] → inscribed
 	elemental control
+	[elemental] control
 
 [stone-type] → good-luck
 	weight

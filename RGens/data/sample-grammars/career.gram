@@ -2,18 +2,25 @@
 
 pragma initial-rule [career-tech-desc]
 
-pragma prefix-with [career-tech-desc] [career-prefsuf]
+pragma prefix-with [career-tech-desc] [career-tech-desc-pref]
 
 pragma suffix-with [career-tech-desc] [career-tech-descsuff]
 pragma suffix-with [career-tech-desc] [career-tech-descsuff]
 pragma suffix-with [career-tech-desc] [career-tech-descsuff]
 
-[career-tech-descsuff] (to the [career-techname] )
+[career-tech-desc-pref] [career-prefsuf] of the
+
+[career-tech-descsuff] (reports to the [career-techname] )
 	(boss of [career-techname] )
 	(subordinate of [career-techname] )
 	(co-worker of [career-techname] )
 	(office rival of [career-techname] )
 	(secretly [career-techname] )
+
+[career-techname] [career-tech]
+	[career-tech] , [full-name-and-title]
+
+pragma export-rule [career-techname]
 
 [career-tech] [career-tech2]
 	[career-tech2]
@@ -21,20 +28,19 @@ pragma suffix-with [career-tech-desc] [career-tech-descsuff]
 	[career-tech2]
 	[career-tech2]
 	[career-tech2]
-	[career-tech2] and [career-tech2]
-	[career-tech2] , [career-tech2] and [career-tech2]
+	[quote-career-tech] and [quote-career-tech]
+	[quote-career-tech] , [quote-career-tech] and [quote-career-tech]
 
-pragma prefix-with [career-tech] [career-prefsuf]
+pragma prefix-with [career-tech] [career-tech-desc-pref]
 
 pragma export-rule [career-tech]
 
-[career-techname] [career-tech]
-	[career-tech] , [full-name-and-title]
+[quote-career-tech] [ [career-tech2] ]
 
-pragma export-rule [career-techname]
+pragma despace-rule [quote-career-tech]
 
-[career-tech2] [act-career-tech] (to the [career-tech] )
-	[act-career-tech] (to [full-name-and-title] )
+[career-tech2] [act-career-tech] (reports to the [career-tech] )
+	[act-career-tech] (reports to [full-name-and-title] )
 
 [act-career-tech] paper pusher
 	computer [software-career-type]
@@ -55,10 +61,13 @@ pragma export-rule [career-techname]
 	corporate spy
 	trade show booth bunny
 	evil human resources
-	internet
+	internet [software-career-type]
 	network [software-career-type]
 
+pragma prefix-with [act-career-tech] [career-prefix]
 pragma suffix-with [act-career-tech] [career-sufsuf]
+
+pragma export-rule [act-career-tech]
 
 [bug-term] terminator
 	exterminator
@@ -81,7 +90,18 @@ pragma suffix-with [act-career-tech] [career-sufsuf]
 [career-prefsuf] [career-suffix]
 	[career-prefix] [career-suffix]
 
-[career-sufsuf] , [career-prefsuf]
+[career-sufsuf] , [career-prefsuf] of [career-department]
+
+[career-department] engineering
+	design
+	administration
+	programming
+	publishing
+	operations
+	HR
+	networking
+	accounting
+	management
 
 [career-prefix] executive
 	assistant
