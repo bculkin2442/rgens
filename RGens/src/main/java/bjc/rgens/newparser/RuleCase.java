@@ -22,7 +22,9 @@ public class RuleCase {
 		/** A normal case, composed from a list of elements. */
 		NORMAL,
 		/** A case that doesn't insert spaces. */
-		SPACEFLATTEN
+		SPACEFLATTEN,
+		/** A case that applies a regex after generation. */
+		REGEX
 	}
 
 	/** The type of this case. */
@@ -53,6 +55,8 @@ public class RuleCase {
 		case NORMAL:
 		case SPACEFLATTEN:
 			throw new IllegalArgumentException("This type requires an element list parameter");
+		case REGEX:
+			throw new IllegalArgumentException("This type requires an element list and a pattern");
 		default:
 			break;
 		}
@@ -78,6 +82,8 @@ public class RuleCase {
 		case NORMAL:
 		case SPACEFLATTEN:
 			break;
+		case REGEX:
+			throw new IllegalArgumentException("This type requires an element list and a pattern");
 		default:
 			throw new IllegalArgumentException("This type doesn't have a element list parameter");
 		}
