@@ -39,28 +39,9 @@ public class RuleCase {
 	 * <dd>Used as the list of elementList the rule is composed of.</dd>
 	 * </dl>
 	 */
-	private IList<CaseElement> elementList;
+	protected IList<CaseElement> elementList;
 
-	/**
-	 * Create a new case of the specified type.
-	 *
-	 * @param typ
-	 * 	The type of case to create.
-	 *
-	 * @throws IllegalArgumentException
-	 * 	If the type requires parameters.
-	 */
-	public RuleCase(CaseType typ) {
-		switch (typ) {
-		case NORMAL:
-		case SPACEFLATTEN:
-			throw new IllegalArgumentException("This type requires an element list parameter");
-		case REGEX:
-			throw new IllegalArgumentException("This type requires an element list and a pattern");
-		default:
-			break;
-		}
-
+	protected RuleCase(CaseType typ) {
 		type = typ;
 	}
 
@@ -78,6 +59,8 @@ public class RuleCase {
 	 * 	If this type doesn't take a element list parameter.
 	 */
 	public RuleCase(CaseType typ, IList<CaseElement> elements) {
+		this(typ);
+
 		switch (typ) {
 		case NORMAL:
 		case SPACEFLATTEN:
@@ -87,8 +70,6 @@ public class RuleCase {
 		default:
 			throw new IllegalArgumentException("This type doesn't have a element list parameter");
 		}
-
-		type = typ;
 
 		elementList = elements;
 	}

@@ -70,6 +70,19 @@ public class RGrammarParser {
 			}
 		});
 
+		pragmas.put("regex-rule", (body, build, level) -> {
+			int nameIndex = body.indexOf(" ");
+
+			if(nameIndex == -1) {
+				throw new GrammarException("Regex-rule pragma takes two arguments: the name of the rule to process, then the regex to apply after the rule has been generated.");
+			}
+
+			String name = body.substring(0, nameIndex).trim();
+			String patt = body.substring(nameIndex + 1).trim();
+
+			build.regexizeRule(name, patt);
+		});
+
 		pragmas.put("suffix-with", (body, build, level) -> {
 			String[] parts = body.trim().split(" ");
 

@@ -178,7 +178,6 @@ public class RGrammar {
 		generateCase(start, new GenerationState(contents, rnd, vars));
 
 		String body = contents.toString();
-
 		/*
 		 * Collapse duplicate spaces.
 		 */
@@ -190,10 +189,33 @@ public class RGrammar {
 		 * This can be done in the grammars, but it is very tedious to
 		 * do so.
 		 */
+
+		/* Handle 's */
 		body = body.replaceAll(" 's ", "'s ");
-		body = body.replaceAll(" ([,:.)\\]'\"]) ", "$1 ");
-		body = body.replaceAll(" (`[(\\[]) ", " $1");
+
+		/* Handle opening/closing punctuation. */
+		body = body.replaceAll("([(\\[]) ", " $1");
+		body = body.replaceAll(" ([)\\]'\"])", "$1 ");
+
+		/* Remove spaces around series of opening/closing punctuation. */
+		body = body.replaceAll("([(\\[])\\s+([(\\[])", "$1$2");
+		body = body.replaceAll("([)\\]])\\s+([)\\]])", "$1$2");
+
+		/* Handle inter-word punctuation. */
+		body = body.replaceAll(" ([,:.])", "$1 ");
+
+		/* Handle intra-word punctuation. */
 		body = body.replaceAll("\\s?([-/])\\s?", "$1");
+
+		/*
+		 * Collapse duplicate spaces.
+		 */
+		body = body.replaceAll("\\s+", " ");
+
+		/* @TODO 11/01/17 Ben Culkin :RegexRule
+		 * 	Replace this once it is no longer needed.
+		 */
+		body = body.replaceAll("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1");
 
 		return body;
 	}
@@ -205,7 +227,10 @@ public class RGrammar {
 			case NORMAL:
 				for (CaseElement elm : start.getElements()) {
 					generateElement(elm, state);
-					state.contents.append(" ");
+
+					if(elm.type != CaseElement.ElementType.VARDEF) {
+						state.contents.append(" ");
+					}
 				}
 				break;
 			case SPACEFLATTEN:

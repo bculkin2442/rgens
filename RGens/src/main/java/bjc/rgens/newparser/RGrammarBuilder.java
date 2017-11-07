@@ -221,4 +221,25 @@ public class RGrammarBuilder {
 
 		rules.get(ruleName).replaceCases(newCaseList);
 	}
+
+	public void regexizeRule(String rule, String pattern) {
+		if (rule == null) {
+			throw new NullPointerException("rule must not be null");
+		} else if(pattern == null) {
+			throw new NullPointerException("pattern must not be null");	
+		} else if (rule.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		}
+
+		IList<RuleCase> caseList = rules.get(rule).getCases();
+
+		IList<RuleCase> newCaseList = new FunctionalList<>();
+
+		for(RuleCase cse : caseList) {
+			newCaseList.add(new RegexRuleCase(cse.getElements(), pattern));
+		}
+
+		rules.get(rule).replaceCases(newCaseList);
+
+	}
 }
