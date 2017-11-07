@@ -116,14 +116,18 @@ pragma suffix-with [course-level1] [class-year]
 	[course-nounprefix] [course-group] [course-medium]
 	ethnicity
 	masterpieces of [course-group] [course-medium]
-	[course-buzzword2] , [course-buzzword2] and [course-buzzword2]
-	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] in [course-group2] [course-medium]
+	[quote-buzzword] , [quote-buzzword] and [quote-buzzword]
+	[quote-buzzword] , [quote-buzzword] and [quote-buzzword] in [course-group2] [course-medium]
 	[course-event]
 	[course-event] as [course-explored] in [course-group] [course-medium]
 	[university-subject] as [course-explored] in [course-group] [course-medium]
 	[course-impactof]
 	[course-static]
 	[course-static]
+
+[quote-buzzword] ( [course-buzzword2] )
+
+pragma despace-rule [quote-buzzword]
 
 pragma prefix-with [college-course] [course-prefix]
 
@@ -134,12 +138,14 @@ pragma suffix-with [college-course] [course-suffix]
 
 pragma export-rule [college-course]
 
-[course-adjnoun-group] [course-adjnoun]
-	[course-adjnoun] and [course-adjnoun]
-	[course-adjnoun] , [course-adjnoun] and [course-adjnoun]
+[course-adjnoun-group] [quote-adjnoun]
+	[quote-adjnoun] and [quote-adjnoun]
+	[quote-adjnoun] , [quote-adjnoun] and [quote-adjnoun]
 
-[course-disjoin-adjnoungroup] [course-adjnoun] or [course-adjnoun]
-	[course-adjnoun] , [course-adjnoun] or [course-adjnoun]
+[course-disjoin-adjnoungroup] [quote-adjnoun] or [quote-adjnoun]
+	[quote-adjnoun] , [quote-adjnoun] or [quote-adjnoun]
+
+[quote-adjnoun] ( [course-adjnoun] )
 
 [course-adjnoun] [course-prefixednoun]
 
@@ -155,7 +161,7 @@ pragma prefix-with [course-adjnoun] [course-adj]
 	the [course-impact] of [course-group2] [thinker-type] on [course-nounprefix] [university-subject]
 	the [rise] of [course-group2] [thinker-type] in [course-nounprefix] [university-subject]
 	[course-group] [course-medium] as the [roots] of [course-nounprefix] [university-subject]
-	[course-buzzword2] , [course-buzzword2] and [course-buzzword2] as [course-explored] in [course-nounprefix] [films]
+	[quote-buzzword] , [quote-buzzword] and [quote-buzzword] as [course-explored] in [course-nounprefix] [films]
 	the history of [course-group2] [course-life-phrase]
 	the [archetype] of the [quest] in [course-group] [course-medium]
 	[cross-cultural] [studies] [course-group2] [course-life-phrase]
@@ -380,11 +386,19 @@ pragma prefix-with [course-noun] [course-nounprefix]
 [study] study
 	approach
 
-[course-group] [course-groups]
-	[course-groups]
-	[course-groups]
-	[course-groups]
-	" [org-political] "
+[course-group] [quote-groups]
+	[quote-groups]
+	[quote-groups]
+	[quote-groups]
+	[quote-political]
+
+[quote-political] " [org-political] "
+
+pragma despace-rule [quote-political]
+
+[quote-groups] ( [course-groups] )
+
+pragma despace-rule [quote-groups]
 
 [course-groups] [course-gengroup]
 
@@ -457,25 +471,37 @@ pragma suffix-with [course-groups] [course-gengroup]
 	Chinese
 	native American
 
-[course-life-phrase] [act-course-lifephrase]
-	[act-course-lifephrase] since [700..2010]
-	[act-course-lifephrase] as influenced by [course-life-influence]
-	[act-course-lifephrase] as viewed through the lens of [course-life-influence]
+[course-life-phrase] [quote-lifephrase]
+	[quote-lifephrase] since [700..2010]
+	[quote-lifephrase] as influenced by [course-life-influence]
+	[quote-lifephrase] as viewed through the lens of [course-life-influence]
+
+[quote-lifephrase] ( [act-course-lifephrase] )
+
+pragma despace-rule [quote-lifephrase]
 
 [influence-type] as influenced by
 	as viewed through the lens of
 
 [act-course-lifephrase] [course-lives]
 
-pragma suffix-with [act-course-lifephrase] [course-group]
-pragma suffix-with [act-course-lifephrase] [course-adjnoun-group]
+pragma suffix-with [act-course-lifephrase] [of-group]
+
+[of-group] of
+
+pragma suffix-with [of-group] [course-group]
+pragma suffix-with [of-group] [course-adjnoun]
 
 [course-life-influence] [course-event]
 	[course-adjnoun-group]
 
-[course-lives] [course-life]
-	[course-life] and [course-life]
-	[course-life] , [course-life] and [course-life]
+[course-lives] [quote-life]
+	[quote-life] and [quote-life]
+	[quote-life] , [quote-life] and [quote-life]
+
+[quote-life] ( [course-life] )
+
+pragma despace-rule [quote-life]
 
 [course-life] life
 	literature
@@ -501,6 +527,9 @@ pragma suffix-with [act-course-lifephrase] [course-adjnoun-group]
 	religion
 	traditions
 	civilization
+
+pragma suffix-with [course-life] [course-group]
+pragma suffix-with [course-life] [course-adjnoun]
 
 [course-metaphor] metaphor
 	study

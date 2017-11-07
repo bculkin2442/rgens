@@ -90,7 +90,7 @@ pragma suffix-with [org-goalbody] [org-wayof]
 	speed limits
 	the [protect]
 	women's suffrage
-	[trademark+drug]
+	the drug [trademark+drug]
 	[trademark]
 	[organization]
 	[org-course]
@@ -99,11 +99,15 @@ pragma suffix-with [org-goalbody] [org-wayof]
 	making [quote-course] a mandatory course
 	teaching [quote-course] in high school
 
-[org-goal-person] supporting [full-name-and-title]
-	opposing [full-name-and-title]
-	exiling [full-name-and-title]
-	indicting [full-name-and-title]
-	pardoning [full-name-and-title]
+[org-goal-person] supporting [quote-nametitle]
+	opposing [quote-nametitle]
+	exiling [quote-nametitle]
+	indicting [quote-nametitle]
+	pardoning [quote-nametitle]
+
+[quote-nametitle] ( [full-name-and-title] )
+
+pragma despace-rule [quote-nametitle]
 
 pragma prefix-with [org-goal] [org-goal-abolish]
 
@@ -159,7 +163,7 @@ pragma prefix-with [org-goal] [org-goal-abolish]
 	[intl-possesive]
 	[us-stateadj]
 
-[intl-possesive] [full-name-and-title] 's
+[intl-possesive] ( [full-name-and-title] 's )
 
 pragma despace-rule [intl-possesive]
 

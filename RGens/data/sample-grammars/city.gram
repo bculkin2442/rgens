@@ -4,9 +4,13 @@
 
 pragma initial-rule [city]
 
+# @TODO 11/01/17 Ben Culkin :SuffixIssues
+#	Figure out why suffixes aren't properly getting attached to
+#	things.
+#
+
 [other-city] [act-other-city]
 	[act-other-city] [town-suffix]
-	[town-suffix]
 
 pragma despace-rule [other-city]
 pragma prefix-with [other-city] [town-prefix]
@@ -20,6 +24,8 @@ pragma prefix-with [other-city] [town-prefix]
 	[gen-name]
 	[gen-name] - [gen-name]
 	[gen-name] [geographic-thing]
+
+pragma despace-rule [act-other-city]
 
 [gen-name] [last-name]
 	[first-name]
@@ -44,3 +50,5 @@ pragma prefix-with [other-city] [town-prefix]
 	field
 	boro
 	dale
+
+pragma despace-rule [town-suffix]

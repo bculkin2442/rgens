@@ -1,133 +1,156 @@
 [item-act] [armor]
-	   [headgear]
-	   [accoutrements]
-	   [shields]
-	   [knives]
-	   [swords]
-	   [clubs]
-	   [spears]
-	   [polearms]
-	   [axes]
-	   [bows]
-	   [crossbows]
-	   [wands]
-	   [staves]
-	   [accessories]
-	   [gems]
-	   [inscriptions]
-	   [perishables]
+	[headgear]
+	[accoutrements]
+	[shields]
+	[knives]
+	[swords]
+	[clubs]
+	[spears]
+	[polearms]
+	[axes]
+	[bows]
+	[crossbows]
+	[wands]
+	[staves]
+	[accessories]
+	[gems]
+	[inscriptions]
+	[perishables]
 
 pragma export-rule [item-act]
 
-[armor] cape
+[armor] [light-armor]
+	[medium-armor]
+	[heavy-armor]
+
+pragma prefix-with [armor] [armor-prefix]
+
+[light-armor] cape
 	rags
 	cloak
 	robe
-	quilted armor
+
+[medium-armor] quilted armor
 	leather armor
-	hard leather armor
 	studded leather armor
-	ring mail
-	scale mail
+	ringmail
+	scalemail
 	chainmail
-	breast plate
-	light plate
+
+[heavy-armor] breastplate
+	plate
 	splint mail
-	plate mail
+	platemail
 	field plate
-	ancient armor
-	Gothic plate
-	full plate mail
+
+[armor-prefix] light
+	heavy
+	hard
+	reinforced
+	full
+	Gothic
+	ancient
 
 [headgear] cap
-	   helm
-	   mask
-	   crown
-
-[headgear-kind] full
-	        great
-	        bone
+	[helm]
+	[mask]
+	crown
 
 pragma prefix-with [headgear] [headgear-kind]
 
-[accoutrements] gloves
-	        sash
-	        boots
-	        bracers
-	        belt
-	        gauntlets
-	        girdle
+[helm] helm
+	helmet
 
-[acc-kind] leather
-	   chain
-	   plate
+[mask] mask
+	masque
+
+[headgear-kind] full
+	great
+	bone
+
+[accoutrements] gloves
+	sash
+	boots
+	bracers
+	belt
+	gauntlets
+	girdle
 
 pragma prefix-with [accoutrements] [acc-kind]
 
+[acc-kind] leather
+	chain
+	plate
+
 [shields] buckler
-	  shield
+	shield
 
 pragma prefix-with [shields] [shield-type]
 pragma prefix-with [shields] [shield-size]
 
 [shield-size] small
-	      large
-	      huge
+	large
+	huge
 
 [shield-type] kite
-	      spiked
-	      bone
-	      tower
-	      Gothic
+	spiked
+	bone
+	tower
+	Gothic
 
 [knives] dagger
-	 throwing knife
-	 kris
+	knife
+	kris
+
+pragma prefix-with [knives] throwing
 
 [swords] sword
-	 sabre
-	 blade
-	 scimitar
-	 falchion
-	 claymore
+	sabre
+	blade
+	scimitar
+	falchion
+	claymore
 
 pragma prefix-with [swords] [sword-kind]
 
 [sword-kind] long
-	     broad
-	     short
-	     bastard
-	     two-handed
+	broad
+	short
+	bastard
+	two-handed
 
 [clubs] club
-	spiked club
 	mace
 	morning star
 	flail
-	war hammer
 	maul
 
+pragma prefix-with [clubs] [club-prefix]
+
+[club-prefix] spiked
+	war
+
 [spears] javelin
-	 spear
-	 pilum
-	 glaive
-	 trident
-	 pike
-	 brandistock
+	spear
+	pilum
+	glaive
+	trident
+	pike
+	brandistock
 
 [polearms] bardiche
-	   scythe
-	   poleaxe
-	   halberd
+	scythe
+	poleaxe
+	halberd
 
-[axes]  axe
+[axes] axe
 
 pragma prefix-with [axes] [axe-type]
 pragma prefix-with [axes] [axe-size]
 
 [axe-size] small
-	   large
-	   giant
+	large
+	giant
 
 [axe-type] throwing
 	broad
@@ -135,30 +158,47 @@ pragma prefix-with [axes] [axe-size]
 	great
 	hand
 
-[bows]  arrow [quote-count]
-	bow
-	[bow-size] bow
-	[bow-type] bow
-	[bow-size] [bow-type] bow
+[bows]  [act-arrow] [quote-count]
+	[act-bow]
+	[act-bow]
+	[act-bow]
+	[act-bow]
 
-pragma prefix-with [bows] [bow-type]
-pragma prefix-with [bows] [bow-size]
+[act-arrow] arrow
+	[gem-type] -tipped arrow
+
+[act-bow] bow
+
+pragma prefix-with [act-bow] [bow-type]
+pragma prefix-with [act-bow] [bow-size]
 
 [bow-size] short
-	   long
+	long
 
 [bow-type] hunter’s
-	   composite
-	   battle
-	   war
+	composite
+	battle
+	war
 
-[crossbows] bolt [quote-count]
-	    crossbow
-	    [crossbow-type] crossbow
+[crossbows] [act-bolt] [quote-count]
+	[act-crossbow]
+	[act-crossbow]
+	[act-crossbow]
+	[act-crossbow]
 
-[crossbow-type] light
-	        repeating
-	        heavy
+[act-bolt] bolt
+	[gem-type] -tipped bolt
+
+[act-crossbow] crossbow
+
+pragma prefix-with [act-crossbow] [crossbow-type]
+pragma prefix-with [act-crossbow] [crossbow-weight]
+
+[crossbow-type] repeating
+	double
+
+[crossbow-weight] light
+	heavy
 
 [wands] wand
 	torch
@@ -167,33 +207,41 @@ pragma prefix-with [bows] [bow-size]
 pragma prefix-with [wands] [wand-type]
 
 [wand-type] bone
-	    yew
+	yew
 
 [staves] staff
 
 pragma prefix-with [staves] [staff-type]
+pragma prefix-with [staves] [staff-length]
 
-[staff-type] short
-	     long
-	     gnarled
-	     composite
-	     battle
-	     war
+[staff-type] gnarled
+	composite
+	battle
+	war
+
+[staff-length] short
+	long
 
 [accessories] charm
-	      ring
-	      flag
-	      orb
-	      amulet
+	ring
+	flag
+	orb
+	amulet
 
 [gems] [gem-type]
 
+pragma prefix-with [gems] [gem-size]
 pragma prefix-with [gems] [gem-quality]
 
 [gem-quality] chipped
 	      flawed
 	      flawless
 	      perfect
+
+[gem-size] tiny
+	small
+	large
+	huge
 
 [gem-type] amethyst
 	   diamond

@@ -7,70 +7,83 @@ pragma initial-rule [card]
 
 [playing-card] [playing-rank] of [playing-suit]
 
-[playing-rank] 2
-	deuce
-	two
-	3
-	three
-	4
-	four
-	5
-	five
-	6
-	six
-	7
-	seven
-	8
-	eight
-	9
-	nine
-	10
-	ten
-	jack
-	king
-	queen
-	ace
+pragma export-rule [playing-card]
 
 [playing-suit] hearts
 	clubs
 	spades
 	diamonds
 
-pragma export-rule [playing-card]
+[playing-rank] [rank-two]
+	[rank-three]
+	[rank-four]
+	[rank-five]
+	[rank-six]
+	[rank-seven]
+	[rank-eight]
+	[rank-nine]
+	[rank-ten]
+	jack
+	king
+	queen
+	ace
+
+[rank-two] 2
+	deuce
+	two
+
+[rank-three] 3
+	three
+
+[rank-four] 4
+	four
+
+[rank-five] 5
+	five
+
+[rank-six] 6
+	six
+
+[rank-seven] 7
+	seven
+
+[rank-eight] 8
+	eight
+
+[rank-nine] 9
+	nine
+
+[rank-ten] 10
+	ten
 
 [tarot-card] [minor-arcana]
 	[major-arcana]
 
-pragma export-rule [tarot-card]
-
 pragma prefix-with [tarot-card] inverse
 
-[minor-arcana] [minor-rank] of [playing-suit]
-	[minor-rank] of [arcana-suit]
-	[minor-rank] of [alt-arcana-suit]
+pragma export-rule [tarot-card]
+
+[minor-arcana] [minor-rank] of [arcana-suit]
+
+[arcana-suit] [playing-suit]
+	[arcana-suit]
+	[alt-arcana-suit]
 
 [major-arcana] [major-arcana1]
 	[major-arcana2]
 
+pragma export-rule [major-arcana]
+
 [minor-rank] ace
-	2
-	deuce
-	3
-	three
-	4
-	four
-	5
-	five
-	6
-	six
-	7
-	seven
-	8
-	eight
-	9
-	nine
-	10
-	ten
+	[rank-two]
+	[rank-three]
+	[rank-four]
+	[rank-five]
+	[rank-six]
+	[rank-seven]
+	[rank-eight]
+	[rank-nine]
+	[rank-ten]
 	knave
 	page
 	jack
@@ -113,6 +126,8 @@ pragma prefix-with [tarot-card] inverse
 	the fool
 	the excuse
 
+pragma export-rule [major-arcana1]
+
 [major-arcana2] the witch
 	the sorceror
 	the temple
@@ -130,8 +145,6 @@ pragma prefix-with [tarot-card] inverse
 	void
 	the demon
 
-pragma export-rule [major-arcana]
-pragma export-rule [major-arcana1]
 pragma export-rule [major-arcana2]
 
 [complete-many-things] fates

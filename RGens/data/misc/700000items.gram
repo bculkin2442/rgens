@@ -1,13 +1,35 @@
 [item-name] [noun]
 
-pragma initial-rule [item-name]
-
 pragma prefix-with [item-name] [post]
 pragma prefix-with [item-name] [adj]
 pragma prefix-with [item-name] [adj]
 pragma prefix-with [item-name] [pre]
 
 pragma suffix-with [item-name] [end]
+
+pragma initial-rule [item-name]
+
+[noun] Boy
+	Kid
+	Tears
+	Head
+	Bag
+	Brain
+	Box
+	Eye
+	Sack
+	Meat
+	Paw
+	Ring
+	Poop
+	Acid
+	Liquid
+	Shield
+	Money
+	Friend
+	Aura
+	Battery
+	Milk
 
 [end] of Secrets
 	of Flies
@@ -57,28 +79,6 @@ pragma suffix-with [item-name] [end]
 	Poison
 	Rainbow
 	Soy
-
-[noun] Boy
-	Kid
-	Tears
-	Head
-	Bag
-	Brain
-	Box
-	Eye
-	Sack
-	Meat
-	Paw
-	Ring
-	Poop
-	Acid
-	Liquid
-	Shield
-	Money
-	Friend
-	Aura
-	Battery
-	Milk
 
 [post] Bomb
 	Coin

@@ -3,7 +3,9 @@
 
 pragma initial-rule [monster]
 
-[monster-prefix] were
+[monster-prefix] were-
+	half-
+	quarter-
 	vampire
 	giant
 	diseased

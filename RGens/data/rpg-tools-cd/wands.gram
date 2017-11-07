@@ -1,7 +1,7 @@
 [wand] a wand
 	a [material] wand
-	a [wand+tip] wand
-	a [material] [wand+tip] wand
+	a [wand-tip] wand
+	a [material] [wand-tip] wand
 
 pragma suffix-with [wand] [tipped]
 pragma suffix-with [wand] [ornament]
@@ -9,16 +9,19 @@ pragma suffix-with [wand] [inscription]
 
 pragma initial-rule [wand]
 
-[material] [material-wood]
-	[material-metal]
+[material]
 	ivory
 	glass
 	ash
 	bone
+	[material-metal]
+	[material-wood]
 
 [tipped] tipped with a [tip]
 
-[wand+tip] [tip] -tipped
+[wand-tip] [tip] -tipped
+
+pragma despace-rule [wand-tip]
 
 [ornament] decorated with [ornaments]
 
@@ -45,38 +48,38 @@ pragma initial-rule [wand]
 	steel
 	silver
 
-[tip] [tip-jewel]
-	[tip-metal]
-	tuning {empty} fork
-	crystal {empty} lens
-	dragon {empty} tooth
-	dessicated {empty} eye
+[tip] tuning fork
+	crystal lens
+	dragon tooth
+	dessicated eye
 	pentagram
-	crescent {moon}
+	crescent moon
+	[tip-jewel]
+	[tip-metal]
 
 [tip-jewel] diamond
 	amethyst
 	amber
 	emerald
-	onyx {empty} disc
+	onyx disc
 	ruby
-	uncut {empty} quartz
+	uncut quartz
 	sapphire
 
-[tip-metal] golden {empty} orb
-	iron {empty} spike
-	copper {empty} sun
-	silver {empty} star
-	tin {empty} thimble
+[tip-metal] golden orb
+	iron spike
+	copper sun
+	silver star
+	tin thimble
 
-[ornaments] [ornaments-elements]
-	[ornaments-creatures]
-	[ornaments-sigils]
-	ribbons
+[ornaments] ribbons
 	chains
 	feathers
 	glitter
 	leather braids
+	[ornaments-sigils]
+	[ornaments-creatures]
+	[ornaments-elements]
 
 [ornaments-sigils] lucky charms
 	hieroglyphs

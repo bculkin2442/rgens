@@ -6,7 +6,7 @@
 
 pragma export-rule [color]
 
-[natural-color] → red
+[natural-color] red
 	black
 	blue
 	green

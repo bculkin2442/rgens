@@ -1,15 +1,19 @@
 [art-treasure-group] [art-treasure]
 	a choice between [art-treasure] and [art-treasure]
-	a choice between [art-treasure] , [art-treasure] and [art-treasure]
+	a choice between [quote-treasure] , [quote-treasure] and [quote-treasure]
 	[art-treasure] as well as [art-treasure]
-	[art-treasure] ; [art-treasure] as well as [art-treasure]
+	[quote-treasure] ; [quote-treasure] as well as [quote-treasure]
 	[art-treasure] atop [art-treasure]
 	[art-treasure] hidden under [art-treasure]
 	[art-treasure] lying next to [art-treasure]
 	[art-treasure] hiding in [art-treasure]
-	[art-treasure] hidden among [art-treasure] and [art-treasure]
+	[quote-treasure] hidden among [quote-treasure] and [quote-treasure]
 
 pragma initial-rule [art-treasure-group]
+
+[quote-treasure] ( [art-treasure] )
+
+pragma despace-rule [quote-treasure]
 
 [art-treasure] [gemstones]
 	[art-object]
@@ -95,28 +99,43 @@ pragma prefix-with [gemstone] [gemstone-sizedesc]
 	aquamarine
 	black pearl
 	topaz
-	[common-gem] and [common-gem]
-	[common-gem] and [common-gem] fused together
+	[quote-commongem] and [quote-commongem]
+	[quote-commongem] and [quote-commongem] fused together
+
+[quote-commongem] ( [common-gem] )
+
+pragma despace-rule [quote-commongem]
 
 [legendary-gem] emerald
 	fire opal
 	sapphire
-	[rare-gem] and [rare-gem]
-	[rare-gem] and [rare-gem] fused together
+	[quote-raregem] and [quote-raregem]
+	[quote-raregem] and [quote-raregem] fused together
+
+[quote-raregem] ( [rare-gem] )
+
+pragma despace-rule [quote-raregem]
 
 [epic-gem] diamond
 	jacinth
 	ruby
-	[legendary-gem] and [legendary-gem]
-	[legendary-gem] and [legendary-gem] fused together
+	[quote-epicgem] and [quote-epicgem]
+	[quote-epicgem] and [quote-epicgem] fused together
+
+[quote-epicgem] ( [epic-gem] )
+
+pragma despace-rule [quote-epicgem]
 
 [common-art] [common-goldring]
-	bone/ivory statuette
+	[statuette-mat] statuette
 	gold bracelet
 	silver necklace
 	bronze crown
 	silver-plated sword
 	silk robe
+
+[statuette-mat] bone
+	ivory
 
 [common-goldring] gold ring
 	gold ring with a [common-gem]
@@ -124,25 +143,37 @@ pragma prefix-with [gemstone] [gemstone-sizedesc]
 	gold ring with [common-gem] setting
 
 [uncommon-art] [uncommon-goldring]
-	gold/silver necklace
+	[necklace-mat] necklace
 	gold bracelet studded with [rare-gem]
 	gold necklace adorned with [common-gem]
-	silver tiara/crown decorated with [common-gem]
+	silver [tiaracrown] decorated with [common-gem]
 	ivory comb with embedded [rare-gem]
 	gold vestments
+
+[necklace-mat] gold
+	silver
+
+[tiaracrown] tiara
+	crown
 
 [uncommon-goldring] gold ring with [legendary-gem] inlay
 	gold ring with a [legendary-gem]
 	gold ring with [legendary-gem] setting
 	gold ring with [rare-gem] and [rare-gem] decorations
 
-[rare-art] gold/platinum ring with a [legendary-gem]
-	gold/silver statuette adorned with [rare-gem]
+[rare-art] [ring-mat] ring with a [legendary-gem]
+	[rare-statuette] statuette adorned with [rare-gem]
 	gold necklace adorned with [rare-gem]
 	gold crown with [rare-gem]
 	gold chalice dusted with [common-gem]
 	ceremonial gold chest-plate
 	enormous [common-gem]
+
+[ring-mat] gold
+	platinum
+
+[rare-statuette] gold
+	silver
 
 [legendary-art] platinum ring with [epic-gem]
 	gold statuette with [legendary-gem]

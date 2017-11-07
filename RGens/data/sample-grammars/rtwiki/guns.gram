@@ -1,20 +1,16 @@
-[guncorp] [guncorp-1]
-	[guncorp-1] [guncorp-2]
-	[guncorp-1] [guncorp-2]
-	[guncorp-1] [guncorp-2]
-	[guncorp-1] [guncorp-1] [guncorp-2]
-	[guncorp-1] - [guncorp-1] [guncorp-2]
-	[guncorp-1] and [guncorp-1] [guncorp-2]
-	[guncorp-1] / [guncorp-1] [guncorp-2]
+[gun-name] [1gun-name]
+	[2gun-name2]
 
-[gun-name] Chimera
+pragma prefix-with [gun-name] [2gun-name1]
+
+pragma export-rule [gun-name]
+
+[1gun-name] Chimera
 	Warrior
-	Dire Wolf
 	Bardiche
 	Courage
 	Grinder
 	Golem
-	White Knight
 	Scorpion
 	Livewire
 	Honor
@@ -53,7 +49,6 @@
 	Veteran
 	Tyrannosaurus
 	Quarterstaff
-	Hard Truth
 	Nano-Loader
 	Jiangshi
 	Vanquisher
@@ -66,22 +61,16 @@
 	Rottweiler
 	Stormcloud
 	Virtuous
-	Decision Maker
-	Grim Reaper
 	Youxia
-	White Lion
 	Sharp
 	Liberty
 	Illuminati
-	Black Unicorn
 	Dogface
-	Purring Kitten
 	Cyclone
 	Justice
 	Temple
 	Tatsu
 	Spartan
-	Night Owl
 	Wildfire
 	Scornful
 	Futurist
@@ -90,7 +79,6 @@
 	Hound
 	Nova
 	Heartache
-	Orphan Maker
 	Xiezhi
 	Patrolman
 	Mantis
@@ -99,8 +87,6 @@
 	Thrillseeker
 	Phoenix
 	Centurion
-	Black Widow
-	Lead Poisoner
 	Noble
 	Motivator
 	Rakshasa
@@ -113,11 +99,45 @@
 	Inquisitor
 	Maggot
 	Biter
-	Final Remedy
 	Taskmaster
 
+[2gun-name1] Dire
+	White
+	Hard
+	Decision
+	Grim
+	Black
+	Purring
+	Night
+	Orphan
+	Lead
+	Final
+
+[2gun-name2] Wolf
+	Knight
+	Truth
+	Maker
+	Reaper
+	Lion
+	Unicorn
+	Kitten
+	Cat
+	Owl
+	Maker
+	Widow
+	Poisoner
+	Remedy
+
+[guncorp] [guncorp-1]
+	[guncorp-1] [guncorp-2]
+	[guncorp-1] [guncorp-2]
+	[guncorp-1] [guncorp-2]
+	[guncorp-1] [guncorp-1] [guncorp-2]
+	[guncorp-1] - [guncorp-1] [guncorp-2]
+	[guncorp-1] and [guncorp-1] [guncorp-2]
+	[guncorp-1] / [guncorp-1] [guncorp-2]
+
 pragma export-rule [guncorp]
-pragma export-rule [gun-name]
 
 [guncorp-1] Ace-Eight 
 	Akinyemi       
@@ -189,8 +209,7 @@ pragma export-rule [gun-name]
 	Personal Weaponry
 	Urban
 	Thunderbolt
-	Coounterstrike
+	Counterstrike
 	Galactic
 	Unlimited
 	Tribal Alliance
-

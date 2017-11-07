@@ -1,4 +1,4 @@
-[character] → 0
+[character] 0
 	1
 	2
 	3
@@ -8,7 +8,6 @@
 	7
 	8
 	9
-	-
 	a
 	b
 	c
@@ -36,5 +35,6 @@
 	y
 	z
 	.
+	-
 
 pragma initial-rule [character]

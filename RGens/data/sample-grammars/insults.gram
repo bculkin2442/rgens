@@ -1,6 +1,10 @@
-[shakesphere-insult] Thou [insult-1] [insult-2] [insult-3] !
+[shakesphere-insult] Thou [insult-1] [insult-2] [bang-insult]
 
 pragma initial-rule [shakesphere-insult]
+
+[bang-insult] [insult-3] !
+
+pragma despace-rule [bang-insult]
 
 [insult-1] artless
 	bawdy

@@ -15,6 +15,7 @@ pragma initial-rule [kitchen]
 	braille
 	animated, speaking
 	floating
+	[creature]
 
 [kitchen-food] chicken with herb butter
 	charred human heart
