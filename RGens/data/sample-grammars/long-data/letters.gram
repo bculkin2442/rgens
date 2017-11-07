@@ -1,0 +1,134 @@
+[character] 0
+	1
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+	a
+	b
+	c
+	d
+	e
+	f
+	g
+	h
+	i
+	j
+	k
+	l
+	m
+	n
+	o
+	p
+	q
+	r
+	s
+	t
+	u
+	v
+	w
+	x
+	y
+	z
+	.
+	-
+
+pragma export-rule [character]
+
+[consonant] b
+	c
+	d
+	f
+	g
+	h
+	j
+	k
+	l
+	m
+	n
+	p
+	q
+	r
+	s
+	t
+	v
+	w
+	x
+	y
+	z
+
+pragma export-rule [consonant]
+
+[last-syllable] on
+	ly
+	er
+	son
+	row
+	way
+	s
+	ton
+	dale
+
+pragma export-rule [last-syllable]
+
+[letter] a
+	b
+	c
+	d
+	e
+	f
+	g
+	h
+	i
+	j
+	k
+	l
+	m
+	n
+	o
+	p
+	q
+	r
+	s
+	t
+	u
+	v
+	w
+	x
+	y
+	z
+
+pragma export-rule [letter]
+
+[middle-initial] a
+	b
+	c
+	d
+	e
+	f
+	g
+	h
+	j
+	k
+	l
+	m
+	n
+	o
+	p
+	r
+	s
+	t
+
+pragma export-rule [middle-initial]
+
+[vowel] a
+	e
+	i
+	o
+	u
+
+pragma export-rule [vowel]

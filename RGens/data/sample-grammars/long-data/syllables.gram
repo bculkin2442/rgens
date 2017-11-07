@@ -1,4 +1,49 @@
-[syllable] → ab
+[consonant-group] b
+	br
+	c
+	cl
+	ch
+	cr
+	d
+	dr
+	f
+	fl
+	fr
+	g
+	gl
+	gr
+	h
+	l
+	m
+	n
+	p
+	pl
+	ph
+	pr
+	s
+	st
+	sl
+	str
+	sm
+	sw
+	sp
+	sh
+	sc
+	sch
+	sn
+	t
+	th
+	tr
+	v
+	w
+	wr
+	x
+	y
+	z
+
+pragma export-rule [consonant-group]
+
+[syllable] ab
 	ack
 	ag
 	ad
@@ -529,4 +574,25 @@
 	zar
 	zin
 
-pragma initial-rule [syllable]
+pragma export-rule [syllable]
+
+[vowel-group] a
+	ai
+	au
+	ar
+	e
+	ee
+	eu
+	er
+	i
+	ir
+	io
+	o
+	or
+	ou
+	oa
+	oo
+	u
+	ur
+
+pragma export-rule [vowel-group]
