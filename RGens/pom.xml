@@ -2,37 +2,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<configuration>
-					<mainClass>bjc.rgens.newparser.RGrammarTest</mainClass>
-					<arguments>
-					</arguments>
-				</configuration>
-			</plugin>
-		</plugins>
-		<resources>
-			<resource>
-				<directory>data/</directory>
-				<includes>
-					<include>**/*.gram</include>
-					<include>**/*.cfg</include>
-				</includes>
-			</resource>
-		</resources>
-	</build>
-
 	<groupId>bjc</groupId>
 	<artifactId>RGens</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -45,22 +14,72 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<distributionManagement>
+		<snapshotRepository>
+				<id>ossrh</id>
+				<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+
+				<configuration>
+					<mainClass>bjc.rgens.newparser.RGrammarTest</mainClass>
+
+					<arguments>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>data/</directory>
+
+				<includes>
+					<include>**/*.gram</include>
+					<include>**/*.cfg</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>bjc</groupId>
 			<artifactId>BJC-Utils2</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.github.mifmif</groupId>
 			<artifactId>generex</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>edu.gatech.gtri.bk-tree</groupId>
 			<artifactId>bk-tree</artifactId>
 			<version>1.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>

@@ -14,14 +14,24 @@
 	admin
 	sysadmin
 
-[user+idno] 800 [idno-chain]
+pragma export-rule [user-role]
+
+[user-idno] [act-user+idno]
+
+pragma export-rule [user-idno]
+
+[act-user+idno] 800 [idno-chain]
 	700 [idno-chain]
 
-[idno-chain] [digit] [digit] [digit] [digit] [digit]
+[idno-chain] [digit] [digit] [digit] [digit] [digit] [digit]
 
-[sd-user] User (role: ' [user-role] ' ; id: ' [user+idno] ' ; realname : ' [full-name-and-title] ' ; email: ' [email] ' )
+[term-code] [2000..2040] 0 [1..9]
+	[2000..2040] [10..12]
 
-[sd-pmsg] recipient: [full-name-and-title] ; nquestions: [small-number] ; questions: [mission-statement]
+pragma despace-rule [term-code]
+pragma export-rule [term-code]
 
-pragma export-rule [sd-user]
-pragma export-rule [sd-pmsg]
+[section-code] [0..9] [0..9]
+
+pragma despace-rule [section-code]
+pragma export-rule [section-code]
