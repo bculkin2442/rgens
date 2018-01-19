@@ -16,6 +16,23 @@
 
 pragma export-rule [user-role]
 
+[dept-id] CS
+	IS
+	MATH
+	ENGL
+	PHYS
+	CHEM
+	PSYC
+	[synth+deptid]
+
+pragma export-rule [dept-id]
+
+[synth+deptid] [letter]
+
+pragma suffix-with [synth+deptid] [letter]
+pragma suffix-with [synth+deptid] [letter]
+pragma suffix-with [synth+deptid] [letter]
+
 [user-idno] [act-user+idno]
 
 pragma export-rule [user-idno]

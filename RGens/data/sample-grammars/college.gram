@@ -687,6 +687,8 @@ pragma prefix-with [university-body] [cardinal]
 	[soft-science]
 	[college-major-tech]
 
+pragma export-rule [university-subject]
+
 [hard-science] quantum mechanics
 	planar geometry
 	vector calculus
