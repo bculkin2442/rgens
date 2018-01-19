@@ -256,10 +256,10 @@ public class RGrammarSet {
 				 */
 				Path convPath = cfgParent.resolve(path.toString());
 
-				if(Files.isDirectory(convPath)) {
-					/* @TODO implement subset grammars */
-					throw new GrammarException("Sub-grammar sets aren't implemented yet");
-				} else if (convPath.getFileName().endsWith(".gram")) {
+				//if(Files.isDirectory(convPath)) {
+				//	/* @TODO implement subset grammars */
+				//	throw new GrammarException("Sub-grammar sets aren't implemented yet");
+				//} else if (convPath.getFileName().endsWith(".gram")) {
 					/* Load grammar file. */
 					try {
 						BufferedReader fis = Files.newBufferedReader(convPath);
@@ -278,10 +278,10 @@ public class RGrammarSet {
 						String msg = String.format("Error loading file '%s'", path);
 						throw new GrammarException(msg, gex);
 					}
-				} else {
-					String msg = String.format("Unrecognized file type '%s'");
-					throw new GrammarException(msg);
-				}
+				//} else {
+				//	String msg = String.format("Unrecognized file type '%s'", convPath.getFileName());
+				//	throw new GrammarException(msg);
+				//}
 			}
 		}
 

@@ -16,14 +16,14 @@
 
 pragma export-rule [user-role]
 
-[dept-id] CS
-	IS
+[dept-id] [synth+deptid]
+
+[real-deptid] CSIS
 	MATH
 	ENGL
 	PHYS
 	CHEM
 	PSYC
-	[synth+deptid]
 
 pragma export-rule [dept-id]
 
