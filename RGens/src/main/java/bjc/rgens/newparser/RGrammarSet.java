@@ -254,7 +254,7 @@ public class RGrammarSet {
 				 * Convert from configuration relative path to
 				 * absolute path.
 				 */
-				Path convPath = cfgParent.resolve(path);
+				Path convPath = cfgParent.resolve(path.toString());
 				File fle      = convPath.toFile();
 
 				if (fle.isDirectory()) {
