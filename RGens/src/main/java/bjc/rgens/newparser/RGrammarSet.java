@@ -1,8 +1,8 @@
 package bjc.rgens.newparser;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -255,15 +255,14 @@ public class RGrammarSet {
 				 * absolute path.
 				 */
 				Path convPath = cfgParent.resolve(path.toString());
-				File fle      = convPath.toFile();
 
-				if (fle.isDirectory()) {
+				if(Files.isDirectory(convPath)) {
 					/* @TODO implement subset grammars */
 					throw new GrammarException("Sub-grammar sets aren't implemented yet");
-				} else if (fle.getName().endsWith(".gram")) {
+				} else if (convPath.getFileName().endsWith(".gram")) {
 					/* Load grammar file. */
 					try {
-						FileReader fis = new FileReader(fle);
+						BufferedReader fis = Files.newBufferedReader(convPath);
 						RGrammar gram = RGrammarParser.readGrammar(fis);
 						fis.close();
 
