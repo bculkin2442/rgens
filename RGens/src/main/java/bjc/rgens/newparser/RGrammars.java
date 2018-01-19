@@ -2,9 +2,13 @@ package bjc.rgens.newparser;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Get access to the included grammars.
@@ -15,10 +19,14 @@ public class RGrammars {
 	private static RGrammarSet gramSet;
 
 	private static void loadSet() {
-		URL rsc = RGrammarTest.class.getResource("/server-config-sample.cfg");
-
 		try {
-			Path cfgPath = Paths.get(rsc.toURI());
+			URI rsc = RGrammarTest.class.getResource("/server-config-sample.cfg").toURI();
+
+			Map<String, String> env = new HashMap<>();
+			env.put("create", "true");
+			FileSystem zipfs = FileSystems.newFileSystem(rsc, env);
+
+			Path cfgPath = Paths.get(rsc);
 
 			gramSet = RGrammarSet.fromConfigFile(cfgPath);
 		} catch (IOException | URISyntaxException ex) {
