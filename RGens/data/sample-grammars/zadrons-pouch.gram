@@ -68,13 +68,20 @@ pragma export-rule [zadrons-item]
 	[card]
 	[card]
 
-[crys-sphere] → [sphere-type] spheres
+[crys-sphere] → crystal of [crystal-type]
+	[crys-act]
+	[crys-act]
+	[crys-act]
+	[crys-act]
+
+[crys-act] → [sphere-type] spheres
 	[sphere-type] sphere
 	lens of [lens-type]
 	[crystal-type] sphere
-	crystal of [crystal-type]
-	crystal ball
-	crystal ball of [crys-suffix]
+	ball
+	ball of [crys-suffix]
+
+pragma prefix-with [crys-act] crystal
 
 [sphere-type] → microphonic
 	seeing-eye

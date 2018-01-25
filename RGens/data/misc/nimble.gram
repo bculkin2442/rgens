@@ -1,0 +1,30 @@
+[nimble-bimble] [bimble]
+
+pragma prefix-with [nimble-bimble] [nimble-plural]
+pragma suffix-with [nimble-bimble] [nimble-plural]
+
+pragma initial-rule [nimble-bimble]
+
+[nimble-plural] [nimble-art] [nimble]
+
+[bimble] bimble
+	nimble
+	bimble
+	nimble
+	bimble
+	nimble
+	dindle
+	symbol
+	frindle
+	kindle
+	titties
+
+[nimble-art] the
+	my
+	her
+	all over
+	this
+	while they
+	a
+
+[nimble] [bimble]
