@@ -1,4 +1,4 @@
-package bjc.rgens.newparser;
+package bjc.rgens.parser;
 
 /**
  * The exception thrown when something goes wrong while parsing a

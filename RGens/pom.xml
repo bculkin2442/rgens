@@ -41,8 +41,7 @@
 				<version>1.2.1</version>
 
 				<configuration>
-					<mainClass>bjc.rgens.newparser.RGrammarTest</mainClass>
-
+					<mainClass>bjc.rgens.parser.RGrammarTest</mainClass>
 					<arguments>
 					</arguments>
 				</configuration>

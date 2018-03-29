@@ -1,14 +1,14 @@
-package bjc.rgens.newparser;
+package bjc.rgens.parser;
 
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+
+import static bjc.rgens.parser.RuleCase.CaseType.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import static bjc.rgens.newparser.RuleCase.CaseType.*;
 
 /**
  * Construct randomized grammars piece by piece.

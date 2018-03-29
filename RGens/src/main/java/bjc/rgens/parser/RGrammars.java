@@ -1,4 +1,4 @@
-package bjc.rgens.newparser;
+package bjc.rgens.parser;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

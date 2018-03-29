@@ -1,6 +1,6 @@
-package bjc.rgens.newparser;
+package bjc.rgens.parser;
 
-import static bjc.rgens.newparser.CaseElement.ElementType.*;
+import static bjc.rgens.parser.CaseElement.ElementType.*;
 
 /*
  * @TODO 10/11/17 Ben Culkin :CaseElementSplit
