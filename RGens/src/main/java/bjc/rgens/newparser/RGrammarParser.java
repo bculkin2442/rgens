@@ -368,19 +368,17 @@ public class RGrammarParser {
 				String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
 
 				try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
+					Block whereBody = whereReader.next();
 
+					/**
+					 * @TODO 10/11/17 Ben Culkin :WhereBlocks
+					 * 	Implement where blocks. 
+					 *
+					 * 	A where block has the context evaluated
+					 * 	in a new context, and the body executed
+					 * 	in that context.
+					 */
 				}
-
-				Block whereBody = whereReader.next();
-
-				/**
-				 * @TODO 10/11/17 Ben Culkin :WhereBlocks
-				 * 	Implement where blocks. 
-				 *
-				 * 	A where block has the context evaluated
-				 * 	in a new context, and the body executed
-				 * 	in that context.
-				 */
 			} catch (GrammarException gex) {
 				throw new GrammarException(String.format("Error in where block (%s)",
 				                           whereReader.getBlock()), gex);

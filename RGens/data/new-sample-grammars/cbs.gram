@@ -1,0 +1,86 @@
+where
+	[boss+codirector] → [boss-co] Director
+	.
+	[boss+cochief] → [boss-co] Chief
+	.
+	[boss+cohead] → [boss-co] Head
+	.
+	[boss+copresident] → [boss-co] President
+	.
+	[boss+comanager] → [boss-co] Manager
+	.
+	[boss-managing] → Managing
+		Acting
+		General
+	.
+	[boss-vice] → Vice
+		Vice
+		Vice
+		Corporate Vice
+		{empty}
+	.
+	[boss-co] → Co-
+		{empty}
+	.
+in
+	[boss-title] → [boss-vice] [boss+codirector]
+		[boss+cochief]
+		[boss+cohead]
+		[boss-vice] [boss+copresident]
+		Supervisor
+		[boss+comanager]
+end
+
+[boss-age] → Senior
+	{empty}
+
+[boss-exec] → Executive
+	Principal
+	{empty}
+	{empty}
+
+[boss-groupal] → Group
+	Global
+	{empty}
+	{empty}
+
+[boss-department] → Human Resources
+	Controlling
+	Internal Audit
+	Legal
+	Operations
+	Management Office
+	Customer Relations
+	Client Leadership
+	Client Relationship
+	Business Planning
+	Business Operations
+	IT Strategy
+	IT Operations
+	Marketing
+	Strategic Planning
+	Facilities Management
+	Innovation
+	Identity
+	Branding
+	Diversity and Exclusion
+
+[boss-departmentrole] → [boss-department]
+	[boss-department]
+	[boss-department]
+	[boss-department]
+	[boss-department]
+	Visionary
+	Digital
+	Technical
+	Manifesto
+
+[boss-catalyst] → Catalyst
+	Futurist
+	Officer
+	Officer
+
+[boss] → [boss-managing] [boss-age] [boss-exec] [boss-title] of
+[boss-department]
+	[boss-groupal] Chief [boss-departmentrole] [boss-catalyst]
+

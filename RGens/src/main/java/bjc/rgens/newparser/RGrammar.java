@@ -202,7 +202,7 @@ public class RGrammar {
 		body = body.replaceAll("([)\\]])\\s+([)\\]])", "$1$2");
 
 		/* Handle inter-word punctuation. */
-		body = body.replaceAll(" ([,:.])", "$1 ");
+		body = body.replaceAll(" ([,:.!])", "$1 ");
 
 		/* Handle intra-word punctuation. */
 		body = body.replaceAll("\\s?([-/])\\s?", "$1");
