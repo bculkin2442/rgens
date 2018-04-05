@@ -1,5 +1,6 @@
 package bjc.rgens.parser;
 
+import bjc.rgens.parser.elements.CaseElement;
 import bjc.utils.funcdata.IList;
 
 /*
