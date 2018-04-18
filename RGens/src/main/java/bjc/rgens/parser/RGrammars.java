@@ -24,6 +24,7 @@ public class RGrammars {
 
 			Map<String, String> env = new HashMap<>();
 			env.put("create", "true");
+			@SuppressWarnings("unused")
 			FileSystem zipfs = FileSystems.newFileSystem(rsc, env);
 
 			Path cfgPath = Paths.get(rsc);
@@ -38,17 +39,28 @@ public class RGrammars {
 		}
 	}
 
+	/**
+	 * Generate an exported rule.
+	 * 
+	 * @param exportName
+	 *            The rule to generate.
+	 * @return The generated rule
+	 * @throws GrammarException
+	 *             If something went wrong.
+	 */
 	public static String generateExport(String exportName) throws GrammarException {
-		if(gramSet == null) loadSet();
+		if (gramSet == null)
+			loadSet();
 
-		if(!gramSet.getExportedRules().contains(exportName)) {
-			throw new GrammarException(String.format("No built-in rule named %s", exportName));
+		if (!gramSet.getExportedRules().contains(exportName)) {
+			throw new GrammarException(String.format("No exported rule named %s", exportName));
 		}
 
 		RGrammar gram = gramSet.getExportSource(exportName);
 
 		String res = gram.generate(exportName);
-		if(exportName.contains("+")) res = res.replaceAll("\\s+", "");
+		if (exportName.contains("+"))
+			res = res.replaceAll("\\s+", "");
 
 		return res;
 	}

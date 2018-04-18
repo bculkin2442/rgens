@@ -19,7 +19,9 @@ import java.util.Map;
  * @author student
  */
 public class RGrammarParser {
-	/* Whether we are in debug mode or not. */
+	/**
+	 *  Whether we are in debug mode or not.
+	 */
 	public static final boolean DEBUG = false;
 
 	/*
@@ -369,6 +371,7 @@ public class RGrammarParser {
 				String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
 
 				try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
+					@SuppressWarnings("unused")
 					Block whereBody = whereReader.next();
 
 					/**

@@ -179,7 +179,7 @@ public class RGrammarSet {
 			return grammarName;
 		} else if (!grammars.containsKey(grammarName)) {
 			String msg = String.format("No grammar with name '%s' defined", grammarName);
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(msg);
 		}
 
 		return loadedFrom.getOrDefault(grammarName, "Unknown");

@@ -1,7 +1,5 @@
 package bjc.rgens.parser.elements;
 
-import static bjc.rgens.parser.elements.CaseElement.ElementType.*;
-
 import bjc.rgens.parser.GrammarException;
 
 /*
