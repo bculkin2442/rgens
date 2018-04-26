@@ -36,3 +36,10 @@
 @TODO 10/30/17 Ben Culkin :RegexPragma
 	Add a pragma that applies a regex substitution to the generated version
 	of a rule.
+
+@TODO 4/25/18 Ben Culkin :Debugging
+	Add a way to print out the rules as a tree format, so as to perform
+	better debugging of rules.
+
+	Once this has been done, consider doing a CLI interface that allows
+	manipulating and using grammars.
