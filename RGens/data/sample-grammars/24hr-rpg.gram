@@ -5,7 +5,15 @@
 	     [rpg-part] : [rpg-part] the [rpg-part]
 	     [rpg-part] : [rpg-part] [rpg-part]
 
+[rpg-name-phrase] [quote-rpg-name] was just released
+	[quote-rpg-name] vs [quote-rpg-name] : which is better?
+	[quote-rpg-name] : will it live up to the hype?
+	[quote-rpg-name] released its [ordinal] edition today
+
+[quote-rpg-name] ( [rpg-name] )
+
 pragma initial-rule [rpg-name]
+pragma export-rule [rpg-name-phrase]
 
 [rpg-part] → tits
 	     teeth

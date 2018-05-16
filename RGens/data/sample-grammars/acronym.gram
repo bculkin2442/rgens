@@ -1,9 +1,25 @@
-[acronym] [actual+acronym]
+[acronym] [acronym-part]
+	[acronym-part]
+	[acronym-part]
+	[acronym-part]
+	[acronym-phrase]
 
 pragma initial-rule [acronym]
 
-[actual+acronym] [consonant] [vowel] [consonant]
+pragma despace-rule [acronym]
+
+[acronym-phrase] [acronym-part] / [acronym-part]
+	[acronym-part] - [acronym-part]
+
+[acronym-part] [join-acronym]
+	[dot-acronym]
+
+[join-acronym] [consonant] [vowel] [consonant]
 	[consonant-group] [consonant] [consonant]
 	[consonant] [consonant] [consonant] [consonant]
 	[consonant] [vowel] [consonant] [vowel]
 	[letter] [vowel-group] [letter] [consonant]
+
+[dot-acronym] [consonant] . [vowel] . [consonant]
+	[consonant] . [consonant] . [consonant] . [consonant]
+	[consonant] . [vowel] . [consonant] . [vowel]

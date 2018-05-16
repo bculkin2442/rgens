@@ -1,8 +1,8 @@
 [base-treasures] [base-treasure]
-	         [quote-treasure] as well as [quote-treasure]
-	         [quote-treasure] or [quote-treasure]
-	         [quote-treasure] , and [quote-treasure] as well as [quote-treasure]
-	         [quote-treasure] , [quote-treasure] or [quote-treasure]
+	[quote-treasure] as well as [quote-treasure]
+	[quote-treasure] or [quote-treasure]
+	[quote-treasure] , and [quote-treasure] as well as [quote-treasure]
+	[quote-treasure] , [quote-treasure] or [quote-treasure]
 
 pragma initial-rule [base-treasures]
 
@@ -11,38 +11,42 @@ pragma initial-rule [base-treasures]
 pragma despace-rule [quote-treasure]
 
 [base-treasure] a [item]
+	a [item]
+	a [item]
 	[non-item]
 
 [non-item] [money]
-	   [money]
-	   nothing
+	[money]
+	[money]
+	[money]
+	nothing
 
 [money] [diablo-amount] [money-type]
 
 [diablo-amount] 1
-	        5
-	        10
-	        20
-	        50
-	        100
-	        200
-	        500
-	        1000
+	5
+	10
+	20
+	50
+	100
+	200
+	500
+	1000
 
 pragma export-rule [diablo-amount]
 
-[money-type] coin
+[money-type] coins
 
 pragma prefix-with [money-type] [metal-type]
 
 [metal-type] copper
-	     silver
-	     gold
-	     platinum
+	silver
+	gold
+	platinum
 
-[item]  [item-act]
-	[item-act] of [suffix]
-	[item-act] of [suffix] and [suffix]
+[item] [d2-item-type]
+	[d2-item-type] of [suffix]
+	[d2-item-type] of [suffix] and [suffix]
 
 pragma prefix-with [item] [prefix]
 pragma prefix-with [item] [prefix]

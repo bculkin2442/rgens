@@ -1,0 +1,143 @@
+[gemstones] [gemstone]
+	[gemstone]
+	[gemstone]
+	[gemstone-group]
+
+[gemstone-group] pair of [gemstone]
+	[gemstone-sizedesc] pile of [gemstone]
+	[gemstone-sizedesc] hoard of [gemstone]
+
+pragma initial-rule [gemstones]
+pragma suffix-with [gemstones] jewels
+
+[gemstone] [gemstone-1]
+	[gemstone-1]
+	[gemstone-1]
+	[gemstone-1]
+	[ds-gem]
+
+[gemstone-1] [common-gem]
+	[rare-gem]
+	[legendary-gem]
+	[epic-gem]
+
+pragma export-rule [gemstone]
+
+[gemstone-sizedesc] [size]
+	[gemstone-desc]
+	[size] [gemstone-desc]
+	[gemstone-desc] [size]
+
+pragma prefix-with [gemstone] [gemstone-sizedesc]
+
+[size] tiny
+	miniscule
+	small
+	medium
+	large
+	huge
+	titanic
+
+[gemstone-desc] flawless
+	flawed
+	cracked
+	faceted
+	cut
+	uncut
+	fake
+
+[common-gem] amber
+	amethyst
+	garnet
+	moonstone
+	jade
+	pearl
+	peridot
+	turquoise
+	[quote-raregem] of poor [extra-deficit]
+
+pragma export-rule [common-gem]
+
+[rare-gem] alexandrite
+	aquamarine
+	black pearl
+	topaz
+	[rare-gem-misc]
+
+[rare-gem-misc] [quote-commongem] of extraordinary [extra-quality]
+	[quote-commongem] and [quote-commongem]
+	[quote-commongem] mixed with [quote-commongem]
+	[quote-commongem] and [quote-commongem] fused together
+	[quote-legendarygem] of poor [extra-deficit]
+
+[extra-deficit] [extra-qualities]
+	[extra-qualities]
+	[extra-qualities]
+	[extra-qualities]
+	[extra-qualities] but excellent [extra-qualities]
+
+[extra-quality] [extra-qualities]
+	[extra-qualities]
+	[extra-qualities]
+	[extra-qualities]
+	[extra-qualities] but poor [extra-qualities]
+
+[extra-qualities] [extra-quality-part]
+	[extra-quality-part]
+	[extra-quality-part]
+	[extra-quality-phrase]
+
+[extra-quality-phrase] [extra-quality-part] and [extra-quality-part]
+	[extra-quality-part] and [extra-quality-part]
+	[extra-quality-part] , [extra-quality-part] and [extra-quality-part]
+
+[extra-quality-part] size
+	color
+	cut
+	quality
+	clarity
+	brilliance
+
+[quote-commongem] ( [common-gem] )
+
+pragma despace-rule [quote-commongem]
+pragma export-rule [rare-gem]
+
+[legendary-gem] emerald
+	fire opal
+	sapphire
+	[legendary-gem-misc]
+
+[legendary-gem-misc] [quote-raregem] of extraordinary [extra-quality]
+	[quote-raregem] and [quote-raregem]
+	[quote-raregem] mixed with [quote-raregem]
+	[quote-raregem] and [quote-raregem] fused together
+	[quote-epicgem] of poor [extra-deficit]
+
+[quote-raregem] ( [rare-gem] )
+
+pragma despace-rule [quote-raregem]
+pragma export-rule [legendary-gem]
+
+[epic-gem] [epic-gem-1]
+	[epic-gem-1]
+	[epic-gem-1]
+	[epic-gem-1]
+	[ds-gem]
+
+[epic-gem-1] diamond
+	jacinth
+	ruby
+	[epic-gem-misc]
+
+[epic-gem-misc] [quote-legendarygem] of extraordinary [extra-quality]
+	[quote-legendarygem] and [quote-legendarygem]
+	[quote-legendarygem] mixed with [quote-legendarygem]
+	[quote-legendarygem] and [quote-legendarygem] fused together
+
+[quote-legendarygem] ( [legendary-gem] )
+
+[quote-epicgem] ( [epic-gem] )
+
+pragma despace-rule [quote-legendarygem]
+pragma export-rule [epic-gem]

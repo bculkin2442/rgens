@@ -1,25 +1,40 @@
-[us-postal-address] [us-postal-address1]
-	[us-postal-address1]
-	[us-postal-address1]
-	[us-postal-address1]
-	[company]
+[us-postal-address] [street-address]
 
 pragma initial-rule [us-postal-address]
 
-[com-street-address] , [street-address]
+[address-prefix] [address-prefix-body] ,
 
-[city-post-zip] , [city] , [us-postalstate] [zipcode]
+[address-prefix-suffix] mail at
+	contact at
+	visit us at
+	located at
 
-pragma suffix-with [us-postal-address] [com-street-address]
-pragma suffix-with [us-postal-address] [city-post-zip]
+pragma suffix-with [address-prefix] [address-prefix-suffix]
 
-[us-postal-address1] [full-name]
+[address-prefix-prefix] [full-name]
 	[full-name-and-title]
 	[person]
 
-[com-company] , [company]
+[address-prefix-body] [address-prefix-prefix]
+	[address-prefix-prefix]
+	[company]
 
-pragma suffix-with [us-postal-address1] [com-company]
+[city-post-zip] , [city] , [us-postalstate] [zipcode]
+
+pragma prefix-with [us-postal-address] [address-prefix]
+pragma suffix-with [us-postal-address] [city-post-zip]
+
+[com-company] , [company]
+	, [work-type] [company]
+
+[work-type] works for
+	works at
+	works with
+	contractor for
+	president of
+	interning at
+
+pragma suffix-with [address-prefix-prefix] [com-company]
 
 [street-address] [medium-number] [street]
 	p.o. box [medium-number]
@@ -56,6 +71,7 @@ pragma suffix-with [street] [street-suffix]
 	s.
 	e.
 	w.
+	[cardinal]
 
 [street-suffix] street
 	st.

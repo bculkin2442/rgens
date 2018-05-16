@@ -43,3 +43,11 @@
 
 	Once this has been done, consider doing a CLI interface that allows
 	manipulating and using grammars.
+
+@TODO 5/10/18 Ben Culkin :Despace
+	Add a generalized form of despace-rule that allows inserting arbitray
+	text between rule bits. Maybe call it 'intersperse-rule'?
+
+@TOD 5/10/18 Ben Culkin :RuleInclusion
+	Add some way to sort of 'import' a rules body into another rule so as to
+	not throw off probability by splitting.

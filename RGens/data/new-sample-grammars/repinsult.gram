@@ -1,6 +1,11 @@
-[rep-insult] [brag-verb] [rude-phrase] [rude-scapegoat]
+[rep-insult] [rude-scapegoat]
 
-[brag-verb] → abolish
+pragma prefix-with [rep-insult] [rude-phrase]
+pragma prefix-with [rep-insult] [brag-verb]
+
+pragma initial-rule [rep-insult]
+
+[brag-verb] abolish
 	ban
 	bash
 	beat
@@ -23,7 +28,7 @@
 	steam-roller
 	wipe
 
-[rude-adj] → AIDS-infested
+[rude-phrase] AIDS-infested
 	America-hating
 	Arab
 	ass-pounding
@@ -85,7 +90,7 @@
 	whining
 	wimpoid
 
-[rude-noun] → alien
+[rude-scapegoat] alien
 	America-hater
 	animal
 	Arab

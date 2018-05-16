@@ -15,13 +15,19 @@ pragma initial-rule [art-treasure-group]
 
 pragma despace-rule [quote-treasure]
 
-[art-treasure] [gemstones]
-	[art-object]
+[art-treasure] [unowned-art-treasure]
+	[unowned-art-treasure]
+	[unowned-art-treasure]
+	[unowned-art-treasure]
+	[owned-art-treasure]
 
 pragma export-rule [art-treasure]
+pragma prefix-with [art-treasure] a(n)
 
-pragma prefix-with [art-treasure] [possesive-title]
-pragma prefix-with [art-treasure-group] a(n)
+[unowned-art-treasure] [gemstones]
+	[art-objects]
+
+[owned-art-treasure] [possesive-title] [unowned-art-treasure]
 
 [possesive-title] [full-name-and-title] 's
 
@@ -29,6 +35,7 @@ pragma prefix-with [art-treasure-group] a(n)
 
 pragma export-rule [art-objects]
 pragma prefix-with [art-objects] [art-object-pref]
+pragma prefix-with [art-objects] [size]
 
 [art-object-pref] counterfeit
 	ancient
@@ -47,28 +54,6 @@ pragma prefix-with [art-objects] [art-object-pref]
 	[mythic-art]
 
 pragma export-rule [art-object]
-pragma prefix-with [art-object] [size]
-
-[gemstones] [gemstone]
-	pair of [gemstone]
-	[gemstone-sizedesc] pile of [gemstone]
-	[gemstone-sizedesc] hoard of [gemstone]
-
-pragma export-rule [gemstones]
-
-[gemstone] [common-gem]
-	[rare-gem]
-	[legendary-gem]
-	[epic-gem]
-
-pragma export-rule [gemstone]
-
-[gemstone-sizedesc] [size]
-	[gemstone-desc]
-	[size] [gemstone-desc]
-	[gemstone-desc] [size]
-
-pragma prefix-with [gemstone] [gemstone-sizedesc]
 
 [size] tiny
 	miniscule
@@ -77,54 +62,6 @@ pragma prefix-with [gemstone] [gemstone-sizedesc]
 	large
 	huge
 	titanic
-
-[gemstone-desc] flawless
-	flawed
-	cracked
-	faceted
-	cut
-	uncut
-	fake
-
-[common-gem] amber
-	amethyst
-	garnet
-	moonstone
-	jade
-	pearl
-	peridot
-	turquoise
-
-[rare-gem] alexandrite
-	aquamarine
-	black pearl
-	topaz
-	[quote-commongem] and [quote-commongem]
-	[quote-commongem] and [quote-commongem] fused together
-
-[quote-commongem] ( [common-gem] )
-
-pragma despace-rule [quote-commongem]
-
-[legendary-gem] emerald
-	fire opal
-	sapphire
-	[quote-raregem] and [quote-raregem]
-	[quote-raregem] and [quote-raregem] fused together
-
-[quote-raregem] ( [rare-gem] )
-
-pragma despace-rule [quote-raregem]
-
-[epic-gem] diamond
-	jacinth
-	ruby
-	[quote-epicgem] and [quote-epicgem]
-	[quote-epicgem] and [quote-epicgem] fused together
-
-[quote-epicgem] ( [epic-gem] )
-
-pragma despace-rule [quote-epicgem]
 
 [common-art] [common-goldring]
 	[statuette-mat] statuette

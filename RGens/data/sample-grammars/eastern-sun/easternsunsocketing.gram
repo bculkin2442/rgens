@@ -1,0 +1,17 @@
+[es-socketable] [es-gem]
+	[es-gem]
+	[es-rune]
+
+[gem-quality] chipped
+	flawed
+	blemished
+	flawless
+	extraordinary
+	perfect
+
+[es-gem] [gem-1
+	[gem-1]
+	[gem-2]
+	[gem-2]
+	[gem-quality] [gem-1]
+	[gem-quality] [gem-1]

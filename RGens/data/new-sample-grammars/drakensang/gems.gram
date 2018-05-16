@@ -1,0 +1,91 @@
+[ds-gem] [gem-type]
+	[gem-type]
+	[gem-type] of qaizah
+	[unique-gem]
+
+pragma initial-rule [ds-gem]
+
+[gem-quality] [gem-quality-normal]
+	[gem-quality-normal]
+	[gem-quality-alt]
+
+[gem-quality-normal] flawed
+	splintered
+	simple
+	polished
+	radiant
+	flawless
+	sacred
+	royal
+
+[gem-quality-alt] [gem-quality-alt-1]
+
+[gem-quality-alt-1] lesser
+	cut
+	cruciate
+	astral
+
+[gem-quality-alt-2] lesser
+	small
+	large
+	huge
+
+[gem-adjective] crystal
+	festive
+	solstice
+
+pragma prefix-with [ds-gem] [gem-adjective]
+pragma prefix-with [ds-gem] [gem-quality]
+
+[gem-type] ruby
+	onyx
+	sapphire
+	cyanite
+	diamond
+	amethyst
+	peridot
+
+[gem-category] gem
+	jewel
+	star
+	moon
+	stone
+	snowflake
+	crystal
+	skull
+
+[gem-descr] timeless
+	concentrated
+	fortified
+	powerful
+
+pragma prefix-with [gem-type] [gem-descr]
+pragma suffix-with [gem-type] [gem-category]
+
+[unique-gem] [gem-category] of [unique-trail]
+	[unique-lead] [gem-category]
+	[unique-type]
+	[gem-category] of [unique-trail]
+	[unique-lead] [gem-category]
+	[unique-type]
+	[gem-category]
+
+[unique-trail] insight
+	immunity
+	rage
+	acceleration
+	shadows
+	willpower
+
+[unique-lead] solstice
+	fluorite
+	shadow
+	accelerating
+	equipment fortifying
+
+[unique-type] bloodstone
+	moonstone
+
+pragma prefix-with [unique-type] [gem-descr]
+pragma prefix-with [unique-lead] [gem-descr]
+pragma prefix-with [unique-trail] [gem-descr]

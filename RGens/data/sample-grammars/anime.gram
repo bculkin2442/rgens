@@ -1,16 +1,22 @@
-[anime-name] [first-name]
+[anime-name] [short-anime-name]
+	[short-anime-name]
+	[long-anime-name]
+
+[short-anime-name] [first-name]
 	[second-name]
 	[third-name]
 
+[long-anime-name] [short-anime-name]
+
 pragma initial-rule [anime-name]
 
-pragma suffix-with [anime-name] [first-name]
-pragma suffix-with [anime-name] [second-name]
-pragma suffix-with [anime-name] [third-name]
+pragma suffix-with [short-anime-name] [first-name]
+pragma suffix-with [short-anime-name] [second-name]
+pragma suffix-with [short-anime-name] [third-name]
 
-pragma prefix-with [anime-name] [third-name]
-pragma prefix-with [anime-name] [second-name]
-pragma prefix-with [anime-name] [first-name]
+pragma prefix-with [long-anime-name] [third-name]
+pragma prefix-with [long-anime-name] [second-name]
+pragma prefix-with [long-anime-name] [first-name]
 
 [first-name] Vampire
 	Cat

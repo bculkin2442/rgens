@@ -1,4 +1,4 @@
-[item-act] [armor]
+[d2-item-type] [armor]
 	[headgear]
 	[accoutrements]
 	[shields]
@@ -16,8 +16,15 @@
 	[gems]
 	[inscriptions]
 	[perishables]
+	[ds-items]
+	[ds-items]
+	[ds-items]
 
-pragma export-rule [item-act]
+[ds-items] [ds-gem]
+	[ds-rune]
+	[ds-armor]
+
+pragma export-rule [d2-item-type]
 
 [armor] [light-armor]
 	[medium-armor]
@@ -144,6 +151,7 @@ pragma prefix-with [clubs] [club-prefix]
 	halberd
 
 [axes] axe
+	hatchet
 
 pragma prefix-with [axes] [axe-type]
 pragma prefix-with [axes] [axe-size]
@@ -199,6 +207,7 @@ pragma prefix-with [act-crossbow] [crossbow-weight]
 
 [crossbow-weight] light
 	heavy
+	hand
 
 [wands] wand
 	torch
@@ -207,11 +216,12 @@ pragma prefix-with [act-crossbow] [crossbow-weight]
 pragma prefix-with [wands] [wand-type]
 
 [wand-type] bone
-	yew
+	[tree]
 
 [staves] staff
 
 pragma prefix-with [staves] [staff-type]
+pragma prefix-with [staves] [tree]
 pragma prefix-with [staves] [staff-length]
 
 [staff-type] gnarled

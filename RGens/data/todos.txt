@@ -1,2 +1,2 @@
-@TODO 10/26/17 Ben Culkin :Greek
-	Add a long rule for greek letters
+:TODO 5/10/18 Ben Culkin :EasternSun
+	Finish up the new-style Diablo generator, using Eastern Sun things
