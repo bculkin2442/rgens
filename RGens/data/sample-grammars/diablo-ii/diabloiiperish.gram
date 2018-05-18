@@ -16,16 +16,33 @@ pragma export-rule [perishables]
 	scalp
 	spleen
 	soul
+	bone
+	skull
+	blood
+	ribcage
 
 [perishable-type] potion
 	oil
 	herb
 	elixir
 	resin
+	flask
+	spice
+	salve
 
-[perishable-effect] [restore-effect]
-	light [restore-effect]
-	full [restore-effect]
+pragma prefix-with [perishable-type] [bodypart]
+
+[perishable-degree] light
+	medium
+	full
+
+[perishable-effect] [perishable-effect-1]
+	[perishable-effect-1]
+	[perishable-effect-1]
+	[perishable-effect-1]
+	[perishable-degree] [perishable-effect-1]
+
+[perishable-effect-1] [restore-effect]
 	detox
 	restoration
 	flaming
@@ -97,8 +114,10 @@ pragma export-rule [perishables]
 	skill
 	fortitude
 	blacksmith’s
+	blacksmithing
 	permanence
 	enchantment
+	enchanting
 
 [restore-effect] healing
 	mana

@@ -1,4 +1,10 @@
-[prefix] [armor-class]
+[d2-prefix] [d2-prefix-part]
+	[d2-prefix-part]
+	[d2-prefix-chain]
+
+pragma export-rule [d2-prefix]
+
+[d2-prefix-part] [armor-class]
 	[saving-throw]
 	[foe-reaction]
 	[skill-improve]
@@ -11,8 +17,6 @@
 	[extra-damage]
 	[to-hit-damage]
 	[item-charges]
-
-pragma export-rule [prefix]
 
 [armor-class] sturdy
 	fine
