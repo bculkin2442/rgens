@@ -44,9 +44,20 @@ pragma prefix-with [money-type] [metal-type]
 	gold
 	platinum
 
-[item] [d2-item-type]
-	[d2-item-type] of [suffix]
-	[d2-item-type] of [suffix] and [suffix]
+[item] [item-types]
+	[item-types]
+	[item-types]
+	[item-types]
+	[item-types] [d2-suffix]
+	[item-types] [d2-suffix]
+	[d2-prefix] [item-types]
+	[d2-prefix] [item-types]
+	[d2-prefix] [item-types] [d2-suffix]
 
-pragma prefix-with [item] [prefix]
-pragma prefix-with [item] [prefix]
+[item-types] [d2-item-type]
+	[d2-item-type]
+	[ds-items]
+
+[ds-items] [ds-gem]
+	[ds-rune]
+	[ds-armor]

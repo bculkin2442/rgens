@@ -1,5 +1,24 @@
+[gun-phrase] [quote-gunname] was released today
+	[quote-gunname] vs. [quote-gunname] shootout
+	[quote-guncorp] is going out of business
+	[quote-guncorp] was bought by [quote-guncorp]
+
+[quote-gunname] ( [gun-name] )
+
+[quote-guncorp] ( [guncorp] )
+
+pragma initial-rule [gun-phrase]
+
 [gun-name] [1gun-name]
 	[2gun-name2]
+	[1gun-name]
+	[2gun-name2]
+	[1gun-name]
+	[2gun-name2]
+	[2gun-name1] [2gun-name2]
+	[2gun-name1] [1gun-name]
+	[1gun-name] [2gun-name2]
+	[2gun-name1] [1gun-name] [2gun-name2]
 
 pragma prefix-with [gun-name] [2gun-name1]
 

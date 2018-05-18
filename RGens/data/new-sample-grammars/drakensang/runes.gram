@@ -1,0 +1,29 @@
+[ds-rune] [rune-type] rune
+	rune of [rune-type]
+
+pragma initial-rule [ds-rune]
+
+[rune-quality] lesser
+	standard
+	mighty
+	supreme
+	grand
+
+pragma prefix-with [ds-rune] [rune-quality]
+
+[rune-type] devestation
+	celerity
+	persistence
+	regeneration
+	vitality
+	vigor
+	relentlessness
+	acceleration
+	fortitude
+	focus
+	resilience
+	materi blessing
+	wisdom seeker
+	vanquisher
+
+pragma prefix-with [rune-type] [rune-quality]

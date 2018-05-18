@@ -1,8 +1,10 @@
 [color-phrases] [color-phrase]
-	[color-phrase] blended with [color-phrase]
+	[multi-color-phrases]
+
+[multi-color-phrases] [color-phrase] blended with [color-phrase]
 	a blend between [color-phrase] , [color-phrase] and [color-phrase]
-	between [color-phrase] and [color-phrase]
-	between [color-phrase] , [color-phrase] and [color-phrase]
+	something between [color-phrase] and [color-phrase]
+	something between [color-phrase] , [color-phrase] and [color-phrase]
 
 pragma initial-rule [color-phrases]
 

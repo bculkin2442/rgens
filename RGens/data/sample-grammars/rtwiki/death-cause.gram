@@ -99,4 +99,10 @@
 	by crucifixion
 	by act of god
 
+[Monster/Animals] {{empty}}
+
+[Character/Torture] {{empty}}
+
+[Character/Deaths] {{empty}}
+
 pragma export-rule [death-cause]

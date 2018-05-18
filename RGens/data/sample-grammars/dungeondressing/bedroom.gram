@@ -1,4 +1,4 @@
-[bedroom] you enter the [bedroom-type] and see a [bedroom-bed] with a [bedroom-person] [bedroom-lying]
+[bedroom] you enter the [bedroom-type] and see a(n) [bedroom-bed] with a(n) [bedroom-person] [bedroom-lying]
 
 pragma initial-rule [bedroom]
 
@@ -26,14 +26,15 @@ pragma initial-rule [bedroom]
 	tropical rope hammock
 	altar
 
-pragma prefix-with [bedroom-bed] [unholy]
 pragma prefix-with [bedroom-bed] [bed-prefix]
+pragma prefix-with [bedroom-bed] [sacred-type]
 
 [bed-prefix] ruined
 	ancient
 	legendary
+	pristine
 
-[unholy] unholy
+[sacred-type] unholy
 	holy
 	blessed
 	dammed
@@ -42,8 +43,11 @@ pragma prefix-with [bedroom-bed] [bed-prefix]
 	hallowed
 	unhallowed
 	sacred
+	infernal
+	angelic
 
-[bedroom-person] pile of [bone-status] bones
+[bedroom-person] [bed-bones]
+	[bed-bones]
 	jug of moonshine
 	[bed-aliveperson]
 	[bed-aliveperson]
@@ -60,6 +64,7 @@ pragma prefix-with [bedroom-bed] [bed-prefix]
 	draped atop it
 	prostrated before it
 	[tied] to it
+	[tied] to it
 	trapped in it
 
 [bed-aliveperson] [bed-arist]
@@ -67,9 +72,17 @@ pragma prefix-with [bedroom-bed] [bed-prefix]
 	[bed-prost]
 	[bed-slave]
 	[humanoid]
-	[creature]
+	[bed-inhuman]
+
+[bed-inhuman] [creature]
+	[monster]
+	[creature-epic]
 
 pragma prefix-with [bed-aliveperson] [bed-status]
+pragma prefix-with [bed-aliveperson] [bed-name]
+
+[bed-name] [full-name] , a(n)
+	[fantasy-name] , a(n)
 
 [bed-status] [bed-status1]
 	[bed-status2]
@@ -86,27 +99,63 @@ pragma prefix-with [bed-aliveperson] [bed-status]
 [status-alive] unconcious
 	sleeping
 	normal
+	fainted
 
 [bed-status2] bleeding
 	badly wounded
 	uninjured
 	pale
 	burnt
+	trembling
+	scared
+	aroused
 
 [tied] chained
 	tied
 	bound
+	secured
+	fastened
+	handcuffed
+	roped
+	shackled
 
 [onin] on
 	in
 
-[bed-bones] pile of [bone-status] [bones]
-	pile of [bone-status] [part-human] [bones]
+[bed-bones] [pile] of [bone-status] [bones]
+	[pile] of [bone-status] [bones]
+	[pile] of [bone-status] [part-human] [bones]
+	[pile] of [bone-status] [part-human] [bones]
+	[blood-puddle]
+
+[pile] pair
+	couple
+	group
+	pile
+	hoard
+	collection
+	set
+
+[blood-puddle] puddle of blood
+	puddle of [part-human] blood
 
 [bones] bones
 	flesh
 	viscera
 	skulls
+	claws
+	hearts
+	brains
+	jawbones
+	eyes
+	ears
+	horns
+	tails
+	fangs
+	quills
+	scalps
+	spleens
+	souls
 
 [bone-status] clean
 	old
@@ -114,10 +163,13 @@ pragma prefix-with [bed-aliveperson] [bed-status]
 	moldy
 	dusty
 	bloody
+	ancient
 
-[bed-arist] kidnapped [aristocrat]
-	kidnapped [part-human] [aristocrat]
-	kidnapped [part-human]
+[bed-arist] [aristocrat]
+	[part-human] [aristocrat]
+	[part-human]
+
+pragma prefix-with [bed-arist] kidnapped
 
 [aristocrat] aristocrat
 	prince
@@ -126,24 +178,41 @@ pragma prefix-with [bed-aliveperson] [bed-status]
 	queen
 	mercenary
 	merchant
+	[generic-title]
 
-[bed-doll] sex doll
-	sex doll of a [part-human]
+[bed-doll] [doll]
+	[doll] of a [part-human]
 
+[doll] doll
+	mannequin
+	puppet
+
+pragma prefix-with [bed-doll] [sex]
 pragma prefix-with [bed-doll] [realism]
+
+[sex] sex
+	sexy
 
 [realism] realistic
 	unrealistic
-	[beauty]
+	[realism-beauty]
+
+[realism-beauty] [beauty]
+	unrealistic [beauty]
+	realistic [beauty]
 
 [beauty] beautiful
 	pretty
 	cute
+	attractive
+	normal
 	ugly
+	unattractive
 
 pragma prefix-with [realism] creepily
 
 [bed-prost] prostitute
+	wench
 
 pragma prefix-with [bed-prost] [part-human]
 
@@ -155,18 +224,32 @@ pragma prefix-with [bed-slave] [part-human]
 [bed-gender] male
 	female
 
-[part-human] [part-human1]
+[part-human] [humanoids]
+	[part-human2]
 
 pragma prefix-with [part-human] [bed-gender]
 
-[part-human1] [humanoid]
-	[half-human]
+[part-human2] [half-humans]
+	[quarter-humans]
+
+[half-humans] [half-human]
 	[half-human] , [half-human]
-	[quarter-human]
 
-[half-human] half- [humanoid]
+[quarter-humans] [quarter-human]
+	[quarter-human] , [half-human]
+	[quarter-human] , [quarter-human]
+	[quarter-human] , [quarter-human] , [quarter-human]
+	[quarter-human] , [quarter-human] , [quarter-human] , [quarter-human]
 
-[quarter-human] quarter- [humanoid]
+[half-human] half- [humanoids]
+
+[quarter-human] quarter- [humanoids]
+
+[humanoids] [humanoid]
+	[humanoid]
+	[humanoid]
+	[humanoid]
+	[bed-inhuman]
 
 pragma despace-rule [half-human]
 pragma despace-rule [quarter-human]

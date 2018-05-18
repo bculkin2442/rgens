@@ -1,0 +1,142 @@
+[ds-armor] [spellweaver-armor]
+	[ranger-armor]
+	[dragonknight-armor]
+
+pragma initial-rule [ds-armor]
+
+[dragonknight-armor] [dragonknight-armortype]
+	[dragonknight-armorprefix] [dragonknight-armortype]
+	[dragonknight-armorprefix] [dragonknight-armortype]
+	[dragonknight-armorprefix] [dragonknight-armortype]
+
+[dragonknight-armortype] jackboots
+	cloak
+	gloves
+	pauldrons
+	bandana
+	coat
+	gauntlets
+	cap
+	armor
+	shirt
+	cowl
+	helmet
+	fists
+
+[dragonknight-armorprefix] cloth
+	fur
+	leather
+	hard-leather
+	studded
+	scaled
+	chain
+	chainmail
+	iron
+	steel
+	soldier
+	duria
+	plated
+	winged
+	black steel
+	obsidian steel
+
+[ranger-armor] [ranger-armortype]
+	[ranger-armorprefix] [ranger-armortype]
+	[ranger-armorprefix] [ranger-armortype]
+	[ranger-armorprefix] [ranger-armortype]
+
+[ranger-armortype] shoes
+	shirt
+	hand wraps
+	shoulder guards
+	mask
+	jerkin
+	fingerless gloves
+	cap
+	vest
+	head
+	skull
+	armor
+	bracers
+	pauldrons
+	gloves
+	claws
+	mail
+	mitts
+	jerkin
+
+[ranger-armorprefix] [ranger-armorprefix-1]
+	[ranger-armormaterial]
+	[ranger-armorprefix-combo]
+
+[ranger-armorprefix-prefix] grim
+	fearsome
+	spirit
+	cave
+
+pragma prefix-with [ranger-armorprefix] [ranger-armorprefix-prefix]
+
+[ranger-armorprefix-combo] [ranger-armormaterial] [ranger-armorprefix-1]
+	[ranger-armorprefix-1] [ranger-armormaterial]
+
+[ranger-armorprefix-1] stalkers
+	hunters
+	wolf
+	ramhorn
+	stag
+	bear
+	dragon-brood
+
+[ranger-armormaterial] linen
+	leather
+	wolfskin
+	grimwolf-skin
+	rams hide
+	ram skin
+	buckskin
+	bearskin
+	bearclaw
+	drakescale
+	dragonscale
+	fireleather
+	sunleather
+
+[spellweaver-armor] [spellweaver-armortype]
+	[spellweaver-armorprefix] [spellweaver-armortype]
+	[spellweaver-armorprefix] [spellweaver-armortype]
+	[spellweaver-armorprefix] [spellweaver-armortype]
+
+[spellweaver-armortype] cloak
+	gloves
+	collar
+	shoes
+	coronet
+	cap
+	robes
+	helmet
+	fist
+	mask
+
+[spellweaver-armorprefix] [spellweaver-armorprefix-1]
+	[spellweaver-armormaterial]
+
+[spellweaver-armorprefix-combo] [spellweaver-armormaterial] [spellweaver-armorprefix-1]
+	[spellweaver-armorprefix-1] [spellweaver-armormaterial]
+
+[spellweaver-armorprefix-1] apprentice
+	acolyte
+	travel
+	journeyman
+	spellweaver
+	arkan
+	elemental
+	duria
+	myrdosch magus
+	myrdosch mystic
+	mystic
+
+[spellweaver-armormaterial] linen
+	leather
+	silver
+	silk
+	brocade

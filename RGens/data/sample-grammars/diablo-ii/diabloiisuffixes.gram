@@ -1,4 +1,16 @@
-[suffix] [damage-reduction]
+[d2-suffix] of [suffix-part]
+	of [suffix-part]
+	of [suffix-chain]
+
+[suffix-chain] [suffix-part] and [suffix-part]
+	[suffix-part] and [suffix-part]
+	[suffix-part] and of [suffix-part]
+	[suffix-part] and of [suffix-part]
+	[suffix-part] , [suffix-part] and [suffix-part]
+
+pragma export-rule [d2-suffix]
+
+[suffix-part] [damage-reduction]
 	[defense-effect]
 	[durability]
 	[hitpoints]
@@ -20,7 +32,7 @@
 	[weapon-use]
 	[spell-casting]
 
-pragma export-rule [suffix]
+pragma prefix-with [suffix-part] the
 
 [damage-reduction] health
 	protection
@@ -34,11 +46,11 @@ pragma export-rule [suffix]
 
 [durability] sturdiness
 	structure
-	the ages
+	ages
 	bonding
 	unity
 
-[hitpoints] the [hitpoints-act]
+[hitpoints] [hitpoints-act]
 
 [hitpoints-act] jackal
 	fox
@@ -55,60 +67,60 @@ pragma export-rule [suffix]
 	dexterity
 	magic
 	strength
-	the lynx
+	lynx
 	zest
 	skill
-	the mind
+	mind
 	might
-	the leopard
+	leopard
 	vim
 	accuracy
 	brilliance
 	power
-	the jaguar
+	jaguar
 	vigor
 	precision
 	sorcery
-	the giant
-	the tiger
+	giant
+	tiger
 	life
 	perfection
 	wizardry
-	the titan
-	the lion
-	the sky
-	the moon
-	the stars
-	the heavens
-	the zodiac
+	titan
+	lion
+	sky
+	moon
+	stars
+	heavens
+	zodiac
 
 [cursed] tears
 	pain
 	brittleness
 	decay
 	fragility
-	the vulture
+	vulture
 	disease
 	atrophy
 	dyslexia
 	weakness
-	the cat
-	the pit
+	cat
+	pit
 	illness
 	paralysis
 	draining
 	frailty
-	the rat
+	rat
 	trouble
 	pox
 	corruption
 	infection
 	ruin
-	the exposed
+	exposed
 	discord
-	the night
-	the dark
-	the void
+	night
+	dark
+	void
 	passivity
 	snail
 	fool
@@ -117,13 +129,13 @@ pragma export-rule [suffix]
 	regrowth
 
 [memorization] warding
-	the sentinel
+	sentinel
 	guarding
 	negation
 	osmosis
 
-[combat-action] the apprentice
-	the magus
+[combat-action] apprentice
+	magus
 	balance
 	stability
 	harmony
@@ -135,9 +147,9 @@ pragma export-rule [suffix]
 
 [light-source] light
 	radiance
-	the sun
+	sun
 
-[hazard-reduction] the thief
+[hazard-reduction] thief
 	warmth
 	remedy
 	amelioration
@@ -150,7 +162,7 @@ pragma export-rule [suffix]
 	slaying
 	gore
 	devastation
-	the jester
+	jester
 	carnage
 	slaughter
 
@@ -174,24 +186,24 @@ pragma export-rule [suffix]
 	fire
 	lightning
 	venom
-	the glacier
+	glacier
 	burning
 	thunder
 	pestilence
 	vileness
-	the crusaders
+	crusaders
 	destruction
 	peril
-	the bear
-	the grizzly
+	bear
+	grizzly
 
-[attack-restore] the leech
-	the claw
-	the bat
+[attack-restore] leech
+	claw
+	bat
 	blood
-	the talon
-	the vampire
-	the lamprey
+	talon
+	vampire
+	lamprey
 
 [item-damage] piercing
 	breaking

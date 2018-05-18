@@ -20,6 +20,9 @@ pragma export-rule [perishables]
 	skull
 	blood
 	ribcage
+	viscera
+	flesh
+	claw
 
 [perishable-type] potion
 	oil
