@@ -1,1 +1,6 @@
 target/
+.DS_Store
+outp.txt
+error.txt
+stress.gout
+HTML/

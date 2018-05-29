@@ -58,6 +58,7 @@ pragma prefix-with [money-type] [metal-type]
 [item-types] [d2-item-type]
 	[d2-item-type]
 	[ds-items]
+	[^item]
 
 [ds-items] [ds-gem]
 	[ds-rune]

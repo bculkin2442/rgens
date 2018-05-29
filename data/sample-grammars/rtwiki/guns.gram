@@ -1,11 +1,13 @@
 [gun-phrase] [quote-gunname] was released today
-	[quote-gunname] vs. [quote-gunname] shootout
+	[quote-gunname] vs. [quote-gunname] : which is better
+	[quote-guncorp] 's [quote-gunname] : cost vs. quality
 	[quote-guncorp] is going out of business
 	[quote-guncorp] was bought by [quote-guncorp]
+	[quote-guncorp] 's [quote-gunname] vs. [quote-guncorp] 's [quote-gunname] : cost vs. quality
 
-[quote-gunname] ( [gun-name] )
+[quote-gunname] [gun-name]
 
-[quote-guncorp] ( [guncorp] )
+[quote-guncorp] [guncorp]
 
 pragma initial-rule [gun-phrase]
 

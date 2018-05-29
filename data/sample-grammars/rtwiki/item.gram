@@ -23,6 +23,7 @@ pragma initial-rule [item]
 	mouth
 	skull
 	tail
+	[bodypart]
 
 [music] bagpipe
 	bell
