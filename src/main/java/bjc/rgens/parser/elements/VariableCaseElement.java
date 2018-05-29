@@ -1,6 +1,6 @@
 package bjc.rgens.parser.elements;
 
-public class VariableCaseElement extends CaseElement {
+public abstract class VariableCaseElement extends CaseElement {
 	/**
 	 * The name of the variable this element defines.
 	 */

@@ -1,17 +1,14 @@
 package bjc.rgens.parser.elements;
 
+import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 
-/*
- * @TODO 10/11/17 Ben Culkin :CaseElementSplit Split this into multiple
- * subclasses based off of a value of ElementType.
- */
 /**
  * A element in a rule case.
  *
  * @author EVE
  */
-public class CaseElement {
+public abstract class CaseElement {
 	/**
 	 * The possible types of an element.
 	 *
@@ -34,8 +31,6 @@ public class CaseElement {
 	}
 
 	/* Regexps for marking rule types. */
-	private static final String SPECIAL_CASELEM = "\\{[^}]+\\}";
-	private static final String REFER_CASELEM = "\\[[^\\]]+\\]";
 	private static final String RANGE_CASELM = "\\[\\d+\\.\\.\\d+\\]";
 
 	/** The type of this element. */
@@ -53,11 +48,16 @@ public class CaseElement {
 
 	@Override
 	public String toString() {
-		switch (type) {
-		default:
-			return String.format("Unknown type '%s'", type);
-		}
+		return String.format("Unknown type '%s'", type);
 	}
+
+	/**
+	 * Generate this case element.
+	 *
+	 * @param state
+	 * 	The current state of generation.
+	 */
+	public abstract void generate(GenerationState state);
 
 	/**
 	 * Create a case element from a string.
@@ -72,8 +72,11 @@ public class CaseElement {
 			throw new NullPointerException("Case part cannot be null");
 		}
 
-		if (csepart.matches(SPECIAL_CASELEM)) {
-			/* Handle special cases. */
+		if (csepart.matches("\\{[^}]+\\}")) {
+			/*
+			 * Handle special cases.
+			 *
+			 */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
 			System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
@@ -88,6 +91,12 @@ public class CaseElement {
 					throw new GrammarException(msg);
 				}
 
+				/*
+				 * @NOTE
+				 *
+				 * This should maybe check that parts[1] is a
+				 * valid rule name, since it gets used as one.
+				 */
 				return new ExpVariableCaseElement(parts[0], parts[1]);
 			} else if (specialBody.matches("\\S+=\\S+")) {
 				/* Handle regular variable definitions. */
@@ -100,23 +109,28 @@ public class CaseElement {
 				}
 
 				return new LitVariableCaseElement(parts[0], parts[1]);
-			} else if (specialBody.matches("{empty}")) {
+			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
 			} else {
 				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
 			}
-		} else if (csepart.matches(REFER_CASELEM)) {
-			if (csepart.matches(RANGE_CASELM)) {
-				/* Handle ranges */
-				String rawRange = csepart.substring(1, csepart.length() - 1);
+		} else if (csepart.matches("\\[[^\\]]+\\]")) {
+			String rawCase = csepart.substring(1, csepart.length() - 1);
 
-				int firstNum = Integer.parseInt(rawRange.substring(0, rawRange.indexOf('.')));
-				int secondNum = Integer.parseInt(rawRange.substring(rawRange.lastIndexOf('.') + 1));
+			if (rawCase.matches("\\d+\\.\\.\\d+")) {
+				int firstNum = Integer.parseInt(rawCase.substring(0, rawCase.indexOf('.')));
+				int secondNum = Integer.parseInt(rawCase.substring(rawCase.lastIndexOf('.') + 1));
 
 				return new RangeCaseElement(firstNum, secondNum);
 			}
 
+			/*
+			 * @NOTE
+			 *
+			 * Once the rule element execution has been refactored,
+			 * pass rawCase instead.
+			 */
 			return new RuleCaseElement(csepart);
 		} else {
 			return new LiteralCaseElement(csepart);

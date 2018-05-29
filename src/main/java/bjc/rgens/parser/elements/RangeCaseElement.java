@@ -1,5 +1,7 @@
 package bjc.rgens.parser.elements;
 
+import bjc.rgens.parser.GenerationState;
+
 public class RangeCaseElement extends CaseElement {
 	public final int begin;
 	public final int end;
@@ -9,6 +11,13 @@ public class RangeCaseElement extends CaseElement {
 
 		begin = beg;
 		end = en;
+	}
+
+	public void generate(GenerationState state) {
+		int val = state.rnd.nextInt(end - begin);
+		val += begin;
+
+		state.contents.append(val);
 	}
 
 	@Override

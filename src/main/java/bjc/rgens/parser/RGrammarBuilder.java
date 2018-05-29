@@ -66,7 +66,19 @@ public class RGrammarBuilder {
 	public RGrammar toRGrammar() {
 		RGrammar grammar = new RGrammar(rules);
 
+		if(initialRule != null) {
+			if(!rules.containsKey(initialRule)) {
+				throw new GrammarException(String.format("Rule '%s' doesn't exist\n", initialRule));
+			}
+		}
+
 		grammar.setInitialRule(initialRule);
+
+		for(String export : exportedRules) {
+			if(!rules.containsKey(export)) {
+				throw new GrammarException(String.format("Rule '%s' doesn't exist\n", export));
+			}
+		}
 
 		grammar.setExportedRules(exportedRules);
 
@@ -87,8 +99,6 @@ public class RGrammarBuilder {
 			throw new NullPointerException("init must not be null");
 		} else if (init.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		} else if (!rules.containsKey(init)) {
-			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", init));
 		}
 
 		initialRule = init;
@@ -108,8 +118,6 @@ public class RGrammarBuilder {
 			throw new NullPointerException("Export name must not be null");
 		} else if (export.equals("")) {
 			throw new NullPointerException("The empty string is not a valid rule name");
-		} else if(!rules.containsKey(export)) {
-			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", rules));
 		}
 
 		exportedRules.add(export);

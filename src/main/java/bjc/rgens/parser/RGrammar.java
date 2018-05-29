@@ -48,35 +48,6 @@ public class RGrammar {
 		}
 	}
 
-	/* The current state during generation. */
-	private static class GenerationState {
-		/* The current string. */
-		public StringBuilder contents;
-		/* The RNG. */
-		public Random rnd;
-
-		/* The current set of variables. */
-		public Map<String, String> vars;
-
-		/**
-		 * Create a new generation state.
-		 * 
-		 * @param cont
-		 *            The string being generated.
-		 *
-		 * @param rand
-		 *            The RNG to use.
-		 *
-		 * @param vs
-		 *            The variables to use.
-		 */
-		public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs) {
-			contents = cont;
-			rnd = rand;
-			vars = vs;
-		}
-	}
-
 	/* The pattern for matching the name of a variable. */
 	private static Pattern NAMEVAR_PATTERN = Pattern.compile("\\$(\\w+)");
 
@@ -156,6 +127,20 @@ public class RGrammar {
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule, Random rnd, Map<String, String> vars) {
+		return generate(startRule, new GenerationState(new StringBuilder(), rnd, vars, this));
+	}
+
+	/**
+	 * Generate a string from this grammar, starting from the specified rule.
+	 *
+	 * @param startRule
+	 *            The rule to start generating at, or null to use the initial rule
+	 *            for this grammar.
+	 *
+	 * @param state
+	 * 	The generation state.
+	 */
+	public String generate(String startRule, GenerationState state) {
 		String fromRule = startRule;
 
 		if (startRule == null) {
@@ -170,13 +155,19 @@ public class RGrammar {
 			}
 		}
 
-		RuleCase start = rules.get(fromRule).getCase(rnd);
+		RuleCase start = rules.get(fromRule).getCase(state.rnd);
 
-		StringBuilder contents = new StringBuilder();
+		generateCase(start, state);
 
-		generateCase(start, new GenerationState(contents, rnd, vars));
+		/*
+		 * @NOTE
+		 *
+		 * :Postprocessing
+		 *
+		 * Do we want to perform this post-processing here, or elsewhere?
+		 */
+		String body = state.contents.toString();
 
-		String body = contents.toString();
 		/*
 		 * Collapse duplicate spaces.
 		 */
@@ -211,16 +202,24 @@ public class RGrammar {
 		body = body.replaceAll("\\s+", " ");
 
 		/*
-		 * @TODO 11/01/17 Ben Culkin :RegexRule Replace this once it is no longer
-		 * needed.
+		 * @TODO 11/01/17 Ben Culkin :RegexRule
+		 *
+		 * Replace this once it is no longer needed.
 		 */
 		body = body.replaceAll("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1");
 
 		return body;
 	}
 
-	/* Generate a rule case. */
-	private void generateCase(RuleCase start, GenerationState state) {
+	/**
+	 * Generate a rule case.
+	 *
+	 * @param start
+	 * 	The rule case to generate.
+	 * @param state
+	 * 	The current generation state.
+	 */
+	public void generateCase(RuleCase start, GenerationState state) {
 		try {
 			switch (start.type) {
 			case NORMAL:
@@ -250,162 +249,10 @@ public class RGrammar {
 	/* Generate a case element. */
 	private void generateElement(CaseElement elm, GenerationState state) {
 		try {
-			switch (elm.type) {
-			case LITERAL: {
-				LiteralCaseElement lit = (LiteralCaseElement)elm;
-				
-				state.contents.append(lit.val);
-				break;
-			}
-			case RULEREF: {
-				RuleCaseElement rle = (RuleCaseElement)elm;
-				
-				generateRuleReference(rle, state);
-				break;
-			}
-			case RANGE: {
-				RangeCaseElement rang = (RangeCaseElement)elm;
-
-				int val = state.rnd.nextInt(rang.end - rang.begin);
-				val += rang.begin;
-
-				state.contents.append(val);
-				break;
-			}
-			case VARDEF:
-				generateVarDef(((VariableCaseElement)elm).varName, ((VariableCaseElement)elm).varDef, state);
-				break;
-			case EXPVARDEF:
-				generateExpVarDef(((VariableCaseElement)elm).varName, ((VariableCaseElement)elm).varDef, state);
-				break;
-			default:
-				String msg = String.format("Unknown element type '%s'", elm.type);
-				throw new GrammarException(msg);
-			}
+			elm.generate(state);
 		} catch (GrammarException gex) {
 			String msg = String.format("Error in generating case element (%s)", elm);
 			throw new GrammarException(msg, gex);
-		}
-	}
-
-	/* Generate a expanding variable definition. */
-	private void generateExpVarDef(String name, String defn, GenerationState state) {
-		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd, state.vars);
-
-		if (rules.containsKey(defn)) {
-			RuleCase destCase = rules.get(defn).getCase();
-
-			generateCase(destCase, newState);
-		} else if (importRules.containsKey(defn)) {
-			RGrammar destGrammar = importRules.get(defn);
-			String res = destGrammar.generate(defn, state.rnd, state.vars);
-
-			newState.contents.append(res);
-		} else {
-			String msg = String.format("No rule '%s' defined", defn);
-			throw new GrammarException(msg);
-		}
-
-		state.vars.put(name, newState.contents.toString());
-	}
-
-	/* Generate a variable definition. */
-	private static void generateVarDef(String name, String defn, GenerationState state) {
-		state.vars.put(name, defn);
-	}
-
-	/* Generate a rule reference. */
-	private void generateRuleReference(RuleCaseElement elm, GenerationState state) {
-		String refersTo = elm.val;
-
-		GenerationState newState = new GenerationState(new StringBuilder(), state.rnd, state.vars);
-
-		if (refersTo.contains("$")) {
-			/* Parse variables */
-			String refBody = refersTo.substring(1, refersTo.length() - 1);
-
-			if (refBody.contains("-")) {
-				/* Handle dependent rule names. */
-				StringBuffer nameBuffer = new StringBuffer();
-
-				Matcher nameMatcher = NAMEVAR_PATTERN.matcher(refBody);
-
-				while (nameMatcher.find()) {
-					String var = nameMatcher.group(1);
-
-					if (!state.vars.containsKey(var)) {
-						String msg = String.format("No variable '%s' defined", var);
-						throw new GrammarException(msg);
-					}
-
-					String name = state.vars.get(var);
-
-					if (name.contains(" ")) {
-						throw new GrammarException("Variables substituted into names cannot contain spaces");
-					} else if (name.equals("")) {
-						throw new GrammarException("Variables substituted into names cannot be empty");
-					}
-
-					nameMatcher.appendReplacement(nameBuffer, name);
-				}
-
-				nameMatcher.appendTail(nameBuffer);
-
-				refersTo = "[" + nameBuffer.toString() + "]";
-			} else {
-				/* Handle string references. */
-				if (refBody.equals("$")) {
-					throw new GrammarException("Cannot refer to unnamed variables");
-				}
-
-				String key = refBody.substring(1);
-
-				if (!state.vars.containsKey(key)) {
-					String msg = String.format("No variable '%s' defined", key);
-					throw new GrammarException(msg);
-				}
-
-				state.contents.append(state.vars.get(key));
-
-				return;
-			}
-		}
-
-		if (refersTo.startsWith("[^")) {
-			refersTo = "[" + refersTo.substring(2);
-
-			RGrammar dst = importRules.get(refersTo);
-
-			newState.contents.append(dst.generate(refersTo, state.rnd, state.vars));
-		} else if (rules.containsKey(refersTo)) {
-			RuleCase cse = rules.get(refersTo).getCase(state.rnd);
-
-			generateCase(cse, newState);
-		} else if (importRules.containsKey(refersTo)) {
-			RGrammar dst = importRules.get(refersTo);
-
-			newState.contents.append(dst.generate(refersTo, state.rnd, state.vars));
-		} else {
-			if (ruleSearcher != null) {
-				Set<Match<? extends String>> results = ruleSearcher.search(refersTo, MAX_DISTANCE);
-
-				String[] resArray = results.stream().map(Match::getMatch).toArray((i) -> new String[i]);
-
-				String msg = String.format("No rule '%s' defined (perhaps you meant %s?)", refersTo,
-						StringUtils.toEnglishList(resArray, false));
-
-				throw new GrammarException(msg);
-			}
-
-			String msg = String.format("No rule '%s' defined", refersTo);
-			throw new GrammarException(msg);
-		}
-
-		if (refersTo.contains("+")) {
-			/* Rule names with pluses in them get space-flattened */
-			state.contents.append(newState.contents.toString().replaceAll("\\s+", ""));
-		} else {
-			state.contents.append(newState.contents.toString());
 		}
 	}
 
@@ -487,5 +334,9 @@ public class RGrammar {
 	 */
 	public Map<String, Rule> getRules() {
 		return rules;
+	}
+
+	public Map<String, RGrammar> getImportRules() {
+		return importRules;
 	}
 }
