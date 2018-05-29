@@ -1,4 +1,4 @@
-:TODO 5/10/18 Ben Culkin :EasternSun
+@TODO 5/10/18 Ben Culkin :EasternSun
 	Finish up the new-style Diablo generator, using Eastern Sun things
 
 @TODO 10/11/17 Ben Culkin :GrammarReorg

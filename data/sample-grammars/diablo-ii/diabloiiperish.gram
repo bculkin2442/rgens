@@ -20,12 +20,9 @@ pragma export-rule [perishables]
 	skull
 	blood
 	ribcage
-<<<<<<< HEAD
 	viscera
 	flesh
 	claw
-=======
->>>>>>> 66f5a43dee94657a56141c093488eccbf64c7ae1
 
 [perishable-type] potion
 	oil

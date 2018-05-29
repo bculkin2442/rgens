@@ -16,17 +16,7 @@
 	[gems]
 	[inscriptions]
 	[perishables]
-	[ds-items]
-	[ds-items]
-	[ds-items]
 
-<<<<<<< HEAD
-=======
-[ds-items] [ds-gem]
-	[ds-rune]
-	[ds-armor]
-
->>>>>>> 66f5a43dee94657a56141c093488eccbf64c7ae1
 pragma export-rule [d2-item-type]
 
 [armor] [light-armor]

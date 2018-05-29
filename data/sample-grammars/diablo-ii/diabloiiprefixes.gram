@@ -4,15 +4,12 @@
 
 pragma export-rule [d2-prefix]
 
-<<<<<<< HEAD
 [d2-prefix-chain] [d2-prefix-part] [d2-prefix-part]
 	[d2-prefix-part] [d2-prefix-part]
 	[d2-prefix-part] and [d2-prefix-part]
 	[d2-prefix-part] and [d2-prefix-part]
 	[d2-prefix-part] [d2-prefix-part] [d2-prefix-part]
 
-=======
->>>>>>> 66f5a43dee94657a56141c093488eccbf64c7ae1
 [d2-prefix-part] [armor-class]
 	[saving-throw]
 	[foe-reaction]

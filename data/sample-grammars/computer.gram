@@ -39,7 +39,6 @@
 	malbolge
 
 pragma export-rule [computer-language]
-pragma export-rule [computer-skill]
 
 [computer-skill] html
 	xml
@@ -51,3 +50,5 @@ pragma export-rule [computer-skill]
 	sql
 	asp
 	php
+
+pragma export-rule [computer-skill]
