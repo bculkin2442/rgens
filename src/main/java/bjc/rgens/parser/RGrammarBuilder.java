@@ -46,9 +46,9 @@ public class RGrammarBuilder {
 		else if(rName.equals(""))
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 
-		if(rules.containsKey(rName))
+		if(rules.containsKey(rName)) {
 			return rules.get(rName);
-		else {
+		} else {
 			Rule ret = new Rule(rName);
 
 			rules.put(rName, ret);
@@ -87,6 +87,8 @@ public class RGrammarBuilder {
 			throw new NullPointerException("init must not be null");
 		} else if (init.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if (!rules.containsKey(init)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", init));
 		}
 
 		initialRule = init;
@@ -106,6 +108,8 @@ public class RGrammarBuilder {
 			throw new NullPointerException("Export name must not be null");
 		} else if (export.equals("")) {
 			throw new NullPointerException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(export)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", rules));
 		}
 
 		exportedRules.add(export);
@@ -130,7 +134,7 @@ public class RGrammarBuilder {
 		} else if (ruleName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if(!rules.containsKey(ruleName)) {
-			String msg = String.format("Rule '%s' is not a valid rule name.");
+			String msg = String.format("Rule '%s' is not a valid rule name");
 
 			throw new IllegalArgumentException(msg);
 		}
@@ -149,6 +153,12 @@ public class RGrammarBuilder {
 
 			newCase.add(element);
 
+			/*
+			 * @NOTE :AffixCasing
+			 *
+			 * Is this correct, or should we be mirroring the
+			 * existing case type?
+			 */
 			newCases.add(new RuleCase(NORMAL, newCase));
 		}
 
@@ -177,7 +187,7 @@ public class RGrammarBuilder {
 		} else if (ruleName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if(!rules.containsKey(ruleName)) {
-			String msg = String.format("Rule '%s' is not a valid rule name.");
+			String msg = String.format("Rule '%s' is not a valid rule name");
 
 			throw new IllegalArgumentException(msg);
 		}
@@ -196,6 +206,12 @@ public class RGrammarBuilder {
 				newCase.add(elm);
 			}
 
+			/*
+			 * @NOTE :AffixCasing
+			 *
+			 * Is this correct, or should we be mirroring the
+			 * existing case type?
+			 */
 			newCases.add(new RuleCase(NORMAL, newCase));
 		}
 
@@ -210,6 +226,8 @@ public class RGrammarBuilder {
 			throw new NullPointerException("ruleName must not be null");
 		} else if (ruleName.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if (!rules.containsKey(ruleName)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", ruleName));
 		}
 
 		IList<RuleCase> caseList = rules.get(ruleName).getCases();
@@ -230,6 +248,8 @@ public class RGrammarBuilder {
 			throw new NullPointerException("pattern must not be null");	
 		} else if (rule.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(rule)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", rule));
 		}
 
 		IList<RuleCase> caseList = rules.get(rule).getCases();
