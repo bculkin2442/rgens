@@ -167,7 +167,7 @@ public class RGrammarBuilder {
 			 * Is this correct, or should we be mirroring the
 			 * existing case type?
 			 */
-			newCases.add(new RuleCase(NORMAL, newCase));
+			newCases.add(new NormalRuleCase(newCase));
 		}
 
 
@@ -220,7 +220,7 @@ public class RGrammarBuilder {
 			 * Is this correct, or should we be mirroring the
 			 * existing case type?
 			 */
-			newCases.add(new RuleCase(NORMAL, newCase));
+			newCases.add(new NormalRuleCase(newCase));
 		}
 
 
@@ -243,7 +243,7 @@ public class RGrammarBuilder {
 		IList<RuleCase> newCaseList = new FunctionalList<>();
 
 		for(RuleCase cse : caseList) {
-			newCaseList.add(new RuleCase(SPACEFLATTEN, cse.getElements()));
+			newCaseList.add(new FlatRuleCase(cse.getElements()));
 		}
 
 		rules.get(ruleName).replaceCases(newCaseList);

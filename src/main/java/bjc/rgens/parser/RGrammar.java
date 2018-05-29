@@ -221,37 +221,9 @@ public class RGrammar {
 	 */
 	public void generateCase(RuleCase start, GenerationState state) {
 		try {
-			switch (start.type) {
-			case NORMAL:
-				for (CaseElement elm : start.getElements()) {
-					generateElement(elm, state);
-
-					if (elm.type != CaseElement.ElementType.VARDEF) {
-						state.contents.append(" ");
-					}
-				}
-				break;
-			case SPACEFLATTEN:
-				for (CaseElement elm : start.getElements()) {
-					generateElement(elm, state);
-				}
-				break;
-			default:
-				String msg = String.format("Unknown case type '%s'", start.type);
-				throw new GrammarException(msg);
-			}
+			start.generate(state);
 		} catch (GrammarException gex) {
 			String msg = String.format("Error in generating case (%s)", start);
-			throw new GrammarException(msg, gex);
-		}
-	}
-
-	/* Generate a case element. */
-	private void generateElement(CaseElement elm, GenerationState state) {
-		try {
-			elm.generate(state);
-		} catch (GrammarException gex) {
-			String msg = String.format("Error in generating case element (%s)", elm);
 			throw new GrammarException(msg, gex);
 		}
 	}

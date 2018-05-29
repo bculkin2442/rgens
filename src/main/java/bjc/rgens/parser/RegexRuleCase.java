@@ -10,7 +10,7 @@ public class RegexRuleCase extends RuleCase {
 	private Pattern patt;
 
 	public RegexRuleCase(IList<CaseElement> elements, String pattern) {
-		super(RuleCase.CaseType.REGEX);
+		super(CaseType.REGEX, elements);
 
 		elementList = elements;
 
@@ -28,5 +28,9 @@ public class RegexRuleCase extends RuleCase {
 
 	public Pattern getPattern() {
 		return patt;
+	}
+
+	public void generate(GenerationState state) {
+
 	}
 }

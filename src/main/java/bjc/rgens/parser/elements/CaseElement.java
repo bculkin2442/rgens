@@ -16,18 +16,24 @@ public abstract class CaseElement {
 	 */
 	public static enum ElementType {
 		/** An element that represents a literal string. */
-		LITERAL,
+		LITERAL(true),
 		/** An element that represents a rule reference. */
-		RULEREF,
+		RULEREF(true),
 		/** An element that represents a random range. */
-		RANGE,
+		RANGE(true),
 		/** An element that represents a variable that stores a string. */
-		VARDEF,
+		VARDEF(false),
 		/**
 		 * An element that represents a variable that stores the result of generating a
 		 * rule.
 		 */
-		EXPVARDEF;
+		EXPVARDEF(false);
+
+		public final boolean spacing;
+
+		private ElementType(boolean spacing) {
+			this.spacing = spacing;
+		}
 	}
 
 	/* Regexps for marking rule types. */

@@ -347,7 +347,7 @@ public class RGrammarParser {
 			caseParts.add(CaseElement.createElement(partToAdd));
 		}
 
-		rul.addCase(new RuleCase(RuleCase.CaseType.NORMAL, caseParts));
+		rul.addCase(new NormalRuleCase(caseParts));
 	}
 
 	/* Handle a where block (a block with local rules). */

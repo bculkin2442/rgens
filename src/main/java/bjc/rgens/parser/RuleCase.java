@@ -13,7 +13,7 @@ import bjc.utils.funcdata.IList;
  *
  * @author EVE
  */
-public class RuleCase {
+public abstract class RuleCase {
 	/**
 	 * The possible types of a case.
 	 *
@@ -25,7 +25,7 @@ public class RuleCase {
 		/** A case that doesn't insert spaces. */
 		SPACEFLATTEN,
 		/** A case that applies a regex after generation. */
-		REGEX
+		REGEX;
 	}
 
 	/** The type of this case. */
@@ -74,6 +74,8 @@ public class RuleCase {
 
 		elementList = elements;
 	}
+
+	public abstract void generate(GenerationState state);
 
 	/**
 	 * Get the element list value of this type.
