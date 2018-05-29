@@ -44,6 +44,7 @@ pragma prefix-with [money-type] [metal-type]
 	gold
 	platinum
 
+<<<<<<< HEAD
 [item] [item-types]
 	[item-types]
 	[item-types]
@@ -61,3 +62,11 @@ pragma prefix-with [money-type] [metal-type]
 [ds-items] [ds-gem]
 	[ds-rune]
 	[ds-armor]
+=======
+[item] [d2-item-type]
+	[d2-item-type] of [suffix]
+	[d2-item-type] of [suffix] and [suffix]
+
+pragma prefix-with [item] [prefix]
+pragma prefix-with [item] [prefix]
+>>>>>>> 66f5a43dee94657a56141c093488eccbf64c7ae1
