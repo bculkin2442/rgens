@@ -1,14 +1,21 @@
-[turboghoul-hat] sack with eyeholes
-	bucket with eyeholes
-	coalscuttle with eyeholes
+[turboghoul-hat] sack
+	bucket
+	coalscuttle
 	[mask]
 	[headscarf]
 	[hood]
 	[turban]
-	]hat]
+	[hat]
 	[helmet]
 	birdcage
 	goldfish bowl
+
+pragma initial-rule [turboghoul-hat]
+
+[eyeholes] with eyeholes
+	with an eyehole
+
+pragma suffix-with [turboghoul-hat] [eyeholes]
 
 [mask] [mask-type] mask
 

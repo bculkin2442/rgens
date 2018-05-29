@@ -42,6 +42,8 @@ pragma suffix-with [address-prefix-prefix] [com-company]
 	route [digit] box [medium-number]
 	[small-number] [street]
 
+pragma export-rule [street-address]
+
 [street] [tree]
 	[color] [tree]
  	[last-name]

@@ -12,8 +12,8 @@
 
 [quote-rpg-name] ( [rpg-name] )
 
-pragma initial-rule [rpg-name]
-pragma export-rule [rpg-name-phrase]
+pragma initial-rule [rpg-name-phrase]
+pragma export-rule [rpg-name]
 
 [rpg-part] → tits
 	     teeth

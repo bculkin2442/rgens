@@ -14,6 +14,8 @@ pragma despace-rule [acronym]
 [acronym-part] [join-acronym]
 	[dot-acronym]
 
+pragma export-rule [acronym-part]
+
 [join-acronym] [consonant] [vowel] [consonant]
 	[consonant-group] [consonant] [consonant]
 	[consonant] [consonant] [consonant] [consonant]
