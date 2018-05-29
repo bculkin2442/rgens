@@ -131,7 +131,15 @@ public abstract class CaseElement {
 			 * Once the rule element execution has been refactored,
 			 * pass rawCase instead.
 			 */
-			return new RuleCaseElement(csepart);
+			if(csepart.contains("$")) {
+				if(csepart.contains("-")) {
+					return new DependantRuleReference(csepart);
+				}
+
+				return new VariableRuleReference(csepart);
+			}
+
+			return new NormalRuleReference(csepart);
 		} else {
 			return new LiteralCaseElement(csepart);
 		}
