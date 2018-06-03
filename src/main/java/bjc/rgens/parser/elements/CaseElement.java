@@ -118,6 +118,8 @@ public abstract class CaseElement {
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
+			} else if (specialBody.contains("|")) {
+				return new InlineRuleCaseElement(specialBody.split("|"));
 			} else {
 				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
 			}
