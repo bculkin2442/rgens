@@ -29,6 +29,8 @@ public class RGrammarSet {
 	/* Contains which file a grammar was loaded from. */
 	private Map<String, String> loadedFrom;
 
+	public static final boolean PERF = true;
+
 	/** Create a new set of randomized grammars. */
 	public RGrammarSet() {
 		grammars = new HashMap<>();
@@ -222,6 +224,8 @@ public class RGrammarSet {
 		/* The grammar set to hand back. */
 		RGrammarSet set = new RGrammarSet();
 
+		long startCFGTime = System.nanoTime();
+
 		/* Get the directory that contains the config file. */
 		Path cfgParent = cfgFile.getParent();
 
@@ -263,11 +267,19 @@ public class RGrammarSet {
 				} else if (convPath.getFileName().toString().endsWith(".gram")) {
 					/* Load grammar file. */
 					try {
+						long startFileTime = System.nanoTime();
 
 						BufferedReader fis = Files.newBufferedReader(convPath);
 						RGrammar gram = RGrammarParser.readGrammar(fis);
 
 						fis.close();
+
+						long endFileTime = System.nanoTime();
+
+						long fileTime = endFileTime - startFileTime;
+
+						if(PERF)
+							System.err.printf("\tPERF: Read grammar %s in %d ns (%f s)\n", convPath, fileTime, fileTime  / 1000000000.0);
 
 						/* Add grammar to the set. */
 						set.addGrammar(name, gram);
@@ -287,6 +299,13 @@ public class RGrammarSet {
 				}
 			}
 		}
+
+		long endCFGTime = System.nanoTime();
+
+		long cfgDur = endCFGTime - startCFGTime;
+
+		if(PERF)
+			System.err.printf("\n\nPERF: Read config file %s in %d ns (%f s)\n", cfgFile, cfgDur, cfgDur / 1000000000.0);
 
 		return set;
 	}

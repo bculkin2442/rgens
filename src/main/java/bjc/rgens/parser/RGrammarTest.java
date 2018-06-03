@@ -28,8 +28,20 @@ public class RGrammarTest {
 
 			/* Generate rule suggestions for all the grammars in the set. */
 			for (String gramName : gramSet.getGrammars()) {
+				long startSuggTime = System.nanoTime();
+
 				gramSet.getGrammar(gramName).generateSuggestions();
+
+				long endSuggTime = System.nanoTime();
+
+				long suggDur = endSuggTime - startSuggTime;
+
+				if(gramSet.PERF)
+					System.err.printf("PERF: Generated rule suggestions for %s in %d ns (%f s)\n", gramName, suggDur, suggDur / 1000000000.0);
 			}
+
+			if(gramSet.PERF) 
+				System.err.printf("\n\n");
 
 			/* Generate for each exported rule. */
 			for (String exportName : gramSet.getExportedRules()) {
@@ -40,6 +52,7 @@ public class RGrammarTest {
 				System.out.printf("Generating for exported rule '%s' from file '%s'\n", exportName, loadSrc);
 
 				RGrammar grammar = gramSet.getExportSource(exportName);
+				long startGenTime = System.nanoTime();
 				for (int i = 0; i < 100; i++) {
 					try {
 						String res = grammar.generate(exportName);
@@ -62,6 +75,12 @@ public class RGrammarTest {
 						System.out.println();
 					}
 				}
+				long endGenTime = System.nanoTime();
+
+				long genDur = endGenTime - startGenTime;
+
+				if(gramSet.PERF)
+					System.err.printf("PERF: Generated %s 100 times in %d ns (%f s)\n", exportName, genDur, genDur / 1000000000.0);
 			}
 		} catch (IOException ioex) {
 			ioex.printStackTrace();

@@ -30,6 +30,7 @@ public class RGrammarParser {
 	 *  Whether we are in debug mode or not.
 	 */
 	public static final boolean DEBUG = false;
+	public static final boolean LINES = true;
 
 	/*
 	 * Templates for level-dependent delimiters.
@@ -147,6 +148,9 @@ public class RGrammarParser {
 
 					handleBlock(build, block.contents, 0);
 				});
+
+				if(LINES)
+					System.err.printf("%d ", reader.getBlock().endLine);
 
 				return build.toRGrammar();
 			} catch (GrammarException gex) {
