@@ -3,6 +3,8 @@ package bjc.rgens.parser;
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+import bjc.utils.funcutils.ListUtils;
+import bjc.utils.funcutils.SetUtils;
 import bjc.utils.funcutils.TriConsumer;
 import bjc.utils.ioutils.blocks.Block;
 import bjc.utils.ioutils.blocks.BlockReader;
@@ -10,8 +12,13 @@ import bjc.utils.ioutils.blocks.SimpleBlockReader;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Reads {@link RGrammar} from a input stream.
@@ -89,25 +96,25 @@ public class RGrammarParser {
 		pragmas.put("suffix-with", (body, build, level) -> {
 			String[] parts = body.trim().split(" ");
 
-			if (parts.length != 2) {
-				String msg = "Suffix-with pragma takes two arguments, the name of the rule to suffix, then what to suffix it with";
+			if (parts.length < 2) {
+				String msg = "Suffix-with pragma takes at least two arguments, the name of the rule to suffix, then what to suffix it with\n\tThis can be more than one token, to get them suffixed as a group";
 
 				throw new GrammarException(msg);
 			}
 
-			build.suffixWith(parts[0], parts[1]);
+			build.suffixWith(parts[0], Arrays.copyOfRange(parts, 1, parts.length));
 		});
 
 		pragmas.put("prefix-with", (body, build, level) -> {
 			String[] parts = body.trim().split(" ");
 
-			if (parts.length != 2) {
-				String msg = "Prefix-with pragma takes two arguments, the name of the rule to prefix, then what to prefix it with";
+			if (parts.length < 2) {
+				String msg = "Prefix-with pragma takes at least two arguments, the name of the rule to prefix, then what to prefix it with\n\tThis can be more than one token, to get them prefixed as a group";
 
 				throw new GrammarException(msg);
 			}
 
-			build.prefixWith(parts[0], parts[1]);
+			build.prefixWith(parts[0], Arrays.copyOfRange(parts, 1, parts.length));
 		});
 	}
 
@@ -175,7 +182,7 @@ public class RGrammarParser {
 			handleRuleBlock(block, build, level);
 		} else if (blockType.equalsIgnoreCase("where")) {
 			handleWhereBlock(block, build, level);
-		} else if (blockType.equalsIgnoreCase("#")) {
+		} else if (blockType.startsWith("#")) {
 			if(DEBUG)
 				System.err.printf("Handled comment block (%s)\n", block);
 			/*
@@ -353,7 +360,7 @@ public class RGrammarParser {
 	/* Handle a where block (a block with local rules). */
 	private static void handleWhereBlock(String block, RGrammarBuilder build,
 	                                     int level) throws GrammarException {
-		int nlIndex = block.indexOf("\\n");
+		int nlIndex = block.indexOf("\\nin");
 
 		if (nlIndex == -1) {
 			throw new GrammarException("Where block must be a context followed by a body");
@@ -375,6 +382,7 @@ public class RGrammarParser {
 					@SuppressWarnings("unused")
 					Block whereBody = whereReader.next();
 
+					System.err.printf("\tUNIMPLEMENTED WHERE:\n%s\n", whereBody.contents);
 					/**
 					 * @TODO 10/11/17 Ben Culkin :WhereBlocks
 					 * 	Implement where blocks. 

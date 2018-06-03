@@ -85,7 +85,7 @@ public abstract class CaseElement {
 			 */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
-			System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
+			//System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
 
 			if (specialBody.matches("\\S+:=\\S+")) {
 				/* Handle expanding variable definitions. */

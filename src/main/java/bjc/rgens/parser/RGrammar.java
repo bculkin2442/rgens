@@ -208,7 +208,7 @@ public class RGrammar {
 		 */
 		body = body.replaceAll("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1");
 
-		return body;
+		return body.trim();
 	}
 
 	/**

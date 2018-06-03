@@ -3,11 +3,16 @@ package bjc.rgens.parser;
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+import bjc.utils.funcutils.ListUtils;
+import bjc.utils.funcutils.SetUtils;
 
 import static bjc.rgens.parser.RuleCase.CaseType.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -136,7 +141,7 @@ public class RGrammarBuilder {
 	 * 	If the rule name is either invalid or not defined by this
 	 * 	grammar, or if the suffix is invalid.
 	 */
-	public void suffixWith(String ruleName, String suffix) {
+	public void suffixWith(String ruleName, String... suffixes) {
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
@@ -147,19 +152,27 @@ public class RGrammarBuilder {
 			throw new IllegalArgumentException(msg);
 		}
 
-		CaseElement element = CaseElement.createElement(suffix);
+		Set<CaseElement> elements = new HashSet<>(suffixes.length);
+		for(String suffix : suffixes) {
+			elements.add(CaseElement.createElement(suffix));
+		}
+		
+		List<List<CaseElement>> suffixLists = powerList(elements);
 
 		FunctionalList<RuleCase> newCases = new FunctionalList<>();
 
 		IList<RuleCase> caseList = rules.get(ruleName).getCases();
 		for (RuleCase ruleCase : caseList) {
+			for(List<CaseElement> suffixList : suffixLists) {
 			FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
 			for(CaseElement elm : ruleCase.getElements()) {
 				newCase.add(elm);
 			}
 
-			newCase.add(element);
+			for(CaseElement element : suffixList) {
+				newCase.add(element);
+			}
 
 			/*
 			 * @NOTE :AffixCasing
@@ -168,6 +181,7 @@ public class RGrammarBuilder {
 			 * existing case type?
 			 */
 			newCases.add(new NormalRuleCase(newCase));
+			}
 		}
 
 
@@ -189,7 +203,7 @@ public class RGrammarBuilder {
 	 * 	If the rule name is either invalid or not defined by this
 	 * 	grammar, or if the prefix is invalid.
 	 */
-	public void prefixWith(String ruleName, String prefix) {
+	public void prefixWith(String ruleName, String... prefixes) {
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
@@ -200,27 +214,36 @@ public class RGrammarBuilder {
 			throw new IllegalArgumentException(msg);
 		}
 
-		CaseElement element = CaseElement.createElement(prefix);
+		Set<CaseElement> elements = new HashSet<>(prefixes.length);
+		for(String prefix : prefixes) {
+			elements.add(CaseElement.createElement(prefix));
+		}
+		
+		List<List<CaseElement>> prefixLists = powerList(elements);
 
 		FunctionalList<RuleCase> newCases = new FunctionalList<>();
 
 		IList<RuleCase> caseList = rules.get(ruleName).getCases();
 		for (RuleCase ruleCase : caseList) {
-			FunctionalList<CaseElement> newCase = new FunctionalList<>();
+			for(List<CaseElement> prefixList : prefixLists) {
+				FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
-			newCase.add(element);
+				for(CaseElement elm: prefixList) {
+					newCase.add(elm);
+				}
 
-			for(CaseElement elm : ruleCase.getElements()) {
-				newCase.add(elm);
+				for(CaseElement elm : ruleCase.getElements()) {
+					newCase.add(elm);
+				}
+
+				/*
+				 * @NOTE :AffixCasing
+				 *
+				 * Is this correct, or should we be mirroring the
+				 * existing case type?
+				 */
+				newCases.add(new NormalRuleCase(newCase));
 			}
-
-			/*
-			 * @NOTE :AffixCasing
-			 *
-			 * Is this correct, or should we be mirroring the
-			 * existing case type?
-			 */
-			newCases.add(new NormalRuleCase(newCase));
 		}
 
 
@@ -269,6 +292,52 @@ public class RGrammarBuilder {
 		}
 
 		rules.get(rule).replaceCases(newCaseList);
+	}
 
+	private static <T> List<List<T>> powerList(Set<T> elements) {
+		/*
+		 * Fast-case the most common usage
+		 */
+		if(elements.size() == 1) {
+			List<List<T>> ret = new LinkedList<>();
+
+			List<T> curr = new ArrayList<>(elements.size());
+			for(T elem : elements) {
+				curr.add(elem);
+			}
+
+			ret.add(curr);
+
+			return ret;
+		}
+
+		Set<Set<T>> powerSet = SetUtils.powerSet(elements);
+
+		List<List<T>> list = new LinkedList<>();
+
+		for(Set<T> set : powerSet) {
+			/*
+			 * Skip empty sets
+			 */
+			if(set.size() == 0) continue;
+
+			List<T> stor = new ArrayList<>(set.size());
+
+			for(T elm : set) {
+				stor.add(elm);
+			}
+
+			for(List<T> permute : ListUtils.permuteList(stor)) {
+				System.err.printf("\tTRACE: generated permute ");
+				for(T elm : permute) {
+					System.err.printf("%s ", elm);
+				}
+				System.err.println();
+
+				list.add(permute);
+			}
+		}
+
+		return list;
 	}
 }
