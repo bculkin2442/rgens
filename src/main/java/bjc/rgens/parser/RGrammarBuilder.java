@@ -272,7 +272,21 @@ public class RGrammarBuilder {
 			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().getElements())));
 		}
 
+		System.err.printf("\tTRACE: Despacing %d cases of rule %s\n", caseList.getSize(), ruleName);
+
 		rules.get(ruleName).replaceCases(newCaseList);
+	}
+
+	public void setWeight(String ruleName) {
+		if (ruleName == null) {
+			throw new NullPointerException("ruleName must not be null");
+		} else if (ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if (!rules.containsKey(ruleName)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", ruleName));
+		}
+
+		rules.get(ruleName).prob = Rule.ProbType.NORMAL;
 	}
 
 	public void setRuleRecur(String ruleName, int recurLimit) {
@@ -285,6 +299,39 @@ public class RGrammarBuilder {
 		}
 
 		rules.get(ruleName).recurLimit = recurLimit;
+	}
+
+	public void setDescent(String ruleName, int descentFactor) {
+		if (ruleName == null) {
+			throw new NullPointerException("ruleName must not be null");
+		} else if (ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if (!rules.containsKey(ruleName)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", ruleName));
+		}
+
+		Rule rl = rules.get(ruleName);
+
+		rl.prob          = Rule.ProbType.DESCENDING;
+		rl.descentFactor = descentFactor;
+	}
+
+	public void setBinomial(String ruleName, int target, int bound, int trials) {
+		if (ruleName == null) {
+			throw new NullPointerException("ruleName must not be null");
+		} else if (ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if (!rules.containsKey(ruleName)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", ruleName));
+		}
+
+		Rule rl = rules.get(ruleName);
+
+		rl.prob          = Rule.ProbType.BINOMIAL;
+
+		rl.target = target;
+		rl.bound  = bound;
+		rl.trials = trials;
 	}
 	/*
 	 * @TODO

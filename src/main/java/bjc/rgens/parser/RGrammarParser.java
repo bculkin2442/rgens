@@ -99,6 +99,49 @@ public class RGrammarParser {
 			build.setRuleRecur(parts[0], Integer.parseInt(parts[1]));
 		});
 
+		pragmas.put("enable-weight", (body, build, level) -> {
+			String[] parts = body.split(" ");
+
+			if(parts.length != 2) {
+				throw new GrammarException("Enable-weight pragma takes one arguments: the name of the rule to set the weight factor for");
+			}
+
+			build.setWeight(parts[0]);
+		});
+		pragmas.put("enable-descent", (body, build, level) -> {
+			String[] parts = body.split(" ");
+
+			if(parts.length != 2) {
+				throw new GrammarException("Enable-descent pragma takes two arguments: the name of the rule to set the descent factor for, and the new value of the factor");
+			}
+
+			if(!parts[1].matches("\\A\\d+\\Z")) {
+				throw new GrammarException("Factor value must be an integer");
+			}
+
+			build.setDescent(parts[0], Integer.parseInt(parts[1]));
+		});
+
+		pragmas.put("enable-binomial", (body, build, level) -> {
+			String[] parts = body.split(" ");
+
+			if(parts.length != 4) {
+				throw new GrammarException("Enable-descent pragma takes four arguments: the name of the rule to set the binomial factors for, and the three binomial parameters (target, bound trials)");
+			}
+
+			if(!parts[1].matches("\\A\\d+\\Z")) {
+				throw new GrammarException("Target value must be an integer");
+			}
+			if(!parts[2].matches("\\A\\d+\\Z")) {
+				throw new GrammarException("Bound value must be an integer");
+			}
+			if(!parts[3].matches("\\A\\d+\\Z")) {
+				throw new GrammarException("Trials value must be an integer");
+			}
+
+			build.setBinomial(parts[0], Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+		});
+
 		pragmas.put("regex-rule", (body, build, level) -> {
 			int nameIndex = body.indexOf(" ");
 
@@ -164,7 +207,7 @@ public class RGrammarParser {
 					if(DEBUG)
 						System.err.printf("Handling top-level block (%s)\n", block);
 
-					handleBlock(build, block.contents, 0);
+					handleBlock(build, block.contents, 0, block.startLine);
 				});
 
 				if(LINES)
@@ -184,7 +227,7 @@ public class RGrammarParser {
 
 	/* Handles an arbitrary block. */
 	private static void handleBlock(RGrammarBuilder build, String block, 
-			int level) throws GrammarException {
+			int level, int lineOffset) throws GrammarException {
 		/* Discard empty blocks. */
 		if (block.equals("") || block.matches("\\R"))
 			return;
@@ -199,11 +242,11 @@ public class RGrammarParser {
 		String blockType = block.substring(0, typeSep).trim();
 
 		if (blockType.equalsIgnoreCase("pragma")) {
-			handlePragmaBlock(block, build, level);
+			handlePragmaBlock(block, build, level, lineOffset);
 		} else if (blockType.startsWith("[")) {
-			handleRuleBlock(block, build, level);
+			handleRuleBlock(block, build, level, lineOffset);
 		} else if (blockType.equalsIgnoreCase("where")) {
-			handleWhereBlock(block, build, level);
+			handleWhereBlock(block, build, level, lineOffset);
 		} else if (blockType.startsWith("#")) {
 			if(DEBUG)
 				System.err.printf("Handled comment block (%s)\n", block);
@@ -224,11 +267,13 @@ public class RGrammarParser {
 
 	/* Handle reading a block of pragmas. */
 	private static void handlePragmaBlock(String block, RGrammarBuilder build,
-	                                      int level) throws GrammarException {
+	                                      int level, int lineOffset) throws GrammarException {
 		String dlm = String.format(TMPL_PRAGMA_BLOCK_DELIM, level);
 		try (BlockReader pragmaReader = new SimpleBlockReader(dlm, new StringReader(block))) {
 			try {
 				pragmaReader.forEachBlock((pragma) -> {
+					pragma.lineOffset = lineOffset;
+
 					if(DEBUG)
 						System.err.printf("Handled pragma block (%s)\n", pragma);
 
@@ -251,7 +296,7 @@ public class RGrammarParser {
 						throw new GrammarException(msg);
 					}
 
-					handlePragma(pragmaBody, build, level);
+					handlePragma(pragmaBody, build, level, pragma.startLine + lineOffset);
 				});
 			} catch (GrammarException gex) {
 				Block pragma = pragmaReader.getBlock();
@@ -266,7 +311,7 @@ public class RGrammarParser {
 
 	/* Handle an individual pragma in a block. */
 	private static void handlePragma(String pragma, RGrammarBuilder build,
-	                                 int level) throws GrammarException {
+	                                 int level, int lineOffset) throws GrammarException {
 		int bodySep = pragma.indexOf(' ');
 
 		if (bodySep == -1)
@@ -295,7 +340,7 @@ public class RGrammarParser {
 
 	/* Handle a block of a rule declaration and one or more cases. */
 	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build,
-	                                    int level) throws GrammarException {
+	                                    int level, int lineOffset) throws GrammarException {
 		String dlm = String.format(TMPL_RULEDECL_BLOCK_DELIM, level);
 		try (BlockReader ruleReader = new SimpleBlockReader(dlm, new StringReader(ruleBlock))) {
 			try {
@@ -303,19 +348,20 @@ public class RGrammarParser {
 					/* Rule with a declaration followed by multiple cases. */
 					ruleReader.nextBlock();
 					Block declBlock = ruleReader.getBlock();
+					declBlock.lineOffset = lineOffset;
 
 					String declContents = declBlock.contents;
-					Rule rl = handleRuleDecl(build, declContents);
+					Rule rl = handleRuleDecl(build, declContents, lineOffset + declBlock.startLine);
 
 					ruleReader.forEachBlock((block) -> {
 						/* Ignore comment lines. */
 						if(block.contents.trim().startsWith("#")) return;
 
-						handleRuleCase(block.contents, build, rl);
+						handleRuleCase(block.contents, build, rl, block.startLine + lineOffset);
 					});
 				} else {
 					/* Rule with a declaration followed by a single case. */
-					handleRuleDecl(build, ruleBlock);
+					handleRuleDecl(build, ruleBlock, lineOffset);
 				}
 			} catch (GrammarException gex) {
 				String msg = String.format("Error in rule case (%s)", ruleReader.getBlock());
@@ -328,7 +374,7 @@ public class RGrammarParser {
 	}
 
 	/* Handle a rule declaration and its initial case. */
-	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents) {
+	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents, int lineOffset) {
 		int declSep = declContents.indexOf("\u2192");
 
 		if (declSep == -1) {
@@ -357,13 +403,13 @@ public class RGrammarParser {
 
 		Rule rul = build.getOrCreateRule(ruleName);
 
-		handleRuleCase(ruleBody, build, rul);
+		handleRuleCase(ruleBody, build, rul, lineOffset);
 
 		return rul;
 	}
 
 	/* Handle a single case of a rule. */
-	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul) {
+	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul, int lineOffset) {
 		Pair<IList<CaseElement>, Integer> caseParts = parseElementString(cse);
 
 		rul.addCase(new NormalRuleCase(caseParts.getLeft()), caseParts.getRight());
@@ -371,7 +417,7 @@ public class RGrammarParser {
 
 	/* Handle a where block (a block with local rules). */
 	private static void handleWhereBlock(String block, RGrammarBuilder build,
-			int level) throws GrammarException {
+			int level, int lineOffset) throws GrammarException {
 		int nlIndex = block.indexOf("\\nin");
 
 		if (nlIndex == -1) {
@@ -386,6 +432,7 @@ public class RGrammarParser {
 					new StringReader(trimBlock))) {
 			try {
 				Block whereCtx = whereReader.next();
+				whereCtx.lineOffset = lineOffset;
 
 				StringReader ctxReader = new StringReader(whereCtx.contents.trim());
 				String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
@@ -393,6 +440,7 @@ public class RGrammarParser {
 				try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
 					@SuppressWarnings("unused")
 					Block whereBody = whereReader.next();
+					whereBody.lineOffset = lineOffset + whereCtx.startLine;
 
 					System.err.printf("\tUNIMPLEMENTED WHERE:\n%s\n", whereBody.contents);
 					/**
