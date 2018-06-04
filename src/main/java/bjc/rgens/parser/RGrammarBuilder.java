@@ -144,7 +144,7 @@ public class RGrammarBuilder {
 	 * 	If the rule name is either invalid or not defined by this
 	 * 	grammar, or if the suffix is invalid.
 	 */
-	public void suffixWith(String ruleName, String... suffixes) {
+	public void suffixWith(String ruleName, IList<CaseElement> suffixes) {
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
@@ -155,9 +155,9 @@ public class RGrammarBuilder {
 			throw new IllegalArgumentException(msg);
 		}
 
-		Set<CaseElement> elements = new HashSet<>(suffixes.length);
-		for(String suffix : suffixes) {
-			elements.add(CaseElement.createElement(suffix));
+		Set<CaseElement> elements = new HashSet<>(suffixes.getSize());
+		for(CaseElement suffix : suffixes) {
+			elements.add(suffix);
 		}
 		
 		List<List<CaseElement>> suffixLists = powerList(elements);
@@ -206,7 +206,7 @@ public class RGrammarBuilder {
 	 * 	If the rule name is either invalid or not defined by this
 	 * 	grammar, or if the prefix is invalid.
 	 */
-	public void prefixWith(String ruleName, String... prefixes) {
+	public void prefixWith(String ruleName, IList<CaseElement> prefixes) {
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
@@ -217,9 +217,9 @@ public class RGrammarBuilder {
 			throw new IllegalArgumentException(msg);
 		}
 
-		Set<CaseElement> elements = new HashSet<>(prefixes.length);
-		for(String prefix : prefixes) {
-			elements.add(CaseElement.createElement(prefix));
+		Set<CaseElement> elements = new HashSet<>(prefixes.getSize());
+		for(CaseElement prefix : prefixes) {
+			elements.add(prefix);
 		}
 		
 		List<List<CaseElement>> prefixLists = powerList(elements);

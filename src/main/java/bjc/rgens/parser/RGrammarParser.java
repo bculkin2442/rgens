@@ -1,6 +1,10 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
+import bjc.rgens.parser.elements.SerialCaseElement;
+
+import bjc.utils.data.IPair;
+import bjc.utils.data.Pair;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.funcutils.ListUtils;
@@ -109,27 +113,27 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("suffix-with", (body, build, level) -> {
-			String[] parts = body.trim().split(" ");
+			int idx = body.indexOf(" ");
 
-			if (parts.length < 2) {
+			if (idx == -1) {
 				String msg = "Suffix-with pragma takes at least two arguments, the name of the rule to suffix, then what to suffix it with\n\tThis can be more than one token, to get them suffixed as a group";
 
 				throw new GrammarException(msg);
 			}
 
-			build.suffixWith(parts[0], Arrays.copyOfRange(parts, 1, parts.length));
+			build.suffixWith(body.substring(0, idx), parseElementString(body.substring(idx + 1)).getLeft());
 		});
 
 		pragmas.put("prefix-with", (body, build, level) -> {
-			String[] parts = body.trim().split(" ");
+			int idx = body.indexOf(" ");
 
-			if (parts.length < 2) {
+			if (idx == -1) {
 				String msg = "Prefix-with pragma takes at least two arguments, the name of the rule to prefix, then what to prefix it with\n\tThis can be more than one token, to get them prefixed as a group";
 
 				throw new GrammarException(msg);
 			}
 
-			build.prefixWith(parts[0], Arrays.copyOfRange(parts, 1, parts.length));
+			build.prefixWith(body.substring(0, idx), parseElementString(body.substring(idx + 1)).getLeft());
 		});
 	}
 
@@ -360,30 +364,14 @@ public class RGrammarParser {
 
 	/* Handle a single case of a rule. */
 	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul) {
-		IList<CaseElement> caseParts = new FunctionalList<>();
+		Pair<IList<CaseElement>, Integer> caseParts = parseElementString(cse);
 
-		int weight = 1;
-
-		for (String csepart : cse.split(" ")) {
-			String partToAdd = csepart.trim();
-
-			if (partToAdd.equals("")) {
-				/* Ignore empty parts */
-				continue;
-			} else if(partToAdd.matches("\\{\\^\\d+\\}")) {
-				/* Set case weights */
-				weight = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
-			} else {
-				caseParts.add(CaseElement.createElement(partToAdd));
-			}
-		}
-
-		rul.addCase(new NormalRuleCase(caseParts), weight);
+		rul.addCase(new NormalRuleCase(caseParts.getLeft()), caseParts.getRight());
 	}
 
 	/* Handle a where block (a block with local rules). */
 	private static void handleWhereBlock(String block, RGrammarBuilder build,
-	                                     int level) throws GrammarException {
+			int level) throws GrammarException {
 		int nlIndex = block.indexOf("\\nin");
 
 		if (nlIndex == -1) {
@@ -395,7 +383,7 @@ public class RGrammarParser {
 		String whereDelim = String.format(TMPL_WHERE_BLOCK_DELIM, level);
 
 		try (BlockReader whereReader = new SimpleBlockReader(whereDelim,
-			                new StringReader(trimBlock))) {
+					new StringReader(trimBlock))) {
 			try {
 				Block whereCtx = whereReader.next();
 
@@ -418,10 +406,64 @@ public class RGrammarParser {
 				}
 			} catch (GrammarException gex) {
 				throw new GrammarException(String.format("Error in where block (%s)",
-				                           whereReader.getBlock()), gex);
+							whereReader.getBlock()), gex);
 			}
 		} catch (Exception ex) {
 			throw new GrammarException("Unknown error in where block", ex);
 		}
+	}
+
+	public static Pair<IList<CaseElement>, Integer> parseElementString(String cses) {
+		return parseElementString(cses.split(" "));
+	}
+
+	public static Pair<IList<CaseElement>, Integer> parseElementString(String... cses) {
+		IList<CaseElement> caseParts = new FunctionalList<>();
+
+		int weight = 1;
+
+		int repCount = 1;
+
+		int serialLower = -1;
+		int serialUpper = -1;
+
+		boolean doSerial = false;
+
+		for (String csepart : cses) {
+			String partToAdd = csepart.trim();
+
+			if (partToAdd.equals("")) {
+				/* Ignore empty parts */
+				continue;
+			} else if(partToAdd.matches("\\{\\^\\d+\\}")) {
+				/* Set case weights */
+				weight = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
+			} else if(partToAdd.matches("\\{&\\d+\\}")) {
+				repCount = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
+			} else if(partToAdd.matches("\\{&\\d+\\.\\.\\d+\\}")) {
+				serialLower = Integer.parseInt(partToAdd.substring(2, partToAdd.indexOf(".")));
+				serialUpper = Integer.parseInt(partToAdd.substring(partToAdd.lastIndexOf(".") + 1, partToAdd.length() - 1));
+
+				doSerial = true;
+			} else {
+				CaseElement elm = CaseElement.createElement(partToAdd);
+
+				if(repCount == 0) {
+					/* Skip no-reps */
+				} else if(doSerial) {
+					caseParts.add(new SerialCaseElement(elm, serialLower, serialUpper));
+
+					doSerial = false;
+				} else {
+					for(int i = 1; i <= repCount; i++) {
+						caseParts.add(elm);
+					}
+				}
+
+				repCount = 1;
+			}
+		}
+
+		return new Pair<>(caseParts, weight);
 	}
 }
