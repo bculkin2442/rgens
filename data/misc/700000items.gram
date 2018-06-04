@@ -1,12 +1,12 @@
-[item-name] [noun]
+[isaac-item-name] [noun]
 
-pragma prefix-with [item-name] [post]
-pragma prefix-with [item-name] <&1..2> [adj]
-pragma prefix-with [item-name] [pre]
+pragma prefix-with [isaac-item-name] [post]
+pragma prefix-with [isaac-item-name] <&1..2> [adj]
+pragma prefix-with [isaac-item-name] [pre]
 
-pragma suffix-with [item-name] [end]
+pragma suffix-with [isaac-item-name] [end]
 
-pragma initial-rule [item-name]
+pragma initial-rule [isaac-item-name]
 
 [noun] Boy
 	Kid

@@ -83,7 +83,7 @@ public class RGrammarTest {
 				long genDur = endGenTime - startGenTime;
 
 				if(gramSet.PERF)
-					System.err.printf("PERF: Generated %s 100 times in %d ns (%f s)\n", exportName, genDur, genDur / 1000000000.0);
+					System.err.printf("PERF: Generated %s 100 times in %d ns (%f s)\n\n\n", exportName, genDur, genDur / 1000000000.0);
 			}
 		} catch (IOException ioex) {
 			ioex.printStackTrace();

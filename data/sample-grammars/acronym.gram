@@ -1,17 +1,16 @@
-[acronym] [acronym-part]
+[acronym] [acronym+1]
+
+[acronym+1] [acronym-phrase]
 	[acronym-part]
-	[acronym-part]
-	[acronym-part]
-	[acronym-phrase]
 
 pragma initial-rule [acronym]
-
-pragma despace-rule [acronym]
 
 [acronym-phrase] [acronym-part] / [acronym-part]
 	[acronym-part] - [acronym-part]
 
-[acronym-part] [join-acronym]
+[acronym-part] [acronym+part]
+
+[acronym+part] [join-acronym]
 	[dot-acronym]
 
 pragma export-rule [acronym-part]

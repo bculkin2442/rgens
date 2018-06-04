@@ -14,6 +14,10 @@ import bjc.utils.funcdata.IList;
  * @author EVE
  */
 public abstract class RuleCase {
+	public final int serial;
+
+	private static int nextSerial = 0;
+
 	/**
 	 * The possible types of a case.
 	 *
@@ -45,7 +49,11 @@ public abstract class RuleCase {
 	protected IList<CaseElement> elementList;
 
 	protected RuleCase(CaseType typ) {
+		serial = nextSerial;
+
 		type = typ;
+
+		nextSerial += 1;
 	}
 
 	/**

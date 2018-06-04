@@ -1,4 +1,4 @@
-[abandoned] while exploring the abandoned [abandon-place] , a [abandon-person] sneaks up on you [abandon-motion] .
+[abandoned] while exploring the [{empty}|abandoned] [abandon-place] , a [abandon-person] sneaks up on you [abandon-motion] .
 
 pragma initial-rule [abandoned]
 

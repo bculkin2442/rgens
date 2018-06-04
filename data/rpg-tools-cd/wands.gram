@@ -1,21 +1,21 @@
-[wand] a wand
-	a [material] wand
-	a [wand-tip] wand
+[wand] a [wand-tip] wand
 	a [material] [wand-tip] wand
+	<^2> [untipped-wand]
 
-pragma suffix-with [wand] [tipped]
-pragma suffix-with [wand] [ornament]
-pragma suffix-with [wand] [inscription]
+[untipped-wand] a wand
+	a [material] wand
+
+pragma suffix-with [untipped-wand] [tipped]
+pragma suffix-with [wand] [ornament] [inscription]
 
 pragma initial-rule [wand]
 
-[material]
-	ivory
+[material] ivory
 	glass
 	ash
 	bone
-	[material-metal]
-	[material-wood]
+	<^4> [material-metal]
+	<^4> [material-wood]
 
 [tipped] tipped with a [tip]
 
@@ -24,9 +24,10 @@ pragma initial-rule [wand]
 pragma despace-rule [wand-tip]
 
 [ornament] decorated with [ornaments]
+	adorned with [ornaments]
 
 [inscription] inscribed with [inscriptions]
-	with a [inscriptions] inscribed on it
+	with [inscriptions] inscribed on it
 
 [material-wood] teak
 	ironwood
@@ -54,8 +55,8 @@ pragma despace-rule [wand-tip]
 	dessicated eye
 	pentagram
 	crescent moon
-	[tip-jewel]
-	[tip-metal]
+	<^4> [tip-jewel]
+	<^4> [tip-metal]
 
 [tip-jewel] diamond
 	amethyst
@@ -77,16 +78,8 @@ pragma despace-rule [wand-tip]
 	feathers
 	glitter
 	leather braids
-	[ornaments-sigils]
-	[ornaments-creatures]
-	[ornaments-elements]
-
-[ornaments-sigils] lucky charms
-	hieroglyphs
-	alchemy signs
-	holy symbols
-	unholy symbols
-	arcane sigils
+	<^3> [ornaments-creatures]
+	<^3> [ornaments-elements]
 
 [ornaments-elements] waves
 	lightning
@@ -97,23 +90,50 @@ pragma despace-rule [wand-tip]
 	dragons
 	spiders and insects
 
-[inscriptions] unreadable
-	gnomish
+[inscriptions] [inscribed-sigils]
+
+pragma prefix-with [inscriptions] [inscribed-language]
+
+[inscribed-sigils] lucky charms
+	hieroglyphs
+	alchemy signs
+	holy symbols
+	unholy symbols
+	arcane sigils
+	runes
+	scriptures
+	warnings
+
+[inscribed-language] [inscribed-language-mod]
+
+pragma suffix-with [inscribed-language] [inscribed-language-base]
+pragma prefix-with [inscribed-language] [inscribed-mod]
+
+[inscribed-language-base] gnomish
 	aboleth
-	abyssal
 	aquan
 	dwarven
 	draconic
-	lost tongue
 	sphinx
 	ignan
 	orcish
 	elven
 	dreemspeech
-	celestial
-	runes
 	auran
 	sylvan
 	terran
-	druidic
+
+[inscribed-language-mod] unreadable
+	runic
+	script
 	infernal
+	celestial
+	abyssal
+	draconic
+	druidic
+
+[inscribed-mod] ancient
+	faint
+	illegible
+	glowing
+	eldritch

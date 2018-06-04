@@ -37,6 +37,7 @@ public abstract class RuleCaseElement extends StringCaseElement {
 
 			if(rl.doRecur()) {
 				RuleCase cse = rl.getCase(state.rnd);
+				System.err.printf("\tFINE: Generating case %d (from %s)\n", cse.serial, actName);
 
 				state.gram.generateCase(cse, newState);
 

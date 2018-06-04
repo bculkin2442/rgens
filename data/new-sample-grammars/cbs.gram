@@ -94,17 +94,12 @@ pragma prefix-with [boss-title] [boss-title-co] [boss-title-vice]
 	Technical
 	Manifesto
 
-[boss-department] [boss-department-1]
-	[boss-department-1]
-	[boss-department-1]
-	[boss-department-1]
+[boss-department] <^4> [boss-department-1]
 	[boss-department-2]
 
 [boss-officer] Catalyst
 	Futurist
-	Officer
-	Officer
-	Officer
+	<^3> Officer
 
 [boss-dept-of] of [boss-department-1]
 
@@ -536,8 +531,7 @@ pragma export-rule [boss]
 	game changer
 	visionary
 
-[person-single] [person-single-spec]
-	[person-single-spec]
+[person-single] <^2> [person-single-spec]
 	[boss]
 
 [person-plural] key people
@@ -940,22 +934,12 @@ pragma export-rule [boss]
 
 pragma export-rule [growth]
 
-[thing-with-adj] [thing-adjective] , [thing-adjective] [thing-atom]
-	[thing-adjective] , [thing-adjective] [thing-atom]
-	[thing-adjective] , [thing-adjective] [thing-atom]
-	[thing-adjective] and [thing-adjective] [thing-atom]
-	[thing-adjective] and [thing-adjective] [thing-atom]
-	[thing-adjective] and [thing-adjective] [thing-atom]
-	[thing-adjective] [thing-atom]
-	[thing-adjective] [thing-atom]
-	[thing-adjective] [thing-atom]
-	[thing-adjective] [thing-atom]
-	[thing-adjective] [thing-atom]
-	[thing-adjective] and/or [thing-adjective] [thing-atom]
-	[thing-adjective] and/or [thing-adjective] [thing-atom]
+[thing-with-adj] <^3> [thing-adjective] , [thing-adjective] [thing-atom]
+	<^3> [thing-adjective] and [thing-adjective] [thing-atom]
+	<^4> [thing-adjective] [thing-atom]
+	<^2> [thing-adjective] and/or [thing-adjective] [thing-atom]
 	[growth]
-	[thing-adjective] [thing-adjective] [thing-adjective] [thing-atom]
-	[thing-adjective] [thing-adjective] [thing-adjective] [thing-adjective] [thing-atom]
+	<^2> [thing-adjective] [thing-adjective] [thing-adjective] [thing-atom]
 
 [thing] [thing-with-adj]
 	[thing-atom]
@@ -1023,21 +1007,13 @@ pragma export-rule [thing]
 	gradually
 	aggressively
 
-[eventual-adverb] {empty}
-	{empty}
-	{empty}
+[eventual-adverb] <^3> {empty}
 	[eventual-adverb-1]
 
 [random-article] the
 	our
-	a
-	an
-	a
-	an
-	a
-	an
-	a
-	an
+	<^4> a
+	<^4> an
 	{empty}
 
 [eventual-postfix-adverb-1] going forward
@@ -1082,10 +1058,7 @@ pragma export-rule [thing]
 	, paving the way for [random-article] [thing]
 
 [eventual-postfix-adverb] [eventual-postfix-adverb-1]
-	{empty}
-	{empty}
-	{empty}
-	{empty}
+	<^4> {empty}
 
 pragma export-rule [eventual-postfix-adverb-1]
 
@@ -1306,19 +1279,11 @@ pragma export-rule [eventual-postfix-adverb-1]
 [thing-verb-def-ending] add value
 	deliver maximum impact
 
-[thing-verb-ending] [thing-verb-thing] [random-article] [thing]
-	[thing-verb-thing] [random-article] [thing]
-	[thing-verb-thing] [random-article] [thing]
-	[thing-verb-thing] [random-article] [thing]
-	[thing-verb-person] the [person]
-	[thing-verb-person] the [person]
-	[thing-verb-person] the [person]
-	[thing-verb-person] the [person]
+[thing-verb-ending] <^4> [thing-verb-thing] [random-article] [thing]
+	<^4> [thing-verb-person] the [person]
 	[thing-verb-def-ending]
 
-[person-verb-ending] [person-verb-def-ending]
-	[person-verb-def-ending]
-	[person-verb-def-ending]
+[person-verb-ending] <^3> [person-verb-def-ending]
 	[person-verb-badthing] [random-article] [bad-things]
 	[person-verb-thing] [random-article] [thing]
 
@@ -1343,12 +1308,8 @@ pragma export-rule [verbphrase-coll-1]
 	we will sharpen our business models to
 
 [proposition] [faukon] [person-verb-ending] [eventual-postfix-adverb]
-	the [person] [eventual-adverb] [person-verb-ending]
-	the [person] [eventual-adverb] [person-verb-ending]
-	the [person] [eventual-adverb] [person-verb-ending]
-	[random-article] [thing] [eventual-adverb] [thing-verb-ending] [eventual-postfix-adverb]
-	[random-article] [thing] [eventual-adverb] [thing-verb-ending] [eventual-postfix-adverb]
-	[random-article] [thing] [eventual-adverb] [thing-verb-ending] [eventual-postfix-adverb]
+	<^3> the [person] [eventual-adverb] [person-verb-ending]
+	<^3> [random-article] [thing] [eventual-adverb] [thing-verb-ending] [eventual-postfix-adverb]
 	[thing] and [thing] [eventual-adverb] [thing-verb-ending] [eventual-postfix-adverb]
 	[thing] , [thing] and [thing] [eventual-adverb] [thing-verb-ending] [eventual-postfix-adverb]
 	there can be no [growth] until we can achieve [random-article] [growth]

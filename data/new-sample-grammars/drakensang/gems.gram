@@ -1,12 +1,13 @@
-[ds-gem] [gem-type]
-	[gem-type]
+[ds-gem] <^2> [gem-type]
 	[gem-type] of qaizah
 	[unique-gem]
 
+pragma prefix-with [ds-gem] [gem-adjective]
+pragma prefix-with [ds-gem] [gem-quality]
+
 pragma initial-rule [ds-gem]
 
-[gem-quality] [gem-quality-normal]
-	[gem-quality-normal]
+[gem-quality] <^2> [gem-quality-normal]
 	[gem-quality-alt]
 
 [gem-quality-normal] flawed
@@ -19,6 +20,7 @@ pragma initial-rule [ds-gem]
 	royal
 
 [gem-quality-alt] [gem-quality-alt-1]
+	[gem-quality-alt-2]
 
 [gem-quality-alt-1] lesser
 	cut
@@ -34,9 +36,6 @@ pragma initial-rule [ds-gem]
 	festive
 	solstice
 
-pragma prefix-with [ds-gem] [gem-adjective]
-pragma prefix-with [ds-gem] [gem-quality]
-
 [gem-type] ruby
 	onyx
 	sapphire
@@ -44,6 +43,9 @@ pragma prefix-with [ds-gem] [gem-quality]
 	diamond
 	amethyst
 	peridot
+
+pragma prefix-with [gem-type] [gem-descr]
+pragma suffix-with [gem-type] [gem-category]
 
 [gem-category] gem
 	jewel
@@ -59,23 +61,22 @@ pragma prefix-with [ds-gem] [gem-quality]
 	fortified
 	powerful
 
-pragma prefix-with [gem-type] [gem-descr]
-pragma suffix-with [gem-type] [gem-category]
-
-[unique-gem] [gem-category] of [unique-trail]
-	[unique-lead] [gem-category]
-	[unique-type]
-	[gem-category] of [unique-trail]
-	[unique-lead] [gem-category]
-	[unique-type]
+[unique-gem] [unique-type]
 	[gem-category]
 
-[unique-trail] insight
+pragma suffix-with [unique-gem] [unique-trail]
+pragma prefix-with [unique-gem] [unique-lead]
+
+[unique-trail] of [unique-trail-1]
+
+[unique-trail-1] insight
 	immunity
 	rage
 	acceleration
 	shadows
 	willpower
+
+pragma prefix-with [unique-trail-1] [gem-descr]
 
 [unique-lead] solstice
 	fluorite
@@ -86,6 +87,4 @@ pragma suffix-with [gem-type] [gem-category]
 [unique-type] bloodstone
 	moonstone
 
-pragma prefix-with [unique-type] [gem-descr]
-pragma prefix-with [unique-lead] [gem-descr]
-pragma prefix-with [unique-trail] [gem-descr]
+pragma prefix-with [unique-type] [gem-descr] [gem-descr]

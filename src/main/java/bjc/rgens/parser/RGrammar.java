@@ -159,6 +159,7 @@ public class RGrammar {
 
 		if(rl.doRecur()) {
 			RuleCase start = rules.get(fromRule).getCase(state.rnd);
+			System.err.printf("\tFINE: Generating case %d (from %s)\n", start.serial, fromRule);
 
 			generateCase(start, state);
 

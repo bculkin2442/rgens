@@ -1,6 +1,6 @@
-[base-treasures] [base-treasure]
-	[quote-treasure] as well as [quote-treasure]
-	[quote-treasure] or [quote-treasure]
+[base-treasures] <^4> [base-treasure]
+	<^2> [quote-treasure] as well as [quote-treasure]
+	<^2> [quote-treasure] or [quote-treasure]
 	[quote-treasure] , and [quote-treasure] as well as [quote-treasure]
 	[quote-treasure] , [quote-treasure] or [quote-treasure]
 
@@ -11,51 +11,49 @@ pragma initial-rule [base-treasures]
 pragma despace-rule [quote-treasure]
 
 [base-treasure] a [item]
-	a [item]
-	a [item]
 	[non-item]
 
-[non-item] [money]
-	[money]
-	[money]
-	[money]
+[non-item] <^4> [money]
 	nothing
 
-[money] [diablo-amount] [money-type]
+pragma export-rule [non-item]
 
-[diablo-amount] 1
+[money] [diablo-amount] [money-type]
+	[diablo-amount] [metal-type] [money-type]
+
+[diablo-amount] 2
 	5
 	10
 	20
+	50
 	50
 	100
 	200
 	500
 	1000
 
+# Try to advance with a two out of three chance, 10 attempts
+pragma enable-binomial [diablo-amount] 2 3 10
+
 pragma export-rule [diablo-amount]
 
 [money-type] coins
 
-pragma prefix-with [money-type] [metal-type]
+#pragma prefix-with [money-type] [metal-type]
 
 [metal-type] copper
 	silver
 	gold
 	platinum
 
-[item] [item-types]
-	[item-types]
-	[item-types]
-	[item-types]
-	[item-types] [d2-suffix]
-	[item-types] [d2-suffix]
-	[d2-prefix] [item-types]
-	[d2-prefix] [item-types]
+pragma enable-descent [metal-type] 2
+
+[item] <^4> [item-types]
+	<^2> [item-types] [d2-suffix]
+	<^2> [d2-prefix] [item-types]
 	[d2-prefix] [item-types] [d2-suffix]
 
-[item-types] [d2-item-type]
-	[d2-item-type]
+[item-types] <^2> [d2-item-type]
 	[ds-items]
 	[^item]
 
