@@ -76,7 +76,7 @@ public class RGrammarSet {
 			exportFrom.put(export.name, grammarName);
 
 			if(DEBUG)
-				System.err.printf("\t\tDEBUG: %s exported from %s\n", export.name, grammarName);
+				System.err.printf("\t\tDEBUG: %s (%d cases) exported from %s\n", export.name, export.getCases().getSize(), grammarName);
 		}
 
 		/* Add exports to grammar. */

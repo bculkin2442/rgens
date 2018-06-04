@@ -14,13 +14,29 @@ import java.util.Random;
  */
 public class Rule {
 	/** The name of this grammar rule. */
-	public final String name;
+	public String name;
 
 	/* The cases for this rule. */
 	private WeightedRandom<RuleCase> cases;
 
+	public static enum ProbType {
+		NORMAL,
+		DESCENDING,
+		BINOMIAL
+	}
+	
+	public ProbType prob;
+
+	public int     descentFactor;
+
+	public int target;
+	public int bound;
+	public int trials;
+
 	public int recurLimit = 5;
 	private int currentRecur;
+
+	private final static Random BASE = new Random();
 
 	/**
 	 * Create a new grammar rule.
@@ -41,6 +57,8 @@ public class Rule {
 		name = ruleName;
 
 		cases = new WeightedRandom<>();
+
+		prob = ProbType.NORMAL;
 	}
 
 	/**
@@ -76,7 +94,7 @@ public class Rule {
 	 * 	A random case from this rule.
 	 */
 	public RuleCase getCase() {
-		return cases.generateValue();
+		return getCase(BASE);
 	}
 
 	/**
@@ -89,7 +107,16 @@ public class Rule {
 	 * 	A random case from this rule.
 	 */
 	public RuleCase getCase(Random rnd) {
-		return cases.generateValue(rnd);
+		switch(prob) {
+		case DESCENDING:
+			return cases.getDescent(descentFactor, rnd);
+		case BINOMIAL:
+			return cases.getBinomial(target, bound, trials, rnd);
+		case NORMAL:
+			return cases.generateValue(rnd);
+		default:
+			return cases.generateValue(rnd);
+		}
 	}
 
 	/**

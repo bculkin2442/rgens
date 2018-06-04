@@ -118,7 +118,6 @@ public abstract class CaseElement {
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
-			} else if (specialBody.contains("|")) {
 			} else {
 				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
 			}
@@ -131,7 +130,15 @@ public abstract class CaseElement {
 
 				return new RangeCaseElement(firstNum, secondNum);
 			} else if(rawCase.contains("|")) {
-				return new InlineRuleCaseElement(specialBody.split("|"));
+				String[] elms = rawCase.split("\\|");
+
+				System.err.printf("\tTRACE: Split inline cases %s to ", rawCase);
+				for(String elm : elms) {
+					System.err.printf("%s, ", elm);
+				}
+				System.err.println();
+
+				return new InlineRuleCaseElement(elms);
 			} else if(csepart.contains("$")) {
 				/*
 				 * @NOTE
@@ -147,7 +154,13 @@ public abstract class CaseElement {
 			} else {
 				return new NormalRuleReference(csepart);
 			}
-		} else {
+		} else if(csepart.startsWith("%")) {
+			String rName = String.format("[%s]", csepart.substring(1));
+
+			System.err.printf("\tTRACE: short ref to %s (%s)\n", rName, csepart);
+
+			return new NormalRuleReference(rName);	
+		} else{
 			return new LiteralCaseElement(csepart);
 		}
 	}
