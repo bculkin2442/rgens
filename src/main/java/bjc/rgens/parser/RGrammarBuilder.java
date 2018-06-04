@@ -275,6 +275,17 @@ public class RGrammarBuilder {
 		rules.get(ruleName).replaceCases(newCaseList);
 	}
 
+	public void setRuleRecur(String ruleName, int recurLimit) {
+		if (ruleName == null) {
+			throw new NullPointerException("ruleName must not be null");
+		} else if (ruleName.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if (!rules.containsKey(ruleName)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", ruleName));
+		}
+
+		rules.get(ruleName).recurLimit = recurLimit;
+	}
 	/*
 	 * @TODO
 	 *

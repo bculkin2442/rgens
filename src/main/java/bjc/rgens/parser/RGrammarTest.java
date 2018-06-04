@@ -69,10 +69,13 @@ public class RGrammarTest {
 						
 						System.out.printf(fmt, exportName, loadSrc);
 						System.out.println();
+						System.out.println();
+
+						System.err.printf(fmt, exportName, loadSrc);
 						gex.printStackTrace();
 
-						System.out.println();
-						System.out.println();
+						System.err.println();
+						System.err.println();
 					}
 				}
 				long endGenTime = System.nanoTime();

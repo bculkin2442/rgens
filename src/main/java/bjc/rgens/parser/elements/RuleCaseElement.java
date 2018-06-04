@@ -33,9 +33,17 @@ public abstract class RuleCaseElement extends StringCaseElement {
 			/* :Postprocessing */
 			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars));
 		} else if (state.rules.containsKey(actName)) {
-			RuleCase cse = state.rules.get(actName).getCase(state.rnd);
+			Rule rl = state.rules.get(actName);
 
-			state.gram.generateCase(cse, newState);
+			if(rl.doRecur()) {
+				RuleCase cse = rl.getCase(state.rnd);
+
+				state.gram.generateCase(cse, newState);
+
+				rl.endRecur();
+			} else {
+				throw new RecurLimitException("Rule recurrence limit exceeded");
+			}
 		} else if (state.importRules.containsKey(actName)) {
 			RGrammar dst = state.importRules.get(actName);
 
@@ -50,17 +58,17 @@ public abstract class RuleCaseElement extends StringCaseElement {
 			 * Re-get this working again.
 			 */
 			/*
-			if (ruleSearcher != null) {
-				Set<Match<? extends String>> results = ruleSearcher.search(actName, MAX_DISTANCE);
+			   if (ruleSearcher != null) {
+			   Set<Match<? extends String>> results = ruleSearcher.search(actName, MAX_DISTANCE);
 
-				String[] resArray = results.stream().map(Match::getMatch).toArray((i) -> new String[i]);
+			   String[] resArray = results.stream().map(Match::getMatch).toArray((i) -> new String[i]);
 
-				String msg = String.format("No rule '%s' defined (perhaps you meant %s?)", actName,
-						StringUtils.toEnglishList(resArray, false));
+			   String msg = String.format("No rule '%s' defined (perhaps you meant %s?)", actName,
+			   StringUtils.toEnglishList(resArray, false));
 
-				throw new GrammarException(msg);
-			}
-			*/
+			   throw new GrammarException(msg);
+			   }
+			   */
 
 			String msg = String.format("No rule '%s' defined", actName);
 			throw new GrammarException(msg);

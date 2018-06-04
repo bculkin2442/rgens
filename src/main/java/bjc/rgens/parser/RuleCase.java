@@ -31,6 +31,8 @@ public abstract class RuleCase {
 	/** The type of this case. */
 	public final CaseType type;
 
+	public String belongsTo;
+
 	/**
 	 * The list of element values for this case.
 	 *
@@ -87,4 +89,9 @@ public abstract class RuleCase {
 	public IList<CaseElement> getElements() {
 		return elementList;
 	}
+
+	public String toString() {
+		return String.format("Case %d of %s", hashCode(), belongsTo);
+	}
+
 }

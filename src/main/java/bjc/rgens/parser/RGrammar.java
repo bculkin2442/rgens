@@ -155,10 +155,17 @@ public class RGrammar {
 			}
 		}
 
-		RuleCase start = rules.get(fromRule).getCase(state.rnd);
+		Rule rl = rules.get(fromRule);
 
-		generateCase(start, state);
+		if(rl.doRecur()) {
+			RuleCase start = rules.get(fromRule).getCase(state.rnd);
 
+			generateCase(start, state);
+
+			rl.endRecur();
+		} else {
+			throw new RecurLimitException("Rule recurrence limit exceeded");
+		}
 		/*
 		 * @NOTE
 		 *

@@ -19,6 +19,9 @@ public class Rule {
 	/* The cases for this rule. */
 	private WeightedRandom<RuleCase> cases;
 
+	public int recurLimit = 5;
+	private int currentRecur;
+
 	/**
 	 * Create a new grammar rule.
 	 *
@@ -47,11 +50,7 @@ public class Rule {
 	 * 	The case to add.
 	 */
 	public void addCase(RuleCase cse) {
-		if (cse == null) {
-			throw new NullPointerException("Case must not be null");
-		}
-
-		cases.addProbability(1, cse);
+		addCase(cse, 1);
 	}
 
 	/**
@@ -64,6 +63,8 @@ public class Rule {
 		if (cse == null) {
 			throw new NullPointerException("Case must not be null");
 		}
+
+		cse.belongsTo = name;
 
 		cases.addProbability(weight, cse);
 	}
@@ -111,7 +112,10 @@ public class Rule {
 		this.cases = new WeightedRandom<>();
 
 		for(IPair<Integer, RuleCase> cse : cases) {
-			this.cases.addProbability(cse.getLeft(), cse.getRight());
+			RuleCase cs = cse.getRight();
+			cs.belongsTo = name;
+
+			this.cases.addProbability(cse.getLeft(), cs);
 		}
 	}
 
@@ -150,5 +154,17 @@ public class Rule {
 	@Override
 	public String toString() {
 		return String.format("Rule [ruleName='%s', ruleCases=%s]", name, cases);
+	}
+
+	public boolean doRecur() {
+		if(currentRecur > recurLimit) return false;
+
+		currentRecur += 1;
+
+		return true;
+	}
+
+	public void endRecur() {
+		if(currentRecur > 0) currentRecur -= 1;
 	}
 }

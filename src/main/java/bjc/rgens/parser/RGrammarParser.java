@@ -81,6 +81,20 @@ public class RGrammarParser {
 			}
 		});
 
+		pragmas.put("recur-limit", (body, build, level) -> {
+			String[] parts = body.split(" ");
+
+			if(parts.length != 2) {
+				throw new GrammarException("Recur-limit pragma takes two arguments: the name of the rule to set the limit for, and the new value of the limit");
+			}
+
+			if(!parts[1].matches("\\A\\d+\\Z")) {
+				throw new GrammarException("Limit value must be an integer");
+			}
+
+			build.setRuleRecur(parts[0], Integer.parseInt(parts[1]));
+		});
+
 		pragmas.put("regex-rule", (body, build, level) -> {
 			int nameIndex = body.indexOf(" ");
 
