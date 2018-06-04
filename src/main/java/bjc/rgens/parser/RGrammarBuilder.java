@@ -1,6 +1,9 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
+
+import bjc.utils.data.IPair;
+import bjc.utils.data.Pair;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.funcutils.ListUtils;
@@ -159,34 +162,34 @@ public class RGrammarBuilder {
 		
 		List<List<CaseElement>> suffixLists = powerList(elements);
 
-		FunctionalList<RuleCase> newCases = new FunctionalList<>();
+		FunctionalList<IPair<Integer, RuleCase>> newCases = new FunctionalList<>();
 
-		IList<RuleCase> caseList = rules.get(ruleName).getCases();
-		for (RuleCase ruleCase : caseList) {
+		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
+		for (IPair<Integer, RuleCase> ruleCase : caseList) {
 			for(List<CaseElement> suffixList : suffixLists) {
-			FunctionalList<CaseElement> newCase = new FunctionalList<>();
+				FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
-			for(CaseElement elm : ruleCase.getElements()) {
-				newCase.add(elm);
-			}
+				for(CaseElement elm : ruleCase.getRight().getElements()) {
+					newCase.add(elm);
+				}
 
-			for(CaseElement element : suffixList) {
-				newCase.add(element);
-			}
+				for(CaseElement element : suffixList) {
+					newCase.add(element);
+				}
 
-			/*
-			 * @NOTE :AffixCasing
-			 *
-			 * Is this correct, or should we be mirroring the
-			 * existing case type?
-			 */
-			newCases.add(new NormalRuleCase(newCase));
+				/*
+				 * @NOTE :AffixCasing
+				 *
+				 * Is this correct, or should we be mirroring the
+				 * existing case type?
+				 */
+				newCases.add(new Pair<>(ruleCase.getLeft(), new NormalRuleCase(newCase)));
 			}
 		}
 
 
-		for (RuleCase newCase : newCases) {
-			caseList.add(newCase);
+		for (IPair<Integer, RuleCase> newCase : newCases) {
+			rules.get(ruleName).addCase(newCase.getRight(), newCase.getLeft());
 		}
 	}
 
@@ -221,10 +224,10 @@ public class RGrammarBuilder {
 		
 		List<List<CaseElement>> prefixLists = powerList(elements);
 
-		FunctionalList<RuleCase> newCases = new FunctionalList<>();
+		FunctionalList<IPair<Integer, RuleCase>> newCases = new FunctionalList<>();
 
-		IList<RuleCase> caseList = rules.get(ruleName).getCases();
-		for (RuleCase ruleCase : caseList) {
+		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
+		for (IPair<Integer, RuleCase> ruleCase : caseList) {
 			for(List<CaseElement> prefixList : prefixLists) {
 				FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
@@ -232,7 +235,7 @@ public class RGrammarBuilder {
 					newCase.add(elm);
 				}
 
-				for(CaseElement elm : ruleCase.getElements()) {
+				for(CaseElement elm : ruleCase.getRight().getElements()) {
 					newCase.add(elm);
 				}
 
@@ -242,13 +245,13 @@ public class RGrammarBuilder {
 				 * Is this correct, or should we be mirroring the
 				 * existing case type?
 				 */
-				newCases.add(new NormalRuleCase(newCase));
+				newCases.add(new Pair<>(ruleCase.getLeft(), new NormalRuleCase(newCase)));
 			}
 		}
 
 
-		for (RuleCase newCase : newCases) {
-			caseList.add(newCase);
+		for (IPair<Integer, RuleCase> newCase : newCases) {
+			rules.get(ruleName).addCase(newCase.getRight(), newCase.getLeft());
 		}
 	}
 
@@ -261,17 +264,23 @@ public class RGrammarBuilder {
 			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", ruleName));
 		}
 
-		IList<RuleCase> caseList = rules.get(ruleName).getCases();
+		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
 
-		IList<RuleCase> newCaseList = new FunctionalList<>();
+		IList<IPair<Integer, RuleCase>> newCaseList = new FunctionalList<>();
 
-		for(RuleCase cse : caseList) {
-			newCaseList.add(new FlatRuleCase(cse.getElements()));
+		for(IPair<Integer, RuleCase> cse : caseList) {
+			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().getElements())));
 		}
 
 		rules.get(ruleName).replaceCases(newCaseList);
 	}
 
+	/*
+	 * @TODO
+	 *
+	 * Actually get this working
+	 */
+	/*
 	public void regexizeRule(String rule, String pattern) {
 		if (rule == null) {
 			throw new NullPointerException("rule must not be null");
@@ -292,7 +301,7 @@ public class RGrammarBuilder {
 		}
 
 		rules.get(rule).replaceCases(newCaseList);
-	}
+	}*/
 
 	private static <T> List<List<T>> powerList(Set<T> elements) {
 		/*

@@ -1,7 +1,9 @@
 package bjc.rgens.parser;
 
+import bjc.utils.data.IPair;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+import bjc.utils.gen.WeightedRandom;
 
 import java.util.Random;
 
@@ -15,7 +17,7 @@ public class Rule {
 	public final String name;
 
 	/* The cases for this rule. */
-	private IList<RuleCase> cases;
+	private WeightedRandom<RuleCase> cases;
 
 	/**
 	 * Create a new grammar rule.
@@ -35,7 +37,7 @@ public class Rule {
 
 		name = ruleName;
 
-		cases = new FunctionalList<>();
+		cases = new WeightedRandom<>();
 	}
 
 	/**
@@ -49,7 +51,21 @@ public class Rule {
 			throw new NullPointerException("Case must not be null");
 		}
 
-		cases.add(cse);
+		cases.addProbability(1, cse);
+	}
+
+	/**
+	 * Adds a case to the rule.
+	 *
+	 * @param cse
+	 * 	The case to add.
+	 */
+	public void addCase(RuleCase cse, int weight) {
+		if (cse == null) {
+			throw new NullPointerException("Case must not be null");
+		}
+
+		cases.addProbability(weight, cse);
 	}
 
 	/**
@@ -59,7 +75,7 @@ public class Rule {
 	 * 	A random case from this rule.
 	 */
 	public RuleCase getCase() {
-		return cases.randItem();
+		return cases.generateValue();
 	}
 
 	/**
@@ -72,7 +88,7 @@ public class Rule {
 	 * 	A random case from this rule.
 	 */
 	public RuleCase getCase(Random rnd) {
-		return cases.randItem(rnd::nextInt);
+		return cases.generateValue(rnd);
 	}
 
 	/**
@@ -81,8 +97,8 @@ public class Rule {
 	 * @return
 	 * 	All the cases in this rule.
 	 */
-	public IList<RuleCase> getCases() {
-		return cases;
+	public IList<IPair<Integer, RuleCase>> getCases() {
+		return cases.getValues();
 	}
 
 	/**
@@ -91,8 +107,12 @@ public class Rule {
 	 * @param cases
 	 * 	The new list of cases.
 	 */
-	public void replaceCases(IList<RuleCase> cases) {
-		this.cases = cases;
+	public void replaceCases(IList<IPair<Integer, RuleCase>> cases) {
+		this.cases = new WeightedRandom<>();
+
+		for(IPair<Integer, RuleCase> cse : cases) {
+			this.cases.addProbability(cse.getLeft(), cse.getRight());
+		}
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
+
+import bjc.utils.data.IPair;
 import bjc.utils.funcdata.IList;
 
 import java.util.HashSet;
@@ -52,7 +54,7 @@ public class RGrammarFormatter {
 
 	/* Format a rule. */
 	private static void processRule(Rule rule, StringBuilder sb) {
-		IList<RuleCase> cases = rule.getCases();
+		IList<IPair<Integer, RuleCase>> cases = rule.getCases();
 
 		StringBuilder ruleBuilder = new StringBuilder();
 
@@ -61,20 +63,21 @@ public class RGrammarFormatter {
 
 		int markerPos = ruleBuilder.length();
 
-		processCase(cases.first(), ruleBuilder);
+		processCase(cases.first().getRight(), ruleBuilder);
 
 		sb.append(ruleBuilder.toString().trim());
 
 		ruleBuilder = new StringBuilder();
 
-		for (RuleCase cse : cases.tail()) {
+		for (IPair<Integer, RuleCase> cse : cases.tail()) {
 			sb.append("\n\t");
 
 			for (int i = 8; i < markerPos; i++) {
 				ruleBuilder.append(" ");
 			}
 
-			processCase(cse, ruleBuilder);
+			/* @TODO do this right, once we pick the syntax */
+			processCase(cse.getRight(), ruleBuilder);
 
 			sb.append(ruleBuilder.toString());
 

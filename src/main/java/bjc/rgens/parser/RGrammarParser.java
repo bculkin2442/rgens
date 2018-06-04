@@ -91,7 +91,7 @@ public class RGrammarParser {
 			String name = body.substring(0, nameIndex).trim();
 			String patt = body.substring(nameIndex + 1).trim();
 
-			build.regexizeRule(name, patt);
+			//build.regexizeRule(name, patt);
 		});
 
 		pragmas.put("suffix-with", (body, build, level) -> {
