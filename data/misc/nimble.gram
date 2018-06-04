@@ -1,18 +1,5 @@
-[nimble-bimble] [bimble]
-
-pragma prefix-with [nimble-bimble] [nimble-plural]
-pragma suffix-with [nimble-bimble] [nimble-plural]
-
-pragma initial-rule [nimble-bimble]
-
-[nimble-plural] [nimble-art] [nimble]
-
-[bimble] bimble
-	nimble
-	bimble
-	nimble
-	bimble
-	nimble
+[bimble] {^4} bimble
+	{^4} nimble
 	dindle
 	symbol
 	frindle
@@ -27,4 +14,14 @@ pragma initial-rule [nimble-bimble]
 	while they
 	a
 
+[nimble-plural] [nimble-art] [nimble]
+
 [nimble] [bimble]
+
+[nimble-bimble] [bimble]
+
+pragma prefix-with [nimble-bimble] [nimble-plural]
+pragma suffix-with [nimble-bimble] [nimble-plural]
+
+pragma initial-rule [nimble-bimble]
+pragma export-rule [nimble]

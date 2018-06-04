@@ -4,9 +4,7 @@ pragma initial-rule [career-tech-desc]
 
 pragma prefix-with [career-tech-desc] [career-tech-desc-pref]
 
-pragma suffix-with [career-tech-desc] [career-tech-descsuff]
-pragma suffix-with [career-tech-desc] [career-tech-descsuff]
-pragma suffix-with [career-tech-desc] [career-tech-descsuff]
+pragma suffix-with [career-tech-desc] [career-tech-descsuff] [career-tech-descsuff]
 
 [career-tech-desc-pref] [career-prefsuf] of the
 

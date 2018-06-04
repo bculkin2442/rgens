@@ -563,8 +563,6 @@ pragma export-rule [boss]
 [person] [person-single]
 	[person-plural]
 
-pragma export-rule [person]
-
 [thing-adjective] efficient
 	strategic
 	constructive
