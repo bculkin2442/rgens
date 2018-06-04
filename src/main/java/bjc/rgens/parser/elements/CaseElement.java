@@ -119,7 +119,6 @@ public abstract class CaseElement {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
 			} else if (specialBody.contains("|")) {
-				return new InlineRuleCaseElement(specialBody.split("|"));
 			} else {
 				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
 			}
@@ -131,23 +130,23 @@ public abstract class CaseElement {
 				int secondNum = Integer.parseInt(rawCase.substring(rawCase.lastIndexOf('.') + 1));
 
 				return new RangeCaseElement(firstNum, secondNum);
-			}
-
-			/*
-			 * @NOTE
-			 *
-			 * Once the rule element execution has been refactored,
-			 * pass rawCase instead.
-			 */
-			if(csepart.contains("$")) {
+			} else if(rawCase.contains("|")) {
+				return new InlineRuleCaseElement(specialBody.split("|"));
+			} else if(csepart.contains("$")) {
+				/*
+				 * @NOTE
+				 *
+				 * Once the rule element execution has been refactored,
+				 * pass rawCase instead.
+				 */
 				if(csepart.contains("-")) {
 					return new DependantRuleReference(csepart);
 				}
 
 				return new VariableRuleReference(csepart);
+			} else {
+				return new NormalRuleReference(csepart);
 			}
-
-			return new NormalRuleReference(csepart);
 		} else {
 			return new LiteralCaseElement(csepart);
 		}
