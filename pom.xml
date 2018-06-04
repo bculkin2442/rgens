@@ -43,6 +43,7 @@
 				<configuration>
 					<mainClass>bjc.rgens.parser.RGrammarTest</mainClass>
 					<arguments>
+						<argument>-Xss1M</argument>
 					</arguments>
 				</configuration>
 			</plugin>
