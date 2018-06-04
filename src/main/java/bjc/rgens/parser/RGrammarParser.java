@@ -348,17 +348,23 @@ public class RGrammarParser {
 	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul) {
 		IList<CaseElement> caseParts = new FunctionalList<>();
 
+		int weight = 1;
+
 		for (String csepart : cse.split(" ")) {
 			String partToAdd = csepart.trim();
 
-			/* Ignore empty parts */
-			if (partToAdd.equals(""))
+			if (partToAdd.equals("")) {
+				/* Ignore empty parts */
 				continue;
-
-			caseParts.add(CaseElement.createElement(partToAdd));
+			} else if(partToAdd.matches("\\{\\^\\d+\\}")) {
+				/* Set case weights */
+				weight = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
+			} else {
+				caseParts.add(CaseElement.createElement(partToAdd));
+			}
 		}
 
-		rul.addCase(new NormalRuleCase(caseParts));
+		rul.addCase(new NormalRuleCase(caseParts), weight);
 	}
 
 	/* Handle a where block (a block with local rules). */

@@ -30,14 +30,15 @@ public class RGrammarSet {
 	private Map<String, String> loadedFrom;
 
 	public static final boolean PERF = true;
+	public static final boolean DEBUG = true;
 
 	/** Create a new set of randomized grammars. */
 	public RGrammarSet() {
 		grammars = new HashMap<>();
 
-		exportedRules = new HashMap<>();
+		exportedRules = new TreeMap<>();
 
-		exportFrom = new TreeMap<>();
+		exportFrom = new HashMap<>();
 		loadedFrom = new HashMap<>();
 	}
 
@@ -67,9 +68,15 @@ public class RGrammarSet {
 
 		/* Process exports from the grammar. */
 		for (Rule export : gram.getExportedRules()) {
+			if(exportedRules.containsKey(export.name))
+				System.err.printf("WARN: Shadowing rule %s in %s from %s\n", export.name, exportFrom.get(export.name), grammarName);
+
 			exportedRules.put(export.name, gram);
 
 			exportFrom.put(export.name, grammarName);
+
+			if(DEBUG)
+				System.err.printf("\t\tDEBUG: %s exported from %s\n", export.name, grammarName);
 		}
 
 		/* Add exports to grammar. */
