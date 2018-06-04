@@ -1,6 +1,7 @@
-@TODO 10/11/17 Ben Culkin :Determinism
+DONE(6/3/18) 10/11/17 Ben Culkin :Determinism
 	Add a way to get the grammar to pick rules in a deterministic fashion,
 	so as to be able to iterate all of the rules.
+	- Specify the same Random instance to the state
 
 @TODO 10/11/17 Ben Culkin :ExportSanity
 	Figure out a way to organize exports instead of just sticking them all
@@ -48,3 +49,7 @@
 @TODO 5/10/18 Ben Culkin :RuleInclusion
 	Add some way to sort of 'import' a rules body into another rule so as to
 	not throw off probability by splitting.
+
+@TODO 6/3/18 Ben Culkin :DieRandom
+	Add a way to use dice from dicelang (probably the rewrite, once that has
+	a string parser) to create random numbers

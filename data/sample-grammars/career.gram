@@ -4,7 +4,7 @@ pragma initial-rule [career-tech-desc]
 
 pragma prefix-with [career-tech-desc] [career-tech-desc-pref]
 
-pragma suffix-with [career-tech-desc] [career-tech-descsuff] [career-tech-descsuff]
+pragma suffix-with [career-tech-desc] {&1..2} [career-tech-descsuff]
 
 [career-tech-desc-pref] [career-prefsuf] of the
 
@@ -20,12 +20,7 @@ pragma suffix-with [career-tech-desc] [career-tech-descsuff] [career-tech-descsu
 
 pragma export-rule [career-techname]
 
-[career-tech] [career-tech2]
-	[career-tech2]
-	[career-tech2]
-	[career-tech2]
-	[career-tech2]
-	[career-tech2]
+[career-tech] {^6} [career-tech2]
 	[quote-career-tech] and [quote-career-tech]
 	[quote-career-tech] , [quote-career-tech] and [quote-career-tech]
 
@@ -37,8 +32,9 @@ pragma export-rule [career-tech]
 
 pragma despace-rule [quote-career-tech]
 
-[career-tech2] [act-career-tech] (reports to the [career-tech] )
-	[act-career-tech] (reports to [full-name-and-title] )
+[career-tech2] {^10} [act-career-tech]
+	[act-career-tech] (reports to the [career-tech] )
+	{^2} [act-career-tech] (reports to [full-name-and-title] )
 
 [act-career-tech] paper pusher
 	computer [software-career-type]
