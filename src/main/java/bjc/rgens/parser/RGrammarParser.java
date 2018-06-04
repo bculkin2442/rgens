@@ -435,12 +435,12 @@ public class RGrammarParser {
 			if (partToAdd.equals("")) {
 				/* Ignore empty parts */
 				continue;
-			} else if(partToAdd.matches("\\{\\^\\d+\\}")) {
+			} else if(partToAdd.matches("\\<\\^\\d+\\>")) {
 				/* Set case weights */
 				weight = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
-			} else if(partToAdd.matches("\\{&\\d+\\}")) {
+			} else if(partToAdd.matches("\\<&\\d+\\>")) {
 				repCount = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
-			} else if(partToAdd.matches("\\{&\\d+\\.\\.\\d+\\}")) {
+			} else if(partToAdd.matches("\\<&\\d+\\.\\.\\d+\\>")) {
 				serialLower = Integer.parseInt(partToAdd.substring(2, partToAdd.indexOf(".")));
 				serialUpper = Integer.parseInt(partToAdd.substring(partToAdd.lastIndexOf(".") + 1, partToAdd.length() - 1));
 

@@ -1,7 +1,7 @@
 [item-name] [noun]
 
 pragma prefix-with [item-name] [post]
-pragma prefix-with [item-name] [adj] [adj]
+pragma prefix-with [item-name] <&1..2> [adj]
 pragma prefix-with [item-name] [pre]
 
 pragma suffix-with [item-name] [end]

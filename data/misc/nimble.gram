@@ -1,5 +1,5 @@
-[bimble] {^4} bimble
-	{^4} nimble
+[bimble] <^4> bimble
+	<^4> nimble
 	dindle
 	symbol
 	frindle

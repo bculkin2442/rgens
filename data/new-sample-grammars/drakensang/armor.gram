@@ -5,9 +5,7 @@
 pragma initial-rule [ds-armor]
 
 [dragonknight-armor] [dragonknight-armortype]
-	[dragonknight-armorprefix] [dragonknight-armortype]
-	[dragonknight-armorprefix] [dragonknight-armortype]
-	[dragonknight-armorprefix] [dragonknight-armortype]
+	<^3> [dragonknight-armorprefix] [dragonknight-armortype]
 
 [dragonknight-armortype] jackboots
 	cloak
@@ -41,9 +39,7 @@ pragma initial-rule [ds-armor]
 	obsidian steel
 
 [ranger-armor] [ranger-armortype]
-	[ranger-armorprefix] [ranger-armortype]
-	[ranger-armorprefix] [ranger-armortype]
-	[ranger-armorprefix] [ranger-armortype]
+	<^3> [ranger-armorprefix] [ranger-armortype]
 
 [ranger-armortype] shoes
 	shirt
@@ -76,8 +72,9 @@ pragma initial-rule [ds-armor]
 
 pragma prefix-with [ranger-armorprefix] [ranger-armorprefix-prefix]
 
-[ranger-armorprefix-combo] [ranger-armormaterial] [ranger-armorprefix-1]
-	[ranger-armorprefix-1] [ranger-armormaterial]
+[ranger-armorprefix-combo] {empty} 
+
+pragma prefix-with [ranger-armorprefix-combo] [ranger-armormaterial] [ranger-armorprefix-1]
 
 [ranger-armorprefix-1] stalkers
 	hunters
@@ -102,9 +99,7 @@ pragma prefix-with [ranger-armorprefix] [ranger-armorprefix-prefix]
 	sunleather
 
 [spellweaver-armor] [spellweaver-armortype]
-	[spellweaver-armorprefix] [spellweaver-armortype]
-	[spellweaver-armorprefix] [spellweaver-armortype]
-	[spellweaver-armorprefix] [spellweaver-armortype]
+	<^3> [spellweaver-armorprefix] [spellweaver-armortype]
 
 [spellweaver-armortype] cloak
 	gloves
