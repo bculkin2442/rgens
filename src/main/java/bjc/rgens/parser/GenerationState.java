@@ -1,5 +1,8 @@
 package bjc.rgens.parser;
 
+import bjc.utils.data.IPair;
+import bjc.utils.data.Pair;
+
 import java.util.Map;
 import java.util.Random;
 
@@ -33,7 +36,7 @@ public class GenerationState {
 	 */
 	/** The current set of variables. */
 	public Map<String, String> vars;
-	public Map<String, Rule> rlVars;
+	public Map<String, IPair<RGrammar, Rule>> rlVars;
 
 	/**
 	 * Create a new generation state.
@@ -47,7 +50,8 @@ public class GenerationState {
 	 * @param vs
 	 *            The variables to use.
 	 */
-	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs, Map<String, Rule> rvs, RGrammar gram) {
+	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs,
+			Map<String, IPair<RGrammar, Rule>> rvs, RGrammar gram) {
 		contents = cont;
 		rnd      = rand;
 		vars     = vs;

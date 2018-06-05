@@ -1,11 +1,14 @@
 package bjc.rgens.parser;
 
+import bjc.utils.data.IPair;
+import bjc.utils.data.Pair;
+import bjc.utils.funcutils.StringUtils;
+
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.rgens.parser.elements.LiteralCaseElement;
 import bjc.rgens.parser.elements.RangeCaseElement;
 import bjc.rgens.parser.elements.RuleCaseElement;
 import bjc.rgens.parser.elements.VariableCaseElement;
-import bjc.utils.funcutils.StringUtils;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -126,7 +129,8 @@ public class RGrammar {
 	 *
 	 * @return A possible string from the grammar.
 	 */
-	public String generate(String startRule, Random rnd, Map<String, String> vars, Map<String, Rule> rlVars) {
+	public String generate(String startRule, Random rnd, Map<String, String> vars,
+			Map<String, IPair<RGrammar, Rule>> rlVars) {
 		return generate(startRule, new GenerationState(new StringBuilder(), rnd, vars, rlVars, this));
 	}
 

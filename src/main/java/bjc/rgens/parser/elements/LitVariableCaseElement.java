@@ -4,7 +4,7 @@ import bjc.rgens.parser.GenerationState;
 
 public class LitVariableCaseElement extends VariableCaseElement {
 	public LitVariableCaseElement(String name, String def) {
-		super(name, def, false);
+		super(name, def, VariableType.NORMAL);
 	}
 
 	public void generate(GenerationState state) {

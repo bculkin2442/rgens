@@ -9,7 +9,7 @@ import bjc.rgens.parser.RuleCase;
 
 public class ExpVariableCaseElement extends VariableCaseElement {
 	public ExpVariableCaseElement(String name, String def) {
-		super(name, def, true);
+		super(name, def, VariableType.EXPAND);
 	}
 
 	@Override

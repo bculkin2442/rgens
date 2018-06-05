@@ -1,6 +1,11 @@
 package bjc.rgens.parser.elements;
 
 public abstract class VariableCaseElement extends CaseElement {
+	public static enum VariableType {
+		NORMAL,
+		EXPAND,
+		RULE
+	}
 	/**
 	 * The name of the variable this element defines.
 	 */
@@ -11,11 +16,15 @@ public abstract class VariableCaseElement extends CaseElement {
 	 */
 	public final String varDef;
 
-	public VariableCaseElement(String name, String def, boolean isExp) {
-		super(isExp ? ElementType.EXPVARDEF : ElementType.VARDEF);
+	public final VariableType varType;
+
+	public VariableCaseElement(String name, String def, VariableType varType) {
+		super(ElementType.VARIABLE);
 
 		varName = name;
 		varDef = def;
+		
+		this.varType = varType;
 	}
 
 	@Override
@@ -51,10 +60,10 @@ public abstract class VariableCaseElement extends CaseElement {
 
 	@Override
 	public String toString() {
-		if (type == ElementType.VARDEF) {
-			return String.format("{%s:=%s}", varName, varDef);
+		if (type == ElementType.VARIABLE) {
+			return String.format("{$%s:=%s}", varName, varDef);
 		} else {
-			return String.format("{%s=%s}", varName, varDef);
+			return String.format("{$%s=%s}", varName, varDef);
 		}
 	}
 }

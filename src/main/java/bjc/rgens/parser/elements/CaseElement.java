@@ -22,12 +22,7 @@ public abstract class CaseElement {
 		/** An element that represents a random range. */
 		RANGE(true),
 		/** An element that represents a variable that stores a string. */
-		VARDEF(false),
-		/**
-		 * An element that represents a variable that stores the result of generating a
-		 * rule.
-		 */
-		EXPVARDEF(false);
+		VARIABLE(false);
 
 		public final boolean spacing;
 
@@ -35,9 +30,6 @@ public abstract class CaseElement {
 			this.spacing = spacing;
 		}
 	}
-
-	/* Regexps for marking rule types. */
-	private static final String RANGE_CASELM = "\\[\\d+\\.\\.\\d+\\]";
 
 	/** The type of this element. */
 	public final ElementType type;
@@ -80,7 +72,7 @@ public abstract class CaseElement {
 
 		if (csepart.matches("\\{[^}]+\\}")) {
 			/*
-			 * Handle special cases.
+			 * Handle special case elements.
 			 *
 			 */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
@@ -97,13 +89,8 @@ public abstract class CaseElement {
 					throw new GrammarException(msg);
 				}
 
-				/*
-				 * @NOTE
-				 *
-				 * This should maybe check that parts[1] is a
-				 * valid rule name, since it gets used as one.
-				 */
-				return new ExpVariableCaseElement(parts[0], parts[1]);
+				/* Trim $ */
+				return new ExpVariableCaseElement(parts[0].substring(1), parts[1]);
 			} else if (specialBody.matches("\\$\\S+=\\S+")) {
 				/* Handle regular variable definitions. */
 				String[] parts = specialBody.split("=");
@@ -114,7 +101,32 @@ public abstract class CaseElement {
 					throw new GrammarException(msg);
 				}
 
-				return new LitVariableCaseElement(parts[0], parts[1]);
+				/* Trim $ */
+				return new LitVariableCaseElement(parts[0].substring(1), parts[1]);
+			} else if (specialBody.matches("\\@\\S+=\\S+")) {
+				/* Handle rule variable definitions. */
+				String[] parts = specialBody.split("=");
+
+				if (parts.length != 2) {
+					String msg = "Rule variables must be a name and a definition, seperated by =";
+
+					throw new GrammarException(msg);
+				}
+
+				/* Trim $ */
+				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], false);
+			} else if (specialBody.matches("\\@\\S+:=\\S+")) {
+				/* Handle exhaustible rule variable definitions. */
+				String[] parts = specialBody.split("=");
+
+				if (parts.length != 2) {
+					String msg = "Rule variables must be a name and a definition, seperated by =";
+
+					throw new GrammarException(msg);
+				}
+
+				/* Trim $ */
+				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], true);
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
@@ -151,6 +163,9 @@ public abstract class CaseElement {
 				}
 
 				return new VariableRuleReference(csepart);
+			} else if(csepart.contains("@")) {
+				// Trim @
+				return new RuleVarRefCaseElement(csepart.substring(1));
 			} else {
 				return new NormalRuleReference(csepart);
 			}
@@ -160,7 +175,7 @@ public abstract class CaseElement {
 			System.err.printf("\tTRACE: short ref to %s (%s)\n", rName, csepart);
 
 			return new NormalRuleReference(rName);	
-		} else{
+		} else {
 			return new LiteralCaseElement(csepart);
 		}
 	}
