@@ -24,7 +24,7 @@ public class RGrammarTest {
 		try {
 			/* Load a grammar set. */
 			Path        cfgPath = Paths.get(rsc.toURI());
-			RGrammarSet gramSet = RGrammarSet.fromConfigFile(cfgPath);
+			RGrammarSet gramSet = ConfigLoader.fromConfigFile(cfgPath);
 
 			/* Generate rule suggestions for all the grammars in the set. */
 			for (String gramName : gramSet.getGrammars()) {

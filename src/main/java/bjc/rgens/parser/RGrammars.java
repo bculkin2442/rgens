@@ -29,7 +29,7 @@ public class RGrammars {
 
 			Path cfgPath = Paths.get(rsc);
 
-			gramSet = RGrammarSet.fromConfigFile(cfgPath);
+			gramSet = ConfigLoader.fromConfigFile(cfgPath);
 		} catch (IOException | URISyntaxException ex) {
 			RuntimeException rtex = new RuntimeException("Could not load grammars");
 

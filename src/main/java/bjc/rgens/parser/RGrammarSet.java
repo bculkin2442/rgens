@@ -1,14 +1,8 @@
 package bjc.rgens.parser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -27,7 +21,7 @@ public class RGrammarSet {
 	private Map<String, String> exportFrom;
 
 	/* Contains which file a grammar was loaded from. */
-	private Map<String, String> loadedFrom;
+	public Map<String, String> loadedFrom;
 
 	public static final boolean PERF = true;
 	public static final boolean DEBUG = true;
@@ -213,107 +207,5 @@ public class RGrammarSet {
 	 */
 	public Set<String> getExportedRules() {
 		return exportedRules.keySet();
-	}
-
-	/**
-	 * Load a grammar set from a configuration file.
-	 *
-	 * @param cfgFile
-	 * 	The configuration file to load from.
-	 *
-	 * @return
-	 * 	The grammar set created by the configuration file.
-	 *
-	 * @throws IOException
-	 * 	If something goes wrong during configuration loading.
-	 */
-	public static RGrammarSet fromConfigFile(Path cfgFile) throws IOException {
-		/* The grammar set to hand back. */
-		RGrammarSet set = new RGrammarSet();
-
-		long startCFGTime = System.nanoTime();
-
-		/* Get the directory that contains the config file. */
-		Path cfgParent = cfgFile.getParent();
-
-		try(Scanner scn = new Scanner(cfgFile)) {
-			/* Execute lines from the configuration file. */
-			while (scn.hasNextLine()) {
-				String ln = scn.nextLine().trim();
-
-				/* Ignore blank/comment lines. */
-				if (ln.equals("")) continue;
-
-				if (ln.startsWith("#")) continue;
-
-				/* Handle mixed whitespace. */
-				ln = ln.replaceAll("\\s+", " ");
-
-				/* 
-				 * Get the place where the name of the grammar
-				 * ends. 
-				 */
-				int nameIdx = ln.indexOf(" ");
-				if (nameIdx == -1) {
-					throw new GrammarException("Must specify a name for a loaded grammar");
-				}
-
-				/* Name and path of grammar. */
-				String name = ln.substring(0, nameIdx);
-				Path path   = Paths.get(ln.substring(nameIdx).trim());
-
-				/*
-				 * Convert from configuration relative path to
-				 * absolute path.
-				 */
-				Path convPath = cfgParent.resolve(path.toString());
-
-				if(Files.isDirectory(convPath)) {
-					/* @TODO implement subset grammars */
-					throw new GrammarException("Sub-grammar sets aren't implemented yet");
-				} else if (convPath.getFileName().toString().endsWith(".gram")) {
-					/* Load grammar file. */
-					try {
-						long startFileTime = System.nanoTime();
-
-						BufferedReader fis = Files.newBufferedReader(convPath);
-						RGrammar gram = RGrammarParser.readGrammar(fis);
-
-						fis.close();
-
-						long endFileTime = System.nanoTime();
-
-						long fileTime = endFileTime - startFileTime;
-
-						if(PERF)
-							System.err.printf("\tPERF: Read grammar %s in %d ns (%f s)\n", convPath, fileTime, fileTime  / 1000000000.0);
-
-						/* Add grammar to the set. */
-						set.addGrammar(name, gram);
-
-						/*
-						 * Mark where the grammar came
-						 * from. 
-						 */
-						set.loadedFrom.put(name, path.toString());
-					} catch (GrammarException gex) {
-						String msg = String.format("Error loading file '%s'", path);
-						throw new GrammarException(msg, gex);
-					}
-				} else {
-					String msg = String.format("Unrecognized file type '%s'", convPath.getFileName());
-					throw new GrammarException(msg);
-				}
-			}
-		}
-
-		long endCFGTime = System.nanoTime();
-
-		long cfgDur = endCFGTime - startCFGTime;
-
-		if(PERF)
-			System.err.printf("\n\nPERF: Read config file %s in %d ns (%f s)\n", cfgFile, cfgDur, cfgDur / 1000000000.0);
-
-		return set;
 	}
 }
