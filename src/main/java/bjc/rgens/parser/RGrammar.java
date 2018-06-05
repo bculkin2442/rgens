@@ -108,7 +108,7 @@ public class RGrammar {
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule) {
-		return generate(startRule, new Random(), new HashMap<>());
+		return generate(startRule, new Random(), new HashMap<>(), new HashMap<>());
 	}
 
 	/**
@@ -126,8 +126,8 @@ public class RGrammar {
 	 *
 	 * @return A possible string from the grammar.
 	 */
-	public String generate(String startRule, Random rnd, Map<String, String> vars) {
-		return generate(startRule, new GenerationState(new StringBuilder(), rnd, vars, this));
+	public String generate(String startRule, Random rnd, Map<String, String> vars, Map<String, Rule> rlVars) {
+		return generate(startRule, new GenerationState(new StringBuilder(), rnd, vars, rlVars, this));
 	}
 
 	/**

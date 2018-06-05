@@ -199,4 +199,24 @@ public class Rule {
 	public void endRecur() {
 		if(currentRecur > 0) currentRecur -= 1;
 	}
+
+	public Rule exhaust() {
+		Rule rl = new Rule(name);
+
+		rl.cases = cases.exhaustible();
+
+		rl.prob = prob;
+
+		rl.descentFactor = descentFactor;
+
+		rl.target = target;
+		rl.bound  = bound;
+		rl.trials = trials;
+
+		rl.recurLimit = recurLimit;
+		/* @NOTE Is this the right thing to do? */
+		rl.currentRecur = 0;
+
+		return rl;
+	}
 }

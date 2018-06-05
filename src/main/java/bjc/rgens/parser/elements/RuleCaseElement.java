@@ -51,7 +51,7 @@ public abstract class RuleCaseElement extends StringCaseElement {
 			newState.swapGrammar(dst);
 
 			/* :Postprocessing */
-			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars));
+			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars, state.rlVars));
 		} else {
 			/*
 			 * @TODO 5/29/18 Ben Culkin :RuleSuggesting

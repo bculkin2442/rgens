@@ -33,6 +33,7 @@ public class GenerationState {
 	 */
 	/** The current set of variables. */
 	public Map<String, String> vars;
+	public Map<String, Rule> rlVars;
 
 	/**
 	 * Create a new generation state.
@@ -46,10 +47,11 @@ public class GenerationState {
 	 * @param vs
 	 *            The variables to use.
 	 */
-	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs, RGrammar gram) {
+	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs, Map<String, Rule> rvs, RGrammar gram) {
 		contents = cont;
-		rnd = rand;
-		vars = vs;
+		rnd      = rand;
+		vars     = vs;
+		rlVars   = rvs;
 
 		this.gram = gram;
 	
@@ -66,6 +68,6 @@ public class GenerationState {
 	}
 
 	public GenerationState newBuf() {
-		return new GenerationState(new StringBuilder(), rnd, vars, gram);
+		return new GenerationState(new StringBuilder(), rnd, vars, rlVars, gram);
 	}
 }
