@@ -31,13 +31,13 @@ public abstract class RuleCaseElement extends StringCaseElement {
 			newState.swapGrammar(dst);
 
 			/* :Postprocessing */
-			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars));
+			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars, state.rlVars));
 		} else if (state.rules.containsKey(actName)) {
 			Rule rl = state.rules.get(actName);
 
 			if(rl.doRecur()) {
 				RuleCase cse = rl.getCase(state.rnd);
-				System.err.printf("\tFINE: Generating case %d (from %s)\n", cse.serial, actName);
+				System.err.printf("\tFINE: Generating %s (from %s)\n", cse, actName);
 
 				state.gram.generateCase(cse, newState);
 

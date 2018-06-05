@@ -493,6 +493,8 @@ public class RGrammarParser {
 				serialUpper = Integer.parseInt(partToAdd.substring(partToAdd.lastIndexOf(".") + 1, partToAdd.length() - 1));
 
 				doSerial = true;
+			} else if(partToAdd.matches("\\<[^\\>]+\\>")) {
+				throw new GrammarException("Unknown parser meta-rule " + partToAdd);
 			} else {
 				CaseElement elm = CaseElement.createElement(partToAdd);
 

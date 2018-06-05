@@ -87,7 +87,7 @@ public abstract class CaseElement {
 
 			//System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
 
-			if (specialBody.matches("\\S+:=\\S+")) {
+			if (specialBody.matches("\\$\\S+:=\\S+")) {
 				/* Handle expanding variable definitions. */
 				String[] parts = specialBody.split(":=");
 
@@ -104,7 +104,7 @@ public abstract class CaseElement {
 				 * valid rule name, since it gets used as one.
 				 */
 				return new ExpVariableCaseElement(parts[0], parts[1]);
-			} else if (specialBody.matches("\\S+=\\S+")) {
+			} else if (specialBody.matches("\\$\\S+=\\S+")) {
 				/* Handle regular variable definitions. */
 				String[] parts = specialBody.split("=");
 

@@ -14,6 +14,8 @@ import bjc.utils.funcdata.IList;
  * @author EVE
  */
 public abstract class RuleCase {
+	public String debugName;
+
 	public final int serial;
 
 	private static int nextSerial = 0;
@@ -99,7 +101,11 @@ public abstract class RuleCase {
 	}
 
 	public String toString() {
-		return String.format("Case %d of %s", hashCode(), belongsTo);
+		if(debugName != null) {
+			return String.format("Case %d (%s) of %s", serial, debugName, belongsTo);
+		} else {
+			return String.format("Case %d (%s-%d) of %s", serial, belongsTo, serial, belongsTo);
+		}
 	}
 
 }

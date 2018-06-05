@@ -38,6 +38,7 @@ public class Rule {
 
 	private final static Random BASE = new Random();
 
+	private int serial = 1;
 	/**
 	 * Create a new grammar rule.
 	 *
@@ -83,6 +84,8 @@ public class Rule {
 		}
 
 		cse.belongsTo = name;
+		cse.debugName = String.format("%s-%d", name, serial);
+		serial += 1;
 
 		cases.addProbability(weight, cse);
 	}
@@ -141,6 +144,8 @@ public class Rule {
 		for(IPair<Integer, RuleCase> cse : cases) {
 			RuleCase cs = cse.getRight();
 			cs.belongsTo = name;
+			cs.debugName = String.format("%s-%d", name, serial);
+			serial += 1;
 
 			this.cases.addProbability(cse.getLeft(), cs);
 		}

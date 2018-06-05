@@ -21,7 +21,7 @@ public class ExpVariableCaseElement extends VariableCaseElement {
 
 			if(rl.doRecur()) {
 				RuleCase destCase = state.rules.get(varDef).getCase();
-				System.err.printf("\tFINE: Generating case %d (from %s)\n", destCase.serial, varDef);
+				System.err.printf("\tFINE: Generating %s (from %s)\n", destCase, varDef);
 
 				state.gram.generateCase(destCase, newState);
 
