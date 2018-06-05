@@ -1,5 +1,8 @@
 package bjc.rgens.parser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ConfigSet {
 	public final Map<String, RGrammarSet> grammars;
 	public final Map<String, GrammarTemplate> templates;

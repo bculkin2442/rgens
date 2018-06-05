@@ -31,6 +31,8 @@ import edu.gatech.gtri.bktree.MutableBkTree;
  * @author EVE
  */
 public class RGrammar {
+	public RGrammarSet belongsTo;
+
 	public String name;
 
 	/* The max distance between possible alternate rules. */
@@ -54,7 +56,7 @@ public class RGrammar {
 	}
 
 	/* The rules of the grammar. */
-	private Map<String, Rule> rules;
+	public Map<String, Rule> rules;
 	/* The rules imported from other grammars. */
 	private Map<String, RGrammar> importRules;
 	/* The rules exported from this grammar. */
@@ -158,10 +160,16 @@ public class RGrammar {
 			}
 		}
 
-		Rule rl = rules.get(fromRule);
+		/* 
+		 * We don't search imports, so it will always belong to this
+		 * grammar.
+		 */
+		Rule rl = state.findRule(fromRule, false).getRight();
+		if(rl == null)
+			throw new GrammarException("Could not find rule " + rl.name);
 
 		if(rl.doRecur()) {
-			RuleCase start = rules.get(fromRule).getCase(state.rnd);
+			RuleCase start = rl.getCase(state.rnd);
 			System.err.printf("\tFINE: Generating %s (from %s in %s)\n", start, fromRule, name);
 
 			generateCase(start, state);
@@ -177,12 +185,11 @@ public class RGrammar {
 		 *
 		 * Do we want to perform this post-processing here, or elsewhere?
 		 */
-		String body = state.contents.toString();
+		return postprocessRes(state.contents.toString());
+	}
 
-		/*
-		 * Collapse duplicate spaces.
-		 */
-		body = body.replaceAll("\\s+", " ");
+	private String postprocessRes(String strang) {
+		String body = strang.replaceAll("\\s+", " ");
 
 		/*
 		 * Remove extraneous spaces around punctutation marks.
@@ -221,7 +228,6 @@ public class RGrammar {
 
 		return body.trim();
 	}
-
 	/**
 	 * Generate a rule case.
 	 *

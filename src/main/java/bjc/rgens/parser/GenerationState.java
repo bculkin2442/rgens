@@ -16,12 +16,6 @@ public class GenerationState {
 	/** The RNG. */
 	public Random rnd;
 
-	/*
-	 * @NOTE
-	 *
-	 * Once the planned refactor for importing rules happens, this will need
-	 * to be changed.
-	 */
 	/** The current grammar. */
 	public RGrammar gram;
 	/** The rules of the grammar. */
@@ -29,11 +23,6 @@ public class GenerationState {
 	/** The rules imported from other grammars. */
 	public Map<String, RGrammar> importRules;
 
-	/*
-	 * @NOTE
-	 *
-	 * For planned features, this will need to be refactored.
-	 */
 	/** The current set of variables. */
 	public Map<String, String> vars;
 	public Map<String, IPair<RGrammar, Rule>> rlVars;
@@ -64,6 +53,8 @@ public class GenerationState {
 	}
 
 	public void swapGrammar(RGrammar gram) {
+		if(this.gram == gram) return;
+
 		this.gram = gram;
 
 		rules = gram.getRules();
@@ -73,5 +64,32 @@ public class GenerationState {
 
 	public GenerationState newBuf() {
 		return new GenerationState(new StringBuilder(), rnd, vars, rlVars, gram);
+	}
+
+	/*
+	 * @TODO 6/5/18 Ben Culkin :ImportRefactor
+	 * 
+	 * Change this so that imports in almost all cases have to specify where
+	 * they are importing the rule from, so as to make it clear which rules
+	 * are imported, and which aren't
+	 */
+	public IPair<RGrammar, Rule> findRule(String ruleName, boolean allowImports) {
+		if(rules.containsKey(ruleName)) {
+			return new Pair<>(gram, rules.get(ruleName));
+		}
+
+		if(allowImports) return findImport(ruleName);
+
+		return null;
+	}
+
+	public IPair<RGrammar, Rule> findImport(String ruleName) {
+		if(importRules.containsKey(ruleName)) {
+			RGrammar imp = importRules.get(ruleName);
+
+			return new Pair<>(imp, imp.rules.get(ruleName));
+		}
+
+		return null;
 	}
 }

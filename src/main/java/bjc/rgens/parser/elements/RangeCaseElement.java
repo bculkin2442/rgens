@@ -14,8 +14,8 @@ public class RangeCaseElement extends CaseElement {
 	}
 
 	public void generate(GenerationState state) {
-		int val = state.rnd.nextInt(end - begin);
-		val += begin;
+		int val  = state.rnd.nextInt(end - begin);
+		val     += begin;
 
 		state.contents.append(val);
 	}

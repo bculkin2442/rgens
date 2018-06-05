@@ -20,9 +20,14 @@ public class ConfigLoader {
 	 * @throws IOException
 	 * 	If something goes wrong during configuration loading.
 	 */
-	public static RGrammarSet fromConfigFile(Path cfgFile) throws IOException {
-		/* The grammar set to hand back. */
+	public static ConfigSet fromConfigFile(Path cfgFile) throws IOException {
+		ConfigSet cfgSet = new ConfigSet();
+
+		/* The grammar set we're parsing into. */
 		RGrammarSet set = new RGrammarSet();
+		cfgSet.grammars.put("default", set);
+		set.belongsTo = cfgSet;
+		set.name = "default";
 
 		long startCFGTime = System.nanoTime();
 
@@ -40,15 +45,15 @@ public class ConfigLoader {
 
 				try {
 					/* Ignore blank/comment lines. */
-					if (ln.equals("")) return;
+					if (ln.equals("")) continue;
 
-					if (ln.startsWith("#")) return;
+					if (ln.startsWith("#")) continue;
 
 					/* Handle mixed whitespace. */
 					ln = ln.replaceAll("\\s+", " ");
 
 					/* Get line type */
-					int typeIdx = ln.indexOf(" ');
+					int typeIdx = ln.indexOf(" ");
 					if(typeIdx == -1) {
 						throw new GrammarException("Must specify config line type");
 					}
@@ -83,7 +88,7 @@ public class ConfigLoader {
 
 		System.err.printf("\n\nPERF: Read config file %s in %d ns (%f s)\n", cfgFile, cfgDur, cfgDur / 1000000000.0);
 
-		return set;
+		return cfgSet;
 	}
 
 	private static void loadConfigLine(String ln, RGrammarSet set, Path cfgParent) throws IOException {
@@ -112,8 +117,60 @@ public class ConfigLoader {
 		switch(tag) {
 			case "template":
 				{
-					throw new GrammarException("Templates aren't implemented yet");
+					Path path = Paths.get(ln);
+
+					/*
+					 * Convert from configuration relative path to
+					 * absolute path.
+					 */
+					Path convPath = cfgParent.resolve(path.toString());
+
+					if(Files.isDirectory(convPath)) {
+						throw new GrammarException("Can't load grammar from directory" + convPath.toString());
+					} else {
+						/* Load template file. */
+						try {
+							long startFileTime = System.nanoTime();
+
+							BufferedReader fis = Files.newBufferedReader(convPath);
+							GrammarTemplate template = GrammarTemplate.readTemplate(fis);
+							if(template.name == null) {
+								System.err.printf("\tINFO: Naming unnamed template loaded from %s off config name '%s'\n",
+										convPath, name);
+
+								template.name = name;
+							}
+
+							fis.close();
+
+							long endFileTime = System.nanoTime();
+
+							long fileTime = endFileTime - startFileTime;
+
+							System.err.printf("\tPERF: Read template %s (from %s) in %d ns (%f s)\n",
+									gram.name, convPath, fileTime, fileTime  / 1000000000.0);
+
+							/* Add grammar to the set. */
+							cfgSet.templates.put(name, gram);
+
+							/*
+							 * @NOTE
+							 *
+							 * Do we need to do this
+							 * for templates?
+							 *
+							 * Mark where the
+							 * template came
+							 * from. 
+							 */
+							//set.loadedFrom.put(name, path.toString());
+						} catch (GrammarException gex) {
+							String msg = String.format("Error loading file '%s'", path);
+							throw new GrammarException(msg, gex);
+						}
+					}
 				}
+				break;
 			case "subset":
 				{
 					/* @TODO implement subset grammars */
@@ -140,7 +197,7 @@ public class ConfigLoader {
 							BufferedReader fis = Files.newBufferedReader(convPath);
 							RGrammar gram = RGrammarParser.readGrammar(fis);
 							if(gram.name == null) {
-								System.err.printf("\tINFO: Naming unnamed grammar loaded from %s off config name %s\n",
+								System.err.printf("\tINFO: Naming unnamed grammar loaded from %s off config name '%s'\n",
 										convPath, name);
 
 								gram.name = name;

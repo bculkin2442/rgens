@@ -185,7 +185,7 @@ public class Rule {
 
 	@Override
 	public String toString() {
-		return String.format("Rule [ruleName='%s', ruleCases=%s]", name, cases);
+		return String.format("Rule '%s' with %d cases", name, cases.getValues().getSize());
 	}
 
 	public boolean doRecur() {

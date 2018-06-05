@@ -1,5 +1,7 @@
 package bjc.rgens.parser.elements;
 
+import bjc.utils.data.IPair;
+
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 import bjc.rgens.parser.RecurLimitException;
@@ -16,24 +18,11 @@ public class ExpVariableCaseElement extends VariableCaseElement {
 	public void generate(GenerationState state) {
 		GenerationState newState = state.newBuf();
 
-		if (state.rules.containsKey(varDef)) {
-			Rule rl = state.rules.get(varDef);
+		IPair<RGrammar, Rule> par = state.findRule(varDef, true);
 
-			if(rl.doRecur()) {
-				RuleCase destCase = state.rules.get(varDef).getCase();
-				System.err.printf("\tFINE: Generating %s (from %s)\n", destCase, varDef);
-
-				state.gram.generateCase(destCase, newState);
-
-				rl.endRecur();
-			} else {
-				throw new RecurLimitException("Rule recurrence limit exceeded");
-			}
-		} else if (state.importRules.containsKey(varDef)) {
-			RGrammar destGrammar = state.importRules.get(varDef);
-
+		if(par != null) {
+			RGrammar destGrammar = par.getLeft();
 			newState.swapGrammar(destGrammar);
-
 			String res = destGrammar.generate(varDef, state);
 
 			/*

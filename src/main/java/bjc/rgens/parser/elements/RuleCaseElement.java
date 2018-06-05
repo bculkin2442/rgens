@@ -1,5 +1,8 @@
 package bjc.rgens.parser.elements;
 
+import bjc.utils.data.IPair;
+import bjc.utils.data.Pair;
+
 import bjc.rgens.parser.*;
 
 import java.util.regex.Matcher;
@@ -23,35 +26,30 @@ public abstract class RuleCaseElement extends StringCaseElement {
 	protected void doGenerate(String actName, GenerationState state) {
 		GenerationState newState = state.newBuf();
 
+		IPair<RGrammar, Rule> par;
+
 		if (actName.startsWith("[^")) {
 			actName = "[" + actName.substring(2);
 
-			RGrammar dst = state.importRules.get(actName);
+			par = state.findImport(actName);
+		} else {
+			par = state.findRule(actName, true);
+		}
 
-			newState.swapGrammar(dst);
+		if(par != null) {
+			RGrammar destGrammar = par.getLeft();
+			newState.swapGrammar(destGrammar);
+			String res = destGrammar.generate(actName, newState);
 
-			/* :Postprocessing */
-			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars, state.rlVars));
-		} else if (state.rules.containsKey(actName)) {
-			Rule rl = state.rules.get(actName);
-
-			if(rl.doRecur()) {
-				RuleCase cse = rl.getCase(state.rnd);
-				System.err.printf("\tFINE: Generating %s (from %s)\n", cse, actName);
-
-				state.gram.generateCase(cse, newState);
-
-				rl.endRecur();
-			} else {
-				throw new RecurLimitException("Rule recurrence limit exceeded");
-			}
-		} else if (state.importRules.containsKey(actName)) {
-			RGrammar dst = state.importRules.get(actName);
-
-			newState.swapGrammar(dst);
-
-			/* :Postprocessing */
-			newState.contents = new StringBuilder(dst.generate(actName, state.rnd, state.vars, state.rlVars));
+			/*
+			 * @NOTE
+			 *
+			 * :Postprocessing
+			 *
+			 * This is because generate() returns a processed
+			 * string, but modifies the passed in StringBuilder.
+			 */
+			newState.contents = new StringBuilder(res);
 		} else {
 			/*
 			 * @TODO 5/29/18 Ben Culkin :RuleSuggesting

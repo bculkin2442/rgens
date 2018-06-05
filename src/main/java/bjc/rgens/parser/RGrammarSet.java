@@ -11,6 +11,10 @@ import java.util.Set;
  * @author EVE
  */
 public class RGrammarSet {
+	public String name;
+
+	public ConfigSet belongsTo;
+
 	/* Contains all the grammars in this set. */
 	private Map<String, RGrammar> grammars;
 
@@ -59,6 +63,7 @@ public class RGrammarSet {
 		}
 
 		grammars.put(grammarName, gram);
+		gram.belongsTo = this;
 
 		/* Process exports from the grammar. */
 		for (Rule export : gram.getExportedRules()) {

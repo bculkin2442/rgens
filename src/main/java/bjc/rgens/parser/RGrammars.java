@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Ben Culkin
  */
 public class RGrammars {
-	private static RGrammarSet gramSet;
+	private static ConfigSet cfgSet;
 
 	private static void loadSet() {
 		try {
@@ -24,12 +24,13 @@ public class RGrammars {
 
 			Map<String, String> env = new HashMap<>();
 			env.put("create", "true");
+			/* Ensure we can get at the file we need */
 			@SuppressWarnings("unused")
 			FileSystem zipfs = FileSystems.newFileSystem(rsc, env);
 
 			Path cfgPath = Paths.get(rsc);
 
-			gramSet = ConfigLoader.fromConfigFile(cfgPath);
+			cfgSet = ConfigLoader.fromConfigFile(cfgPath);
 		} catch (IOException | URISyntaxException ex) {
 			RuntimeException rtex = new RuntimeException("Could not load grammars");
 
@@ -49,19 +50,23 @@ public class RGrammars {
 	 *             If something went wrong.
 	 */
 	public static String generateExport(String exportName) throws GrammarException {
-		if (gramSet == null)
+		if (cfgSet == null)
 			loadSet();
 
-		if (!gramSet.getExportedRules().contains(exportName)) {
-			throw new GrammarException(String.format("No exported rule named %s", exportName));
+		for(RGrammarSet gramSet : cfgSet.grammars.values()) {
+			if (!gramSet.getExportedRules().contains(exportName)) {
+				continue;
+			}
+
+			RGrammar gram = gramSet.getExportSource(exportName);
+
+			String res = gram.generate(exportName);
+			if (exportName.contains("+"))
+				res = res.replaceAll("\\s+", "");
+
+			return res;
 		}
 
-		RGrammar gram = gramSet.getExportSource(exportName);
-
-		String res = gram.generate(exportName);
-		if (exportName.contains("+"))
-			res = res.replaceAll("\\s+", "");
-
-		return res;
+		throw new GrammarException(String.format("No exported rule named %s", exportName));
 	}
 }
