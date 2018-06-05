@@ -272,7 +272,7 @@ public class RGrammarBuilder {
 			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().getElements())));
 		}
 
-		System.err.printf("\tTRACE: Despacing %d cases of rule %s\n", caseList.getSize(), ruleName);
+		System.err.printf("\t\tTRACE: Despacing %d cases of rule %s\n", caseList.getSize(), ruleName);
 
 		rules.get(ruleName).replaceCases(newCaseList);
 	}
@@ -395,7 +395,7 @@ public class RGrammarBuilder {
 			}
 
 			for(List<T> permute : ListUtils.permuteList(stor)) {
-				System.err.printf("\tTRACE: generated permute ");
+				System.err.printf("\t\tTRACE: generated permute ");
 				for(T elm : permute) {
 					System.err.printf("%s ", elm);
 				}

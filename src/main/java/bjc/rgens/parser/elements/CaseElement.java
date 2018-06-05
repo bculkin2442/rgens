@@ -103,6 +103,18 @@ public abstract class CaseElement {
 
 				/* Trim $ */
 				return new LitVariableCaseElement(parts[0].substring(1), parts[1]);
+			} else if (specialBody.matches("\\@\\S+:=\\S+")) {
+				/* Handle exhaustible rule variable definitions. */
+				String[] parts = specialBody.split(":=");
+
+				if (parts.length != 2) {
+					String msg = "Rule variables must be a name and a definition, seperated by =";
+
+					throw new GrammarException(msg);
+				}
+
+				/* Trim $ */
+				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], true);
 			} else if (specialBody.matches("\\@\\S+=\\S+")) {
 				/* Handle rule variable definitions. */
 				String[] parts = specialBody.split("=");
@@ -115,18 +127,6 @@ public abstract class CaseElement {
 
 				/* Trim $ */
 				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], false);
-			} else if (specialBody.matches("\\@\\S+:=\\S+")) {
-				/* Handle exhaustible rule variable definitions. */
-				String[] parts = specialBody.split("=");
-
-				if (parts.length != 2) {
-					String msg = "Rule variables must be a name and a definition, seperated by =";
-
-					throw new GrammarException(msg);
-				}
-
-				/* Trim $ */
-				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], true);
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
@@ -144,7 +144,7 @@ public abstract class CaseElement {
 			} else if(rawCase.contains("|")) {
 				String[] elms = rawCase.split("\\|");
 
-				System.err.printf("\tTRACE: Split inline cases %s to ", rawCase);
+				System.err.printf("\t\tTRACE: Split inline cases %s to ", rawCase);
 				for(String elm : elms) {
 					System.err.printf("%s, ", elm);
 				}
@@ -165,14 +165,14 @@ public abstract class CaseElement {
 				return new VariableRuleReference(csepart);
 			} else if(csepart.contains("@")) {
 				// Trim @
-				return new RuleVarRefCaseElement(csepart.substring(1));
+				return new RuleVarRefCaseElement(rawCase.substring(1));
 			} else {
 				return new NormalRuleReference(csepart);
 			}
 		} else if(csepart.startsWith("%")) {
 			String rName = String.format("[%s]", csepart.substring(1));
 
-			System.err.printf("\tTRACE: short ref to %s (%s)\n", rName, csepart);
+			System.err.printf("\t\tTRACE: short ref to %s (%s)\n", rName, csepart);
 
 			return new NormalRuleReference(rName);	
 		} else {

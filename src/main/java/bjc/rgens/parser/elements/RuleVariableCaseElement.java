@@ -42,5 +42,11 @@ public class RuleVariableCaseElement extends VariableCaseElement {
 		}
 
 		state.rlVars.put(varName, new Pair<>(grm, rl));
+
+		if(exhaust) {
+			System.err.printf("\t\tTRACE: Defined exhausted rulevar '%s' ('%s')\n", varName, varDef);
+		} else {
+			System.err.printf("\t\tTRACE: Defined rulevar '%s' ('%s')\n", varName, varDef);
+		}
 	}
 }
