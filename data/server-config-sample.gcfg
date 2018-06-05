@@ -1,0 +1,127 @@
+# Load 'long rules' -- Grammars which generally are used as part of the output
+# for other grammars
+load grammar animal            sample-grammars/long-data/animal.gram
+load grammar canada-province   sample-grammars/long-data/canada-province.gram
+load grammar cards             sample-grammars/long-data/cards.gram
+load grammar color             sample-grammars/long-data/color.gram
+load grammar first-name-female sample-grammars/long-data/first-name-female.gram
+load grammar first-name-male   sample-grammars/long-data/first-name-male.gram
+load grammar geographic-thing  sample-grammars/long-data/geographic-thing.gram
+load grammar last-name         sample-grammars/long-data/last-name.gram
+load grammar letters           sample-grammars/long-data/letters.gram
+load grammar nation            sample-grammars/long-data/nation.gram
+load grammar numbers           sample-grammars/long-data/numbers.gram
+load grammar planet            sample-grammars/long-data/planet.gram
+load grammar real-city         sample-grammars/long-data/real-city.gram
+load grammar real-company      sample-grammars/long-data/real-company.gram
+load grammar relative          sample-grammars/long-data/relative.gram
+load grammar roman-numeral     sample-grammars/long-data/roman-numeral.gram
+load grammar syllables         sample-grammars/long-data/syllables.gram
+load grammar town-name         sample-grammars/long-data/town-name.gram
+load grammar tree              sample-grammars/long-data/tree.gram
+load grammar greek-letters     sample-grammars/long-data/greek-letters.gram
+load grammar japanese-sylls    sample-grammars/long-data/japanese-writing.gram
+
+# Load grammars
+
+# Set I of grammars
+load grammar 24hr-rpg           sample-grammars/24hr-rpg.gram
+load grammar acronym            sample-grammars/acronym.gram
+load grammar address            sample-grammars/address.gram
+load grammar anime              sample-grammars/anime.gram
+load grammar art-objects        sample-grammars/art-objects.gram
+load grammar awesome-names      sample-grammars/awe-names.gram
+load grammar buzzword           sample-grammars/buzzword.gram
+load grammar career             sample-grammars/career.gram
+load grammar city               sample-grammars/city.gram
+load grammar college            sample-grammars/college.gram
+load grammar company            sample-grammars/company.gram
+load grammar computer           sample-grammars/computer.gram
+load grammar congress           sample-grammars/congress.gram
+load grammar dates              sample-grammars/dates.gram
+load grammar dungeon-enviroment sample-grammars/dungeon-enviroment.gram
+load grammar elemental          sample-grammars/elementals.gram
+load grammar fantasy-locations  sample-grammars/fantasy-locations.gram
+load grammar fortune            sample-grammars/fortune.gram
+load grammar gemstones          sample-grammars/gemstones.gram
+load grammar genre-fiction      sample-grammars/genre-fiction.gram
+load grammar horror             sample-grammars/horror.gram
+load grammar insults            sample-grammars/insults.gram
+load grammar linux              sample-grammars/linux.gram
+load grammar martial-arts       sample-grammars/martial-arts.gram
+load grammar mary-sue           sample-grammars/mary-sue.gram
+load grammar media              sample-grammars/media.gram
+load grammar mission            sample-grammars/mission.gram
+load grammar names              sample-grammars/names.gram
+# newspaper          sample-grammars/newspaper.gram
+load grammar numbers            sample-grammars/numbers.gram
+load grammar ordinal            sample-grammars/ordinal.gram
+load grammar organization       sample-grammars/organization.gram
+load grammar part-creature      sample-grammars/part-creature.gram
+load grammar phone-number       sample-grammars/phone-number.gram
+load grammar pokeattacks        sample-grammars/pokeattacks.gram
+load grammar president          sample-grammars/president.gram
+load grammar rune               sample-grammars/rune.gram
+load grammar school             sample-grammars/school.gram
+load grammar slashdot           sample-grammars/slashdot.gram
+load grammar states             sample-grammars/states.gram
+load grammar superhero          sample-grammars/superhero.gram
+load grammar tarotcard          sample-grammars/tarotcard.gram
+load grammar technobabble       sample-grammars/technobabble.gram
+load grammar theory             sample-grammars/theory.gram
+load grammar trademark          sample-grammars/trademark.gram
+load grammar web                sample-grammars/web.gram
+load grammar zadrons-pouch      sample-grammars/zadrons-pouch.gram
+
+# Diablo II items
+load grammar diabloii-base        sample-grammars/diablo-ii/diabloii.gram
+load grammar diabloii-items       sample-grammars/diablo-ii/diabloiiitems.gram
+load grammar diabloii-perish      sample-grammars/diablo-ii/diabloiiperish.gram
+load grammar diabloii-prefixes    sample-grammars/diablo-ii/diabloiiprefixes.gram
+load grammar diabloii-suffixes    sample-grammars/diablo-ii/diabloiisuffixes.gram
+
+# Vaults of Nagoh
+load grammar turboghoul-hats sample-grammars/vaultsofnagoh/turboghoul-hats.gram
+
+# RPG tools
+load grammar wand rpg-tools-cd/wands.gram
+
+# Set II of grammars
+load grammar cbs new-sample-grammars/cbs.gram
+load grammar repinsults new-sample-grammars/repinsult.gram
+
+# Drakensang online items
+load grammar ds-runes new-sample-grammars/drakensang/runes.gram
+load grammar ds-gems  new-sample-grammars/drakensang/gems.gram
+load grammar ds-armor new-sample-grammars/drakensang/armor.gram
+
+# Perchance sample grammars
+load grammar meal new-sample-grammars/perchance/meal.gram
+
+# Other grammar files
+
+# Dungeon dressing
+load grammar abandoned       sample-grammars/dungeondressing/abandoned.gram
+load grammar bedroom         sample-grammars/dungeondressing/bedroom.gram
+load grammar dragonencounter sample-grammars/dungeondressing/dragonencounter.gram
+load grammar kitchen         sample-grammars/dungeondressing/kitchen.gram
+load grammar monster         sample-grammars/dungeondressing/monster.gram
+
+# RandomTable Wiki
+load grammar adjective    sample-grammars/rtwiki/adjective.gram
+load grammar bodyparts    sample-grammars/rtwiki/bodyparts.gram
+load grammar color        sample-grammars/rtwiki/color.gram
+load grammar creature     sample-grammars/rtwiki/creature.gram
+load grammar death-cause  sample-grammars/rtwiki/death-cause.gram
+load grammar fantasy-name sample-grammars/rtwiki/fantasy-name.gram
+load grammar favorite     sample-grammars/rtwiki/favorite.gram
+load grammar guns         sample-grammars/rtwiki/guns.gram
+load grammar item         sample-grammars/rtwiki/item.gram
+load grammar traits       sample-grammars/rtwiki/traits.gram
+
+# Senior design
+load grammar seniordesign seniordesign/dbdata.gram
+
+# Misc
+load grammar 700000items   misc/700000items.gram
+load grammar nimble-bimble misc/nimble.gram

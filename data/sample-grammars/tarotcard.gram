@@ -11,7 +11,7 @@
 	[title] [adjective]
 	[title] [adjective] [noun]
 
-pragma initial-rule [tarot-card]
+pragma initial-rule [alt-tarot-card]
 
 [title] <^2> [male-title]
 	<^2> [female-title]
