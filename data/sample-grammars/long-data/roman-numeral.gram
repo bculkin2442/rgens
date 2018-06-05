@@ -1,8 +1,8 @@
 [roman-numeral-string] [roman-numeral-string+1]
 
-[roman-numeral-string+1] [roman-numeral]
-	[roman-numeral]
-	[roman-numeral] [roman-numeral-string]
+[roman-numeral-string+1] <^2> <&1..4> [roman-numeral]
+	<^4> <&5..10> [roman-numeral]
+	<&10..15> [roman-numeral]
 
 pragma initial-rule [roman-numeral-string]
 

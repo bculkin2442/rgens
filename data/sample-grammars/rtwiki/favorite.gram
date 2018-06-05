@@ -1,10 +1,6 @@
-[favorite-food] My favorite foods are [fruit] , [vegetable] and [meat]
+[favorite-food] My favorite foods are [apple|banana|cherry] , [vegetable] and [meat]
 
 pragma initial-rule [favorite-food]
-
-[fruit] apple
-	banana
-	cherry
 
 [vegetable] potato
 	okra
@@ -16,7 +12,7 @@ pragma initial-rule [favorite-food]
 	green beans
 
 [meat] hamburgers
-	hot dogs
+	hot dog
 	salmon
 	beef
 	chicken

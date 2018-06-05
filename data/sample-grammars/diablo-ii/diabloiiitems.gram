@@ -129,6 +129,7 @@ pragma prefix-with [clubs] [club-prefix]
 
 [club-prefix] spiked
 	war
+	dire
 
 [spears] javelin
 	spear
@@ -160,12 +161,9 @@ pragma prefix-with [axes] [axe-size]
 	hand
 
 [bows]  [act-arrow] [quote-count]
-	[act-bow]
-	[act-bow]
-	[act-bow]
-	[act-bow]
+	<^4> [act-bow]
 
-[act-arrow] arrow
+[act-arrow] <^2> arrow
 	[gem-type] -tipped arrow
 
 [act-bow] bow
@@ -182,12 +180,9 @@ pragma prefix-with [act-bow] [bow-size]
 	war
 
 [crossbows] [act-bolt] [quote-count]
-	[act-crossbow]
-	[act-crossbow]
-	[act-crossbow]
-	[act-crossbow]
+	<^4> [act-crossbow]
 
-[act-bolt] bolt
+[act-bolt] <^2>  bolt
 	[gem-type] -tipped bolt
 
 [act-crossbow] crossbow
@@ -213,8 +208,7 @@ pragma prefix-with [wands] [wand-type]
 
 [staves] staff
 
-pragma prefix-with [staves] [staff-type]
-pragma prefix-with [staves] [tree]
+pragma prefix-with [staves] [staff-type] [tree]
 pragma prefix-with [staves] [staff-length]
 
 [staff-type] gnarled
@@ -223,6 +217,7 @@ pragma prefix-with [staves] [staff-length]
 	war
 
 [staff-length] short
+	full
 	long
 
 [accessories] charm
@@ -233,8 +228,7 @@ pragma prefix-with [staves] [staff-length]
 
 [gems] [gem-type]
 
-pragma prefix-with [gems] [gem-size]
-pragma prefix-with [gems] [gem-quality]
+pragma prefix-with [gems] [gem-size] [gem-quality]
 
 [gem-quality] chipped
 	      flawed
@@ -258,5 +252,3 @@ pragma prefix-with [gems] [gem-quality]
 	       book
 
 [quote-count] ( [diablo-amount] count )
-
-pragma despace-rule [quote-count]

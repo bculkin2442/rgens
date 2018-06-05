@@ -125,10 +125,6 @@ pragma export-rule [letter]
 
 pragma export-rule [middle-initial]
 
-[vowel] a
-	e
-	i
-	o
-	u
+[vowel] [a|e|i|o|u]
 
 pragma export-rule [vowel]

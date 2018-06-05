@@ -1,15 +1,13 @@
-[color-phrases] [color-phrase]
-	[multi-color-phrases]
-
-[multi-color-phrases] [color-phrase] blended with [color-phrase]
+[color-phrases] <^8> [color-phrase]
+	<^2> [color-phrase] blended with [color-phrase]
 	a blend between [color-phrase] , [color-phrase] and [color-phrase]
-	something between [color-phrase] and [color-phrase]
+	<^2> something between [color-phrase] and [color-phrase]
 	something between [color-phrase] , [color-phrase] and [color-phrase]
 
 pragma initial-rule [color-phrases]
 
-[color-phrase] [complete-color]
-	[sw-complete-color]
+[color-phrase] <^2> [complete-color]
+	<^2> [sw-complete-color]
 	[sw-complete-color] [complete-color]
 	[sw-complete-color] - [complete-color]
 	[sw-complete-color] [sw-complete-color]
@@ -17,15 +15,14 @@ pragma initial-rule [color-phrases]
 
 pragma export-rule [color-phrase]
 
-[sw-color-phrase] [sw-complete-color]
+[sw-color-phrase] <^2> [sw-complete-color]
 	[sw-complete-color] [sw-complete-color]
 	[sw-complete-color] - [sw-complete-color]
 
 pragma export-rule [sw-color-phrase]
 
-[complete-color] {wtype=mw} [act-complete-color]
+[complete-color] {$wtype=mw} [act-complete-color]
 
-pragma despace-rule [complete-color]
 pragma export-rule [complete-color]
 
 [sw-complete-color] [act-sw-complete-color]
@@ -34,9 +31,7 @@ pragma export-rule [complete-color]
 pragma despace-rule [sw-complete-color]
 pragma export-rule [sw-complete-color]
 
-[act-sw-complete-color] {wtype=sw} [act-complete-color]
-
-pragma despace-rule [act-sw-complete-color]
+[act-sw-complete-color] {$wtype=sw} [act-complete-color]
 
 [act-complete-color] [standard]
 	[red-purple]
@@ -46,6 +41,7 @@ pragma despace-rule [act-sw-complete-color]
 	[jewel]
 	[metallic]
 	[heraldic]
+	[other-color]
 
 [other-color] [archaic-purple]
 	[archaic-green]
@@ -71,7 +67,7 @@ pragma despace-rule [act-sw-complete-color]
 	ivory
 	white
 	blue-gray
-	[gray]
+	[gray|grey]
 	black
 	ebony
 	copper
@@ -83,35 +79,26 @@ pragma despace-rule [act-sw-complete-color]
 	[$wtype-standard]
 	transparent
 
-[gray] gray
-	grey
-
 [sw-standard] iridescent
 	opalescent
 	rainbow
 
-[mw-standard] [iridescent]
-	[opalescent]
-	[ombre]
-	[rainbow]
+[mw-standard] [%iridescent|%opalescent|%ombre|%rainbow]
 
-[iridescent] iridescent [color]
+[iridescent] <^2> iridescent [color]
 	iridescent between [color] and [color]
 
 [opalescent] opalescent [color]
 
 [ombre] [color] (tinted [color] )
 
-[rainbow] rainbow of red, orange, yellow, green, blue, indigo and violet
-	[custom-rainbow]
+[rainbow] <^2> rainbow of red, orange, yellow, green, blue, indigo and violet
 
 [custom-rainbow] rainbow of [color]
 
 pragma suffix-with [custom-rainbow] [com-color]
 pragma suffix-with [custom-rainbow] [com-color]
-pragma suffix-with [custom-rainbow] [com-color]
-pragma suffix-with [custom-rainbow] [com-color]
-pragma suffix-with [custom-rainbow] [com-color]
+pragma suffix-with [custom-rainbow] <&1..3> [com-color]
 pragma suffix-with [custom-rainbow] [and-color]
 
 [com-color] , [color]
@@ -373,10 +360,9 @@ pragma suffix-with [custom-rainbow] [and-color]
 	sulphureous (bright yellow)
 	urobilin (urine-colored)
 
-[arcipluvian] (varies between [color] and [color] )
-	(varies between [color] , [color] and [color] )
+[arcipluvian] <^4> (varies between [color] and [color] )
+	<^2> (varies between [color] , [color] and [color] )
 	(varies between [color] , [color] , [color] and [color] )
-	(varies between [color] , [color] and [color] )
 
 [archaic-green] [$wtype-archaic-green]
 

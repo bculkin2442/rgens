@@ -1,14 +1,13 @@
-[item] [act-item]
-	[act-item]
+[item] <^2> [act-item]
 	[act-item] of the [act-item]
+
+pragma initial-rule [item]
 
 [act-item] [body]
 	[music]
 	[symbol]
 	[thing]
 	[weapon]
-
-pragma initial-rule [item]
 
 [body] arm
 	open eye

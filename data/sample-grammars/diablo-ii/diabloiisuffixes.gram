@@ -1,11 +1,6 @@
-[d2-suffix] of [suffix-part]
-	of [suffix-part]
-	of [suffix-chain]
-
-[suffix-chain] [suffix-part] and [suffix-part]
-	[suffix-part] and [suffix-part]
-	[suffix-part] and of [suffix-part]
-	[suffix-part] and of [suffix-part]
+[d2-suffix] <^4> of [suffix-part]
+	<^2> [suffix-part] and [suffix-part]
+	<^2> [suffix-part] and of [suffix-part]
 	[suffix-part] , [suffix-part] and [suffix-part]
 
 pragma export-rule [d2-suffix]

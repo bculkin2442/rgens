@@ -28,20 +28,11 @@ pragma suffix-with [turboghoul-hat] [eyeholes]
 	hockey
 	tights
 
-[headscarf] [headscarf-type] headscarf
+[headscarf] [flowery|bedouin] headscarf
 
-[headscarf-type] flowery
-	bedouin
+[hood] [liripided|monastic] hood
 
-[hood] [hood-type] hood
-
-[hood-type] liripided
-	monastic
-
-[turban] [turban-type] turban
-
-[turban-type] elaborate
-	simple
+[turban] [elaborate|simple] turban
 
 [hat] [hat-type] hat
 	[hat-type] hat with bandana
@@ -50,8 +41,7 @@ pragma suffix-with [turboghoul-hat] [eyeholes]
 	fancy feathered
 	wizard's pointy
 
-[helmet] [helmet-type] helmet
-	[helmet-type] helm
+[helmet] [helmet-type] [helm|helmet]
 
 [helmet-type] monstrous skull
 	common

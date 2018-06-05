@@ -1,0 +1,35 @@
+[meal] It's a [adjective] dish with [type] [main] .
+	The [adjective] [main] is paired with a [size] serving of [condiment] .
+	A [main] with with a bit of [condiment] and some [adjective] [side] on top .
+
+pragma export-rule [meal]
+
+[adjective] vegan
+	Indonesian
+	Italian
+	delicious
+
+[main] risotto
+	pie
+	stir-fry
+	curry
+
+[side] bowl of rice
+	salad
+	fries
+	fried mushrooms
+	pumpkin soup
+
+[type] a [size] serving of
+	well-cooked
+	unusually fresh
+	roasted
+
+[size] small
+	large
+	tiny
+
+[condiment] <^2> pepper
+	salt
+	chili flakes
+	oregano

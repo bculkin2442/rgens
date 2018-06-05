@@ -10,16 +10,13 @@ pragma initial-rule [base-treasures]
 
 pragma despace-rule [quote-treasure]
 
-[base-treasure] a [item]
+[base-treasure] <^3> a [item]
 	[non-item]
 
 [non-item] <^4> [money]
 	nothing
 
-pragma export-rule [non-item]
-
 [money] [diablo-amount] [money-type]
-	[diablo-amount] [metal-type] [money-type]
 
 [diablo-amount] 2
 	5
@@ -39,7 +36,7 @@ pragma export-rule [diablo-amount]
 
 [money-type] coins
 
-#pragma prefix-with [money-type] [metal-type]
+pragma prefix-with [money-type] [metal-type]
 
 [metal-type] copper
 	silver

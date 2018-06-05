@@ -1,5 +1,4 @@
-[es-socketable] [es-gem]
-	[es-gem]
+[es-socketable] <^2> [es-gem]
 	[es-rune]
 
 [gem-quality] chipped
@@ -9,7 +8,7 @@
 	extraordinary
 	perfect
 
-[es-gem] [gem-1
+[es-gem] [gem-1]
 	[gem-1]
 	[gem-2]
 	[gem-2]

@@ -19,8 +19,8 @@ pragma initial-rule [media-company]
 
 [radio+name2] [letter] [letter] [letter] [chan-type]
 
-[chan-type] -fm {chantype=fm}
-	-am {chantype=am}
+[chan-type] -fm {$chantype=fm}
+	-am {$chantype=am}
 
 [radio+chan] 9 [radio-9chan]
 	[$chantype-1chan]

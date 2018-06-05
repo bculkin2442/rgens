@@ -5,21 +5,17 @@
 	[quote-guncorp] was bought by [quote-guncorp]
 	[quote-guncorp] 's [quote-gunname] vs. [quote-guncorp] 's [quote-gunname] : cost vs. quality
 
-[quote-gunname] [gun-name]
+[quote-gunname] ( [gun-name] )
 
-[quote-guncorp] [guncorp]
+[quote-guncorp] ( [guncorp] )
 
 pragma initial-rule [gun-phrase]
 
-[gun-name] [1gun-name]
-	[2gun-name2]
-	[1gun-name]
-	[2gun-name2]
-	[1gun-name]
-	[2gun-name2]
-	[2gun-name1] [2gun-name2]
-	[2gun-name1] [1gun-name]
-	[1gun-name] [2gun-name2]
+[gun-name] <^4> [1gun-name]
+	<^4> [2gun-name2]
+	<^2> [2gun-name1] [2gun-name2]
+	<^2> [2gun-name1] [1gun-name]
+	<^2> [1gun-name] [2gun-name2]
 	[2gun-name1] [1gun-name] [2gun-name2]
 
 pragma prefix-with [gun-name] [2gun-name1]
@@ -149,11 +145,9 @@ pragma export-rule [gun-name]
 	Poisoner
 	Remedy
 
-[guncorp] [guncorp-1]
-	[guncorp-1] [guncorp-2]
-	[guncorp-1] [guncorp-2]
-	[guncorp-1] [guncorp-2]
-	[guncorp-1] [guncorp-1] [guncorp-2]
+[guncorp] <^2> [guncorp-1]
+	<^3> [guncorp-1] [guncorp-2]
+	<&1..2> [guncorp-1] [guncorp-2]
 	[guncorp-1] - [guncorp-1] [guncorp-2]
 	[guncorp-1] and [guncorp-1] [guncorp-2]
 	[guncorp-1] / [guncorp-1] [guncorp-2]

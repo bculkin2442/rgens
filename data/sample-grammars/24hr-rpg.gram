@@ -1,9 +1,9 @@
-[rpg-name] → [rpg-part] , [rpg-part] and [rpg-part]
-	     [rpg-part] and [rpg-part]
-	     [rpg-part] / [rpg-part]
-	     [rpg-part] the [rpg-part]
-	     [rpg-part] : [rpg-part] the [rpg-part]
-	     [rpg-part] : [rpg-part] [rpg-part]
+[rpg-name] [rpg-part] and [rpg-part]
+	[rpg-part] / [rpg-part]
+	[rpg-part] the [rpg-part]
+	[rpg-part] : [rpg-part] the [rpg-part]
+	[rpg-part] : [rpg-part] [rpg-part]
+	[rpg-part] , [rpg-part] and [rpg-part]
 
 [rpg-name-phrase] [quote-rpg-name] was just released
 	[quote-rpg-name] vs [quote-rpg-name] : which is better?
@@ -15,201 +15,201 @@
 pragma initial-rule [rpg-name-phrase]
 pragma export-rule [rpg-name]
 
-[rpg-part] → tits
-	     teeth
-	     claws
-	     fluff
-	     crunch
-	     tools
-	     guns
-	     treachery
-	     post-apocalyptic
-	     underwater
-	     terror
-	     fast food
-	     military
-	     fortress
-	     pirates
-	     metalhead
-	     genies
-	     insects
-	     environmentalism
-	     voodoo
-	     pitchforks
-	     inventors
-	     bomb technicians
-	     zombies
-	     vampires
-	     the 70s
-	     ninjas
-	     cards
-	     rebellion
-	     cannibals
-	     beast men
-	     dancing
-	     monty python
-	     energy crisis
-	     orchestra
-	     summer
-	     trolls
-	     medical
-	     time manipulation
-	     hitchhiking
-	     meteors
-	     the meaning of life
-	     literary figures
-	     wrestlers
-	     tournament
-	     imaginary friends
-	     world leaders
-	     exploration
-	     fish
-	     gods
-	     trading
-	     rap battles
-	     creation
-	     blurring boundaries
-	     animals
-	     bounty hunters
-	     organized crime
-	     high school
-	     cybernetics
-	     aliens
-	     contemporary world
-	     urban fantasy
-	     Nazis
-	     robots
-	     surfers
-	     gentlemen
-	     haberdashery
-	     zeppelins
-	     demons
-	     rapscallions
-	     memory loss
-	     repetition
-	     martial arts
-	     conquistadors
-	     winter
-	     mummies
-	     orcs
-	     reinterpreted myths
-	     machinery
-	     harmony
-	     motorcycles
-	     horses
-	     limited time
-	     ancient
-	     sleepovers
-	     submarines
-	     ambition
-	     colors
-	     marshmallows
-	     the 90s
-	     neckbeards
-	     unicorns
-	     clothing
-	     hunting
-	     world war I
-	     trees
-	     magical girls
-	     game show
-	     dragons
-	     recursion
-	     musicians
-	     construction
-	     plants
-	     cats
-	     drugs
-	     surgery
-	     politics
-	     cartoons
-	     athletics
-	     disease
-	     computers
-	     cowboys
-	     cars
-	     cooking
-	     samurai
-	     spaceships
-	     dinosaurs
-	     candy
-	     krakens
-	     chainsaws
-	     fists
-	     crowbars
-	     lava
-	     elf
-	     emperor
-	     loch ness monster
-	     knights
-	     celebrities
-	     video games
-	     elves
-	     the 2000s
-	     rush hour traffic
-	     spandex
-	     stand-up comedy
-	     nano-machines
-	     mutation
-	     dice
-	     soft drinks
-	     labyrinth
-	     totalitarianism
-	     prostitutes
-	     cell phones
-	     death
-	     the line at the DMV
-	     office
-	     mars
-	     the sun
-	     survival
-	     autumn
-	     portals
-	     world war II
-	     the internet
-	     brewing
-	     alternate universe
-	     tanks
-	     jewelry
-	     marketplace
-	     dungeon building
-	     business
-	     coins
-	     crustaceans
-	     plumbing
-	     parasites
-	     rockets
-	     electricity
-	     speed
-	     reincarnation
-	     theatrics
-	     storm chasers
-	     curiosity
-	     horror
-	     tragedy
-	     big damn heroes
-	     SCIENCE!
-	     transhumanism
-	     spring
-	     scandal
-	     desert
-	     laboratory
-	     hipsters
-	     obscure
-	     dwarves
-	     outer space
-	     trains
-	     religion
-	     espionage
-	     small scale
-	     unicycles
-	     airplanes
-	     werewolves
-	     fashion
-	     JUSTICE!
-	     suburbs
-	     art
-	     skies
-	     madness
-	     economy
-	     the 60s
+[rpg-part] Tits
+	Teeth
+	Claws
+	Fluff
+	Crunch
+	Tools
+	Guns
+	Treachery
+	Post-Apocalyptic
+	Underwater
+	Terror
+	Fast Food
+	Military
+	Fortress
+	Pirates
+	Metalhead
+	Genies
+	Insects
+	Environmentalism
+	Voodoo
+	Pitchforks
+	Inventors
+	Bomb Technicians
+	Zombies
+	Vampires
+	The 70s
+	Ninjas
+	Cards
+	Rebellion
+	Cannibals
+	Beast Men
+	Dancing
+	Monty Python
+	Energy Crisis
+	Orchestra
+	Summer
+	Trolls
+	Medical
+	Time Manipulation
+	Hitchhiking
+	Meteors
+	The Meaning Of Life
+	Literary Figures
+	Wrestlers
+	Tournament
+	Imaginary Friends
+	World Leaders
+	Exploration
+	Fish
+	Gods
+	Trading
+	Rap Battles
+	Creation
+	Blurring Boundaries
+	Animals
+	Bounty Hunters
+	Organized Crime
+	High School
+	Cybernetics
+	Aliens
+	Contemporary World
+	Urban Fantasy
+	Nazis
+	Robots
+	Surfers
+	Gentlemen
+	Haberdashery
+	Zeppelins
+	Demons
+	Rapscallions
+	Memory Loss
+	Repetition
+	Martial Arts
+	Conquistadors
+	Winter
+	Mummies
+	Orcs
+	Reinterpreted Myths
+	Machinery
+	Harmony
+	Motorcycles
+	Horses
+	Limited Time
+	Ancient
+	Sleepovers
+	Submarines
+	Ambition
+	Colors
+	Marshmallows
+	The 90s
+	Neckbeards
+	Unicorns
+	Clothing
+	Hunting
+	World War I
+	Trees
+	Magical Girls
+	Game Show
+	Dragons
+	Recursion
+	Musicians
+	Construction
+	Plants
+	Cats
+	Drugs
+	Surgery
+	Politics
+	Cartoons
+	Athletics
+	Disease
+	Computers
+	Cowboys
+	Cars
+	Cooking
+	Samurai
+	Spaceships
+	Dinosaurs
+	Candy
+	Krakens
+	Chainsaws
+	Fists
+	Crowbars
+	Lava
+	Elf
+	Emperor
+	Loch Ness Monster
+	Knights
+	Celebrities
+	Video Games
+	Elves
+	The 2000s
+	Rush Hour Traffic
+	Spandex
+	Stand-Up Comedy
+	Nano-Machines
+	Mutation
+	Dice
+	Soft Drinks
+	Labyrinth
+	Totalitarianism
+	Prostitutes
+	Cell Phones
+	Death
+	The Line At The DMV
+	Office
+	Mars
+	The Sun
+	Survival
+	Autumn
+	Portals
+	World War II
+	The Internet
+	Brewing
+	Alternate Universe
+	Tanks
+	Jewelry
+	Marketplace
+	Dungeon Building
+	Business
+	Coins
+	Crustaceans
+	Plumbing
+	Parasites
+	Rockets
+	Electricity
+	Speed
+	Reincarnation
+	Theatrics
+	Storm Chasers
+	Curiosity
+	Horror
+	Tragedy
+	Big Damn Heroes
+	SCIENCE!
+	Transhumanism
+	Spring
+	Scandal
+	Desert
+	Laboratory
+	Hipsters
+	Obscure
+	Dwarves
+	Outer Space
+	Trains
+	Religion
+	Espionage
+	Small Scale
+	Unicycles
+	Airplanes
+	Werewolves
+	Fashion
+	JUSTICE!
+	Suburbs
+	Art
+	Skies
+	Madness
+	Economy
+	The 60s

@@ -1,209 +1,210 @@
-[real-company] 3com
-	aflac
-	at&t
-	ace hardware
-	aetna
-	aid association for lutherans
-	albertson's
-	allstate
-	alltel
-	amerenue
-	america online
-	american express
-	american general
-	ames department stores
-	anheuser-busch
-	apple computer
-	archer daniels midland
-	autozone
-	avis rent a car
-	avon products
-	b.f. goodrich
-	bank of america corp.
-	barnes & noble
-	bell atlantic
-	bellsouth
-	berkshire hathaway
-	best buy
-	black & decker
-	boeing
-	bristol-myers squibb
-	burlington northern santa fe
-	cbs
-	cvs
-	cablevision systems
-	campbell soup
-	caterpillar
-	cendant
-	charles schwab
-	chase manhattan corp.
-	chevron
-	cigna
-	cinergy
-	circuit city group
-	cisco systems
-	citigroup
-	clorox
-	coastal
-	coca-cola
-	colgate-palmolive
-	columbia/hca healthcare
-	comcast
-	comerica
-	compusa
-	compaq computer
-	computer associates intl.
-	conagra
-	conoco
-	conseco
-	continental airlines
-	corning
-	costco wholesale
-	dana
-	dell computer
-	delta air lines
-	dillard's
-	dole food
-	dollar general
-	dow chemical
-	eastman kodak
-	eli lilly
-	este lauder
-	exxon mobil
-	fannie mae
-	farmland industries
-	fedex
-	firstar corp.
-	fleetwood enterprises
-	ford motor
-	gte
-	gannett
-	gap
-	gateway
-	general electric
-	general mills
-	general motors
-	gillette
-	goldman sachs group
-	goodyear tire & rubber
-	h.j. heinz
-	hartford financial services
-	hasbro
-	healthsouth
-	hershey foods
-	hewlett-packard
-	home depot
-	honeywell international
-	hormel foods
-	itt industries
-	ikon office solutions
-	ingersoll-rand
-	intel
-	ibm
-	j.c. penney
-	j.p. morgan & co.
-	john hancock financial services
-	johnson & johnson
-	kellogg
-	kimberly-clark
-	kmart
-	knight-ridder
-	kroger
-	lexmark international
-	lockheed martin
-	lowe's
-	lucent technologies
-	mci worldcom
-	marriott international
-	mattel
-	maytag
-	mcdonald's
-	mcgraw-hill
-	merck
-	merrill lynch
-	metropolitan life insurance
-	micron technology
-	microsoft
-	monsanto
-	morgan stanley dean witter
-	motorola
-	mutual of omaha insurance
-	ncr
-	nabisco group holdings
-	new york life insurance
-	new york times
-	newell rubbermaid
-	nextel communications
-	nike
-	nordstrom
-	northwest airlines
-	office depot
-	officemax
-	oracle
-	owens corning
-	paine webber group
-	pepsico
-	pfizer
-	pharmacia & upjohn
-	philip morris
-	procter & gamble
-	providian financial
-	prudential ins. co. of america
-	quaker oats
-	qualcomm
-	quantum
-	qwest communications
-	r. j. reynolds tobacco
-	ralston purina
-	raytheon
-	rockwell international
-	sbc communications
-	safeway
-	saks
-	sara lee
-	seagate technology
-	sears roebuck
-	servicemaster
-	sherwin-williams
-	shopko stores
-	sodexho marriott services
-	southwest airlines
-	sprint
-	staples
-	state farm insurance cos.
-	sun microsystems
-	suntrust banks
-	sunoco
-	supervalu
-	tandy
-	target
-	tenet healthcare
-	texaco
-	texas instruments
-	time warner
-	times mirror
-	toys `r' us
-	trans world airlines
-	tyson foods
-	u.s. bancorp
-	us airways group
-	us west
-	ultramar diamond shamrock
-	union carbide
-	union pacific
-	unisys
-	united parcel service
-	unitedhealth group
-	universal
-	viacom
-	wal-mart stores
-	walgreen
-	walt disney
-	warner-lambert
-	wells fargo
-	weyerhaeuser
-	whirlpool
-	winn-dixie stores
-	xerox
+[real-company] 
+	3com
+	Aflac
+	At&T
+	Ace Hardware
+	Aetna
+	Aid Association For Lutherans
+	Albertson'S
+	Allstate
+	Alltel
+	Amerenue
+	America Online
+	American Express
+	American General
+	Ames Department Stores
+	Anheuser-Busch
+	Apple Computer
+	Archer Daniels Midland
+	Autozone
+	Avis Rent A Car
+	Avon Products
+	B.F. Goodrich
+	Bank Of America Corp.
+	Barnes & Noble
+	Bell Atlantic
+	Bellsouth
+	Berkshire Hathaway
+	Best Buy
+	Black & Decker
+	Boeing
+	Bristol-Myers Squibb
+	Burlington Northern Santa Fe
+	Cbs
+	Cvs
+	Cablevision Systems
+	Campbell Soup
+	Caterpillar
+	Cendant
+	Charles Schwab
+	Chase Manhattan Corp.
+	Chevron
+	Cigna
+	Cinergy
+	Circuit City Group
+	Cisco Systems
+	Citigroup
+	Clorox
+	Coastal
+	Coca-Cola
+	Colgate-Palmolive
+	Columbia/Hca Healthcare
+	Comcast
+	Comerica
+	Compusa
+	Compaq Computer
+	Computer Associates Intl.
+	Conagra
+	Conoco
+	Conseco
+	Continental Airlines
+	Corning
+	Costco Wholesale
+	Dana
+	Dell Computer
+	Delta Air Lines
+	Dillard'S
+	Dole Food
+	Dollar General
+	Dow Chemical
+	Eastman Kodak
+	Eli Lilly
+	Este Lauder
+	Exxon Mobil
+	Fannie Mae
+	Farmland Industries
+	Fedex
+	Firstar Corp.
+	Fleetwood Enterprises
+	Ford Motor
+	Gte
+	Gannett
+	Gap
+	Gateway
+	General Electric
+	General Mills
+	General Motors
+	Gillette
+	Goldman Sachs Group
+	Goodyear Tire & Rubber
+	H.J. Heinz
+	Hartford Financial Services
+	Hasbro
+	Healthsouth
+	Hershey Foods
+	Hewlett-Packard
+	Home Depot
+	Honeywell International
+	Hormel Foods
+	Itt Industries
+	Ikon Office Solutions
+	Ingersoll-Rand
+	Intel
+	Ibm
+	J.C. Penney
+	J.P. Morgan & Co.
+	John Hancock Financial Services
+	Johnson & Johnson
+	Kellogg
+	Kimberly-Clark
+	Kmart
+	Knight-Ridder
+	Kroger
+	Lexmark International
+	Lockheed Martin
+	Lowe'S
+	Lucent Technologies
+	Mci Worldcom
+	Marriott International
+	Mattel
+	Maytag
+	Mcdonald'S
+	Mcgraw-Hill
+	Merck
+	Merrill Lynch
+	Metropolitan Life Insurance
+	Micron Technology
+	Microsoft
+	Monsanto
+	Morgan Stanley Dean Witter
+	Motorola
+	Mutual Of Omaha Insurance
+	Ncr
+	Nabisco Group Holdings
+	New York Life Insurance
+	New York Times
+	Newell Rubbermaid
+	Nextel Communications
+	Nike
+	Nordstrom
+	Northwest Airlines
+	Office Depot
+	Officemax
+	Oracle
+	Owens Corning
+	Paine Webber Group
+	Pepsico
+	Pfizer
+	Pharmacia & Upjohn
+	Philip Morris
+	Procter & Gamble
+	Providian Financial
+	Prudential Ins. Co. Of America
+	Quaker Oats
+	Qualcomm
+	Quantum
+	Qwest Communications
+	R. J. Reynolds Tobacco
+	Ralston Purina
+	Raytheon
+	Rockwell International
+	Sbc Communications
+	Safeway
+	Saks
+	Sara Lee
+	Seagate Technology
+	Sears Roebuck
+	Servicemaster
+	Sherwin-Williams
+	Shopko Stores
+	Sodexho Marriott Services
+	Southwest Airlines
+	Sprint
+	Staples
+	State Farm Insurance Cos.
+	Sun Microsystems
+	Suntrust Banks
+	Sunoco
+	Supervalu
+	Tandy
+	Target
+	Tenet Healthcare
+	Texaco
+	Texas Instruments
+	Time Warner
+	Times Mirror
+	Toys `R' Us
+	Trans World Airlines
+	Tyson Foods
+	U.S. Bancorp
+	Us Airways Group
+	Us West
+	Ultramar Diamond Shamrock
+	Union Carbide
+	Union Pacific
+	Unisys
+	United Parcel Service
+	Unitedhealth Group
+	Universal
+	Viacom
+	Wal-Mart Stores
+	Walgreen
+	Walt Disney
+	Warner-Lambert
+	Wells Fargo
+	Weyerhaeuser
+	Whirlpool
+	Winn-Dixie Stores
+	Xerox
 
 pragma initial-rule [real-company]

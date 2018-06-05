@@ -22,6 +22,8 @@
 	leaping
 	prancing
 
+pragma export-rule [adjective1]
+
 [adjective2] curious
 	happy
 	lusty
@@ -32,3 +34,5 @@
 	zealous
 	angry
 	vulgar
+
+pragma export-rule [adjective2]

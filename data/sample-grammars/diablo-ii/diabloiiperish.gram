@@ -39,10 +39,7 @@ pragma prefix-with [perishable-type] [bodypart]
 	medium
 	full
 
-[perishable-effect] [perishable-effect-1]
-	[perishable-effect-1]
-	[perishable-effect-1]
-	[perishable-effect-1]
+[perishable-effect] <^4> [perishable-effect-1]
 	[perishable-degree] [perishable-effect-1]
 
 [perishable-effect-1] [restore-effect]

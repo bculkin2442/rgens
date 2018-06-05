@@ -1,10 +1,19 @@
-[fantasy-name] [fantasy+name]
+[fantasy-name] <^6> [fantasy+name]
+	<^2> <&2> [fantasy+name]
+	<&3> [fantasy+name]
 
 pragma initial-rule [fantasy-name]
 
-[fantasy+name] [name-root1] [name-root2]
-	[name-root1] [name-root3]
-	[name-root1] [name-root2] [name-root3]
+[fantasy+name] [name-root1] 
+
+pragma suffix-with [fantasy+name] <&1..2> [name-root2] [name-root3]
+pragma prefix-with [fantasy+name] [hname-root1]
+
+[hname-root1] <^3> {empty}
+	[name-root1] -
+
+[hname-root3] <^3> {empty}
+	- [name-root3]
 
 [name-root1] ag
 	al

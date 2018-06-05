@@ -14,47 +14,21 @@ pragma export-rule [playing-card]
 	spades
 	diamonds
 
-[playing-rank] [rank-two]
-	[rank-three]
-	[rank-four]
-	[rank-five]
-	[rank-six]
-	[rank-seven]
-	[rank-eight]
-	[rank-nine]
-	[rank-ten]
+[playing-rank] <^8> [playing-rank-num]
 	jack
 	king
 	queen
 	ace
 
-[rank-two] 2
-	deuce
-	two
-
-[rank-three] 3
-	three
-
-[rank-four] 4
-	four
-
-[rank-five] 5
-	five
-
-[rank-six] 6
-	six
-
-[rank-seven] 7
-	seven
-
-[rank-eight] 8
-	eight
-
-[rank-nine] 9
-	nine
-
-[rank-ten] 10
-	ten
+[playing-rank-num] [2|deuce|two]
+	[3|three]
+	[4|four]
+	[5|five]
+	[6|six]
+	[7|seven]
+	[8|eight]
+	[9|nine]
+	[10|ten]
 
 [tarot-card] [minor-arcana]
 	[major-arcana]
@@ -75,15 +49,7 @@ pragma export-rule [tarot-card]
 pragma export-rule [major-arcana]
 
 [minor-rank] ace
-	[rank-two]
-	[rank-three]
-	[rank-four]
-	[rank-five]
-	[rank-six]
-	[rank-seven]
-	[rank-eight]
-	[rank-nine]
-	[rank-ten]
+	<^8> [playing-rank-num]
 	knave
 	page
 	jack

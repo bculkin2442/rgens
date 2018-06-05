@@ -1,12 +1,17 @@
-[monster] [monster-kind]
+[monster] <^2> [monster-kind]
 	[monster-prefix] [monster-kind]
 
 pragma initial-rule [monster]
 
-[monster-prefix] were-
+[monster-prefix] [monster-prefix-tail]
+
+pragma prefix-with [monster-prefix] <&1..3> [monster-prefix-head]
+
+[monster-prefix-tail] were-
 	half-
 	quarter-
-	vampire
+
+[monster-prefix-head] vampire
 	giant
 	diseased
 	magic

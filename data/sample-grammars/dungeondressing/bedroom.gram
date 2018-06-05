@@ -13,9 +13,7 @@ pragma initial-rule [bedroom]
 	deserted clearing
 	desert island
 	abandoned crypt
-	[fantasy-location-name]
-	[fantasy-location-name]
-	[fantasy-location-name]
+	<^3> [fantasy-location-name]
 
 [bedroom-bed] king bed with luxury sheets
 	messy pile of wet hay
@@ -26,8 +24,7 @@ pragma initial-rule [bedroom]
 	tropical rope hammock
 	altar
 
-pragma prefix-with [bedroom-bed] [bed-prefix]
-pragma prefix-with [bedroom-bed] [sacred-type]
+pragma prefix-with [bedroom-bed] [bed-prefix] [sacred-type]
 
 [bed-prefix] ruined
 	ancient
@@ -46,21 +43,11 @@ pragma prefix-with [bedroom-bed] [sacred-type]
 	infernal
 	angelic
 
-[bedroom-person] [bed-bones]
-	[bed-bones]
+[bedroom-person] <^2> [bed-bones]
 	jug of moonshine
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
-	[bed-aliveperson]
+	<^8> [bed-aliveperson]
 
-[bedroom-lying] lying [onin] it
+[bedroom-lying] lying [on|in] it
 	draped atop it
 	prostrated before it
 	[tied] to it
@@ -84,17 +71,13 @@ pragma prefix-with [bed-aliveperson] [bed-name]
 [bed-name] [full-name] , a(n)
 	[fantasy-name] , a(n)
 
-[bed-status] [bed-status1]
-	[bed-status2]
-	[bed-status1] [bed-status2]
-	[bed-status2] [bed-status1]
+[bed-status] {empty}
+
+pragma prefix-with [bed-status] [bed-status1] [bed-status2]
 
 [bed-status1] dead
 	decapitated
-	[status-alive]
-	[status-alive]
-	[status-alive]
-	[status-alive]
+	<^4> [status-alive]
 
 [status-alive] unconcious
 	sleeping
@@ -119,13 +102,8 @@ pragma prefix-with [bed-aliveperson] [bed-name]
 	roped
 	shackled
 
-[onin] on
-	in
-
-[bed-bones] [pile] of [bone-status] [bones]
-	[pile] of [bone-status] [bones]
-	[pile] of [bone-status] [part-human] [bones]
-	[pile] of [bone-status] [part-human] [bones]
+[bed-bones] <^2> [pile] of [bone-status] [bones]
+	<^2> [pile] of [bone-status] [part-human] [bones]
 	[blood-puddle]
 
 [pile] pair
@@ -187,11 +165,7 @@ pragma prefix-with [bed-arist] kidnapped
 	mannequin
 	puppet
 
-pragma prefix-with [bed-doll] [sex]
-pragma prefix-with [bed-doll] [realism]
-
-[sex] sex
-	sexy
+pragma prefix-with [bed-doll] [sex|sexy] [realism]
 
 [realism] realistic
 	unrealistic
@@ -224,20 +198,18 @@ pragma prefix-with [bed-slave] [part-human]
 [bed-gender] male
 	female
 
-[part-human] [humanoids]
-	[part-human2]
+[part-human] <^4> [humanoids]
+	<^2> [half-humans]
+	[quarter-humans]
 
 pragma prefix-with [part-human] [bed-gender]
 
-[part-human2] [half-humans]
-	[quarter-humans]
-
-[half-humans] [half-human]
+[half-humans] <^2> [half-human]
 	[half-human] , [half-human]
 
-[quarter-humans] [quarter-human]
-	[quarter-human] , [half-human]
-	[quarter-human] , [quarter-human]
+[quarter-humans] <^4> [quarter-human]
+	<^2> [quarter-human] , [half-human]
+	<^2> [quarter-human] , [quarter-human]
 	[quarter-human] , [quarter-human] , [quarter-human]
 	[quarter-human] , [quarter-human] , [quarter-human] , [quarter-human]
 
@@ -245,10 +217,7 @@ pragma prefix-with [part-human] [bed-gender]
 
 [quarter-human] quarter- [humanoids]
 
-[humanoids] [humanoid]
-	[humanoid]
-	[humanoid]
-	[humanoid]
+[humanoids] <^4> [humanoid]
 	[bed-inhuman]
 
 pragma despace-rule [half-human]
