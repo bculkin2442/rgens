@@ -20,7 +20,7 @@ public class RGrammars {
 
 	private static void loadSet() {
 		try {
-			URI rsc = RGrammarTest.class.getResource("/server-config-sample.cfg").toURI();
+			URI rsc = RGrammarTest.class.getResource("/server-config-sample.gcfg").toURI();
 
 			Map<String, String> env = new HashMap<>();
 			env.put("create", "true");

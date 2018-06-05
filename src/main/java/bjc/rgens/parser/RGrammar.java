@@ -31,6 +31,8 @@ import edu.gatech.gtri.bktree.MutableBkTree;
  * @author EVE
  */
 public class RGrammar {
+	public String name;
+
 	/* The max distance between possible alternate rules. */
 	private static final int MAX_DISTANCE = 6;
 
@@ -50,9 +52,6 @@ public class RGrammar {
 			return DIST.apply(x, y);
 		}
 	}
-
-	/* The pattern for matching the name of a variable. */
-	private static Pattern NAMEVAR_PATTERN = Pattern.compile("\\$(\\w+)");
 
 	/* The rules of the grammar. */
 	private Map<String, Rule> rules;
@@ -163,7 +162,7 @@ public class RGrammar {
 
 		if(rl.doRecur()) {
 			RuleCase start = rules.get(fromRule).getCase(state.rnd);
-			System.err.printf("\tFINE: Generating %s (from %s)\n", start, fromRule);
+			System.err.printf("\tFINE: Generating %s (from %s in %s)\n", start, fromRule, name);
 
 			generateCase(start, state);
 
@@ -266,7 +265,7 @@ public class RGrammar {
 		if (initRule.equals("")) {
 			throw new GrammarException("The empty string is not a valid rule name");
 		} else if (!rules.containsKey(initRule)) {
-			String msg = String.format("No rule '%s' local to this grammar defined.", initRule);
+			String msg = String.format("No rule '%s' local to this grammar (%s) defined.", initRule, name);
 
 			throw new GrammarException(msg);
 		}
@@ -286,7 +285,8 @@ public class RGrammar {
 
 		for (String rname : exportRules) {
 			if (!rules.containsKey(rname)) {
-				String msg = String.format("No rule '%s' local to this grammar defined", initialRule);
+				String msg = String.format("No rule '%s' local to this grammar (%s) defined for export",
+						name, rname);
 
 				throw new GrammarException(msg);
 			}

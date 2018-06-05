@@ -19,7 +19,7 @@ public class RGrammarTest {
 	 * 	Unused CLI args.
 	 */
 	public static void main(String[] args) {
-		URL rsc = RGrammarTest.class.getResource("/server-config-sample.cfg");
+		URL rsc = RGrammarTest.class.getResource("/server-config-sample.gcfg");
 
 		try {
 			/* Load a grammar set. */
