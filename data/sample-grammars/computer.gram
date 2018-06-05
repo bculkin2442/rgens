@@ -29,8 +29,7 @@
 	apl
 	k
 	opencomal
-	[esoteric-language]
-	[esoteric-language]
+	<^2> [esoteric-language]
 
 [esoteric-language] magenta
 	brainfuck

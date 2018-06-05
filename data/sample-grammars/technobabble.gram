@@ -1,14 +1,13 @@
-[technobabble] [part-prefix] [part-suffix] [part-problem]
-	[part-suffix] [part-prefix] [part-problem]
-	[part-prefix] [part-problem]
+[technobabble] [part-clause] [part-problem]
 
+[part-clause] {empty}
+
+pragma prefix-with [part-clause] [part-prefix] [part-suffix]
 pragma initial-rule [technobabble]
 
 pragma suffix-with [technobabble] [part-cause]
 
-[part-cause] the [part-prefix]
-	the [part-suffix]
-	the [part-prefix] [part-suffix]
+[part-cause] the [part-clause]
 
 pragma suffix-with [part-cause] [add-cause]
 

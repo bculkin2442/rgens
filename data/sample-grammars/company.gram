@@ -43,15 +43,12 @@ pragma despace-rule [company-root-city]
 
 pragma despace-rule [company-root-name]
 
-[letter+group] [letters]
-	[letters] & [letters]
+[letter+group] <^4> [letters]
+	<^2> [letters] & [letters]
 	[letters] & [letters] & [letters]
 
-[letters] [letter]
-	[letter]
-	[letter]
-	[letter] [letter]
-	[letter] [letter]
+[letters] <^3> [letter]
+	<^2> [letter] [letter]
 	[letter] [letter] [letter]
 
 pragma despace-rule [letters]

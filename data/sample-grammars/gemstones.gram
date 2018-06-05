@@ -1,19 +1,18 @@
-[gemstones] [gemstone]
-	[gemstone]
-	[gemstone]
+[gemstones] [act-gemstones]
+
+[act-gemstones] <^3> [gemstone]
 	[gemstone-group]
 
 [gemstone-group] pair of [gemstone]
-	[gemstone-sizedesc] pile of [gemstone]
-	[gemstone-sizedesc] hoard of [gemstone]
+	pile of [gemstone]
+	hoard of [gemstone]
+
+pragma prefix-with [gemstone-group] [gemstone-sizedesc]
 
 pragma initial-rule [gemstones]
 pragma suffix-with [gemstones] jewels
 
-[gemstone] [gemstone-1]
-	[gemstone-1]
-	[gemstone-1]
-	[gemstone-1]
+[gemstone] <^4> [gemstone-1]
 	[ds-gem]
 
 [gemstone-1] [common-gem]
@@ -21,14 +20,12 @@ pragma suffix-with [gemstones] jewels
 	[legendary-gem]
 	[epic-gem]
 
+pragma enable-descent [gemstone-1] 2
 pragma export-rule [gemstone]
 
-[gemstone-sizedesc] [size]
-	[gemstone-desc]
-	[size] [gemstone-desc]
-	[gemstone-desc] [size]
+[gemstone-sizedesc] {empty}
 
-pragma prefix-with [gemstone] [gemstone-sizedesc]
+pragma prefix-with [gemstone-sizedesc] [size] [gemstone-desc]
 
 [size] tiny
 	miniscule
@@ -70,25 +67,17 @@ pragma export-rule [common-gem]
 	[quote-commongem] and [quote-commongem] fused together
 	[quote-legendarygem] of poor [extra-deficit]
 
-[extra-deficit] [extra-qualities]
-	[extra-qualities]
-	[extra-qualities]
-	[extra-qualities]
+[extra-deficit] <^4> [extra-qualities]
 	[extra-qualities] but excellent [extra-qualities]
 
-[extra-quality] [extra-qualities]
-	[extra-qualities]
-	[extra-qualities]
-	[extra-qualities]
+[extra-quality] <^4> [extra-qualities]
 	[extra-qualities] but poor [extra-qualities]
 
-[extra-qualities] [extra-quality-part]
-	[extra-quality-part]
-	[extra-quality-part]
+[extra-qualities] <^3> [extra-quality-part]
 	[extra-quality-phrase]
 
-[extra-quality-phrase] [extra-quality-part] and [extra-quality-part]
-	[extra-quality-part] and [extra-quality-part]
+[extra-quality-phrase] <^2> [extra-quality-part] and [extra-quality-part]
+	<^2> [extra-quality-part] and [extra-quality-part]
 	[extra-quality-part] , [extra-quality-part] and [extra-quality-part]
 
 [extra-quality-part] size
@@ -119,10 +108,7 @@ pragma export-rule [rare-gem]
 pragma despace-rule [quote-raregem]
 pragma export-rule [legendary-gem]
 
-[epic-gem] [epic-gem-1]
-	[epic-gem-1]
-	[epic-gem-1]
-	[epic-gem-1]
+[epic-gem] <^4> [epic-gem-1]
 	[ds-gem]
 
 [epic-gem-1] diamond

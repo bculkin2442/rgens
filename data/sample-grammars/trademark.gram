@@ -37,9 +37,7 @@ pragma initial-rule [trademark]
 	cere
 	mor
 
-[trademark+drug] [trademark-drug-fragment] [trademark-drug-suffix]
-	[trademark-drug-fragment] [trademark-drug-suffix]
-	[trademark-drug-fragment] [trademark-drug-suffix]
+[trademark+drug] <^3> [trademark-drug-fragment] [trademark-drug-suffix]
 	[trademark-fragment] [trademark-drug-suffix]
 	[trademark-fragment] [trademark-drug-fragment] [trademark-drug-suffix]
 	[syllable] [trademark-drug-fragment] [trademark-drug-suffix]

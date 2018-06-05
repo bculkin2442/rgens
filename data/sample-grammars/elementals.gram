@@ -1,12 +1,9 @@
-[elemental] elemental
-	elemental
-	elemental
+[elemental] <^3> elemental
 	[other-elementalcreatures]
 	[rs-elementype]
 
 pragma prefix-with [elemental] [elemental-types]
-pragma prefix-with [elemental] [elemental-age]
-pragma prefix-with [elemental] [great-less]
+pragma prefix-with [elemental] [elemental-age] [great-less]
 pragma suffix-with [elemental] [sgreat-less]
 
 pragma initial-rule [elemental]
@@ -36,7 +33,7 @@ pragma initial-rule [elemental]
 	elemental dragon
 	elemental knight
 
-[great-less] lesser
+[act-great-less] lesser
 	greater
 	advanced
 
@@ -57,22 +54,16 @@ pragma initial-rule [elemental]
 	primal
 	eldritch
 
-[elemental-types] [nhelemental-types]
-	[nhelemental-types]
-	[nhelemental-types]
-	[nhelemental-types]
-	[nhelemental-types]
-	[nhelemental-types]
+[elemental-types] <^6> [nhelemental-types]
 	[hybrid-type]
 
-[nhelemental-types] [quote-type]
-	[quote-type]
-	[quote-type] / [quote-type]
+[nhelemental-types] <^4> [quote-type]
+	<^2> [quote-type] / [quote-type]
 	[quote-type] / [quote-type] / [nhelemental-types]
 
 pragma export-rule [elemental-types]
 
-[hybrid-type] hybrid [hybrid-open] and [hybrid-close]
+[hybrid-type] <^2> hybrid [hybrid-open] and [hybrid-close]
 	hybrid [hybrid-open] , [nhelemental-types] and [hybrid-close]
 
 [hybrid-open] ( [nhelemental-types]
@@ -87,20 +78,13 @@ pragma despace-rule [hybrid-close]
 
 pragma despace-rule [quote-type]
 
-[elemental-type] [bare-elemental-type]
-	[bare-elemental-type]
-	[bare-elemental-type]
-	[bare-elemental-type]
-	[elemental-adv] [bare-elemental-type]
-	[elemental-adv] [bare-elemental-type]
+[elemental-type] <^4> [bare-elemental-type]
+	<^2> [elemental-adv] [bare-elemental-type]
 	[elemental-adv] [elemental-adv] [bare-elemental-type]
 
-[bare-elemental-type] [common-element]
-	[common-element]
-	[runescape-elemental]
-	[runescape-elemental]
-	[paraquasi-elemental]
-	[paraquasi-elemental]
+[bare-elemental-type] <^2> [common-element]
+	<^2> [runescape-elemental]
+	<^2> [paraquasi-elemental]
 	[other-elemental]
 
 pragma export-rule [elemental-type]
@@ -205,12 +189,8 @@ pragma export-rule [elemental-adv]
 	blood
 	soul
 
-[paraquasi-elemental] [para-elemental]
-	[para-elemental]
-	[quasi-elemental]
-	[quasi-elemental]
-	[quasi-elemental]
-	[quasi-elemental]
+[paraquasi-elemental] <^2> [para-elemental]
+	<^4> [quasi-elemental]
 	[paraquasi-elemental]
 
 [para-elemental] ice

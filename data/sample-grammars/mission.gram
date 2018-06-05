@@ -211,7 +211,7 @@ pragma initial-rule [mission-statement]
 	supply-chains
 	synergies
 	technologies
-	total {{empty}} quality {{empty}} management
+	total {empty} quality {empty} management
 	version control
 	vision
 	catalysts for [noun]

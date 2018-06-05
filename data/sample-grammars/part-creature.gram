@@ -16,12 +16,8 @@ pragma prefix-with [creature-choice] [abilities]
 pragma initial-rule [full-creature]
 pragma export-rule [creature-choice]
 
-[abilities] [ability]
-	[ability]
-	[ability]
-	[ability]
-	[quote-ability] and [quote-ability]
-	[quote-ability] and [quote-ability]
+[abilities] <^4> [ability]
+	<^2> [quote-ability] and [quote-ability]
 	[quote-ability] , [quote-ability] and [quote-ability]
 
 [quote-ability] ( [ability] )
@@ -60,12 +56,8 @@ pragma despace-rule [eating]
 # @TODO 10/26/17 Ben Culkin :CharacteristicAdditions
 # 	Add more templates and classes to the list
 
-[characteristics] [characteristic]
-	[characteristic]
-	[characteristic]
-	[characteristic]
-	[quote-characteristic] and [quote-characteristic]
-	[quote-characteristic] and [quote-characteristic]
+[characteristics] <^4> [characteristic]
+	<^2> [quote-characteristic] and [quote-characteristic]
 	[quote-characteristic] , [quote-characteristic] and [quote-characteristic]
 
 [quote-characteristic] ( [characteristic] )

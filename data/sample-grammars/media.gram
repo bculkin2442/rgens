@@ -10,14 +10,14 @@ pragma initial-rule [media-company]
 [chan+name] k [chan-name2]
 	w [chan-name2]
 
-[chan-name2] [letter] [letter] [letter] -tv
+[chan-name2] <&3> [letter] -tv
 
 [radio-station] [radio+name] on frequency [radio+chan]
 
 [radio+name] k [radio+name2]
 	w [radio+name2]
 
-[radio+name2] [letter] [letter] [letter] [chan-type]
+[radio+name2] <&3> [letter] [chan-type]
 
 [chan-type] -fm {$chantype=fm}
 	-am {$chantype=am}
@@ -25,11 +25,11 @@ pragma initial-rule [media-company]
 [radio+chan] 9 [radio-9chan]
 	[$chantype-1chan]
 
-[radio-9chan] [digit] . [digit]
+[radio-9chan] [0..9] . [0..9]
 
-[fm-1chan] 1 [digit] [digit] . [digit]
+[fm-1chan] 1 [0..9] [0..9] . [0..9]
 
-[am-1chan] 10 [digit] [digit]
+[am-1chan] 10 [0..9] [0..9]
 
 [newspaper] the [newspaper-pair1] - [newspaper-pair2]
 	the [newspaper-pair1] - [newspaper-pair2] - [newspaper-pair2]
@@ -112,8 +112,7 @@ pragma initial-rule [media-company]
 
 pragma export-rule [newspaper-pair2]
 
-[cardinal] [act-cardinal]
-	[act-cardinal]
+[cardinal] <^2> [act-cardinal]
 	[act-cardinal] by [act-cardinal]
 	[2+cardinal]
 

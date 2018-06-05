@@ -1,5 +1,5 @@
-[mary-sue] she appears to be a normal [normal-desc] . [mary-sue2]
-	she appears to be a normal [normal-desc] [opt-dress] [mary-sue2]
+[mary-sue] She appears to be a normal [normal-desc] . [mary-sue2]
+	She appears to be a normal [normal-desc] [opt-dress] [mary-sue2]
 
 [mary-sue2] She is [desc] and she will fight her enemies with her power to [power-desc] [mary-sue3]
 
@@ -177,7 +177,7 @@ pragma initial-rule [mary-sue]
 	cursed by god
 	traveling through time
 
-[power-desc] [power-1]
+[power-desc] <^2> [power-1]
 	[power-1] and [power-1]
 
 [power-1] [power-p1] [power-p2]
@@ -300,10 +300,9 @@ pragma suffix-with [comp] [comp-weapon]
 [comp-name] [comp-name1]
 	[comp-prefix] [comp-name1]
 
-[comp-prefix] [comp-prefix1]
-	[comp-prefix2]
-	[comp-prefix1] [comp-prefix2]
-	[comp-prefix2] [comp-prefix1]
+[comp-prefix] {empty}
+
+pragma prefix-with [comp-prefix] [comp-prefix1] [comp-prefix2]
 
 [comp-name1] dragon
 	mecha
@@ -437,10 +436,9 @@ pragma suffix-with [comp] [comp-weapon]
 	rapier
 	scissors
 
-[compweap-prefix] [compweap-1]
-	[compweap-2]
-	[compweap-1] [compweap-2]
-	[compweap-2] [compweap-1]
+[compweap-prefix] {empty}
+
+pragma prefix-with [compweap-prefix] [compweap-1] [compweap-2]
 
 [compweap-1] poisoned
 	blessed

@@ -1,19 +1,14 @@
-# @TODO 10/23/17 Ben Culkin :RuneDebug
-#	Something seems to be wrong with this grammar, and I'm not sure as to
-#	the exact details.
-#
-#	The problem is that we are getting multiple runes running together
-#	without an obvious cause.
+[rune-string] {@1rune:=[rune-1]} {@2rune:=[rune-2]} {@3rune:=[rune-3]} [act-rune-string]
 
-[rune-string] [rune-2]
-	[rune-1] [rune-2]
-	[rune-1] [rune-2] [rune-3]
-	[rune-2] [rune-3]
+[act-rune-string] [@2rune]
+	[@1rune] [@2rune]
+	[@1rune] [@2rune] [@3rune]
+	[@2rune] [@3rune]
 
 pragma initial-rule [rune-string]
 
-pragma prefix-with [rune-string] [rune-1]
-pragma suffix-with [rune-string] [rune-3]
+pragma prefix-with [rune-string] [@1rune]
+pragma suffix-with [rune-string] [@3rune]
 
 [rune-1] a dagger plunged into
 	vines growing out of

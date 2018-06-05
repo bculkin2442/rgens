@@ -2,6 +2,7 @@
 	[tarot-card]
 	[complete-many-things]
 	[harrowed-many-things]
+	[alt-tarot-card]
 
 pragma initial-rule [card]
 

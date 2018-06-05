@@ -1,9 +1,6 @@
 [genre-fict] in a [setting] a young [person] stumbles across a(n) [place] [genre-fict2]
 
-# Uncomment me when we're done testing, because this rule takes a while to
-# generate
 pragma initial-rule [genre-fict]
-pragma export-rule  [genre-fict]
 
 [genre-fict2] which spurs him into conflict with [antagonist] [genre-fict3]
 
@@ -91,9 +88,9 @@ pragma export-rule  [genre-fict]
 	humanity’s selfish nature
 	his own insecurity vis-a-vis girls
 
-[female] [female]
-	[female] [fem-suffix]
-	[fem-prefix] [female]
+[female] <^4> [female]
+	<^2> [female] [fem-suffix]
+	<^2> [fem-prefix] [female]
 	[fem-prefix] [female] [fem-suffix]
 
 [fem-prefix] sarcastic

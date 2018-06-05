@@ -15,13 +15,11 @@ pragma initial-rule [college-announcement]
 
 [students] students
 
-pragma prefix-with [students] [course-level]
-pragma prefix-with [students] [course-adj]
+pragma prefix-with [students] [course-level] [course-adj]
 
 [student] student
 
-pragma prefix-with [student] [course-level]
-pragma prefix-with [student] [course-adj]
+pragma prefix-with [student] [course-level] [course-adj]
 
 [popularity] popularity
 	popularity among [students]
@@ -122,8 +120,7 @@ pragma suffix-with [course-level1] [class-year]
 	[course-event] as [course-explored] in [course-group] [course-medium]
 	[university-subject] as [course-explored] in [course-group] [course-medium]
 	[course-impactof]
-	[course-static]
-	[course-static]
+	<^2> [course-static]
 
 [quote-buzzword] ( [course-buzzword2] )
 
@@ -133,24 +130,22 @@ pragma prefix-with [college-course] [course-prefix]
 
 [course-colonending] : [course-ending]
 
-pragma suffix-with [college-course] [course-colonending]
-pragma suffix-with [college-course] [course-suffix]
+pragma suffix-with [college-course] [course-colonending] [course-suffix]
 
 pragma export-rule [college-course]
 
-[course-adjnoun-group] [quote-adjnoun]
-	[quote-adjnoun] and [quote-adjnoun]
+[course-adjnoun-group] <^4> [quote-adjnoun]
+	<^2> [quote-adjnoun] and [quote-adjnoun]
 	[quote-adjnoun] , [quote-adjnoun] and [quote-adjnoun]
 
-[course-disjoin-adjnoungroup] [quote-adjnoun] or [quote-adjnoun]
+[course-disjoin-adjnoungroup] <^2> [quote-adjnoun] or [quote-adjnoun]
 	[quote-adjnoun] , [quote-adjnoun] or [quote-adjnoun]
 
 [quote-adjnoun] ( [course-adjnoun] )
 
 [course-adjnoun] [course-prefixednoun]
 
-pragma prefix-with [course-adjnoun] [course-adj]
-pragma prefix-with [course-adjnoun] [course-adj]
+pragma prefix-with [course-adjnoun] [course-adj] [course-adj]
 
 [condition] condition
 	experience
@@ -244,7 +239,7 @@ pragma prefix-with [course-adjnoun] [course-adj]
 [experience] arts
 	experience
 
-[course-prefixednoun] [course-noun]
+[course-prefixednoun] <^2> [course-noun]
 	post- [course-noun]
 	pre- [course-noun]
 
@@ -386,10 +381,7 @@ pragma prefix-with [course-noun] [course-nounprefix]
 [study] study
 	approach
 
-[course-group] [quote-groups]
-	[quote-groups]
-	[quote-groups]
-	[quote-groups]
+[course-group] <^4> [quote-groups]
 	[quote-political]
 
 [quote-political] " [org-political] "
@@ -495,8 +487,8 @@ pragma suffix-with [of-group] [course-adjnoun]
 [course-life-influence] [course-event]
 	[course-adjnoun-group]
 
-[course-lives] [quote-life]
-	[quote-life] and [quote-life]
+[course-lives] <^4> [quote-life]
+	<^2> [quote-life] and [quote-life]
 	[quote-life] , [quote-life] and [quote-life]
 
 [quote-life] ( [course-life] )

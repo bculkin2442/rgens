@@ -64,9 +64,7 @@ pragma export-rule [zadrons-item]
 	imprisoning
 	messaging
 	bounty
-	[card]
-	[card]
-	[card]
+	<^3> [card]
 
 [crys-sphere] → crystal of [crystal-type]
 	[crys-act]

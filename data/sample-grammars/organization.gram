@@ -1,15 +1,14 @@
 [organization-desc] [org-political]
 
-[org-postfix] (allies of [org-political] )
+[org-postfix] <^3> {empty}
+	(allies of [org-political] )
 	(enemies of [org-political] )
 	(secretly opposed to [org-political] )
 	(secretly in cohorts with [org-political] )
 	(based in [city] )
 	(based in [town-name] )
 
-pragma suffix-with [organization-desc] [org-postfix]
-pragma suffix-with [organization-desc] [org-postfix]
-pragma suffix-with [organization-desc] [org-postfix]
+pragma suffix-with [organization-desc] <&1..3> [org-postfix]
 
 [organization] [org-political]
 
@@ -119,7 +118,7 @@ pragma prefix-with [org-goal] [org-goal-abolish]
 	wealth
 	filthy rich
 
-[min+wage] [9..20] . [digit] [digit]
+[min+wage] [9..20] . [0..9] [0..9]
 
 [protect] bill of rights
 	first amendment

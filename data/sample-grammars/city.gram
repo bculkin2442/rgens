@@ -31,17 +31,17 @@ pragma despace-rule [act-other-city]
 	[first-name]
 	[random-name]
 
-[town-prefix] [cardinal]
-	new
-	new
-	old
-	little
-	fort
-	lower
-	upper
-	san
-	la
-	van
+[town-prefix] <^2> [cardinal]
+	New
+	New
+	Old
+	Little
+	Fort
+	Lower
+	Upper
+	San
+	La
+	Van
 
 [town-suffix] burg
 	ton

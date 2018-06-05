@@ -1,9 +1,9 @@
-[awesome-name] [part]
+[awesome-name] {@parts:=[part]} [@parts]
 
-pragma prefix-with [awesome-name] [part]
-pragma prefix-with [awesome-name] [part]
-pragma suffix-with [awesome-name] [part]
-pragma suffix-with [awesome-name] [part]
+pragma prefix-with [awesome-name] [@parts]
+pragma prefix-with [awesome-name] [@parts]
+pragma suffix-with [awesome-name] [@parts]
+pragma suffix-with [awesome-name] [@parts]
 
 pragma initial-rule [awesome-name]
 

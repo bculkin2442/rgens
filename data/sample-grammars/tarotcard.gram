@@ -1,4 +1,4 @@
-[tarot-card] [adjective-of] [title]
+[alt-tarot-card] [adjective-of] [title]
 	[adjective-of] [title] [adjective]
 	[adjective-of] [title] [adjective] [noun]
 	[adjective-of] [noun] [title]
@@ -13,10 +13,8 @@
 
 pragma initial-rule [tarot-card]
 
-[title] [male-title]
-	[male-title]
-	[female-title]
-	[female-title]
+[title] <^2> [male-title]
+	<^2> [female-title]
 	[misc-title]
 
 [male-title] emperor

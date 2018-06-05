@@ -1,29 +1,22 @@
-[pokeattack] [pokeattack-name]
+[pokeattack] {@oword:=[word-1]} {@tword:=[word-2]} {@ptype:=[poke-type]} [pokeattack-name]
 
-[attack-type] ( [poke-type] type)
-	( [poke-type] / [poke-type] type)
+[attack-type] ( [@ptype] type)
+	( [@ptype] / [@ptype] type)
 
 [attack-pp] ( [5..40] pp )
-
-pragma despace-rule [attack-type]
-pragma despace-rule [attack-pp]
 
 pragma suffix-with [pokeattack] [move-kind]
 pragma suffix-with [pokeattack] [attack-type]
 pragma suffix-with [pokeattack] [attack-pp]
 
-[pokeattack-name] [word-1] [word-1]
-	[word-2] [word-2]
-	[word-1] [word-2]
-	[word-2] [word-1]
-	[word-1] [seperator] [word-1]
-	[word-2] [seperator] [word-2]
-	[word-1] [seperator] [word-2]
-	[word-2] [seperator] [word-1]
-	[word-1] [seperator] [word-1]
-	[word-2] [seperator] [word-2]
-	[word-1] [seperator] [word-2]
-	[word-2] [seperator] [word-1]
+[pokeattack-name] <^2> <&1..2> [@oword] [@oword]
+	<^2> <&1..2> [@tword] [@tword]
+	<^2> [@oword] [@tword]
+	<^2> [@tword] [@oword]
+	[@oword] [seperator] [@oword]
+	[@oword] [seperator] [@tword]
+	[@tword] [seperator] [@oword]
+	[@tword] [seperator] [@tword]
 
 [seperator] -
 	/
@@ -54,16 +47,16 @@ pragma suffix-with [pokeattack] [attack-pp]
 pragma initial-rule [pokeattack]
 pragma export-rule [pokeattack-name]
 
-[word-11] [word-1]
+[word-11] [@oword]
 
 pragma suffix-with [word-11] [seperator]
 
-[word-21] [word-2]
+[word-21] [@tword]
 
 pragma prefix-with [word-21] [seperator]
 
-pragma prefix-with [pokeattack-name] [word-1]
-pragma suffix-with [pokeattack-name] [word-2]
+pragma prefix-with [pokeattack-name] [word-11]
+pragma suffix-with [pokeattack-name] [word-21]
 
 [word-1] acid
 	aerial

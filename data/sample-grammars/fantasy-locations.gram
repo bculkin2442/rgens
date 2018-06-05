@@ -1,7 +1,7 @@
-[fantasy-location-name] [name2]
+[fantasy-location-name] {@oname=[name1]} [name2]
 
-pragma prefix-with [fantasy-location-name] [name1]
-pragma prefix-with [fantasy-location-name] [name1]
+pragma prefix-with [fantasy-location-name] [@oname]
+pragma prefix-with [fantasy-location-name] [@oname]
 
 pragma initial-rule [fantasy-location-name]
 
@@ -27,11 +27,11 @@ pragma initial-rule [fantasy-location-name]
 	drowsy
 	dry
 	dusty
-	[black-color]
+	[ebon|ebony]
 	emerald
 	fleet
 	fire
-	[gold-color]
+	[gold|golden]
 	good
 	grace
 	grand
@@ -46,7 +46,7 @@ pragma initial-rule [fantasy-location-name]
 	holy
 	honey
 	hot
-	[ice-type]
+	[ice|icy]
 	iron
 	ivory
 	lilac
@@ -55,16 +55,16 @@ pragma initial-rule [fantasy-location-name]
 	maple
 	mighty
 	night
-	[oak-type]
+	[oak|oaken]
 	onyx
 	peaceful
 	pearl
 	prancing
 	quartz
 	queens
-	[rain-type]
+	[rain|rainy]
 	red
-	[rose-type]
+	[rose|rosy]
 	royal
 	ruby
 	sable
@@ -76,7 +76,7 @@ pragma initial-rule [fantasy-location-name]
 	shale
 	shining
 	short
-	[silk-type]
+	[silk|silken]
 	silver
 	sleeping
 	small
@@ -207,24 +207,3 @@ pragma initial-rule [fantasy-location-name]
 	way
 	wolf
 	wood
-
-[silk-type] silk
-	silken
-
-[rose-type] rose
-	rosy
-
-[rain-type] rain
-	rainy
-
-[oak-type] oak
-	oaken
-
-[ice-type] ice
-	icy
-
-[black-color] ebon
-	ebony
-
-[gold-color] gold
-	golden

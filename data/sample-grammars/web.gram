@@ -20,14 +20,10 @@ pragma export-rule [big-tld]
 
 [actual+email] [email-initial] @ [email-trailing]
 
-[email-initial] [username]
-	[acronym]
-	[email-alias]
-	[full-name]
-	[username]
-	[acronym]
-	[email-alias]
-	[full-name]
+[email-initial] <^2> [username]
+	<^2> [acronym]
+	<^2> [email-alias]
+	<^2> [full-name]
 	[subdomain-name]
 	[email-misc]
 	[email-initial] + [email-initial]
@@ -99,7 +95,7 @@ pragma export-rule [big-tld]
 	[url-with-path]
 	[url-with-path]
 
-[url-with-path] [url-protocol] :// www.geocities.com/ [neighborhood] / [digit-nonzero] [digit] [digit] [digit] /
+[url-with-path] [url-protocol] :// www.geocities.com/ [neighborhood] / [1..9] [0..9] [0..9] [0..9] /
 	[url-protocol] :// [url-begin] . [acronym] .net/ [url-username] /
 	[url-protocol] :// [url-begin] . [town-name] .net/ [url-username]
 	[url-protocol] :// [subdomain-name] . [acronym] .net/ [url-username]
@@ -175,15 +171,9 @@ pragma export-rule [big-tld]
 	[last-name]
 	[syllable] [syllable]
 
-[tld] com
-	com
-	com
-	com
-	com
-	net
-	net
-	org
-	org
+[tld] <^5> com
+	<^2> net
+	<^2> org
 	edu
 	de
 	ca
@@ -195,8 +185,7 @@ pragma export-rule [big-tld]
 	se
 	no
 
-[big-tld] com
-	com
+[big-tld] <^2> com
 	net
 	org
 
@@ -204,7 +193,7 @@ pragma export-rule [big-tld]
 	[planet]
 	mail
 	www2
-	www [digit]
+	www [0..9]
 	alpha
 	beta
 	gamma
@@ -217,10 +206,10 @@ pragma export-rule [big-tld]
 	[email-initial]
 	[subdomain-name] - [subdomain-name]
 
-[email-misc] 
-	[us-stateadj]
+[email-misc] [us-stateadj]
 	[town-name]
 	[complete-many-things]
+	[minor-arcana]
 	[major-arcana]
 	[trademark+drug]
 	[trademark]

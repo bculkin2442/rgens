@@ -1,7 +1,7 @@
-[isaac-item-name] [noun]
+[isaac-item-name] {@adjs:=[adj]} [noun]
 
 pragma prefix-with [isaac-item-name] [post]
-pragma prefix-with [isaac-item-name] <&1..2> [adj]
+pragma prefix-with [isaac-item-name] <&1..2> [@adjs]
 pragma prefix-with [isaac-item-name] [pre]
 
 pragma suffix-with [isaac-item-name] [end]

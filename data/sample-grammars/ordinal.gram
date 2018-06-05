@@ -3,10 +3,10 @@
 pragma export-rule [ordinal-number]
 
 [actual+ordinal-number] [ordinal-digit]
-	1 [digit] th
-	[digit-twoup] [ordinal-digit]
-	[digit-twoup] [ordinal-digit]
-	[digit-nonzero] [ordinal-number]
+	1 [0..9] th
+	[2..9] [ordinal-digit]
+	[2..9] [ordinal-digit]
+	[1..9] [ordinal-number]
 
 [ordinal-digit] 1st
 	2nd

@@ -1,12 +1,9 @@
-[theory] [plural+last] [theory-suffix]
+[theory] <^2> [plural+last] [theory-suffix]
+	<^2> the [last-name] [theory-suffix]
+	<^3> the [2+last-name] [theory-suffix]
 	[plural+last] [theory-suffix]
-	the [2+last-name] [theory-suffix]
-	the [2+last-name] [theory-suffix]
-	the [2+last-name] [theory-suffix]
 	the [3+last-name] [theory-suffix]
 	[plural+last] [ordinal] [theory-suffix]
-	the [last-name] [theory-suffix]
-	the [last-name] [theory-suffix]
 
 pragma initial-rule [theory]
 

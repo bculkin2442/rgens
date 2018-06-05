@@ -4,11 +4,8 @@ pragma initial-rule [linux-domain]
 
 [actual+linux-domain] [linux-domainname] . [big-tld]
 
-[linux-domainname] [linux-domain1] [linux-domain2]
-	[linux-domain1] [linux-domain2]
-	[linux-domain1] [linux-domain2]
-	[linux-domain1] [linux-domain1]
-	[linux-domain1] [linux-domain1]
+[linux-domainname] <^3> [linux-domain1] [linux-domain2]
+	<^2> [linux-domain1] [linux-domain1]
 	[linux-domain1] [linux-domain1] [linux-domain2]
 	[linux-domain1] [linux-domain1] - [linux-domain2]
 	[linux-domain1] - [linux-domain2]
@@ -583,8 +580,7 @@ pragma export-rule [geek-scifi-book]
 
 [monitor] monitor
 
-pragma prefix-with [monitor] [monitor-resolution]
-pragma prefix-with [monitor] [monitor-type]
+pragma prefix-with [monitor] [monitor-resolution] [monitor-type]
 
 [monitor-resolution] 4k
 	1080p
@@ -604,7 +600,7 @@ pragma prefix-with [monitor] [monitor-type]
 [peripheral-interface] scsi
 	ide
 	parallel
-	[usb]
+	<^3> [usb]
 	firewire 400
 	firewire 800
 	serial
@@ -663,11 +659,7 @@ pragma export-rule [peripheral]
 
 pragma export-rule [freshmeat-url]
 
-[freshmeat+url] http://freshmeat.net/news/ [digit] / [digit] / [freshmeat-group1] / [freshmeat-group2] .html
-
-[freshmeat-group1] [digit] [digit] [digit] [digit]
-
-[freshmeat-group2] [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit] [digit]
+[freshmeat+url] http://freshmeat.net/news/ [0..9] / [0..9] / <&4> [0..9] / <&9> [0..9] .html
 
 [freshmeat-desc] [app-type] [app-suffix]
 	[app-type] [app-suffix] for [freshmeat-for]
@@ -709,61 +701,58 @@ pragma export-rule [freshmeat-desc]
 
 [freshmeat-app] [app-name] [app-version]
 
-[app-name] [app-name-simple]
-	[app-name-simple]
-	[app-name-simple]
+[app-name] <^3> [app-name-simple]
 	[app-name-complex]
 
 pragma export-rule [app-name]
 
 [app-name-simple] [app-name+simple]
 
-[app-name+simple] [acronym]
-	[acronym]
-	[acronym]
-	[app-prefix] [acronym]
-	[app-prefix] [syllable] [letter]
-	[app-prefix] [syllable] 2 [syllable]
-	[acronym]
+[app-name+simple] <^3> [acronym]
+	<^3> [letter-syll]
+	[syllable] 2 [syllable]
 	[letter] [acronym]
 	[random-name]
 	[last-name]
 	[syllable] [syllable]
-	[letter] [syllable]
-	[letter] [letter] [letter]
-	[letter] [letter] [letter] [letter]
-	[letter] [letter] [letter] [letter]
-	[letter] [letter] [letter] [letter]
-	[letter] [letter] [letter] [number-word]
-	[app-prefix] [acronym]
-	[app-prefix] [random-name]
-	[app-prefix] [letter] [letter] [letter] [letter]
+	<&3> [letter]
+	<^4> <&4> [letter]
+	<&3> [letter] [number-word]
+	[random-name]
 	[app-common]
 
-[app-name-complex] [plural+first] [app-type] [app-suffix]
-	[plural+first] [app-suffix]
+[letter-syll] {empty}
+
+pragma prefix-with [letter-syll] [syllable] [letter]
+
+pragma prefix-with [app-name+simple] [app-prefix]
+
+[app-name-complex] [plural+first] [app-type]
+	[plural+first]
+	<^2> [acronym] [app-type]
 	[acronym] [app-type]
-	[acronym] [app-type] [app-suffix]
-	[app-type] [app-suffix]
-	[2+syllable] [app-type] [app-suffix]
-	[random-name] [app-suffix]
-	[app-prefix+letter] [app-suffix]
-	[app-prefix+syllable] [app-type] [app-suffix]
-	[app-common] [app-type] [app-suffix]
+	[app-type]
+	[2+syllable] [app-type]
+	[random-name]
+	[app-prefix+letter]
+	[app-prefix+syllable] [app-type]
+	[app-common] [app-type]
 	[tech-company] [peripheral] [device-type]
-	[buzzword-adjective] [app-suffix]
+	[buzzword-adjective]
 	[plural+first] [buzzword-adjective] [buzzword-noun] [buzzword-job]
 	[acronym] [buzzword-noun]
-	[app-prefix+name] [buzzword-adjective] [buzzword-job] [app-suffix]
+	[app-prefix+name] [buzzword-adjective] [buzzword-job]
 	[random-name] [buzzword-job]
-	[buzzword-adjective] [buzzword-noun] [app-suffix]
+	[buzzword-adjective] [buzzword-noun]
 	[linux-distro]
+
+pragma suffix-with [app-name-complex] [app-suffix]
 
 [device-type] 'WRITE ME'
 
 [app-prefix+name] [app-prefix] [random-name]
 
-[app-prefix+letter] [app-prefix] [letter] [letter] [letter] [letter]
+[app-prefix+letter] [app-prefix] <&4> [letter]
 
 [app-prefix+syllable] [app-prefix] [syllable] [syllable]
 
@@ -885,14 +874,14 @@ pragma export-rule [app-name]
 [app-version] [app+version]
 
 [app+version] 0.0. [1..20] [version-suffix]
-	0. [digit-nonzero] . [0..30]
+	0. [1..9] . [0..30]
 	1.0. [0..30]
-	1. [digit-nonzero] . [0..30] [version-suffix]
-	2. [digit] . [0..30]
-	2. [digit] . [0..30] [version-suffix]
-	[3..9] . [digit] . [0..30]
-	0.0 [digit] [version-suffix]
-	0. [digit]
+	1. [1..9] . [0..30] [version-suffix]
+	2. [0..9] . [0..30]
+	2. [0..9] . [0..30] [version-suffix]
+	[3..9] . [0..9] . [0..30]
+	0.0 [0..9] [version-suffix]
+	0. [0..9]
 	0. [1..99]
 	1.0 [version-suffix]
 	1.00
@@ -900,13 +889,13 @@ pragma export-rule [app-name]
 	1. [1..99] [version-suffix]
 	[2..20] . [1..99] [version-suffix]
 
-[version-suffix] pl [digit]
+[version-suffix] pl [0..9]
 	alpha
 	beta
 	- [1..30]
 	[letter]
-	-ac [digit]
-	-pre [digit]
+	-ac [0..9]
+	-pre [0..9]
 
 [linux-kernel-version] [linux-kernel+version]
 
@@ -914,7 +903,7 @@ pragma export-rule [app-name]
 	2.3. [50..99]
 	2.4.0-pre [1..30]
 	2.4.0-ac [1..30]
-	2.4. [digit]
+	2.4. [0..9]
 	2.5. [0..99]
 	[2..4] . [6..9] . [0..99]
 

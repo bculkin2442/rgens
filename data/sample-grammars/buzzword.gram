@@ -1,4 +1,4 @@
-[buzzword-phrase] [buzzwords]
+[buzzword-phrase] <^2> [buzzwords]
 	[buzzwords] to [buzzwords]
 	[buzzwords] while [buzzwords]
 	[buzzwords] in order to [buzzwords]
@@ -6,9 +6,9 @@
 
 pragma initial-rule [buzzword-phrase]
 
-[buzzwords] [buzzword]
-	[buzzword] [buzzword]
-	[buzzword] and [buzzword]
+[buzzwords] <^4> [buzzword]
+	<^2> [buzzword] [buzzword]
+	<^2> [buzzword] and [buzzword]
 	[buzzword] , [buzzword] and [buzzword]
 
 pragma export-rule [buzzwords]
