@@ -3,6 +3,7 @@ package bjc.rgens.parser;
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -21,11 +22,13 @@ public class GenerationState {
 	/** The rules of the grammar. */
 	public Map<String, Rule> rules;
 	/** The rules imported from other grammars. */
-	public Map<String, RGrammar> importRules;
+	public Map<String, Rule> importRules;
 
 	/** The current set of variables. */
 	public Map<String, String> vars;
-	public Map<String, IPair<RGrammar, Rule>> rlVars;
+	public Map<String, Rule> rlVars;
+
+	private static final Random BASE = new Random();
 
 	/**
 	 * Create a new generation state.
@@ -40,7 +43,7 @@ public class GenerationState {
 	 *            The variables to use.
 	 */
 	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs,
-			Map<String, IPair<RGrammar, Rule>> rvs, RGrammar gram) {
+			Map<String, Rule> rvs, RGrammar gram) {
 		contents = cont;
 		rnd      = rand;
 		vars     = vs;
@@ -50,6 +53,14 @@ public class GenerationState {
 	
 		this.rules = gram.getRules();
 		this.importRules = gram.getImportRules();
+	}
+
+	public static GenerationState fromGrammar(RGrammar gram) {
+		return fromGrammar(BASE, gram);
+	}
+
+	public static GenerationState fromGrammar(Random rand, RGrammar gram) {
+		return new GenerationState(new StringBuilder(), rand, new HashMap<>(), new HashMap<>(), gram);
 	}
 
 	public void swapGrammar(RGrammar gram) {
@@ -73,9 +84,9 @@ public class GenerationState {
 	 * they are importing the rule from, so as to make it clear which rules
 	 * are imported, and which aren't
 	 */
-	public IPair<RGrammar, Rule> findRule(String ruleName, boolean allowImports) {
+	public Rule findRule(String ruleName, boolean allowImports) {
 		if(rules.containsKey(ruleName)) {
-			return new Pair<>(gram, rules.get(ruleName));
+			return rules.get(ruleName);
 		}
 
 		if(allowImports) return findImport(ruleName);
@@ -83,11 +94,9 @@ public class GenerationState {
 		return null;
 	}
 
-	public IPair<RGrammar, Rule> findImport(String ruleName) {
+	public Rule findImport(String ruleName) {
 		if(importRules.containsKey(ruleName)) {
-			RGrammar imp = importRules.get(ruleName);
-
-			return new Pair<>(imp, imp.rules.get(ruleName));
+			return  importRules.get(ruleName);
 		}
 
 		return null;

@@ -58,7 +58,7 @@ public class RGrammar {
 	/* The rules of the grammar. */
 	public Map<String, Rule> rules;
 	/* The rules imported from other grammars. */
-	private Map<String, RGrammar> importRules;
+	private Map<String, Rule> importRules;
 	/* The rules exported from this grammar. */
 	private Set<String> exportRules;
 	/* The initial rule of this grammar. */
@@ -75,6 +75,10 @@ public class RGrammar {
 	 */
 	public RGrammar(Map<String, Rule> ruls) {
 		rules = ruls;
+
+		for(Rule rl : ruls.values()) {
+			rl.belongsTo = this;
+		}
 	}
 
 	/**
@@ -86,7 +90,7 @@ public class RGrammar {
 	 * @param importedRules
 	 *            The set of imported rules to use.
 	 */
-	public void setImportedRules(Map<String, RGrammar> importedRules) {
+	public void setImportedRules(Map<String, Rule> importedRules) {
 		importRules = importedRules;
 	}
 
@@ -131,7 +135,7 @@ public class RGrammar {
 	 * @return A possible string from the grammar.
 	 */
 	public String generate(String startRule, Random rnd, Map<String, String> vars,
-			Map<String, IPair<RGrammar, Rule>> rlVars) {
+			Map<String, Rule> rlVars) {
 		return generate(startRule, new GenerationState(new StringBuilder(), rnd, vars, rlVars, this));
 	}
 
@@ -164,20 +168,13 @@ public class RGrammar {
 		 * We don't search imports, so it will always belong to this
 		 * grammar.
 		 */
-		Rule rl = state.findRule(fromRule, false).getRight();
+		Rule rl = state.findRule(fromRule, false);
+
 		if(rl == null)
 			throw new GrammarException("Could not find rule " + rl.name);
 
-		if(rl.doRecur()) {
-			RuleCase start = rl.getCase(state.rnd);
-			System.err.printf("\tFINE: Generating %s (from %s in %s)\n", start, fromRule, name);
+		rl.generate(state);
 
-			generateCase(start, state);
-
-			rl.endRecur();
-		} else {
-			throw new RecurLimitException("Rule recurrence limit exceeded");
-		}
 		/*
 		 * @NOTE
 		 *
@@ -326,7 +323,7 @@ public class RGrammar {
 		return rules;
 	}
 
-	public Map<String, RGrammar> getImportRules() {
+	public Map<String, Rule> getImportRules() {
 		return importRules;
 	}
 }

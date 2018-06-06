@@ -18,17 +18,17 @@ public class RuleVariableCaseElement extends VariableCaseElement {
 	}
 
 	public void generate(GenerationState state) {
-		IPair<RGrammar, Rule> par = state.findRule(varDef, true);
+		Rule rl = state.findRule(varDef, true);
 
-		if(par == null) {
+		if(rl == null) {
 			throw new GrammarException("Can't create variable referencing non-existent rule " + varDef);
 		}
 		
 		if(exhaust) {
-			par = new Pair<>(par.getLeft(), par.getRight().exhaust());
+			rl = rl.exhaust();
 		}
 
-		state.rlVars.put(varName, par);
+		state.rlVars.put(varName, rl);
 
 		if(exhaust) {
 			System.err.printf("\t\tFINE: Defined exhausted rulevar '%s' ('%s')\n", varName, varDef);

@@ -79,54 +79,20 @@ public abstract class CaseElement {
 
 			//System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
 
-			if (specialBody.matches("\\$\\S+:=\\S+")) {
-				/* Handle expanding variable definitions. */
+			if (specialBody.matches("\\S+:=\\S+")) {
 				String[] parts = specialBody.split(":=");
-
-				if (parts.length != 2) {
-					String msg = "Expanded variables must be a name and a definition, seperated by :=";
-
-					throw new GrammarException(msg);
+				if(parts.length != 2) {
+					throw new GrammarException("Colon variables must have a name and a definition");
 				}
 
-				/* Trim $ */
-				return new ExpVariableCaseElement(parts[0].substring(1), parts[1]);
-			} else if (specialBody.matches("\\$\\S+=\\S+")) {
-				/* Handle regular variable definitions. */
+				return VariableCaseElement.parseVariable(parts[0], parts[1], true);
+			} else if (specialBody.matches("\\S+=\\S+")) {
 				String[] parts = specialBody.split("=");
-
-				if (parts.length != 2) {
-					String msg = "Variables must be a name and a definition, seperated by =";
-
-					throw new GrammarException(msg);
+				if(parts.length != 2) {
+					throw new GrammarException("Variables must have a name and a definition");
 				}
 
-				/* Trim $ */
-				return new LitVariableCaseElement(parts[0].substring(1), parts[1]);
-			} else if (specialBody.matches("\\@\\S+:=\\S+")) {
-				/* Handle exhaustible rule variable definitions. */
-				String[] parts = specialBody.split(":=");
-
-				if (parts.length != 2) {
-					String msg = "Rule variables must be a name and a definition, seperated by =";
-
-					throw new GrammarException(msg);
-				}
-
-				/* Trim $ */
-				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], true);
-			} else if (specialBody.matches("\\@\\S+=\\S+")) {
-				/* Handle rule variable definitions. */
-				String[] parts = specialBody.split("=");
-
-				if (parts.length != 2) {
-					String msg = "Rule variables must be a name and a definition, seperated by =";
-
-					throw new GrammarException(msg);
-				}
-
-				/* Trim $ */
-				return new RuleVariableCaseElement(parts[0].substring(1), parts[1], false);
+				return VariableCaseElement.parseVariable(parts[0], parts[1], false);
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();

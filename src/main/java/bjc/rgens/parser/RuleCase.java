@@ -37,7 +37,7 @@ public abstract class RuleCase {
 	/** The type of this case. */
 	public final CaseType type;
 
-	public String belongsTo;
+	public Rule belongsTo;
 
 	/**
 	 * The list of element values for this case.

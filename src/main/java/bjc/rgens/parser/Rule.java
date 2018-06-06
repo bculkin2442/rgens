@@ -13,6 +13,8 @@ import java.util.Random;
  * @author EVE
  */
 public class Rule {
+	public RGrammar belongsTo;
+
 	/** The name of this grammar rule. */
 	public String name;
 
@@ -83,7 +85,7 @@ public class Rule {
 			throw new NullPointerException("Case must not be null");
 		}
 
-		cse.belongsTo = name;
+		cse.belongsTo = this;
 		cse.debugName = String.format("%s-%d", name, serial);
 		serial += 1;
 
@@ -143,7 +145,7 @@ public class Rule {
 
 		for(IPair<Integer, RuleCase> cse : cases) {
 			RuleCase cs = cse.getRight();
-			cs.belongsTo = name;
+			cs.belongsTo = this;
 			cs.debugName = String.format("%s-%d", name, serial);
 			serial += 1;
 
@@ -203,6 +205,8 @@ public class Rule {
 	public Rule exhaust() {
 		Rule rl = new Rule(name);
 
+		rl.belongsTo = belongsTo;
+
 		rl.cases = cases.exhaustible();
 
 		rl.prob = prob;
@@ -218,5 +222,23 @@ public class Rule {
 		rl.currentRecur = 0;
 
 		return rl;
+	}
+
+	public void generate(GenerationState state) {
+		state.swapGrammar(belongsTo);
+
+		if(doRecur()) {
+			RuleCase cse = getCase(state.rnd);
+
+			System.err.printf("\tFINE: Generating %s (from %s)\n", cse, belongsTo.name);
+
+			belongsTo.generateCase(cse, state);
+
+			endRecur();
+		}
+
+		if(name.contains("+")) {
+			state.contents = new StringBuilder(state.contents.toString().replaceAll("\\s+", ""));
+		}
 	}
 }

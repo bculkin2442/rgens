@@ -1,5 +1,7 @@
 package bjc.rgens.parser.elements;
 
+import bjc.rgens.parser.GrammarException;
+
 public abstract class VariableCaseElement extends CaseElement {
 	public static enum VariableType {
 		NORMAL,
@@ -64,6 +66,19 @@ public abstract class VariableCaseElement extends CaseElement {
 			return String.format("{$%s:=%s}", varName, varDef);
 		} else {
 			return String.format("{$%s=%s}", varName, varDef);
+		}
+	}
+
+	public static CaseElement parseVariable(String varName, String varDef, boolean colon) {
+		if(varName.startsWith("$")) {
+			// Handle normal/expanding variable definitions
+			if(colon) return new ExpVariableCaseElement(varName.substring(1), varDef);
+
+			return new LitVariableCaseElement(varName.substring(1), varDef);
+		} else if(varName.startsWith("@")) {
+			return new RuleVariableCaseElement(varName.substring(1), varDef, colon);
+		} else {
+			throw new GrammarException("Unrecognized declaration sigil " + varName.charAt(0));
 		}
 	}
 }

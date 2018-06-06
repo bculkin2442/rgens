@@ -1,10 +1,13 @@
 package bjc.rgens.parser;
 
+import bjc.rgens.parser.templates.GrammarTemplate;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 
 /**
  * Test for new grammar syntax.
@@ -29,10 +32,34 @@ public class RGrammarTest {
 			for(RGrammarSet gramSet : cfgSet.grammars.values()) {
 				testGrammarSet(gramSet);
 			}
+
+			for(GrammarTemplate template : cfgSet.templates.values()) {
+				testTemplate(template, cfgSet.grammars.get("default"));
+			}
 		} catch (IOException ioex) {
 			ioex.printStackTrace();
 		} catch (URISyntaxException urisex) {
 			urisex.printStackTrace();
+		}
+	}
+
+	private static void testTemplate(GrammarTemplate template, RGrammarSet set) {
+		System.out.printf("Generating for template %s\n", template);
+
+		Random rnd = new Random();
+
+		for(int i = 0; i < 10; i++) {
+			GenerationState state = GenerationState.fromGrammar(rnd, set.exportGrammar);
+
+			template.generate(state);
+
+			String res = state.contents.toString();
+
+			if(res.length() > 120) {
+				System.out.printf("\t\n\tContents: %s\n\t\n", res);
+			} else {
+				System.out.printf("\tContents: %s\n", res);
+			}
 		}
 	}
 

@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import bjc.rgens.parser.templates.GrammarTemplate;
+
 public class ConfigLoader {
 	/**
 	 * Load a grammar set from a configuration file.
@@ -62,7 +64,7 @@ public class ConfigLoader {
 
 					switch(type) {
 					case "load":
-						loadConfigLine(ln, set, cfgParent);
+						loadConfigLine(ln, cfgSet, set, cfgParent);
 						break;
 					default:
 						throw new GrammarException("Unknown config line type " + type);
@@ -91,8 +93,7 @@ public class ConfigLoader {
 		return cfgSet;
 	}
 
-	private static void loadConfigLine(String ln, RGrammarSet set, Path cfgParent) throws IOException {
-
+	private static void loadConfigLine(String ln, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
 		/*
 		 * Get the place where the tag ID ends
 		 */
@@ -134,6 +135,8 @@ public class ConfigLoader {
 
 							BufferedReader fis = Files.newBufferedReader(convPath);
 							GrammarTemplate template = GrammarTemplate.readTemplate(fis);
+							template.belongsTo = cfgSet;
+
 							if(template.name == null) {
 								System.err.printf("\tINFO: Naming unnamed template loaded from %s off config name '%s'\n",
 										convPath, name);
@@ -148,10 +151,10 @@ public class ConfigLoader {
 							long fileTime = endFileTime - startFileTime;
 
 							System.err.printf("\tPERF: Read template %s (from %s) in %d ns (%f s)\n",
-									gram.name, convPath, fileTime, fileTime  / 1000000000.0);
+									template.name, convPath, fileTime, fileTime  / 1000000000.0);
 
 							/* Add grammar to the set. */
-							cfgSet.templates.put(name, gram);
+							cfgSet.templates.put(name, template);
 
 							/*
 							 * @NOTE

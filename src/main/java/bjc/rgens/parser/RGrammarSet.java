@@ -15,14 +15,13 @@ public class RGrammarSet {
 
 	public ConfigSet belongsTo;
 
+	public RGrammar exportGrammar;
+
 	/* Contains all the grammars in this set. */
 	private Map<String, RGrammar> grammars;
 
 	/* Contains all the exported rules from grammars. */
-	private Map<String, RGrammar> exportedRules;
-
-	/* Contains which export came from which grammar. */
-	private Map<String, String> exportFrom;
+	private Map<String, Rule> exportedRules;
 
 	/* Contains which file a grammar was loaded from. */
 	public Map<String, String> loadedFrom;
@@ -36,8 +35,9 @@ public class RGrammarSet {
 
 		exportedRules = new TreeMap<>();
 
-		exportFrom = new HashMap<>();
 		loadedFrom = new HashMap<>();
+
+		exportGrammar = new RGrammar(exportedRules);
 	}
 
 	/**
@@ -68,11 +68,9 @@ public class RGrammarSet {
 		/* Process exports from the grammar. */
 		for (Rule export : gram.getExportedRules()) {
 			if(exportedRules.containsKey(export.name))
-				System.err.printf("WARN: Shadowing rule %s in %s from %s\n", export.name, exportFrom.get(export.name), grammarName);
+				System.err.printf("WARN: Shadowing rule %s in %s from %s\n", export.name, export.belongsTo.name, grammarName);
 
-			exportedRules.put(export.name, gram);
-
-			exportFrom.put(export.name, grammarName);
+			exportedRules.put(export.name, export);
 
 			if(DEBUG)
 				System.err.printf("\t\tDEBUG: %s (%d cases) exported from %s\n", export.name, export.getCases().getSize(), grammarName);
@@ -132,7 +130,7 @@ public class RGrammarSet {
 			throw new IllegalArgumentException(msg);
 		}
 
-		return exportedRules.get(exportName);
+		return exportedRules.get(exportName).belongsTo;
 	}
 
 	/**
@@ -161,7 +159,12 @@ public class RGrammarSet {
 			throw new IllegalArgumentException(msg);
 		}
 
-		return exportFrom.getOrDefault(exportName, "Unknown");
+		String nm = exportedRules.get(exportName).belongsTo.name;
+		if(nm == null) {
+			return "Unknown";
+		}
+
+		return nm;
 	}
 
 	/**

@@ -26,18 +26,18 @@ public abstract class RuleCaseElement extends StringCaseElement {
 	protected void doGenerate(String actName, GenerationState state) {
 		GenerationState newState = state.newBuf();
 
-		IPair<RGrammar, Rule> par;
+		Rule rl;
 
 		if (actName.startsWith("[^")) {
 			actName = "[" + actName.substring(2);
 
-			par = state.findImport(actName);
+			rl = state.findImport(actName);
 		} else {
-			par = state.findRule(actName, true);
+			rl = state.findRule(actName, true);
 		}
 
-		if(par != null) {
-			RGrammar destGrammar = par.getLeft();
+		if(rl != null) {
+			RGrammar destGrammar = rl.belongsTo;
 			newState.swapGrammar(destGrammar);
 			String res = destGrammar.generate(actName, newState);
 

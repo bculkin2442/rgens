@@ -19,29 +19,14 @@ public class RuleVarRefCaseElement extends StringCaseElement {
 			throw new GrammarException("No rule variable named " + val);
 		}
 
-		IPair<RGrammar, Rule> par = state.rlVars.get(val);
+		Rule rl = state.rlVars.get(val);
 
 		GenerationState newState = state.newBuf();
-		newState.swapGrammar(par.getLeft());
 
-		if(par.getRight().doRecur()) {
-			RuleCase cse = par.getRight().getCase(state.rnd);
-			System.err.printf("\tFINE: Generating %s (from %s)\n", cse, par.getRight().name);
-
-			par.getLeft().generateCase(cse, newState);
-
-			par.getRight().endRecur();
-		} else {
-			throw new RecurLimitException("Rule recurrence limit exceeded");
-		}
+		rl.generate(newState);
 
 		String res = newState.contents.toString();
 
-		if (par.getRight().name.contains("+")) {
-			/* Rule names with pluses in them get space-flattened */
-			state.contents.append(res.replaceAll("\\s+", ""));
-		} else {
-			state.contents.append(res);
-		}
+		state.contents.append(res);
 	}
 }

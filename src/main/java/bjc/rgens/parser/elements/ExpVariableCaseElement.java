@@ -18,10 +18,10 @@ public class ExpVariableCaseElement extends VariableCaseElement {
 	public void generate(GenerationState state) {
 		GenerationState newState = state.newBuf();
 
-		IPair<RGrammar, Rule> par = state.findRule(varDef, true);
+		Rule rl = state.findRule(varDef, true);
 
-		if(par != null) {
-			RGrammar destGrammar = par.getLeft();
+		if(rl != null) {
+			RGrammar destGrammar = rl.belongsTo;
 			newState.swapGrammar(destGrammar);
 			String res = destGrammar.generate(varDef, state);
 
