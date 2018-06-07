@@ -48,6 +48,7 @@ pragma export-rule [tarot-card]
 	[major-arcana2]
 
 pragma export-rule [major-arcana]
+pragma export-rule [minor-arcana]
 
 [minor-rank] ace
 	<^8> [playing-rank-num]

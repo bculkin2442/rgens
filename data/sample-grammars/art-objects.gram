@@ -1,6 +1,6 @@
-[act-art-treasure-group] {@atreasure:=[art-treasure]} [art-treasure-group]
+[art-treasure-group] {@atreasure:=[art-treasure]} [act-art-treasure-group]
 
-[art-treasure-group] <^4> [@atreasure]
+[act-art-treasure-group] <^4> [@atreasure]
 	<^2> a choice between [@atreasure] and [@atreasure]
 	<^2> [@atreasure] as well as [@atreasure]
 	<^2> [@atreasure] atop [@atreasure]

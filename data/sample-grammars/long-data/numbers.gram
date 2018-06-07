@@ -1,4 +1,4 @@
-[binary-digit] [0-1]
+[binary-digit] 0
 	1
 
 pragma export-rule [binary-digit]

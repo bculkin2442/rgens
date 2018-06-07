@@ -1,13 +1,15 @@
-[pokeattack] {@oword:=[word-1]} {@tword:=[word-2]} {@ptype:=[poke-type]} [pokeattack-name]
+[pokeattack] {@oword:=[word-1]} {@tword:=[word-2]} {@ptype:=[poke-type]} [act-pokeattack]
+
+[act-pokeattack] [pokeattack-name]
 
 [attack-type] ( [@ptype] type)
 	( [@ptype] / [@ptype] type)
 
 [attack-pp] ( [5..40] pp )
 
-pragma suffix-with [pokeattack] [move-kind]
-pragma suffix-with [pokeattack] [attack-type]
-pragma suffix-with [pokeattack] [attack-pp]
+pragma suffix-with [act-pokeattack] [move-kind]
+pragma suffix-with [act-pokeattack] [attack-type]
+pragma suffix-with [act-pokeattack] [attack-pp]
 
 [pokeattack-name] <^2> <&1..2> [@oword] [@oword]
 	<^2> <&1..2> [@tword] [@tword]

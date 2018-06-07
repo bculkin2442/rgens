@@ -1,17 +1,7 @@
-[user-role] student
-	student
-	student
-	student
-	student
-	tutor
-	tutor
-	tutor
-	tutor
-	staff
-	staff
-	staff
-	admin
-	admin
+[user-role] <^5> student
+	<^4> tutor
+	<^3> staff
+	<^2> admin
 	sysadmin
 
 pragma export-rule [user-role]
@@ -29,9 +19,7 @@ pragma export-rule [dept-id]
 
 [synth+deptid] [letter]
 
-pragma suffix-with [synth+deptid] [letter]
-pragma suffix-with [synth+deptid] [letter]
-pragma suffix-with [synth+deptid] [letter]
+pragma suffix-with [synth+deptid] <&1..3> [letter]
 
 [user-idno] [act-user+idno]
 
@@ -40,7 +28,7 @@ pragma export-rule [user-idno]
 [act-user+idno] 800 [idno-chain]
 	700 [idno-chain]
 
-[idno-chain] [digit] [digit] [digit] [digit] [digit] [digit]
+[idno-chain] <&5> [digit]
 
 [term-code] [2000..2040] 0 [1..9]
 	[2000..2040] [10..12]
@@ -48,7 +36,7 @@ pragma export-rule [user-idno]
 pragma despace-rule [term-code]
 pragma export-rule [term-code]
 
-[section-code] [letter] [0..9] [0..9]
+[section-code] [letter] <&2> [0..9]
 
 pragma despace-rule [section-code]
 pragma export-rule [section-code]

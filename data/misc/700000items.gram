@@ -1,8 +1,10 @@
-[isaac-item-name] {@adjs:=[adj]} [noun]
+[isaac-item-name] {@adjs:=[adj]} [act-isaac-item-name]
 
-pragma prefix-with [isaac-item-name] [post]
-pragma prefix-with [isaac-item-name] <&1..2> [@adjs]
-pragma prefix-with [isaac-item-name] [pre]
+[act-isaac-item-name] [noun]
+
+pragma prefix-with [act-isaac-item-name] [post]
+pragma prefix-with [act-isaac-item-name] <&1..2> [@adjs]
+pragma prefix-with [act-isaac-item-name] [pre]
 
 pragma suffix-with [isaac-item-name] [end]
 

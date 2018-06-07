@@ -33,7 +33,7 @@ pragma initial-rule [elemental]
 	elemental dragon
 	elemental knight
 
-[act-great-less] lesser
+[great-less] lesser
 	greater
 	advanced
 

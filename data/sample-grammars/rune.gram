@@ -7,8 +7,8 @@
 
 pragma initial-rule [rune-string]
 
-pragma prefix-with [rune-string] [@1rune]
-pragma suffix-with [rune-string] [@3rune]
+pragma prefix-with [act-rune-string] [@1rune]
+pragma suffix-with [act-rune-string] [@3rune]
 
 [rune-1] a dagger plunged into
 	vines growing out of

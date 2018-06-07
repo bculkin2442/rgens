@@ -1,7 +1,8 @@
-[fantasy-location-name] {@oname=[name1]} [name2]
+[fantasy-location-name] {@oname=[name1]} [act-fantasy-location-name]
 
-pragma prefix-with [fantasy-location-name] [@oname]
-pragma prefix-with [fantasy-location-name] [@oname]
+[act-fantasy-location-name] [name2]
+
+pragma prefix-with [act-fantasy-location-name] <&1..2> [@oname]
 
 pragma initial-rule [fantasy-location-name]
 
