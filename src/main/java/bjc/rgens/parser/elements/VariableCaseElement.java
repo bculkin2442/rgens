@@ -21,7 +21,7 @@ public abstract class VariableCaseElement extends CaseElement {
 	public final VariableType varType;
 
 	public VariableCaseElement(String name, String def, VariableType varType) {
-		super(ElementType.VARIABLE);
+		super(false);
 
 		varName = name;
 		varDef = def;
@@ -58,15 +58,6 @@ public abstract class VariableCaseElement extends CaseElement {
 		} else if (!varName.equals(other.varName))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		if (type == ElementType.VARIABLE) {
-			return String.format("{$%s:=%s}", varName, varDef);
-		} else {
-			return String.format("{$%s=%s}", varName, varDef);
-		}
 	}
 
 	public static CaseElement parseVariable(String varName, String varDef, boolean colon) {

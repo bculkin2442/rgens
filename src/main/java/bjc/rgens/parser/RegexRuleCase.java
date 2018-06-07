@@ -6,31 +6,22 @@ import bjc.utils.funcdata.IList;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+/*
+ * @TODO
+ *
+ * Actually implement this
+ */
 public class RegexRuleCase extends RuleCase {
-	private Pattern patt;
+	public RegexRuleCase(IList<CaseElement> elements) {
+		super(elements);
 
-	public RegexRuleCase(IList<CaseElement> elements, String pattern) {
-		super(CaseType.REGEX, elements);
-
-		elementList = elements;
-
-		try {
-			patt = Pattern.compile(pattern);
-		} catch (PatternSyntaxException psex) {
-			IllegalArgumentException iaex = 
-				new IllegalArgumentException("This type requires a valid regular expression parameter");
-
-			iaex.initCause(psex);
-
-			throw iaex;
-		}
-	}
-
-	public Pattern getPattern() {
-		return patt;
 	}
 
 	public void generate(GenerationState state) {
 
+	}
+
+	public RegexRuleCase withElements(IList<CaseElement> elements) {
+		return new RegexRuleCase(elements);
 	}
 }

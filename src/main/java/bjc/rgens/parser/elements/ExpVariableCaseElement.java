@@ -23,16 +23,12 @@ public class ExpVariableCaseElement extends VariableCaseElement {
 		if(rl != null) {
 			RGrammar destGrammar = rl.belongsTo;
 			newState.swapGrammar(destGrammar);
-			String res = destGrammar.generate(varDef, state);
-
-			/*
-			 * @NOTE
-			 *
-			 * :Postprocessing
-			 *
-			 * This is because generate() returns a processed
-			 * string, but modifies the passed in StringBuilder.
+			/* 
+			 * Don't post-process the string, we should only do that
+			 * once.
 			 */
+			String res = destGrammar.generate(varDef, state, false);
+
 			newState.contents = new StringBuilder(res);
 		} else {
 			String msg = String.format("No rule '%s' defined", varDef);

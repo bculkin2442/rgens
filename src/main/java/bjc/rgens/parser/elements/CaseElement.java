@@ -1,5 +1,7 @@
 package bjc.rgens.parser.elements;
 
+import bjc.utils.funcutils.StringUtils;
+
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 
@@ -32,7 +34,11 @@ public abstract class CaseElement {
 	}
 
 	/** The type of this element. */
-	public final ElementType type;
+	public boolean spacing;
+
+	protected CaseElement() {
+		this(true);
+	}
 
 	/**
 	 * Create a new case element.
@@ -40,13 +46,8 @@ public abstract class CaseElement {
 	 * @param typ
 	 *            The type of this element.
 	 */
-	protected CaseElement(ElementType typ) {
-		type = typ;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Unknown type '%s'", type);
+	protected CaseElement(boolean spacing) {
+		this.spacing = spacing;
 	}
 
 	/**
@@ -70,14 +71,12 @@ public abstract class CaseElement {
 			throw new NullPointerException("Case part cannot be null");
 		}
 
-		if (csepart.matches("\\{[^}]+\\}")) {
+		if (csepart.matches("\\{\\S+\\}")) {
 			/*
 			 * Handle special case elements.
 			 *
 			 */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
-
-			//System.out.printf("\t\tTRACE: special body is '%s'\n", specialBody);
 
 			if (specialBody.matches("\\S+:=\\S+")) {
 				String[] parts = specialBody.split(":=");
@@ -99,7 +98,7 @@ public abstract class CaseElement {
 			} else {
 				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
 			}
-		} else if (csepart.matches("\\[[^\\]]+\\]")) {
+		} else if (csepart.matches("\\[\\S+\\]")) {
 			String rawCase = csepart.substring(1, csepart.length() - 1);
 
 			if (rawCase.matches("\\d+\\.\\.\\d+")) {
@@ -107,23 +106,17 @@ public abstract class CaseElement {
 				int secondNum = Integer.parseInt(rawCase.substring(rawCase.lastIndexOf('.') + 1));
 
 				return new RangeCaseElement(firstNum, secondNum);
-			} else if(rawCase.contains("|")) {
-				String[] elms = rawCase.split("\\|");
-
-				System.err.printf("\t\tTRACE: Split inline cases %s to ", rawCase);
-				for(String elm : elms) {
-					System.err.printf("%s, ", elm);
-				}
-				System.err.println();
+			} else if(rawCase.contains("||")) {
+				String[] elms = StringUtils.levelSplit(rawCase, "||").toArray(new String[0]);
+				//String[] elms = rawCase.split("\\|\\|");
 
 				return new InlineRuleCaseElement(elms);
+			} else if(rawCase.contains("|")) {
+				System.err.println("\t\tWARN: Inline rule using | found, they use || now");
+
+				String[] elms = StringUtils.levelSplit(rawCase, "|").toArray(new String[0]);
+				return new InlineRuleCaseElement(elms);
 			} else if(csepart.contains("$")) {
-				/*
-				 * @NOTE
-				 *
-				 * Once the rule element execution has been refactored,
-				 * pass rawCase instead.
-				 */
 				if(csepart.contains("-")) {
 					return new DependantRuleReference(csepart);
 				}
@@ -135,7 +128,7 @@ public abstract class CaseElement {
 			} else {
 				return new NormalRuleReference(csepart);
 			}
-		} else if(csepart.startsWith("%")) {
+		} else if(csepart.startsWith("%") && !csepart.equals("%")) {
 			String rName = String.format("[%s]", csepart.substring(1));
 
 			System.err.printf("\t\tTRACE: short ref to %s (%s)\n", rName, csepart);
@@ -150,7 +143,7 @@ public abstract class CaseElement {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + (spacing ? 0 : 2);
 		return result;
 	}
 
@@ -163,7 +156,7 @@ public abstract class CaseElement {
 		if (getClass() != obj.getClass())
 			return false;
 		CaseElement other = (CaseElement) obj;
-		if (type != other.type)
+		if (spacing != other.spacing)
 			return false;
 		return true;
 	}

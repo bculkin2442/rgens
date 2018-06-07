@@ -9,7 +9,7 @@ public class SerialCaseElement extends CaseElement {
 	public final int upper;
 
 	public SerialCaseElement(CaseElement rep, int lower, int upper)  {
-		super(rep.type);
+		super(rep.spacing);
 
 		this.rep = rep;
 
@@ -23,7 +23,7 @@ public class SerialCaseElement extends CaseElement {
 		for(int i = 0; i < num; i++) {
 			rep.generate(state);
 
-			if(rep.type.spacing)
+			if(rep.spacing)
 				state.contents.append(" ");
 		}
 	}

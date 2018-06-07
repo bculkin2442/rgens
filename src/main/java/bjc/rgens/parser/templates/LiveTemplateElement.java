@@ -20,7 +20,7 @@ public class LiveTemplateElement extends TemplateElement {
 	public final List<List<CaseElement>> elements;
 
 	public LiveTemplateElement(String val) {
-		super(ElementType.TEMPLATE);
+		super(true);
 
 		elements = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class LiveTemplateElement extends TemplateElement {
 			for(CaseElement elm : elmList) {
 				elm.generate(state);
 
-				if(doSpacing && elm.type.spacing)
+				if(doSpacing && elm.spacing)
 					state.contents.append(" ");
 			}
 		}

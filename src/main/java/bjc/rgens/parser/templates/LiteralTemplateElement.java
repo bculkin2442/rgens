@@ -6,7 +6,7 @@ public class LiteralTemplateElement extends TemplateElement {
 	public final String val;
 
 	public LiteralTemplateElement(String val) {
-		super(ElementType.LITERAL);
+		super(true);
 
 		this.val = val;
 	}

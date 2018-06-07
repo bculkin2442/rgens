@@ -39,16 +39,11 @@ public abstract class RuleCaseElement extends StringCaseElement {
 		if(rl != null) {
 			RGrammar destGrammar = rl.belongsTo;
 			newState.swapGrammar(destGrammar);
-			String res = destGrammar.generate(actName, newState);
-
-			/*
-			 * @NOTE
-			 *
-			 * :Postprocessing
-			 *
-			 * This is because generate() returns a processed
-			 * string, but modifies the passed in StringBuilder.
+			/* 
+			 * Don't postprocess the string, we should only do that
+			 * once.
 			 */
+			String res = destGrammar.generate(actName, newState, false);
 			newState.contents = new StringBuilder(res);
 		} else {
 			/*

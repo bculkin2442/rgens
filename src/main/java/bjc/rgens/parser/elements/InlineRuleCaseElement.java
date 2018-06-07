@@ -3,23 +3,38 @@ package bjc.rgens.parser.elements;
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
 
+import bjc.utils.data.IPair;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+import bjc.utils.gen.WeightedRandom;
 
 public class InlineRuleCaseElement extends CaseElement {
-	public final IList<CaseElement> elements;
+	public final WeightedRandom<CaseElement> elements;
 
-	public InlineRuleCaseElement(String... elements) {
-		this(RGrammarParser.parseElementString(elements).getLeft());
-	}
+	public InlineRuleCaseElement(String... parts) {
+		super(true);
 
-	public InlineRuleCaseElement(IList<CaseElement> elements) {
-		super(ElementType.RULEREF);
+		this.elements = new WeightedRandom<>();
 
-		this.elements = elements;
+		for(String part : parts) {
+			String[] partArr;
+
+			if(part.contains("|")) {
+				partArr = part.split("\\|");
+			} else {
+				partArr = new String[] {part};
+			}
+
+			IPair<IList<CaseElement>, Integer> par = RGrammarParser.parseElementString(partArr);
+			int prob = par.getRight();
+
+			for(CaseElement elm :par.getLeft()) {
+				elements.addProbability(prob, elm);
+			}
+		}
 	}
 
 	public void generate(GenerationState state) {
-		elements.randItem(state.rnd::nextInt).generate(state);
+		elements.generateValue(state.rnd).generate(state);
 	}
 }

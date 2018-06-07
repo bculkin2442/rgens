@@ -6,7 +6,7 @@ import bjc.rgens.parser.elements.CaseElement;
 
 public class FlatRuleCase extends RuleCase {
 	public FlatRuleCase(IList<CaseElement> elms) {
-		super(CaseType.SPACEFLATTEN, elms);
+		super(elms);
 	}
 
 	@Override
@@ -14,6 +14,10 @@ public class FlatRuleCase extends RuleCase {
 		for(CaseElement elm : elementList) {
 			elm.generate(state);
 		}
+	}
+
+	public FlatRuleCase withElements(IList<CaseElement> elms) {
+		return new FlatRuleCase(elms);
 	}
 }
 

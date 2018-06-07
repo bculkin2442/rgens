@@ -9,8 +9,6 @@ import bjc.utils.funcdata.IList;
 import bjc.utils.funcutils.ListUtils;
 import bjc.utils.funcutils.SetUtils;
 
-import static bjc.rgens.parser.RuleCase.CaseType.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -166,10 +164,12 @@ public class RGrammarBuilder {
 
 		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
 		for (IPair<Integer, RuleCase> ruleCase : caseList) {
+			RuleCase cas = ruleCase.getRight();
+
 			for(List<CaseElement> suffixList : suffixLists) {
 				FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
-				for(CaseElement elm : ruleCase.getRight().getElements()) {
+				for(CaseElement elm : cas.elementList) {
 					newCase.add(elm);
 				}
 
@@ -177,13 +177,7 @@ public class RGrammarBuilder {
 					newCase.add(element);
 				}
 
-				/*
-				 * @NOTE :AffixCasing
-				 *
-				 * Is this correct, or should we be mirroring the
-				 * existing case type?
-				 */
-				newCases.add(new Pair<>(ruleCase.getLeft(), new NormalRuleCase(newCase)));
+				newCases.add(new Pair<>(ruleCase.getLeft(), cas.withElements(newCase)));
 			}
 		}
 
@@ -228,6 +222,8 @@ public class RGrammarBuilder {
 
 		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
 		for (IPair<Integer, RuleCase> ruleCase : caseList) {
+			RuleCase cas = ruleCase.getRight();
+
 			for(List<CaseElement> prefixList : prefixLists) {
 				FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
@@ -235,17 +231,11 @@ public class RGrammarBuilder {
 					newCase.add(elm);
 				}
 
-				for(CaseElement elm : ruleCase.getRight().getElements()) {
+				for(CaseElement elm :cas.elementList) {
 					newCase.add(elm);
 				}
 
-				/*
-				 * @NOTE :AffixCasing
-				 *
-				 * Is this correct, or should we be mirroring the
-				 * existing case type?
-				 */
-				newCases.add(new Pair<>(ruleCase.getLeft(), new NormalRuleCase(newCase)));
+				newCases.add(new Pair<>(ruleCase.getLeft(), cas.withElements(newCase)));
 			}
 		}
 
@@ -269,7 +259,7 @@ public class RGrammarBuilder {
 		IList<IPair<Integer, RuleCase>> newCaseList = new FunctionalList<>();
 
 		for(IPair<Integer, RuleCase> cse : caseList) {
-			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().getElements())));
+			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().elementList)));
 		}
 
 		System.err.printf("\t\tTRACE: Despacing %d cases of rule %s\n", caseList.getSize(), ruleName);

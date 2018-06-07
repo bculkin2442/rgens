@@ -6,7 +6,7 @@ import bjc.rgens.parser.elements.CaseElement;
 
 public class NormalRuleCase extends RuleCase {
 	public NormalRuleCase(IList<CaseElement> elms) {
-		super(CaseType.NORMAL, elms);
+		super(elms);
 	}
 
 	@Override
@@ -14,9 +14,13 @@ public class NormalRuleCase extends RuleCase {
 		for(CaseElement elm : elementList) {
 			elm.generate(state);
 
-			if(elm.type.spacing) {
+			if(elm.spacing) {
 				state.contents.append(" ");
 			}
 		}
+	}
+
+	public NormalRuleCase withElements(IList<CaseElement> elms) {
+		return new NormalRuleCase(elms);
 	}
 }

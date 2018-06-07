@@ -1,7 +1,6 @@
 package bjc.rgens.parser;
 
-import bjc.rgens.parser.elements.CaseElement;
-import bjc.rgens.parser.elements.SerialCaseElement;
+import bjc.rgens.parser.elements.*;
 
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
@@ -475,7 +474,9 @@ public class RGrammarParser {
 		int serialLower = -1;
 		int serialUpper = -1;
 
+		int chance = -1;
 		boolean doSerial = false;
+		boolean doChance = false;
 
 		for (String csepart : cses) {
 			String partToAdd = csepart.trim();
@@ -493,6 +494,34 @@ public class RGrammarParser {
 				serialUpper = Integer.parseInt(partToAdd.substring(partToAdd.lastIndexOf(".") + 1, partToAdd.length() - 1));
 
 				doSerial = true;
+			} else if(partToAdd.matches("\\<\\?\\d+\\>")) {
+				chance = Integer.parseInt(partToAdd.substring(2, partToAdd.length() - 1));
+
+				doChance = true;
+			} else if (partToAdd.matches("\\<\\<\\>")) {
+				CaseElement elm = caseParts.popLast();
+
+				if(repCount == 0) {
+					/* Skip no-reps */
+				} else {
+					if(doChance) {
+						elm = new ChanceCaseElement(elm, chance);
+
+						doChance = false;
+					}
+
+					if(doSerial) {
+						elm = new SerialCaseElement(elm, serialLower, serialUpper);
+
+						doSerial = false;
+					}
+
+					for(int i = 1; i <= repCount; i++) {
+						caseParts.add(elm);
+					}
+
+					repCount = 1;
+				}
 			} else if(partToAdd.matches("\\<[^\\>]+\\>")) {
 				throw new GrammarException("Unknown parser meta-rule " + partToAdd);
 			} else {
@@ -500,14 +529,23 @@ public class RGrammarParser {
 
 				if(repCount == 0) {
 					/* Skip no-reps */
-				} else if(doSerial) {
-					caseParts.add(new SerialCaseElement(elm, serialLower, serialUpper));
-
-					doSerial = false;
 				} else {
+					if(doChance) {
+						elm = new ChanceCaseElement(elm, chance);
+
+						doChance = false;
+					}
+
+					if(doSerial) {
+						elm = new SerialCaseElement(elm, serialLower, serialUpper);
+
+						doSerial = false;
+					}
+
 					for(int i = 1; i <= repCount; i++) {
 						caseParts.add(elm);
 					}
+
 				}
 
 				repCount = 1;

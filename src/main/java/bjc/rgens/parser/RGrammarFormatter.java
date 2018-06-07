@@ -89,7 +89,7 @@ public class RGrammarFormatter {
 	/* Format a case. */
 	private static void processCase(RuleCase cse, StringBuilder sb) {
 		/* Process each element, adding a space. */
-		for (CaseElement element : cse.getElements()) {
+		for (CaseElement element : cse.elementList) {
 			sb.append(element.toString());
 			sb.append(" ");
 		}

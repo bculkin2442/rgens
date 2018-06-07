@@ -10,8 +10,11 @@ import bjc.rgens.parser.elements.RangeCaseElement;
 import bjc.rgens.parser.elements.RuleCaseElement;
 import bjc.rgens.parser.elements.VariableCaseElement;
 
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -25,6 +28,8 @@ import edu.gatech.gtri.bktree.BkTreeSearcher.Match;
 import edu.gatech.gtri.bktree.Metric;
 import edu.gatech.gtri.bktree.MutableBkTree;
 
+import static bjc.utils.data.IPair.pair;
+
 /**
  * Represents a randomized grammar.
  *
@@ -34,6 +39,11 @@ public class RGrammar {
 	public RGrammarSet belongsTo;
 
 	public String name;
+
+	public List<IPair<String, String>> postprocs;
+
+	private static final List<IPair<String, String>> builtinPostprocs;
+	public boolean useBuiltinPostprocs = true;
 
 	/* The max distance between possible alternate rules. */
 	private static final int MAX_DISTANCE = 6;
@@ -67,6 +77,43 @@ public class RGrammar {
 	/* The tree to use for finding rule suggestions. */
 	private BkTreeSearcher<String> ruleSearcher;
 
+	static {
+		/* Collapse duplicate spaces */
+		IPair<String, String> collapseDupSpaces = pair("\\s+", " ");
+
+		/* Built-in post-processing steps */
+		builtinPostprocs = Arrays.asList(
+				collapseDupSpaces,
+
+				/* 
+				 * Remove extraneous spaces around punctuation
+				 * marks, forced by the way the language syntax
+				 * works.
+				 *
+				 * This can be done in grammars, but it is quite
+				 * tedious to do so.
+				 */
+
+
+				/* Handle 's */
+				pair(" 's ", "'s "),
+				/* Handle opening/closing punctuation. */
+				pair("([(\\[]) ", " $1"),
+				pair(" ([)\\]'\"])", "$1 "),
+				/* Remove spaces around series of opening/closing punctuation. */
+				pair("([(\\[])\\s+([(\\[])", "$1$2"),
+				pair("([)\\]])\\s+([)\\]])", "$1$2"),
+				/* Handle inter-word punctuation. */
+				pair(" ([,:.!])", "$1 "),
+				/* Handle intra-word punctuation. */
+				pair("\\s?([-/])\\s?", "$1"),
+
+				collapseDupSpaces,
+
+				/* Replace this once it is no longer needed. */
+				pair("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1")
+				);
+	}
 	/**
 	 * Create a new randomized grammar using the specified set of rules.
 	 *
@@ -79,6 +126,8 @@ public class RGrammar {
 		for(Rule rl : ruls.values()) {
 			rl.belongsTo = this;
 		}
+
+		postprocs = new ArrayList<>();
 	}
 
 	/**
@@ -150,6 +199,10 @@ public class RGrammar {
 	 * 	The generation state.
 	 */
 	public String generate(String startRule, GenerationState state) {
+		return generate(startRule, state, true);
+	}
+
+	public String generate(String startRule, GenerationState state, boolean doPostprocess) {
 		String fromRule = startRule;
 
 		if (startRule == null) {
@@ -175,53 +228,27 @@ public class RGrammar {
 
 		rl.generate(state);
 
-		/*
-		 * @NOTE
-		 *
-		 * :Postprocessing
-		 *
-		 * Do we want to perform this post-processing here, or elsewhere?
-		 */
-		return postprocessRes(state.contents.toString());
+		String body = state.contents.toString();
+
+		if(doPostprocess) {
+			body = postprocessRes(body);
+		}
+
+		return body;
 	}
 
 	private String postprocessRes(String strang) {
-		String body = strang.replaceAll("\\s+", " ");
+		String body = strang;
 
-		/*
-		 * Remove extraneous spaces around punctutation marks.
-		 *
-		 * This can be done in the grammars, but it is very tedious to do so.
-		 */
+		if(useBuiltinPostprocs) {
+			for(IPair<String, String> par : builtinPostprocs) {
+				body = body.replaceAll(par.getLeft(), par.getRight());
+			}
+		}
 
-		/* Handle 's */
-		body = body.replaceAll(" 's ", "'s ");
-
-		/* Handle opening/closing punctuation. */
-		body = body.replaceAll("([(\\[]) ", " $1");
-		body = body.replaceAll(" ([)\\]'\"])", "$1 ");
-
-		/* Remove spaces around series of opening/closing punctuation. */
-		body = body.replaceAll("([(\\[])\\s+([(\\[])", "$1$2");
-		body = body.replaceAll("([)\\]])\\s+([)\\]])", "$1$2");
-
-		/* Handle inter-word punctuation. */
-		body = body.replaceAll(" ([,:.!])", "$1 ");
-
-		/* Handle intra-word punctuation. */
-		body = body.replaceAll("\\s?([-/])\\s?", "$1");
-
-		/*
-		 * Collapse duplicate spaces.
-		 */
-		body = body.replaceAll("\\s+", " ");
-
-		/*
-		 * @TODO 11/01/17 Ben Culkin :RegexRule
-		 *
-		 * Replace this once it is no longer needed.
-		 */
-		body = body.replaceAll("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1");
+		for(IPair<String, String> par : postprocs) {
+			body = body.replaceAll(par.getLeft(), par.getRight());
+		}
 
 		return body.trim();
 	}

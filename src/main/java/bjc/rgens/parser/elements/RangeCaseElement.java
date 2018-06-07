@@ -7,7 +7,7 @@ public class RangeCaseElement extends CaseElement {
 	public final int end;
 
 	public RangeCaseElement(int beg, int en) {
-		super(ElementType.RANGE);
+		super(true);
 
 		begin = beg;
 		end = en;
