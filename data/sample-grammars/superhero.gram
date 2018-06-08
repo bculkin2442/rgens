@@ -286,11 +286,11 @@ pragma suffix-with [third-part] [fifth-part]
 	Night
 	Eclipse
 
-[arcana] [%tarot-card|%alt-tarot-card]
+[arcana] [%tarot-card||%alt-tarot-card]
 	Minor Arcana
 	Major Arcana
 	<^3> [ordinal-arcana]
 
 [ordinal-arcana] {empty}
 
-pragma prefix-with [ordinal-arcana] Arcana [%ordinal|%ordinal-roman|%ordinal-number]
+pragma prefix-with [ordinal-arcana] Arcana [%ordinal||%ordinal-roman||%ordinal-number]

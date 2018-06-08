@@ -1,11 +1,11 @@
-[rpg-name] {@rpg-parts:=[rpg-part]} [act-rpg-name]
+[rpg-name] {@rpgparts:=[rpg-part]} [act-rpg-name]
 
-[act-rpg-name] [@rpg-parts] and [@rpg-parts]
-	[@rpg-parts] / [@rpg-parts]
-	[@rpg-parts] the [@rpg-parts]
-	[@rpg-parts] : [@rpg-parts] the [@rpg-parts]
-	[@rpg-parts] : [@rpg-parts] [@rpg-parts]
-	[@rpg-parts] , [@rpg-parts] and [@rpg-parts]
+[act-rpg-name] [@rpgparts] and [@rpgparts]
+	[@rpgparts] / [@rpgparts]
+	[@rpgparts] the [@rpgparts]
+	[@rpgparts] : [@rpgparts] the [@rpgparts]
+	[@rpgparts] : [@rpgparts] [@rpgparts]
+	[@rpgparts] , [@rpgparts] and [@rpgparts]
 
 [rpg-name-phrase] [quote-rpg-name] was just released
 	[quote-rpg-name] vs [quote-rpg-name] : which is better?

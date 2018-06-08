@@ -75,17 +75,17 @@ pragma suffix-with [street] [street-suffix]
 	w.
 	<^2> [cardinal]
 
-[street-suffix] [street|st.]
-	[road|rd.]
+[street-suffix] [street||st.]
+	[road||rd.]
 	way
-	[boulevard|blvd.]
-	[avenue|ave.]
+	[boulevard||blvd.]
+	[avenue||ave.]
 	place
 	plaza
 	court
 	drive
-	[highway|hwy.]
-	[parkway|pkwy.]
+	[highway||hwy.]
+	[parkway||pkwy.]
 	pike
 	bypass
 

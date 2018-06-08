@@ -82,7 +82,7 @@ pragma export-rule [art-object]
 	[necklace-mat] necklace
 	gold bracelet studded with [rare-gem]
 	gold necklace adorned with [common-gem]
-	silver [tiara|crown] decorated with [common-gem]
+	silver [tiara||crown] decorated with [common-gem]
 	ivory comb with embedded [rare-gem]
 	gold vestments
 

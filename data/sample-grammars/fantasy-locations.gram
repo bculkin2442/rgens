@@ -28,11 +28,11 @@ pragma initial-rule [fantasy-location-name]
 	drowsy
 	dry
 	dusty
-	[ebon|ebony]
+	[ebon||ebony]
 	emerald
 	fleet
 	fire
-	[gold|golden]
+	[gold||golden]
 	good
 	grace
 	grand
@@ -47,7 +47,7 @@ pragma initial-rule [fantasy-location-name]
 	holy
 	honey
 	hot
-	[ice|icy]
+	[ice||icy]
 	iron
 	ivory
 	lilac
@@ -56,16 +56,16 @@ pragma initial-rule [fantasy-location-name]
 	maple
 	mighty
 	night
-	[oak|oaken]
+	[oak||oaken]
 	onyx
 	peaceful
 	pearl
 	prancing
 	quartz
 	queens
-	[rain|rainy]
+	[rain||rainy]
 	red
-	[rose|rosy]
+	[rose||rosy]
 	royal
 	ruby
 	sable
@@ -77,7 +77,7 @@ pragma initial-rule [fantasy-location-name]
 	shale
 	shining
 	short
-	[silk|silken]
+	[silk||silken]
 	silver
 	sleeping
 	small

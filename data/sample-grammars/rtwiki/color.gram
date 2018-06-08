@@ -67,7 +67,7 @@ pragma export-rule [sw-complete-color]
 	ivory
 	white
 	blue-gray
-	[gray|grey]
+	[gray||grey]
 	black
 	ebony
 	copper
@@ -83,7 +83,7 @@ pragma export-rule [sw-complete-color]
 	opalescent
 	rainbow
 
-[mw-standard] [%iridescent|%opalescent|%ombre|%rainbow]
+[mw-standard] [%iridescent||%opalescent||%ombre||%rainbow]
 
 [iridescent] <^2> iridescent [color]
 	iridescent between [color] and [color]

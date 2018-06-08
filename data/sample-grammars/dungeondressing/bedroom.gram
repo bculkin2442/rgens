@@ -47,7 +47,7 @@ pragma prefix-with [bedroom-bed] [bed-prefix] [sacred-type]
 	jug of moonshine
 	<^8> [bed-aliveperson]
 
-[bedroom-lying] lying [on|in] it
+[bedroom-lying] lying [on||in] it
 	draped atop it
 	prostrated before it
 	[tied] to it
@@ -165,7 +165,7 @@ pragma prefix-with [bed-arist] kidnapped
 	mannequin
 	puppet
 
-pragma prefix-with [bed-doll] [sex|sexy] [realism]
+pragma prefix-with [bed-doll] [sex||sexy] [realism]
 
 [realism] realistic
 	unrealistic

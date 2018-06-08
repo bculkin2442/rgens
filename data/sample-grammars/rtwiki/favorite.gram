@@ -1,4 +1,4 @@
-[favorite-food] My favorite foods are [apple|banana|cherry] , [vegetable] and [meat]
+[favorite-food] My favorite foods are [apple||banana||cherry] , [vegetable] and [meat]
 
 pragma initial-rule [favorite-food]
 
