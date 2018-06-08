@@ -69,6 +69,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>bjc</groupId>
+			<artifactId>inflexion</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.mifmif</groupId>
 			<artifactId>generex</artifactId>
 			<version>1.0.2</version>
