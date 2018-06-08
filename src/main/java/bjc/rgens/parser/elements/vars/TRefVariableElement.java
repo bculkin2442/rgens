@@ -10,14 +10,13 @@ import bjc.rgens.parser.templates.GrammarTemplate;
  * finish when template vars are implemented.
  */
 public class TRefVariableElement extends VariableElement {
-	/*
 	public String value;
 
-	private boolean forbidSpaces;
-
 	public TRefVariableElement(boolean forbidSpaces, String val) {
+		super(forbidSpaces);
+
 		value = val;
-	}*/
+	}
 	
 	public void generate(GenerationState state) {
 		/*

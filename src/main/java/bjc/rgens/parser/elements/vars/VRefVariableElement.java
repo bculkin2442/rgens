@@ -6,12 +6,10 @@ import bjc.rgens.parser.GrammarException;
 public class VRefVariableElement extends VariableElement {
 	public final String nam;
 
-	private final boolean forbidSpaces;
-
 	public VRefVariableElement(boolean forbidSpaces, String nam) {
-		this.nam = nam;
+		super(forbidSpaces);
 
-		this.forbidSpaces = forbidSpaces;
+		this.nam = nam;
 	}
 
 	public void generate(GenerationState state) {

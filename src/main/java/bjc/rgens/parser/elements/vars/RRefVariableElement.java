@@ -7,17 +7,13 @@ import bjc.rgens.parser.Rule;
 public class RRefVariableElement extends VariableElement {
 	public String value;
 
-	private boolean forbidSpaces;
-
 	public RRefVariableElement(boolean forbidSpaces, String val) {
+		super(forbidSpaces);
+
 		value = val;
 	}
 	
 	public void generate(GenerationState state) {
-		if(!state.rlVars.containsKey(value)) {
-			throw new GrammarException("No rule variable named " + value);
-		}
-
 		Rule rl = state.findRule(value, true);
 
 		GenerationState newState = state.newBuf();

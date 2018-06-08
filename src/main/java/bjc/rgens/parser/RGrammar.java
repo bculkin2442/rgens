@@ -4,11 +4,7 @@ import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
 import bjc.utils.funcutils.StringUtils;
 
-import bjc.rgens.parser.elements.CaseElement;
-import bjc.rgens.parser.elements.LiteralCaseElement;
-import bjc.rgens.parser.elements.RangeCaseElement;
-import bjc.rgens.parser.elements.RuleCaseElement;
-import bjc.rgens.parser.elements.VariableCaseElement;
+import bjc.rgens.parser.elements.*;
 
 import java.util.Arrays;
 import java.util.ArrayList;

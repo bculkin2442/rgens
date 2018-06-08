@@ -7,9 +7,9 @@ import bjc.rgens.parser.Rule;
 public class ARefVariableElement extends VariableElement {
 	public String value;
 
-	private boolean forbidSpaces;
+	public ARefVariableElement(String val) {
+		super(false);
 
-	public ARefVariableElement(boolean forbidSpaces, String val) {
 		value = val;
 	}
 	
@@ -25,10 +25,6 @@ public class ARefVariableElement extends VariableElement {
 		rl.generate(newState);
 
 		String res = newState.contents.toString();
-
-		if(forbidSpaces && res.contains(" ")) {
-			throw new GrammarException("Spaces not allowed in this context (rule-var %s)");
-		}
 
 		state.contents.append(res);
 	}

@@ -2,12 +2,7 @@ package bjc.rgens.parser.elements;
 
 import bjc.rgens.parser.GrammarException;
 
-public abstract class VariableCaseElement extends CaseElement {
-	public static enum VariableType {
-		NORMAL,
-		EXPAND,
-		RULE
-	}
+public abstract class VariableDefCaseElement extends CaseElement {
 	/**
 	 * The name of the variable this element defines.
 	 */
@@ -18,15 +13,11 @@ public abstract class VariableCaseElement extends CaseElement {
 	 */
 	public final String varDef;
 
-	public final VariableType varType;
-
-	public VariableCaseElement(String name, String def, VariableType varType) {
+	public VariableDefCaseElement(String name, String def) {
 		super(false);
 
 		varName = name;
 		varDef = def;
-		
-		this.varType = varType;
 	}
 
 	@Override
@@ -46,7 +37,7 @@ public abstract class VariableCaseElement extends CaseElement {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VariableCaseElement other = (VariableCaseElement) obj;
+		VariableDefCaseElement other = (VariableDefCaseElement) obj;
 		if (varDef == null) {
 			if (other.varDef != null)
 				return false;
@@ -60,7 +51,7 @@ public abstract class VariableCaseElement extends CaseElement {
 		return true;
 	}
 
-	public static CaseElement parseVariable(String varName, String varDef, boolean colon) {
+	public static CaseElement parseVariable(String varName, String varDef, char op, boolean colon) {
 		if(varName.startsWith("$")) {
 			// Handle normal/expanding variable definitions
 			if(colon) return new ExpVariableCaseElement(varName.substring(1), varDef);

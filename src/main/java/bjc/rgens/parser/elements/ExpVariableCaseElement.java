@@ -9,9 +9,9 @@ import bjc.rgens.parser.RGrammar;
 import bjc.rgens.parser.Rule;
 import bjc.rgens.parser.RuleCase;
 
-public class ExpVariableCaseElement extends VariableCaseElement {
+public class ExpVariableCaseElement extends VariableDefCaseElement {
 	public ExpVariableCaseElement(String name, String def) {
-		super(name, def, VariableType.EXPAND);
+		super(name, def);
 	}
 
 	@Override

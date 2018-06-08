@@ -4,23 +4,46 @@ import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
 
 import bjc.rgens.parser.*;
+import bjc.rgens.parser.elements.vars.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class RuleCaseElement extends StringCaseElement {
-	public static enum ReferenceType {
-		DEPENDENT,
-		VARIABLE,
-		NORMAL
+public class RuleCaseElement extends CaseElement {
+	public List<VariableElement> elements;
+
+	public RuleCaseElement(String vl) {
+		super(true);
+
+		this.elements = VariableElement.parseElementString(vl);
 	}
 
-	public final ReferenceType ref;
+	public RuleCaseElement(String vl, List<VariableElement> elements) {
+		super(true);
 
-	protected RuleCaseElement(String vl, ReferenceType ref) {
-		super(vl, false);
+		this.elements = elements;
+	}
 
-		this.ref = ref;
+	public void generate(GenerationState state) {
+		GenerationState newState = state.newBuf();
+
+		boolean inName = false;
+
+		for(VariableElement elm : elements) {
+			elm.generate(newState);
+
+			if(inName == false) inName = elm.forbidSpaces;
+		}
+
+		String body = newState.contents.toString();
+
+		if(inName) {
+			doGenerate(String.format("[%s]", body), state);
+		} else {
+			state.contents.append(body);
+		}
 	}
 
 	protected void doGenerate(String actName, GenerationState state) {

@@ -28,7 +28,7 @@ public class InlineRuleCaseElement extends CaseElement {
 			IPair<IList<CaseElement>, Integer> par = RGrammarParser.parseElementString(partArr);
 			int prob = par.getRight();
 
-			for(CaseElement elm :par.getLeft()) {
+			for(CaseElement elm : par.getLeft()) {
 				elements.addProbability(prob, elm);
 			}
 		}

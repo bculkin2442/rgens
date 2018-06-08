@@ -8,11 +8,11 @@ import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.Rule;
 import bjc.rgens.parser.RGrammar;
 
-public class RuleVariableCaseElement extends VariableCaseElement {
+public class RuleVariableCaseElement extends VariableDefCaseElement {
 	public final boolean exhaust;
 
 	public RuleVariableCaseElement(String varName, String varDef, boolean exhaust) {
-		super(varName, varDef, VariableType.RULE);
+		super(varName, varDef);
 
 		this.exhaust = exhaust;
 	}

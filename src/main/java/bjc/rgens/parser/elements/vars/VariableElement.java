@@ -1,5 +1,7 @@
 package bjc.rgens.parser.elements.vars;
 
+import bjc.utils.funcutils.StringUtils;
+
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 
@@ -7,23 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class VariableElement {
+	public boolean forbidSpaces;
+
+	protected VariableElement(boolean forbidSpacing) {
+		forbidSpaces = forbidSpacing;
+	}
+
 	public abstract void generate(GenerationState state);
 
-	public static List<VariableElement> parseVariableElements(String varElm) {
-		boolean forbidSpaces = varElm.contains("-");
+	public static List<VariableElement> parseElementString(String varElm) {
+		boolean forbidSpaces = StringUtils.levelContains(varElm, "-", "+");
 
 		String[] parts;
 
 		if(forbidSpaces) {
-			parts = varElm.split("(?<=[+-])|(?=[+-])");
+			parts = StringUtils.levelSplit(varElm, true, "-", "+").toArray(new String[0]);
 		} else {
 			parts = new String[] { varElm };
 		}
 
-		return parseVariableElements(forbidSpaces, parts);
+		return parseElementString(forbidSpaces, parts);
 	}
 
-	public static List<VariableElement> parseVariableElements(boolean forbidSpaces, String... parts) {
+	public static List<VariableElement> parseElementString(boolean forbidSpaces, String... parts) {
 		List<VariableElement> elms = new ArrayList<>(parts.length);
 
 		VariableElement prevElement = null;
@@ -34,22 +42,26 @@ public abstract class VariableElement {
 			if(part.startsWith("$")) {
 				elm = new VRefVariableElement(forbidSpaces, part.substring(1));
 			} else if (part.startsWith("@")) {
-				elm = new ARefVariableElement(forbidSpaces, part.substring(1));
+				if(forbidSpaces)
+					throw new GrammarException("Arrays references aren't allowed in rule names");
+
+				elm = new ARefVariableElement(part.substring(1));
 			} else if (part.startsWith("%")) {
 				elm = new RRefVariableElement(forbidSpaces, part.substring(1));
 			} else if (part.startsWith("/")) {
 				throw new GrammarException("Template variables aren't implemented yet");
 			} else {
-				if(prevElement instanceof LiteralVariableElement) {
+				if(prevElement != null && prevElement instanceof LiteralVariableElement) {
 					/* Aggregate chain literals together */
-					((LiteralVariableElement)prevElement).val += elm;
+					((LiteralVariableElement)prevElement).val += part;
 				} else {
-					elm = new LiteralVariableElement(part);
+					elm = new LiteralVariableElement(forbidSpaces, part);
 				}
 			}
 
 			if(elm != null) {
 				elms.add(elm);
+
 				prevElement = elm;
 			}
 		}

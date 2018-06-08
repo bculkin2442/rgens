@@ -3,7 +3,7 @@ package bjc.rgens.parser.elements;
 public abstract class StringCaseElement extends CaseElement {
 	public final String val;
 	
-	protected StringCaseElement(String vl, boolean isLiteral) {
+	protected StringCaseElement(String vl) {
 		super(true);
 		
 		val = vl;

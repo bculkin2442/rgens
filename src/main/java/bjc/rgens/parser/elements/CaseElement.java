@@ -71,27 +71,52 @@ public abstract class CaseElement {
 			throw new NullPointerException("Case part cannot be null");
 		}
 
-		if (csepart.matches("\\{\\S+\\}")) {
+		if (csepart.matches("\\(\\S+\\)")) {
+			return createElement(csepart.substring(1, csepart.length() - 1));
+		} else if (csepart.matches("\\{\\S+\\}")) {
 			/*
 			 * Handle special case elements.
 			 *
 			 */
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
-			if (specialBody.matches("\\S+:=\\S+")) {
-				String[] parts = specialBody.split(":=");
+			if (specialBody.matches("\\S+:\\S=\\S+")) {
+				String[] parts = StringUtils.levelSplit(specialBody, "=").toArray(new String[0]);
+
 				if(parts.length != 2) {
 					throw new GrammarException("Colon variables must have a name and a definition");
 				}
 
-				return VariableCaseElement.parseVariable(parts[0], parts[1], true);
+				String varName = parts[0];
+
+				char op = varName.charAt(varName.length() - 1);
+
+					System.err.printf("\t\tTRACE: Colon definition w/ op %d", (int)op);
+
+				// Remove the colon, plus any tacked on operator
+				varName = varName.substring(0, varName.length() - 2);
+
+				return VariableDefCaseElement.parseVariable(varName, parts[1], op, true);
+			} else if (specialBody.matches("\\S+:=\\S+")) {
+				String[] parts = StringUtils.levelSplit(specialBody, "=").toArray(new String[0]);
+
+				if(parts.length != 2) {
+					throw new GrammarException("Colon variables must have a name and a definition");
+				}
+
+				String varName = parts[0];
+
+				varName = varName.substring(0, varName.length() - 1);
+
+				return VariableDefCaseElement.parseVariable(varName, parts[1], ' ', true);
 			} else if (specialBody.matches("\\S+=\\S+")) {
 				String[] parts = specialBody.split("=");
 				if(parts.length != 2) {
 					throw new GrammarException("Variables must have a name and a definition");
 				}
 
-				return VariableCaseElement.parseVariable(parts[0], parts[1], false);
+				// Non-colon variables can't take an operator
+				return VariableDefCaseElement.parseVariable(parts[0], parts[1], (char)0, false);
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
@@ -101,39 +126,25 @@ public abstract class CaseElement {
 		} else if (csepart.matches("\\[\\S+\\]")) {
 			String rawCase = csepart.substring(1, csepart.length() - 1);
 
-			if (rawCase.matches("\\d+\\.\\.\\d+")) {
+			if (rawCase.matches("\\d+\\.{2}\\d+")) {
 				int firstNum = Integer.parseInt(rawCase.substring(0, rawCase.indexOf('.')));
 				int secondNum = Integer.parseInt(rawCase.substring(rawCase.lastIndexOf('.') + 1));
 
 				return new RangeCaseElement(firstNum, secondNum);
 			} else if(rawCase.contains("||")) {
 				String[] elms = StringUtils.levelSplit(rawCase, "||").toArray(new String[0]);
-				//String[] elms = rawCase.split("\\|\\|");
 
 				return new InlineRuleCaseElement(elms);
 			} else if(rawCase.contains("|")) {
-				System.err.println("\t\tWARN: Inline rule using | found, they use || now");
+				throw new GrammarException("\t\tERROR: Inline rule using | found, they use || now");
 
-				String[] elms = StringUtils.levelSplit(rawCase, "|").toArray(new String[0]);
-				return new InlineRuleCaseElement(elms);
-			} else if(csepart.contains("$")) {
-				if(csepart.contains("-")) {
-					return new DependantRuleReference(csepart);
-				}
-
-				return new VariableRuleReference(csepart);
-			} else if(csepart.contains("@")) {
-				// Trim @
-				return new RuleVarRefCaseElement(rawCase.substring(1));
+				// String[] elms = StringUtils.levelSplit(rawCase, "|").toArray(new String[0]);
+				// return new InlineRuleCaseElement(elms);
 			} else {
-				return new NormalRuleReference(csepart);
+				return new RuleCaseElement(rawCase);
 			}
 		} else if(csepart.startsWith("%") && !csepart.equals("%")) {
-			String rName = String.format("[%s]", csepart.substring(1));
-
-			System.err.printf("\t\tTRACE: short ref to %s (%s)\n", rName, csepart);
-
-			return new NormalRuleReference(rName);	
+			return new RuleCaseElement(csepart);	
 		} else {
 			return new LiteralCaseElement(csepart);
 		}
