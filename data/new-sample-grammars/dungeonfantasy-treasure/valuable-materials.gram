@@ -1,0 +1,185 @@
+# TODO
+# 
+# Spices
+# - Add more spices
+# - Add dried herbs?
+#
+# Fabrics
+# - Add various animals for scale hide
+# - Change contraband to reference the race table, when added
+# - Add more otherworldly fabric types (cloth & fiber)
+#
+# Other
+# - Expand generic entries (distilled liquour/tea/wine)
+
+[valuable-material] [spices]
+	[fabrics]
+	[other-valuable]
+
+pragma export-rule [valuable-materials]
+
+[spices] {@smods:=[spices-mod]} [spices-1]`
+
+[spices-1] allspice
+	anise
+	annato
+	asafetida
+	cardamom
+	cassia
+	chiles
+	cinnamon
+	clove
+	coriander
+	cumin
+	savory fungus
+	pepperbark
+	glimmerseed
+	fennel
+	fenugreek
+	ginger
+	savory
+	[huajiao]
+	mace
+	mustard
+	nigella
+	nutmeg
+	onion seed
+	firegrain
+	pepper
+	poppy seed
+	saffron
+	salt
+	sumac
+	tamarind
+	turmeric
+	zeodary
+
+[huajiao] huajiao
+	szechuan pepper
+
+[spices-mod] dwarven
+	savory
+	elven
+	faerie
+	halfling
+	orcish
+	black
+	white
+	red
+
+pragma prefix-with [spices-1] <&0..2> [@smods]
+pragma export-rule [spices]
+
+[fabrics] <^2> [cloth] cloth {$unit=100sqft} {$unit+:=bolt}
+	[%common-pelt|%exotic-pelt] fur {$unit=100sqft} {$unit+:=bundle}
+	[%common-pelt|%exotic-pelt|contraband|%other-pelt] leather {$unit=100sqft} {$unit+:=bundle}
+	scale-hide {$unit=100sqft} {$unit+:=bundle}
+	[fiber] fibers {$unit=pound}
+
+[cloth] [other-cloth]
+	giant-spider silk
+	<^2> gauze
+	<^2> linen
+	<^2> pashima wool
+	<^2> plain silk
+	<^2> samite
+	<^2> satin
+	<^2> velvet
+	wool
+
+[other-cloth] spun moonbeam
+	stabilized seafoam
+	felted tear
+
+[other-pelt] angelic horse
+	astral tiger
+	demon-skin
+
+# This is treasure, it should lean towards more valuable things
+
+[common-pelt] [common-pelt-1]
+	[exotic-pelt]
+
+[common-pelt-1] seal
+	monkey
+	rabbit
+	fox
+	goat
+	horse
+	ox
+	deer
+	elk
+	reindeer
+	antelope
+	ibex
+
+[exotic-pelt] nidjet
+	sable
+	ermine
+	jaguar
+	lion
+	tiger
+	wolf
+	bear
+	wyvern
+	ape
+	snake
+
+pragma prefix-with [exotic-pelt] [epelt-prefix]
+
+[epelt-prefix] dire
+	cave
+	giant
+	frost
+	fire
+	winter
+
+[fiber] linen
+	silk
+	wild silk
+	wool
+	pashmina wool
+	giant-spider silk
+	otherworldly
+
+pragma export-rule [fabrics]
+
+[other-valuable] ale
+	distilled liquor
+	flavored ale
+	flavored brandy
+	kumiz
+	mead
+	opium
+	black tea
+	green tea
+	date wine
+	rice wine
+	[other-wine] wine
+	sealing wax
+	ambergris
+	cedar resin
+	copal
+	frankincense
+	<?4> [%common-pelt|exotic-pelt] musk
+	myrrh
+	onycha
+	patchouli
+	sandalwood gum
+	flower water
+	perfumed essence
+	perfumed oil
+	pomander
+	carmine
+	cinnabar
+	ochre
+	henna
+	indigo
+	madder
+	murex
+	orpiment
+	woad
+
+[other-wine] dissolved stardust
+	lotus nectar
+	<?3> fermented demon's blood

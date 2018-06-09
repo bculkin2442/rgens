@@ -1,0 +1,80 @@
+[treasure] [flawless||ruined||<^2>|{empty}] [%bodypart||%clothing||%jewlery]
+
+[bodypart] [brain]
+	[ear||lobe||sensor]
+	[entrails||blood||slime||ooze]
+	[eye||antenna||sensor]
+	[finger||toe||claw||talon]
+	[hair||fur||feather||leaf]
+	[hand||foot||hoof||paw||root]
+	[heart]
+	[knuckle]
+	[limb||tail||wing]
+	[loins||breast]
+	[nose||snout||beak||gills]
+	[scalp||mane||face]
+	[skin||hide||bark||scale||shell]
+	[skull||jaw||horn]
+	[spine||fin||barb]
+	[teeth||mandible||pincer||stinger]
+	[tongue||tentacle||vine]
+	[venom]
+	pristine body
+
+[venom] venom sack
+	gas gland
+	fire lung
+	silk spinner
+
+[knuckle] knuckle bone
+	joint gear
+
+[heart] heart
+	engine
+	rib cage
+
+[brain] brain
+	control mechanism
+
+[clothing] belt
+	boots
+	coat
+	[cloak||cape]
+	dress
+	eyepatch
+	[glasses||monocle]
+	gloves
+	handkerchief
+	[hat||headband]
+	[loincloth||stockings]
+	pants
+	robe
+	sash
+	shirt
+	[shoes||sandals]
+	tunic
+	veil
+	vest
+	vestments
+
+[jewlery] amulet
+	[anklet||bracelet]
+	[armband||bracer]
+	[brooch||medal]
+	[cane]
+	[charm||trinket]
+	[collar||choker]
+	[crown||tiara]
+	[earring||piercing]
+	[comb||pin]
+	locket
+	mask
+	pendant
+	ring
+	scepter
+	talisman
+	tattoo
+	torc
+
+[cane] cane
+	walking stick

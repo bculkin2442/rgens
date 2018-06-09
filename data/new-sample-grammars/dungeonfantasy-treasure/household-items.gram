@@ -1,0 +1,101 @@
+[household-item] [cooking]
+	[decor]
+	[painting]
+	[sculpture]
+	[furniture]
+	[grooming]
+	[personal]
+
+[cooking] basin
+	bowl
+	bucket
+	cauldron
+	chopsticks
+	cup
+	dinner plate
+	drinking set
+	cooking fork
+	table fork
+	goblet
+	table knife
+	ladle
+	mortar and pestle
+	pitcher
+	place setting
+	platter
+	pot
+	skillet
+	cooking spit
+	tea set
+	iron teapot
+	wine glass
+
+[decor] banner
+	brazier
+	candlesticks
+	[censer]
+	complex clock
+	simple clock
+	music box
+
+[censer] censer
+	incense burner
+
+[painting] encaustic painting
+	oil painting
+	[tempera|watercolor] painting
+	pennant
+
+[sculpture] [scul-mat] [scul-fig]
+
+[scul-mat] clay
+	bone
+	[porcelain|faience]
+	stone
+	wood
+	ivory
+
+[furniture] bench
+	chair
+	folding chair
+	couch
+	footstool
+	headrest
+	mattress
+	pillow
+	rug/carpet
+	sheets
+	table
+	folding table
+	tapestry
+	tub
+
+[grooming] brush
+	comb
+	cosmetics
+	grooming kit
+	razor
+	scissor
+	strigil
+
+[personal] fan
+	mask
+	<?2> canopy parasol
+	pipe
+	seal
+	staff
+	tinderbox
+	walking stick
+	wand
+	water pipe
+	large wig
+	small wig
+
+# TODO
+# Continue from here, page 16 of pdf
+[science] abacus
+
+[scul-fig] sculpture
+	figurine
+
+pragma initial-rule [household-item]

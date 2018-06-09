@@ -1,0 +1,21 @@
+[profession] fisher
+	forester
+	laborer
+	messenger
+	sailor
+	serf
+	servant
+	shepherd
+	trapper
+	alchemist
+	blacksmith
+	[bowyer||fletcher]
+	brewer
+	carpenter
+	cartographer
+	cook
+	[gold||silver] smith
+	jeweler
+	painter
+	potter
+	weaver

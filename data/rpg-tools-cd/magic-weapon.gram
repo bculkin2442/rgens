@@ -1,0 +1,75 @@
+[magic-weapon] [weapon-type]
+
+pragma initial-rule [weapon-type]
+
+[weapon-type] long sword
+	dagger
+	mace
+	battleaxe
+	warhammer
+	rapier
+	great axe
+	great sword
+	morningstar
+	maul
+	[light||heavy] crossbow
+	shortbow
+	longbow
+
+[creator] abyssal
+	<^2> ancient human
+	celestial
+	draconic
+	drow
+	<^2> dwarven
+	[air||earth||fire||water] elemental
+	elven
+	fiendish
+	giant
+	gnome
+
+[nature] arcane
+	bane
+	storied
+	ornament
+	prophecy
+	religious icon
+	sinister
+	symbol of power
+
+[minor-prop] beacon
+	compass
+	conscientious
+	delver
+	gleaming
+	guardian
+	harmonious
+	hidden message
+	illusion
+	key
+	language
+	sentinel
+	song craft
+	strange material
+	temperate
+	unbreakable
+	war leader
+	waterborne
+	wicked
+
+[minor-quirk] blissful
+	confident
+	coveted
+	covetous
+	frail
+	hungry
+	loud
+	melancholy
+	metamorphic
+	mistaken
+	muttering
+	painful
+	possessive
+	repellent
+	slippery
+	slothful

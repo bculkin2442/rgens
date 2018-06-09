@@ -1,0 +1,36 @@
+[harlot] [harlot]
+
+pragma suffix-with [harlot] [harlot-suffix]
+
+[harlot-name] [harlot-2]
+
+pragma prefix-with [harlot-name] [harlot-1]
+
+[harlot-suffix] (secretly a [harlot-name] )
+	(mistaken for a [harlot-name] )
+
+[harlot-1] slovenly
+	brazen
+	cheap
+	typical
+	saucy
+	wanton
+	expensive
+	haughty
+	aged
+	wealthy
+	sly
+	rich
+
+[harlot-2] trull
+	strumpet
+	trollop
+	streetwalker
+	tart
+	wench
+	doxy
+	courtesan
+	madam
+	procuress
+	pimp
+	panderer
