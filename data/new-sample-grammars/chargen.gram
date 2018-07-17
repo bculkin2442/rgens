@@ -1,0 +1,48 @@
+[character] [race] [class]
+
+pragma initial-rule [character]
+
+[race] centaur
+	demon
+	orc
+	fae
+	vampire
+	dwarf
+	human
+	high elf
+	dryad
+	troll
+	dark elf
+	shapeshifter
+
+[class] paladin
+	illusionist
+	engineer
+	black mage
+	arcanist
+	summoner
+	druid
+	assassin
+	merchant
+	templar
+	alchemist
+	warrior
+	thief
+	oracle
+	blacksmth
+	archer
+	warlock
+	berserker
+	bard
+	red mage
+	sky pirate
+	monk
+	wizard
+	hunter
+	rogue
+	death knight
+	white mage
+	dancer
+	shaman
+	necromancer
+	beastmaster

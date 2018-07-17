@@ -1,0 +1,107 @@
+[noble-jewlery]
+
+pragma initial-rule [noble-jewlery]
+
+[jewlery-material] [jewlery-material-1]
+	[jewlery-material-1] and [jewlery-material-1]
+
+[jewlery-material-1] [tin||pewter]
+	nickel
+	solid stone
+	iron
+	[bone||ivory||coral]
+	wood
+	<^3> gold
+	electrum
+	<^3> silver
+	copper
+	brass
+	bronze
+	mithril
+	[platinum||rhodium||palladium]
+	adamantine
+
+[noble-gem] [gem-color]
+
+pragma prefix-with [noble-gem] [gem-shape] [gem-cut]
+pragma prefix-with [noble-gem] [gem-finish] [gem-size]
+
+pragma export-rule [noble-gem]
+
+[gem-finish] matte
+	glossy
+	opaque
+	transparent
+
+[gem-size] [size-category]
+	[abs-size] mm
+	[rel-size] -sized
+
+pragma despace-rule [gem-size]
+
+[size-category] fine
+	tiny
+	small
+	medium
+	large
+	massive
+
+[abs-size] [1..2]
+	[3..4]
+	[5..9]
+	[10..24]
+	[25..44]
+	[45..60]
+
+[rel-size] poppy seed
+	sesame seed
+	pine nut
+	almon
+	pecan
+	brazil nut
+
+[gem-shape] round
+	oval
+	baguette
+	octagon
+	cushion
+	trillion
+	drop
+	square
+	star
+	pear
+	heart
+	emerald
+	tapered baguette
+	triangle
+	marquise
+	hexagon
+	pentagon
+	[kite||shield]
+	asymmetric
+
+[gem-cut] cabochon
+	point cut
+	table cut
+	single cut
+	brilliant cut
+	checkerboard cut
+	step cut
+	rose cut
+	princess cut
+	cameo cut
+	[natural||unworked]
+
+[gem-color] <^19> [gem-color-1]
+	[gem-color-2]
+
+[gem-color-2] [gem-color-1] and [gem-color-1] [gem-pattern]
+
+[gem-pattern] striated
+	banded
+	marbled
+	speckled
+	dendritic
+	gradated
+	criss-crossed
+	iridescent
