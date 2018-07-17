@@ -1,0 +1,36 @@
+[plothook] [subject] [verbing] [object]
+
+pragma initial-rule [plothook]
+
+[subject] merchants
+	brigands
+	bandits
+	beggars
+	pilgrims
+	vagrants
+	mercenaries
+	rice farmers
+	hunters
+	slaves
+
+[verbing] making
+	guarding
+	hiding
+	building
+	carrying
+	trading
+	worshipping
+	searching for
+	fighting
+	fleeing
+
+[object] opium
+	slaves
+	rice
+	hunter-killer worms
+	giant crayfish
+	gold
+	a statue
+	a temple
+	hohools
+	manure

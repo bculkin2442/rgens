@@ -1,0 +1,63 @@
+[gems] [ornamental]
+	[semiprecious]
+	[precious]
+	[jewels]
+
+pragma initial-rule [gems]
+
+[ornamental] azurite
+	banded agate
+	blue quartz
+	eye agate
+	hematite
+	lapis lazuli
+	malachite
+	moss agate
+	obsidian
+	rhodochrosite
+	tiger eye agate
+	turquoisse
+
+[semiprecious] bloodstone
+	carnelian
+	chalcedony
+	chrysoprase
+	citrine
+	jasper
+	moonstone
+	onyx
+	rock crystal
+	sardonyx
+	smoky quartz
+	star rose quartz
+	zircon
+
+[precious] amber
+	alexandrite
+	amethyst
+	aquamarine
+	chrysoberyl
+	coral
+	garnet
+	jade
+	jet
+	perl
+	peridot
+	spinel
+	topaz
+	tourmaline
+
+[gems] black opal
+	black sapphire
+	diamond
+	emerald
+	fire opal
+	jacinth
+	opal
+	oriental amethyst
+	oriental emerald
+	oriental topaz
+	ruby
+	sapphire
+	star ruby
+	star sapphire

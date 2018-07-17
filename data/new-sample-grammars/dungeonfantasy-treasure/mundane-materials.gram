@@ -1,0 +1,4 @@
+[mundane-materials] [valuable-materials]
+	[household-item]
+
+pragma initial-rule [mundane-materials]

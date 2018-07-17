@@ -1,0 +1,87 @@
+[nonweapon-prof]
+
+[general-prof] agriculture
+	animal handling
+	animal training
+	artistic ability
+	blacksmithing
+	brewing
+	carpentry
+	cobbling
+	cooking
+	dancing
+	direction sense
+	etiquette
+	fire-building
+	fishing
+	heraldry
+	modern languages
+	leatherworking
+	mining
+	pottery
+	[airborne||land-based] riding
+	rope use
+	seamanship
+	[seamstress||tailor]
+	singing
+	stonemasonry
+	swimming
+	weather sense
+	weaving
+
+[priest] ancient history
+	astrology
+	engineering
+	healing
+	herbalism
+	ancient languages
+	local history
+	musical instrument
+	navigation
+	reading/writing
+	religion
+	spellcraft
+
+[rogue] ancient history
+	appraising
+	blind-fighting
+	disguise
+	forgery
+	gaming
+	gem cutting
+	juggling
+	jumping
+	local history
+	musical instrument
+	reading libs
+	set snares
+	tightrope walking
+	tumbling
+	ventriloquism
+
+[warrior] animal lore
+	armorer
+	blind-fighting
+	[bowyer||fletcher]
+	charioteering
+	endurance
+	gaming
+	hunting
+	mountaineering
+	navigation
+	running
+	set snares
+	survival
+	tracking
+	weaponsmithing
+
+[wizard] ancient history
+	astrology
+	engineering
+	gem cutting
+	herbalism
+	ancient languages
+	navigation
+	reading/writing
+	religion
+	spellcraft

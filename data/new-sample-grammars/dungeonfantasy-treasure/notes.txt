@@ -1,0 +1,4 @@
+This is adapted from the GURPS 'Dungeon Fantasy - Treasure Tables' pdf
+
+It may not stay in this form, as various generators will probably be pulled
+away for better, more detailed handling
