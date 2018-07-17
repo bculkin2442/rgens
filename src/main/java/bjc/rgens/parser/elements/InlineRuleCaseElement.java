@@ -6,6 +6,7 @@ import bjc.rgens.parser.RGrammarParser;
 import bjc.utils.data.IPair;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+import bjc.utils.funcutils.StringUtils;
 import bjc.utils.gen.WeightedRandom;
 
 public class InlineRuleCaseElement extends CaseElement {
@@ -19,8 +20,8 @@ public class InlineRuleCaseElement extends CaseElement {
 		for(String part : parts) {
 			String[] partArr;
 
-			if(part.contains("|")) {
-				partArr = part.split("\\|");
+			if(StringUtils.levelContains(part, "|")) {
+				partArr = StringUtils.levelSplit(part, "||").toArray(new String[0]);
 			} else {
 				partArr = new String[] {part};
 			}

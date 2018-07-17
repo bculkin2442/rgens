@@ -202,12 +202,12 @@ public class RGrammarParser {
 			try {
 				RGrammarBuilder build = new RGrammarBuilder();
 
-				reader.forEachBlock((block) -> {
+				for(Block block : reader) {
 					if(DEBUG)
 						System.err.printf("Handling top-level block (%s)\n", block);
 
 					handleBlock(build, block.contents, 0, block.startLine);
-				});
+				}
 
 				if(LINES)
 					System.err.printf("%d ", reader.getBlock().endLine);
@@ -270,7 +270,7 @@ public class RGrammarParser {
 		String dlm = String.format(TMPL_PRAGMA_BLOCK_DELIM, level);
 		try (BlockReader pragmaReader = new SimpleBlockReader(dlm, new StringReader(block))) {
 			try {
-				pragmaReader.forEachBlock((pragma) -> {
+				for(Block pragma : pragmaReader) {
 					pragma.lineOffset = lineOffset;
 
 					if(DEBUG)
@@ -296,7 +296,7 @@ public class RGrammarParser {
 					}
 
 					handlePragma(pragmaBody, build, level, pragma.startLine + lineOffset);
-				});
+				}
 			} catch (GrammarException gex) {
 				Block pragma = pragmaReader.getBlock();
 				String msg   = String.format("Error in pragma: (%s)", pragma);
@@ -352,12 +352,12 @@ public class RGrammarParser {
 					String declContents = declBlock.contents;
 					Rule rl = handleRuleDecl(build, declContents, lineOffset + declBlock.startLine);
 
-					ruleReader.forEachBlock((block) -> {
+					for(Block block : ruleReader) {
 						/* Ignore comment lines. */
 						if(block.contents.trim().startsWith("#")) return;
 
 						handleRuleCase(block.contents, build, rl, block.startLine + lineOffset);
-					});
+					}
 				} else {
 					/* Rule with a declaration followed by a single case. */
 					handleRuleDecl(build, ruleBlock, lineOffset);
@@ -387,7 +387,7 @@ public class RGrammarParser {
 			declSep = declContents.indexOf(' ');
 
 			if (declSep == -1) {
-				String msg = "A rule must be given at least one case in its declaration, and seperated from that case by \u2192";
+				String msg = "A rule must be given at least one case in its declaration, and seperated from that case by \u2192 or ' '";
 
 				throw new GrammarException(msg);
 			}
