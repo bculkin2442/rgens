@@ -16,6 +16,9 @@ public class RRefVariableElement extends VariableElement {
 	public void generate(GenerationState state) {
 		Rule rl = state.findRule(value, true);
 
+		if(rl == null)
+			throw new GrammarException(String.format("Could not find rule '%s'", value));
+
 		GenerationState newState = state.newBuf();
 
 		rl.generate(newState);
@@ -23,7 +26,7 @@ public class RRefVariableElement extends VariableElement {
 		String res = newState.contents.toString();
 
 		if(forbidSpaces && res.contains(" ")) {
-			throw new GrammarException("Spaces not allowed in this context (rule-reference %s)");
+			throw new GrammarException(String.format("Spaces not allowed in this context (rule-reference %s)", state));
 		}
 
 		state.contents.append(res);

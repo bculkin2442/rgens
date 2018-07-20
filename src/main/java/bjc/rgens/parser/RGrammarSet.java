@@ -33,7 +33,10 @@ public class RGrammarSet {
 	public RGrammarSet() {
 		grammars = new HashMap<>();
 
-		exportedRules = new TreeMap<>();
+		// @NOTE
+		// Swap which line is commented to toggle ordering of exports
+		//exportedRules = new TreeMap<>();
+		exportedRules = new HashMap<>();
 
 		loadedFrom = new HashMap<>();
 

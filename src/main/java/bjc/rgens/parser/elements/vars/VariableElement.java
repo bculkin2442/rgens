@@ -36,7 +36,12 @@ public abstract class VariableElement {
 
 		VariableElement prevElement = null;
 
-		for (String part : parts) {
+		for (String npart : parts) {
+			// @HACK
+			// This is so that inline refs to hypenized rule names
+			// work. Not sure this is a good impl. strategy
+			String part = npart.replaceAll("\\(|\\)", "");
+
 			VariableElement elm = null;
 
 			if(part.startsWith("$")) {
@@ -47,7 +52,7 @@ public abstract class VariableElement {
 
 				elm = new ARefVariableElement(part.substring(1));
 			} else if (part.startsWith("%")) {
-				elm = new RRefVariableElement(forbidSpaces, part.substring(1));
+				elm = new RRefVariableElement(forbidSpaces, String.format("[%s]", part.substring(1)));
 			} else if (part.startsWith("/")) {
 				throw new GrammarException("Template variables aren't implemented yet");
 			} else {
@@ -55,7 +60,11 @@ public abstract class VariableElement {
 					/* Aggregate chain literals together */
 					((LiteralVariableElement)prevElement).val += part;
 				} else {
-					elm = new LiteralVariableElement(forbidSpaces, part);
+					if(part.contains(" ")) {
+						elm = new LiteralVariableElement(false, part);
+					} else {
+						elm = new LiteralVariableElement(true, part);
+					}
 				}
 			}
 

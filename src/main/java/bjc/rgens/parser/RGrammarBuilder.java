@@ -351,6 +351,12 @@ public class RGrammarBuilder {
 		rules.get(rule).replaceCases(newCaseList);
 	}*/
 
+	/*
+	 * @NOTE
+	 *
+	 * This should be moved into its own class somewhere, as it is general
+	 * eneough.
+	 */
 	private static <T> List<List<T>> powerList(Set<T> elements) {
 		/*
 		 * Fast-case the most common usage

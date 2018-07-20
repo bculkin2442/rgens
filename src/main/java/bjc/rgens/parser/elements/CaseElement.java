@@ -5,6 +5,8 @@ import bjc.utils.funcutils.StringUtils;
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 
+import java.util.Arrays;
+
 /**
  * A element in a rule case.
  *
@@ -91,7 +93,7 @@ public abstract class CaseElement {
 
 				char op = varName.charAt(varName.length() - 1);
 
-					System.err.printf("\t\tTRACE: Colon definition w/ op %d", (int)op);
+				System.err.printf("\t\tTRACE: Colon definition w/ op %d", (int)op);
 
 				// Remove the colon, plus any tacked on operator
 				varName = varName.substring(0, varName.length() - 2);
@@ -110,7 +112,7 @@ public abstract class CaseElement {
 
 				return VariableDefCaseElement.parseVariable(varName, parts[1], ' ', true);
 			} else if (specialBody.matches("\\S+=\\S+")) {
-				String[] parts = specialBody.split("=");
+				String[] parts = StringUtils.levelSplit(specialBody, "=").toArray(new String[0]);
 				if(parts.length != 2) {
 					throw new GrammarException("Variables must have a name and a definition");
 				}
@@ -140,6 +142,12 @@ public abstract class CaseElement {
 
 				// String[] elms = StringUtils.levelSplit(rawCase, "|").toArray(new String[0]);
 				// return new InlineRuleCaseElement(elms);
+			} else if (StringUtils.levelContains(rawCase, ".")) {
+				String[] parts = StringUtils.levelSplit(rawCase, ".").toArray(new String[0]);
+
+				CaseElement base = createElement(parts[0]);
+
+				return new MethodCaseElement(base, Arrays.copyOfRange(parts, 1, parts.length));
 			} else {
 				return new RuleCaseElement(rawCase);
 			}
