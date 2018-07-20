@@ -1,4 +1,10 @@
-[nonweapon-prof]
+[nonweapon-prof] [general-prof]
+	[priest]
+	[rogue]
+	[warrior]
+	[wizard]
+
+pragma initial-rule [nonweapon-prof]
 
 [general-prof] agriculture
 	animal handling

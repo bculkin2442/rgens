@@ -12,13 +12,13 @@
 # Other
 # - Expand generic entries (distilled liquour/tea/wine)
 
-[valuable-material] [spices]
+[valuable-materials] [spices]
 	[fabrics]
 	[other-valuable]
 
-pragma export-rule [valuable-materials]
+pragma initial-rule [valuable-materials]
 
-[spices] {@smods:=[spices-mod]} [spices-1]`
+[spices] {@smods:=[spices-mod]} [spices-1]
 
 [spices-1] allspice
 	anise
@@ -70,11 +70,11 @@ pragma export-rule [valuable-materials]
 pragma prefix-with [spices-1] <&0..2> [@smods]
 pragma export-rule [spices]
 
-[fabrics] <^2> [cloth] cloth {$unit=100sqft} {$unit+:=bolt}
-	[%common-pelt|%exotic-pelt] fur {$unit=100sqft} {$unit+:=bundle}
-	[%common-pelt|%exotic-pelt|contraband|%other-pelt] leather {$unit=100sqft} {$unit+:=bundle}
-	scale-hide {$unit=100sqft} {$unit+:=bundle}
-	[fiber] fibers {$unit=pound}
+[fabrics] <^2> [cloth] cloth
+	[%(common-pelt)||%(exotic-pelt)] fur
+	[%(common-pelt)||%(exotic-pelt)||contraband||%(other-pelt)] leather
+	scale-hide
+	[fiber] fibers
 
 [cloth] [other-cloth]
 	giant-spider silk
@@ -161,7 +161,7 @@ pragma export-rule [fabrics]
 	cedar resin
 	copal
 	frankincense
-	<?4> [%common-pelt|exotic-pelt] musk
+	<?4> [%(common-pelt)||(exotic-pelt)] musk
 	myrrh
 	onycha
 	patchouli

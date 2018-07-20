@@ -84,10 +84,20 @@ load grammar diabloii-suffixes    sample-grammars/diablo-ii/diabloiisuffixes.gra
 load grammar turboghoul-hats sample-grammars/vaultsofnagoh/turboghoul-hats.gram
 
 # RPG tools
-load grammar wand rpg-tools-cd/wands.gram
+load grammar harlot rpg-tools-cd/harlot.gram
+load grammar magic-weapon rpg-tools-cd/magic-weapon.gram
+load grammar metalgear rpg-tools-cd/metalgear.gram
+load grammar plothook rpg-tools-cd/plothook.gram
+load grammar profession rpg-tools-cd/profession.gram
+load grammar treasure rpg-tools-cd/treasure.gram
+load grammar wands rpg-tools-cd/wands.gram
 
 # Set II of grammars
 load grammar cbs new-sample-grammars/cbs.gram
+load grammar chargen new-sample-grammars/chargen.gram
+load grammar gems new-sample-grammars/gems.gram
+load grammar noble-jewlery new-sample-grammars/noble-jewlery.gram
+load grammar nonweapon-prof new-sample-grammars/nonweapon-prof.gram
 load grammar repinsults new-sample-grammars/repinsult.gram
 
 # Drakensang online items
@@ -95,8 +105,16 @@ load grammar ds-runes new-sample-grammars/drakensang/runes.gram
 load grammar ds-gems  new-sample-grammars/drakensang/gems.gram
 load grammar ds-armor new-sample-grammars/drakensang/armor.gram
 
+# DungeonFantasy
+load grammar household-items new-sample-grammars/dungeonfantasy-treasure/household-items.gram
+#load grammar mundane-materials new-sample-grammars/dungeonfantasy-treasure/mundane-materials.gram
+load grammar valuable-materials new-sample-grammars/dungeonfantasy-treasure/valuable-materials.gram
+
 # Perchance sample grammars
 load grammar meal new-sample-grammars/perchance/meal.gram
+
+# Springhole generators
+load grammar earthen-names new-sample-grammars/springhole/earthen-names.gram
 
 # Other grammar files
 

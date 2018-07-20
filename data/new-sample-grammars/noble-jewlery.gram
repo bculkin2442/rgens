@@ -1,6 +1,6 @@
-[noble-jewlery]
+#[noble-jewlery] [noble-
 
-pragma initial-rule [noble-jewlery]
+#pragma initial-rule [noble-jewlery]
 
 [jewlery-material] [jewlery-material-1]
 	[jewlery-material-1] and [jewlery-material-1]
@@ -94,6 +94,26 @@ pragma despace-rule [gem-size]
 
 [gem-color] <^19> [gem-color-1]
 	[gem-color-2]
+
+[gem-color-1] bright crimson
+	blood red
+	orange
+	bright yellow
+	yellow ochre
+	yellow green
+	forest green
+	teal
+	sky blue
+	cerulean
+	phthalo blue
+	violet
+	lavender
+	pink
+	brown
+	grey
+	white
+	clear
+	black
 
 [gem-color-2] [gem-color-1] and [gem-color-1] [gem-pattern]
 

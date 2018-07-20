@@ -2,13 +2,13 @@
 	[gem-type] of qaizah
 	[unique-gem]
 
-pragma prefix-with [ds-gem] [gem-adjective]
-pragma prefix-with [ds-gem] [gem-quality]
+pragma prefix-with [ds-gem] [gem-adjective] [gem-quality]
 
 pragma initial-rule [ds-gem]
 
 [gem-quality] <^2> [gem-quality-normal]
-	[gem-quality-alt]
+	[gem-quality-alt-1]
+	[gem-quality-alt-2]
 
 [gem-quality-normal] flawed
 	splintered
@@ -19,20 +19,15 @@ pragma initial-rule [ds-gem]
 	sacred
 	royal
 
-[gem-quality-alt] [gem-quality-alt-1]
-	[gem-quality-alt-2]
-
-[gem-quality-alt-1] lesser
+[gem-quality-alt-1] <^2> lesser
 	cut
 	cruciate
 	astral
-
-[gem-quality-alt-2] lesser
 	small
 	large
 	huge
 
-[gem-adjective] crystal
+[gem-adjective] <?2> crystal
 	festive
 	solstice
 
@@ -86,5 +81,7 @@ pragma prefix-with [unique-trail-1] [gem-descr]
 
 [unique-type] bloodstone
 	moonstone
+	sunstone
+	starstone
 
 pragma prefix-with [unique-type] [gem-descr] [gem-descr]

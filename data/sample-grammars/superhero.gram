@@ -280,17 +280,19 @@ pragma suffix-with [third-part] [fifth-part]
 	<^2> [exalt-type]
 	<^2> [arcana]
 
-[exalt-type] Dawn
-	Zenith
-	Twilight
-	Night
-	Eclipse
+[exalt-type] [Dawn||Zenith||Twilight||Night||Eclipse]
+	[Dusk||Midnight||Daybreak||Day||Midnight]
+	[Full||Waxing||Half||No] Moon
+	Chosen of [Journeys||Serenity||Battle||Endings||Secrets]
+	[Herald||Disciple||Crusader||Shephard]
 
-[arcana] [%tarot-card||%alt-tarot-card]
+[arcana] [%(tarot-card)||%(alt-tarot-card)]
 	Minor Arcana
 	Major Arcana
 	<^3> [ordinal-arcana]
 
-[ordinal-arcana] {empty}
+[ordinal-arcana] <^2> {empty}
+	Arcana [%ordinal||%(ordinal-roman)]
+	[ordinal-number] Arcana
 
-pragma prefix-with [ordinal-arcana] Arcana [%ordinal||%ordinal-roman||%ordinal-number]
+#pragma prefix-with [ordinal-arcana] Arcana [%ordinal||%(ordinal-roman)||%(ordinal-number)]

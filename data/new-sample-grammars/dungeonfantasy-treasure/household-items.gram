@@ -6,6 +6,8 @@
 	[grooming]
 	[personal]
 
+pragma initial-rule [household-item]
+
 [cooking] basin
 	bowl
 	bucket
@@ -43,14 +45,14 @@
 
 [painting] encaustic painting
 	oil painting
-	[tempera|watercolor] painting
+	[tempera||watercolor] painting
 	pennant
 
 [sculpture] [scul-mat] [scul-fig]
 
 [scul-mat] clay
 	bone
-	[porcelain|faience]
+	[porcelain||faience]
 	stone
 	wood
 	ivory

@@ -18,7 +18,8 @@
 
 [nimble] [bimble]
 
-[nimble-bimble] [bimble]
+[nimble-bimble] <^2> {empty}
+	[bimble]
 
 pragma prefix-with [nimble-bimble] [nimble-plural]
 pragma suffix-with [nimble-bimble] [nimble-plural]

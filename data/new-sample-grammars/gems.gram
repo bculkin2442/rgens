@@ -47,7 +47,7 @@ pragma initial-rule [gems]
 	topaz
 	tourmaline
 
-[gems] black opal
+[jewels] black opal
 	black sapphire
 	diamond
 	emerald

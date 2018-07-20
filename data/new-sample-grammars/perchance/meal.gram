@@ -1,6 +1,6 @@
 [meal] It's a [adjective] dish with [type] [main] .
 	The [adjective] [main] is paired with a [size] serving of [condiment] .
-	A [main] with with a bit of [condiment] and some [adjective] [side] on top .
+	A [main] with a bit of [condiment] and some [adjective] [side] on top .
 
 pragma export-rule [meal]
 
@@ -25,7 +25,7 @@ pragma export-rule [meal]
 	unusually fresh
 	roasted
 
-[size] [(small||smol)||(large||hueg)||(tiny||teeny)]
+[size] [([small||smol])||([large||hueg])||([tiny||teeny])]
 
 [condiment] <^2> pepper
 	salt
