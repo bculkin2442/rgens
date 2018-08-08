@@ -2,6 +2,8 @@
 
 [earth-name] [earth+name]
 
+pragma initial-rule [earth-name]
+
 [earth+name] <^6> [sf]
 	<^2> [prefix] [end-long]
 	<^2> [prefix] [suffix] [end-short]

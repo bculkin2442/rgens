@@ -20,6 +20,8 @@ pragma initial-rule [valuable-materials]
 
 [spices] {@smods:=[spices-mod]} [spices-1]
 
+pragma prefix-with [spices] dried
+
 [spices-1] allspice
 	anise
 	annato

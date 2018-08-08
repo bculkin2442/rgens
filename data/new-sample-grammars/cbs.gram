@@ -61,12 +61,14 @@
 pragma prefix-with [boss-title] [boss-title-co] [boss-title-vice]
 
 [boss-age] Senior
+	Junior
 
 [boss-exec] Executive
 	Principal
 
 [boss-groupal] Group
 	Global
+	Local
 
 [boss-department-1] Human Resources
 	Controllers
@@ -917,6 +919,9 @@ pragma export-rule [boss]
 	disciplined
 	accelerated
 	impressive
+	[growth+percent]
+
+[growth+percent] [1..20] [1..20] %
 
 [growth-improvement] growth
 	improvement
