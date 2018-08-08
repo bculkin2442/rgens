@@ -147,7 +147,8 @@ public abstract class CaseElement {
 
 				CaseElement base = createElement(parts[0]);
 
-				return new MethodCaseElement(base, Arrays.copyOfRange(parts, 1, parts.length));
+				parts = Arrays.copyOfRange(parts, 1, parts.length);
+				return new MethodCaseElement(base, parts);
 			} else {
 				return new RuleCaseElement(rawCase);
 			}

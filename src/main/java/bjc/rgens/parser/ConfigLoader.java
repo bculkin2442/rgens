@@ -1,5 +1,7 @@
 package bjc.rgens.parser;
 
+import bjc.utils.funcutils.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,20 +53,18 @@ public class ConfigLoader {
 
 					if (ln.startsWith("#")) continue;
 
-					/* Handle mixed whitespace. */
 					ln = ln.replaceAll("\\s+", " ");
+					String[] parts = StringUtils.levelSplit(ln, " ").toArray(new String[0]);
 
 					/* Get line type */
-					int typeIdx = ln.indexOf(" ");
-					if(typeIdx == -1) {
+					if(parts.length < 1) {
 						throw new GrammarException("Must specify config line type");
 					}
-					String type = ln.substring(0, typeIdx).trim();
-					ln          = ln.substring(typeIdx).trim();
+					String type = parts[0];
 
 					switch(type) {
 					case "load":
-						loadConfigLine(ln, cfgSet, set, cfgParent);
+						loadConfigLine(parts, cfgSet, set, cfgParent);
 						break;
 					default:
 						throw new GrammarException("Unknown config line type " + type);
@@ -93,31 +93,27 @@ public class ConfigLoader {
 		return cfgSet;
 	}
 
-	private static void loadConfigLine(String ln, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
+	private static void loadConfigLine(String[] parts, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
 		/*
 		 * Get the place where the tag ID ends
 		 */
-		int tagIdx = ln.indexOf(" ");
-		if(tagIdx == -1) {
+		if(parts.length < 2) {
 			throw new GrammarException("Must specify a tag as to what a line is");
 		}
-		String tag = ln.substring(0, tagIdx).trim();
-		ln         = ln.substring(tagIdx).trim();
+		String tag = parts[1];
 
 		/* 
 		 * Get the place where the name of the grammar
 		 * ends. 
 		 */
-		int nameIdx = ln.indexOf(" ");
-		if (nameIdx == -1) {
+		if (parts.length < 3) {
 			throw new GrammarException("Must specify a name for a loaded object");
 		}
-		String name = ln.substring(0, nameIdx);
-		ln          = ln.substring(nameIdx).trim();
+		String name = parts[2]; 
 
 		switch(tag) {
 			case "template":
-				loadTemplate(name, ln, cfgSet, set, cfgParent);
+				loadTemplate(name, parts, cfgSet, set, cfgParent);
 				break;
 			case "subset":
 				{
@@ -126,7 +122,7 @@ public class ConfigLoader {
 				}
 			case "gram":
 			case "grammar":
-				loadGrammar(name, ln, cfgSet, set, cfgParent);
+				loadGrammar(name, parts, cfgSet, set, cfgParent);
 				break;
 			default:
 				String msg = String.format("Unrecognized tag type '%s'", tag);
@@ -134,8 +130,12 @@ public class ConfigLoader {
 		}
 	}
 
-	private static void loadTemplate(String name, String ln, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
-		Path path = Paths.get(ln);
+	private static void loadTemplate(String name, String[] parts, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
+		if(parts.length < 4) {
+			throw new GrammarException(String.format("Must specify a path to load template '%s' from", name));
+		}
+
+		Path path = Paths.get(parts[3]);
 
 		/*
 		 * Convert from configuration relative path to
@@ -191,8 +191,12 @@ public class ConfigLoader {
 		}
 	}
 
-	private static void loadGrammar(String name, String ln, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
-		Path path = Paths.get(ln);
+	private static void loadGrammar(String name, String[] parts, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
+		if(parts.length < 4) {
+			throw new GrammarException(String.format("Must provide a path to load grammar '%s' from", name));
+		}
+
+		Path path = Paths.get(parts[3]);
 
 		/*
 		 * Convert from configuration relative path to
@@ -233,9 +237,9 @@ public class ConfigLoader {
 				 * from. 
 				 */
 				set.loadedFrom.put(name, path.toString());
-			} catch (GrammarException gex) {
-				String msg = String.format("Error loading template '%s'", path);
-				throw new GrammarException(msg, gex);
+			} catch (IOException | GrammarException ex) {
+				String msg = String.format("Error loading grammar '%s'", path);
+				throw new GrammarException(msg, ex);
 			}
 		}
 	}
