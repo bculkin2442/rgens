@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Set;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 /**
  * Represents a set of grammars that can share rules via exports.
  *
@@ -26,6 +28,7 @@ public class RGrammarSet {
 	/* Contains which file a grammar was loaded from. */
 	public Map<String, String> loadedFrom;
 
+	/* @NOTE These are replaced by the logging setup */
 	public static final boolean PERF = true;
 	public static final boolean DEBUG = true;
 
@@ -71,12 +74,12 @@ public class RGrammarSet {
 		/* Process exports from the grammar. */
 		for (Rule export : gram.getExportedRules()) {
 			if(exportedRules.containsKey(export.name))
-				System.err.printf("WARN: Shadowing rule %s in %s from %s\n", export.name, export.belongsTo.name, grammarName);
+				warn("Shadowing rule %s in %s from %s", export.name, export.belongsTo.name, grammarName);
 
 			exportedRules.put(export.name, export);
 
 			if(DEBUG)
-				System.err.printf("\t\tDEBUG: %s (%d cases) exported from %s\n", export.name, export.getCases().getSize(), grammarName);
+				debug("%s (%d cases) exported from %s", export.name, export.getCases().getSize(), grammarName);
 		}
 
 		/* Add exports to grammar. */

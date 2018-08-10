@@ -261,7 +261,7 @@ public class RGrammar {
 			start.generate(state);
 		} catch (GrammarException gex) {
 			String msg = String.format("Error in generating case (%s)", start);
-			throw new GrammarException(msg, gex);
+			throw new GrammarException(msg, gex, gex.getRootMessage());
 		}
 	}
 

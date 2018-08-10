@@ -8,6 +8,8 @@ import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.Rule;
 import bjc.rgens.parser.RGrammar;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 public class RuleVariableCaseElement extends VariableDefCaseElement {
 	public final boolean exhaust;
 
@@ -31,9 +33,9 @@ public class RuleVariableCaseElement extends VariableDefCaseElement {
 		state.rlVars.put(varName, rl);
 
 		if(exhaust) {
-			System.err.printf("\t\tFINE: Defined exhausted rulevar '%s' ('%s')\n", varName, varDef);
+			fine("Defined exhausted rulevar '%s' ('%s')", varName, varDef);
 		} else {
-			System.err.printf("\t\tFINE: Defined rulevar '%s' ('%s')\n", varName, varDef);
+			fine("Defined rulevar '%s' ('%s')", varName, varDef);
 		}
 	}
 }

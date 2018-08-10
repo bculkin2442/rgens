@@ -151,6 +151,7 @@ public class RGrammarParser {
 			String name = body.substring(0, nameIndex).trim();
 			String patt = body.substring(nameIndex + 1).trim();
 
+			throw new GrammarException("Regexize-rule pragma not yet supported");
 			//build.regexizeRule(name, patt);
 		});
 
@@ -215,10 +216,10 @@ public class RGrammarParser {
 				return build.toRGrammar();
 			} catch (GrammarException gex) {
 				String msg = String.format("Error in block (%s)", reader.getBlock());
-				throw new GrammarException(msg, gex);
+				throw new GrammarException(msg, gex, gex.getRootMessage());
 			}
 		} catch (Exception ex) {
-			throw new GrammarException("Unknown error handling block", ex);
+			throw new GrammarException("Unknown error handling block", ex, ex.getMessage());
 		}
 	}
 
@@ -301,10 +302,10 @@ public class RGrammarParser {
 				Block pragma = pragmaReader.getBlock();
 				String msg   = String.format("Error in pragma: (%s)", pragma);
 
-				throw new GrammarException(msg, gex);
+				throw new GrammarException(msg, gex, gex.getRootMessage());
 			}
 		} catch (Exception ex) {
-			throw new GrammarException("Unknown error handling pragma block", ex);
+			throw new GrammarException("Unknown error handling pragma block", ex, ex.getMessage());
 		}
 	}
 
@@ -365,10 +366,10 @@ public class RGrammarParser {
 			} catch (GrammarException gex) {
 				String msg = String.format("Error in rule case (%s)", ruleReader.getBlock());
 
-				throw new GrammarException(msg, gex);
+				throw new GrammarException(msg, gex, gex.getRootMessage());
 			}
 		} catch (Exception ex) {
-			throw new GrammarException("Unknown error handling rule block", ex);
+			throw new GrammarException("Unknown error handling rule block", ex, ex.getMessage());
 		}
 	}
 
@@ -453,10 +454,10 @@ public class RGrammarParser {
 				}
 			} catch (GrammarException gex) {
 				throw new GrammarException(String.format("Error in where block (%s)",
-							whereReader.getBlock()), gex);
+							whereReader.getBlock()), gex, gex.getRootMessage());
 			}
 		} catch (Exception ex) {
-			throw new GrammarException("Unknown error in where block", ex);
+			throw new GrammarException("Unknown error in where block", ex, ex.getMessage());
 		}
 	}
 

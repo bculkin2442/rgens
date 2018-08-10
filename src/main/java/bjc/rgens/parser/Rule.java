@@ -7,6 +7,8 @@ import bjc.utils.gen.WeightedRandom;
 
 import java.util.Random;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 /**
  * A rule in a randomized grammar.
  *
@@ -230,7 +232,7 @@ public class Rule {
 		if(doRecur()) {
 			RuleCase cse = getCase(state.rnd);
 
-			System.err.printf("\tFINE: Generating %s (from %s)\n", cse, belongsTo.name);
+			fine("FINE: Generating %s (from %s)", cse, belongsTo.name);
 
 			belongsTo.generateCase(cse, state);
 

@@ -17,6 +17,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 /**
  * Construct randomized grammars piece by piece.
  *
@@ -74,7 +76,7 @@ public class RGrammarBuilder {
 
 		if(initialRule != null) {
 			if(!rules.containsKey(initialRule)) {
-				throw new GrammarException(String.format("Rule '%s' doesn't exist\n", initialRule));
+				throw new GrammarException(String.format("Rule '%s' doesn't exist", initialRule));
 			}
 		}
 
@@ -82,7 +84,7 @@ public class RGrammarBuilder {
 
 		for(String export : exportedRules) {
 			if(!rules.containsKey(export)) {
-				throw new GrammarException(String.format("Rule '%s' doesn't exist\n", export));
+				throw new GrammarException(String.format("Rule '%s' doesn't exist", export));
 			}
 		}
 
@@ -262,7 +264,7 @@ public class RGrammarBuilder {
 			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().elementList)));
 		}
 
-		System.err.printf("\t\tTRACE: Despacing %d cases of rule %s\n", caseList.getSize(), ruleName);
+		trace("Despacing %d cases of rule %s", caseList.getSize(), ruleName);
 
 		rules.get(ruleName).replaceCases(newCaseList);
 	}
@@ -317,16 +319,17 @@ public class RGrammarBuilder {
 
 		Rule rl = rules.get(ruleName);
 
-		rl.prob          = Rule.ProbType.BINOMIAL;
+		rl.prob = Rule.ProbType.BINOMIAL;
 
 		rl.target = target;
 		rl.bound  = bound;
 		rl.trials = trials;
 	}
+
 	/*
 	 * @TODO
 	 *
-	 * Actually get this working
+	 * Figure out how this should work, and get this working.
 	 */
 	/*
 	public void regexizeRule(String rule, String pattern) {
@@ -355,7 +358,7 @@ public class RGrammarBuilder {
 	 * @NOTE
 	 *
 	 * This should be moved into its own class somewhere, as it is general
-	 * eneough.
+	 * enough.
 	 */
 	private static <T> List<List<T>> powerList(Set<T> elements) {
 		/*
@@ -391,7 +394,7 @@ public class RGrammarBuilder {
 			}
 
 			for(List<T> permute : ListUtils.permuteList(stor)) {
-				System.err.printf("\t\tTRACE: generated permute ");
+				//System.err.printf("\t\tTRACE: generated permute ");
 				for(T elm : permute) {
 					System.err.printf("%s ", elm);
 				}

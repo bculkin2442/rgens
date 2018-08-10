@@ -7,6 +7,8 @@ import bjc.rgens.parser.GrammarException;
 
 import java.util.Arrays;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 /**
  * A element in a rule case.
  *
@@ -93,7 +95,7 @@ public abstract class CaseElement {
 
 				char op = varName.charAt(varName.length() - 1);
 
-				System.err.printf("\t\tTRACE: Colon definition w/ op %d", (int)op);
+				trace("Colon definition w/ op %d", (int)op);
 
 				// Remove the colon, plus any tacked on operator
 				varName = varName.substring(0, varName.length() - 2);
@@ -138,7 +140,7 @@ public abstract class CaseElement {
 
 				return new InlineRuleCaseElement(elms);
 			} else if(rawCase.contains("|")) {
-				throw new GrammarException("\t\tERROR: Inline rule using | found, they use || now");
+				throw new GrammarException("Inline rule using | found, they use || now");
 
 				// String[] elms = StringUtils.levelSplit(rawCase, "|").toArray(new String[0]);
 				// return new InlineRuleCaseElement(elms);

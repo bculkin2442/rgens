@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import bjc.rgens.parser.templates.GrammarTemplate;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 public class ConfigLoader {
 	/**
 	 * Load a grammar set from a configuration file.
@@ -70,16 +72,13 @@ public class ConfigLoader {
 						throw new GrammarException("Unknown config line type " + type);
 					}
 				} catch(GrammarException gex) {
-					System.out.printf("ERROR: Line %s of config set %s\n", lno, cfgFile);
+					System.out.printf("ERROR: Line %s of config set %s (%s)\n", lno, cfgFile, gex.getRootMessage());
 
-					System.err.printf("ERROR: Line %s of config set %s\n", lno, cfgFile);
+					error(gex, "Line %s of config set %s (%s)", lno, cfgFile, gex.getRootMessage());
 					gex.printStackTrace();
 
 					System.out.println();
 					System.out.println();
-
-					System.err.println();
-					System.err.println();
 				}
 			}
 		}
@@ -88,7 +87,7 @@ public class ConfigLoader {
 
 		long cfgDur = endCFGTime - startCFGTime;
 
-		System.err.printf("\n\nPERF: Read config file %s in %d ns (%f s)\n", cfgFile, cfgDur, cfgDur / 1000000000.0);
+		perf("Read config file %s in %d ns (%f s)", cfgFile, cfgDur, cfgDur / 1000000000.0);
 
 		return cfgSet;
 	}
@@ -98,7 +97,7 @@ public class ConfigLoader {
 		 * Get the place where the tag ID ends
 		 */
 		if(parts.length < 2) {
-			throw new GrammarException("Must specify a tag as to what a line is");
+			throw new GrammarException("Must specify object tag");
 		}
 		String tag = parts[1];
 
@@ -107,7 +106,7 @@ public class ConfigLoader {
 		 * ends. 
 		 */
 		if (parts.length < 3) {
-			throw new GrammarException("Must specify a name for a loaded object");
+			throw new GrammarException("Must specify a name for a loaded " + tag);
 		}
 		String name = parts[2]; 
 
@@ -117,7 +116,11 @@ public class ConfigLoader {
 				break;
 			case "subset":
 				{
-					/* @TODO implement subset grammars */
+					/* 
+					 *@TODO Ben Culkin 9/8/17 :SubsetGrammar
+					 *
+					 * Implement subset grammars.
+					 */
 					throw new GrammarException("Sub-grammar sets aren't implemented yet");
 				}
 			case "gram":
@@ -125,8 +128,7 @@ public class ConfigLoader {
 				loadGrammar(name, parts, cfgSet, set, cfgParent);
 				break;
 			default:
-				String msg = String.format("Unrecognized tag type '%s'", tag);
-				throw new GrammarException(msg);
+				throw new GrammarException(String.format("Unrecognized tag type '%s'", tag));
 		}
 	}
 
@@ -144,7 +146,7 @@ public class ConfigLoader {
 		Path convPath = cfgParent.resolve(path.toString());
 
 		if(Files.isDirectory(convPath)) {
-			throw new GrammarException("Can't load grammar from directory" + convPath.toString());
+			throw new GrammarException(String.format("%s is not a valid grammar file", convPath));
 		} else {
 			/* Load template file. */
 			try {
@@ -155,7 +157,7 @@ public class ConfigLoader {
 				template.belongsTo = cfgSet;
 
 				if(template.name == null) {
-					System.err.printf("\tINFO: Naming unnamed template loaded from %s off config name '%s'\n",
+					info("Naming unnamed template loaded from path %s off config name '%s'",
 							convPath, name);
 
 					template.name = name;
@@ -167,7 +169,7 @@ public class ConfigLoader {
 
 				long fileTime = endFileTime - startFileTime;
 
-				System.err.printf("\tPERF: Read template %s (from %s) in %d ns (%f s)\n",
+				perf("Read template %s (from %s) in %d ns (%f s)",
 						template.name, convPath, fileTime, fileTime  / 1000000000.0);
 
 				/* Add grammar to the set. */
@@ -176,17 +178,14 @@ public class ConfigLoader {
 				/*
 				 * @NOTE
 				 *
-				 * Do we need to do this
-				 * for templates?
+				 * Do we need to do this for templates?
 				 *
-				 * Mark where the
-				 * template came
-				 * from. 
 				 */
+				//Mark where the template came from. 
 				//set.loadedFrom.put(name, path.toString());
 			} catch (GrammarException gex) {
 				String msg = String.format("Error loading template file '%s'", path);
-				throw new GrammarException(msg, gex);
+				throw new GrammarException(msg, gex, gex.getRootMessage());
 			}
 		}
 	}
@@ -205,7 +204,7 @@ public class ConfigLoader {
 		Path convPath = cfgParent.resolve(path.toString());
 
 		if(Files.isDirectory(convPath)) {
-			throw new GrammarException("Can't load grammar from directory" + convPath.toString());
+			throw new GrammarException(String.format("%s is not a valid grammar file", convPath));
 		} else {
 			/* Load grammar file. */
 			try {
@@ -214,7 +213,7 @@ public class ConfigLoader {
 				BufferedReader fis = Files.newBufferedReader(convPath);
 				RGrammar gram = RGrammarParser.readGrammar(fis);
 				if(gram.name == null) {
-					System.err.printf("\tINFO: Naming unnamed grammar loaded from %s off config name '%s'\n",
+					info("Naming unnamed grammar loaded from %s off config name '%s'",
 							convPath, name);
 
 					gram.name = name;
@@ -226,7 +225,7 @@ public class ConfigLoader {
 
 				long fileTime = endFileTime - startFileTime;
 
-				System.err.printf("\tPERF: Read grammar %s (from %s) in %d ns (%f s)\n",
+				perf("Read grammar %s (from %s) in %d ns (%f s)",
 						gram.name, convPath, fileTime, fileTime  / 1000000000.0);
 
 				/* Add grammar to the set. */
@@ -237,10 +236,14 @@ public class ConfigLoader {
 				 * from. 
 				 */
 				set.loadedFrom.put(name, path.toString());
-			} catch (IOException | GrammarException ex) {
+			} catch(GrammarException gex) {
 				String msg = String.format("Error loading grammar '%s'", path);
-				throw new GrammarException(msg, ex);
+				throw new GrammarException(msg, gex, gex.getRootMessage());
+			} catch (IOException ioex) {
+				String msg = String.format("Error loading grammar '%s'", path);
+				throw new GrammarException(msg, ioex);
 			}
+				
 		}
 	}
 }

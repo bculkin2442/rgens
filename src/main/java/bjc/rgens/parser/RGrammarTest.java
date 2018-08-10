@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
+
 /**
  * Test for new grammar syntax.
  *
@@ -74,7 +76,7 @@ public class RGrammarTest {
 
 			long suggDur = endSuggTime - startSuggTime;
 
-			System.err.printf("PERF: Generated rule suggestions for %s in %d ns (%f s)\n", gramName, suggDur, suggDur / 1000000000.0);
+			perf("Generated rule suggestions for %s in %d ns (%f s)", gramName, suggDur, suggDur / 1000000000.0);
 		}
 
 		System.err.printf("\n\n");
@@ -101,24 +103,20 @@ public class RGrammarTest {
 					}
 				} catch (GrammarException gex) {
 					/* Print out errors with generation. */
-					String fmt     = "ERROR: Exported rule %s from %s failed (loaded from '%s')\n";
+					String fmt     = "Exported rule %s from %s failed (loaded from '%s')";
 
-					System.out.printf(fmt, exportName, grammar.name, loadSrc);
+					System.out.printf("ERROR: " + fmt, exportName, grammar.name, loadSrc);
 					System.out.println();
 					System.out.println();
 
-					System.err.printf(fmt, exportName, grammar.name, loadSrc);
-					gex.printStackTrace();
-
-					System.err.println();
-					System.err.println();
+					error(gex, fmt, exportName, grammar.name, loadSrc);
 				}
 			}
 			long endGenTime = System.nanoTime();
 
 			long genDur = endGenTime - startGenTime;
 
-			System.err.printf("PERF: Generated %s 100 times in %d ns (%f s)\n\n\n", exportName, genDur, genDur / 1000000000.0);
+			perf("Generated %s 100 times in %d ns (%f s)", exportName, genDur, genDur / 1000000000.0);
 		}
 	}
 }

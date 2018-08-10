@@ -10,6 +10,8 @@ public class GrammarException extends RuntimeException {
 	/* Serialization ID. */
 	private static final long serialVersionUID = -7287427479316953668L;
 
+	private String rootMessage;
+
 	/**
 	 * Create a new grammar exception with the specified message.
 	 *
@@ -32,5 +34,37 @@ public class GrammarException extends RuntimeException {
 	 */
 	public GrammarException(String msg, Exception cause) {
 		super(msg, cause);
+	}
+
+	/**
+	 * Create a new grammar exception with the specified message.
+	 *
+	 * @param msg
+	 * 	The message for this exception.
+	 */
+	public GrammarException(String msg, String rootMsg) {
+		super(msg);
+
+		this.rootMessage = rootMsg;
+	}
+
+	/**
+	 * Create a new grammar exception with the specified message and
+	 * cause.
+	 *
+	 * @param msg
+	 * 	The message for this exception.
+	 *
+	 * @param cause
+	 * 	The cause of this exception.
+	 */
+	public GrammarException(String msg, Exception cause, String rootMsg) {
+		super(msg, cause);
+
+		this.rootMessage = rootMsg;
+	}
+
+	public String getRootMessage() {
+		return rootMessage == null? getMessage() : rootMessage;
 	}
 }
