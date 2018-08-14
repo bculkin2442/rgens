@@ -23,6 +23,12 @@ public class Rule {
 	/* The cases for this rule. */
 	private WeightedRandom<RuleCase> cases;
 
+	/*
+	 * @NOTE
+	 *
+	 * Perhaps this should be split into subclasses along prob type? I'm not
+	 * sure as to whether or not that would be a useful thing to do.
+	 */
 	public static enum ProbType {
 		NORMAL,
 		DESCENDING,
@@ -37,12 +43,17 @@ public class Rule {
 	public int bound;
 	public int trials;
 
+	// @TODO This default should be configurable in some way
 	public int recurLimit = 5;
 	private int currentRecur;
 
 	private final static Random BASE = new Random();
 
-	private int serial = 1;
+	private int caseCount = 0;
+
+	private int serial;
+	private static int nextSerial = 0;
+
 	/**
 	 * Create a new grammar rule.
 	 *
@@ -53,6 +64,8 @@ public class Rule {
 	 * 	If the rule name is invalid.
 	 */
 	public Rule(String ruleName) {
+		serial = ++nextSerial;
+
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
@@ -88,8 +101,7 @@ public class Rule {
 		}
 
 		cse.belongsTo = this;
-		cse.debugName = String.format("%s-%d", name, serial);
-		serial += 1;
+		cse.debugName = String.format("%s-%d", name, ++caseCount);
 
 		cases.addProbability(weight, cse);
 	}
@@ -148,8 +160,7 @@ public class Rule {
 		for(IPair<Integer, RuleCase> cse : cases) {
 			RuleCase cs = cse.getRight();
 			cs.belongsTo = this;
-			cs.debugName = String.format("%s-%d", name, serial);
-			serial += 1;
+			cs.debugName = String.format("%s-%d", name, ++caseCount);
 
 			this.cases.addProbability(cse.getLeft(), cs);
 		}
@@ -202,6 +213,7 @@ public class Rule {
 
 	public void endRecur() {
 		if(currentRecur > 0) currentRecur -= 1;
+		else throw new IllegalStateException("endRecur without matching doRecur");
 	}
 
 	public Rule exhaust() {
@@ -220,7 +232,14 @@ public class Rule {
 		rl.trials = trials;
 
 		rl.recurLimit = recurLimit;
-		/* @NOTE Is this the right thing to do? */
+		/* @NOTE 
+		 *
+		 * Is this the right thing to do?
+		 *
+		 * At least for now it is. I can't think of any intentional
+		 * situations where this would cause issues, but it'll be kept
+		 * in mind -- 8/14/18
+		 */
 		rl.currentRecur = 0;
 
 		return rl;
@@ -232,7 +251,7 @@ public class Rule {
 		if(doRecur()) {
 			RuleCase cse = getCase(state.rnd);
 
-			fine("FINE: Generating %s (from %s)", cse, belongsTo.name);
+			fine("Generating %s (from %s)", cse, belongsTo.name);
 
 			belongsTo.generateCase(cse, state);
 

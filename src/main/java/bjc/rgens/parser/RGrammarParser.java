@@ -33,6 +33,9 @@ public class RGrammarParser {
 	 *  Whether we are in debug mode or not.
 	 */
 	public static final boolean DEBUG = false;
+	/**
+	 * Whether or not to log endline numbers
+	 */
 	public static final boolean LINES = true;
 
 	/*
