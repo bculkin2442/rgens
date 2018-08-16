@@ -8,6 +8,7 @@ import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.funcutils.ListUtils;
 import bjc.utils.funcutils.SetUtils;
+import bjc.utils.funcutils.StringUtils;
 import bjc.utils.funcutils.TriConsumer;
 import bjc.utils.ioutils.blocks.Block;
 import bjc.utils.ioutils.blocks.BlockReader;
@@ -58,29 +59,34 @@ public class RGrammarParser {
 		pragmas = new HashMap<>();
 
 		pragmas.put("initial-rule", (body, build, level) -> {
-			int sep = body.indexOf(' ');
+			List<String> bits = StringUtils.levelSplit(body, " ");
 
-			if (sep != -1) {
-				String msg = "Initial-rule pragma takes only one argument, the name of the initial rule";
+			if (bits.size() != 1) {
+				String msg = "Must specify initial rule";
 				throw new GrammarException(msg);
 			}
 
-			build.setInitialRule(body);
+			build.setInitialRule(bits.get(0));
 		});
 
 		pragmas.put("despace-rule", (body, build, level) -> {
-			int sep = body.indexOf(' ');
+			List<String> bits = StringUtils.levelSplit(body, " ");
 
-			if (sep != -1) {
-				String msg = "despace-rule pragma takes only one argument, the name of the rule to despace";
-				throw new GrammarException(msg);
+			if (bits.size() < 1) {
+				throw new GrammarException("Must specify rules to despace");
 			}
 
-			build.despaceRule(body);
+			for(String bit : bits) {
+				build.despaceRule(bit);
+			}
 		});
 
 		pragmas.put("export-rule", (body, build, level) -> {
-			String[] exports = body.split(" ");
+			List<String> exports = StringUtils.levelSplit(body, " ");
+
+			if(exports.size() < 1) {
+				throw new GrammarException("Must specify rules to export");
+			}
 
 			for (String export : exports) {
 				build.addExport(export);
@@ -88,60 +94,60 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("recur-limit", (body, build, level) -> {
-			String[] parts = body.split(" ");
+			List<String> parts = StringUtils.levelSplit(body, " ");
 
-			if(parts.length != 2) {
+			if(parts.size() != 2) {
 				throw new GrammarException("Recur-limit pragma takes two arguments: the name of the rule to set the limit for, and the new value of the limit");
 			}
 
-			if(!parts[1].matches("\\A\\d+\\Z")) {
+			if(!parts.get(1).matches("\\A\\d+\\Z")) {
 				throw new GrammarException("Limit value must be an integer");
 			}
 
-			build.setRuleRecur(parts[0], Integer.parseInt(parts[1]));
+			build.setRuleRecur(parts.get(0), Integer.parseInt(parts.get(1)));
 		});
 
 		pragmas.put("enable-weight", (body, build, level) -> {
-			String[] parts = body.split(" ");
+			List<String> parts = StringUtils.levelSplit(body, " ");
 
-			if(parts.length != 2) {
-				throw new GrammarException("Enable-weight pragma takes one arguments: the name of the rule to set the weight factor for");
+			if(parts.size() != 1) {
+				throw new GrammarException("Enable-weight pragma takes one argument: the name of the rule to set the weight factor for");
 			}
 
-			build.setWeight(parts[0]);
+			build.setWeight(parts.get(0));
 		});
 		pragmas.put("enable-descent", (body, build, level) -> {
-			String[] parts = body.split(" ");
+			List<String> parts = StringUtils.levelSplit(body, " ");
 
-			if(parts.length != 2) {
+			if(parts.size() != 2) {
 				throw new GrammarException("Enable-descent pragma takes two arguments: the name of the rule to set the descent factor for, and the new value of the factor");
 			}
 
-			if(!parts[1].matches("\\A\\d+\\Z")) {
+			if(!parts.get(1).matches("\\A\\d+\\Z")) {
 				throw new GrammarException("Factor value must be an integer");
 			}
 
-			build.setDescent(parts[0], Integer.parseInt(parts[1]));
+			build.setDescent(parts.get(0), Integer.parseInt(parts.get(1)));
 		});
 
 		pragmas.put("enable-binomial", (body, build, level) -> {
-			String[] parts = body.split(" ");
+			List<String> parts = StringUtils.levelSplit(body, " ");
 
-			if(parts.length != 4) {
+			if(parts.size() != 4) {
 				throw new GrammarException("Enable-descent pragma takes four arguments: the name of the rule to set the binomial factors for, and the three binomial parameters (target, bound trials)");
 			}
 
-			if(!parts[1].matches("\\A\\d+\\Z")) {
+			if(!parts.get(1).matches("\\A\\d+\\Z")) {
 				throw new GrammarException("Target value must be an integer");
 			}
-			if(!parts[2].matches("\\A\\d+\\Z")) {
+			if(!parts.get(2).matches("\\A\\d+\\Z")) {
 				throw new GrammarException("Bound value must be an integer");
 			}
-			if(!parts[3].matches("\\A\\d+\\Z")) {
+			if(!parts.get(3).matches("\\A\\d+\\Z")) {
 				throw new GrammarException("Trials value must be an integer");
 			}
 
-			build.setBinomial(parts[0], Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+			build.setBinomial(parts.get(0), Integer.parseInt(parts.get(1)), Integer.parseInt(parts.get(2)), Integer.parseInt(parts.get(3)));
 		});
 
 		pragmas.put("regex-rule", (body, build, level) -> {
