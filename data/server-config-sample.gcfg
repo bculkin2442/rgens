@@ -1,3 +1,5 @@
+load directory testdir .
+
 # Load 'long rules' -- Grammars which generally are used as part of the output
 # for other grammars
 load grammar animal            sample-grammars/long-data/animal.gram

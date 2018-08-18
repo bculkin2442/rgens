@@ -1,5 +1,6 @@
 package bjc.rgens.parser;
 
+import bjc.utils.funcutils.FileUtils;
 import bjc.utils.funcutils.StringUtils;
 
 import java.io.BufferedReader;
@@ -127,9 +128,106 @@ public class ConfigLoader {
 			case "grammar":
 				loadGrammar(name, parts, cfgSet, set, cfgParent);
 				break;
+			case "directory":
+				loadDirectory(name, parts, cfgSet, set, cfgParent);
+				break;
 			default:
 				throw new GrammarException(String.format("Unrecognized tag type '%s'", tag));
 		}
+	}
+
+	private static void loadDirectory(String name, String[] parts, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
+		if(parts.length < 4) {
+			throw new GrammarException(String.format("Must specify a path to load directory '%s' from"));
+		}
+
+		Path path = Paths.get(parts[3]);
+
+		/*
+		 * Convert from configuration relative path to
+		 * absolute path.
+		 */
+		Path dirPath = cfgParent.resolve(path.toString());
+
+		if(!Files.isDirectory(dirPath)) {
+			throw new GrammarException(String.format("%s is not a valid directory", dirPath));
+		} else {
+			FileUtils.traverseDirectory(dirPath, (fle, atts) -> {
+				// We want to consider all the files
+				return true;
+			}, (fle, atts) -> {
+				Path normFle = fle.normalize();
+
+				String fleName = normFle.toString();
+				
+				try {
+					if(fleName.endsWith(".gram")) {
+						BufferedReader rdr = Files.newBufferedReader(normFle);
+
+						doLoadGrammar(rdr, null, cfgSet, set, dirPath, normFle);
+					} else if(fleName.endsWith(".gtpl")) {
+						BufferedReader rdr = Files.newBufferedReader(normFle);
+
+						doLoadTemplate(rdr, null, cfgSet, set, dirPath);
+					} else if(fleName.endsWith(".class")) {
+						// Ignore these
+					} else {
+						info("Ignoring file '%s' of unknown type", fleName);
+					}
+				} catch (GrammarException gex) {
+					error(gex, "Error loading file %s (%s)", normFle, gex.getRootMessage());
+				} catch (IOException ioex) {
+					error(ioex, "Error loading file %s", normFle);
+				}
+
+				return true;
+			});
+		}
+	}
+
+	private static void doLoadTemplate(BufferedReader rdr, String name, ConfigSet cfgSet, RGrammarSet set, Path convPath) throws IOException {
+		String actName;
+		
+		long startFileTime = System.nanoTime();
+
+		GrammarTemplate template = GrammarTemplate.readTemplate(rdr);
+		template.belongsTo = cfgSet;
+
+		if(template.name == null) {
+			if(name == null) {
+				info("Using default name for template from path '%s'", convPath);
+
+				actName = "default-name";
+			} else {
+				actName = name;
+			}
+
+			info("Naming unnamed template loaded from path %s off config name '%s'",
+					convPath, actName);
+
+			template.name = actName;
+		}
+
+		rdr.close();
+
+		long endFileTime = System.nanoTime();
+
+		long fileTime = endFileTime - startFileTime;
+
+		perf("Read template %s (from %s) in %d ns (%f s)",
+				template.name, convPath, fileTime, fileTime  / 1000000000.0);
+
+		/* Add grammar to the set. */
+		cfgSet.templates.put(template.name, template);
+
+		/*
+		 * @NOTE
+		 *
+		 * Do we need to do this for templates?
+		 *
+		 */
+		//Mark where the template came from. 
+		//set.loadedFrom.put(template.name, path.toString());
 	}
 
 	private static void loadTemplate(String name, String[] parts, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
@@ -150,44 +248,53 @@ public class ConfigLoader {
 		} else {
 			/* Load template file. */
 			try {
-				long startFileTime = System.nanoTime();
-
 				BufferedReader fis = Files.newBufferedReader(convPath);
-				GrammarTemplate template = GrammarTemplate.readTemplate(fis);
-				template.belongsTo = cfgSet;
-
-				if(template.name == null) {
-					info("Naming unnamed template loaded from path %s off config name '%s'",
-							convPath, name);
-
-					template.name = name;
-				}
-
-				fis.close();
-
-				long endFileTime = System.nanoTime();
-
-				long fileTime = endFileTime - startFileTime;
-
-				perf("Read template %s (from %s) in %d ns (%f s)",
-						template.name, convPath, fileTime, fileTime  / 1000000000.0);
-
-				/* Add grammar to the set. */
-				cfgSet.templates.put(name, template);
-
-				/*
-				 * @NOTE
-				 *
-				 * Do we need to do this for templates?
-				 *
-				 */
-				//Mark where the template came from. 
-				//set.loadedFrom.put(name, path.toString());
+				doLoadTemplate(fis, name, cfgSet, set, convPath);
 			} catch (GrammarException gex) {
 				String msg = String.format("Error loading template file '%s'", path);
 				throw new GrammarException(msg, gex, gex.getRootMessage());
 			}
 		}
+	}
+
+	private static void doLoadGrammar(BufferedReader rdr, String name, ConfigSet cfgSet, RGrammarSet set, Path convPath, Path pth) throws IOException {
+		String actName;
+
+		long startFileTime = System.nanoTime();
+
+		RGrammar gram = RGrammarParser.readGrammar(rdr);
+		if(gram.name == null) {
+			if(name == null) {
+				info("Using default name from grammar for '%s'", convPath);
+
+				actName = "default-name";
+			} else {
+				actName = name;
+			}
+
+			info("Naming unnamed grammar loaded from %s off config name '%s'",
+					pth, actName);
+
+			gram.name = actName;
+		}
+
+		rdr.close();
+
+		long endFileTime = System.nanoTime();
+
+		long fileTime = endFileTime - startFileTime;
+
+		perf("Read grammar %s (from %s) in %d ns (%f s)",
+				gram.name, convPath, fileTime, fileTime  / 1000000000.0);
+
+		/* Add grammar to the set. */
+		set.addGrammar(gram.name, gram);
+
+		/*
+		 * Mark where the grammar came
+		 * from. 
+		 */
+		set.loadedFrom.put(gram.name, pth.toString());
 	}
 
 	private static void loadGrammar(String name, String[] parts, ConfigSet cfgSet, RGrammarSet set, Path cfgParent) throws IOException {
@@ -211,31 +318,7 @@ public class ConfigLoader {
 				long startFileTime = System.nanoTime();
 
 				BufferedReader fis = Files.newBufferedReader(convPath);
-				RGrammar gram = RGrammarParser.readGrammar(fis);
-				if(gram.name == null) {
-					info("Naming unnamed grammar loaded from %s off config name '%s'",
-							convPath, name);
-
-					gram.name = name;
-				}
-
-				fis.close();
-
-				long endFileTime = System.nanoTime();
-
-				long fileTime = endFileTime - startFileTime;
-
-				perf("Read grammar %s (from %s) in %d ns (%f s)",
-						gram.name, convPath, fileTime, fileTime  / 1000000000.0);
-
-				/* Add grammar to the set. */
-				set.addGrammar(name, gram);
-
-				/*
-				 * Mark where the grammar came
-				 * from. 
-				 */
-				set.loadedFrom.put(name, path.toString());
+				doLoadGrammar(fis, name, cfgSet, set, convPath, path);
 			} catch(GrammarException gex) {
 				String msg = String.format("Error loading grammar '%s'", path);
 				throw new GrammarException(msg, gex, gex.getRootMessage());
@@ -243,7 +326,6 @@ public class ConfigLoader {
 				String msg = String.format("Error loading grammar '%s'", path);
 				throw new GrammarException(msg, ioex);
 			}
-				
 		}
 	}
 }
