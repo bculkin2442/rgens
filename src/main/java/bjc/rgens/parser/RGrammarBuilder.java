@@ -145,49 +145,9 @@ public class RGrammarBuilder {
 	 * 	grammar, or if the suffix is invalid.
 	 */
 	public void suffixWith(String ruleName, IList<CaseElement> suffixes) {
-		if (ruleName == null) {
-			throw new NullPointerException("Rule name must not be null");
-		} else if (ruleName.equals("")) {
-			throw new IllegalArgumentException("The empty string is not a valid rule name");
-		} else if(!rules.containsKey(ruleName)) {
-			String msg = String.format("Rule '%s' is not a valid rule name");
-
-			throw new IllegalArgumentException(msg);
-		}
-
-		Set<CaseElement> elements = new HashSet<>(suffixes.getSize());
-		for(CaseElement suffix : suffixes) {
-			elements.add(suffix);
-		}
-		
-		List<List<CaseElement>> suffixLists = powerList(elements);
-
-		FunctionalList<IPair<Integer, RuleCase>> newCases = new FunctionalList<>();
-
-		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
-		for (IPair<Integer, RuleCase> ruleCase : caseList) {
-			RuleCase cas = ruleCase.getRight();
-
-			for(List<CaseElement> suffixList : suffixLists) {
-				FunctionalList<CaseElement> newCase = new FunctionalList<>();
-
-				for(CaseElement elm : cas.elementList) {
-					newCase.add(elm);
-				}
-
-				for(CaseElement element : suffixList) {
-					newCase.add(element);
-				}
-
-				newCases.add(new Pair<>(ruleCase.getLeft(), cas.withElements(newCase)));
-			}
-		}
-
-
-		for (IPair<Integer, RuleCase> newCase : newCases) {
-			rules.get(ruleName).addCase(newCase.getRight(), newCase.getLeft());
-		}
+		affixWith(ruleName, suffixes, AffixType.SUFFIX);
 	}
+
 
 	/**
 	 * Prefix a given case element to every case of a specific rule.
@@ -203,6 +163,23 @@ public class RGrammarBuilder {
 	 * 	grammar, or if the prefix is invalid.
 	 */
 	public void prefixWith(String ruleName, IList<CaseElement> prefixes) {
+		affixWith(ruleName, prefixes, AffixType.PREFIX);
+	}
+
+	private static enum AffixType {
+		SUFFIX,
+		PREFIX;
+
+		public boolean isSuffix() {
+			return this == SUFFIX;
+		}
+
+		public boolean isPrefix() {
+			return this == PREFIX;
+		}
+	}
+
+	private void affixWith(String ruleName, IList<CaseElement> affixes, AffixType type) {
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {
@@ -213,12 +190,12 @@ public class RGrammarBuilder {
 			throw new IllegalArgumentException(msg);
 		}
 
-		Set<CaseElement> elements = new HashSet<>(prefixes.getSize());
-		for(CaseElement prefix : prefixes) {
-			elements.add(prefix);
+		Set<CaseElement> elements = new HashSet<>(affixes.getSize());
+		for(CaseElement affix : affixes) {
+			elements.add(affix);
 		}
 		
-		List<List<CaseElement>> prefixLists = powerList(elements);
+		List<List<CaseElement>> affixLists = powerList(elements);
 
 		FunctionalList<IPair<Integer, RuleCase>> newCases = new FunctionalList<>();
 
@@ -226,16 +203,25 @@ public class RGrammarBuilder {
 		for (IPair<Integer, RuleCase> ruleCase : caseList) {
 			RuleCase cas = ruleCase.getRight();
 
-			for(List<CaseElement> prefixList : prefixLists) {
+			for(List<CaseElement> affixList : affixLists) {
 				FunctionalList<CaseElement> newCase = new FunctionalList<>();
 
-				for(CaseElement elm: prefixList) {
-					newCase.add(elm);
+				if(type.isPrefix()) {
+					for(CaseElement element : affixList) {
+						newCase.add(element);
+					}
 				}
 
-				for(CaseElement elm :cas.elementList) {
+				for(CaseElement elm : cas.elementList) {
 					newCase.add(elm);
 				}
+				
+				if(type.isSuffix()) {
+					for(CaseElement element : affixList) {
+						newCase.add(element);
+					}
+				}
+
 
 				newCases.add(new Pair<>(ruleCase.getLeft(), cas.withElements(newCase)));
 			}
