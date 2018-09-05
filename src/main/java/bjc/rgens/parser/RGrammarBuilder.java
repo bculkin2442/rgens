@@ -179,20 +179,38 @@ public class RGrammarBuilder {
 		affixWith(ruleName, prefixes, AffixType.PREFIX);
 	}
 
-	private static enum AffixType {
+	/**
+	 * Prefix and suffix a given case element to every case of a specific rule.
+	 *
+	 * @param ruleName
+	 * 	The rule to prefix and suffix.
+	 *
+	 * @param prefix
+	 * 	The prefix/suffix to add.
+	 *
+	 * @throws IllegalArgumentException
+	 * 	If the rule name is either invalid or not defined by this
+	 * 	grammar, or if the prefix/suffix is invalid.
+	 */
+	public void circumfixWith(String ruleName, IList<CaseElement> prefixes) {
+		affixWith(ruleName, prefixes, AffixType.CIRCUMFIX);
+	}
+
+	public static enum AffixType {
+		CIRCUMFIX,
 		SUFFIX,
 		PREFIX;
 
 		public boolean isSuffix() {
-			return this == SUFFIX;
+			return this != PREFIX;
 		}
 
 		public boolean isPrefix() {
-			return this == PREFIX;
+			return this != SUFFIX;
 		}
 	}
 
-	private void affixWith(String ruleName, IList<CaseElement> affixes, AffixType type) {
+	public void affixWith(String ruleName, IList<CaseElement> affixes, AffixType type) {
 		if (ruleName == null) {
 			throw new NullPointerException("Rule name must not be null");
 		} else if (ruleName.equals("")) {

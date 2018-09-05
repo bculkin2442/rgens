@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static bjc.rgens.parser.RGrammarLogging.*;
+import static bjc.rgens.parser.RGrammarBuilder.AffixType;
 /**
  * Reads {@link RGrammar} from a input stream.
  *
@@ -182,30 +183,17 @@ public class RGrammarParser {
 			//build.regexizeRule(name, patt);
 		});
 
-		pragmas.put("suffix-with", (body, build, level) -> {
-			int idx = body.indexOf(" ");
-
-			if (idx == -1) {
-				String msg = "Suffix-with pragma takes at least two arguments, the name of the rule to suffix, then what to suffix it with\n\tThis can be more than one token, to get them suffixed as a group";
-
-				throw new GrammarException(msg);
-			}
-
-			build.suffixWith(body.substring(0, idx), parseElementString(body.substring(idx + 1)).getLeft());
-		});
-
 		pragmas.put("prefix-with", (body, build, level) -> {
-			int idx = body.indexOf(" ");
-
-			if (idx == -1) {
-				String msg = "Prefix-with pragma takes at least two arguments, the name of the rule to prefix, then what to prefix it with\n\tThis can be more than one token, to get them prefixed as a group";
-
-				throw new GrammarException(msg);
-			}
-
-			build.prefixWith(body.substring(0, idx), parseElementString(body.substring(idx + 1)).getLeft());
+			doAffixWith(body, build, level, AffixType.PREFIX);
 		});
 
+		pragmas.put("suffix-with", (body, build, level) -> {
+			doAffixWith(body, build, level, AffixType.SUFFIX);
+		});
+
+		pragmas.put("circumfix-with", (body, build, level) -> {
+			doAffixWith(body, build, level, AffixType.CIRCUMFIX);
+		});
 		/*
 		 * @NOTE 9/4/18
 		 *
@@ -252,6 +240,22 @@ public class RGrammarParser {
 		pragmas.put("autovivify-rule", (body, build, level) -> {
 			doAutoVar(body, build, level, true);
 		});
+	}
+
+	private static void doAffixWith(String body, RGrammarBuilder build, int level, AffixType afxType) {
+		int idx = body.indexOf(" ");
+
+		if (idx == -1) {
+			String msg = "Affixing pragma %s-with takes at least two arguments, the name of the rule to affix, then what to affix it with\n\tThis can be more than one token, to get them affixed as a group";
+
+			throw new GrammarException(String.format(msg, afxType.toString().toLowerCase()));
+		}
+
+		String rName = body.substring(0, idx);
+
+		IList<CaseElement> elms = parseElementString(body.substring(idx + 1)).getLeft();
+
+		build.affixWith(rName, elms, afxType);
 	}
 
 	private static void doAutoVar(String body, RGrammarBuilder build, int level, boolean isRule) {
