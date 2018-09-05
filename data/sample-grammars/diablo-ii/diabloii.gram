@@ -52,6 +52,9 @@ pragma enable-descent [metal-type] 2
 
 [item-types] <^2> [d2-item-type]
 	[ds-items]
+	# This is somewhat confusing, as it is referring to a exported rule named item, not the item defined above.
+	#
+	# This is less than optimal, and will get better once exports are referred to by name
 	[^item]
 
 [ds-items] [ds-gem]
