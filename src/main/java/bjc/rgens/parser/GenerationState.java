@@ -1,5 +1,6 @@
 package bjc.rgens.parser;
 
+import bjc.utils.esodata.MapSet;
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
 
@@ -25,8 +26,8 @@ public class GenerationState {
 	public Map<String, Rule> importRules;
 
 	/** The current set of variables. */
-	public Map<String, String> vars;
-	public Map<String, Rule> rlVars;
+	public MapSet<String, String> vars;
+	public MapSet<String, Rule> rlVars;
 
 	private static final Random BASE = new Random();
 
@@ -44,10 +45,14 @@ public class GenerationState {
 	 */
 	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs,
 			Map<String, Rule> rvs, RGrammar gram) {
+		vars   = new MapSet<>();
+		rlVars = new MapSet<>();
+
 		contents = cont;
 		rnd      = rand;
-		vars     = vs;
-		rlVars   = rvs;
+
+		vars.setPutMap(gram.name, vs);
+		rlVars.setPutMap(gram.name, rvs);
 
 		this.gram = gram;
 	
@@ -71,6 +76,9 @@ public class GenerationState {
 		rules = gram.getRules();
 		
 		importRules = gram.getImportRules();
+
+		vars.setCreateMap(gram.name);
+		rlVars.setCreateMap(gram.name);
 	}
 
 	public GenerationState newBuf() {
