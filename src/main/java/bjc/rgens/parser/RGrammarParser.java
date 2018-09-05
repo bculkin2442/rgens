@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
 /**
  * Reads {@link RGrammar} from a input stream.
  *
@@ -471,7 +472,9 @@ public class RGrammarParser {
 	}
 
 	public static Pair<IList<CaseElement>, Integer> parseElementString(String cses) {
-		return parseElementString(cses.split(" "));
+		List<String> cseList = StringUtils.levelSplit(cses.trim(), " ");
+
+		return parseElementString(cseList.toArray(new String[0]));
 	}
 
 	public static Pair<IList<CaseElement>, Integer> parseElementString(String... cses) {

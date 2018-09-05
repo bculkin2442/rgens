@@ -1,4 +1,5 @@
-load directory testdir .
+# Uncomment this to load all grammars
+# load directory testdir .
 
 # Load 'long rules' -- Grammars which generally are used as part of the output
 # for other grammars
