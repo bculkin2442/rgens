@@ -70,6 +70,17 @@ public class RGrammarParser {
 			build.setInitialRule(bits.get(0));
 		});
 
+		pragmas.put("grammar-name", (body, build, level) -> {
+			List<String> bits = StringUtils.levelSplit(body, " ");
+
+			if (bits.size() != 1) {
+				String msg = "Must specify grammar name";
+				throw new GrammarException(msg);
+			}
+
+			build.name = bits.get(0);
+		});
+
 		pragmas.put("despace-rule", (body, build, level) -> {
 			List<String> bits = StringUtils.levelSplit(body, " ");
 
@@ -117,6 +128,7 @@ public class RGrammarParser {
 
 			build.setWeight(parts.get(0));
 		});
+
 		pragmas.put("enable-descent", (body, build, level) -> {
 			List<String> parts = StringUtils.levelSplit(body, " ");
 
@@ -132,6 +144,11 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("enable-binomial", (body, build, level) -> {
+			// @NOTE 9/4/18
+			//
+			// This can be kind of hard to read right off. Is there
+			// a format to put stuff in that looks better and is
+			// more readable?
 			List<String> parts = StringUtils.levelSplit(body, " ");
 
 			if(parts.size() != 4) {

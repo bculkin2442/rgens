@@ -31,6 +31,8 @@ public class RGrammarBuilder {
 	private Set<String> exportedRules;
 	/* The current initial rule. */
 	private String initialRule;
+	/* The current grammar name. */
+	public String name;
 
 	/** Create a new randomized grammar builder. */
 	public RGrammarBuilder() {
@@ -73,6 +75,7 @@ public class RGrammarBuilder {
 	 */
 	public RGrammar toRGrammar() {
 		RGrammar grammar = new RGrammar(rules);
+		grammar.name = name;
 
 		if(initialRule != null) {
 			if(!rules.containsKey(initialRule)) {
