@@ -30,7 +30,7 @@ public class RuleVariableCaseElement extends VariableDefCaseElement {
 			rl = rl.exhaust();
 		}
 
-		state.rlVars.put(varName, rl);
+		state.defineRuleVar(varName, rl);
 
 		if(exhaust) {
 			fine("Defined exhausted rulevar '%s' ('%s')", varName, varDef);

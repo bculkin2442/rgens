@@ -14,11 +14,7 @@ public class ARefVariableElement extends VariableElement {
 	}
 	
 	public void generate(GenerationState state) {
-		if(!state.rlVars.containsKey(value)) {
-			throw new GrammarException("No rule variable named " + value);
-		}
-
-		Rule rl = state.rlVars.get(value);
+		Rule rl = state.findRuleVar(value, state);
 
 		GenerationState newState = state.newBuf();
 

@@ -13,11 +13,8 @@ public class VRefVariableElement extends VariableElement {
 	}
 
 	public void generate(GenerationState state) {
-		if (!state.vars.containsKey(nam)) {
-			throw new GrammarException(String.format("No variable '%s' defined", nam));
-		}
+		String strang = state.findVar(nam, state);
 
-		String strang = state.vars.get(nam);
 		if(forbidSpaces && strang.contains(" ")) {
 			throw new GrammarException(String.format("Cannot include variable %s w/ spaces in body in rule name", nam));
 		}

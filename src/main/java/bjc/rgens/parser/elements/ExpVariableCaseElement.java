@@ -35,6 +35,6 @@ public class ExpVariableCaseElement extends VariableDefCaseElement {
 			throw new GrammarException(msg);
 		}
 
-		state.vars.put(varName, newState.contents.toString());
+		state.defineVar(varName, newState.contents.toString());
 	}
 }

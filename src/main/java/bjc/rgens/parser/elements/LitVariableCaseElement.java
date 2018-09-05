@@ -8,6 +8,6 @@ public class LitVariableCaseElement extends VariableDefCaseElement {
 	}
 
 	public void generate(GenerationState state) {
-		state.vars.put(varName, varDef);
+		state.defineVar(varName, varDef);
 	}
 }

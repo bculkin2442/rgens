@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static bjc.rgens.parser.RGrammarLogging.*;
 /* 
  * The current state during generation.
  *
@@ -21,13 +22,13 @@ public class GenerationState {
 	/** The current grammar. */
 	public RGrammar gram;
 	/** The rules of the grammar. */
-	public Map<String, Rule> rules;
+	private Map<String, Rule> rules;
 	/** The rules imported from other grammars. */
-	public Map<String, Rule> importRules;
+	private Map<String, Rule> importRules;
 
 	/** The current set of variables. */
-	public MapSet<String, String> vars;
-	public MapSet<String, Rule> rlVars;
+	private MapSet<String, String> vars;
+	private MapSet<String, Rule> rlVars;
 
 	private static final Random BASE = new Random();
 
@@ -108,5 +109,33 @@ public class GenerationState {
 		}
 
 		return null;
+	}
+
+	public void defineVar(String name, String val) {
+		if(vars.containsKey(name)) 
+			warn("Shadowing variable %s with value %s (old value %s)", name, vars.get(name), val);
+
+		vars.put(name, val);
+	}
+
+	public void defineRuleVar(String name, Rule rle) {
+		if(rlVars.containsKey(name))
+			warn("Shadowing rule variable %s with value %s (old value %s)", name, rlVars.get(name), rle);
+
+		rlVars.put(name, rle);
+	}
+
+	public String findVar(String name, GenerationState stat) {
+		if(!vars.containsKey(name)) 
+			throw new GrammarException(String.format("Variable %s not defined", name));
+
+		return vars.get(name);
+	}
+
+	public Rule findRuleVar(String name, GenerationState stat) {
+		if(!rlVars.containsKey(name))
+			throw new GrammarException(String.format("Rule variable %s not defined", name));
+
+		return rlVars.get(name);
 	}
 }
