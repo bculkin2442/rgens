@@ -113,28 +113,44 @@ public class GenerationState {
 
 	public void defineVar(String name, String val) {
 		if(vars.containsKey(name)) 
-			warn("Shadowing variable %s with value %s (old value %s)", name, vars.get(name), val);
+			warn("Shadowing variable %s with value %s (old value %s)",
+					name, val, vars.get(name));
+		else if (gram.autoVars.containsKey(name))
+			warn("Shadowing autovariable %s with value %s (defn. %s)",
+					name, val, gram.autoVars.get(name));
 
 		vars.put(name, val);
 	}
 
 	public void defineRuleVar(String name, Rule rle) {
 		if(rlVars.containsKey(name))
-			warn("Shadowing rule variable %s with value %s (old value %s)", name, rlVars.get(name), rle);
+			warn("Shadowing rule variable %s with value %s (old value %s)",
+					name, rlVars.get(name), rle);
+		else if (gram.autoRlVars.containsKey(name))
+			warn("Shadowing rule autovariable %s with value %s (defn. %s)",
+					name, rle, gram.autoRlVars.get(name));
 
 		rlVars.put(name, rle);
 	}
 
-	public String findVar(String name, GenerationState stat) {
+	public String findVar(String name) {
 		if(!vars.containsKey(name)) 
-			throw new GrammarException(String.format("Variable %s not defined", name));
+			if(gram.autoVars.containsKey(name)) {
+				gram.autoVars.get(name).generate(this);
+			} else {
+				throw new GrammarException(String.format("Variable %s not defined", name));
+			}
 
 		return vars.get(name);
 	}
 
-	public Rule findRuleVar(String name, GenerationState stat) {
+	public Rule findRuleVar(String name) {
 		if(!rlVars.containsKey(name))
-			throw new GrammarException(String.format("Rule variable %s not defined", name));
+			if(gram.autoRlVars.containsKey(name)) {
+				gram.autoRlVars.get(name).generate(this);
+			} else {
+				throw new GrammarException(String.format("Rule variable %s not defined", name));
+			}
 
 		return rlVars.get(name);
 	}

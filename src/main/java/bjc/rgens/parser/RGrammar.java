@@ -67,8 +67,12 @@ public class RGrammar {
 	private Map<String, Rule> importRules;
 	/* The rules exported from this grammar. */
 	private Set<String> exportRules;
+
 	/* The initial rule of this grammar. */
 	private String initialRule;
+
+	public Map<String, CaseElement> autoVars;
+	public Map<String, CaseElement> autoRlVars;
 
 	/* The tree to use for finding rule suggestions. */
 	private BkTreeSearcher<String> ruleSearcher;
@@ -348,5 +352,10 @@ public class RGrammar {
 
 	public Map<String, Rule> getImportRules() {
 		return importRules;
+	}
+
+	public void setAutoVars(Map<String, CaseElement> aVars, Map<String, CaseElement> aRlVars) {
+		autoVars   = aVars;
+		autoRlVars = aRlVars;
 	}
 }

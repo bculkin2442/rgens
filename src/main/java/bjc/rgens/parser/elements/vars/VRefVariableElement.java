@@ -13,7 +13,7 @@ public class VRefVariableElement extends VariableElement {
 	}
 
 	public void generate(GenerationState state) {
-		String strang = state.findVar(nam, state);
+		String strang = state.findVar(nam);
 
 		if(forbidSpaces && strang.contains(" ")) {
 			throw new GrammarException(String.format("Cannot include variable %s w/ spaces in body in rule name", nam));

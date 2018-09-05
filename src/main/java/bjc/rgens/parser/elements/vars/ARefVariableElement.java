@@ -14,7 +14,7 @@ public class ARefVariableElement extends VariableElement {
 	}
 	
 	public void generate(GenerationState state) {
-		Rule rl = state.findRuleVar(value, state);
+		Rule rl = state.findRuleVar(value);
 
 		GenerationState newState = state.newBuf();
 

@@ -205,6 +205,82 @@ public class RGrammarParser {
 
 			build.prefixWith(body.substring(0, idx), parseElementString(body.substring(idx + 1)).getLeft());
 		});
+
+		/*
+		 * @NOTE 9/4/18
+		 *
+		 * Right now, we ignore additional elements to autovivify. Not
+		 * sure yet if this is the desired behavior.
+		 *
+		 * As I see it, there are a couple of alternatives:
+		 * 
+		 * 1) Continue what we're doing. This is simple, but seems
+		 *                  somewhat inelegant.
+		 *
+		 * 2) Error if more than one is provided. Even simpler, but also
+		 *                  seems inelegant.
+		 *
+		 * 3) Parse them independantly. Each element is treated as a
+		 *                  seperate autovar. Seems simple, but may
+		 *                  cause issues with mixing rule & nonrule
+		 *                  variables, as well as naming.
+		 *
+		 * 4) Parse them together. Autovars are stored as cases instead
+		 *                  of case elements. Also simple, but may have
+		 *                  some odd corner cases, and I can't think of
+		 *                  any cases where the additional power would
+		 *                  be useful.
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 * As an additional aside, we currently error if we provide
+		 * something that isn't a variable definition. This is because
+		 * we pull the name for the auto-vivify variable from the
+		 * element. If we go with option 4 above, the user will have to
+		 * specify a name for the variable, and we should likely add
+		 * some check when the variable is made live that it actually
+		 * created the variable it said it would.
+		 *
+		 */
+		pragmas.put("autovivify", (body, build, level) -> {
+			doAutoVar(body, build, level, false);
+		});
+
+		pragmas.put("autovivify-rule", (body, build, level) -> {
+			doAutoVar(body, build, level, true);
+		});
+	}
+
+	private static void doAutoVar(String body, RGrammarBuilder build, int level, boolean isRule) {
+		List<String> bits = StringUtils.levelSplit(body, " ");
+
+		if (bits.size() < 1) {
+			String msg = "Must specify name of variable and definition to autovivify";
+			throw new GrammarException(msg);
+		}
+
+		String[] bitArr = bits.toArray(new String[0]);
+
+		IList<CaseElement> elmList = parseElementString(bitArr).getLeft();
+		CaseElement elm = elmList.first();
+
+		if (elmList.getSize() > 1) {
+			warn("Ignoring %d additional elements for autovivify: %s", elmList.getSize(), elmList.tail());
+		}
+
+		if (!(elm instanceof VariableDefCaseElement)) {
+			throw new GrammarException(String.format("Autovivify expression must be a variable defn. (expr. %s)", elm));
+		}
+
+		{
+			String name = ((VariableDefCaseElement)elm).varName;
+
+			if (isRule) build.addAutoRlVar(name, elm);
+			else        build.addAutoVar(name, elm);
+		}
 	}
 
 	/**

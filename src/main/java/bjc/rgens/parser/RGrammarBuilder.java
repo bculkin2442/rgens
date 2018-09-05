@@ -1,6 +1,7 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
+import bjc.rgens.parser.elements.VariableDefCaseElement;
 
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
@@ -34,11 +35,18 @@ public class RGrammarBuilder {
 	/* The current grammar name. */
 	public String name;
 
+	/* Autovivify variables */
+	private Map<String, CaseElement> autoVars;
+	private Map<String, CaseElement> autoRlVars;
+
 	/** Create a new randomized grammar builder. */
 	public RGrammarBuilder() {
 		rules = new HashMap<>();
 
 		exportedRules = new HashSet<>();
+
+		autoVars = new HashMap<>();
+		autoRlVars = new HashMap<>();
 	}
 
 	/**
@@ -92,6 +100,8 @@ public class RGrammarBuilder {
 		}
 
 		grammar.setExportedRules(exportedRules);
+
+		grammar.setAutoVars(autoVars, autoRlVars);
 
 		return grammar;
 	}
@@ -315,6 +325,13 @@ public class RGrammarBuilder {
 		rl.trials = trials;
 	}
 
+	public void addAutoVar(String name, CaseElement elm) {
+		autoVars.put(name, elm);
+	}
+
+	public void addAutoRlVar(String name, CaseElement elm) {
+		autoRlVars.put(name, elm);
+	}
 	/*
 	 * @TODO
 	 *
