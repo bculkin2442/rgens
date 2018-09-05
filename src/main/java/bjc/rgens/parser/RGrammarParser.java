@@ -472,9 +472,19 @@ public class RGrammarParser {
 	}
 
 	public static Pair<IList<CaseElement>, Integer> parseElementString(String cses) {
-		List<String> cseList = StringUtils.levelSplit(cses.trim(), " ");
+		/*
+		 * @NOTE
+		 *
+		 * This is done using String.split because using things like (
+		 * as groupers breaks certain grammars. Maybe it can be used if
+		 * some sort of way to set which groupers to use is added?
+		 *
+		 *  List<String> cseList = StringUtils.levelSplit(cses.trim(), " ");
+		 *
+		 *  return parseElementString(cseList.toArray(new String[0]));
+		 */
 
-		return parseElementString(cseList.toArray(new String[0]));
+		return parseElementString(cses.split(" "));
 	}
 
 	public static Pair<IList<CaseElement>, Integer> parseElementString(String... cses) {
