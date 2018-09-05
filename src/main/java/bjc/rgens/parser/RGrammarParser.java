@@ -619,6 +619,23 @@ public class RGrammarParser {
 
 				doChance = true;
 			} else if (partToAdd.matches("\\<\\<\\>")) {
+				/*
+				 * @NOTE
+				 *
+				 * One, am I even using this feature anywhere?
+				 * As far as I can tell, this says to apply the
+				 * current set of case part rules to the
+				 * previous case part. This may be useful in
+				 * certain cases, but none come to mind at the
+				 * moment.
+				 *
+				 * @PERF
+				 *
+				 * For performance reasons, we may want to
+				 * consider setting the chance/serial values as
+				 * a setting on CaseElement, instead of having
+				 * their own CaseElement type.
+				 */
 				CaseElement elm = caseParts.popLast();
 
 				if(repCount == 0) {
