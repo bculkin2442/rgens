@@ -1,3 +1,5 @@
+pragma grammar-name draken-rune
+
 [ds-rune] <^2> [rune-type] rune
 	rune of [rune-type]
 	[rune-quality] rune of [rune-type]

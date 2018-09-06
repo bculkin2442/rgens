@@ -1,3 +1,5 @@
+pragma grammar-name draken-gem
+
 [ds-gem] <^2> [gem-type]
 	[gem-type] of qaizah
 	[unique-gem]

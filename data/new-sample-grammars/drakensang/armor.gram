@@ -1,3 +1,5 @@
+pragma grammar-name draken-armor
+
 [ds-armor] [spellweaver-armor]
 	[ranger-armor]
 	[dragonknight-armor]

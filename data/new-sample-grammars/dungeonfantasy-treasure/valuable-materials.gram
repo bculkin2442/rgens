@@ -12,6 +12,8 @@
 # Other
 # - Expand generic entries (distilled liquour/tea/wine)
 
+pragma grammar-name valuable-materials
+
 [valuable-materials] [spices]
 	[fabrics]
 	[other-valuable]

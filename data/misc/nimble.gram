@@ -22,8 +22,7 @@ pragma grammar-name nimblebimble
 
 [nimble-bimble] <?2> [bimble]
 
-pragma prefix-with [nimble-bimble] [nimble-plural]
-pragma suffix-with [nimble-bimble] [nimble-plural]
+pragma circumfix-with [nimble-bimble] [nimble-plural]
 
 pragma initial-rule [nimble-bimble]
 pragma export-rule [nimble]

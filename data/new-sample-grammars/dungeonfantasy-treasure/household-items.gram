@@ -1,3 +1,5 @@
+pragma grammar-name household-item
+
 [household-item] [cooking]
 	[decor]
 	[painting]

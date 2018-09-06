@@ -1,3 +1,5 @@
+pragma grammar-name mundane-material
+
 [mundane-materials] [valuable-materials]
 	[household-item]
 
