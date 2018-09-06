@@ -3,6 +3,10 @@ package bjc.rgens.parser;
 import bjc.utils.esodata.MapSet;
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
+import bjc.utils.ioutils.ReportWriter;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +19,7 @@ import static bjc.rgens.parser.RGrammarLogging.*;
  */
 public class GenerationState {
 	/** The current string. */
-	private StringBuilder contents;
+	private ReportWriter contents;
 	/** The RNG. */
 	public Random rnd;
 
@@ -44,12 +48,12 @@ public class GenerationState {
 	 * @param vs
 	 *            The variables to use.
 	 */
-	public GenerationState(StringBuilder cont, Random rand, Map<String, String> vs,
+	public GenerationState(ReportWriter rw, Random rand, Map<String, String> vs,
 			Map<String, Rule> rvs, RGrammar gram) {
 		vars   = new MapSet<>();
 		rlVars = new MapSet<>();
 
-		contents = cont;
+		contents = rw;
 		rnd      = rand;
 
 		vars.setPutMap(gram.name, vs);
@@ -66,7 +70,9 @@ public class GenerationState {
 	}
 
 	public static GenerationState fromGrammar(Random rand, RGrammar gram) {
-		return new GenerationState(new StringBuilder(), rand, new HashMap<>(), new HashMap<>(), gram);
+		ReportWriter rw = new ReportWriter(new StringWriter());
+
+		return new GenerationState(rw, rand, new HashMap<>(), new HashMap<>(), gram);
 	}
 
 	public void swapGrammar(RGrammar gram) {
@@ -83,7 +89,16 @@ public class GenerationState {
 	}
 
 	public GenerationState newBuf() {
-		return new GenerationState(new StringBuilder(), rnd, vars, rlVars, gram);
+		// @NOTE 9/5/18
+		//
+		// Not sure if this is the right thing to do or not.
+		//
+		// I suppose it'll only matter once we actually start using the
+		// features of ReportWriter, instead of just using the basic
+		// Writer functionality
+		ReportWriter rw = contents.duplicate(new StringWriter());
+
+		return new GenerationState(rw, rnd, vars, rlVars, gram);
 	}
 
 	/*
@@ -156,11 +171,33 @@ public class GenerationState {
 	}
 
 	public void appendContents(String strang) {
-		contents.append(strang);
+		try {
+			contents.write(strang);
+		} catch (IOException ioex) {
+			throw new GrammarException("I/O Error", ioex);
+		}
 	}
 
 	public void setContents(String strang) {
-		contents = new StringBuilder(strang);
+		// @NOTE 9/5/18
+		//
+		// This raises some interesting questions as to what the
+		// appropriate behavior is.
+		//
+		// For now, I'm simply going to say to go with a StringWriter
+		// and then write the contents to that, but I am not sure that
+		// that is the right way to go about it.
+		contents = contents.duplicate(new StringWriter());
+
+		try {
+			contents.write(strang);
+		} catch (IOException ioex) {
+			throw new GrammarException("I/O Error", ioex);
+		}
+	}
+
+	public ReportWriter getWriter() {
+		return contents;
 	}
 
 	public String getContents() {
@@ -168,10 +205,10 @@ public class GenerationState {
 	}
 
 	public void findReplaceContents(String find, String replace) {
-		contents = new StringBuilder(contents.toString().replaceAll(find, replace));
+		setContents(getContents().replaceAll(find, replace));
 	}
 
 	public void clearContents() {
-		contents = new StringBuilder();
+		contents = contents.duplicate(new StringWriter());
 	}
 }

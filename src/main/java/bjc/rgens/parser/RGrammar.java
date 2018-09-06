@@ -3,8 +3,11 @@ package bjc.rgens.parser;
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
 import bjc.utils.funcutils.StringUtils;
+import bjc.utils.ioutils.ReportWriter;
 
 import bjc.rgens.parser.elements.*;
+
+import java.io.StringWriter;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -185,7 +188,9 @@ public class RGrammar {
 	 */
 	public String generate(String startRule, Random rnd, Map<String, String> vars,
 			Map<String, Rule> rlVars) {
-		return generate(startRule, new GenerationState(new StringBuilder(), rnd, vars, rlVars, this));
+		ReportWriter rw = new ReportWriter(new StringWriter());
+
+		return generate(startRule, new GenerationState(rw, rnd, vars, rlVars, this));
 	}
 
 	/**
