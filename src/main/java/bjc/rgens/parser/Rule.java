@@ -5,9 +5,15 @@ import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.gen.WeightedRandom;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
 import static bjc.rgens.parser.RGrammarLogging.*;
+import static bjc.utils.data.IPair.pair;
 
 /**
  * A rule in a randomized grammar.
@@ -37,11 +43,16 @@ public class Rule {
 	
 	public ProbType prob;
 
-	public int     descentFactor;
-
+	// Probability vars
+	/* Descent vars */
+	public int descentFactor;
+	/* Binomial vars */
 	public int target;
 	public int bound;
 	public int trials;
+
+	private List<String> rejectionPreds;
+	private List<IPair<String, String>> findReplaces;
 
 	// @TODO This default should be configurable in some way
 	public int recurLimit = 5;
@@ -77,6 +88,9 @@ public class Rule {
 		cases = new WeightedRandom<>();
 
 		prob = ProbType.NORMAL;
+
+		rejectionPreds = new ArrayList<>();
+		findReplaces = new ArrayList<>();
 	}
 
 	/**
@@ -104,6 +118,26 @@ public class Rule {
 		cse.debugName = String.format("%s-%d", name, ++caseCount);
 
 		cases.addProbability(weight, cse);
+	}
+
+	public void addRejection(String reject) {
+		try {
+			Pattern.compile(reject);
+		} catch (PatternSyntaxException psex) {
+			throw new GrammarException(String.format("String %s is not a valid regex for rejection", reject), psex);
+		}
+
+		rejectionPreds.add(reject);
+	}
+
+	public void addFindReplace(String find, String replace) {
+		try {
+			Pattern.compile(find);
+		} catch (PatternSyntaxException psex) {
+			throw new GrammarException(String.format("String %s is not a valid regex for finding", find), psex);
+		}
+
+		findReplaces.add(pair(find, replace));
 	}
 
 	/**
@@ -248,18 +282,43 @@ public class Rule {
 	public void generate(GenerationState state) {
 		state.swapGrammar(belongsTo);
 
-		if(doRecur()) {
-			RuleCase cse = getCase(state.rnd);
+		boolean rejected;
 
-			fine("Generating %s (from %s)", cse, belongsTo.name);
+		do {
+			rejected = false;
 
-			belongsTo.generateCase(cse, state);
+			if(doRecur()) {
+				RuleCase cse = getCase(state.rnd);
 
-			endRecur();
-		}
+				fine("Generating %s (from %s)", cse, belongsTo.name);
 
-		if(name.contains("+")) {
-			state.contents = new StringBuilder(state.contents.toString().replaceAll("\\s+", ""));
-		}
+				belongsTo.generateCase(cse, state);
+
+				endRecur();
+			}
+
+			if(name.contains("+")) {
+				state.contents = new StringBuilder(state.contents.toString().replaceAll("\\s+", ""));
+			}
+
+			String conts = state.contents.toString();
+
+			for(IPair<String, String> findRep : findReplaces) {
+				conts = conts.replaceAll(findRep.getLeft(), findRep.getRight());
+			}
+
+			state.contents = new StringBuilder(conts);
+
+			for(String pat : rejectionPreds) {
+				if(!conts.matches(pat)) {
+					fine("Rejected %s by %s (from %s)", conts, pat, belongsTo.name);
+
+					rejected = true;
+					state.contents = new StringBuilder();
+
+					break;
+				}
+			}
+		} while (rejected);
 	}
 }

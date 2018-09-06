@@ -350,33 +350,40 @@ public class RGrammarBuilder {
 	public void addAutoRlVar(String name, CaseElement elm) {
 		autoRlVars.put(name, elm);
 	}
-	/*
-	 * @TODO
-	 *
-	 * Figure out how this should work, and get this working.
-	 */
-	/*
-	public void regexizeRule(String rule, String pattern) {
+
+	public void rejectRule(String rule, String reject) {
 		if (rule == null) {
 			throw new NullPointerException("rule must not be null");
-		} else if(pattern == null) {
-			throw new NullPointerException("pattern must not be null");	
+		} else if(reject == null) {
+			throw new NullPointerException("reject must not be null");	
 		} else if (rule.equals("")) {
 			throw new IllegalArgumentException("The empty string is not a valid rule name");
 		} else if(!rules.containsKey(rule)) {
 			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", rule));
 		}
 
-		IList<RuleCase> caseList = rules.get(rule).getCases();
+		Rule rl = rules.get(rule);
 
-		IList<RuleCase> newCaseList = new FunctionalList<>();
+		rl.addRejection(reject);
+	}
 
-		for(RuleCase cse : caseList) {
-			newCaseList.add(new RegexRuleCase(cse.getElements(), pattern));
+	public void findReplaceRule(String rule, String find, String replace) {
+		if (rule == null) {
+			throw new NullPointerException("rule must not be null");
+		} else if(find == null) {
+			throw new NullPointerException("find must not be null");	
+		} else if(replace == null) {
+			throw new NullPointerException("replace must not be null");	
+		} else if (rule.equals("")) {
+			throw new IllegalArgumentException("The empty string is not a valid rule name");
+		} else if(!rules.containsKey(rule)) {
+			throw new IllegalArgumentException(String.format("The rule '%s' doesn't exist", rule));
 		}
 
-		rules.get(rule).replaceCases(newCaseList);
-	}*/
+		Rule rl = rules.get(rule);
+
+		rl.addFindReplace(find, replace);
+	}
 
 	/*
 	 * @NOTE

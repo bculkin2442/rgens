@@ -169,18 +169,32 @@ public class RGrammarParser {
 			build.setBinomial(parts.get(0), Integer.parseInt(parts.get(1)), Integer.parseInt(parts.get(2)), Integer.parseInt(parts.get(3)));
 		});
 
-		pragmas.put("regex-rule", (body, build, level) -> {
-			int nameIndex = body.indexOf(" ");
+		/*
+		 * @NOTE 4/9/18
+		 *
+		 * Consider if we want to replace this with something more akin
+		 * to the `definer` feature from DiceLang. This will work fine
+		 * in most cases, but there are some cases where you'd want the
+		 * extra power. No examples are apparent at the moment.
+		 */
+		pragmas.put("find-replace-rule", (body, build, level) -> {
+			List<String> bits = StringUtils.levelSplit(body, " ");
 
-			if(nameIndex == -1) {
-				throw new GrammarException("Regex-rule pragma takes two arguments: the name of the rule to process, then the regex to apply after the rule has been generated.");
+			if(bits.size() != 3) {
+				throw new GrammarException("Regex-rule pragma takes three arguments: the name of the rule to process, then the find/replace pair to apply after the rule has been generated.");
 			}
 
-			String name = body.substring(0, nameIndex).trim();
-			String patt = body.substring(nameIndex + 1).trim();
+			build.findReplaceRule(bits.get(0), bits.get(1), bits.get(2));
+		});
 
-			throw new GrammarException("Regexize-rule pragma not yet supported");
-			//build.regexizeRule(name, patt);
+		pragmas.put("reject-rule", (body, build, level) -> {
+			List<String> bits = StringUtils.levelSplit(body, " ");
+
+			if(bits.size() != 3) {
+				throw new GrammarException("Reject-rule pragma takes two arguments: the name of the rule to process, then the rejection pattern to apply after the rule has been generated.");
+			}
+
+			build.rejectRule(bits.get(0), bits.get(1));
 		});
 
 		pragmas.put("prefix-with", (body, build, level) -> {
