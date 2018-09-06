@@ -15,7 +15,7 @@ import static bjc.rgens.parser.RGrammarLogging.*;
  */
 public class GenerationState {
 	/** The current string. */
-	public StringBuilder contents;
+	private StringBuilder contents;
 	/** The RNG. */
 	public Random rnd;
 
@@ -153,5 +153,25 @@ public class GenerationState {
 			}
 
 		return rlVars.get(name);
+	}
+
+	public void appendContents(String strang) {
+		contents.append(strang);
+	}
+
+	public void setContents(String strang) {
+		contents = new StringBuilder(strang);
+	}
+
+	public String getContents() {
+		return contents.toString();
+	}
+
+	public void findReplaceContents(String find, String replace) {
+		contents = new StringBuilder(contents.toString().replaceAll(find, replace));
+	}
+
+	public void clearContents() {
+		contents = new StringBuilder();
 	}
 }

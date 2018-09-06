@@ -12,6 +12,6 @@ public class LiteralTemplateElement extends TemplateElement {
 	}
 
 	public void generate(GenerationState state) {
-		state.contents.append(val);
+		state.appendContents(val);
 	}
 }

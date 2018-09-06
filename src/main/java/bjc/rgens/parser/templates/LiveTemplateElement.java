@@ -53,7 +53,7 @@ public class LiveTemplateElement extends TemplateElement {
 				elm.generate(state);
 
 				if(doSpacing && elm.spacing)
-					state.contents.append(" ");
+					state.appendContents(" ");
 			}
 		}
 	}

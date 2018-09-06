@@ -29,12 +29,10 @@ public class ExpVariableCaseElement extends VariableDefCaseElement {
 			 */
 			String res = destGrammar.generate(varDef, state, false);
 
-			newState.contents = new StringBuilder(res);
+			state.defineVar(varName, res);
 		} else {
 			String msg = String.format("No rule '%s' defined", varDef);
 			throw new GrammarException(msg);
 		}
-
-		state.defineVar(varName, newState.contents.toString());
 	}
 }

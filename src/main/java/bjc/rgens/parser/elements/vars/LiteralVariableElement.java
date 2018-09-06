@@ -12,6 +12,6 @@ public class LiteralVariableElement extends VariableElement {
 	}
 
 	public void generate(GenerationState state) {
-		state.contents.append(val);
+		state.appendContents(val);
 	}
 }

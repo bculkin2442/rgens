@@ -55,7 +55,7 @@ public class RGrammarTest {
 
 			template.generate(state);
 
-			String res = state.contents.toString();
+			String res = state.getContents();
 
 			if(res.length() > 120) {
 				System.out.printf("\t\n\tContents: %s\n\t\n", res);

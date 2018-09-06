@@ -12,6 +12,6 @@ public class LiteralCaseElement extends CaseElement {
 	}
 
 	public void generate(GenerationState state) {
-		state.contents.append(val);
+		state.appendContents(val);
 	}
 }

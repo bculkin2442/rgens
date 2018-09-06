@@ -228,7 +228,7 @@ public class RGrammar {
 
 		rl.generate(state);
 
-		String body = state.contents.toString();
+		String body = state.getContents();
 
 		if(doPostprocess) {
 			body = postprocessRes(body);

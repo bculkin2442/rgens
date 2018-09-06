@@ -24,7 +24,7 @@ public class SerialCaseElement extends CaseElement {
 			rep.generate(state);
 
 			if(rep.spacing)
-				state.contents.append(" ");
+				state.appendContents(" ");
 		}
 	}
 }

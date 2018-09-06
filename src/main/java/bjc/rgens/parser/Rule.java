@@ -297,24 +297,23 @@ public class Rule {
 				endRecur();
 			}
 
+			// Don't rebuild the builder a bunch
+			String conts = state.getContents();
 			if(name.contains("+")) {
-				state.contents = new StringBuilder(state.contents.toString().replaceAll("\\s+", ""));
+				conts = conts.replaceAll("\\s+", "");
 			}
-
-			String conts = state.contents.toString();
 
 			for(IPair<String, String> findRep : findReplaces) {
 				conts = conts.replaceAll(findRep.getLeft(), findRep.getRight());
 			}
-
-			state.contents = new StringBuilder(conts);
+			state.setContents(conts);
 
 			for(String pat : rejectionPreds) {
 				if(!conts.matches(pat)) {
 					fine("Rejected %s by %s (from %s)", conts, pat, belongsTo.name);
 
 					rejected = true;
-					state.contents = new StringBuilder();
+					state.clearContents();
 
 					break;
 				}

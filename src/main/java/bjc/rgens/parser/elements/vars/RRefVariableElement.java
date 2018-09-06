@@ -23,12 +23,12 @@ public class RRefVariableElement extends VariableElement {
 
 		rl.generate(newState);
 
-		String res = newState.contents.toString();
+		String res = newState.getContents();
 
 		if(forbidSpaces && res.contains(" ")) {
 			throw new GrammarException(String.format("Spaces not allowed in this context (rule-reference %s)", state));
 		}
 
-		state.contents.append(res);
+		state.appendContents(res);
 	}
 }

@@ -15,7 +15,7 @@ public class NormalRuleCase extends RuleCase {
 			elm.generate(state);
 
 			if(elm.spacing) {
-				state.contents.append(" ");
+				state.appendContents(" ");
 			}
 		}
 	}

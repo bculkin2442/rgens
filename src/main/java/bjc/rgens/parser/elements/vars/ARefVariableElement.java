@@ -20,8 +20,8 @@ public class ARefVariableElement extends VariableElement {
 
 		rl.generate(newState);
 
-		String res = newState.contents.toString();
+		String res = newState.getContents();
 
-		state.contents.append(res);
+		state.appendContents(res);
 	}
 }

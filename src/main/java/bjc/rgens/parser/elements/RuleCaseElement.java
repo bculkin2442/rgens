@@ -37,12 +37,12 @@ public class RuleCaseElement extends CaseElement {
 			if(inName == false) inName = elm.forbidSpaces;
 		}
 
-		String body = newState.contents.toString();
+		String body = newState.getContents();
 
 		if(inName) {
 			doGenerate(String.format("[%s]", body), state);
 		} else {
-			state.contents.append(body);
+			state.appendContents(body);
 		}
 	}
 
@@ -67,7 +67,7 @@ public class RuleCaseElement extends CaseElement {
 			 * once.
 			 */
 			String res = destGrammar.generate(actName, newState, false);
-			newState.contents = new StringBuilder(res);
+			newState.setContents(res);
 		} else {
 			/*
 			 * @TODO 5/29/18 Ben Culkin :RuleSuggesting
@@ -91,13 +91,13 @@ public class RuleCaseElement extends CaseElement {
 			throw new GrammarException(msg);
 		}
 
-		String res = newState.contents.toString();
+		String res = newState.getContents();
 
 		if (actName.contains("+")) {
 			/* Rule names with pluses in them get space-flattened */
-			state.contents.append(res.replaceAll("\\s+", ""));
+			state.appendContents(res.replaceAll("\\s+", ""));
 		} else {
-			state.contents.append(res);
+			state.appendContents(res);
 		}
 	}
 }

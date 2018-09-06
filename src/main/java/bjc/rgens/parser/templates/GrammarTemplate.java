@@ -26,7 +26,7 @@ public class GrammarTemplate {
 			element.generate(state);
 
 			if(doSpacing && element.spacing)
-				state.contents.append("\n");
+				state.appendContents("\n");
 		}
 	}
 

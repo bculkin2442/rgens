@@ -17,7 +17,7 @@ public class RangeCaseElement extends CaseElement {
 		int val  = state.rnd.nextInt(end - begin);
 		val     += begin;
 
-		state.contents.append(val);
+		state.appendContents(Integer.toString(val));
 	}
 
 	@Override

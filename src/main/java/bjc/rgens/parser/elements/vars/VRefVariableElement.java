@@ -19,6 +19,6 @@ public class VRefVariableElement extends VariableElement {
 			throw new GrammarException(String.format("Cannot include variable %s w/ spaces in body in rule name", nam));
 		}
 
-		state.contents.append(strang);
+		state.appendContents(strang);
 	}
 }
