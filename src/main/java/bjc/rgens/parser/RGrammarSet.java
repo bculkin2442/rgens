@@ -29,17 +29,20 @@ public class RGrammarSet {
 	public Map<String, String> loadedFrom;
 
 	/* @NOTE These are replaced by the logging setup */
-	public static final boolean PERF = true;
-	public static final boolean DEBUG = true;
+	public static final boolean PERF  = true;
 
 	/** Create a new set of randomized grammars. */
 	public RGrammarSet() {
+		this(false);
+	}
+
+	public RGrammarSet(boolean orderExports) {
 		grammars = new HashMap<>();
 
 		// @NOTE
 		// Swap which line is commented to toggle ordering of exports
-		//exportedRules = new TreeMap<>();
-		exportedRules = new HashMap<>();
+		if   (orderExports) exportedRules = new TreeMap<>();
+		else                exportedRules = new HashMap<>();
 
 		loadedFrom = new HashMap<>();
 
@@ -78,8 +81,7 @@ public class RGrammarSet {
 
 			exportedRules.put(export.name, export);
 
-			if(DEBUG)
-				debug("%s (%d cases) exported from %s", export.name, export.getCases().getSize(), grammarName);
+			debug("%s (%d cases) exported from %s", export.name, export.getCases().getSize(), grammarName);
 		}
 
 		/* Add exports to grammar. */

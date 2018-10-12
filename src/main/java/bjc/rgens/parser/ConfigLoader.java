@@ -31,10 +31,7 @@ public class ConfigLoader {
 		ConfigSet cfgSet = new ConfigSet();
 
 		/* The grammar set we're parsing into. */
-		RGrammarSet set = new RGrammarSet();
-		cfgSet.grammars.put("default", set);
-		set.belongsTo = cfgSet;
-		set.name = "default";
+		RGrammarSet set = cfgSet.createGSet("default");
 
 		long startCFGTime = System.nanoTime();
 
