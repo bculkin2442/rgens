@@ -2,7 +2,11 @@ package bjc.rgens.parser.elements.vars;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.Rule;
-
+/**
+ * Reference to an array variable.
+ * @author bjculkin
+ *
+ */
 public class ARefVariableElement extends VariableElement {
 	public String value;
 

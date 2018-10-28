@@ -2,8 +2,6 @@ package bjc.rgens.parser.elements;
 
 import static bjc.rgens.parser.RGrammarLogging.trace;
 
-import java.util.Arrays;
-
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 import bjc.utils.ioutils.LevelSplitter;
@@ -143,13 +141,6 @@ public abstract class CaseElement {
 
 				// String[] elms = LevelSplitter.def.levelSplit(rawCase, "|").toArray(new String[0]);
 				// return new InlineRuleCaseElement(elms);
-			} else if (LevelSplitter.def.levelContains(rawCase, ".")) {
-				String[] parts = LevelSplitter.def.levelSplit(rawCase, ".").toArray(new String[0]);
-
-				CaseElement base = createElement(parts[0]);
-
-				parts = Arrays.copyOfRange(parts, 1, parts.length);
-				return new MethodCaseElement(base, parts);
 			} else {
 				return new RuleCaseElement(rawCase);
 			}

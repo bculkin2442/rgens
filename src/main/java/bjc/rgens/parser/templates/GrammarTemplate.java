@@ -37,10 +37,10 @@ public class GrammarTemplate {
 		Scanner scn = new Scanner(rdr);
 		scn.useDelimiter("\\R");
 
-		int lno = 0;
+		//int lno = 0;
 		while(scn.hasNextLine()) {
 			String ln = scn.nextLine();
-			lno += 1;
+			//lno += 1;
 
 			switch(ln.charAt(0)) {
 			case '#':

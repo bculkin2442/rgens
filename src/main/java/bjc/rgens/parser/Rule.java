@@ -60,6 +60,7 @@ public class Rule {
 
 	private int caseCount = 0;
 
+	@SuppressWarnings("unused")
 	private int serial;
 	private static int nextSerial = 0;
 

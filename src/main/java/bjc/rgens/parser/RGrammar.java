@@ -37,6 +37,7 @@ public class RGrammar {
 	public boolean useBuiltinPostprocs = true;
 
 	/* The max distance between possible alternate rules. */
+	@SuppressWarnings("unused")
 	private static final int MAX_DISTANCE = 6;
 
 	/* The metric for the levenshtein distance. */
@@ -70,6 +71,7 @@ public class RGrammar {
 	public Map<String, CaseElement> autoRlVars;
 
 	/* The tree to use for finding rule suggestions. */
+	@SuppressWarnings("unused")
 	private BkTreeSearcher<String> ruleSearcher;
 
 	static {

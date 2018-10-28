@@ -316,7 +316,7 @@ public class ConfigLoader {
 		} else {
 			/* Load grammar file. */
 			try {
-				long startFileTime = System.nanoTime();
+				//long startFileTime = System.nanoTime();
 
 				BufferedReader fis = Files.newBufferedReader(convPath);
 				doLoadGrammar(fis, name, cfgSet, set, convPath, path);
