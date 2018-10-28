@@ -1,7 +1,7 @@
 package bjc.rgens.parser;
 
 import bjc.utils.funcutils.FileUtils;
-import bjc.utils.funcutils.StringUtils;
+import bjc.utils.ioutils.LevelSplitter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class ConfigLoader {
 					if (ln.startsWith("#")) continue;
 
 					ln = ln.replaceAll("\\s+", " ");
-					String[] parts = StringUtils.levelSplit(ln, " ").toArray(new String[0]);
+					String[] parts = LevelSplitter.def.levelSplit(ln, " ").toArray(new String[0]);
 
 					/* Get line type */
 					if(parts.length < 1) {

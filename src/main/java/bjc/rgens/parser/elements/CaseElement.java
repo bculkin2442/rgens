@@ -1,7 +1,6 @@
 package bjc.rgens.parser.elements;
 
-import bjc.utils.funcutils.StringUtils;
-
+import bjc.utils.ioutils.LevelSplitter;
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 
@@ -85,7 +84,7 @@ public abstract class CaseElement {
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
 			if (specialBody.matches("\\S+:\\S=\\S+")) {
-				String[] parts = StringUtils.levelSplit(specialBody, "=").toArray(new String[0]);
+				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=").toArray(new String[0]);
 
 				if(parts.length != 2) {
 					throw new GrammarException("Colon variables must have a name and a definition");
@@ -102,7 +101,7 @@ public abstract class CaseElement {
 
 				return VariableDefCaseElement.parseVariable(varName, parts[1], op, true);
 			} else if (specialBody.matches("\\S+:=\\S+")) {
-				String[] parts = StringUtils.levelSplit(specialBody, "=").toArray(new String[0]);
+				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=").toArray(new String[0]);
 
 				if(parts.length != 2) {
 					throw new GrammarException("Colon variables must have a name and a definition");
@@ -114,7 +113,7 @@ public abstract class CaseElement {
 
 				return VariableDefCaseElement.parseVariable(varName, parts[1], ' ', true);
 			} else if (specialBody.matches("\\S+=\\S+")) {
-				String[] parts = StringUtils.levelSplit(specialBody, "=").toArray(new String[0]);
+				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=").toArray(new String[0]);
 				if(parts.length != 2) {
 					throw new GrammarException("Variables must have a name and a definition");
 				}
@@ -136,16 +135,16 @@ public abstract class CaseElement {
 
 				return new RangeCaseElement(firstNum, secondNum);
 			} else if(rawCase.contains("||")) {
-				String[] elms = StringUtils.levelSplit(rawCase, "||").toArray(new String[0]);
+				String[] elms = LevelSplitter.def.levelSplit(rawCase, "||").toArray(new String[0]);
 
 				return new InlineRuleCaseElement(elms);
 			} else if(rawCase.contains("|")) {
 				throw new GrammarException("Inline rule using | found, they use || now");
 
-				// String[] elms = StringUtils.levelSplit(rawCase, "|").toArray(new String[0]);
+				// String[] elms = LevelSplitter.def.levelSplit(rawCase, "|").toArray(new String[0]);
 				// return new InlineRuleCaseElement(elms);
-			} else if (StringUtils.levelContains(rawCase, ".")) {
-				String[] parts = StringUtils.levelSplit(rawCase, ".").toArray(new String[0]);
+			} else if (LevelSplitter.def.levelContains(rawCase, ".")) {
+				String[] parts = LevelSplitter.def.levelSplit(rawCase, ".").toArray(new String[0]);
 
 				CaseElement base = createElement(parts[0]);
 

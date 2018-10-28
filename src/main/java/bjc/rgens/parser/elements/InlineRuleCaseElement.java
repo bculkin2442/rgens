@@ -2,12 +2,10 @@ package bjc.rgens.parser.elements;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
-
 import bjc.utils.data.IPair;
-import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
-import bjc.utils.funcutils.StringUtils;
 import bjc.utils.gen.WeightedRandom;
+import bjc.utils.ioutils.LevelSplitter;
 
 public class InlineRuleCaseElement extends CaseElement {
 	public final WeightedRandom<CaseElement> elements;
@@ -20,8 +18,8 @@ public class InlineRuleCaseElement extends CaseElement {
 		for(String part : parts) {
 			String[] partArr;
 
-			if(StringUtils.levelContains(part, "|")) {
-				partArr = StringUtils.levelSplit(part, "||").toArray(new String[0]);
+			if(LevelSplitter.def.levelContains(part, "|")) {
+				partArr = LevelSplitter.def.levelSplit(part, "||").toArray(new String[0]);
 			} else {
 				partArr = new String[] {part};
 			}

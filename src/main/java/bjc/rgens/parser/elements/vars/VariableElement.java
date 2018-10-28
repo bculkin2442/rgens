@@ -1,7 +1,6 @@
 package bjc.rgens.parser.elements.vars;
 
-import bjc.utils.funcutils.StringUtils;
-
+import bjc.utils.ioutils.LevelSplitter;
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
 
@@ -18,12 +17,12 @@ public abstract class VariableElement {
 	public abstract void generate(GenerationState state);
 
 	public static List<VariableElement> parseElementString(String varElm) {
-		boolean forbidSpaces = StringUtils.levelContains(varElm, "-", "+");
+		boolean forbidSpaces = LevelSplitter.def.levelContains(varElm, "-", "+");
 
 		String[] parts;
 
 		if(forbidSpaces) {
-			parts = StringUtils.levelSplit(varElm, true, "-", "+").toArray(new String[0]);
+			parts = LevelSplitter.def.levelSplit(varElm, true, "-", "+").toArray(new String[0]);
 		} else {
 			parts = new String[] { varElm };
 		}

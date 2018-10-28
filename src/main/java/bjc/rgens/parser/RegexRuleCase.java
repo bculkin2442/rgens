@@ -3,9 +3,6 @@ package bjc.rgens.parser;
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.utils.funcdata.IList;
 
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
 /*
  * @TODO
  *
@@ -18,7 +15,7 @@ public class RegexRuleCase extends RuleCase {
 	}
 
 	public void generate(GenerationState state) {
-
+		// TODO
 	}
 
 	public RegexRuleCase withElements(IList<CaseElement> elements) {

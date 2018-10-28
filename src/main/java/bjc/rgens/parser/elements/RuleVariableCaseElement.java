@@ -1,13 +1,8 @@
 package bjc.rgens.parser.elements;
 
-import bjc.utils.data.IPair;
-import bjc.utils.data.Pair;
-
 import bjc.rgens.parser.GrammarException;
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.Rule;
-import bjc.rgens.parser.RGrammar;
-
 import static bjc.rgens.parser.RGrammarLogging.*;
 
 public class RuleVariableCaseElement extends VariableDefCaseElement {

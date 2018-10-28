@@ -1,15 +1,12 @@
 package bjc.rgens.parser.elements;
 
-import bjc.utils.data.IPair;
-import bjc.utils.data.Pair;
-
-import bjc.rgens.parser.*;
-import bjc.rgens.parser.elements.vars.*;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import bjc.rgens.parser.GenerationState;
+import bjc.rgens.parser.GrammarException;
+import bjc.rgens.parser.RGrammar;
+import bjc.rgens.parser.Rule;
+import bjc.rgens.parser.elements.vars.VariableElement;
 
 public class RuleCaseElement extends CaseElement {
 	public List<VariableElement> elements;
@@ -46,11 +43,13 @@ public class RuleCaseElement extends CaseElement {
 		}
 	}
 
-	protected void doGenerate(String actName, GenerationState state) {
+	protected void doGenerate(String acName, GenerationState state) {
 		GenerationState newState = state.newBuf();
 
 		Rule rl;
 
+		String actName = acName;
+		
 		if (actName.startsWith("[^")) {
 			actName = "[" + actName.substring(2);
 

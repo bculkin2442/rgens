@@ -1,31 +1,26 @@
 package bjc.rgens.parser;
 
-import bjc.rgens.parser.elements.*;
-
-import bjc.utils.data.IPair;
-import bjc.utils.data.Pair;
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcdata.IList;
-import bjc.utils.funcutils.ListUtils;
-import bjc.utils.funcutils.SetUtils;
-import bjc.utils.funcutils.StringUtils;
-import bjc.utils.funcutils.TriConsumer;
-import bjc.utils.ioutils.blocks.Block;
-import bjc.utils.ioutils.blocks.BlockReader;
-import bjc.utils.ioutils.blocks.SimpleBlockReader;
+import static bjc.rgens.parser.RGrammarLogging.warn;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import static bjc.rgens.parser.RGrammarLogging.*;
-import static bjc.rgens.parser.RGrammarBuilder.AffixType;
+import bjc.rgens.parser.RGrammarBuilder.AffixType;
+import bjc.rgens.parser.elements.CaseElement;
+import bjc.rgens.parser.elements.ChanceCaseElement;
+import bjc.rgens.parser.elements.SerialCaseElement;
+import bjc.rgens.parser.elements.VariableDefCaseElement;
+import bjc.utils.data.Pair;
+import bjc.utils.funcdata.FunctionalList;
+import bjc.utils.funcdata.IList;
+import bjc.utils.funcutils.TriConsumer;
+import bjc.utils.ioutils.LevelSplitter;
+import bjc.utils.ioutils.blocks.Block;
+import bjc.utils.ioutils.blocks.BlockReader;
+import bjc.utils.ioutils.blocks.SimpleBlockReader;
 /**
  * Reads {@link RGrammar} from a input stream.
  *
@@ -61,7 +56,7 @@ public class RGrammarParser {
 		pragmas = new HashMap<>();
 
 		pragmas.put("initial-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
+			List<String> bits = LevelSplitter.def.levelSplit(body, " ");
 
 			if (bits.size() != 1) {
 				String msg = "Must specify initial rule";
@@ -72,7 +67,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("grammar-name", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
+			List<String> bits = LevelSplitter.def.levelSplit(body, " ");
 
 			if (bits.size() != 1) {
 				String msg = "Must specify grammar name";
@@ -83,7 +78,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("despace-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
+			List<String> bits = LevelSplitter.def.levelSplit(body, " ");
 
 			if (bits.size() < 1) {
 				throw new GrammarException("Must specify rules to despace");
@@ -95,7 +90,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("export-rule", (body, build, level) -> {
-			List<String> exports = StringUtils.levelSplit(body, " ");
+			List<String> exports = LevelSplitter.def.levelSplit(body, " ");
 
 			if(exports.size() < 1) {
 				throw new GrammarException("Must specify rules to export");
@@ -107,7 +102,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("recur-limit", (body, build, level) -> {
-			List<String> parts = StringUtils.levelSplit(body, " ");
+			List<String> parts = LevelSplitter.def.levelSplit(body, " ");
 
 			if(parts.size() != 2) {
 				throw new GrammarException("Recur-limit pragma takes two arguments: the name of the rule to set the limit for, and the new value of the limit");
@@ -121,7 +116,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("enable-weight", (body, build, level) -> {
-			List<String> parts = StringUtils.levelSplit(body, " ");
+			List<String> parts = LevelSplitter.def.levelSplit(body, " ");
 
 			if(parts.size() != 1) {
 				throw new GrammarException("Enable-weight pragma takes one argument: the name of the rule to set the weight factor for");
@@ -131,7 +126,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("enable-descent", (body, build, level) -> {
-			List<String> parts = StringUtils.levelSplit(body, " ");
+			List<String> parts = LevelSplitter.def.levelSplit(body, " ");
 
 			if(parts.size() != 2) {
 				throw new GrammarException("Enable-descent pragma takes two arguments: the name of the rule to set the descent factor for, and the new value of the factor");
@@ -150,7 +145,7 @@ public class RGrammarParser {
 			// This can be kind of hard to read right off. Is there
 			// a format to put stuff in that looks better and is
 			// more readable?
-			List<String> parts = StringUtils.levelSplit(body, " ");
+			List<String> parts = LevelSplitter.def.levelSplit(body, " ");
 
 			if(parts.size() != 4) {
 				throw new GrammarException("Enable-descent pragma takes four arguments: the name of the rule to set the binomial factors for, and the three binomial parameters (target, bound trials)");
@@ -178,7 +173,7 @@ public class RGrammarParser {
 		 * extra power. No examples are apparent at the moment.
 		 */
 		pragmas.put("find-replace-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
+			List<String> bits = LevelSplitter.def.levelSplit(body, " ");
 
 			if(bits.size() != 3) {
 				throw new GrammarException("Regex-rule pragma takes three arguments: the name of the rule to process, then the find/replace pair to apply after the rule has been generated.");
@@ -188,7 +183,7 @@ public class RGrammarParser {
 		});
 
 		pragmas.put("reject-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
+			List<String> bits = LevelSplitter.def.levelSplit(body, " ");
 
 			if(bits.size() != 3) {
 				throw new GrammarException("Reject-rule pragma takes two arguments: the name of the rule to process, then the rejection pattern to apply after the rule has been generated.");
@@ -273,7 +268,7 @@ public class RGrammarParser {
 	}
 
 	private static void doAutoVar(String body, RGrammarBuilder build, int level, boolean isRule) {
-		List<String> bits = StringUtils.levelSplit(body, " ");
+		List<String> bits = LevelSplitter.def.levelSplit(body, " ");
 
 		if (bits.size() < 1) {
 			String msg = "Must specify name of variable and definition to autovivify";
@@ -559,7 +554,6 @@ public class RGrammarParser {
 				String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
 
 				try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
-					@SuppressWarnings("unused")
 					Block whereBody = whereReader.next();
 					whereBody.lineOffset = lineOffset + whereCtx.startLine;
 
@@ -590,7 +584,7 @@ public class RGrammarParser {
 		 * as groupers breaks certain grammars. Maybe it can be used if
 		 * some sort of way to set which groupers to use is added?
 		 *
-		 *  List<String> cseList = StringUtils.levelSplit(cses.trim(), " ");
+		 *  List<String> cseList = LevelSplitter.def.levelSplit(cses.trim(), " ");
 		 *
 		 *  return parseElementString(cseList.toArray(new String[0]));
 		 */

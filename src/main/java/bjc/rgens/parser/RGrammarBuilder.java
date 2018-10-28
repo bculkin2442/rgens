@@ -1,8 +1,6 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.rgens.parser.elements.VariableDefCaseElement;
-
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
 import bjc.utils.funcdata.FunctionalList;
@@ -150,8 +148,8 @@ public class RGrammarBuilder {
 	 * @param ruleName
 	 * 	The rule to suffix.
 	 *
-	 * @param suffix
-	 * 	The suffix to add.
+	 * @param suffixes
+	 * 	The suffixes to add.
 	 *
 	 * @throws IllegalArgumentException
 	 * 	If the rule name is either invalid or not defined by this
@@ -168,8 +166,8 @@ public class RGrammarBuilder {
 	 * @param ruleName
 	 * 	The rule to prefix.
 	 *
-	 * @param prefix
-	 * 	The prefix to add.
+	 * @param prefixes
+	 * 	The prefixes to add.
 	 *
 	 * @throws IllegalArgumentException
 	 * 	If the rule name is either invalid or not defined by this
@@ -185,8 +183,8 @@ public class RGrammarBuilder {
 	 * @param ruleName
 	 * 	The rule to prefix and suffix.
 	 *
-	 * @param prefix
-	 * 	The prefix/suffix to add.
+	 * @param prefixes
+	 * 	The prefixes/suffixes to add.
 	 *
 	 * @throws IllegalArgumentException
 	 * 	If the rule name is either invalid or not defined by this

@@ -54,7 +54,8 @@ public class GrammarTemplate {
 			}
 		}
 
-
+		scn.close();
+		
 		return template;
 	}
 
@@ -70,6 +71,6 @@ public class GrammarTemplate {
 	}
 
 	private static void handlePragma(List<TemplateElement> elements, GrammarTemplate template, String ln) {
-
+		// TODO
 	}
 }

@@ -1,13 +1,9 @@
 package bjc.rgens.parser.elements;
 
-import bjc.utils.data.IPair;
-
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.GrammarException;
-import bjc.rgens.parser.RecurLimitException;
 import bjc.rgens.parser.RGrammar;
 import bjc.rgens.parser.Rule;
-import bjc.rgens.parser.RuleCase;
 
 public class ExpVariableCaseElement extends VariableDefCaseElement {
 	public ExpVariableCaseElement(String name, String def) {

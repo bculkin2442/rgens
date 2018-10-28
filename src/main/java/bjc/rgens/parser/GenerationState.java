@@ -1,8 +1,6 @@
 package bjc.rgens.parser;
 
 import bjc.utils.esodata.MapSet;
-import bjc.utils.data.IPair;
-import bjc.utils.data.Pair;
 import bjc.utils.ioutils.ReportWriter;
 
 import java.io.IOException;
@@ -13,6 +11,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static bjc.rgens.parser.RGrammarLogging.*;
+
 /* 
  * The current state during generation.
  *
@@ -39,28 +38,32 @@ public class GenerationState {
 	/**
 	 * Create a new generation state.
 	 * 
-	 * @param cont
-	 *            The string being generated.
+	 * @param rw
+	 *                The place to write the string.
 	 *
 	 * @param rand
-	 *            The RNG to use.
+	 *                The RNG to use.
 	 *
 	 * @param vs
-	 *            The variables to use.
+	 *                The variables to use.
+	 * @param rvs
+	 *                The rule variables to use.
+	 * @param gram
+	 *                The current grammar.
 	 */
-	public GenerationState(ReportWriter rw, Random rand, Map<String, String> vs,
-			Map<String, Rule> rvs, RGrammar gram) {
-		vars   = new MapSet<>();
+	public GenerationState(ReportWriter rw, Random rand, Map<String, String> vs, Map<String, Rule> rvs,
+			RGrammar gram) {
+		vars = new MapSet<>();
 		rlVars = new MapSet<>();
 
 		contents = rw;
-		rnd      = rand;
+		rnd = rand;
 
 		vars.setPutMap(gram.name, vs);
 		rlVars.setPutMap(gram.name, rvs);
 
 		this.gram = gram;
-	
+
 		this.rules = gram.getRules();
 		this.importRules = gram.getImportRules();
 	}
@@ -76,12 +79,12 @@ public class GenerationState {
 	}
 
 	public void swapGrammar(RGrammar gram) {
-		if(this.gram == gram) return;
+		if (this.gram == gram) return;
 
 		this.gram = gram;
 
 		rules = gram.getRules();
-		
+
 		importRules = gram.getImportRules();
 
 		vars.setCreateMap(gram.name);
@@ -109,63 +112,58 @@ public class GenerationState {
 	 * are imported, and which aren't
 	 */
 	public Rule findRule(String ruleName, boolean allowImports) {
-		if(rules.containsKey(ruleName)) {
+		if (rules.containsKey(ruleName)) {
 			return rules.get(ruleName);
 		}
 
-		if(allowImports) return findImport(ruleName);
+		if (allowImports) return findImport(ruleName);
 
 		return null;
 	}
 
 	public Rule findImport(String ruleName) {
-		if(importRules.containsKey(ruleName)) {
-			return  importRules.get(ruleName);
+		if (importRules.containsKey(ruleName)) {
+			return importRules.get(ruleName);
 		}
 
 		return null;
 	}
 
 	public void defineVar(String name, String val) {
-		if(vars.containsKey(name)) 
-			warn("Shadowing variable %s with value %s (old value %s)",
-					name, val, vars.get(name));
+		if (vars.containsKey(name))
+			warn("Shadowing variable %s with value %s (old value %s)", name, val, vars.get(name));
 		else if (gram.autoVars.containsKey(name))
-			warn("Shadowing autovariable %s with value %s (defn. %s)",
-					name, val, gram.autoVars.get(name));
+			warn("Shadowing autovariable %s with value %s (defn. %s)", name, val, gram.autoVars.get(name));
 
 		vars.put(name, val);
 	}
 
 	public void defineRuleVar(String name, Rule rle) {
-		if(rlVars.containsKey(name))
-			warn("Shadowing rule variable %s with value %s (old value %s)",
-					name, rlVars.get(name), rle);
+		if (rlVars.containsKey(name))
+			warn("Shadowing rule variable %s with value %s (old value %s)", name, rlVars.get(name), rle);
 		else if (gram.autoRlVars.containsKey(name))
-			warn("Shadowing rule autovariable %s with value %s (defn. %s)",
-					name, rle, gram.autoRlVars.get(name));
+			warn("Shadowing rule autovariable %s with value %s (defn. %s)", name, rle,
+					gram.autoRlVars.get(name));
 
 		rlVars.put(name, rle);
 	}
 
 	public String findVar(String name) {
-		if(!vars.containsKey(name)) 
-			if(gram.autoVars.containsKey(name)) {
-				gram.autoVars.get(name).generate(this);
-			} else {
-				throw new GrammarException(String.format("Variable %s not defined", name));
-			}
+		if (!vars.containsKey(name)) if (gram.autoVars.containsKey(name)) {
+			gram.autoVars.get(name).generate(this);
+		} else {
+			throw new GrammarException(String.format("Variable %s not defined", name));
+		}
 
 		return vars.get(name);
 	}
 
 	public Rule findRuleVar(String name) {
-		if(!rlVars.containsKey(name))
-			if(gram.autoRlVars.containsKey(name)) {
-				gram.autoRlVars.get(name).generate(this);
-			} else {
-				throw new GrammarException(String.format("Rule variable %s not defined", name));
-			}
+		if (!rlVars.containsKey(name)) if (gram.autoRlVars.containsKey(name)) {
+			gram.autoRlVars.get(name).generate(this);
+		} else {
+			throw new GrammarException(String.format("Rule variable %s not defined", name));
+		}
 
 		return rlVars.get(name);
 	}

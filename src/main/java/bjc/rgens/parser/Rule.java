@@ -1,7 +1,6 @@
 package bjc.rgens.parser;
 
 import bjc.utils.data.IPair;
-import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.gen.WeightedRandom;
 

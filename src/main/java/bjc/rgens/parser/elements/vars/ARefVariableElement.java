@@ -1,7 +1,6 @@
 package bjc.rgens.parser.elements.vars;
 
 import bjc.rgens.parser.GenerationState;
-import bjc.rgens.parser.GrammarException;
 import bjc.rgens.parser.Rule;
 
 public class ARefVariableElement extends VariableElement {

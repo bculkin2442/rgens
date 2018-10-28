@@ -2,7 +2,6 @@ package bjc.rgens.parser;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Set;
 
 import static bjc.rgens.parser.RGrammarLogging.*;

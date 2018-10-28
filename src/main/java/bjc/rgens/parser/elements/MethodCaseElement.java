@@ -1,7 +1,6 @@
 package bjc.rgens.parser.elements;
 
 import bjc.rgens.parser.GenerationState;
-import bjc.rgens.parser.GrammarException;
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.rgens.parser.elements.methods.MethodElement;
 

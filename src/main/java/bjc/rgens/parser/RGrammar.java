@@ -1,33 +1,25 @@
 package bjc.rgens.parser;
 
-import bjc.utils.data.IPair;
-import bjc.utils.data.Pair;
-import bjc.utils.funcutils.StringUtils;
-import bjc.utils.ioutils.ReportWriter;
-
-import bjc.rgens.parser.elements.*;
+import static bjc.utils.data.IPair.pair;
 
 import java.io.StringWriter;
-
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
+import bjc.rgens.parser.elements.CaseElement;
+import bjc.utils.data.IPair;
+import bjc.utils.ioutils.ReportWriter;
 import edu.gatech.gtri.bktree.BkTreeSearcher;
-import edu.gatech.gtri.bktree.BkTreeSearcher.Match;
 import edu.gatech.gtri.bktree.Metric;
 import edu.gatech.gtri.bktree.MutableBkTree;
-
-import static bjc.utils.data.IPair.pair;
 
 /**
  * Represents a randomized grammar.
@@ -229,7 +221,7 @@ public class RGrammar {
 		Rule rl = state.findRule(fromRule, false);
 
 		if(rl == null)
-			throw new GrammarException("Could not find rule " + rl.name);
+			throw new GrammarException("Could not find rule " + fromRule);
 
 		rl.generate(state);
 
