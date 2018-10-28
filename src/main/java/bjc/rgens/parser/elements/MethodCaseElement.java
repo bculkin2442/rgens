@@ -1,11 +1,10 @@
 package bjc.rgens.parser.elements;
 
-import bjc.rgens.parser.GenerationState;
-import bjc.rgens.parser.elements.CaseElement;
-import bjc.rgens.parser.elements.methods.MethodElement;
-
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
+
+import bjc.rgens.parser.GenerationState;
+import bjc.rgens.parser.elements.methods.MethodElement;
 
 public class MethodCaseElement extends CaseElement {
 	public CaseElement base;

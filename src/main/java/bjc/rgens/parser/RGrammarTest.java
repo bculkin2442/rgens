@@ -1,6 +1,7 @@
 package bjc.rgens.parser;
 
-import bjc.rgens.parser.templates.GrammarTemplate;
+import static bjc.rgens.parser.RGrammarLogging.error;
+import static bjc.rgens.parser.RGrammarLogging.perf;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
 
-import static bjc.rgens.parser.RGrammarLogging.*;
+import bjc.rgens.parser.templates.GrammarTemplate;
 
 /**
  * Test for new grammar syntax.

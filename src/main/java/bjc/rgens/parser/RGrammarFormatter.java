@@ -1,13 +1,12 @@
 package bjc.rgens.parser;
 
-import bjc.rgens.parser.elements.CaseElement;
-
-import bjc.utils.data.IPair;
-import bjc.utils.funcdata.IList;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import bjc.rgens.parser.elements.CaseElement;
+import bjc.utils.data.IPair;
+import bjc.utils.funcdata.IList;
 
 /**
  * @TODO Ben Culkin 9/8/18 :GrammarFormatter

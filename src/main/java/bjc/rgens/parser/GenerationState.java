@@ -1,16 +1,15 @@
 package bjc.rgens.parser;
 
-import bjc.utils.esodata.MapSet;
-import bjc.utils.ioutils.ReportWriter;
+import static bjc.rgens.parser.RGrammarLogging.warn;
 
 import java.io.IOException;
 import java.io.StringWriter;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static bjc.rgens.parser.RGrammarLogging.*;
+import bjc.utils.esodata.MapSet;
+import bjc.utils.ioutils.ReportWriter;
 
 /* 
  * The current state during generation.

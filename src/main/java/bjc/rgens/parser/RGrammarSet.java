@@ -1,10 +1,11 @@
 package bjc.rgens.parser;
 
+import static bjc.rgens.parser.RGrammarLogging.debug;
+import static bjc.rgens.parser.RGrammarLogging.warn;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import static bjc.rgens.parser.RGrammarLogging.*;
 
 /**
  * Represents a set of grammars that can share rules via exports.

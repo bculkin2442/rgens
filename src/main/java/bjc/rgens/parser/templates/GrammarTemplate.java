@@ -1,12 +1,12 @@
 package bjc.rgens.parser.templates;
 
-import bjc.rgens.parser.ConfigSet;
-import bjc.rgens.parser.GenerationState;
-
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import bjc.rgens.parser.ConfigSet;
+import bjc.rgens.parser.GenerationState;
 
 public class GrammarTemplate {
 	public ConfigSet belongsTo;

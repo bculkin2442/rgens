@@ -1,12 +1,12 @@
 package bjc.rgens.parser.elements;
 
-import bjc.utils.ioutils.LevelSplitter;
-import bjc.rgens.parser.GenerationState;
-import bjc.rgens.parser.GrammarException;
+import static bjc.rgens.parser.RGrammarLogging.trace;
 
 import java.util.Arrays;
 
-import static bjc.rgens.parser.RGrammarLogging.*;
+import bjc.rgens.parser.GenerationState;
+import bjc.rgens.parser.GrammarException;
+import bjc.utils.ioutils.LevelSplitter;
 
 /**
  * A element in a rule case.

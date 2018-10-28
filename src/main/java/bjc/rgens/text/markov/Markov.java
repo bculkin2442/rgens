@@ -1,7 +1,11 @@
 package bjc.rgens.text.markov;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.*;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Represents a k-character substring.

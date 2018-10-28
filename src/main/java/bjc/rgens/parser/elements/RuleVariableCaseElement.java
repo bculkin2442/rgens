@@ -1,9 +1,10 @@
 package bjc.rgens.parser.elements;
 
-import bjc.rgens.parser.GrammarException;
+import static bjc.rgens.parser.RGrammarLogging.fine;
+
 import bjc.rgens.parser.GenerationState;
+import bjc.rgens.parser.GrammarException;
 import bjc.rgens.parser.Rule;
-import static bjc.rgens.parser.RGrammarLogging.*;
 
 public class RuleVariableCaseElement extends VariableDefCaseElement {
 	public final boolean exhaust;

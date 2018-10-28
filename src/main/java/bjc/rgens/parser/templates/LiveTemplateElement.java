@@ -1,18 +1,17 @@
 package bjc.rgens.parser.templates;
 
-import bjc.utils.data.BooleanToggle;
-import bjc.utils.funcdata.FunctionalList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.rgens.parser.elements.LiteralCaseElement;
-
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import bjc.utils.data.BooleanToggle;
+import bjc.utils.funcdata.FunctionalList;
 
 public class LiveTemplateElement extends TemplateElement {
 	private static final Pattern INSERT_PAT = Pattern.compile("\\$@(.+?)@\\$");

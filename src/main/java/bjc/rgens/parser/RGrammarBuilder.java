@@ -1,5 +1,15 @@
 package bjc.rgens.parser;
 
+import static bjc.rgens.parser.RGrammarLogging.trace;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.utils.data.IPair;
 import bjc.utils.data.Pair;
@@ -7,16 +17,6 @@ import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.funcutils.ListUtils;
 import bjc.utils.funcutils.SetUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
-
-import static bjc.rgens.parser.RGrammarLogging.*;
 
 /**
  * Construct randomized grammars piece by piece.

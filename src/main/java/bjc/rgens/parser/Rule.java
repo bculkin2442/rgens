@@ -1,18 +1,17 @@
 package bjc.rgens.parser;
 
-import bjc.utils.data.IPair;
-import bjc.utils.funcdata.IList;
-import bjc.utils.gen.WeightedRandom;
+import static bjc.rgens.parser.RGrammarLogging.fine;
+import static bjc.utils.data.IPair.pair;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import static bjc.rgens.parser.RGrammarLogging.*;
-import static bjc.utils.data.IPair.pair;
+import bjc.utils.data.IPair;
+import bjc.utils.funcdata.IList;
+import bjc.utils.gen.WeightedRandom;
 
 /**
  * A rule in a randomized grammar.

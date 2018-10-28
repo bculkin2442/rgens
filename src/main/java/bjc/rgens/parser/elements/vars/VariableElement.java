@@ -1,11 +1,11 @@
 package bjc.rgens.parser.elements.vars;
 
-import bjc.utils.ioutils.LevelSplitter;
-import bjc.rgens.parser.GenerationState;
-import bjc.rgens.parser.GrammarException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import bjc.rgens.parser.GenerationState;
+import bjc.rgens.parser.GrammarException;
+import bjc.utils.ioutils.LevelSplitter;
 
 public abstract class VariableElement {
 	public boolean forbidSpaces;

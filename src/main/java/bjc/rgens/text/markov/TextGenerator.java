@@ -1,6 +1,8 @@
 package bjc.rgens.text.markov;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Generate text from a markov model of an input text

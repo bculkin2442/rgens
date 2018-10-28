@@ -1,7 +1,8 @@
 package bjc.rgens.parser;
 
-import bjc.utils.funcutils.FileUtils;
-import bjc.utils.ioutils.LevelSplitter;
+import static bjc.rgens.parser.RGrammarLogging.error;
+import static bjc.rgens.parser.RGrammarLogging.info;
+import static bjc.rgens.parser.RGrammarLogging.perf;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,8 +12,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import bjc.rgens.parser.templates.GrammarTemplate;
-
-import static bjc.rgens.parser.RGrammarLogging.*;
+import bjc.utils.funcutils.FileUtils;
+import bjc.utils.ioutils.LevelSplitter;
 
 public class ConfigLoader {
 	/**
