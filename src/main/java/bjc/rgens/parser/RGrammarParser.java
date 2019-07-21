@@ -3,19 +3,27 @@ package bjc.rgens.parser;
 import bjc.rgens.parser.elements.*;
 
 import bjc.utils.data.IPair;
+import bjc.utils.data.ITree;
 import bjc.utils.data.Pair;
+import bjc.utils.data.Tree;
+
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
+
 import bjc.utils.funcutils.ListUtils;
 import bjc.utils.funcutils.SetUtils;
 import bjc.utils.funcutils.StringUtils;
 import bjc.utils.funcutils.TriConsumer;
+
+import bjc.utils.ioutils.LevelSplitter;
 import bjc.utils.ioutils.blocks.Block;
 import bjc.utils.ioutils.blocks.BlockReader;
 import bjc.utils.ioutils.blocks.SimpleBlockReader;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +34,7 @@ import java.util.Set;
 
 import static bjc.rgens.parser.RGrammarLogging.*;
 import static bjc.rgens.parser.RGrammarBuilder.AffixType;
+
 /**
  * Reads {@link RGrammar} from a input stream.
  *
@@ -53,244 +62,58 @@ public class RGrammarParser {
 	/* Top-level block delimiter. */
 	private static final String TMPL_TOPLEVEL_BLOCK_DELIM = "\\R\\t{%d}\\.?\\R";
 
-	/* Pragma impls. */
-	private static Map<String, TriConsumer<String, RGrammarBuilder, Integer>> pragmas;
-
-	/* Initialize pragmas. */
-	static {
-		pragmas = new HashMap<>();
-
-		pragmas.put("initial-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
-
-			if (bits.size() != 1) {
-				String msg = "Must specify initial rule";
-				throw new GrammarException(msg);
-			}
-
-			build.setInitialRule(bits.get(0));
-		});
-
-		pragmas.put("grammar-name", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
-
-			if (bits.size() != 1) {
-				String msg = "Must specify grammar name";
-				throw new GrammarException(msg);
-			}
-
-			build.name = bits.get(0);
-		});
-
-		pragmas.put("despace-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
-
-			if (bits.size() < 1) {
-				throw new GrammarException("Must specify rules to despace");
-			}
-
-			for(String bit : bits) {
-				build.despaceRule(bit);
-			}
-		});
-
-		pragmas.put("export-rule", (body, build, level) -> {
-			List<String> exports = StringUtils.levelSplit(body, " ");
-
-			if(exports.size() < 1) {
-				throw new GrammarException("Must specify rules to export");
-			}
-
-			for (String export : exports) {
-				build.addExport(export);
-			}
-		});
-
-		pragmas.put("recur-limit", (body, build, level) -> {
-			List<String> parts = StringUtils.levelSplit(body, " ");
-
-			if(parts.size() != 2) {
-				throw new GrammarException("Recur-limit pragma takes two arguments: the name of the rule to set the limit for, and the new value of the limit");
-			}
-
-			if(!parts.get(1).matches("\\A\\d+\\Z")) {
-				throw new GrammarException("Limit value must be an integer");
-			}
-
-			build.setRuleRecur(parts.get(0), Integer.parseInt(parts.get(1)));
-		});
-
-		pragmas.put("enable-weight", (body, build, level) -> {
-			List<String> parts = StringUtils.levelSplit(body, " ");
-
-			if(parts.size() != 1) {
-				throw new GrammarException("Enable-weight pragma takes one argument: the name of the rule to set the weight factor for");
-			}
-
-			build.setWeight(parts.get(0));
-		});
-
-		pragmas.put("enable-descent", (body, build, level) -> {
-			List<String> parts = StringUtils.levelSplit(body, " ");
-
-			if(parts.size() != 2) {
-				throw new GrammarException("Enable-descent pragma takes two arguments: the name of the rule to set the descent factor for, and the new value of the factor");
-			}
-
-			if(!parts.get(1).matches("\\A\\d+\\Z")) {
-				throw new GrammarException("Factor value must be an integer");
-			}
-
-			build.setDescent(parts.get(0), Integer.parseInt(parts.get(1)));
-		});
-
-		pragmas.put("enable-binomial", (body, build, level) -> {
-			// @NOTE 9/4/18
-			//
-			// This can be kind of hard to read right off. Is there
-			// a format to put stuff in that looks better and is
-			// more readable?
-			List<String> parts = StringUtils.levelSplit(body, " ");
-
-			if(parts.size() != 4) {
-				throw new GrammarException("Enable-descent pragma takes four arguments: the name of the rule to set the binomial factors for, and the three binomial parameters (target, bound trials)");
-			}
-
-			if(!parts.get(1).matches("\\A\\d+\\Z")) {
-				throw new GrammarException("Target value must be an integer");
-			}
-			if(!parts.get(2).matches("\\A\\d+\\Z")) {
-				throw new GrammarException("Bound value must be an integer");
-			}
-			if(!parts.get(3).matches("\\A\\d+\\Z")) {
-				throw new GrammarException("Trials value must be an integer");
-			}
-
-			build.setBinomial(parts.get(0), Integer.parseInt(parts.get(1)), Integer.parseInt(parts.get(2)), Integer.parseInt(parts.get(3)));
-		});
-
-		/*
-		 * @NOTE 4/9/18
-		 *
-		 * Consider if we want to replace this with something more akin
-		 * to the `definer` feature from DiceLang. This will work fine
-		 * in most cases, but there are some cases where you'd want the
-		 * extra power. No examples are apparent at the moment.
-		 */
-		pragmas.put("find-replace-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
-
-			if(bits.size() != 3) {
-				throw new GrammarException("Regex-rule pragma takes three arguments: the name of the rule to process, then the find/replace pair to apply after the rule has been generated.");
-			}
-
-			build.findReplaceRule(bits.get(0), bits.get(1), bits.get(2));
-		});
-
-		pragmas.put("reject-rule", (body, build, level) -> {
-			List<String> bits = StringUtils.levelSplit(body, " ");
-
-			if(bits.size() != 3) {
-				throw new GrammarException("Reject-rule pragma takes two arguments: the name of the rule to process, then the rejection pattern to apply after the rule has been generated.");
-			}
-
-			build.rejectRule(bits.get(0), bits.get(1));
-		});
-
-		pragmas.put("prefix-with", (body, build, level) -> {
-			doAffixWith(body, build, level, AffixType.PREFIX);
-		});
-
-		pragmas.put("suffix-with", (body, build, level) -> {
-			doAffixWith(body, build, level, AffixType.SUFFIX);
-		});
-
-		pragmas.put("circumfix-with", (body, build, level) -> {
-			doAffixWith(body, build, level, AffixType.CIRCUMFIX);
-		});
-		/*
-		 * @NOTE 9/4/18
-		 *
-		 * Right now, we ignore additional elements to autovivify. Not
-		 * sure yet if this is the desired behavior.
-		 *
-		 * As I see it, there are a couple of alternatives:
-		 * 
-		 * 1) Continue what we're doing. This is simple, but seems
-		 *                  somewhat inelegant.
-		 *
-		 * 2) Error if more than one is provided. Even simpler, but also
-		 *                  seems inelegant.
-		 *
-		 * 3) Parse them independantly. Each element is treated as a
-		 *                  seperate autovar. Seems simple, but may
-		 *                  cause issues with mixing rule & nonrule
-		 *                  variables, as well as naming.
-		 *
-		 * 4) Parse them together. Autovars are stored as cases instead
-		 *                  of case elements. Also simple, but may have
-		 *                  some odd corner cases, and I can't think of
-		 *                  any cases where the additional power would
-		 *                  be useful.
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 * As an additional aside, we currently error if we provide
-		 * something that isn't a variable definition. This is because
-		 * we pull the name for the auto-vivify variable from the
-		 * element. If we go with option 4 above, the user will have to
-		 * specify a name for the variable, and we should likely add
-		 * some check when the variable is made live that it actually
-		 * created the variable it said it would.
-		 *
-		 */
-		pragmas.put("autovivify", (body, build, level) -> {
-			doAutoVar(body, build, level, false);
-		});
-
-		pragmas.put("autovivify-rule", (body, build, level) -> {
-			doAutoVar(body, build, level, true);
-		});
-	}
-
-	private static void doAffixWith(String body, RGrammarBuilder build, int level, AffixType afxType) {
+	private static void doAffixWith(String body, RGrammarBuilder build, int level, AffixType afxType, ITree<String> errs) {
 		int idx = body.indexOf(" ");
 
 		if (idx == -1) {
-			String msg = "Affixing pragma %s-with takes at least two arguments, the name of the rule to affix, then what to affix it with\n\tThis can be more than one token, to get them affixed as a group";
+			String fmt = "ERROR: Takes at least two arguments, the name of the rule to affix, then what to affix it with\n\tThis can be more than one token, to get them affixed as a group";
 
-			throw new GrammarException(String.format(msg, afxType.toString().toLowerCase()));
+			String msg = String.format(fmt, afxType.toString().toLowerCase());
+
+			errs.addChild(msg);
+
+			return;
 		}
 
 		String rName = body.substring(0, idx);
 
-		IList<CaseElement> elms = parseElementString(body.substring(idx + 1)).getLeft();
+		List<CaseElement> elms = new ArrayList<>();
 
-		build.affixWith(rName, elms, afxType);
+		parseElementString(body.substring(idx + 1), elms, errs);
+
+		build.affixWith(rName, elms, afxType, errs);
 	}
 
-	private static void doAutoVar(String body, RGrammarBuilder build, int level, boolean isRule) {
-		List<String> bits = StringUtils.levelSplit(body, " ");
-
+	private static void doAutoVar(List<String> bits, RGrammarBuilder build, int level, boolean isRule, ITree<String> errs) {
 		if (bits.size() < 1) {
 			String msg = "Must specify name of variable and definition to autovivify";
-			throw new GrammarException(msg);
+
+			errs.addChild(msg);
+
+			return;
 		}
 
 		String[] bitArr = bits.toArray(new String[0]);
 
-		IList<CaseElement> elmList = parseElementString(bitArr).getLeft();
-		CaseElement elm = elmList.first();
+		List<CaseElement> elmList = new ArrayList<>();
 
-		if (elmList.getSize() > 1) {
-			warn("Ignoring %d additional elements for autovivify: %s", elmList.getSize(), elmList.tail());
+		parseElementString(bitArr, elmList, errs);
+		CaseElement elm = elmList.get(0);
+
+		if (elmList.size() > 1) {
+			String msg = String.format("WARN: Ignoring %d additional elements for autovivify: %s", elmList.size(), elmList.subList(1, elmList.size()));
+
+			errs.addChild(msg);
+
+			return;
 		}
 
 		if (!(elm instanceof VariableDefCaseElement)) {
-			throw new GrammarException(String.format("Autovivify expression must be a variable defn. (expr. %s)", elm));
+			String msg = String.format("ERROR: Autovivify expression must be a variable defn. (expr. %s)", elm);
+
+			errs.addChild(msg);
+
+			return;
 		}
 
 		{
@@ -313,64 +136,80 @@ public class RGrammarParser {
 	 * @throws GrammarException
 	 * 	Thrown if the grammar has a syntax error.
 	 */
-	public static RGrammar readGrammar(Reader is) throws GrammarException {
+	public static RGrammar readGrammar(Reader is, LoadOptions lopts, ITree<String> errs) throws GrammarException {
 		String dlm = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, 0);
 
 		try (BlockReader reader = new SimpleBlockReader(dlm, is)) {
 			if (!reader.hasNextBlock()) {
-				throw new GrammarException("At least one top-level block must be present");
+				errs.addChild("At least one top-level block must be present");
+
+				return null;
 			}
 
-			try {
 				RGrammarBuilder build = new RGrammarBuilder();
 
 				for(Block block : reader) {
-					if(DEBUG)
-						System.err.printf("Handling top-level block (%s)\n", block);
+					if(lopts.doTrace) {
+						String msg = String.format("TRACE: Handling top-level block (%s)\n", block);
 
-					handleBlock(build, block.contents, 0, block.startLine);
+						errs.addChild(msg);
+					}
+
+					String msg = String.format("INFO: Block %d (%d-%d) (offset %d, %d-%d)", block.blockNo, block.startLine, block.endLine, block.lineOffset, block.lineOffset + block.startLine, block.lineOffset + block.endLine);
+
+					ITree<String> kid = new Tree<>(msg);
+
+					handleBlock(build, block.contents, 0, block.startLine, lopts, kid);
+
+					if (kid.size() > 0) errs.addChild(kid);
 				}
 
-				if(LINES)
-					System.err.printf("%d ", reader.getBlock().endLine);
+				if(lopts.doTrace) {
+					errs.addChild(String.format("TRACE: Ended at line %d ", reader.getBlock().endLine));
+				}
 
 				return build.toRGrammar();
-			} catch (GrammarException gex) {
-				String msg = String.format("Error in block (%s)", reader.getBlock());
-				throw new GrammarException(msg, gex, gex.getRootMessage());
-			}
-		} catch (Exception ex) {
-			throw new GrammarException("Unknown error handling block", ex, ex.getMessage());
+		} catch (IOException ioex) {
+			String msg = String.format("ERROR: Unknown I/O error: %s", ioex.getMessage());
+
+			errs.addChild(msg);
 		}
+
+		return null;
 	}
 
-	/* Throughout these, level indicates the nesting level of that construct. */
+	/* 
+	 * Throughout these, level indicates the nesting level of that construct,
+	 * and lineOffset indicates the total number of lines to adjust the block
+	 * line numbers by.
+	 */
 
 	/* Handles an arbitrary block. */
-	private static void handleBlock(RGrammarBuilder build, String block, 
-			int level, int lineOffset) throws GrammarException {
+	private static void handleBlock(RGrammarBuilder build, String block, int level, int lineOffset, LoadOptions lopts, ITree<String> errs) {
 		/* Discard empty blocks. */
-		if (block.equals("") || block.matches("\\R"))
-			return;
+		if (block.equals("") || block.matches("\\R")) return;
 
 		int typeSep = block.indexOf(' ');
 
 		if (typeSep == -1) {
-			throw new GrammarException(
-			        "A block must start with a introducer, followed by a space, then the rest of the block");
+			errs.addChild("ERROR: A block must start with a introducer, followed by a space, then the rest of the block");
 		}
 
 		String blockType = block.substring(0, typeSep).trim();
 
 		if (blockType.equalsIgnoreCase("pragma")) {
-			handlePragmaBlock(block, build, level, lineOffset);
+			handlePragmaBlock(block, build, level, lineOffset, lopts, errs);
 		} else if (blockType.startsWith("[")) {
-			handleRuleBlock(block, build, level, lineOffset);
+			handleRuleBlock(block, build, level, lineOffset, lopts, errs);
 		} else if (blockType.equalsIgnoreCase("where")) {
-			handleWhereBlock(block, build, level, lineOffset);
+			handleWhereBlock(block, build, level, lineOffset, lopts, errs);
 		} else if (blockType.startsWith("#")) {
-			if(DEBUG)
-				System.err.printf("Handled comment block (%s)\n", block);
+			if(lopts.doTrace) {
+				String msg = String.format("TRACE: Handled comment block (%s)\n", block);
+
+				errs.addChild(msg);
+			}
+
 			/*
 			 * Comment block.
 			 *
@@ -381,137 +220,368 @@ public class RGrammarParser {
 			 */
 			return;
 		} else {
-			String msg = String.format("Unknown block type: '%s'", blockType);
-			throw new GrammarException(msg);
+			String msg = String.format("ERROR: Unknown block type: '%s'", blockType);
+
+			errs.addChild(msg);
 		}
 	}
 
 	/* Handle reading a block of pragmas. */
-	private static void handlePragmaBlock(String block, RGrammarBuilder build,
-	                                      int level, int lineOffset) throws GrammarException {
+	private static void handlePragmaBlock(String block, RGrammarBuilder build, int level, int lineOffset, LoadOptions lopts, ITree<String> errs) {
 		String dlm = String.format(TMPL_PRAGMA_BLOCK_DELIM, level);
+
 		try (BlockReader pragmaReader = new SimpleBlockReader(dlm, new StringReader(block))) {
-			try {
-				for(Block pragma : pragmaReader) {
-					pragma.lineOffset = lineOffset;
+			for(Block pragma : pragmaReader) {
+				pragma.lineOffset = lineOffset;
 
-					if(DEBUG)
-						System.err.printf("Handled pragma block (%s)\n", pragma);
-
-					String pragmaContents = pragma.contents;
-
-					int pragmaSep = pragmaContents.indexOf(' ');
-
-					if (pragmaSep == -1) {
-						String msg = "A pragma invocation must consist of the word pragma, followed by a space, then the body of the pragma";
-
-						throw new GrammarException(msg);
-					}
-
-					String pragmaLeader = pragmaContents.substring(0, pragmaSep);
-					String pragmaBody   = pragmaContents.substring(pragmaSep + 1);
-
-					if (!pragmaLeader.equalsIgnoreCase("pragma")) {
-						String msg = String.format("Illegal line leader in pragma block: '%s'", pragmaLeader);
-
-						throw new GrammarException(msg);
-					}
-
-					handlePragma(pragmaBody, build, level, pragma.startLine + lineOffset);
+				if(lopts.doTrace) {
+					System.err.printf("TRACE: Handled pragma block (%s)\n", pragma);
 				}
-			} catch (GrammarException gex) {
-				Block pragma = pragmaReader.getBlock();
-				String msg   = String.format("Error in pragma: (%s)", pragma);
 
-				throw new GrammarException(msg, gex, gex.getRootMessage());
+				String pragmaContents = pragma.contents;
+
+				int pragmaSep = pragmaContents.indexOf(' ');
+
+				if (pragmaSep == -1) {
+					String msg = "ERROR: A pragma invocation must consist of the word pragma, followed by a space, then the body of the pragma";
+
+					errs.addChild(msg);
+					return;
+				}
+
+				String pragmaLeader = pragmaContents.substring(0, pragmaSep);
+				String pragmaBody   = pragmaContents.substring(pragmaSep + 1);
+
+				if (!pragmaLeader.equalsIgnoreCase("pragma")) {
+					String msg = String.format("ERROR: Illegal line leader in pragma block: '%s'", pragmaLeader);
+
+					errs.addChild(msg);
+					return;
+				}
+
+				handlePragma(pragmaBody, build, level, pragma.startLine + lineOffset, lopts, errs);
 			}
-		} catch (Exception ex) {
-			throw new GrammarException("Unknown error handling pragma block", ex, ex.getMessage());
+		} catch (IOException ioex) {
+			String msg = String.format("ERROR: Unknown I/O error in pragma block: %s", ioex.getMessage());
+
+			errs.addChild(msg);
 		}
 	}
 
 	/* Handle an individual pragma in a block. */
-	private static void handlePragma(String pragma, RGrammarBuilder build,
-	                                 int level, int lineOffset) throws GrammarException {
+	private static void handlePragma(String pragma, RGrammarBuilder build, int level, int lineOffset, LoadOptions lopts, ITree<String> errs) {
 		int bodySep = pragma.indexOf(' ');
 
-		if (bodySep == -1)
-			bodySep = pragma.length();
+		if (bodySep == -1) bodySep = pragma.length();
 
 		String pragmaName = pragma.substring(0, bodySep);
 		String pragmaBody = pragma.substring(bodySep + 1);
 
-		if (pragmas.containsKey(pragmaName)) {
-			try {
-				if(DEBUG)
-					System.err.printf("Handled pragma '%s'\n", pragmaName);
+		if(lopts.doTrace) {
+			String msg = String.format("TRACE: Handled pragma '%s'\n", pragmaName);
 
-				pragmas.get(pragmaName).accept(pragmaBody, build, level);
-			} catch (GrammarException gex) {
-				String msg = String.format("Error in pragma '%s'", pragmaName);
-
-				throw new GrammarException(msg, gex);
-			}
-		} else {
-			String msg = String.format("Unknown pragma '%s'", pragmaName);
-
-			throw new GrammarException(msg);
+			errs.addChild(msg);
 		}
+
+		// Pragma bits
+		List<String> bits = StringUtils.levelSplit(pragmaBody, " ");
+
+		String fmt = String.format("INFO: Pragma '%s'", pragmaName);
+		ITree<String> kid = new Tree<>(fmt);
+
+		switch (pragmaName) {
+		case "initial-rule":
+			{
+				if (bits.size() != 1) {
+					kid.addChild("ERROR: Must specify initial rule");
+
+					break;
+				}
+
+				build.setInitialRule(bits.get(0), kid);
+			}
+			break;
+		case "grammar-name":
+			{
+				if (bits.size() != 1) {
+					kid.addChild("ERROR: Must specify grammar name");
+
+					break;
+				}
+
+				build.name = bits.get(0);
+			}
+			break;
+		case "despace-rule":
+			{
+				if (bits.size() < 1) {
+					kid.addChild("ERROR: Must specify at least one rule to despace");
+
+					break;
+				}
+
+				for(String bit : bits) {
+					build.despaceRule(bit, kid, lopts.doTrace);
+				}
+			}
+			break;
+		case "export-rule":
+			{
+				if(bits.size() < 1) {
+					kid.addChild("ERROR: Must specify rules to export");
+
+					break;
+				}
+
+				for (String export : bits) {
+					build.addExport(export);
+				}
+			}
+			break;
+		case "recur-limit":
+			{
+				if(bits.size() != 2) {
+					kid.addChild("ERROR: Takes two arguments: the name of the rule to set the limit for, and the new value of the limit");
+
+					break;
+				}
+
+				if(!bits.get(1).matches("\\A\\d+\\Z")) {
+					kid.addChild("ERROR: Limit value must be an integer");
+
+					break;
+				}
+
+				build.setRuleRecur(bits.get(0), Integer.parseInt(bits.get(1)), kid);
+			}
+			break;
+		case "enable-weight":
+			{
+				if(bits.size() != 1) {
+					kid.addChild("ERROR: Takes one argument: the name of the rule to enable standard weighting for");
+				}
+
+				build.setWeight(bits.get(0), kid);
+			}
+			break;
+		case "enable-descent":
+			{
+				if(bits.size() != 2) {
+					kid.addChild("ERROR: Takes two arguments: The name of the rule to set to descent mode, and the value of the descent factor");
+
+					break;
+				}
+
+				if(!bits.get(1).matches("\\A\\d+\\Z")) {
+					kid.addChild("ERROR: Factor value must be an integer");
+
+					break;
+				}
+
+				build.setDescent(bits.get(0), Integer.parseInt(bits.get(1)), kid);
+			}
+			break;
+		case "enable-binomial":
+			{
+				// @NOTE 9/4/18
+				//
+				// This can be kind of hard to read right off. Is there
+				// a format to put stuff in that looks better and is
+				// more readable?
+
+				if(bits.size() != 4) {
+					kid.addChild("ERROR: Takes four arguments: the name of the rule to set the binomial factors for, and the three binomial parameters (target, bound, trials) (target/bound chance of success)");
+
+					break;
+				}
+
+				if(!bits.get(1).matches("\\A\\d+\\Z")) {
+					kid.addChild("ERROR: Target value must be an integer");
+
+					break;
+				}
+
+				if(!bits.get(2).matches("\\A\\d+\\Z")) {
+					kid.addChild("ERROR: Bound value must be an integer");
+
+					break;
+				}
+
+				if(!bits.get(3).matches("\\A\\d+\\Z")) {
+					kid.addChild("ERROR: Trials value must be an integer");
+
+					break;
+				}
+
+				build.setBinomial(bits.get(0), Integer.parseInt(bits.get(1)), Integer.parseInt(bits.get(2)), Integer.parseInt(bits.get(3)), kid);
+			}
+			break;
+		case "find-replace-rule":
+			{
+				/*
+				 * @NOTE 4/9/18
+				 *
+				 * Consider if we want to replace this with something more akin
+				 * to the `definer` feature from DiceLang. This will work fine
+				 * in most cases, but there are some cases where you'd want the
+				 * extra power. No examples are apparent at the moment.
+				 */
+				if(bits.size() != 3) {
+					kid.addChild("ERROR: Takes three arguments: the name of the rule to process, then the find/replace pair to apply after the rule has been generated.");
+
+					break;
+				}
+
+				build.findReplaceRule(bits.get(0), bits.get(1), bits.get(2), kid);
+			}
+			break;
+		case "reject-rule":
+			{
+				if(bits.size() != 2) {
+					kid.addChild("ERROR: Takes two arguments: the name of the rule to process, then the rejection pattern to apply after the rule has been generated.");
+
+					break;
+				}
+
+				build.rejectRule(bits.get(0), bits.get(1), kid);
+			}
+			break;
+		case "prefix-with":
+			{
+				doAffixWith(pragmaBody, build, level, AffixType.PREFIX, kid);
+			}
+			break;
+		case "suffix-with":
+			{
+				doAffixWith(pragmaBody, build, level, AffixType.SUFFIX, kid);
+			}
+			break;
+		case "circumfix-with":
+			{
+				doAffixWith(pragmaBody, build, level, AffixType.CIRCUMFIX, kid);
+			}
+			break;
+			/*
+			 * @NOTE 9/4/18
+			 *
+			 * Right now, we ignore additional elements to autovivify. Not
+			 * sure yet if this is the desired behavior.
+			 *
+			 * As I see it, there are a couple of alternatives:
+			 * 
+			 * 1) Continue what we're doing. This is simple, but seems
+			 *                  somewhat inelegant.
+			 *
+			 * 2) Error if more than one is provided. Even simpler, but also
+			 *                  seems inelegant.
+			 *
+			 * 3) Parse them independantly. Each element is treated as a
+			 *                  seperate autovar. Seems simple, but may
+			 *                  cause issues with mixing rule & nonrule
+			 *                  variables, as well as naming.
+			 *
+			 * 4) Parse them together. Autovars are stored as cases instead
+			 *                  of case elements. Also simple, but may have
+			 *                  some odd corner cases, and I can't think of
+			 *                  any cases where the additional power would
+			 *                  be useful.
+			 *
+			 *
+			 *
+			 *
+			 *
+			 *
+			 * As an additional aside, we currently error if we provide
+			 * something that isn't a variable definition. This is because
+			 * we pull the name for the auto-vivify variable from the
+			 * element. If we go with option 4 above, the user will have to
+			 * specify a name for the variable, and we should likely add
+			 * some check when the variable is made live that it actually
+			 * created the variable it said it would.
+			 *
+			 */
+		case "autovivify":
+			{
+				doAutoVar(bits, build, level, false, kid);
+			}
+			break;
+		case "autovivify-rule":
+			{
+				doAutoVar(bits, build, level, true, kid);
+			}
+			break;
+		default: 
+			{
+				String msg = String.format("ERROR: Unknown pragma '%s'", pragmaName);
+
+				kid.addChild(msg);
+			}
+		}
+
+		if (kid.size() > 0) errs.addChild(kid);
 	}
 
 	/* Handle a block of a rule declaration and one or more cases. */
-	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build,
-	                                    int level, int lineOffset) throws GrammarException {
+	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build, int level, int lineOffset, LoadOptions lopts, ITree<String> errs) {
 		String dlm = String.format(TMPL_RULEDECL_BLOCK_DELIM, level);
+
 		try (BlockReader ruleReader = new SimpleBlockReader(dlm, new StringReader(ruleBlock))) {
-			try {
-				if (ruleReader.hasNextBlock()) {
-					/* Rule with a declaration followed by multiple cases. */
-					ruleReader.nextBlock();
-					Block declBlock = ruleReader.getBlock();
-					declBlock.lineOffset = lineOffset;
+			ITree<String> kid = new Tree<>();
 
-					String declContents = declBlock.contents;
-					Rule rl = handleRuleDecl(build, declContents, lineOffset + declBlock.startLine);
+			if (ruleReader.hasNextBlock()) {
+				/* Rule with a declaration followed by multiple cases. */
+				ruleReader.nextBlock();
+				Block declBlock = ruleReader.getBlock();
+				declBlock.lineOffset = lineOffset;
 
-					for(Block block : ruleReader) {
-						/* Ignore comment lines. */
-						if(block.contents.trim().startsWith("#")) return;
+				String declContents = declBlock.contents;
+				Rule rl = handleRuleDecl(build, declContents, lineOffset + declBlock.startLine, kid);
 
-						handleRuleCase(block.contents, build, rl, block.startLine + lineOffset);
-					}
-				} else {
-					/* Rule with a declaration followed by a single case. */
-					handleRuleDecl(build, ruleBlock, lineOffset);
+				// Error occured during rule processing
+				if (rl == null) return;
+
+				for(Block block : ruleReader) {
+					/* Ignore comment lines. */
+					if(block.contents.trim().startsWith("#")) return;
+
+					handleRuleCase(block.contents, build, rl, block.startLine + lineOffset, kid);
 				}
-			} catch (GrammarException gex) {
-				String msg = String.format("Error in rule case (%s)", ruleReader.getBlock());
-
-				throw new GrammarException(msg, gex, gex.getRootMessage());
+			} else {
+				/* Rule with a declaration followed by a single case. */
+				handleRuleDecl(build, ruleBlock, lineOffset, kid);
 			}
-		} catch (Exception ex) {
-			throw new GrammarException("Unknown error handling rule block", ex, ex.getMessage());
+
+			if (kid.size() > 0) errs.addChild(kid);
+		} catch (IOException ex) {
+			String msg = String.format("ERROR: Unknown error handling rule block (%s)",ex.getMessage());
+
+			errs.addChild(msg);
 		}
 	}
 
 	/* Handle a rule declaration and its initial case. */
-	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents, int lineOffset) {
+	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents, int lineOffset, ITree<String> errs) {
 		int declSep = declContents.indexOf("\u2192");
 
 		if (declSep == -1) {
 			/*
 			 * @NOTE
 			 * 	We should maybe remove support for the old
-			 * 	syntax at some point. However, maybe we don't
-			 * 	want to do so so as to make inputting grammars
-			 * 	easier.
+			 * 	syntax at some point.
+			 *
+			 * 	We don't want to do so so as to make inputting grammars easier,
+			 * 	since that character is not easy to type on a normal keyboard,
+			 * 	and takes 4 keystrokes in vim as composed to 1 for the normal
+			 * 	one.
 			 */
 			declSep = declContents.indexOf(' ');
 
 			if (declSep == -1) {
 				String msg = "A rule must be given at least one case in its declaration, and seperated from that case by \u2192 or ' '";
 
-				throw new GrammarException(msg);
+				errs.addChild(msg);
+
+				return null;
 			}
 		}
 
@@ -519,70 +589,78 @@ public class RGrammarParser {
 		String ruleBody = declContents.substring(declSep + 1).trim();
 
 		if (ruleName.equals("")) {
-			throw new GrammarException("The empty string is not a valid rule name");
+			errs.addChild("ERROR: The empty string is not a valid rule name");
+
+			return null;
 		}
 
-		Rule rul = build.getOrCreateRule(ruleName);
+		errs.setHead("INFO: Rule " + ruleName);
 
-		handleRuleCase(ruleBody, build, rul, lineOffset);
+		Rule rul = build.getOrCreateRule(ruleName, errs);
+
+		if (rul == null) return null;
+
+		handleRuleCase(ruleBody, build, rul, lineOffset, errs);
 
 		return rul;
 	}
 
 	/* Handle a single case of a rule. */
-	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul, int lineOffset) {
-		Pair<IList<CaseElement>, Integer> caseParts = parseElementString(cse);
+	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul, int lineOffset, ITree<String> errs) {
+		List<CaseElement> elms = new ArrayList<>();
 
-		rul.addCase(new NormalRuleCase(caseParts.getLeft()), caseParts.getRight());
+		int weights = parseElementString(cse, elms, errs);
+
+		rul.addCase(new NormalRuleCase(elms), weights);
 	}
 
 	/* Handle a where block (a block with local rules). */
-	private static void handleWhereBlock(String block, RGrammarBuilder build,
-			int level, int lineOffset) throws GrammarException {
+	private static void handleWhereBlock(String block, RGrammarBuilder build, int level, int lineOffset, LoadOptions lopts, ITree<String> errs) { 
 		int nlIndex = block.indexOf("\\nin");
 
 		if (nlIndex == -1) {
-			throw new GrammarException("Where block must be a context followed by a body");
+			errs.addChild("ERROR: Where block must be a context followed by a body");
+
+			return;
 		}
 
 		String trimBlock = block.substring(nlIndex).trim();
 
 		String whereDelim = String.format(TMPL_WHERE_BLOCK_DELIM, level);
 
-		try (BlockReader whereReader = new SimpleBlockReader(whereDelim,
-					new StringReader(trimBlock))) {
-			try {
-				Block whereCtx = whereReader.next();
-				whereCtx.lineOffset = lineOffset;
+		try (BlockReader whereReader = new SimpleBlockReader(whereDelim, new StringReader(trimBlock))) {
+			Block whereCtx = whereReader.next();
+			whereCtx.lineOffset = lineOffset;
 
-				StringReader ctxReader = new StringReader(whereCtx.contents.trim());
-				String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
+			StringReader ctxReader = new StringReader(whereCtx.contents.trim());
+			String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
 
-				try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
-					@SuppressWarnings("unused")
-					Block whereBody = whereReader.next();
-					whereBody.lineOffset = lineOffset + whereCtx.startLine;
+			try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
+				@SuppressWarnings("unused")
+				Block whereBody = whereReader.next();
+				whereBody.lineOffset = lineOffset + whereCtx.startLine;
 
-					System.err.printf("\tUNIMPLEMENTED WHERE:\n%s\n", whereBody.contents);
-					/**
-					 * @TODO 10/11/17 Ben Culkin :WhereBlocks
-					 * 	Implement where blocks. 
-					 *
-					 * 	A where block has the context evaluated
-					 * 	in a new context, and the body executed
-					 * 	in that context.
-					 */
-				}
-			} catch (GrammarException gex) {
-				throw new GrammarException(String.format("Error in where block (%s)",
-							whereReader.getBlock()), gex, gex.getRootMessage());
+				String msg = String.format("UNIMPLEMENTED WHERE:\n%s\n", whereBody.contents);
+				errs.addChild(msg);
+				/**
+				 * @TODO 10/11/17 Ben Culkin :WhereBlocks
+				 * 	Implement where blocks. 
+				 *
+				 * 	A where block has the context evaluated
+				 * 	in a new context, and the body executed
+				 * 	in that context.
+				 */
 			}
-		} catch (Exception ex) {
-			throw new GrammarException("Unknown error in where block", ex, ex.getMessage());
+		} catch (IOException ioex) {
+			String msg = String.format("Unknown error in where block (%s)", ioex.getMessage());
 		}
 	}
 
-	public static Pair<IList<CaseElement>, Integer> parseElementString(String cses) {
+	public static int parseElementString(String cses, List<CaseElement> elms) {
+		return parseElementString(cses, elms, new Tree<>());
+	}
+
+	public static int parseElementString(String cses, List<CaseElement> elms, ITree<String> errs) {
 		/*
 		 * @NOTE
 		 *
@@ -595,12 +673,14 @@ public class RGrammarParser {
 		 *  return parseElementString(cseList.toArray(new String[0]));
 		 */
 
-		return parseElementString(cses.split(" "));
+		return parseElementString(cses.split(" "), elms, errs);
 	}
 
-	public static Pair<IList<CaseElement>, Integer> parseElementString(String... cses) {
-		IList<CaseElement> caseParts = new FunctionalList<>();
+	public static int parseElementString(String[] cses, List<CaseElement> elms) {
+		return parseElementString(cses, elms, new Tree<>());
+	}
 
+	public static int parseElementString(String[] cses, List<CaseElement> caseParts, ITree<String> errs) {
 		int weight = 1;
 
 		int repCount = 1;
@@ -650,7 +730,7 @@ public class RGrammarParser {
 				 * a setting on CaseElement, instead of having
 				 * their own CaseElement type.
 				 */
-				CaseElement elm = caseParts.popLast();
+				CaseElement elm = caseParts.remove(caseParts.size() - 1);
 
 				if(repCount == 0) {
 					/* Skip no-reps */
@@ -703,6 +783,6 @@ public class RGrammarParser {
 			}
 		}
 
-		return new Pair<>(caseParts, weight);
+		return weight;
 	}
 }

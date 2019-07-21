@@ -1,7 +1,10 @@
 package bjc.rgens.parser.templates;
 
 import bjc.utils.data.BooleanToggle;
+import bjc.utils.data.ITree;
+import bjc.utils.data.Tree;
 import bjc.utils.funcdata.FunctionalList;
+import bjc.utils.funcdata.IList;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
@@ -14,12 +17,30 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A template element that can contain rule elements.
+ *
+ * @author Ben Culkin.
+ */
 public class LiveTemplateElement extends TemplateElement {
+	// Pattern for matching elements (any number of characters bracketed by '$@' and '@$')
 	private static final Pattern INSERT_PAT = Pattern.compile("\\$@(.+?)@\\$");
 
+	/**
+	 * The sub-elements of this element.
+	 */
 	public final List<List<CaseElement>> elements;
 
-	public LiveTemplateElement(String val) {
+	/**
+	 * Create a new template element.
+	 *
+	 * @param val
+	 * 		The string to parse this element from.
+	 *
+	 * @param errs
+	 * 		A tree to add errors &amp; information to.
+	 */
+	public LiveTemplateElement(String val, ITree<String> errs) {
 		super(true);
 
 		elements = new ArrayList<>();
@@ -31,10 +52,12 @@ public class LiveTemplateElement extends TemplateElement {
 			mat.appendReplacement(sb, "");
 			String body = mat.group(1);
 
-			FunctionalList<CaseElement> elms = (FunctionalList<CaseElement>)RGrammarParser.parseElementString(body).getLeft();
+			List<CaseElement> elms = new ArrayList<>();
+
+			int weight = RGrammarParser.parseElementString(body, elms, errs);
 
 			elements.add(Arrays.asList(new LiteralCaseElement(sb.toString())));
-			elements.add(elms.getInternal());
+			elements.add(elms);
 
 			sb = new StringBuffer();
 		}
@@ -43,6 +66,7 @@ public class LiveTemplateElement extends TemplateElement {
 		elements.add(Arrays.asList(new LiteralCaseElement(sb.toString())));
 	}
 
+	@Override
 	public void generate(GenerationState state) {
 		BooleanToggle bt = new BooleanToggle(false);
 

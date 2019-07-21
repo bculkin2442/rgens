@@ -1,7 +1,8 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.utils.funcdata.IList;
+
+import java.util.List;
 
 /*
  * @NOTE
@@ -22,7 +23,7 @@ public abstract class RuleCase {
 
 	public Rule belongsTo;
 
-	public IList<CaseElement> elementList;
+	public List<CaseElement> elementList;
 
 	/**
 	 * Create a new case of the specified type that takes a element list
@@ -32,7 +33,7 @@ public abstract class RuleCase {
 	 * 	The element list parameter of the case.
 	 *
 	 */
-	protected RuleCase(IList<CaseElement> elements) {
+	protected RuleCase(List<CaseElement> elements) {
 		elementList = elements;
 
 		serial      = nextSerial;
@@ -41,7 +42,7 @@ public abstract class RuleCase {
 
 	public abstract void generate(GenerationState state);
 
-	public abstract RuleCase withElements(IList<CaseElement> elements);
+	public abstract RuleCase withElements(List<CaseElement> elements);
 
 	public String toString() {
 		if(debugName != null) {

@@ -1,6 +1,8 @@
 package bjc.rgens.parser;
 
 import bjc.utils.data.IPair;
+import bjc.utils.data.ITree;
+import bjc.utils.data.Tree;
 import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.gen.WeightedRandom;
@@ -121,20 +123,32 @@ public class Rule {
 	}
 
 	public void addRejection(String reject) {
+		addRejection(reject, new Tree<>());
+	}
+
+	public void addRejection(String reject, ITree<String> errs) {
 		try {
 			Pattern.compile(reject);
 		} catch (PatternSyntaxException psex) {
-			throw new GrammarException(String.format("String %s is not a valid regex for rejection", reject), psex);
+			String msg = String.format("ERROR: '%s' is not a valid regex for rejection (%s)", reject, psex.getMessage());
 		}
 
 		rejectionPreds.add(reject);
 	}
 
 	public void addFindReplace(String find, String replace) {
+		addFindReplace(find, replace, new Tree<>());
+	}
+
+	public void addFindReplace(String find, String replace, ITree<String> errs) {
 		try {
 			Pattern.compile(find);
 		} catch (PatternSyntaxException psex) {
-			throw new GrammarException(String.format("String %s is not a valid regex for finding", find), psex);
+			String msg = String.format("ERROR: '%s' is not a valid regex for finding (%s)", find, psex.getMessage());
+
+			errs.addChild(msg);
+
+			return;
 		}
 
 		findReplaces.add(pair(find, replace));

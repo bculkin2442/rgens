@@ -1,11 +1,11 @@
 package bjc.rgens.parser;
 
-import bjc.utils.funcdata.IList;
+import java.util.List;
 
 import bjc.rgens.parser.elements.CaseElement;
 
 public class NormalRuleCase extends RuleCase {
-	public NormalRuleCase(IList<CaseElement> elms) {
+	public NormalRuleCase(List<CaseElement> elms) {
 		super(elms);
 	}
 
@@ -20,7 +20,7 @@ public class NormalRuleCase extends RuleCase {
 		}
 	}
 
-	public NormalRuleCase withElements(IList<CaseElement> elms) {
+	public NormalRuleCase withElements(List<CaseElement> elms) {
 		return new NormalRuleCase(elms);
 	}
 }
