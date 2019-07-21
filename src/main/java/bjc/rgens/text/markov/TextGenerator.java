@@ -42,10 +42,10 @@ public class TextGenerator {
 
 			file = args[1];
 		} else {
-			System.out.println("\n" + "Usage: java TextGenerator k M file");
+			System.out.println("\nUsage: java TextGenerator k M file");
 			System.out.println("where k is the markov order, M is the number");
 			System.out.println("of characters to be printed, and file is the");
-			System.out.println("name of the file to print from. M may be left out." + "\n");
+			System.out.println("name of the file to print from. M may be left out.\n");
 			System.exit(1);
 		}
 

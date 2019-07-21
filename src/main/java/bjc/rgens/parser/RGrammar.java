@@ -2,6 +2,15 @@ package bjc.rgens.parser;
 
 import static bjc.utils.data.IPair.pair;
 
+import bjc.utils.data.IPair;
+import bjc.utils.data.ITree;
+import bjc.utils.data.Pair;
+import bjc.utils.data.Tree;
+import bjc.utils.funcutils.StringUtils;
+import bjc.utils.ioutils.ReportWriter;
+
+import bjc.rgens.parser.elements.*;
+
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +23,6 @@ import java.util.Set;
 
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
-import bjc.rgens.parser.elements.CaseElement;
 import bjc.utils.data.IPair;
 import bjc.utils.ioutils.ReportWriter;
 import edu.gatech.gtri.bktree.BkTreeSearcher;
@@ -285,18 +293,27 @@ public class RGrammar {
 	 *            initial rule.
 	 */
 	public void setInitialRule(String initRule) {
+		setInitialRule(initRule, new Tree<>());
+	}
+
+	public void setInitialRule(String initRule, ITree<String> errs) {
 		/* Passing null, nulls our initial rule. */
 		if (initRule == null) {
 			this.initialRule = null;
+
 			return;
 		}
 
 		if (initRule.equals("")) {
-			throw new GrammarException("The empty string is not a valid rule name");
-		} else if (!rules.containsKey(initRule)) {
-			String msg = String.format("No rule '%s' local to this grammar (%s) defined.", initRule, name);
+			errs.addChild("ERROR: The empty string is not a valid rule name");
 
-			throw new GrammarException(msg);
+			return;
+		} else if (!rules.containsKey(initRule)) {
+			String msg = String.format("ERROR: No rule '%s' local to this grammar (%s) defined.", initRule, name);
+
+			errs.addChild(msg);
+
+			return;
 		}
 
 		initialRule = initRule;

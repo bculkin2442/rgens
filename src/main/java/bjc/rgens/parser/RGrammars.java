@@ -30,7 +30,12 @@ public class RGrammars {
 
 			Path cfgPath = Paths.get(rsc);
 
-			cfgSet = ConfigLoader.fromConfigFile(cfgPath);
+			LoadOptions lopts = new LoadOptions();
+
+			lopts.doPerf  = false;
+			lopts.defName = "default";
+
+			cfgSet = ConfigLoader.fromConfigFile(cfgPath, lopts);
 		} catch (IOException | URISyntaxException ex) {
 			RuntimeException rtex = new RuntimeException("Could not load grammars");
 

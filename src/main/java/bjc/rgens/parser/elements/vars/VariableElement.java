@@ -37,6 +37,7 @@ public abstract class VariableElement {
 
 		for (String npart : parts) {
 			// @HACK
+			//
 			// This is so that inline refs to hypenized rule names
 			// work. Not sure this is a good impl. strategy
 			String part = npart.replaceAll("\\(|\\)", "");

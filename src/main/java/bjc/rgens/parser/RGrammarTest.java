@@ -3,11 +3,17 @@ package bjc.rgens.parser;
 import static bjc.rgens.parser.RGrammarLogging.error;
 import static bjc.rgens.parser.RGrammarLogging.perf;
 
+import bjc.utils.data.ITree;
+import bjc.utils.data.Tree;
+
 import java.io.IOException;
+
 import java.net.URISyntaxException;
 import java.net.URL;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.Random;
 
 import bjc.rgens.parser.templates.GrammarTemplate;
@@ -28,9 +34,24 @@ public class RGrammarTest {
 		URL rsc = RGrammarTest.class.getResource("/server-config-sample.gcfg");
 
 		try {
+			LoadOptions lopts = new LoadOptions();
+
+			// Set up load options
+			lopts.doPerf  = true;
+			lopts.doDebug = false;
+			lopts.doTrace = false;
+
+			lopts.defName = "default";
+
 			/* Load a grammar set. */
-			Path        cfgPath = Paths.get(rsc.toURI());
-			ConfigSet   cfgSet  = ConfigLoader.fromConfigFile(cfgPath);
+			Path cfgPath = Paths.get(rsc.toURI());
+
+			String        msg     = String.format("INFO: Loading config file %s", cfgPath);
+			ITree<String> errTree = new Tree<>(msg);
+
+			ConfigSet cfgSet = ConfigLoader.fromConfigFile(cfgPath, lopts, errTree);
+
+			System.err.print(errTree);
 
 			for(RGrammarSet gramSet : cfgSet.grammars.values()) {
 				testGrammarSet(gramSet);

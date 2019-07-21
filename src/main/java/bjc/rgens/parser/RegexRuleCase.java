@@ -1,7 +1,10 @@
 package bjc.rgens.parser;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.utils.funcdata.IList;
+
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /*
  * @TODO
@@ -9,7 +12,7 @@ import bjc.utils.funcdata.IList;
  * Actually implement this
  */
 public class RegexRuleCase extends RuleCase {
-	public RegexRuleCase(IList<CaseElement> elements) {
+	public RegexRuleCase(List<CaseElement> elements) {
 		super(elements);
 
 	}
@@ -18,7 +21,7 @@ public class RegexRuleCase extends RuleCase {
 		// TODO
 	}
 
-	public RegexRuleCase withElements(IList<CaseElement> elements) {
+	public RegexRuleCase withElements(List<CaseElement> elements) {
 		return new RegexRuleCase(elements);
 	}
 }
