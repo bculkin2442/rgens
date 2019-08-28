@@ -154,7 +154,7 @@ public class RGrammarParser {
 
 		try (BlockReader reader = new SimpleBlockReader(dlm, is)) {
 			if (!reader.hasNextBlock()) {
-				errs.addChild("At least one top-level block must be present");
+				errs.addChild("ERROR: At least one top-level block must be present");
 
 				return null;
 			}

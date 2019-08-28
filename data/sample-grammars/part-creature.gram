@@ -1,17 +1,17 @@
 [full-creature] a(n) [creature-choice]
 	a(n) [quote-creature] fused with a(n) [quote-creature]
-	chimera of a(n) [quote-creature] , a(n) [quote-creature] and a(n) [quote-creature] 
+	chimera of the following creatures: [quote-creature] ; a(n) [quote-creature] ; and a(n) [quote-creature] 
 
-[quote-creature] ( [creature-choice] )
+[quote-creature] [creature-choice]
 
 pragma despace-rule [quote-creature]
 
 [creature-choice] [creature]
 
-pragma prefix-with [creature-choice] [characteristics]
-pragma prefix-with [creature-choice] [abilities]
-pragma prefix-with [creature-choice] [characteristics]
-pragma prefix-with [creature-choice] [abilities]
+pragma prefix-with [creature-choice] <?2> [characteristics]
+pragma prefix-with [creature-choice] <?2> [abilities]
+pragma prefix-with [creature-choice] <?4> [characteristics]
+pragma prefix-with [creature-choice] <?4> [abilities]
 
 pragma initial-rule [full-creature]
 pragma export-rule [creature-choice]
@@ -20,7 +20,7 @@ pragma export-rule [creature-choice]
 	<^2> [quote-ability] and [quote-ability]
 	[quote-ability] , [quote-ability] and [quote-ability]
 
-[quote-ability] ( [ability] )
+[quote-ability] [ability]
 
 pragma despace-rule [quote-ability]
 
@@ -60,7 +60,7 @@ pragma despace-rule [eating]
 	<^2> [quote-characteristic] and [quote-characteristic]
 	[quote-characteristic] , [quote-characteristic] and [quote-characteristic]
 
-[quote-characteristic] ( [characteristic] )
+[quote-characteristic] [characteristic]
 
 pragma despace-rule [quote-characteristic]
 

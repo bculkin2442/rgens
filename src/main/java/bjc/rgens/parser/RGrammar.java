@@ -35,12 +35,22 @@ import edu.gatech.gtri.bktree.MutableBkTree;
  * @author EVE
  */
 public class RGrammar {
+	/**
+	 * The grammar set this grammar belongs to.
+	 */
 	public RGrammarSet belongsTo;
 
+	/**
+	 * The name of this grammar.
+	 */
 	public String name;
 
+	/**
+	 * The post-processing find/replace pairs applied to this grammars outputs.
+	 */
 	public List<IPair<String, String>> postprocs;
 
+	/* The default post-processing rules to apply. */
 	private static final List<IPair<String, String>> builtinPostprocs;
 	public boolean useBuiltinPostprocs = true;
 
@@ -65,8 +75,11 @@ public class RGrammar {
 		}
 	}
 
-	/* The rules of the grammar. */
+	/**
+	 * The rules of the grammar.
+	 */
 	public Map<String, Rule> rules;
+
 	/* The rules imported from other grammars. */
 	private Map<String, Rule> importRules;
 	/* The rules exported from this grammar. */
@@ -75,7 +88,14 @@ public class RGrammar {
 	/* The initial rule of this grammar. */
 	private String initialRule;
 
+	/**
+	 * The normal auto-variables for this grammar.
+	 */
 	public Map<String, CaseElement> autoVars;
+
+	/**
+	 * The rule auto-variables for this grammar.
+	 */
 	public Map<String, CaseElement> autoRlVars;
 
 	/* The tree to use for finding rule suggestions. */
@@ -119,6 +139,7 @@ public class RGrammar {
 				pair("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1")
 				);
 	}
+
 	/**
 	 * Create a new randomized grammar using the specified set of rules.
 	 *
@@ -177,14 +198,16 @@ public class RGrammar {
 	 * Generate a string from this grammar, starting from the specified rule.
 	 *
 	 * @param startRule
-	 *            The rule to start generating at, or null to use the initial rule
-	 *            for this grammar.
+	 * 	The rule to start generating at, or null to use the initial rule for this grammar.
 	 *
 	 * @param rnd
-	 *            The random number generator to use.
+	 * 	The random number generator to use.
 	 *
 	 * @param vars
-	 *            The set of variables to use.
+	 * 	The set of variables to use.
+	 *
+	 * @param rlVars
+	 * 	The set of rule variables to use.
 	 *
 	 * @return A possible string from the grammar.
 	 */
@@ -199,8 +222,7 @@ public class RGrammar {
 	 * Generate a string from this grammar, starting from the specified rule.
 	 *
 	 * @param startRule
-	 *            The rule to start generating at, or null to use the initial rule
-	 *            for this grammar.
+	 * 	The rule to start generating at, or null to use the initial rule for this grammar.
 	 *
 	 * @param state
 	 * 	The generation state.
@@ -209,6 +231,18 @@ public class RGrammar {
 		return generate(startRule, state, true);
 	}
 
+	/**
+	 * Generate a string from this grammar, starting from the specified rule.
+	 *
+	 * @param startRule
+	 * 	The rule to start generating at, or null to use the initial rule for this grammar.
+	 *
+	 * @param doPostprocess
+	 * 	Whether or not we should perform post-processing of our output.
+	 *
+	 * @param state
+	 * 	The generation state.
+	 */
 	public String generate(String startRule, GenerationState state, boolean doPostprocess) {
 		String fromRule = startRule;
 
@@ -224,10 +258,7 @@ public class RGrammar {
 			}
 		}
 
-		/* 
-		 * We don't search imports, so it will always belong to this
-		 * grammar.
-		 */
+		/* We don't search imports for the initial rule, so it will always belong to this grammar. */
 		Rule rl = state.findRule(fromRule, false);
 
 		if(rl == null)
@@ -244,6 +275,7 @@ public class RGrammar {
 		return body;
 	}
 
+	/* Postprocess the output. */
 	private String postprocessRes(String strang) {
 		String body = strang;
 
@@ -264,6 +296,7 @@ public class RGrammar {
 	 *
 	 * @param start
 	 * 	The rule case to generate.
+	 *
 	 * @param state
 	 * 	The current generation state.
 	 */
@@ -289,13 +322,21 @@ public class RGrammar {
 	 * Set the initial rule of this grammar.
 	 *
 	 * @param initRule
-	 *            The initial rule of this grammar, or null to say there is no
-	 *            initial rule.
+	 * 	The initial rule of this grammar, or null to say there is no initial rule.
 	 */
 	public void setInitialRule(String initRule) {
 		setInitialRule(initRule, new Tree<>());
 	}
 
+	/**
+	 * Set the initial rule of this grammar.
+	 *
+	 * @param initRule
+	 * 	The initial rule of this grammar, or null to say there is no initial rule.
+	 *
+	 * @param errs
+	 * 	The tree to store errors in.
+	 */
 	public void setInitialRule(String initRule, ITree<String> errs) {
 		/* Passing null, nulls our initial rule. */
 		if (initRule == null) {

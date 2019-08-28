@@ -53,3 +53,10 @@ DONE(6/3/18) 10/11/17 Ben Culkin :Determinism
 @TODO 6/3/18 Ben Culkin :DieRandom
 	Add a way to use dice from dicelang (probably the rewrite, once that has
 	a string parser) to create random numbers
+
+@TODO 9/22/2019 Ben Culkin :ErrorHandling
+	Do a wholesale refactoring away from exceptions to a more C-style way of
+	handling things.
+
+	This will probably entail the definition of some kind of error code type
+	that can be conveniently returned and used.

@@ -1,0 +1,15 @@
+RGens Grammar Definitions
+    filter remove_matches ^\s*#
+    filter remove_inline #.*$
+    extension gram
+    3rd_gen_scale 3.0
+RGens Grammar Templates
+    filter remove_matches ^\s*#
+    filter remove_inline #.*$
+    extension gtpl
+    3rd_gen_scale 3.0
+RGens Grammar Set definitions
+    filter remove_matches ^\s*#
+    filter remove_inline #.*$
+    extension gcfg
+    3rd_gen_scale 3.0
