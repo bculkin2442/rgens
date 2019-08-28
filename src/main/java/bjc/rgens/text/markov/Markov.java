@@ -148,6 +148,11 @@ public class Markov {
 		return map;
 	}
 
+	/*
+	 * @TODO @PERF Ben Culkin 7/21/2019 :PerfSelect
+	 * Couldn't we come up some better way to do the random sampling? Maybe use
+	 * like the reservoir sampling stuff, or build the array list ahead of time?
+	 */
 	/**
 	 * Using probability, returns a pseudo-random character to follow the
 	 * substring.

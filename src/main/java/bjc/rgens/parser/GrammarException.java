@@ -64,6 +64,11 @@ public class GrammarException extends RuntimeException {
 		this.rootMessage = rootMsg;
 	}
 
+	/**
+	 * Get the root cause of this exception.
+	 *
+	 * @return The root cause of this exception.
+	 */
 	public String getRootMessage() {
 		return rootMessage == null? getMessage() : rootMessage;
 	}
