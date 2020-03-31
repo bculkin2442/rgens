@@ -2,7 +2,6 @@ package bjc.rgens.parser.templates;
 
 import bjc.rgens.parser.ConfigSet;
 import bjc.rgens.parser.GenerationState;
-import bjc.rgens.parser.LoadOptions;
 
 import bjc.utils.data.ITree;
 import bjc.utils.data.Tree;
@@ -11,10 +10,6 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import bjc.rgens.parser.ConfigSet;
-import bjc.rgens.parser.GenerationState;
-
 /**
  * Represents a grammar template.
  *

@@ -3,8 +3,6 @@ package bjc.rgens.parser;
 import bjc.rgens.parser.elements.CaseElement;
 
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 /*
  * @TODO

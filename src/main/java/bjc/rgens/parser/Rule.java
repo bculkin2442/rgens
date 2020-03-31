@@ -6,7 +6,6 @@ import static bjc.utils.data.IPair.pair;
 import bjc.utils.data.IPair;
 import bjc.utils.data.ITree;
 import bjc.utils.data.Tree;
-import bjc.utils.funcdata.FunctionalList;
 import bjc.utils.funcdata.IList;
 import bjc.utils.gen.WeightedRandom;
 
@@ -15,10 +14,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import bjc.utils.data.IPair;
-import bjc.utils.funcdata.IList;
-import bjc.utils.gen.WeightedRandom;
 
 /**
  * A rule in a randomized grammar.
@@ -134,7 +129,7 @@ public class Rule {
 		try {
 			Pattern.compile(reject);
 		} catch (PatternSyntaxException psex) {
-			String msg = String.format("ERROR: '%s' is not a valid regex for rejection (%s)", reject, psex.getMessage());
+		//	String msg = String.format("ERROR: '%s' is not a valid regex for rejection (%s)", reject, psex.getMessage());
 		}
 
 		rejectionPreds.add(reject);

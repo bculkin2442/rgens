@@ -1,52 +1,22 @@
 package bjc.rgens.parser;
 
-import static bjc.rgens.parser.RGrammarLogging.warn;
-
-import bjc.rgens.parser.elements.*;
-
-import bjc.utils.data.IPair;
-import bjc.utils.data.ITree;
-import bjc.utils.data.Pair;
-import bjc.utils.data.Tree;
-
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcdata.IList;
-
-import bjc.utils.funcutils.ListUtils;
-import bjc.utils.funcutils.SetUtils;
-import bjc.utils.funcutils.StringUtils;
-import bjc.utils.funcutils.TriConsumer;
-
-import bjc.utils.ioutils.LevelSplitter;
-import bjc.utils.ioutils.blocks.Block;
-import bjc.utils.ioutils.blocks.BlockReader;
-import bjc.utils.ioutils.blocks.SimpleBlockReader;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import bjc.rgens.parser.RGrammarBuilder.AffixType;
-
-import bjc.utils.data.Pair;
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcdata.IList;
-import bjc.utils.funcutils.TriConsumer;
-import bjc.utils.ioutils.LevelSplitter;
+import bjc.rgens.parser.elements.CaseElement;
+import bjc.rgens.parser.elements.ChanceCaseElement;
+import bjc.rgens.parser.elements.SerialCaseElement;
+import bjc.rgens.parser.elements.VariableDefCaseElement;
+import bjc.utils.data.ITree;
+import bjc.utils.data.Tree;
+import bjc.utils.funcutils.StringUtils;
 import bjc.utils.ioutils.blocks.Block;
 import bjc.utils.ioutils.blocks.BlockReader;
 import bjc.utils.ioutils.blocks.SimpleBlockReader;
-
-import static bjc.rgens.parser.RGrammarLogging.*;
-import static bjc.rgens.parser.RGrammarBuilder.AffixType;
 
 /**
  * Reads {@link RGrammar} from a input stream.
@@ -649,7 +619,7 @@ public class RGrammarParser {
 			String ctxDelim = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, level + 1);
 
 			try (BlockReader bodyReader = new SimpleBlockReader(ctxDelim, ctxReader)) {
-				@SuppressWarnings("unused")
+				//@SuppressWarnings("unused")
 				Block whereBody = whereReader.next();
 				whereBody.lineOffset = lineOffset + whereCtx.startLine;
 
@@ -665,7 +635,7 @@ public class RGrammarParser {
 				 */
 			}
 		} catch (IOException ioex) {
-			String msg = String.format("Unknown error in where block (%s)", ioex.getMessage());
+			//String msg = String.format("Unknown error in where block (%s)", ioex.getMessage());
 		}
 	}
 

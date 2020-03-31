@@ -1,7 +1,5 @@
 package bjc.rgens.parser;
 
-import static bjc.rgens.parser.RGrammarLogging.trace;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

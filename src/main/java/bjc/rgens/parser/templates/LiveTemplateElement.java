@@ -8,16 +8,11 @@ import java.util.regex.Pattern;
 
 import bjc.utils.data.BooleanToggle;
 import bjc.utils.data.ITree;
-import bjc.utils.data.Tree;
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcdata.IList;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
 import bjc.rgens.parser.elements.CaseElement;
 import bjc.rgens.parser.elements.LiteralCaseElement;
-import bjc.utils.data.BooleanToggle;
-import bjc.utils.funcdata.FunctionalList;
 
 /**
  * A template element that can contain rule elements.
@@ -56,7 +51,8 @@ public class LiveTemplateElement extends TemplateElement {
 
 			List<CaseElement> elms = new ArrayList<>();
 
-			int weight = RGrammarParser.parseElementString(body, elms, errs);
+			// This mutates elms. Not great design, but passable
+			RGrammarParser.parseElementString(body, elms, errs);
 
 			elements.add(Arrays.asList(new LiteralCaseElement(sb.toString())));
 			elements.add(elms);

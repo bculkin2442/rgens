@@ -11,7 +11,6 @@ import java.util.Random;
 import bjc.utils.esodata.MapSet;
 import bjc.utils.ioutils.ReportWriter;
 
-import static bjc.rgens.parser.RGrammarLogging.*;
 /**
  * The current state during generation.
  *

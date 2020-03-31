@@ -3,14 +3,9 @@ package bjc.rgens.parser.elements;
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
 
-import bjc.utils.data.IPair;
-import bjc.utils.funcdata.IList;
-
 
 import bjc.utils.data.ITree;
 import bjc.utils.data.Tree;
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcutils.StringUtils;
 
 import bjc.utils.gen.WeightedRandom;
 import bjc.utils.ioutils.LevelSplitter;

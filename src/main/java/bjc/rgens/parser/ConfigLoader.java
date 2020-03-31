@@ -1,15 +1,9 @@
 package bjc.rgens.parser;
 
-import static bjc.rgens.parser.RGrammarLogging.error;
-import static bjc.rgens.parser.RGrammarLogging.info;
-import static bjc.rgens.parser.RGrammarLogging.perf;
-
 import bjc.utils.data.ITree;
 import bjc.utils.data.QueuedIterator;
 import bjc.utils.data.Tree;
 
-import bjc.utils.funcutils.FileUtils;
-import bjc.utils.funcutils.IteratorUtils;
 import bjc.utils.funcutils.StringUtils;
 
 import java.io.File;
@@ -24,8 +18,6 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import bjc.rgens.parser.templates.GrammarTemplate;
-import bjc.utils.funcutils.FileUtils;
-import bjc.utils.ioutils.LevelSplitter;
 
 /*
  * @TODO @CLEANUP Ben Culkin 7/21/2019 :LoadingInfo
@@ -428,7 +420,7 @@ public class ConfigLoader {
 				actName = name;
 			}
 
-			String fmt = String.format("INFO: Naming unnamed grammar off config name '%s'", actName);
+			//String fmt = String.format("INFO: Naming unnamed grammar off config name '%s'", actName);
 
 			gram.name = actName;
 		}
@@ -483,6 +475,7 @@ public class ConfigLoader {
 
 			try {
 				/* Load grammar file. */
+				@SuppressWarnings("unused")
 				long startFileTime = System.nanoTime();
 
 				Reader rdr = new FileReader(convPath.toFile());

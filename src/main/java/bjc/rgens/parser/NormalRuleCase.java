@@ -3,7 +3,6 @@ package bjc.rgens.parser;
 import java.util.List;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.utils.funcdata.IList;
 
 /**
  * A rule case that inserts spaces in between elements, where appropriate.

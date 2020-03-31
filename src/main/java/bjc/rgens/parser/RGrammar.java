@@ -4,9 +4,7 @@ import static bjc.utils.data.IPair.pair;
 
 import bjc.utils.data.IPair;
 import bjc.utils.data.ITree;
-import bjc.utils.data.Pair;
 import bjc.utils.data.Tree;
-import bjc.utils.funcutils.StringUtils;
 import bjc.utils.ioutils.ReportWriter;
 
 import bjc.rgens.parser.elements.*;
@@ -23,8 +21,6 @@ import java.util.Set;
 
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
-import bjc.utils.data.IPair;
-import bjc.utils.ioutils.ReportWriter;
 import edu.gatech.gtri.bktree.BkTreeSearcher;
 import edu.gatech.gtri.bktree.Metric;
 import edu.gatech.gtri.bktree.MutableBkTree;
