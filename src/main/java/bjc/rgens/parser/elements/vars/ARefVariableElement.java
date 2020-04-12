@@ -8,14 +8,23 @@ import bjc.rgens.parser.Rule;
  *
  */
 public class ARefVariableElement extends VariableElement {
+	/**
+	 * The name of the value we are referring to.
+	 */
 	public String value;
 
+	/**
+	 * Create a new array reference.
+	 * 
+	 * @param val The value of the array reference.
+	 */
 	public ARefVariableElement(String val) {
 		super(false);
 
 		value = val;
 	}
 	
+	@Override
 	public void generate(GenerationState state) {
 		Rule rl = state.findRuleVar(value);
 

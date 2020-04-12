@@ -3,8 +3,8 @@ package bjc.rgens.parser;
 import static bjc.rgens.parser.RGrammarLogging.error;
 import static bjc.rgens.parser.RGrammarLogging.perf;
 
-import bjc.utils.data.ITree;
-import bjc.utils.data.Tree;
+import bjc.data.ITree;
+import bjc.data.Tree;
 
 import java.io.IOException;
 

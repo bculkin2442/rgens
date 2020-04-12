@@ -3,8 +3,8 @@ package bjc.rgens.parser.templates;
 import bjc.rgens.parser.ConfigSet;
 import bjc.rgens.parser.GenerationState;
 
-import bjc.utils.data.ITree;
-import bjc.utils.data.Tree;
+import bjc.data.ITree;
+import bjc.data.Tree;
 
 import java.io.Reader;
 import java.util.ArrayList;

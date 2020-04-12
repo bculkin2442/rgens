@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.Set;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.utils.data.IPair;
-import bjc.utils.data.ITree;
-import bjc.utils.data.Pair;
-import bjc.utils.data.Tree;
+import bjc.data.IPair;
+import bjc.data.ITree;
+import bjc.data.Pair;
+import bjc.data.Tree;
 
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcdata.IList;
+import bjc.funcdata.FunctionalList;
+import bjc.funcdata.IList;
 
 import bjc.utils.funcutils.ListUtils;
 import bjc.utils.funcutils.SetUtils;
@@ -125,6 +125,11 @@ public class RGrammarBuilder {
 	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
 	public void setInitialRule(String init) {
+		ITree<String> errs = new Tree<>();
+		
+		setInitialRule(init, errs);
+		
+		// FIXME do something if errs has a result.
 	}
 
 	public void setInitialRule(String init, ITree<String> errs) {

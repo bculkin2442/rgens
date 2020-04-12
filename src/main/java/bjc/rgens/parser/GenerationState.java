@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import bjc.utils.esodata.MapSet;
+import bjc.esodata.MapSet;
 import bjc.utils.ioutils.ReportWriter;
 
 /**

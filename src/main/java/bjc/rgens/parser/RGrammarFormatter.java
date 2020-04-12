@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.utils.data.IPair;
-import bjc.utils.funcdata.IList;
+import bjc.data.IPair;
+import bjc.funcdata.IList;
 
 /**
  * @TODO Ben Culkin 9/8/18 :GrammarFormatter

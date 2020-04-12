@@ -1,8 +1,8 @@
 package bjc.rgens.parser;
 
-import bjc.utils.data.ITree;
-import bjc.utils.data.QueuedIterator;
-import bjc.utils.data.Tree;
+import bjc.data.ITree;
+import bjc.data.QueuedIterator;
+import bjc.data.Tree;
 
 import bjc.utils.funcutils.StringUtils;
 

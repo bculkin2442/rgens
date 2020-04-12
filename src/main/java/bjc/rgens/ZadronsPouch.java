@@ -1,8 +1,8 @@
 package bjc.rgens;
 
-import bjc.utils.funcdata.FunctionalList;
-import bjc.utils.funcdata.FunctionalStringTokenizer;
-import bjc.utils.funcdata.IList;
+import bjc.funcdata.FunctionalList;
+import bjc.funcdata.FunctionalStringTokenizer;
+import bjc.funcdata.IList;
 import bjc.utils.gen.RandomGrammar;
 
 /**

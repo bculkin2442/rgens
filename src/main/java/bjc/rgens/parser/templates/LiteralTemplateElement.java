@@ -1,6 +1,6 @@
 package bjc.rgens.parser.templates;
 
-import bjc.utils.data.ITree;
+import bjc.data.ITree;
 
 import bjc.rgens.parser.GenerationState;
 

@@ -4,8 +4,8 @@ import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
 
 
-import bjc.utils.data.ITree;
-import bjc.utils.data.Tree;
+import bjc.data.ITree;
+import bjc.data.Tree;
 
 import bjc.utils.gen.WeightedRandom;
 import bjc.utils.ioutils.LevelSplitter;

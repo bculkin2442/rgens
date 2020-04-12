@@ -1,12 +1,12 @@
 package bjc.rgens.parser;
 
 import static bjc.rgens.parser.RGrammarLogging.fine;
-import static bjc.utils.data.IPair.pair;
+import static bjc.data.IPair.pair;
 
-import bjc.utils.data.IPair;
-import bjc.utils.data.ITree;
-import bjc.utils.data.Tree;
-import bjc.utils.funcdata.IList;
+import bjc.data.IPair;
+import bjc.data.ITree;
+import bjc.data.Tree;
+import bjc.funcdata.IList;
 import bjc.utils.gen.WeightedRandom;
 
 import java.util.ArrayList;

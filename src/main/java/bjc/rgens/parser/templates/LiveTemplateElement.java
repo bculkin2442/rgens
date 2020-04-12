@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import bjc.utils.data.BooleanToggle;
-import bjc.utils.data.ITree;
+import bjc.data.BooleanToggle;
+import bjc.data.ITree;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
