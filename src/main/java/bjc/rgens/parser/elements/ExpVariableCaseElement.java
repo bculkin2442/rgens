@@ -5,7 +5,17 @@ import bjc.rgens.parser.GrammarException;
 import bjc.rgens.parser.RGrammar;
 import bjc.rgens.parser.Rule;
 
+/**
+ * Case element that defines a expanded-rule variable.
+ * @author Ben Culkin
+ *
+ */
 public class ExpVariableCaseElement extends VariableDefCaseElement {
+	/**
+	 * Create a new variable-expanding element.
+	 * @param name The name of the variable.
+	 * @param def The definition of the variable.
+	 */
 	public ExpVariableCaseElement(String name, String def) {
 		super(name, def);
 	}

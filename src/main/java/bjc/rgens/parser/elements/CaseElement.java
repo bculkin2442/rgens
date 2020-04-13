@@ -27,6 +27,9 @@ public abstract class CaseElement {
 		/** An element that represents a variable that stores a string. */
 		VARIABLE(false);
 
+		/**
+		 * Whether or not to add spacing after each element.
+		 */
 		public final boolean spacing;
 
 		private ElementType(boolean spacing) {

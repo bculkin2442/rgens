@@ -21,18 +21,18 @@ public class ConfigSet {
 	// methods for them, since at least grammars have some extra stuff that
 	// needs to be done when they are associated/unassociated with a config
 	// set.
-	/*
+	/**
 	 * Represents all of the grammar sets that are mapped into this config
 	 * set.
 	 */
 	public final Map<String, RGrammarSet>     grammars;
 
-	/*
+	/**
 	 * Represents all of the templates that are mapped into this config set.
 	 */
 	public final Map<String, GrammarTemplate> templates;
 
-	/*
+	/**
 	 * Represents all of the sub-configurations that are mapped into this
 	 * config set.
 	 */
