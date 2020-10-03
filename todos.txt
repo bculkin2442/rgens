@@ -60,3 +60,9 @@ DONE(6/3/18) 10/11/17 Ben Culkin :Determinism
 
 	This will probably entail the definition of some kind of error code type
 	that can be conveniently returned and used.
+
+@TODO 7/8/2020 Ben Culkin :RecurLimit
+	Add some easy way to say that we only want to recur into a given rule once
+	in this context (could some sort of use of exhaustive rule vars. do this?
+	maybe. it's been a while since last I looked at the details of how this
+	project worked; and I doubt I left enough comments/other documentation)
