@@ -40,15 +40,17 @@ public class ConfigLoader {
 	 * Load a grammar set from a configuration file.
 	 *
 	 * @param cfgFile
-	 * 	The configuration file to load from.
+	 *                The configuration file to load from.
+	 * @param lopts
+	 *                Options used during loading.
 	 *
-	 * @return
-	 * 	The grammar set created by the configuration file.
+	 * @return The grammar set created by the configuration file.
 	 *
 	 * @throws IOException
-	 * 	If something goes wrong during configuration loading.
+	 *                     If something goes wrong during configuration loading.
 	 */
-	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts) throws IOException {
+	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts)
+			throws IOException {
 		String msg = String.format("INFO: Loading config file from path '%s'", cfgFile);
 
 		ITree<String> errTree = new Tree<>(msg);
@@ -60,20 +62,22 @@ public class ConfigLoader {
 	 * Load a grammar set from a configuration file.
 	 *
 	 * @param cfgFile
-	 * 	The configuration file to load from.
+	 *                The configuration file to load from.
+	 * @param lopts
+	 *                Options used during loading.
 	 *
 	 * @param errs
-	 *	A place to add errors that occur during loading.
+	 *                A place to add errors that occur during loading.
 	 *
-	 * @return
-	 * 	The grammar set created by the configuration file.
+	 * @return The grammar set created by the configuration file.
 	 *
 	 * @throws IOException
-	 * 	If something goes wrong during configuration loading.
+	 *                     If something goes wrong during configuration loading.
 	 */
-	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts, ITree<String> errs) throws IOException {
+	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts,
+			ITree<String> errs) throws IOException {
 		lopts.cfgFile = cfgFile;
-		lopts.cfgSet  = new ConfigSet();
+		lopts.cfgSet = new ConfigSet();
 
 		/* The grammar set we're parsing into. */
 		lopts.gramSet = lopts.cfgSet.createGSet(lopts.defName);
@@ -81,10 +85,11 @@ public class ConfigLoader {
 		long startCFGTime = System.nanoTime();
 
 		// Get the directory that contains the config file.
-		if (lopts.parent == null) lopts.parent = cfgFile.getParent();
+		if (lopts.parent == null)
+			lopts.parent = cfgFile.getParent();
 
 		int lno = 0;
-		try(Scanner scn = new Scanner(cfgFile)) {
+		try (Scanner scn = new Scanner(cfgFile)) {
 
 			while (scn.hasNextLine()) {
 				// Execute a line from the configuration file.
@@ -99,18 +104,21 @@ public class ConfigLoader {
 				String ln = scn.nextLine().trim().replaceAll("\\s+", " ");
 
 				// Ignore blank/comment lines.
-				if (ln.equals(""))      continue;
-				if (ln.startsWith("#")) continue;
+				if (ln.equals(""))
+					continue;
+				if (ln.startsWith("#"))
+					continue;
 
 				// @TODO Ben Culkin 9/21/2019 :LineCont
 				// We should support some sort of line
 				// continuation ability, probably using the '\'
 				// since that what UNIX uses in most places
-				ITree<String> header = new Tree<>(String.format("INFO: Processing line %d", lno));
+				ITree<String> header
+						= new Tree<>(String.format("INFO: Processing line %d", lno));
 
 				String[] parts = StringUtils.levelSplit(ln, " ").toArray(new String[0]);
 
-				if(parts.length < 1) {
+				if (parts.length < 1) {
 					// Must specify a line type
 					//
 					// @TODO Ben Culkin 9/21/2019 :ErrorLine
@@ -138,12 +146,13 @@ public class ConfigLoader {
 				} else {
 					String type = parts[0];
 
-					switch(type) {
-					case "load": 
+					switch (type) {
+					case "load":
 						loadConfigLine(parts, lopts, header);
 						break;
 					default:
-						String fmt = String.format("ERROR: Unknown config line type '%s'", type);
+						String fmt = String.format("ERROR: Unknown config line type '%s'",
+								type);
 
 						header.addChild(fmt);
 					}
@@ -158,7 +167,9 @@ public class ConfigLoader {
 		long cfgDur = endCFGTime - startCFGTime;
 
 		if (lopts.doPerf) {
-			String fmt = String.format("PERF: Read config file (%d lines) from path '%s' in %d ns (%f s)", lno, cfgFile, cfgDur, cfgDur / 1000000000.0);
+			String fmt = String.format(
+					"PERF: Read config file (%d lines) from path '%s' in %d ns (%f s)",
+					lno, cfgFile, cfgDur, cfgDur / 1000000000.0);
 
 			errs.addChild(fmt);
 		}
@@ -167,8 +178,9 @@ public class ConfigLoader {
 	}
 
 	// Load a line from a config file.
-	private static void loadConfigLine(String[] parts, LoadOptions lopts, ITree<String> errs) throws IOException {
-		if(parts.length < 2) {
+	private static void loadConfigLine(String[] parts, LoadOptions lopts,
+			ITree<String> errs) throws IOException {
+		if (parts.length < 2) {
 			// Must specify the type of config object you wish to
 			// load.
 			//
@@ -191,48 +203,50 @@ public class ConfigLoader {
 			// Perhaps do a thing that auto-picks a plausible name
 			// for the object based off of the file name we're
 			// loading from?
-			String fmt = String.format("ERROR: Must specify a name for config object of type '%s'", tag);
+			String fmt = String.format(
+					"ERROR: Must specify a name for config object of type '%s'", tag);
 
 			errs.addChild(fmt);
 
 			return;
 		}
 
-		String name = parts[2]; 
+		String name = parts[2];
 
-		switch(tag) {
-			case "template":
-				loadTemplate(name, parts, lopts, errs);
-				break;
-			case "subset":
-				{
-					String fmt = String.format("ERROR: Sub-grammar sets aren't implemented yet");
+		switch (tag) {
+		case "template":
+			loadTemplate(name, parts, lopts, errs);
+			break;
+		case "subset": {
+			String fmt = String.format("ERROR: Sub-grammar sets aren't implemented yet");
 
-					/* 
-					 * @TODO Ben Culkin 9/8/17 :SubsetGrammar
-					 * Implement subset grammars.
-					 */
-					errs.addChild(fmt);
-				}
-			case "gram":
-			case "grammar":
-				loadGrammar(name, parts, lopts, errs);
-				break;
-			case "directory":
-				loadDirectory(name, parts, lopts, errs);
-				break;
-			default:
-				String fmt = String.format("ERROR: Unrecognized config object type '%s'", tag);
+			/*
+			 * @TODO Ben Culkin 9/8/17 :SubsetGrammar Implement subset grammars.
+			 */
+			errs.addChild(fmt);
+		}
+		case "gram":
+		case "grammar":
+			loadGrammar(name, parts, lopts, errs);
+			break;
+		case "directory":
+			loadDirectory(name, parts, lopts, errs);
+			break;
+		default:
+			String fmt
+					= String.format("ERROR: Unrecognized config object type '%s'", tag);
 
-				errs.addChild(fmt);
+			errs.addChild(fmt);
 		}
 	}
 
 	// Load a 'directory' config object, by recursively attempting to
 	// auto-load all of the items in the directory as objects
-	private static void loadDirectory(String name, String[] parts, LoadOptions lopts, ITree<String> errs) throws IOException {
-		if(parts.length < 4) {
-			String fmt = String.format("ERROR: Must specify a path to load directory '%s' from", name);
+	private static void loadDirectory(String name, String[] parts, LoadOptions lopts,
+			ITree<String> errs) {
+		if (parts.length < 4) {
+			String fmt = String.format(
+					"ERROR: Must specify a path to load directory '%s' from", name);
 
 			errs.addChild(fmt);
 
@@ -242,12 +256,11 @@ public class ConfigLoader {
 		Path path = Paths.get(parts[3]);
 
 		/*
-		 * Convert from configuration relative path to
-		 * absolute path.
+		 * Convert from configuration relative path to absolute path.
 		 */
 		Path dirPath = lopts.parent.resolve(path.toString());
 
-		if(!Files.isDirectory(dirPath)) {
+		if (!Files.isDirectory(dirPath)) {
 			String fmt = String.format("ERROR: '%s' is not a valid directory", dirPath);
 
 			errs.addChild(fmt);
@@ -255,16 +268,19 @@ public class ConfigLoader {
 			// Create an iterator over all of the files in the
 			// provided directory. This will also have the files for
 			// the sub-directories added to it as well
-			QueuedIterator<File> dirItr = new QueuedIterator<>(dirPath.toFile().listFiles());
+			QueuedIterator<File> dirItr
+					= new QueuedIterator<>(dirPath.toFile().listFiles());
 
-			ITree<String> header = new Tree<>(String.format("INFO: Bulk-loading objects from directory '%s'", lopts.parent));
+			ITree<String> header = new Tree<>(String.format(
+					"INFO: Bulk-loading objects from directory '%s'", lopts.parent));
 
 			while (dirItr.hasNext()) {
 				File curFile = dirItr.next();
 
 				String fName = curFile.toString();
 
-				ITree<String> kid = new Tree<>(String.format("INFO: Processing object from path '%s'", fName));
+				ITree<String> kid = new Tree<>(
+						String.format("INFO: Processing object from path '%s'", fName));
 
 				Path oldPar = lopts.parent;
 
@@ -290,7 +306,8 @@ public class ConfigLoader {
 					} else if (fName.endsWith(".class")) {
 						// These get ignored
 					} else {
-						String fmt = String.format("WARN: Ignoring unknown type of file '%s'");
+						String fmt = String
+								.format("WARN: Ignoring unknown type of file '%s'");
 
 						kid.addChild(fmt);
 
@@ -310,16 +327,17 @@ public class ConfigLoader {
 	}
 
 	// Actually do the work of loading a 'template' object
-	private static void doLoadTemplate(Reader rdr, String name, LoadOptions lopts, ITree<String> errs) throws IOException {
+	private static void doLoadTemplate(Reader rdr, String name, LoadOptions lopts,
+			ITree<String> errs) throws IOException {
 		String actName;
-		
+
 		long startFileTime = System.nanoTime();
 
 		GrammarTemplate template = GrammarTemplate.readTemplate(rdr, errs);
 		template.belongsTo = lopts.cfgSet;
 
-		if(template.name == null) {
-			if(name == null) {
+		if (template.name == null) {
+			if (name == null) {
 				String fmt = String.format("WARN: Using default name for template");
 
 				errs.addChild(fmt);
@@ -329,7 +347,9 @@ public class ConfigLoader {
 				actName = name;
 			}
 
-			String fmt = String.format("INFO: Naming unnamed template off name '%s' specified in config", actName);
+			String fmt = String.format(
+					"INFO: Naming unnamed template off name '%s' specified in config",
+					actName);
 			errs.addChild(fmt);
 
 			template.name = actName;
@@ -342,7 +362,8 @@ public class ConfigLoader {
 		long fileTime = endFileTime - startFileTime;
 
 		if (lopts.doPerf) {
-			String fmt = String.format("PERF: Read template %s in %d ns (%f s)", template.name, fileTime, fileTime  / 1000000000.0);
+			String fmt = String.format("PERF: Read template %s in %d ns (%f s)",
+					template.name, fileTime, fileTime / 1000000000.0);
 
 			errs.addChild(fmt);
 		}
@@ -355,17 +376,19 @@ public class ConfigLoader {
 		 *
 		 * Do we need to do this for templates?
 		 *
-		 * Probably, if only to allow for some better diagnostics when
-		 * we need them - ben, 9/21/2019
+		 * Probably, if only to allow for some better diagnostics when we need them -
+		 * ben, 9/21/2019
 		 */
-		//Mark where the template came from. 
-		//set.loadedFrom.put(template.name, path.toString());
+		// Mark where the template came from.
+		// set.loadedFrom.put(template.name, path.toString());
 	}
 
 	// Load a 'template' type grammar object
-	private static void loadTemplate(String name, String[] parts, LoadOptions lopts, ITree<String> errs) throws IOException {
-		if(parts.length < 4) {
-			String fmt = String.format("ERROR: Must specify a path to load template '%s' from", name);
+	private static void loadTemplate(String name, String[] parts, LoadOptions lopts,
+			ITree<String> errs) throws IOException {
+		if (parts.length < 4) {
+			String fmt = String.format(
+					"ERROR: Must specify a path to load template '%s' from", name);
 
 			errs.addChild(fmt);
 
@@ -375,23 +398,24 @@ public class ConfigLoader {
 		Path path = Paths.get(parts[3]);
 
 		/*
-		 * Convert from configuration relative path to
-		 * absolute path.
+		 * Convert from configuration relative path to absolute path.
 		 */
 		Path convPath = lopts.parent.resolve(path.toString());
 
-		if(!Files.exists(convPath) || Files.isDirectory(convPath)) {
-			String fmt = String.format("ERROR: '%s' is not a valid grammar file", convPath);
+		if (!Files.exists(convPath) || Files.isDirectory(convPath)) {
+			String fmt
+					= String.format("ERROR: '%s' is not a valid grammar file", convPath);
 
 			errs.addChild(fmt);
 		} else {
 			/* Load template file. */
 			Reader rdr = new FileReader(convPath.toFile());
 
-			String fmt        = String.format("INFO: Loading template '%s' from '%s'", name, convPath);
+			String fmt = String.format("INFO: Loading template '%s' from '%s'", name,
+					convPath);
 			ITree<String> kid = new Tree<>(fmt);
 
-			Path oldPar  = lopts.parent;
+			Path oldPar = lopts.parent;
 			lopts.parent = convPath.getParent();
 
 			try {
@@ -405,14 +429,15 @@ public class ConfigLoader {
 	}
 
 	// Actually load a 'grammar' object
-	private static void doLoadGrammar(Reader rdr, String name, LoadOptions lopts, ITree<String> errs, Path convPath) throws IOException {
+	private static void doLoadGrammar(Reader rdr, String name, LoadOptions lopts,
+			ITree<String> errs, Path convPath) throws IOException {
 		String actName;
 
 		long startFileTime = System.nanoTime();
 
 		RGrammar gram = RGrammarParser.readGrammar(rdr, lopts, errs);
-		if(gram.name == null) {
-			if(name == null) {
+		if (gram.name == null) {
+			if (name == null) {
 				errs.addChild("WARN: Using default name for grammar");
 
 				actName = "default-name";
@@ -420,7 +445,8 @@ public class ConfigLoader {
 				actName = name;
 			}
 
-			//String fmt = String.format("INFO: Naming unnamed grammar off config name '%s'", actName);
+			// String fmt = String.format("INFO: Naming unnamed grammar off config name
+			// '%s'", actName);
 
 			gram.name = actName;
 		}
@@ -432,7 +458,8 @@ public class ConfigLoader {
 		long fileTime = endFileTime - startFileTime;
 
 		if (lopts.doPerf) {
-			String fmt = String.format("PERF: Read grammar %s in %d ns (%f s)", gram.name, fileTime, fileTime  / 1000000000.0);
+			String fmt = String.format("PERF: Read grammar %s in %d ns (%f s)", gram.name,
+					fileTime, fileTime / 1000000000.0);
 
 			errs.addChild(fmt);
 		}
@@ -441,16 +468,17 @@ public class ConfigLoader {
 		lopts.gramSet.addGrammar(gram.name, gram);
 
 		/*
-		 * Mark where the grammar came
-		 * from. 
+		 * Mark where the grammar came from.
 		 */
 		lopts.gramSet.loadedFrom.put(gram.name, convPath.toString());
 	}
 
 	// Load a 'grammar' object
-	private static void loadGrammar(String name, String[] parts, LoadOptions lopts, ITree<String> errs) throws IOException {
-		if(parts.length < 4) {
-			String fmt = String.format("ERROR: Must provide a path to load grammar '%s' from", name);
+	private static void loadGrammar(String name, String[] parts, LoadOptions lopts,
+			ITree<String> errs) {
+		if (parts.length < 4) {
+			String fmt = String
+					.format("ERROR: Must provide a path to load grammar '%s' from", name);
 
 			errs.addChild(fmt);
 
@@ -460,13 +488,13 @@ public class ConfigLoader {
 		Path path = Paths.get(parts[3]);
 
 		/*
-		 * Convert from configuration relative path to
-		 * absolute path.
+		 * Convert from configuration relative path to absolute path.
 		 */
 		Path convPath = lopts.parent.resolve(path.toString());
 
-		if(!Files.exists(convPath) || Files.isDirectory(convPath)) {
-			String fmt = String.format("ERROR: '%s' is not a valid grammar file", convPath);
+		if (!Files.exists(convPath) || Files.isDirectory(convPath)) {
+			String fmt
+					= String.format("ERROR: '%s' is not a valid grammar file", convPath);
 
 			errs.addChild(fmt);
 		} else {
@@ -480,7 +508,8 @@ public class ConfigLoader {
 
 				Reader rdr = new FileReader(convPath.toFile());
 
-				ITree<String> kid = new Tree<>(String.format("INFO: Loading grammar '%s' from '%s'", name, convPath));
+				ITree<String> kid = new Tree<>(String
+						.format("INFO: Loading grammar '%s' from '%s'", name, convPath));
 
 				doLoadGrammar(rdr, name, lopts, kid, convPath);
 

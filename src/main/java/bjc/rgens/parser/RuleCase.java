@@ -15,14 +15,25 @@ import java.util.List;
  * @author EVE
  */
 public abstract class RuleCase {
+	/**
+	 * Debugging name for this case.
+	 */
 	public String debugName;
 
+	/**
+	 * Serial number for this case.
+	 */
 	public final int serial;
-
 	private static int nextSerial = 0;
 
+	/**
+	 * The rule this case belongs to.
+	 */
 	public Rule belongsTo;
 
+	/**
+	 * The elements that make up this case.
+	 */
 	public List<CaseElement> elementList;
 
 	/**
@@ -40,10 +51,23 @@ public abstract class RuleCase {
 		nextSerial += 1;
 	}
 
+	/**
+	 * Generate this case.
+	 * 
+	 * @param state The state to use.
+	 */
 	public abstract void generate(GenerationState state);
 
+	/**
+	 * Create a new case with a different set of elements.
+	 * 
+	 * @param elements The elements for this case.
+	 * 
+	 * @return The case with the same settings, but a different set of elements.
+	 */
 	public abstract RuleCase withElements(List<CaseElement> elements);
 
+	@Override
 	public String toString() {
 		if(debugName != null) {
 			return String.format("Case %s (#%d) of %s", debugName, serial, belongsTo);

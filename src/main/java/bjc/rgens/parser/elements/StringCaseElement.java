@@ -1,11 +1,26 @@
 package bjc.rgens.parser.elements;
 
+/**
+ * Case element which writes a string.
+ * 
+ * @author Ben Culkin
+ *
+ */
 public abstract class StringCaseElement extends CaseElement {
+	/**
+	 * String written by this element.
+	 */
 	public final String val;
-	
+
+	/**
+	 * Create a new string inserting case element.
+	 * 
+	 * @param vl
+	 *           The string to insert.
+	 */
 	protected StringCaseElement(String vl) {
 		super(true);
-		
+
 		val = vl;
 	}
 
@@ -33,7 +48,7 @@ public abstract class StringCaseElement extends CaseElement {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return val;

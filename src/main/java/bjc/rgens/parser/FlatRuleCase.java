@@ -35,6 +35,7 @@ public class FlatRuleCase extends RuleCase {
 	 *
 	 * @return A flat rule case, with the given elements.
 	 */
+	@Override
 	public FlatRuleCase withElements(List<CaseElement> elms) {
 		return new FlatRuleCase(elms);
 	}

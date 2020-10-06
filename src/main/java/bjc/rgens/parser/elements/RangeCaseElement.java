@@ -2,10 +2,28 @@ package bjc.rgens.parser.elements;
 
 import bjc.rgens.parser.GenerationState;
 
+/**
+ * Case element which generates a range of random numbers.
+ * 
+ * @author Ben Culkin
+ *
+ */
 public class RangeCaseElement extends CaseElement {
+	/**
+	 * The beginning point for this range.
+	 */
 	public final int begin;
+	
+	/**
+	 * The ending point for this range.
+	 */
 	public final int end;
 
+	/**
+	 * Create a new range case element.
+	 * @param beg The beginning point for the range.
+	 * @param en The ending point for the range.
+	 */
 	public RangeCaseElement(int beg, int en) {
 		super(true);
 
@@ -13,6 +31,7 @@ public class RangeCaseElement extends CaseElement {
 		end = en;
 	}
 
+	@Override
 	public void generate(GenerationState state) {
 		int val  = state.rnd.nextInt(end - begin);
 		val     += begin;

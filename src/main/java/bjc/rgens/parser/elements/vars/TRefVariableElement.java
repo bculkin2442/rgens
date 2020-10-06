@@ -7,6 +7,7 @@ import bjc.rgens.parser.GenerationState;
  *
  * finish when template vars are implemented.
  */
+@SuppressWarnings("javadoc")
 public class TRefVariableElement extends VariableElement {
 	public String value;
 
@@ -16,6 +17,7 @@ public class TRefVariableElement extends VariableElement {
 		value = val;
 	}
 	
+	@Override
 	public void generate(GenerationState state) {
 		/*
 		if(!state.rlVars.containsKey(val)) {

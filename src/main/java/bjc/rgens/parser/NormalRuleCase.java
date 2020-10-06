@@ -39,6 +39,7 @@ public class NormalRuleCase extends RuleCase {
 	 *
 	 * @return A normal rule case with those elements.
 	 */
+	@Override
 	public NormalRuleCase withElements(List<CaseElement> elms) {
 		return new NormalRuleCase(elms);
 	}

@@ -40,22 +40,23 @@ public class GenerationState {
 	/**
 	 * Create a new generation state.
 	 * 
-	 * 	The place to write output to.
+	 * @param rw
+	 *             The place to write output to.
 	 *
 	 * @param rand
-	 * 	The random number generator to use.
+	 *             The random number generator to use.
 	 *
 	 * @param vs
-	 * 	The normal variables to use.
+	 *             The normal variables to use.
 	 * 
 	 * @param rvs
-	 * 	The rule variables to use.
+	 *             The rule variables to use.
 	 *
 	 * @param gram
-	 * 	The grammar we are generating from.
+	 *             The grammar we are generating from.
 	 */
-	public GenerationState(ReportWriter rw, Random rand, Map<String, String> vs, Map<String, Rule> rvs,
-			RGrammar gram) {
+	public GenerationState(ReportWriter rw, Random rand, Map<String, String> vs,
+			Map<String, Rule> rvs, RGrammar gram) {
 		vars = new MapSet<>();
 		rlVars = new MapSet<>();
 
@@ -75,27 +76,24 @@ public class GenerationState {
 	 * Create a new generation state, from a given grammar.
 	 *
 	 * @param gram
-	 * 	The grammar to generate from.
+	 *             The grammar to generate from.
 	 *
-	 * @return
-	 * 	A new generation state, with the provided parameters.
+	 * @return A new generation state, with the provided parameters.
 	 */
 	public static GenerationState fromGrammar(RGrammar gram) {
 		return fromGrammar(BASE, gram);
 	}
 
 	/**
-	 * Create a new generation state, using a provided random generator and
-	 * grammar.
+	 * Create a new generation state, using a provided random generator and grammar.
 	 *
 	 * @param rand
-	 * 	The random number generator to use.
+	 *             The random number generator to use.
 	 *
 	 * @param gram
-	 * 	The grammar to generate from.
+	 *             The grammar to generate from.
 	 *
-	 * @return
-	 * 	A new generation state, with the provided parameters.
+	 * @return A new generation state, with the provided parameters.
 	 */
 	public static GenerationState fromGrammar(Random rand, RGrammar gram) {
 		ReportWriter rw = new ReportWriter(new StringWriter());
@@ -106,27 +104,28 @@ public class GenerationState {
 	/**
 	 * Swap the grammar for the state.
 	 *
-	 * @param gram
-	 * 	The grammar to swap to.
+	 * @param gramr
+	 *             The grammar to swap to.
 	 */
-	public void swapGrammar(RGrammar gram) {
-		if (this.gram == gram) return;
+	public void swapGrammar(RGrammar gramr) {
+		if (this.gram == gramr)
+			return;
 
-		this.gram = gram;
+		this.gram = gramr;
 
-		rules = gram.getRules();
+		rules = gramr.getRules();
 
-		importRules = gram.getImportRules();
+		importRules = gramr.getImportRules();
 
-		vars.setCreateMap(gram.name);
-		rlVars.setCreateMap(gram.name);
+		vars.setCreateMap(gramr.name);
+		rlVars.setCreateMap(gramr.name);
 	}
 
 	/**
 	 * Create a copy of this generation state, writing into a fresh buffer.
 	 *
 	 * @return A generation state that is a copy of this one, but writes into a
-	 * fresh buffer.
+	 *         fresh buffer.
 	 */
 	public GenerationState newBuf() {
 		// @NOTE 9/5/18
@@ -144,28 +143,29 @@ public class GenerationState {
 	/*
 	 * @TODO 6/5/18 Ben Culkin :ImportRefactor
 	 * 
-	 * Change this so that imports in almost all cases have to specify where
-	 * they are importing the rule from, so as to make it clear which rules
-	 * are imported, and which aren't
+	 * Change this so that imports in almost all cases have to specify where they
+	 * are importing the rule from, so as to make it clear which rules are imported,
+	 * and which aren't
 	 */
 	/**
 	 * Find an instance of a rule.
 	 *
 	 * @param ruleName
-	 * 	The name of the rule to look for.
+	 *                     The name of the rule to look for.
 	 *
 	 * @param allowImports
-	 * 	Whether or not to look for imported rules.
+	 *                     Whether or not to look for imported rules.
 	 *
-	 * @return The rule instance you were looking for, or null if none by that
-	 * name happen to exist.
+	 * @return The rule instance you were looking for, or null if none by that name
+	 *         happen to exist.
 	 */
 	public Rule findRule(String ruleName, boolean allowImports) {
 		if (rules.containsKey(ruleName)) {
 			return rules.get(ruleName);
 		}
 
-		if (allowImports) return findImport(ruleName);
+		if (allowImports)
+			return findImport(ruleName);
 
 		return null;
 	}
@@ -174,10 +174,10 @@ public class GenerationState {
 	 * Find an instance of an imported rule.
 	 *
 	 * @param ruleName
-	 * 	The name of the rule to look for.
+	 *                 The name of the rule to look for.
 	 *
-	 * @return The rule instance you were looking for, or null if none by that
-	 * name happen to exist.
+	 * @return The rule instance you were looking for, or null if none by that name
+	 *         happen to exist.
 	 */
 	public Rule findImport(String ruleName) {
 		if (importRules.containsKey(ruleName)) {
@@ -191,16 +191,18 @@ public class GenerationState {
 	 * Define a normal variable.
 	 *
 	 * @param name
-	 * 	The name to give the variable.
+	 *             The name to give the variable.
 	 *
 	 * @param val
-	 * 	The value to give the variable.
+	 *             The value to give the variable.
 	 */
 	public void defineVar(String name, String val) {
 		if (vars.containsKey(name))
-			warn("Shadowing variable %s with value %s (old value %s)", name, val, vars.get(name));
+			warn("Shadowing variable %s with value %s (old value %s)", name, val,
+					vars.get(name));
 		else if (gram.autoVars.containsKey(name))
-			warn("Shadowing autovariable %s with value %s (defn. %s)", name, val, gram.autoVars.get(name));
+			warn("Shadowing autovariable %s with value %s (defn. %s)", name, val,
+					gram.autoVars.get(name));
 
 		vars.put(name, val);
 	}
@@ -209,14 +211,15 @@ public class GenerationState {
 	 * Define a rule variable.
 	 *
 	 * @param name
-	 * 	The name to give the variable.
+	 *             The name to give the variable.
 	 *
 	 * @param rle
-	 * 	The value to give the variable.
+	 *             The value to give the variable.
 	 */
 	public void defineRuleVar(String name, Rule rle) {
 		if (rlVars.containsKey(name))
-			warn("Shadowing rule variable %s with value %s (old value %s)", name, rlVars.get(name), rle);
+			warn("Shadowing rule variable %s with value %s (old value %s)", name,
+					rlVars.get(name), rle);
 		else if (gram.autoRlVars.containsKey(name))
 			warn("Shadowing rule autovariable %s with value %s (defn. %s)", name, rle,
 					gram.autoRlVars.get(name));
@@ -228,19 +231,22 @@ public class GenerationState {
 	 * Find a variable.
 	 *
 	 * @param name
-	 * 	The variable to look for.
+	 *             The variable to look for.
 	 *
 	 * @return The value of the variable.
 	 *
-	 * @throws GrammarException If the variable isn't found, or if it was an
-	 * auto-variable that failed to generate succesfully.
+	 * @throws GrammarException
+	 *                          If the variable isn't found, or if it was an
+	 *                          auto-variable that failed to generate succesfully.
 	 */
 	public String findVar(String name) {
-		if (!vars.containsKey(name)) if (gram.autoVars.containsKey(name)) {
-			gram.autoVars.get(name).generate(this);
-		} else {
-			throw new GrammarException(String.format("Variable %s not defined", name));
-		}
+		if (!vars.containsKey(name))
+			if (gram.autoVars.containsKey(name)) {
+				gram.autoVars.get(name).generate(this);
+			} else {
+				throw new GrammarException(
+						String.format("Variable %s not defined", name));
+			}
 
 		return vars.get(name);
 	}
@@ -249,25 +255,31 @@ public class GenerationState {
 	 * Find a rule variable.
 	 *
 	 * @param name
-	 * 	The variable to look for.
+	 *             The variable to look for.
 	 *
 	 * @return The value of the variable.
 	 *
-	 * @throws GrammarException If the variable isn't found, or if it was an
-	 * auto-variable that failed to generate succesfully.
+	 * @throws GrammarException
+	 *                          If the variable isn't found, or if it was an
+	 *                          auto-variable that failed to generate succesfully.
 	 */
 	public Rule findRuleVar(String name) {
-		if (!rlVars.containsKey(name)) if (gram.autoRlVars.containsKey(name)) {
-			gram.autoRlVars.get(name).generate(this);
-		} else {
-			throw new GrammarException(String.format("Rule variable %s not defined", name));
-		}
+		if (!rlVars.containsKey(name))
+			if (gram.autoRlVars.containsKey(name)) {
+				gram.autoRlVars.get(name).generate(this);
+			} else {
+				throw new GrammarException(
+						String.format("Rule variable %s not defined", name));
+			}
 
 		return rlVars.get(name);
 	}
 
 	/**
 	 * Append the given string to our output.
+	 * 
+	 * @param strang
+	 *               The string to append.
 	 */
 	public void appendContents(String strang) {
 		try {
@@ -281,7 +293,7 @@ public class GenerationState {
 	 * Replace the current contents of our output with the given string.
 	 *
 	 * @param strang
-	 * 	The string to replace the output with.
+	 *               The string to replace the output with.
 	 */
 	public void setContents(String strang) {
 		// @NOTE 9/5/18
@@ -312,6 +324,7 @@ public class GenerationState {
 
 	/**
 	 * Get our output as a string.
+	 * @return The contents of the state.
 	 */
 	public String getContents() {
 		return contents.toString();
@@ -321,10 +334,10 @@ public class GenerationState {
 	 * Execute a find/replace on our output.
 	 *
 	 * @param find
-	 * 	The pattern to look for
+	 *                The pattern to look for
 	 *
 	 * @param replace
-	 * 	The string to replace occurances of 'find' with.
+	 *                The string to replace occurrences of 'find' with.
 	 */
 	public void findReplaceContents(String find, String replace) {
 		setContents(getContents().replaceAll(find, replace));

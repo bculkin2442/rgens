@@ -9,12 +9,14 @@ import java.util.List;
  *
  * Actually implement this
  */
+@SuppressWarnings("javadoc")
 public class RegexRuleCase extends RuleCase {
 	public RegexRuleCase(List<CaseElement> elements) {
 		super(elements);
 
 	}
 
+	@Override
 	public void generate(GenerationState state) {
 		// TODO
 	}
