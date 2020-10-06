@@ -19,6 +19,7 @@ public class RegexRuleCase extends RuleCase {
 		// TODO
 	}
 
+	@Override
 	public RegexRuleCase withElements(List<CaseElement> elements) {
 		return new RegexRuleCase(elements);
 	}
