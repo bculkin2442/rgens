@@ -40,6 +40,9 @@ public abstract class CaseElement {
 	/** The type of this element. */
 	public boolean spacing;
 
+	/**
+	 * Create a new case element.
+	 */
 	protected CaseElement() {
 		this(true);
 	}
@@ -47,8 +50,8 @@ public abstract class CaseElement {
 	/**
 	 * Create a new case element.
 	 *
-	 * @param typ
-	 *            The type of this element.
+	 * @param spacing
+	 *                Whether or not to allow spacing.
 	 */
 	protected CaseElement(boolean spacing) {
 		this.spacing = spacing;
@@ -58,7 +61,7 @@ public abstract class CaseElement {
 	 * Generate this case element.
 	 *
 	 * @param state
-	 * 	The current state of generation.
+	 *              The current state of generation.
 	 */
 	public abstract void generate(GenerationState state);
 
@@ -66,7 +69,7 @@ public abstract class CaseElement {
 	 * Create a case element from a string.
 	 *
 	 * @param csepart
-	 *            The string to convert.
+	 *                The string to convert.
 	 *
 	 * @return A case element representing the string.
 	 */
@@ -85,27 +88,31 @@ public abstract class CaseElement {
 			String specialBody = csepart.substring(1, csepart.length() - 1);
 
 			if (specialBody.matches("\\S+:\\S=\\S+")) {
-				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=").toArray(new String[0]);
+				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=")
+						.toArray(new String[0]);
 
-				if(parts.length != 2) {
-					throw new GrammarException("Colon variables must have a name and a definition");
+				if (parts.length != 2) {
+					throw new GrammarException(
+							"Colon variables must have a name and a definition");
 				}
 
 				String varName = parts[0];
 
 				char op = varName.charAt(varName.length() - 1);
 
-				trace("Colon definition w/ op %d", (int)op);
+				trace("Colon definition w/ op %d", (int) op);
 
 				// Remove the colon, plus any tacked on operator
 				varName = varName.substring(0, varName.length() - 2);
 
 				return VariableDefCaseElement.parseVariable(varName, parts[1], op, true);
 			} else if (specialBody.matches("\\S+:=\\S+")) {
-				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=").toArray(new String[0]);
+				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=")
+						.toArray(new String[0]);
 
-				if(parts.length != 2) {
-					throw new GrammarException("Colon variables must have a name and a definition");
+				if (parts.length != 2) {
+					throw new GrammarException(
+							"Colon variables must have a name and a definition");
 				}
 
 				String varName = parts[0];
@@ -114,41 +121,49 @@ public abstract class CaseElement {
 
 				return VariableDefCaseElement.parseVariable(varName, parts[1], ' ', true);
 			} else if (specialBody.matches("\\S+=\\S+")) {
-				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=").toArray(new String[0]);
-				if(parts.length != 2) {
-					throw new GrammarException("Variables must have a name and a definition");
+				String[] parts = LevelSplitter.def.levelSplit(specialBody, "=")
+						.toArray(new String[0]);
+				if (parts.length != 2) {
+					throw new GrammarException(
+							"Variables must have a name and a definition");
 				}
 
 				// Non-colon variables can't take an operator
-				return VariableDefCaseElement.parseVariable(parts[0], parts[1], (char)0, false);
+				return VariableDefCaseElement.parseVariable(parts[0], parts[1], (char) 0,
+						false);
 			} else if (specialBody.matches("empty")) {
 				/* Literal blank, for empty cases. */
 				return new BlankCaseElement();
 			} else {
-				throw new IllegalArgumentException(String.format("Unknown special case part '%s'", specialBody));
+				throw new IllegalArgumentException(
+						String.format("Unknown special case part '%s'", specialBody));
 			}
 		} else if (csepart.matches("\\[\\S+\\]")) {
 			String rawCase = csepart.substring(1, csepart.length() - 1);
 
 			if (rawCase.matches("\\d+\\.{2}\\d+")) {
-				int firstNum = Integer.parseInt(rawCase.substring(0, rawCase.indexOf('.')));
-				int secondNum = Integer.parseInt(rawCase.substring(rawCase.lastIndexOf('.') + 1));
+				int firstNum
+						= Integer.parseInt(rawCase.substring(0, rawCase.indexOf('.')));
+				int secondNum = Integer
+						.parseInt(rawCase.substring(rawCase.lastIndexOf('.') + 1));
 
 				return new RangeCaseElement(firstNum, secondNum);
-			} else if(rawCase.contains("||")) {
-				String[] elms = LevelSplitter.def.levelSplit(rawCase, "||").toArray(new String[0]);
+			} else if (rawCase.contains("||")) {
+				String[] elms = LevelSplitter.def.levelSplit(rawCase, "||")
+						.toArray(new String[0]);
 
 				return new InlineRuleCaseElement(elms);
-			} else if(rawCase.contains("|")) {
+			} else if (rawCase.contains("|")) {
 				throw new GrammarException("Inline rule using | found, they use || now");
 
-				// String[] elms = LevelSplitter.def.levelSplit(rawCase, "|").toArray(new String[0]);
+				// String[] elms = LevelSplitter.def.levelSplit(rawCase, "|").toArray(new
+				// String[0]);
 				// return new InlineRuleCaseElement(elms);
 			} else {
 				return new RuleCaseElement(rawCase);
 			}
-		} else if(csepart.startsWith("%") && !csepart.equals("%")) {
-			return new RuleCaseElement(csepart);	
+		} else if (csepart.startsWith("%") && !csepart.equals("%")) {
+			return new RuleCaseElement(csepart);
 		} else {
 			return new LiteralCaseElement(csepart);
 		}

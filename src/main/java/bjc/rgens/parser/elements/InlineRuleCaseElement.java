@@ -13,13 +13,33 @@ import bjc.utils.ioutils.LevelSplitter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Case element for an inline rule.
+ * 
+ * @author Ben Culkin
+ *
+ */
 public class InlineRuleCaseElement extends CaseElement {
+	/**
+	 * The elements for this case element.
+	 */
 	public final WeightedRandom<CaseElement> elements;
 
+	/**
+	 * Create a new inline rule case element.
+	 * 
+	 * @param parts The parts of this case element.
+	 */
 	public InlineRuleCaseElement(String... parts) {
 		this(new Tree<>(), parts);
 	}
 
+	/**
+	 * Create a new inline rule case element.
+	 * 
+	 * @param errs The place to store errors in.
+	 * @param parts The parts of this case element.
+	 */
 	public InlineRuleCaseElement(ITree<String> errs, String... parts) {
 		super(true);
 
@@ -43,6 +63,7 @@ public class InlineRuleCaseElement extends CaseElement {
 		}
 	}
 
+	@Override
 	public void generate(GenerationState state) {
 		elements.generateValue(state.rnd).generate(state);
 	}

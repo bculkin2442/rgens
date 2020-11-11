@@ -14,10 +14,19 @@ import java.util.TreeMap;
  * @author EVE
  */
 public class RGrammarSet {
+	/**
+	 * The name for this grammar set.
+	 */
 	public String name;
 
+	/**
+	 * The config set this grammar set belongs to.
+	 */
 	public ConfigSet belongsTo;
 
+	/**
+	 * The grammar which contains the exports of this grammar set.
+	 */
 	public RGrammar exportGrammar;
 
 	/* Contains all the grammars in this set. */
@@ -26,17 +35,21 @@ public class RGrammarSet {
 	/* Contains all the exported rules from grammars. */
 	private Map<String, Rule> exportedRules;
 
-	/* Contains which file a grammar was loaded from. */
+	/**
+	 *  Contains which file a grammar was loaded from.
+	 */
 	public Map<String, String> loadedFrom;
-
-	/* @NOTE These are replaced by the logging setup */
-	public static final boolean PERF  = true;
 
 	/** Create a new set of randomized grammars. */
 	public RGrammarSet() {
 		this(false);
 	}
 
+	/**
+	 * Create a new set of randomized grammars.
+	 * 
+	 * @param orderExports Should the exports be ordered?
+	 */
 	public RGrammarSet(boolean orderExports) {
 		grammars = new HashMap<>();
 

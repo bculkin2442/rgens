@@ -21,6 +21,9 @@ import java.util.regex.PatternSyntaxException;
  * @author EVE
  */
 public class Rule {
+	/**
+	 * The grammar this rule belongs to.
+	 */
 	public RGrammar belongsTo;
 
 	/** The name of this grammar rule. */
@@ -35,26 +38,60 @@ public class Rule {
 	 * Perhaps this should be split into subclasses along prob type? I'm not
 	 * sure as to whether or not that would be a useful thing to do.
 	 */
+	/**
+	 * Type of probability to use for this rule.
+	 * 
+	 * @author Ben Culkin
+	 *
+	 */
 	public static enum ProbType {
+		/**
+		 * Normal-type probability.
+		 */
 		NORMAL,
+		/**
+		 * Descent-type probability.
+		 */
 		DESCENDING,
+		/**
+		 * Binomial-type probability.
+		 */
 		BINOMIAL
 	}
 	
+	/**
+	 * Type of probability to use for this rule.
+	 */
 	public ProbType prob;
 
 	// Probability vars
 	/* Descent vars */
+	/**
+	 * Factor for probability to descend by.
+	 */
 	public int descentFactor;
+	
 	/* Binomial vars */
+	/**
+	 * Target for the binomial probability.
+	 */
 	public int target;
+	/**
+	 * Bound for the binomial probability.
+	 */
 	public int bound;
+	/**
+	 * Trials for the binomial probability.
+	 */
 	public int trials;
 
 	private List<String> rejectionPreds;
 	private List<IPair<String, String>> findReplaces;
 
 	// @TODO This default should be configurable in some way
+	/**
+	 * Number of times this rule can recur.
+	 */
 	public int recurLimit = 5;
 	private int currentRecur;
 
@@ -109,6 +146,7 @@ public class Rule {
 	 *
 	 * @param cse
 	 * 	The case to add.
+	 * @param weight The weight for this case.
 	 */
 	public void addCase(RuleCase cse, int weight) {
 		if (cse == null) {
@@ -121,10 +159,21 @@ public class Rule {
 		cases.addProbability(weight, cse);
 	}
 
+	/**
+	 * Add a rejection pattern to this rule.
+	 * 
+	 * @param reject The rejection pattern.
+	 */
 	public void addRejection(String reject) {
 		addRejection(reject, new Tree<>());
 	}
 
+	/**
+	 * Add a rejection pattern to this rule.
+	 * 
+	 * @param reject The rejection pattern.
+	 * @param errs The place to put errors.
+	 */
 	public void addRejection(String reject, ITree<String> errs) {
 		try {
 			Pattern.compile(reject);
@@ -135,10 +184,23 @@ public class Rule {
 		rejectionPreds.add(reject);
 	}
 
+	/**
+	 * Add a find/replace pattern to this rule.
+	 * 
+	 * @param find The find string.
+	 * @param replace The replace string.
+	 */
 	public void addFindReplace(String find, String replace) {
 		addFindReplace(find, replace, new Tree<>());
 	}
 
+	/**
+	 * Add a find/replace pattern to this rule.
+	 * 
+	 * @param find The find string.
+	 * @param replace The replace string.
+	 * @param errs The place to put errors.
+	 */
 	public void addFindReplace(String find, String replace, ITree<String> errs) {
 		try {
 			Pattern.compile(find);
@@ -198,13 +260,13 @@ public class Rule {
 	/**
 	 * Replace the current list of cases with a new one.
 	 *
-	 * @param cases
+	 * @param caseList
 	 * 	The new list of cases.
 	 */
-	public void replaceCases(IList<IPair<Integer, RuleCase>> cases) {
+	public void replaceCases(IList<IPair<Integer, RuleCase>> caseList) {
 		this.cases = new WeightedRandom<>();
 
-		for(IPair<Integer, RuleCase> cse : cases) {
+		for(IPair<Integer, RuleCase> cse : caseList) {
 			RuleCase cs = cse.getRight();
 			cs.belongsTo = this;
 			cs.debugName = String.format("%s-%d", name, ++caseCount);
@@ -250,6 +312,11 @@ public class Rule {
 		return String.format("Rule '%s' with %d cases", name, cases.getValues().getSize());
 	}
 
+	/**
+	 * Start recurring on this rule.
+	 * 
+	 * @return Whether the recurrence rule has been exceeded.
+	 */
 	public boolean doRecur() {
 		if(currentRecur > recurLimit) return false;
 
@@ -258,11 +325,22 @@ public class Rule {
 		return true;
 	}
 
+	/**
+	 * End recurring on this rule.
+	 */
 	public void endRecur() {
-		if(currentRecur > 0) currentRecur -= 1;
-		else throw new IllegalStateException("endRecur without matching doRecur");
+		if(currentRecur > 0) {
+			currentRecur -= 1;
+		} else {
+			throw new IllegalStateException("endRecur without matching doRecur");
+		}
 	}
 
+	/**
+	 * Get an exhaustive version of this rule.
+	 * 
+	 * @return An exhaustive version of this rule.
+	 */
 	public Rule exhaust() {
 		Rule rl = new Rule(name);
 
@@ -292,6 +370,11 @@ public class Rule {
 		return rl;
 	}
 
+	/**
+	 * Generate this rule.
+	 * 
+	 * @param state The generation state to use.
+	 */
 	public void generate(GenerationState state) {
 		state.swapGrammar(belongsTo);
 

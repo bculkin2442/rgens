@@ -1,8 +1,7 @@
 package bjc.rgens.parser;
 
 /**
- * The exception thrown when something goes wrong while parsing a
- * grammar.
+ * The exception thrown when something goes wrong while parsing a grammar.
  *
  * @author student
  */
@@ -16,21 +15,20 @@ public class GrammarException extends RuntimeException {
 	 * Create a new grammar exception with the specified message.
 	 *
 	 * @param msg
-	 * 	The message for this exception.
+	 *            The message for this exception.
 	 */
 	public GrammarException(String msg) {
 		super(msg);
 	}
 
 	/**
-	 * Create a new grammar exception with the specified message and
-	 * cause.
+	 * Create a new grammar exception with the specified message and cause.
 	 *
 	 * @param msg
-	 * 	The message for this exception.
+	 *              The message for this exception.
 	 *
 	 * @param cause
-	 * 	The cause of this exception.
+	 *              The cause of this exception.
 	 */
 	public GrammarException(String msg, Exception cause) {
 		super(msg, cause);
@@ -40,7 +38,9 @@ public class GrammarException extends RuntimeException {
 	 * Create a new grammar exception with the specified message.
 	 *
 	 * @param msg
-	 * 	The message for this exception.
+	 *                The message for this exception.
+	 * @param rootMsg
+	 *                The root message for this exception
 	 */
 	public GrammarException(String msg, String rootMsg) {
 		super(msg);
@@ -49,14 +49,15 @@ public class GrammarException extends RuntimeException {
 	}
 
 	/**
-	 * Create a new grammar exception with the specified message and
-	 * cause.
+	 * Create a new grammar exception with the specified message and cause.
 	 *
 	 * @param msg
-	 * 	The message for this exception.
+	 *                The message for this exception.
 	 *
 	 * @param cause
-	 * 	The cause of this exception.
+	 *                The cause of this exception.
+	 * @param rootMsg
+	 *                The root message for this exception.
 	 */
 	public GrammarException(String msg, Exception cause, String rootMsg) {
 		super(msg, cause);
@@ -70,6 +71,6 @@ public class GrammarException extends RuntimeException {
 	 * @return The root cause of this exception.
 	 */
 	public String getRootMessage() {
-		return rootMessage == null? getMessage() : rootMessage;
+		return rootMessage == null ? getMessage() : rootMessage;
 	}
 }

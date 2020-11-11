@@ -19,7 +19,10 @@ public class LiteralTemplateElement extends TemplateElement {
 	 * Create a new literal template element.
 	 *
 	 * @param val
-	 * 		The string to insert.
+	 *             The string to insert.
+	 * 
+	 * @param errs
+	 *             The place to put errors.
 	 */
 	public LiteralTemplateElement(String val, ITree<String> errs) {
 		super(true);

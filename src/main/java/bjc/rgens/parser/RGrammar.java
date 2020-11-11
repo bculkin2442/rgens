@@ -48,6 +48,10 @@ public class RGrammar {
 
 	/* The default post-processing rules to apply. */
 	private static final List<IPair<String, String>> builtinPostprocs;
+
+	/**
+	 * Should we use the built-in post-processing procedures?
+	 */
 	public boolean useBuiltinPostprocs = true;
 
 	/* The max distance between possible alternate rules. */
@@ -103,24 +107,19 @@ public class RGrammar {
 		IPair<String, String> collapseDupSpaces = pair("\\s+", " ");
 
 		/* Built-in post-processing steps */
-		builtinPostprocs = Arrays.asList(
-				collapseDupSpaces,
+		builtinPostprocs = Arrays.asList(collapseDupSpaces,
 
-				/* 
-				 * Remove extraneous spaces around punctuation
-				 * marks, forced by the way the language syntax
-				 * works.
+				/*
+				 * Remove extraneous spaces around punctuation marks, forced by the way
+				 * the language syntax works.
 				 *
-				 * This can be done in grammars, but it is quite
-				 * tedious to do so.
+				 * This can be done in grammars, but it is quite tedious to do so.
 				 */
-
 
 				/* Handle 's */
 				pair(" 's ", "'s "),
 				/* Handle opening/closing punctuation. */
-				pair("([(\\[]) ", " $1"),
-				pair(" ([)\\]'\"])", "$1 "),
+				pair("([(\\[]) ", " $1"), pair(" ([)\\]'\"])", "$1 "),
 				/* Remove spaces around series of opening/closing punctuation. */
 				pair("([(\\[])\\s+([(\\[])", "$1$2"),
 				pair("([)\\]])\\s+([)\\]])", "$1$2"),
@@ -132,20 +131,19 @@ public class RGrammar {
 				collapseDupSpaces,
 
 				/* Replace this once it is no longer needed. */
-				pair("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1")
-				);
+				pair("\\s(ish|burg|ton|ville|opolis|field|boro|dale)", "$1"));
 	}
 
 	/**
 	 * Create a new randomized grammar using the specified set of rules.
 	 *
 	 * @param ruls
-	 *            The rules to use.
+	 *             The rules to use.
 	 */
 	public RGrammar(Map<String, Rule> ruls) {
 		rules = ruls;
 
-		for(Rule rl : ruls.values()) {
+		for (Rule rl : ruls.values()) {
 			rl.belongsTo = this;
 		}
 
@@ -159,7 +157,7 @@ public class RGrammar {
 	 * checked.
 	 *
 	 * @param importedRules
-	 *            The set of imported rules to use.
+	 *                      The set of imported rules to use.
 	 */
 	public void setImportedRules(Map<String, Rule> importedRules) {
 		importRules = importedRules;
@@ -169,7 +167,8 @@ public class RGrammar {
 	 * Generates the data structure backing rule suggestions for unknown rules.
 	 */
 	public void generateSuggestions() {
-		MutableBkTree<String> ruleSuggester = new MutableBkTree<>(new LevenshteinMetric());
+		MutableBkTree<String> ruleSuggester
+				= new MutableBkTree<>(new LevenshteinMetric());
 
 		ruleSuggester.addAll(rules.keySet());
 		ruleSuggester.addAll(importRules.keySet());
@@ -181,8 +180,8 @@ public class RGrammar {
 	 * Generate a string from this grammar, starting from the specified rule.
 	 *
 	 * @param startRule
-	 *            The rule to start generating at, or null to use the initial rule
-	 *            for this grammar.
+	 *                  The rule to start generating at, or null to use the initial
+	 *                  rule for this grammar.
 	 *
 	 * @return A possible string from the grammar.
 	 */
@@ -194,16 +193,17 @@ public class RGrammar {
 	 * Generate a string from this grammar, starting from the specified rule.
 	 *
 	 * @param startRule
-	 * 	The rule to start generating at, or null to use the initial rule for this grammar.
+	 *                  The rule to start generating at, or null to use the initial
+	 *                  rule for this grammar.
 	 *
 	 * @param rnd
-	 * 	The random number generator to use.
+	 *                  The random number generator to use.
 	 *
 	 * @param vars
-	 * 	The set of variables to use.
+	 *                  The set of variables to use.
 	 *
 	 * @param rlVars
-	 * 	The set of rule variables to use.
+	 *                  The set of rule variables to use.
 	 *
 	 * @return A possible string from the grammar.
 	 */
@@ -218,10 +218,13 @@ public class RGrammar {
 	 * Generate a string from this grammar, starting from the specified rule.
 	 *
 	 * @param startRule
-	 * 	The rule to start generating at, or null to use the initial rule for this grammar.
+	 *                  The rule to start generating at, or null to use the initial
+	 *                  rule for this grammar.
 	 *
 	 * @param state
-	 * 	The generation state.
+	 *                  The generation state.
+	 * 
+	 * @return The generated string.
 	 */
 	public String generate(String startRule, GenerationState state) {
 		return generate(startRule, state, true);
@@ -231,20 +234,26 @@ public class RGrammar {
 	 * Generate a string from this grammar, starting from the specified rule.
 	 *
 	 * @param startRule
-	 * 	The rule to start generating at, or null to use the initial rule for this grammar.
+	 *                      The rule to start generating at, or null to use the
+	 *                      initial rule for this grammar.
 	 *
 	 * @param doPostprocess
-	 * 	Whether or not we should perform post-processing of our output.
+	 *                      Whether or not we should perform post-processing of our
+	 *                      output.
 	 *
 	 * @param state
-	 * 	The generation state.
+	 *                      The generation state.
+	 * 
+	 * @return The generated string.
 	 */
-	public String generate(String startRule, GenerationState state, boolean doPostprocess) {
+	public String generate(String startRule, GenerationState state,
+			boolean doPostprocess) {
 		String fromRule = startRule;
 
 		if (startRule == null) {
 			if (initialRule == null) {
-				throw new GrammarException("Must specify a start rule for grammars with no initial rule");
+				throw new GrammarException(
+						"Must specify a start rule for grammars with no initial rule");
 			}
 
 			fromRule = initialRule;
@@ -254,17 +263,20 @@ public class RGrammar {
 			}
 		}
 
-		/* We don't search imports for the initial rule, so it will always belong to this grammar. */
+		/*
+		 * We don't search imports for the initial rule, so it will always belong to
+		 * this grammar.
+		 */
 		Rule rl = state.findRule(fromRule, false);
 
-		if(rl == null)
+		if (rl == null)
 			throw new GrammarException("Could not find rule " + fromRule);
 
 		rl.generate(state);
 
 		String body = state.getContents();
 
-		if(doPostprocess) {
+		if (doPostprocess) {
 			body = postprocessRes(body);
 		}
 
@@ -275,26 +287,27 @@ public class RGrammar {
 	private String postprocessRes(String strang) {
 		String body = strang;
 
-		if(useBuiltinPostprocs) {
-			for(IPair<String, String> par : builtinPostprocs) {
+		if (useBuiltinPostprocs) {
+			for (IPair<String, String> par : builtinPostprocs) {
 				body = body.replaceAll(par.getLeft(), par.getRight());
 			}
 		}
 
-		for(IPair<String, String> par : postprocs) {
+		for (IPair<String, String> par : postprocs) {
 			body = body.replaceAll(par.getLeft(), par.getRight());
 		}
 
 		return body.trim();
 	}
+
 	/**
 	 * Generate a rule case.
 	 *
 	 * @param start
-	 * 	The rule case to generate.
+	 *              The rule case to generate.
 	 *
 	 * @param state
-	 * 	The current generation state.
+	 *              The current generation state.
 	 */
 	public void generateCase(RuleCase start, GenerationState state) {
 		try {
@@ -318,7 +331,8 @@ public class RGrammar {
 	 * Set the initial rule of this grammar.
 	 *
 	 * @param initRule
-	 * 	The initial rule of this grammar, or null to say there is no initial rule.
+	 *                 The initial rule of this grammar, or null to say there is no
+	 *                 initial rule.
 	 */
 	public void setInitialRule(String initRule) {
 		setInitialRule(initRule, new Tree<>());
@@ -328,10 +342,11 @@ public class RGrammar {
 	 * Set the initial rule of this grammar.
 	 *
 	 * @param initRule
-	 * 	The initial rule of this grammar, or null to say there is no initial rule.
+	 *                 The initial rule of this grammar, or null to say there is no
+	 *                 initial rule.
 	 *
 	 * @param errs
-	 * 	The tree to store errors in.
+	 *                 The tree to store errors in.
 	 */
 	public void setInitialRule(String initRule, ITree<String> errs) {
 		/* Passing null, nulls our initial rule. */
@@ -346,7 +361,9 @@ public class RGrammar {
 
 			return;
 		} else if (!rules.containsKey(initRule)) {
-			String msg = String.format("ERROR: No rule '%s' local to this grammar (%s) defined.", initRule, name);
+			String msg = String.format(
+					"ERROR: No rule '%s' local to this grammar (%s) defined.", initRule,
+					name);
 
 			errs.addChild(msg);
 
@@ -368,7 +385,8 @@ public class RGrammar {
 
 		for (String rname : exportRules) {
 			if (!rules.containsKey(rname)) {
-				String msg = String.format("No rule '%s' local to this grammar (%s) defined for export",
+				String msg = String.format(
+						"No rule '%s' local to this grammar (%s) defined for export",
 						name, rname);
 
 				throw new GrammarException(msg);
@@ -388,7 +406,7 @@ public class RGrammar {
 	 * Set the rules exported by this grammar.
 	 *
 	 * @param exportedRules
-	 *            The rules exported by this grammar.
+	 *                      The rules exported by this grammar.
 	 */
 	public void setExportedRules(Set<String> exportedRules) {
 		exportRules = exportedRules;
@@ -403,12 +421,26 @@ public class RGrammar {
 		return rules;
 	}
 
+	/**
+	 * Get the rules imported into this grammar.
+	 * 
+	 * @return The rules imported into this grammar.
+	 */
 	public Map<String, Rule> getImportRules() {
 		return importRules;
 	}
 
-	public void setAutoVars(Map<String, CaseElement> aVars, Map<String, CaseElement> aRlVars) {
-		autoVars   = aVars;
+	/**
+	 * Set up the auto-variable sets.
+	 * 
+	 * @param aVars
+	 *                The auto-variables to use.
+	 * @param aRlVars
+	 *                The rule-auto-variables to use.
+	 */
+	public void setAutoVars(Map<String, CaseElement> aVars,
+			Map<String, CaseElement> aRlVars) {
+		autoVars = aVars;
 		autoRlVars = aRlVars;
 	}
 }
