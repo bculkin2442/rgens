@@ -4,8 +4,8 @@ import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
 
 
-import bjc.data.ITree;
 import bjc.data.Tree;
+import bjc.data.SimpleTree;
 
 import bjc.utils.gen.WeightedRandom;
 import bjc.utils.ioutils.LevelSplitter;
@@ -31,7 +31,7 @@ public class InlineRuleCaseElement extends CaseElement {
 	 * @param parts The parts of this case element.
 	 */
 	public InlineRuleCaseElement(String... parts) {
-		this(new Tree<>(), parts);
+		this(new SimpleTree<>(), parts);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class InlineRuleCaseElement extends CaseElement {
 	 * @param errs The place to store errors in.
 	 * @param parts The parts of this case element.
 	 */
-	public InlineRuleCaseElement(ITree<String> errs, String... parts) {
+	public InlineRuleCaseElement(Tree<String> errs, String... parts) {
 		super(true);
 
 		this.elements = new WeightedRandom<>();

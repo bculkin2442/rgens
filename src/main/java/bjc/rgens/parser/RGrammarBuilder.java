@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.Set;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.data.IPair;
-import bjc.data.ITree;
 import bjc.data.Pair;
 import bjc.data.Tree;
+import bjc.data.SimplePair;
+import bjc.data.SimpleTree;
 
 import bjc.funcdata.FunctionalList;
-import bjc.funcdata.IList;
+import bjc.funcdata.ListEx;
 
 import bjc.utils.funcutils.ListUtils;
 import bjc.utils.funcutils.SetUtils;
@@ -62,7 +62,7 @@ public class RGrammarBuilder {
 	 * 	The rule by that name, or a new one if none existed.
 	 */
 	public Rule getOrCreateRule(String rName) {
-		return getOrCreateRule(rName, new Tree<>());
+		return getOrCreateRule(rName, new SimpleTree<>());
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class RGrammarBuilder {
 	 * @return
 	 * 	The rule by that name, or a new one if none existed.
 	 */
-	public Rule getOrCreateRule(String rName, ITree<String> errs) {
+	public Rule getOrCreateRule(String rName, Tree<String> errs) {
 		if(rName == null) {
 			errs.addChild("ERROR: Rule name must not be null");
 
@@ -139,7 +139,7 @@ public class RGrammarBuilder {
 	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
 	public void setInitialRule(String init) {
-		ITree<String> errs = new Tree<>();
+		Tree<String> errs = new SimpleTree<>();
 		
 		setInitialRule(init, errs);
 		
@@ -157,7 +157,7 @@ public class RGrammarBuilder {
 	 * @throws IllegalArgumentException
 	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
-	public void setInitialRule(String init, ITree<String> errs) {
+	public void setInitialRule(String init, Tree<String> errs) {
 		if (init == null) {
 			errs.addChild("init must not be null");
 
@@ -181,7 +181,7 @@ public class RGrammarBuilder {
 	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
 	public void addExport(String export) {
-		addExport(export, new Tree<>());
+		addExport(export, new SimpleTree<>());
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class RGrammarBuilder {
 	 * @throws IllegalArgumentException
 	 * 	If the rule is either not valid or not defined in the grammar.
 	 */
-	public void addExport(String export, ITree<String> errs) {
+	public void addExport(String export, Tree<String> errs) {
 		if (export == null) {
 			errs.addChild("ERROR: Export name must not be null");
 
@@ -223,7 +223,7 @@ public class RGrammarBuilder {
 	 * 	grammar, or if the suffix is invalid.
 	 */
 	public void suffixWith(String ruleName, List<CaseElement> suffixes) {
-		affixWith(ruleName, suffixes, AffixType.SUFFIX, new Tree<>());
+		affixWith(ruleName, suffixes, AffixType.SUFFIX, new SimpleTree<>());
 	}
 
 
@@ -241,7 +241,7 @@ public class RGrammarBuilder {
 	 * 	grammar, or if the prefix is invalid.
 	 */
 	public void prefixWith(String ruleName, List<CaseElement> prefixes) {
-		affixWith(ruleName, prefixes, AffixType.PREFIX, new Tree<>());
+		affixWith(ruleName, prefixes, AffixType.PREFIX, new SimpleTree<>());
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class RGrammarBuilder {
 	 * 	grammar, or if the prefix/suffix is invalid.
 	 */
 	public void circumfixWith(String ruleName, List<CaseElement> prefixes) {
-		affixWith(ruleName, prefixes, AffixType.CIRCUMFIX, new Tree<>());
+		affixWith(ruleName, prefixes, AffixType.CIRCUMFIX, new SimpleTree<>());
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class RGrammarBuilder {
 	 * 	grammar, or if the prefix/suffix is invalid.
 	 */
 	public void affixWith(String ruleName, List<CaseElement> affixes, AffixType type) {
-		affixWith(ruleName, affixes, type, new Tree<>());
+		affixWith(ruleName, affixes, type, new SimpleTree<>());
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class RGrammarBuilder {
 	 * 	If the rule name is either invalid or not defined by this
 	 * 	grammar, or if the prefix/suffix is invalid.
 	 */
-	public void affixWith(String ruleName, List<CaseElement> affixes, AffixType type, ITree<String> errs) {
+	public void affixWith(String ruleName, List<CaseElement> affixes, AffixType type, Tree<String> errs) {
 		if (ruleName == null) {
 			errs.addChild("ERROR: Rule name must not be null");
 
@@ -318,10 +318,10 @@ public class RGrammarBuilder {
 		
 		List<List<CaseElement>> affixLists = powerList(elements);
 
-		FunctionalList<IPair<Integer, RuleCase>> newCases = new FunctionalList<>();
-		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
+		FunctionalList<Pair<Integer, RuleCase>> newCases = new FunctionalList<>();
+		ListEx<Pair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
 
-		for (IPair<Integer, RuleCase> ruleCase : caseList) {
+		for (Pair<Integer, RuleCase> ruleCase : caseList) {
 			RuleCase cas = ruleCase.getRight();
 
 			for(List<CaseElement> affixList : affixLists) {
@@ -344,12 +344,12 @@ public class RGrammarBuilder {
 				}
 
 
-				newCases.add(new Pair<>(ruleCase.getLeft(), cas.withElements(newCase)));
+				newCases.add(new SimplePair<>(ruleCase.getLeft(), cas.withElements(newCase)));
 			}
 		}
 
 
-		for (IPair<Integer, RuleCase> newCase : newCases) {
+		for (Pair<Integer, RuleCase> newCase : newCases) {
 			rules.get(ruleName).addCase(newCase.getRight(), newCase.getLeft());
 		}
 	}
@@ -360,7 +360,7 @@ public class RGrammarBuilder {
 	 * @param ruleName The rule to perform despacing on.
 	 */
 	public void despaceRule(String ruleName) {
-		despaceRule(ruleName, new Tree<>(), false);
+		despaceRule(ruleName, new SimpleTree<>(), false);
 	}
 	
 	/**
@@ -370,7 +370,7 @@ public class RGrammarBuilder {
 	 * @param errs The place to put errors.
 	 * @param doTrace Whether or not to do tracing.
 	 */
-	public void despaceRule(String ruleName, ITree<String> errs, boolean doTrace) {
+	public void despaceRule(String ruleName, Tree<String> errs, boolean doTrace) {
 		if (ruleName == null) {
 			 errs.addChild("ERROR: Rule name must not be null");
 
@@ -387,12 +387,12 @@ public class RGrammarBuilder {
 			return;
 		}
 
-		IList<IPair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
+		ListEx<Pair<Integer, RuleCase>> caseList = rules.get(ruleName).getCases();
 
-		IList<IPair<Integer, RuleCase>> newCaseList = new FunctionalList<>();
+		ListEx<Pair<Integer, RuleCase>> newCaseList = new FunctionalList<>();
 
-		for(IPair<Integer, RuleCase> cse : caseList) {
-			newCaseList.add(new Pair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().elementList)));
+		for(Pair<Integer, RuleCase> cse : caseList) {
+			newCaseList.add(new SimplePair<>(cse.getLeft(), new FlatRuleCase(cse.getRight().elementList)));
 		}
 
 		if (doTrace) {
@@ -410,7 +410,7 @@ public class RGrammarBuilder {
 	 * @param ruleName The rule to set the weight for.
 	 */
 	public void setWeight(String ruleName) {
-		setWeight(ruleName, new Tree<>());
+		setWeight(ruleName, new SimpleTree<>());
 	}
 
 	/**
@@ -419,7 +419,7 @@ public class RGrammarBuilder {
 	 * @param ruleName The rule to set the weight for.
 	 * @param errs The place to put errors.
 	 */
-	public void setWeight(String ruleName, ITree<String> errs) {
+	public void setWeight(String ruleName, Tree<String> errs) {
 		if (ruleName == null) {
 			errs.addChild("ERROR: Rule name must not be null");
 
@@ -446,7 +446,7 @@ public class RGrammarBuilder {
 	 * @param recurLimit The limit of the number of times to recur.
 	 */
 	public void setRuleRecur(String ruleName, int recurLimit) {
-		setRuleRecur(ruleName, recurLimit, new Tree<>());
+		setRuleRecur(ruleName, recurLimit, new SimpleTree<>());
 	}
 
 	/**
@@ -456,7 +456,7 @@ public class RGrammarBuilder {
 	 * @param recurLimit The limit of the number of times to recur.
 	 * @param errs The place to put errors.
 	 */
-	public void setRuleRecur(String ruleName, int recurLimit, ITree<String> errs) {
+	public void setRuleRecur(String ruleName, int recurLimit, Tree<String> errs) {
 		if (ruleName == null) {
 			errs.addChild("ERROR: Rule name must not be null");
 
@@ -483,7 +483,7 @@ public class RGrammarBuilder {
 	 * @param descentFactor The amount to descend by every time.
 	 */
 	public void setDescent(String ruleName, int descentFactor) {
-		setDescent(ruleName, descentFactor, new Tree<>());
+		setDescent(ruleName, descentFactor, new SimpleTree<>());
 	}
 
 	/**
@@ -493,7 +493,7 @@ public class RGrammarBuilder {
 	 * @param descentFactor The amount to descend by every time.
 	 * @param errs Place to put errors.
 	 */
-	public void setDescent(String ruleName, int descentFactor, ITree<String> errs) {
+	public void setDescent(String ruleName, int descentFactor, Tree<String> errs) {
 		if (ruleName == null) {
 			errs.addChild("ERROR: Rule name must not be null");
 
@@ -525,7 +525,7 @@ public class RGrammarBuilder {
 	 * @param trials The number of trials for the distribution.
 	 */
 	public void setBinomial(String ruleName, int target, int bound, int trials) {
-		setBinomial(ruleName, target, bound, trials, new Tree<>());
+		setBinomial(ruleName, target, bound, trials, new SimpleTree<>());
 	}
 
 	/**
@@ -537,7 +537,7 @@ public class RGrammarBuilder {
 	 * @param trials The number of trials for the distribution.
 	 * @param errs The place to put errors.
 	 */
-	public void setBinomial(String ruleName, int target, int bound, int trials, ITree<String> errs) {
+	public void setBinomial(String ruleName, int target, int bound, int trials, Tree<String> errs) {
 		if (ruleName == null) {
 			errs.addChild("ERROR: Rule name must not be null");
 
@@ -589,7 +589,7 @@ public class RGrammarBuilder {
 	 * @param reject The rejection for the rule.
 	 */
 	public void rejectRule(String rule, String reject) {
-		rejectRule(rule, reject, new Tree<>());
+		rejectRule(rule, reject, new SimpleTree<>());
 	}
 
 	/**
@@ -599,7 +599,7 @@ public class RGrammarBuilder {
 	 * @param reject The rejection for the rule.
 	 * @param errs The place to put errors.
 	 */
-	public void rejectRule(String rule, String reject, ITree<String> errs) {
+	public void rejectRule(String rule, String reject, Tree<String> errs) {
 		if (rule == null) {
 			errs.addChild("ERROR: Rule must not be null");
 
@@ -633,7 +633,7 @@ public class RGrammarBuilder {
 	 * @param replace The replace string.
 	 */
 	public void findReplaceRule(String rule, String find, String replace) {
-		findReplaceRule(rule, find, replace, new Tree<>());
+		findReplaceRule(rule, find, replace, new SimpleTree<>());
 	}
 
 	/**
@@ -644,7 +644,7 @@ public class RGrammarBuilder {
 	 * @param replace The replace string.
 	 * @param errs The place to put errors.
 	 */
-	public void findReplaceRule(String rule, String find, String replace, ITree<String> errs) {
+	public void findReplaceRule(String rule, String find, String replace, Tree<String> errs) {
 		if (rule == null) {
 			errs.addChild("ERROR: Rule must not be null");
 

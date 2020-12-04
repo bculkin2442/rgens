@@ -10,8 +10,8 @@ import bjc.rgens.parser.elements.CaseElement;
 import bjc.rgens.parser.elements.ChanceCaseElement;
 import bjc.rgens.parser.elements.SerialCaseElement;
 import bjc.rgens.parser.elements.VariableDefCaseElement;
-import bjc.data.ITree;
 import bjc.data.Tree;
+import bjc.data.SimpleTree;
 import bjc.utils.funcutils.StringUtils;
 import bjc.utils.ioutils.blocks.Block;
 import bjc.utils.ioutils.blocks.BlockReader;
@@ -45,7 +45,7 @@ public class RGrammarParser {
 	private static final String TMPL_TOPLEVEL_BLOCK_DELIM = "\\R\\t{%d}\\.?\\R";
 
 	private static void doAffixWith(String body, RGrammarBuilder build, int level,
-			AffixType afxType, ITree<String> errs) {
+			AffixType afxType, Tree<String> errs) {
 		int idx = body.indexOf(" ");
 
 		if (idx == -1) {
@@ -69,7 +69,7 @@ public class RGrammarParser {
 	}
 
 	private static void doAutoVar(List<String> bits, RGrammarBuilder build, int level,
-			boolean isRule, ITree<String> errs) {
+			boolean isRule, Tree<String> errs) {
 		if (bits.size() < 1) {
 			String msg = "Must specify name of variable and definition to autovivify";
 
@@ -130,7 +130,7 @@ public class RGrammarParser {
 	 * @throws GrammarException
 	 *                          Thrown if the grammar has a syntax error.
 	 */
-	public static RGrammar readGrammar(Reader is, LoadOptions lopts, ITree<String> errs)
+	public static RGrammar readGrammar(Reader is, LoadOptions lopts, Tree<String> errs)
 			throws GrammarException {
 		String dlm = String.format(TMPL_TOPLEVEL_BLOCK_DELIM, 0);
 
@@ -156,7 +156,7 @@ public class RGrammarParser {
 						block.lineOffset + block.startLine,
 						block.lineOffset + block.endLine);
 
-				ITree<String> kid = new Tree<>(msg);
+				Tree<String> kid = new SimpleTree<>(msg);
 
 				handleBlock(build, block.contents, 0, block.startLine, lopts, kid);
 
@@ -187,7 +187,7 @@ public class RGrammarParser {
 
 	/* Handles an arbitrary block. */
 	private static void handleBlock(RGrammarBuilder build, String block, int level,
-			int lineOffset, LoadOptions lopts, ITree<String> errs) {
+			int lineOffset, LoadOptions lopts, Tree<String> errs) {
 		/* Discard empty blocks. */
 		if (block.equals("") || block.matches("\\R"))
 			return;
@@ -232,7 +232,7 @@ public class RGrammarParser {
 
 	/* Handle reading a block of pragmas. */
 	private static void handlePragmaBlock(String block, RGrammarBuilder build, int level,
-			int lineOffset, LoadOptions lopts, ITree<String> errs) {
+			int lineOffset, LoadOptions lopts, Tree<String> errs) {
 		String dlm = String.format(TMPL_PRAGMA_BLOCK_DELIM, level);
 
 		try (BlockReader pragmaReader
@@ -281,7 +281,7 @@ public class RGrammarParser {
 
 	/* Handle an individual pragma in a block. */
 	private static void handlePragma(String pragma, RGrammarBuilder build, int level,
-			int lineOffset, LoadOptions lopts, ITree<String> errs) {
+			int lineOffset, LoadOptions lopts, Tree<String> errs) {
 		int bodySep = pragma.indexOf(' ');
 
 		if (bodySep == -1)
@@ -300,7 +300,7 @@ public class RGrammarParser {
 		List<String> bits = StringUtils.levelSplit(pragmaBody, " ");
 
 		String fmt = String.format("INFO: Pragma '%s'", pragmaName);
-		ITree<String> kid = new Tree<>(fmt);
+		Tree<String> kid = new SimpleTree<>(fmt);
 
 		switch (pragmaName) {
 		case "initial-rule": {
@@ -523,12 +523,12 @@ public class RGrammarParser {
 
 	/* Handle a block of a rule declaration and one or more cases. */
 	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build,
-			int level, int lineOffset, LoadOptions lopts, ITree<String> errs) {
+			int level, int lineOffset, LoadOptions lopts, Tree<String> errs) {
 		String dlm = String.format(TMPL_RULEDECL_BLOCK_DELIM, level);
 
 		try (BlockReader ruleReader
 				= new SimpleBlockReader(dlm, new StringReader(ruleBlock))) {
-			ITree<String> kid = new Tree<>();
+			Tree<String> kid = new SimpleTree<>();
 
 			if (ruleReader.hasNextBlock()) {
 				/* Rule with a declaration followed by multiple cases. */
@@ -569,7 +569,7 @@ public class RGrammarParser {
 
 	/* Handle a rule declaration and its initial case. */
 	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents,
-			int lineOffset, ITree<String> errs) {
+			int lineOffset, Tree<String> errs) {
 		int declSep = declContents.indexOf("\u2192");
 
 		if (declSep == -1) {
@@ -615,7 +615,7 @@ public class RGrammarParser {
 
 	/* Handle a single case of a rule. */
 	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul,
-			int lineOffset, ITree<String> errs) {
+			int lineOffset, Tree<String> errs) {
 		List<CaseElement> elms = new ArrayList<>();
 
 		int weights = parseElementString(cse, elms, errs);
@@ -625,7 +625,7 @@ public class RGrammarParser {
 
 	/* Handle a where block (a block with local rules). */
 	private static void handleWhereBlock(String block, RGrammarBuilder build, int level,
-			int lineOffset, LoadOptions lopts, ITree<String> errs) {
+			int lineOffset, LoadOptions lopts, Tree<String> errs) {
 		int nlIndex = block.indexOf("\\nin");
 
 		if (nlIndex == -1) {
@@ -678,7 +678,7 @@ public class RGrammarParser {
 	 * @return The weight of the resulting case.
 	 */
 	public static int parseElementString(String cses, List<CaseElement> elms) {
-		return parseElementString(cses, elms, new Tree<>());
+		return parseElementString(cses, elms, new SimpleTree<>());
 	}
 
 	/**
@@ -694,7 +694,7 @@ public class RGrammarParser {
 	 * @return The weight of the resulting case.
 	 */
 	public static int parseElementString(String cses, List<CaseElement> elms,
-			ITree<String> errs) {
+			Tree<String> errs) {
 		/*
 		 * @NOTE
 		 *
@@ -721,7 +721,7 @@ public class RGrammarParser {
 	 * @return The weight of the resulting case.
 	 */
 	public static int parseElementString(String[] cses, List<CaseElement> elms) {
-		return parseElementString(cses, elms, new Tree<>());
+		return parseElementString(cses, elms, new SimpleTree<>());
 	}
 
 	/**
@@ -737,7 +737,7 @@ public class RGrammarParser {
 	 * @return The weight of the resulting case.
 	 */
 	public static int parseElementString(String[] cses, List<CaseElement> caseParts,
-			ITree<String> errs) {
+			Tree<String> errs) {
 		int weight = 1;
 
 		int repCount = 1;

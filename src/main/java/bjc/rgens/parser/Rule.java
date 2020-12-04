@@ -1,12 +1,12 @@
 package bjc.rgens.parser;
 
 import static bjc.rgens.parser.RGrammarLogging.fine;
-import static bjc.data.IPair.pair;
+import static bjc.data.Pair.pair;
 
-import bjc.data.IPair;
-import bjc.data.ITree;
+import bjc.data.Pair;
 import bjc.data.Tree;
-import bjc.funcdata.IList;
+import bjc.data.SimpleTree;
+import bjc.funcdata.ListEx;
 import bjc.utils.gen.WeightedRandom;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class Rule {
 	public int trials;
 
 	private List<String> rejectionPreds;
-	private List<IPair<String, String>> findReplaces;
+	private List<Pair<String, String>> findReplaces;
 
 	// @TODO This default should be configurable in some way
 	/**
@@ -165,7 +165,7 @@ public class Rule {
 	 * @param reject The rejection pattern.
 	 */
 	public void addRejection(String reject) {
-		addRejection(reject, new Tree<>());
+		addRejection(reject, new SimpleTree<>());
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class Rule {
 	 * @param reject The rejection pattern.
 	 * @param errs The place to put errors.
 	 */
-	public void addRejection(String reject, ITree<String> errs) {
+	public void addRejection(String reject, Tree<String> errs) {
 		try {
 			Pattern.compile(reject);
 		} catch (PatternSyntaxException psex) {
@@ -191,7 +191,7 @@ public class Rule {
 	 * @param replace The replace string.
 	 */
 	public void addFindReplace(String find, String replace) {
-		addFindReplace(find, replace, new Tree<>());
+		addFindReplace(find, replace, new SimpleTree<>());
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class Rule {
 	 * @param replace The replace string.
 	 * @param errs The place to put errors.
 	 */
-	public void addFindReplace(String find, String replace, ITree<String> errs) {
+	public void addFindReplace(String find, String replace, Tree<String> errs) {
 		try {
 			Pattern.compile(find);
 		} catch (PatternSyntaxException psex) {
@@ -253,7 +253,7 @@ public class Rule {
 	 * @return
 	 * 	All the cases in this rule.
 	 */
-	public IList<IPair<Integer, RuleCase>> getCases() {
+	public ListEx<Pair<Integer, RuleCase>> getCases() {
 		return cases.getValues();
 	}
 
@@ -263,10 +263,10 @@ public class Rule {
 	 * @param caseList
 	 * 	The new list of cases.
 	 */
-	public void replaceCases(IList<IPair<Integer, RuleCase>> caseList) {
+	public void replaceCases(ListEx<Pair<Integer, RuleCase>> caseList) {
 		this.cases = new WeightedRandom<>();
 
-		for(IPair<Integer, RuleCase> cse : caseList) {
+		for(Pair<Integer, RuleCase> cse : caseList) {
 			RuleCase cs = cse.getRight();
 			cs.belongsTo = this;
 			cs.debugName = String.format("%s-%d", name, ++caseCount);
@@ -399,7 +399,7 @@ public class Rule {
 				conts = conts.replaceAll("\\s+", "");
 			}
 
-			for(IPair<String, String> findRep : findReplaces) {
+			for(Pair<String, String> findRep : findReplaces) {
 				conts = conts.replaceAll(findRep.getLeft(), findRep.getRight());
 			}
 			state.setContents(conts);

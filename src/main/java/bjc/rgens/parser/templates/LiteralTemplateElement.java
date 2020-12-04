@@ -1,6 +1,6 @@
 package bjc.rgens.parser.templates;
 
-import bjc.data.ITree;
+import bjc.data.Tree;
 
 import bjc.rgens.parser.GenerationState;
 
@@ -24,7 +24,7 @@ public class LiteralTemplateElement extends TemplateElement {
 	 * @param errs
 	 *             The place to put errors.
 	 */
-	public LiteralTemplateElement(String val, ITree<String> errs) {
+	public LiteralTemplateElement(String val, Tree<String> errs) {
 		super(true);
 
 		this.val = val;

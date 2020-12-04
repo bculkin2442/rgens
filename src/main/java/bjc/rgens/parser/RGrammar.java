@@ -1,10 +1,10 @@
 package bjc.rgens.parser;
 
-import static bjc.data.IPair.pair;
+import static bjc.data.Pair.pair;
 
-import bjc.data.IPair;
-import bjc.data.ITree;
+import bjc.data.Pair;
 import bjc.data.Tree;
+import bjc.data.SimpleTree;
 import bjc.utils.ioutils.ReportWriter;
 
 import bjc.rgens.parser.elements.*;
@@ -44,10 +44,10 @@ public class RGrammar {
 	/**
 	 * The post-processing find/replace pairs applied to this grammars outputs.
 	 */
-	public List<IPair<String, String>> postprocs;
+	public List<Pair<String, String>> postprocs;
 
 	/* The default post-processing rules to apply. */
-	private static final List<IPair<String, String>> builtinPostprocs;
+	private static final List<Pair<String, String>> builtinPostprocs;
 
 	/**
 	 * Should we use the built-in post-processing procedures?
@@ -104,7 +104,7 @@ public class RGrammar {
 
 	static {
 		/* Collapse duplicate spaces */
-		IPair<String, String> collapseDupSpaces = pair("\\s+", " ");
+		Pair<String, String> collapseDupSpaces = pair("\\s+", " ");
 
 		/* Built-in post-processing steps */
 		builtinPostprocs = Arrays.asList(collapseDupSpaces,
@@ -288,12 +288,12 @@ public class RGrammar {
 		String body = strang;
 
 		if (useBuiltinPostprocs) {
-			for (IPair<String, String> par : builtinPostprocs) {
+			for (Pair<String, String> par : builtinPostprocs) {
 				body = body.replaceAll(par.getLeft(), par.getRight());
 			}
 		}
 
-		for (IPair<String, String> par : postprocs) {
+		for (Pair<String, String> par : postprocs) {
 			body = body.replaceAll(par.getLeft(), par.getRight());
 		}
 
@@ -335,7 +335,7 @@ public class RGrammar {
 	 *                 initial rule.
 	 */
 	public void setInitialRule(String initRule) {
-		setInitialRule(initRule, new Tree<>());
+		setInitialRule(initRule, new SimpleTree<>());
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class RGrammar {
 	 * @param errs
 	 *                 The tree to store errors in.
 	 */
-	public void setInitialRule(String initRule, ITree<String> errs) {
+	public void setInitialRule(String initRule, Tree<String> errs) {
 		/* Passing null, nulls our initial rule. */
 		if (initRule == null) {
 			this.initialRule = null;

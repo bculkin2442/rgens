@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 import bjc.rgens.parser.elements.CaseElement;
-import bjc.data.IPair;
-import bjc.funcdata.IList;
+import bjc.data.Pair;
+import bjc.funcdata.ListEx;
 
 /**
  * @TODO Ben Culkin 9/8/18 :GrammarFormatter
@@ -58,7 +58,7 @@ public class RGrammarFormatter {
 
 	/* Format a rule. */
 	private static void processRule(Rule rule, StringBuilder sb) {
-		IList<IPair<Integer, RuleCase>> cases = rule.getCases();
+		ListEx<Pair<Integer, RuleCase>> cases = rule.getCases();
 
 		StringBuilder ruleBuilder = new StringBuilder();
 
@@ -73,7 +73,7 @@ public class RGrammarFormatter {
 
 		ruleBuilder = new StringBuilder();
 
-		for (IPair<Integer, RuleCase> cse : cases.tail()) {
+		for (Pair<Integer, RuleCase> cse : cases.tail()) {
 			sb.append("\n\t");
 
 			for (int i = 8; i < markerPos; i++) {

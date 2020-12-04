@@ -2,7 +2,7 @@ package bjc.rgens;
 
 import bjc.funcdata.FunctionalList;
 import bjc.funcdata.FunctionalStringTokenizer;
-import bjc.funcdata.IList;
+import bjc.funcdata.ListEx;
 import bjc.utils.gen.RandomGrammar;
 
 /**
@@ -21,7 +21,7 @@ public class ZadronsPouch {
 		ZadronsPouch zp = new ZadronsPouch();
 
 		for (int i = 0; i < 100; i++) {
-			IList<String> ls = zp.grammar.generateListValues("[item]", " ");
+			ListEx<String> ls = zp.grammar.generateListValues("[item]", " ");
 
 			StringBuilder sb = new StringBuilder();
 
@@ -179,7 +179,7 @@ public class ZadronsPouch {
 	}
 
 	private void addRule(String rule, String... cases) {
-		IList<IList<String>> cses = new FunctionalList<>();
+		ListEx<ListEx<String>> cses = new FunctionalList<>();
 
 		for (String strang : cases) {
 			cses.add(FunctionalStringTokenizer.fromString(strang).toList(s -> s));

@@ -3,8 +3,8 @@ package bjc.rgens.parser;
 import static bjc.rgens.parser.RGrammarLogging.error;
 import static bjc.rgens.parser.RGrammarLogging.perf;
 
-import bjc.data.ITree;
 import bjc.data.Tree;
+import bjc.data.SimpleTree;
 
 import java.io.IOException;
 
@@ -47,7 +47,7 @@ public class RGrammarTest {
 			Path cfgPath = Paths.get(rsc.toURI());
 
 			String        msg     = String.format("INFO: Loading config file %s", cfgPath);
-			ITree<String> errTree = new Tree<>(msg);
+			Tree<String> errTree = new SimpleTree<>(msg);
 
 			ConfigSet cfgSet = ConfigLoader.fromConfigFile(cfgPath, lopts, errTree);
 

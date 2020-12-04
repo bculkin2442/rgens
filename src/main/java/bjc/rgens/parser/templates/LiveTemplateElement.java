@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import bjc.data.BooleanToggle;
-import bjc.data.ITree;
+import bjc.data.Tree;
 
 import bjc.rgens.parser.GenerationState;
 import bjc.rgens.parser.RGrammarParser;
@@ -37,7 +37,7 @@ public class LiveTemplateElement extends TemplateElement {
 	 * @param errs
 	 * 		A tree to add errors &amp; information to.
 	 */
-	public LiveTemplateElement(String val, ITree<String> errs) {
+	public LiveTemplateElement(String val, Tree<String> errs) {
 		super(true);
 
 		elements = new ArrayList<>();

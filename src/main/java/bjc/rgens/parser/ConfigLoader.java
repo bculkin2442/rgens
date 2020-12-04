@@ -1,8 +1,8 @@
 package bjc.rgens.parser;
 
-import bjc.data.ITree;
-import bjc.data.QueuedIterator;
 import bjc.data.Tree;
+import bjc.data.QueuedIterator;
+import bjc.data.SimpleTree;
 
 import bjc.utils.funcutils.StringUtils;
 
@@ -53,7 +53,7 @@ public class ConfigLoader {
 			throws IOException {
 		String msg = String.format("INFO: Loading config file from path '%s'", cfgFile);
 
-		ITree<String> errTree = new Tree<>(msg);
+		Tree<String> errTree = new SimpleTree<>(msg);
 
 		return fromConfigFile(cfgFile, lopts, errTree);
 	}
@@ -75,7 +75,7 @@ public class ConfigLoader {
 	 *                     If something goes wrong during configuration loading.
 	 */
 	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts,
-			ITree<String> errs) throws IOException {
+			Tree<String> errs) throws IOException {
 		lopts.cfgFile = cfgFile;
 		lopts.cfgSet = new ConfigSet();
 
@@ -113,8 +113,8 @@ public class ConfigLoader {
 				// We should support some sort of line
 				// continuation ability, probably using the '\'
 				// since that what UNIX uses in most places
-				ITree<String> header
-						= new Tree<>(String.format("INFO: Processing line %d", lno));
+				Tree<String> header
+						= new SimpleTree<>(String.format("INFO: Processing line %d", lno));
 
 				String[] parts = StringUtils.levelSplit(ln, " ").toArray(new String[0]);
 
@@ -179,7 +179,7 @@ public class ConfigLoader {
 
 	// Load a line from a config file.
 	private static void loadConfigLine(String[] parts, LoadOptions lopts,
-			ITree<String> errs) throws IOException {
+			Tree<String> errs) throws IOException {
 		if (parts.length < 2) {
 			// Must specify the type of config object you wish to
 			// load.
@@ -243,7 +243,7 @@ public class ConfigLoader {
 	// Load a 'directory' config object, by recursively attempting to
 	// auto-load all of the items in the directory as objects
 	private static void loadDirectory(String name, String[] parts, LoadOptions lopts,
-			ITree<String> errs) {
+			Tree<String> errs) {
 		if (parts.length < 4) {
 			String fmt = String.format(
 					"ERROR: Must specify a path to load directory '%s' from", name);
@@ -271,7 +271,7 @@ public class ConfigLoader {
 			QueuedIterator<File> dirItr
 					= new QueuedIterator<>(dirPath.toFile().listFiles());
 
-			ITree<String> header = new Tree<>(String.format(
+			Tree<String> header = new SimpleTree<>(String.format(
 					"INFO: Bulk-loading objects from directory '%s'", lopts.parent));
 
 			while (dirItr.hasNext()) {
@@ -279,7 +279,7 @@ public class ConfigLoader {
 
 				String fName = curFile.toString();
 
-				ITree<String> kid = new Tree<>(
+				Tree<String> kid = new SimpleTree<>(
 						String.format("INFO: Processing object from path '%s'", fName));
 
 				Path oldPar = lopts.parent;
@@ -328,7 +328,7 @@ public class ConfigLoader {
 
 	// Actually do the work of loading a 'template' object
 	private static void doLoadTemplate(Reader rdr, String name, LoadOptions lopts,
-			ITree<String> errs) throws IOException {
+			Tree<String> errs) throws IOException {
 		String actName;
 
 		long startFileTime = System.nanoTime();
@@ -385,7 +385,7 @@ public class ConfigLoader {
 
 	// Load a 'template' type grammar object
 	private static void loadTemplate(String name, String[] parts, LoadOptions lopts,
-			ITree<String> errs) throws IOException {
+			Tree<String> errs) throws IOException {
 		if (parts.length < 4) {
 			String fmt = String.format(
 					"ERROR: Must specify a path to load template '%s' from", name);
@@ -413,7 +413,7 @@ public class ConfigLoader {
 
 			String fmt = String.format("INFO: Loading template '%s' from '%s'", name,
 					convPath);
-			ITree<String> kid = new Tree<>(fmt);
+			Tree<String> kid = new SimpleTree<>(fmt);
 
 			Path oldPar = lopts.parent;
 			lopts.parent = convPath.getParent();
@@ -430,7 +430,7 @@ public class ConfigLoader {
 
 	// Actually load a 'grammar' object
 	private static void doLoadGrammar(Reader rdr, String name, LoadOptions lopts,
-			ITree<String> errs, Path convPath) throws IOException {
+			Tree<String> errs, Path convPath) throws IOException {
 		String actName;
 
 		long startFileTime = System.nanoTime();
@@ -475,7 +475,7 @@ public class ConfigLoader {
 
 	// Load a 'grammar' object
 	private static void loadGrammar(String name, String[] parts, LoadOptions lopts,
-			ITree<String> errs) {
+			Tree<String> errs) {
 		if (parts.length < 4) {
 			String fmt = String
 					.format("ERROR: Must provide a path to load grammar '%s' from", name);
@@ -508,7 +508,7 @@ public class ConfigLoader {
 
 				Reader rdr = new FileReader(convPath.toFile());
 
-				ITree<String> kid = new Tree<>(String
+				Tree<String> kid = new SimpleTree<>(String
 						.format("INFO: Loading grammar '%s' from '%s'", name, convPath));
 
 				doLoadGrammar(rdr, name, lopts, kid, convPath);

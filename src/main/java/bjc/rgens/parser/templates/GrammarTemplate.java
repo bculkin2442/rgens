@@ -3,8 +3,8 @@ package bjc.rgens.parser.templates;
 import bjc.rgens.parser.ConfigSet;
 import bjc.rgens.parser.GenerationState;
 
-import bjc.data.ITree;
 import bjc.data.Tree;
+import bjc.data.SimpleTree;
 
 import java.io.Reader;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class GrammarTemplate {
 	 *
 	 * @return The generated template.
 	 */
-	public static GrammarTemplate readTemplate(Reader rdr, ITree<String> errs) {
+	public static GrammarTemplate readTemplate(Reader rdr, Tree<String> errs) {
 		List<TemplateElement> elements = new ArrayList<>();
 		GrammarTemplate template = new GrammarTemplate(elements);
 
@@ -84,7 +84,7 @@ public class GrammarTemplate {
 			String ln = scn.nextLine();
 			lno += 1;
 
-			ITree<String> kid = new Tree<>(String.format("INFO: Line %d", lno));
+			Tree<String> kid = new SimpleTree<>(String.format("INFO: Line %d", lno));
 			switch(ln.charAt(0)) {
 			case '#':
 				// Ignore comments
@@ -106,7 +106,7 @@ public class GrammarTemplate {
 		return template;
 	}
 
-	private static void handleLine(List<TemplateElement> elements, GrammarTemplate template, String ln, ITree<String> errs) {
+	private static void handleLine(List<TemplateElement> elements, GrammarTemplate template, String ln, Tree<String> errs) {
 		if(ln.matches("^.*?\\$@.+?@\\$.*$")) {
 			/*
 			 * Handle live templates
@@ -117,7 +117,7 @@ public class GrammarTemplate {
 		}
 	}
 
-	private static void handlePragma(List<TemplateElement> elements, GrammarTemplate template, String ln, ITree<String> errs) {
+	private static void handlePragma(List<TemplateElement> elements, GrammarTemplate template, String ln, Tree<String> errs) {
 		/*
 		 * @TODO 2/8/2019 Ben Culkin :TemplatePragmas
 		 * Implement template pragmas.
