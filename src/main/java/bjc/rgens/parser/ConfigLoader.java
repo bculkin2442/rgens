@@ -6,16 +6,11 @@ import bjc.data.SimpleTree;
 
 import bjc.utils.funcutils.StringUtils;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.Reader;
-import java.io.IOException;
-
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import java.util.Scanner;
+import java.util.*;
 
 import bjc.rgens.parser.templates.GrammarTemplate;
 
@@ -39,10 +34,8 @@ public class ConfigLoader {
 	/**
 	 * Load a grammar set from a configuration file.
 	 *
-	 * @param cfgFile
-	 *                The configuration file to load from.
-	 * @param lopts
-	 *                Options used during loading.
+	 * @param cfgFile The configuration file to load from.
+	 * @param lopts   Options used during loading.
 	 *
 	 * @return The grammar set created by the configuration file.
 	 *
@@ -77,46 +70,48 @@ public class ConfigLoader {
 	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts,
 			Tree<String> errs) throws IOException {
 		lopts.cfgFile = cfgFile;
-		lopts.cfgSet = new ConfigSet();
-
+		lopts.cfgSet  = new ConfigSet();
 		/* The grammar set we're parsing into. */
 		lopts.gramSet = lopts.cfgSet.createGSet(lopts.defName);
 
 		long startCFGTime = System.nanoTime();
 
 		// Get the directory that contains the config file.
-		if (lopts.parent == null)
-			lopts.parent = cfgFile.getParent();
+		if (lopts.parent == null) lopts.parent = cfgFile.getParent();
 
 		int lno = 0;
-		try (Scanner scn = new Scanner(cfgFile)) {
-
+		try (FileReader fileReader = new FileReader(cfgFile.toFile());
+		        LineNumberReader lnr = new LineNumberReader(fileReader);
+		        Scanner scn = new Scanner(lnr)) {
 			while (scn.hasNextLine()) {
 				// Execute a line from the configuration file.
-
-				// @NOTE: Do we want to also track logical
-				// lines, or just physical ones? - ben,
-				// 9/21/2019
-				lno += 1;
-
-				// @NOTE: Does this replaceAll need to exist? -
-				// ben, 9/21/2019
-				String ln = scn.nextLine().trim().replaceAll("\\s+", " ");
+				String ln = scn.nextLine().trim();
 
 				// Ignore blank/comment lines.
-				if (ln.equals(""))
-					continue;
-				if (ln.startsWith("#"))
-					continue;
+				if (ln.equals(""))       continue;
+				if (ln.startsWith("#")) {
+				    // Eat up line-continued comments
+				    while (ln.endsWith("\\")) {
+				        ln = scn.nextLine().trim();
+				    }
+				    continue;
+				}
 
-				// @TODO Ben Culkin 9/21/2019 :LineCont
-				// We should support some sort of line
-				// continuation ability, probably using the '\'
-				// since that what UNIX uses in most places
+				while (ln.endsWith("\\")) {
+				    // Handle line continuation
+				    String newLn = scn.nextLine().trim();
+				    ln = ln + newLn;
+				}
+
 				Tree<String> header
-						= new SimpleTree<>(String.format("INFO: Processing line %d", lno));
+						= new SimpleTree<>(String.format("INFO: Processing line %d", lnr.getLineNumber()));
 
-				String[] parts = StringUtils.levelSplit(ln, " ").toArray(new String[0]);
+				List<String> partList = StringUtils.levelSplit(ln, " ", "\t");
+				// Remove blank strings, since levelSplit doesn't filter out
+				// 'blank' fields you get from having multiple delimiters in a
+				// row
+				partList.removeIf((s) -> s.trim().equals(""));
+                String[] parts = partList.toArray(new String[0]);
 
 				if (parts.length < 1) {
 					// Must specify a line type
@@ -160,6 +155,9 @@ public class ConfigLoader {
 
 				errs.addChild(header);
 			}
+			
+			// Update lno, since lnr will go out-of-scope when we close the loop
+			lno = lnr.getLineNumber();
 		}
 
 		long endCFGTime = System.nanoTime();
