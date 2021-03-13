@@ -52,7 +52,7 @@ public class TextGenerator {
 		StandaloneMarkov markov = null;
 
 		try (FileReader reader = new FileReader(file)) {
-			markov = StandaloneTextGenerator.generateMarkovMap(k, reader);
+			markov = StandaloneMarkov.generateMarkovMap(k, reader);
 
 			String generatedText = markov.generateTextFromMarkov(M);
 			String desiredText = generatedText.substring(0, Math.min(M, text.length()));
