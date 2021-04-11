@@ -39,8 +39,7 @@ public class ConfigLoader {
 	 *
 	 * @return The grammar set created by the configuration file.
 	 *
-	 * @throws IOException
-	 *                     If something goes wrong during configuration loading.
+	 * @throws IOException If something goes wrong during configuration loading.
 	 */
 	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts)
 			throws IOException {
@@ -54,18 +53,13 @@ public class ConfigLoader {
 	/**
 	 * Load a grammar set from a configuration file.
 	 *
-	 * @param cfgFile
-	 *                The configuration file to load from.
-	 * @param lopts
-	 *                Options used during loading.
-	 *
-	 * @param errs
-	 *                A place to add errors that occur during loading.
+	 * @param cfgFile The configuration file to load from.
+	 * @param lopts Options used during loading.
+	 * @param errs A place to add errors that occur during loading.
 	 *
 	 * @return The grammar set created by the configuration file.
 	 *
-	 * @throws IOException
-	 *                     If something goes wrong during configuration loading.
+	 * @throws IOException If something goes wrong during configuration loading.
 	 */
 	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts,
 			Tree<String> errs) throws IOException {
@@ -88,7 +82,7 @@ public class ConfigLoader {
 				String ln = scn.nextLine().trim();
 
 				// Ignore blank/comment lines.
-				if (ln.equals(""))       continue;
+				if (ln.equals("")) continue;
 				if (ln.startsWith("#")) {
 				    // Eat up line-continued comments
 				    while (ln.endsWith("\\")) {
@@ -103,8 +97,9 @@ public class ConfigLoader {
 				    ln = ln + newLn;
 				}
 
-				Tree<String> header
-						= new SimpleTree<>(String.format("INFO: Processing line %d", lnr.getLineNumber()));
+				String lnMsg = String.format(
+				        "INFO: Processing line %d", lnr.getLineNumber());
+                Tree<String> header	= new SimpleTree<>(lnMsg);
 
 				List<String> partList = StringUtils.levelSplit(ln, " ", "\t");
 				// Remove blank strings, since levelSplit doesn't filter out
