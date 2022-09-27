@@ -71,9 +71,8 @@ public abstract class RuleCase {
 	public String toString() {
 		if(debugName != null) {
 			return String.format("Case %s (#%d) of %s", debugName, serial, belongsTo);
-		} else {
-			return String.format("Case #%d of %s", serial, belongsTo, serial, belongsTo);
 		}
+		return String.format("Case #%d of %s", serial, belongsTo, serial, belongsTo);
 	}
 
 }

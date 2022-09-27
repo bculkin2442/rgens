@@ -1,0 +1,469 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/ARefVariableElement.java	/^	public ARefVariableElement(String val) {$/;"	m	class:ARefVariableElement
+ARefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/ARefVariableElement.java	/^public class ARefVariableElement extends VariableElement {$/;"	c
+AffixType	src/main/java/bjc/rgens/parser/AffixType.java	/^public enum AffixType {$/;"	g
+BASE	src/main/java/bjc/rgens/parser/GenerationState.java	/^	private static final Random BASE = new Random();$/;"	f	class:GenerationState	file:
+BASE	src/main/java/bjc/rgens/parser/Rule.java	/^	private final static Random BASE = new Random();$/;"	f	class:Rule	file:
+BINOMIAL	src/main/java/bjc/rgens/parser/Rule.java	/^		BINOMIAL$/;"	e	enum:Rule.ProbType	file:
+BlankCaseElement	src/main/java/bjc/rgens/parser/elements/BlankCaseElement.java	/^	public BlankCaseElement() {$/;"	m	class:BlankCaseElement
+BlankCaseElement	src/main/java/bjc/rgens/parser/elements/BlankCaseElement.java	/^public class BlankCaseElement extends LiteralCaseElement {$/;"	c
+CIRCUMFIX	src/main/java/bjc/rgens/parser/AffixType.java	/^	CIRCUMFIX,$/;"	e	enum:AffixType	file:
+CaseElement	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	protected CaseElement() {$/;"	m	class:CaseElement
+CaseElement	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	protected CaseElement(boolean spacing) {$/;"	m	class:CaseElement
+CaseElement	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^public abstract class CaseElement {$/;"	c
+ChanceCaseElement	src/main/java/bjc/rgens/parser/elements/ChanceCaseElement.java	/^	public ChanceCaseElement(CaseElement elm, int chance) {$/;"	m	class:ChanceCaseElement
+ChanceCaseElement	src/main/java/bjc/rgens/parser/elements/ChanceCaseElement.java	/^public class ChanceCaseElement extends CaseElement {$/;"	c
+ConfigLoader	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^public class ConfigLoader {$/;"	c
+ConfigSet	src/main/java/bjc/rgens/parser/ConfigSet.java	/^	public ConfigSet() {$/;"	m	class:ConfigSet
+ConfigSet	src/main/java/bjc/rgens/parser/ConfigSet.java	/^public class ConfigSet {$/;"	c
+DEBUG	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static final boolean DEBUG = false;$/;"	f	class:RGrammarParser
+DESCENDING	src/main/java/bjc/rgens/parser/Rule.java	/^		DESCENDING,$/;"	e	enum:Rule.ProbType	file:
+DIST	src/main/java/bjc/rgens/parser/RGrammar.java	/^		private static LevenshteinDistance DIST;$/;"	f	class:RGrammar.LevenshteinMetric	file:
+ElementType	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^		private ElementType(boolean spacing) {$/;"	m	class:CaseElement.ElementType	file:
+ElementType	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	public static enum ElementType {$/;"	g	class:CaseElement
+ExpVariableCaseElement	src/main/java/bjc/rgens/parser/elements/ExpVariableCaseElement.java	/^	public ExpVariableCaseElement(String name, String def) {$/;"	m	class:ExpVariableCaseElement
+ExpVariableCaseElement	src/main/java/bjc/rgens/parser/elements/ExpVariableCaseElement.java	/^public class ExpVariableCaseElement extends VariableDefCaseElement {$/;"	c
+FlatRuleCase	src/main/java/bjc/rgens/parser/FlatRuleCase.java	/^	public FlatRuleCase(List<CaseElement> elms) {$/;"	m	class:FlatRuleCase
+FlatRuleCase	src/main/java/bjc/rgens/parser/FlatRuleCase.java	/^public class FlatRuleCase extends RuleCase {$/;"	c
+GenerationState	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public GenerationState(ReportWriter rw, Random rand, Map<String, String> vs,$/;"	m	class:GenerationState
+GenerationState	src/main/java/bjc/rgens/parser/GenerationState.java	/^public class GenerationState {$/;"	c
+GrammarException	src/main/java/bjc/rgens/parser/GrammarException.java	/^	public GrammarException(String msg) {$/;"	m	class:GrammarException
+GrammarException	src/main/java/bjc/rgens/parser/GrammarException.java	/^	public GrammarException(String msg, Exception cause) {$/;"	m	class:GrammarException
+GrammarException	src/main/java/bjc/rgens/parser/GrammarException.java	/^	public GrammarException(String msg, Exception cause, String rootMsg) {$/;"	m	class:GrammarException
+GrammarException	src/main/java/bjc/rgens/parser/GrammarException.java	/^	public GrammarException(String msg, String rootMsg) {$/;"	m	class:GrammarException
+GrammarException	src/main/java/bjc/rgens/parser/GrammarException.java	/^public class GrammarException extends RuntimeException {$/;"	c
+GrammarTemplate	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public GrammarTemplate(List<TemplateElement> elements) {$/;"	m	class:GrammarTemplate
+GrammarTemplate	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^public class GrammarTemplate {$/;"	c
+INSERT_PAT	src/main/java/bjc/rgens/parser/templates/LiveTemplateElement.java	/^	private static final Pattern INSERT_PAT = Pattern.compile("\\\\$@(.+?)@\\\\$");$/;"	f	class:LiveTemplateElement	file:
+InlineRuleCaseElement	src/main/java/bjc/rgens/parser/elements/InlineRuleCaseElement.java	/^	public InlineRuleCaseElement(String... parts) {$/;"	m	class:InlineRuleCaseElement
+InlineRuleCaseElement	src/main/java/bjc/rgens/parser/elements/InlineRuleCaseElement.java	/^	public InlineRuleCaseElement(Tree<String> errs, String... parts) {$/;"	m	class:InlineRuleCaseElement
+InlineRuleCaseElement	src/main/java/bjc/rgens/parser/elements/InlineRuleCaseElement.java	/^public class InlineRuleCaseElement extends CaseElement {$/;"	c
+LINES	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static final boolean LINES = true;$/;"	f	class:RGrammarParser
+LITERAL	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^		LITERAL(true),$/;"	e	enum:CaseElement.ElementType	file:
+LevenshteinMetric	src/main/java/bjc/rgens/parser/RGrammar.java	/^		public LevenshteinMetric() {$/;"	m	class:RGrammar.LevenshteinMetric
+LevenshteinMetric	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private static final class LevenshteinMetric implements Metric<String> {$/;"	c	class:RGrammar
+LitVariableCaseElement	src/main/java/bjc/rgens/parser/elements/LitVariableCaseElement.java	/^	public LitVariableCaseElement(String name, String def) {$/;"	m	class:LitVariableCaseElement
+LitVariableCaseElement	src/main/java/bjc/rgens/parser/elements/LitVariableCaseElement.java	/^public class LitVariableCaseElement extends VariableDefCaseElement {$/;"	c
+LiteralCaseElement	src/main/java/bjc/rgens/parser/elements/LiteralCaseElement.java	/^	public LiteralCaseElement(String val) {$/;"	m	class:LiteralCaseElement
+LiteralCaseElement	src/main/java/bjc/rgens/parser/elements/LiteralCaseElement.java	/^public class LiteralCaseElement extends CaseElement {$/;"	c
+LiteralTemplateElement	src/main/java/bjc/rgens/parser/templates/LiteralTemplateElement.java	/^	public LiteralTemplateElement(String val, Tree<String> errs) {$/;"	m	class:LiteralTemplateElement
+LiteralTemplateElement	src/main/java/bjc/rgens/parser/templates/LiteralTemplateElement.java	/^public class LiteralTemplateElement extends TemplateElement {$/;"	c
+LiteralVariableElement	src/main/java/bjc/rgens/parser/elements/vars/LiteralVariableElement.java	/^	public LiteralVariableElement(boolean forbidSpaces, String val) {$/;"	m	class:LiteralVariableElement
+LiteralVariableElement	src/main/java/bjc/rgens/parser/elements/vars/LiteralVariableElement.java	/^public class LiteralVariableElement extends VariableElement {$/;"	c
+LiveTemplateElement	src/main/java/bjc/rgens/parser/templates/LiveTemplateElement.java	/^	public LiveTemplateElement(String val, Tree<String> errs) {$/;"	m	class:LiveTemplateElement
+LiveTemplateElement	src/main/java/bjc/rgens/parser/templates/LiveTemplateElement.java	/^public class LiveTemplateElement extends TemplateElement {$/;"	c
+LoadOptions	src/main/java/bjc/rgens/parser/LoadOptions.java	/^public class LoadOptions {$/;"	c
+MAX_DISTANCE	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private static final int MAX_DISTANCE = 6;$/;"	f	class:RGrammar	file:
+Markov	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public Markov(String substr) {$/;"	m	class:Markov
+Markov	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public Markov(String substr, Character suffix) {$/;"	m	class:Markov
+Markov	src/main/java/bjc/rgens/text/markov/Markov.java	/^public class Markov {$/;"	c
+NORMAL	src/main/java/bjc/rgens/parser/Rule.java	/^		NORMAL,$/;"	e	enum:Rule.ProbType	file:
+NormalRuleCase	src/main/java/bjc/rgens/parser/NormalRuleCase.java	/^	public NormalRuleCase(List<CaseElement> elms) {$/;"	m	class:NormalRuleCase
+NormalRuleCase	src/main/java/bjc/rgens/parser/NormalRuleCase.java	/^public class NormalRuleCase extends RuleCase {$/;"	c
+PREFIX	src/main/java/bjc/rgens/parser/AffixType.java	/^	PREFIX;$/;"	e	enum:AffixType	file:
+ProbType	src/main/java/bjc/rgens/parser/Rule.java	/^	public static enum ProbType {$/;"	g	class:Rule
+RANGE	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^		RANGE(true),$/;"	e	enum:CaseElement.ElementType	file:
+RGrammar	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public RGrammar(Map<String, Rule> ruls) {$/;"	m	class:RGrammar
+RGrammar	src/main/java/bjc/rgens/parser/RGrammar.java	/^public class RGrammar {$/;"	c
+RGrammarBuilder	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public RGrammarBuilder() {$/;"	m	class:RGrammarBuilder
+RGrammarBuilder	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^public class RGrammarBuilder {$/;"	c
+RGrammarFormatter	src/main/java/bjc/rgens/parser/RGrammarFormatter.java	/^public class RGrammarFormatter {$/;"	c
+RGrammarLogging	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^public final class RGrammarLogging {$/;"	c
+RGrammarParser	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^public class RGrammarParser {$/;"	c
+RGrammarSet	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public RGrammarSet() {$/;"	m	class:RGrammarSet
+RGrammarSet	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public RGrammarSet(boolean orderExports) {$/;"	m	class:RGrammarSet
+RGrammarSet	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^public class RGrammarSet {$/;"	c
+RGrammarTest	src/example/java/bjc/rgens/parser/RGrammarTest.java	/^public class RGrammarTest {$/;"	c
+RGrammars	src/main/java/bjc/rgens/parser/RGrammars.java	/^public class RGrammars {$/;"	c
+RRefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/RRefVariableElement.java	/^	public RRefVariableElement(boolean forbidSpaces, String val) {$/;"	m	class:RRefVariableElement
+RRefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/RRefVariableElement.java	/^public class RRefVariableElement extends VariableElement {$/;"	c
+RULEREF	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^		RULEREF(true),$/;"	e	enum:CaseElement.ElementType	file:
+RangeCaseElement	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public RangeCaseElement(int beg, int en) {$/;"	m	class:RangeCaseElement
+RangeCaseElement	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^public class RangeCaseElement extends CaseElement {$/;"	c
+RecurLimitException	src/main/java/bjc/rgens/parser/RecurLimitException.java	/^	public RecurLimitException(String msg) {$/;"	m	class:RecurLimitException
+RecurLimitException	src/main/java/bjc/rgens/parser/RecurLimitException.java	/^	public RecurLimitException(String msg, Exception cause) {$/;"	m	class:RecurLimitException
+RecurLimitException	src/main/java/bjc/rgens/parser/RecurLimitException.java	/^public class RecurLimitException extends GrammarException {$/;"	c
+RegexRuleCase	src/main/java/bjc/rgens/parser/RegexRuleCase.java	/^	public RegexRuleCase(List<CaseElement> elements) {$/;"	m	class:RegexRuleCase
+RegexRuleCase	src/main/java/bjc/rgens/parser/RegexRuleCase.java	/^public class RegexRuleCase extends RuleCase {$/;"	c
+Rule	src/main/java/bjc/rgens/parser/Rule.java	/^	public Rule(String ruleName) {$/;"	m	class:Rule
+Rule	src/main/java/bjc/rgens/parser/Rule.java	/^public class Rule {$/;"	c
+RuleCase	src/main/java/bjc/rgens/parser/RuleCase.java	/^	protected RuleCase(List<CaseElement> elements) {$/;"	m	class:RuleCase
+RuleCase	src/main/java/bjc/rgens/parser/RuleCase.java	/^public abstract class RuleCase {$/;"	c
+RuleCaseElement	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^	public RuleCaseElement(String vl) {$/;"	m	class:RuleCaseElement
+RuleCaseElement	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^	public RuleCaseElement(String vl, List<VariableElement> elements) {$/;"	m	class:RuleCaseElement
+RuleCaseElement	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^public class RuleCaseElement extends CaseElement {$/;"	c
+RuleCases	src/main/sql/db_schema.sql	/^create table RuleCases ($/;"	t
+RuleCases.RuleCase_id	src/main/sql/db_schema.sql	/^create index RuleCase_id on RuleCases(ruleid);$/;"	i
+RuleCases.cse	src/main/sql/db_schema.sql	/^        cse varchar(255) array$/;"	F
+RuleCases.ruleid	src/main/sql/db_schema.sql	/^        ruleid serial,$/;"	F
+RuleVariableCaseElement	src/main/java/bjc/rgens/parser/elements/RuleVariableCaseElement.java	/^	public RuleVariableCaseElement(String varName, String varDef, boolean exhaust) {$/;"	m	class:RuleVariableCaseElement
+RuleVariableCaseElement	src/main/java/bjc/rgens/parser/elements/RuleVariableCaseElement.java	/^public class RuleVariableCaseElement extends VariableDefCaseElement {$/;"	c
+Rules	src/main/sql/db_schema.sql	/^create table Rules ($/;"	t
+Rules.Rules_name	src/main/sql/db_schema.sql	/^create index Rules_name on Rules(name);$/;"	i
+Rules.casecount	src/main/sql/db_schema.sql	/^        casecount int,$/;"	F
+Rules.name	src/main/sql/db_schema.sql	/^        name varchar(255) not null,$/;"	F
+Rules.ruleid	src/main/sql/db_schema.sql	/^        ruleid serial,$/;"	F
+SUFFIX	src/main/java/bjc/rgens/parser/AffixType.java	/^	SUFFIX,$/;"	e	enum:AffixType	file:
+SerialCaseElement	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^	public SerialCaseElement(CaseElement rep, int lower, int upper)  {$/;"	m	class:SerialCaseElement
+SerialCaseElement	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^public class SerialCaseElement extends CaseElement {$/;"	c
+StandaloneMarkov	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^	public StandaloneMarkov(int order, Map<String, Markov> markovHash, String firstSub) {$/;"	m	class:StandaloneMarkov
+StandaloneMarkov	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^public class StandaloneMarkov {$/;"	c
+StringCaseElement	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^	protected StringCaseElement(String vl) {$/;"	m	class:StringCaseElement
+StringCaseElement	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^public abstract class StringCaseElement extends CaseElement {$/;"	c
+TMPL_PRAGMA_BLOCK_DELIM	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static final String TMPL_PRAGMA_BLOCK_DELIM = "\\\\R\\\\t{%d}(?!\\\\t)";$/;"	f	class:RGrammarParser	file:
+TMPL_RULEDECL_BLOCK_DELIM	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static final String TMPL_RULEDECL_BLOCK_DELIM = "\\\\R\\\\t\\\\t{%d}";$/;"	f	class:RGrammarParser	file:
+TMPL_TOPLEVEL_BLOCK_DELIM	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static final String TMPL_TOPLEVEL_BLOCK_DELIM = "\\\\R\\\\t{%d}\\\\.?\\\\R";$/;"	f	class:RGrammarParser	file:
+TMPL_WHERE_BLOCK_DELIM	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static final String TMPL_WHERE_BLOCK_DELIM = "\\\\R\\\\t{%d}(?:in|end)\\\\R";$/;"	f	class:RGrammarParser	file:
+TRefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/TRefVariableElement.java	/^	public TRefVariableElement(boolean forbidSpaces, String val) {$/;"	m	class:TRefVariableElement
+TRefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/TRefVariableElement.java	/^public class TRefVariableElement extends VariableElement {$/;"	c
+TemplateElement	src/main/java/bjc/rgens/parser/templates/TemplateElement.java	/^	protected TemplateElement(boolean spacing) {$/;"	m	class:TemplateElement
+TemplateElement	src/main/java/bjc/rgens/parser/templates/TemplateElement.java	/^public abstract class TemplateElement {$/;"	c
+TextGenerator	src/example/java/bjc/rgens/text/markov/TextGenerator.java	/^public class TextGenerator {$/;"	c
+VARIABLE	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^		VARIABLE(false);$/;"	e	enum:CaseElement.ElementType	file:
+VRefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/VRefVariableElement.java	/^	public VRefVariableElement(boolean forbidSpaces, String nam) {$/;"	m	class:VRefVariableElement
+VRefVariableElement	src/main/java/bjc/rgens/parser/elements/vars/VRefVariableElement.java	/^public class VRefVariableElement extends VariableElement {$/;"	c
+VariableDefCaseElement	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^	public VariableDefCaseElement(String name, String def) {$/;"	m	class:VariableDefCaseElement
+VariableDefCaseElement	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^public abstract class VariableDefCaseElement extends CaseElement {$/;"	c
+VariableElement	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^	protected VariableElement(boolean forbidSpacing) {$/;"	m	class:VariableElement
+VariableElement	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^public abstract class VariableElement {$/;"	c
+add	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public void add() {$/;"	m	class:Markov
+add	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public void add(char c) {$/;"	m	class:Markov
+addAutoRlVar	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void addAutoRlVar(String nam, CaseElement elm) {$/;"	m	class:RGrammarBuilder
+addAutoVar	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void addAutoVar(String nam, CaseElement elm) {$/;"	m	class:RGrammarBuilder
+addCase	src/main/java/bjc/rgens/parser/Rule.java	/^	public void addCase(RuleCase cse) {$/;"	m	class:Rule
+addCase	src/main/java/bjc/rgens/parser/Rule.java	/^	public void addCase(RuleCase cse, int weight) {$/;"	m	class:Rule
+addExport	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void addExport(String export) {$/;"	m	class:RGrammarBuilder
+addExport	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void addExport(String export, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+addFindReplace	src/main/java/bjc/rgens/parser/Rule.java	/^	public void addFindReplace(String find, String replace) {$/;"	m	class:Rule
+addFindReplace	src/main/java/bjc/rgens/parser/Rule.java	/^	public void addFindReplace(String find, String replace, Tree<String> errs) {$/;"	m	class:Rule
+addGrammar	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public void addGrammar(String grammarName, RGrammar gram) {$/;"	m	class:RGrammarSet
+addRejection	src/main/java/bjc/rgens/parser/Rule.java	/^	public void addRejection(String reject) {$/;"	m	class:Rule
+addRejection	src/main/java/bjc/rgens/parser/Rule.java	/^	public void addRejection(String reject, Tree<String> errs) {$/;"	m	class:Rule
+affixWith	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void affixWith(String ruleName, List<CaseElement> affixes, AffixType type) {$/;"	m	class:RGrammarBuilder
+affixWith	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void affixWith(String ruleName, List<CaseElement> affixes, AffixType type, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+appendContents	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void appendContents(String strang) {$/;"	m	class:GenerationState
+autoRlVars	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public Map<String, CaseElement> autoRlVars;$/;"	f	class:RGrammar
+autoRlVars	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	private Map<String, CaseElement> autoRlVars;$/;"	f	class:RGrammarBuilder	file:
+autoVars	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public Map<String, CaseElement> autoVars;$/;"	f	class:RGrammar
+autoVars	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	private Map<String, CaseElement> autoVars;$/;"	f	class:RGrammarBuilder	file:
+begin	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public final int begin;$/;"	f	class:RangeCaseElement
+belongsTo	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public RGrammarSet belongsTo;$/;"	f	class:RGrammar
+belongsTo	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public ConfigSet belongsTo;$/;"	f	class:RGrammarSet
+belongsTo	src/main/java/bjc/rgens/parser/Rule.java	/^	public RGrammar belongsTo;$/;"	f	class:Rule
+belongsTo	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public Rule belongsTo;$/;"	f	class:RuleCase
+belongsTo	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public ConfigSet belongsTo;$/;"	f	class:GrammarTemplate
+belongsTo	src/main/java/bjc/rgens/parser/templates/TemplateElement.java	/^	public GrammarTemplate belongsTo;$/;"	f	class:TemplateElement
+bjc.rgens.parser	src/example/java/bjc/rgens/parser/RGrammarTest.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/AffixType.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/ConfigSet.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/FlatRuleCase.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/GenerationState.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/GrammarException.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/LoadOptions.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/NormalRuleCase.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammar.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammarFormatter.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RGrammars.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RecurLimitException.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RegexRuleCase.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/Rule.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser	src/main/java/bjc/rgens/parser/RuleCase.java	/^package bjc.rgens.parser;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/BlankCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/ChanceCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/ExpVariableCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/InlineRuleCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/LitVariableCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/LiteralCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/RuleVariableCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^package bjc.rgens.parser.elements;$/;"	p
+bjc.rgens.parser.elements.vars	src/main/java/bjc/rgens/parser/elements/vars/ARefVariableElement.java	/^package bjc.rgens.parser.elements.vars;$/;"	p
+bjc.rgens.parser.elements.vars	src/main/java/bjc/rgens/parser/elements/vars/LiteralVariableElement.java	/^package bjc.rgens.parser.elements.vars;$/;"	p
+bjc.rgens.parser.elements.vars	src/main/java/bjc/rgens/parser/elements/vars/RRefVariableElement.java	/^package bjc.rgens.parser.elements.vars;$/;"	p
+bjc.rgens.parser.elements.vars	src/main/java/bjc/rgens/parser/elements/vars/TRefVariableElement.java	/^package bjc.rgens.parser.elements.vars;$/;"	p
+bjc.rgens.parser.elements.vars	src/main/java/bjc/rgens/parser/elements/vars/VRefVariableElement.java	/^package bjc.rgens.parser.elements.vars;$/;"	p
+bjc.rgens.parser.elements.vars	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^package bjc.rgens.parser.elements.vars;$/;"	p
+bjc.rgens.parser.templates	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^package bjc.rgens.parser.templates;$/;"	p
+bjc.rgens.parser.templates	src/main/java/bjc/rgens/parser/templates/LiteralTemplateElement.java	/^package bjc.rgens.parser.templates;$/;"	p
+bjc.rgens.parser.templates	src/main/java/bjc/rgens/parser/templates/LiveTemplateElement.java	/^package bjc.rgens.parser.templates;$/;"	p
+bjc.rgens.parser.templates	src/main/java/bjc/rgens/parser/templates/TemplateElement.java	/^package bjc.rgens.parser.templates;$/;"	p
+bjc.rgens.text.markov	src/example/java/bjc/rgens/text/markov/TextGenerator.java	/^package bjc.rgens.text.markov;$/;"	p
+bjc.rgens.text.markov	src/main/java/bjc/rgens/text/markov/Markov.java	/^package bjc.rgens.text.markov;$/;"	p
+bjc.rgens.text.markov	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^package bjc.rgens.text.markov;$/;"	p
+bound	src/main/java/bjc/rgens/parser/Rule.java	/^	public int bound;$/;"	f	class:Rule
+builtinPostprocs	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private static final List<Pair<String, String>> builtinPostprocs;$/;"	f	class:RGrammar	file:
+caseCount	src/main/java/bjc/rgens/parser/Rule.java	/^	private int caseCount = 0;$/;"	f	class:Rule	file:
+cases	src/main/java/bjc/rgens/parser/Rule.java	/^	private WeightedRandom<RuleCase> cases;$/;"	f	class:Rule	file:
+cfgFile	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public Path cfgFile;$/;"	f	class:LoadOptions
+cfgSet	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public ConfigSet cfgSet;$/;"	f	class:LoadOptions
+cfgSet	src/main/java/bjc/rgens/parser/RGrammars.java	/^	private static ConfigSet cfgSet;$/;"	f	class:RGrammars	file:
+chance	src/main/java/bjc/rgens/parser/elements/ChanceCaseElement.java	/^	public int chance;$/;"	f	class:ChanceCaseElement
+circumfixWith	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void circumfixWith(String ruleName, List<CaseElement> prefixes) {$/;"	m	class:RGrammarBuilder
+clearContents	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void clearContents() {$/;"	m	class:GenerationState
+containsChar	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public boolean containsChar(char c) {$/;"	m	class:Markov
+contents	src/main/java/bjc/rgens/parser/GenerationState.java	/^	private ReportWriter contents;$/;"	f	class:GenerationState	file:
+count	src/main/java/bjc/rgens/text/markov/Markov.java	/^	int     count   = 0;$/;"	f	class:Markov
+count	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public int count() {$/;"	m	class:Markov
+createElement	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	public static CaseElement createElement(String csepart) {$/;"	m	class:CaseElement
+createGSet	src/main/java/bjc/rgens/parser/ConfigSet.java	/^	public RGrammarSet createGSet(String name) {$/;"	m	class:ConfigSet
+currentRecur	src/main/java/bjc/rgens/parser/Rule.java	/^	private int currentRecur;$/;"	f	class:Rule	file:
+debug	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void debug(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+debugName	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public String debugName;$/;"	f	class:RuleCase
+defName	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public String defName;$/;"	f	class:LoadOptions
+defineRuleVar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void defineRuleVar(String name, Rule rle) {$/;"	m	class:GenerationState
+defineVar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void defineVar(String name, String val) {$/;"	m	class:GenerationState
+descentFactor	src/main/java/bjc/rgens/parser/Rule.java	/^	public int descentFactor;$/;"	f	class:Rule
+despaceRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void despaceRule(String ruleName) {$/;"	m	class:RGrammarBuilder
+despaceRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void despaceRule(String ruleName, Tree<String> errs, boolean doTrace) {$/;"	m	class:RGrammarBuilder
+distance	src/main/java/bjc/rgens/parser/RGrammar.java	/^		public int distance(String x, String y) {$/;"	m	class:RGrammar.LevenshteinMetric
+doAffixWith	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void doAffixWith(String body, RGrammarBuilder build, int level,$/;"	m	class:RGrammarParser	file:
+doAutoVar	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void doAutoVar(List<String> bits, RGrammarBuilder build, int level,$/;"	m	class:RGrammarParser	file:
+doDebug	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public boolean doDebug;$/;"	f	class:LoadOptions
+doGenerate	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^	protected void doGenerate(String acName, GenerationState state) {$/;"	m	class:RuleCaseElement
+doLoadGrammar	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	private static void doLoadGrammar(Reader rdr, String name, LoadOptions lopts,$/;"	m	class:ConfigLoader	file:
+doLoadTemplate	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	private static void doLoadTemplate(Reader rdr, String name, LoadOptions lopts,$/;"	m	class:ConfigLoader	file:
+doPerf	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public boolean doPerf;$/;"	f	class:LoadOptions
+doRecur	src/main/java/bjc/rgens/parser/Rule.java	/^	public boolean doRecur() {$/;"	m	class:Rule
+doSpacing	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public boolean doSpacing = true;$/;"	f	class:GrammarTemplate
+doTrace	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public boolean doTrace;$/;"	f	class:LoadOptions
+elementList	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public List<CaseElement> elementList;$/;"	f	class:RuleCase
+elements	src/main/java/bjc/rgens/parser/elements/InlineRuleCaseElement.java	/^	public final WeightedRandom<CaseElement> elements;$/;"	f	class:InlineRuleCaseElement
+elements	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^	public List<VariableElement> elements;$/;"	f	class:RuleCaseElement
+elements	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public final List<TemplateElement> elements;$/;"	f	class:GrammarTemplate
+elements	src/main/java/bjc/rgens/parser/templates/LiveTemplateElement.java	/^	public final List<List<CaseElement>> elements;$/;"	f	class:LiveTemplateElement
+elm	src/main/java/bjc/rgens/parser/elements/ChanceCaseElement.java	/^	public final CaseElement elm;$/;"	f	class:ChanceCaseElement
+end	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public final int end;$/;"	f	class:RangeCaseElement
+endRecur	src/main/java/bjc/rgens/parser/Rule.java	/^	public void endRecur() {$/;"	m	class:Rule
+equals	src/main/java/bjc/rgens/parser/Rule.java	/^	public boolean equals(Object obj) {$/;"	m	class:Rule
+equals	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	public boolean equals(Object obj) {$/;"	m	class:CaseElement
+equals	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public boolean equals(Object obj) {$/;"	m	class:RangeCaseElement
+equals	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^	public boolean equals(Object obj) {$/;"	m	class:StringCaseElement
+equals	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^	public boolean equals(Object obj) {$/;"	m	class:VariableDefCaseElement
+error	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void error(Exception ex, String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+exhaust	src/main/java/bjc/rgens/parser/Rule.java	/^	public Rule exhaust() {$/;"	m	class:Rule
+exhaust	src/main/java/bjc/rgens/parser/elements/RuleVariableCaseElement.java	/^	public final boolean exhaust;$/;"	f	class:RuleVariableCaseElement
+exportGrammar	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public RGrammar exportGrammar;$/;"	f	class:RGrammarSet
+exportRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private Set<String> exportRules;$/;"	f	class:RGrammar	file:
+exportedFrom	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public String exportedFrom(String exportName) {$/;"	m	class:RGrammarSet
+exportedRules	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	private Set<String> exportedRules;$/;"	f	class:RGrammarBuilder	file:
+exportedRules	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	private Map<String, Rule> exportedRules;$/;"	f	class:RGrammarSet	file:
+findImport	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public Rule findImport(String ruleName) {$/;"	m	class:GenerationState
+findReplaceContents	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void findReplaceContents(String find, String replace) {$/;"	m	class:GenerationState
+findReplaceRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void findReplaceRule(String rule, String find, String replace) {$/;"	m	class:RGrammarBuilder
+findReplaceRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void findReplaceRule(String rule, String find, String replace, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+findReplaces	src/main/java/bjc/rgens/parser/Rule.java	/^	private List<Pair<String, String>> findReplaces;$/;"	f	class:Rule	file:
+findRule	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public Rule findRule(String ruleName, boolean allowImports) {$/;"	m	class:GenerationState
+findRuleVar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public Rule findRuleVar(String name) {$/;"	m	class:GenerationState
+findVar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public String findVar(String name) {$/;"	m	class:GenerationState
+fine	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void fine(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+first	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^	private String                  first;$/;"	f	class:StandaloneMarkov	file:
+forbidSpaces	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^	public boolean forbidSpaces;$/;"	f	class:VariableElement
+formatGrammar	src/main/java/bjc/rgens/parser/RGrammarFormatter.java	/^	public static String formatGrammar(RGrammar gram) {$/;"	m	class:RGrammarFormatter
+fromConfigFile	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts)$/;"	m	class:ConfigLoader
+fromConfigFile	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	public static ConfigSet fromConfigFile(Path cfgFile, LoadOptions lopts,$/;"	m	class:ConfigLoader
+fromGrammar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public static GenerationState fromGrammar(RGrammar gram) {$/;"	m	class:GenerationState
+fromGrammar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public static GenerationState fromGrammar(Random rand, RGrammar gram) {$/;"	m	class:GenerationState
+generate	src/main/java/bjc/rgens/parser/FlatRuleCase.java	/^	public void generate(GenerationState state) {$/;"	m	class:FlatRuleCase
+generate	src/main/java/bjc/rgens/parser/NormalRuleCase.java	/^	public void generate(GenerationState state) {$/;"	m	class:NormalRuleCase
+generate	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public String generate(String startRule) {$/;"	m	class:RGrammar
+generate	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public String generate(String startRule, GenerationState state) {$/;"	m	class:RGrammar
+generate	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public String generate(String startRule, GenerationState state,$/;"	m	class:RGrammar
+generate	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public String generate(String startRule, Random rnd, Map<String, String> vars,$/;"	m	class:RGrammar
+generate	src/main/java/bjc/rgens/parser/RegexRuleCase.java	/^	public void generate(GenerationState state) {$/;"	m	class:RegexRuleCase
+generate	src/main/java/bjc/rgens/parser/Rule.java	/^	public void generate(GenerationState state) {$/;"	m	class:Rule
+generate	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public abstract void generate(GenerationState state);$/;"	m	class:RuleCase
+generate	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	public abstract void generate(GenerationState state);$/;"	m	class:CaseElement
+generate	src/main/java/bjc/rgens/parser/elements/ChanceCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:ChanceCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/ExpVariableCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:ExpVariableCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/InlineRuleCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:InlineRuleCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/LitVariableCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:LitVariableCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/LiteralCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:LiteralCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:RangeCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/RuleCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:RuleCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/RuleVariableCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:RuleVariableCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:SerialCaseElement
+generate	src/main/java/bjc/rgens/parser/elements/vars/ARefVariableElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:ARefVariableElement
+generate	src/main/java/bjc/rgens/parser/elements/vars/LiteralVariableElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:LiteralVariableElement
+generate	src/main/java/bjc/rgens/parser/elements/vars/RRefVariableElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:RRefVariableElement
+generate	src/main/java/bjc/rgens/parser/elements/vars/TRefVariableElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:TRefVariableElement
+generate	src/main/java/bjc/rgens/parser/elements/vars/VRefVariableElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:VRefVariableElement
+generate	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^	public abstract void generate(GenerationState state);$/;"	m	class:VariableElement
+generate	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public void generate(GenerationState state) {$/;"	m	class:GrammarTemplate
+generate	src/main/java/bjc/rgens/parser/templates/LiteralTemplateElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:LiteralTemplateElement
+generate	src/main/java/bjc/rgens/parser/templates/LiveTemplateElement.java	/^	public void generate(GenerationState state) {$/;"	m	class:LiveTemplateElement
+generate	src/main/java/bjc/rgens/parser/templates/TemplateElement.java	/^	public abstract void generate(GenerationState state);$/;"	m	class:TemplateElement
+generateCase	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void generateCase(RuleCase start, GenerationState state) {$/;"	m	class:RGrammar
+generateExport	src/main/java/bjc/rgens/parser/RGrammars.java	/^	public static String generateExport(String exportName) throws GrammarException {$/;"	m	class:RGrammars
+generateMarkovMap	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^    public static StandaloneMarkov generateMarkovMap(int order, Reader reader) {$/;"	m	class:StandaloneMarkov
+generateSuggestions	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void generateSuggestions() {$/;"	m	class:RGrammar
+generateTextFromMarkov	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^	public String generateTextFromMarkov(int charsToGenerate) {$/;"	m	class:StandaloneMarkov
+getCase	src/main/java/bjc/rgens/parser/Rule.java	/^	public RuleCase getCase() {$/;"	m	class:Rule
+getCase	src/main/java/bjc/rgens/parser/Rule.java	/^	public RuleCase getCase(Random rnd) {$/;"	m	class:Rule
+getCases	src/main/java/bjc/rgens/parser/Rule.java	/^	public ListEx<Pair<Integer, RuleCase>> getCases() {$/;"	m	class:Rule
+getCharFrequency	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public double getCharFrequency(char c) {$/;"	m	class:Markov
+getContents	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public String getContents() {$/;"	m	class:GenerationState
+getExportSource	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public RGrammar getExportSource(String exportName) {$/;"	m	class:RGrammarSet
+getExportedRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public Set<Rule> getExportedRules() {$/;"	m	class:RGrammar
+getExportedRules	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public Set<String> getExportedRules() {$/;"	m	class:RGrammarSet
+getFrequencyCount	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public int getFrequencyCount(char c) {$/;"	m	class:Markov
+getGrammar	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public RGrammar getGrammar(String grammarName) {$/;"	m	class:RGrammarSet
+getGrammars	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public Set<String> getGrammars() {$/;"	m	class:RGrammarSet
+getImportRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public Map<String, Rule> getImportRules() {$/;"	m	class:RGrammar
+getInitialRule	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public String getInitialRule() {$/;"	m	class:RGrammar
+getMap	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public TreeMap<Character, Integer> getMap() {$/;"	m	class:Markov
+getOrCreateRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public Rule getOrCreateRule(String rName) {$/;"	m	class:RGrammarBuilder
+getOrCreateRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public Rule getOrCreateRule(String rName, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+getRootMessage	src/main/java/bjc/rgens/parser/GrammarException.java	/^	public String getRootMessage() {$/;"	m	class:GrammarException
+getRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public Map<String, Rule> getRules() {$/;"	m	class:RGrammar
+getWriter	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public ReportWriter getWriter() {$/;"	m	class:GenerationState
+gram	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public RGrammar gram;$/;"	f	class:GenerationState
+gramSet	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public RGrammarSet gramSet;$/;"	f	class:LoadOptions
+grammars	src/main/java/bjc/rgens/parser/ConfigSet.java	/^	public final Map<String, RGrammarSet>     grammars;$/;"	f	class:ConfigSet
+grammars	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	private Map<String, RGrammar> grammars;$/;"	f	class:RGrammarSet	file:
+handleBlock	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void handleBlock(RGrammarBuilder build, String block, int level,$/;"	m	class:RGrammarParser	file:
+handleLine	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	private static void handleLine(List<TemplateElement> elements, GrammarTemplate template, String ln, Tree<String> errs) {$/;"	m	class:GrammarTemplate	file:
+handlePragma	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void handlePragma(String pragma, RGrammarBuilder build, int level,$/;"	m	class:RGrammarParser	file:
+handlePragma	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	private static void handlePragma(List<TemplateElement> elements, GrammarTemplate template, String ln, Tree<String> errs) {$/;"	m	class:GrammarTemplate	file:
+handlePragmaBlock	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void handlePragmaBlock(String block, RGrammarBuilder build, int level,$/;"	m	class:RGrammarParser	file:
+handleRuleBlock	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void handleRuleBlock(String ruleBlock, RGrammarBuilder build,$/;"	m	class:RGrammarParser	file:
+handleRuleCase	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void handleRuleCase(String cse, RGrammarBuilder build, Rule rul,$/;"	m	class:RGrammarParser	file:
+handleRuleDecl	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static Rule handleRuleDecl(RGrammarBuilder build, String declContents,$/;"	m	class:RGrammarParser	file:
+handleWhereBlock	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	private static void handleWhereBlock(String block, RGrammarBuilder build, int level,$/;"	m	class:RGrammarParser	file:
+hash	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^	private Map<String, Markov>     hash;$/;"	f	class:StandaloneMarkov	file:
+hashCode	src/main/java/bjc/rgens/parser/Rule.java	/^	public int hashCode() {$/;"	m	class:Rule
+hashCode	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	public int hashCode() {$/;"	m	class:CaseElement
+hashCode	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public int hashCode() {$/;"	m	class:RangeCaseElement
+hashCode	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^	public int hashCode() {$/;"	m	class:StringCaseElement
+hashCode	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^	public int hashCode() {$/;"	m	class:VariableDefCaseElement
+importRules	src/main/java/bjc/rgens/parser/GenerationState.java	/^	private Map<String, Rule> importRules;$/;"	f	class:GenerationState	file:
+importRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private Map<String, Rule> importRules;$/;"	f	class:RGrammar	file:
+info	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void info(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+initialRule	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private String initialRule;$/;"	f	class:RGrammar	file:
+initialRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	private String initialRule;$/;"	f	class:RGrammarBuilder	file:
+isPrefix	src/main/java/bjc/rgens/parser/AffixType.java	/^	public boolean isPrefix() {$/;"	m	class:AffixType
+isSuffix	src/main/java/bjc/rgens/parser/AffixType.java	/^	public boolean isSuffix() {$/;"	m	class:AffixType
+loadConfigLine	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	private static void loadConfigLine(String[] parts, LoadOptions lopts,$/;"	m	class:ConfigLoader	file:
+loadDirectory	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	private static void loadDirectory(String name, String[] parts, LoadOptions lopts,$/;"	m	class:ConfigLoader	file:
+loadGrammar	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	private static void loadGrammar(String name, String[] parts, LoadOptions lopts,$/;"	m	class:ConfigLoader	file:
+loadSet	src/main/java/bjc/rgens/parser/RGrammars.java	/^	private static void loadSet() {$/;"	m	class:RGrammars	file:
+loadTemplate	src/main/java/bjc/rgens/parser/ConfigLoader.java	/^	private static void loadTemplate(String name, String[] parts, LoadOptions lopts,$/;"	m	class:ConfigLoader	file:
+loadedFrom	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public Map<String, String> loadedFrom;$/;"	f	class:RGrammarSet
+loadedFrom	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public String loadedFrom(String grammarName) {$/;"	m	class:RGrammarSet
+log	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void log(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+logline	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void logline(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+lower	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^	public final int lower;$/;"	f	class:SerialCaseElement
+main	src/example/java/bjc/rgens/parser/RGrammarTest.java	/^	public static void main(String[] args) {$/;"	m	class:RGrammarTest
+main	src/example/java/bjc/rgens/text/markov/TextGenerator.java	/^	public static void main(String[] args) {$/;"	m	class:TextGenerator
+map	src/main/java/bjc/rgens/text/markov/Markov.java	/^	TreeMap<Character, Integer> map;$/;"	f	class:Markov
+nam	src/main/java/bjc/rgens/parser/elements/vars/VRefVariableElement.java	/^	public final String nam;$/;"	f	class:VRefVariableElement
+name	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public String name;$/;"	f	class:RGrammar
+name	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public String name;$/;"	f	class:RGrammarBuilder
+name	src/main/java/bjc/rgens/parser/RGrammarSet.java	/^	public String name;$/;"	f	class:RGrammarSet
+name	src/main/java/bjc/rgens/parser/Rule.java	/^	public String name;$/;"	f	class:Rule
+name	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public String name;$/;"	f	class:GrammarTemplate
+newBuf	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public GenerationState newBuf() {$/;"	m	class:GenerationState
+nextSerial	src/main/java/bjc/rgens/parser/Rule.java	/^	private static int nextSerial = 0;$/;"	f	class:Rule	file:
+nextSerial	src/main/java/bjc/rgens/parser/RuleCase.java	/^	private static int nextSerial = 0;$/;"	f	class:RuleCase	file:
+ord	src/main/java/bjc/rgens/text/markov/StandaloneMarkov.java	/^	private int ord;$/;"	f	class:StandaloneMarkov	file:
+parent	src/main/java/bjc/rgens/parser/LoadOptions.java	/^	public Path parent;$/;"	f	class:LoadOptions
+parseElementString	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static int parseElementString(String cses, List<CaseElement> elms) {$/;"	m	class:RGrammarParser
+parseElementString	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static int parseElementString(String cses, List<CaseElement> elms,$/;"	m	class:RGrammarParser
+parseElementString	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static int parseElementString(String[] cses, List<CaseElement> caseParts,$/;"	m	class:RGrammarParser
+parseElementString	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static int parseElementString(String[] cses, List<CaseElement> elms) {$/;"	m	class:RGrammarParser
+parseElementString	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^	public static List<VariableElement> parseElementString(String varElm) {$/;"	m	class:VariableElement
+parseElementString	src/main/java/bjc/rgens/parser/elements/vars/VariableElement.java	/^	public static List<VariableElement> parseElementString(boolean forbidSpaces,$/;"	m	class:VariableElement
+parseVariable	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^	public static CaseElement parseVariable(String varName, String varDef, char op,$/;"	m	class:VariableDefCaseElement
+perf	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void perf(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+postprocessRes	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private String postprocessRes(String strang) {$/;"	m	class:RGrammar	file:
+postprocs	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public List<Pair<String, String>> postprocs;$/;"	f	class:RGrammar
+powerList	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	private static <T> List<List<T>> powerList(Set<T> elements) {$/;"	m	class:RGrammarBuilder	file:
+prefixWith	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void prefixWith(String ruleName, List<CaseElement> prefixes) {$/;"	m	class:RGrammarBuilder
+prob	src/main/java/bjc/rgens/parser/Rule.java	/^	public ProbType prob;$/;"	f	class:Rule
+processCase	src/main/java/bjc/rgens/parser/RGrammarFormatter.java	/^	private static void processCase(RuleCase cse, StringBuilder sb) {$/;"	m	class:RGrammarFormatter	file:
+processRule	src/main/java/bjc/rgens/parser/RGrammarFormatter.java	/^	private static void processRule(Rule rule, StringBuilder sb) {$/;"	m	class:RGrammarFormatter	file:
+random	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public char random() {$/;"	m	class:Markov
+readGrammar	src/main/java/bjc/rgens/parser/RGrammarParser.java	/^	public static RGrammar readGrammar(Reader is, LoadOptions lopts, Tree<String> errs)$/;"	m	class:RGrammarParser
+readTemplate	src/main/java/bjc/rgens/parser/templates/GrammarTemplate.java	/^	public static GrammarTemplate readTemplate(Reader rdr, Tree<String> errs) {$/;"	m	class:GrammarTemplate
+recurLimit	src/main/java/bjc/rgens/parser/Rule.java	/^	public int recurLimit = 5;$/;"	f	class:Rule
+rejectRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void rejectRule(String rule, String reject) {$/;"	m	class:RGrammarBuilder
+rejectRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void rejectRule(String rule, String reject, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+rejectionPreds	src/main/java/bjc/rgens/parser/Rule.java	/^	private List<String> rejectionPreds;$/;"	f	class:Rule	file:
+rep	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^	public final CaseElement rep;$/;"	f	class:SerialCaseElement
+replaceCases	src/main/java/bjc/rgens/parser/Rule.java	/^	public void replaceCases(ListEx<Pair<Integer, RuleCase>> caseList) {$/;"	m	class:Rule
+rlVars	src/main/java/bjc/rgens/parser/GenerationState.java	/^	private MapSet<String, Rule> rlVars;$/;"	f	class:GenerationState	file:
+rnd	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public Random rnd;$/;"	f	class:GenerationState
+rootMessage	src/main/java/bjc/rgens/parser/GrammarException.java	/^	private String rootMessage;$/;"	f	class:GrammarException	file:
+ruleSearcher	src/main/java/bjc/rgens/parser/RGrammar.java	/^	private BkTreeSearcher<String> ruleSearcher;$/;"	f	class:RGrammar	file:
+rules	src/main/java/bjc/rgens/parser/GenerationState.java	/^	private Map<String, Rule> rules;$/;"	f	class:GenerationState	file:
+rules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public Map<String, Rule> rules;$/;"	f	class:RGrammar
+rules	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	private Map<String, Rule> rules;$/;"	f	class:RGrammarBuilder	file:
+serial	src/main/java/bjc/rgens/parser/Rule.java	/^	private int serial;$/;"	f	class:Rule	file:
+serial	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public final int serial;$/;"	f	class:RuleCase
+serialVersionUID	src/main/java/bjc/rgens/parser/GrammarException.java	/^	private static final long serialVersionUID = -7287427479316953668L;$/;"	f	class:GrammarException	file:
+serialVersionUID	src/main/java/bjc/rgens/parser/RecurLimitException.java	/^	private static final long serialVersionUID = -7287427479316953668L;$/;"	f	class:RecurLimitException	file:
+setAutoVars	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void setAutoVars(Map<String, CaseElement> aVars,$/;"	m	class:RGrammar
+setBinomial	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setBinomial(String ruleName, int target, int bound, int trials) {$/;"	m	class:RGrammarBuilder
+setBinomial	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setBinomial(String ruleName, int target, int bound, int trials, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+setContents	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void setContents(String strang) {$/;"	m	class:GenerationState
+setDescent	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setDescent(String ruleName, int descentFactor) {$/;"	m	class:RGrammarBuilder
+setDescent	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setDescent(String ruleName, int descentFactor, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+setExportedRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void setExportedRules(Set<String> exportedRules) {$/;"	m	class:RGrammar
+setImportedRules	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void setImportedRules(Map<String, Rule> importedRules) {$/;"	m	class:RGrammar
+setInitialRule	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void setInitialRule(String initRule) {$/;"	m	class:RGrammar
+setInitialRule	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public void setInitialRule(String initRule, Tree<String> errs) {$/;"	m	class:RGrammar
+setInitialRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setInitialRule(String init) {$/;"	m	class:RGrammarBuilder
+setInitialRule	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setInitialRule(String init, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+setRuleRecur	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setRuleRecur(String ruleName, int recurLimit) {$/;"	m	class:RGrammarBuilder
+setRuleRecur	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setRuleRecur(String ruleName, int recurLimit, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+setWeight	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setWeight(String ruleName) {$/;"	m	class:RGrammarBuilder
+setWeight	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void setWeight(String ruleName, Tree<String> errs) {$/;"	m	class:RGrammarBuilder
+spacing	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^		public final boolean spacing;$/;"	f	class:CaseElement.ElementType
+spacing	src/main/java/bjc/rgens/parser/elements/CaseElement.java	/^	public boolean spacing;$/;"	f	class:CaseElement
+spacing	src/main/java/bjc/rgens/parser/templates/TemplateElement.java	/^	public boolean spacing;$/;"	f	class:TemplateElement
+subconfigs	src/main/java/bjc/rgens/parser/ConfigSet.java	/^	public final Map<String, ConfigSet>       subconfigs;$/;"	f	class:ConfigSet
+substring	src/main/java/bjc/rgens/text/markov/Markov.java	/^	String  substring;$/;"	f	class:Markov
+suffixWith	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public void suffixWith(String ruleName, List<CaseElement> suffixes) {$/;"	m	class:RGrammarBuilder
+swapGrammar	src/main/java/bjc/rgens/parser/GenerationState.java	/^	public void swapGrammar(RGrammar gramr) {$/;"	m	class:GenerationState
+target	src/main/java/bjc/rgens/parser/Rule.java	/^	public int target;$/;"	f	class:Rule
+templates	src/main/java/bjc/rgens/parser/ConfigSet.java	/^	public final Map<String, GrammarTemplate> templates;$/;"	f	class:ConfigSet
+testGrammarSet	src/example/java/bjc/rgens/parser/RGrammarTest.java	/^	private static void testGrammarSet(RGrammarSet gramSet) {$/;"	m	class:RGrammarTest	file:
+testTemplate	src/example/java/bjc/rgens/parser/RGrammarTest.java	/^	private static void testTemplate(GrammarTemplate template, RGrammarSet set) {$/;"	m	class:RGrammarTest	file:
+toRGrammar	src/main/java/bjc/rgens/parser/RGrammarBuilder.java	/^	public RGrammar toRGrammar() {$/;"	m	class:RGrammarBuilder
+toString	src/main/java/bjc/rgens/parser/Rule.java	/^	public String toString() {$/;"	m	class:Rule
+toString	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public String toString() {$/;"	m	class:RuleCase
+toString	src/main/java/bjc/rgens/parser/elements/RangeCaseElement.java	/^	public String toString() {$/;"	m	class:RangeCaseElement
+toString	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^	public String toString() {$/;"	m	class:StringCaseElement
+toString	src/main/java/bjc/rgens/text/markov/Markov.java	/^	public String toString() {$/;"	m	class:Markov
+trace	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void trace(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+trials	src/main/java/bjc/rgens/parser/Rule.java	/^	public int trials;$/;"	f	class:Rule
+upper	src/main/java/bjc/rgens/parser/elements/SerialCaseElement.java	/^	public final int upper;$/;"	f	class:SerialCaseElement
+useBuiltinPostprocs	src/main/java/bjc/rgens/parser/RGrammar.java	/^	public boolean useBuiltinPostprocs = true;$/;"	f	class:RGrammar
+val	src/main/java/bjc/rgens/parser/elements/LiteralCaseElement.java	/^	public String val;$/;"	f	class:LiteralCaseElement
+val	src/main/java/bjc/rgens/parser/elements/StringCaseElement.java	/^	public final String val;$/;"	f	class:StringCaseElement
+val	src/main/java/bjc/rgens/parser/elements/vars/LiteralVariableElement.java	/^	public String val;$/;"	f	class:LiteralVariableElement
+val	src/main/java/bjc/rgens/parser/templates/LiteralTemplateElement.java	/^	public final String val;$/;"	f	class:LiteralTemplateElement
+value	src/main/java/bjc/rgens/parser/elements/vars/ARefVariableElement.java	/^	public String value;$/;"	f	class:ARefVariableElement
+value	src/main/java/bjc/rgens/parser/elements/vars/RRefVariableElement.java	/^	public String value;$/;"	f	class:RRefVariableElement
+value	src/main/java/bjc/rgens/parser/elements/vars/TRefVariableElement.java	/^	public String value;$/;"	f	class:TRefVariableElement
+varDef	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^	public final String varDef;$/;"	f	class:VariableDefCaseElement
+varName	src/main/java/bjc/rgens/parser/elements/VariableDefCaseElement.java	/^	public final String varName;$/;"	f	class:VariableDefCaseElement
+vars	src/main/java/bjc/rgens/parser/GenerationState.java	/^	private MapSet<String, String> vars;$/;"	f	class:GenerationState	file:
+warn	src/main/java/bjc/rgens/parser/RGrammarLogging.java	/^	public static void warn(String msg, Object... vars) {$/;"	m	class:RGrammarLogging
+withElements	src/main/java/bjc/rgens/parser/FlatRuleCase.java	/^	public FlatRuleCase withElements(List<CaseElement> elms) {$/;"	m	class:FlatRuleCase
+withElements	src/main/java/bjc/rgens/parser/NormalRuleCase.java	/^	public NormalRuleCase withElements(List<CaseElement> elms) {$/;"	m	class:NormalRuleCase
+withElements	src/main/java/bjc/rgens/parser/RegexRuleCase.java	/^	public RegexRuleCase withElements(List<CaseElement> elements) {$/;"	m	class:RegexRuleCase
+withElements	src/main/java/bjc/rgens/parser/RuleCase.java	/^	public abstract RuleCase withElements(List<CaseElement> elements);$/;"	m	class:RuleCase
